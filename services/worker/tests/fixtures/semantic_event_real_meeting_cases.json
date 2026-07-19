@@ -1,0 +1,1310 @@
+[
+  {
+    "case_id": "real_case_001",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "各位大家下午好，今天我们召开V3.2版本迭代启动会，整体会议控制在30分钟。",
+    "context_before": [],
+    "expected": {
+      "allowed_primary_intents": [
+        "agenda_statement"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_002",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "首先请产品整体介绍本期迭代内容。",
+    "context_before": [
+      "各位大家下午好，今天我们召开V3.2版本迭代启动会，整体会议控制在30分钟。",
+      "核心目标是把本期所有需求、排期、责任人、交付标准全部对齐，避免开发中途反复变更。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "agenda_statement"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_003",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "最后统一整体节奏。",
+    "context_before": [
+      "我还有一个疑问，第三方积分接口回调超时没有明确容错方案，需求文档里没有写极端场景，这块需要补充。",
+      "确实遗漏，我会后补充异常场景、超时重试、失败回滚方案，今天内更新文档。",
+      "那我这边等文档更新完毕后，明日启动测试用例编写，提前覆盖异常场景。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "agenda_statement"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_004",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "所有需求文档和原型已经全部同步完毕，昨天已经完成预评审。",
+    "context_before": [
+      "订单结算逻辑优化，解决多商品拆分结算异常问题",
+      "后台数据看板改版，支持运营自定义报表。",
+      "本期一共28个功能点，其中P0级高优先级8个，P1级12个，P2级8个。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "progress_update"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "completed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_005",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "第二、三周：前后端开发、联调、自测",
+    "context_before": [
+      "那我这边等文档更新完毕后，明日启动测试用例编写，提前覆盖异常场景。",
+      "最后统一整体节奏。",
+      "第一周：设计定稿、需求最终锁定、技术方案评审"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "progress_update"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "completed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_006",
+    "meeting_id": "meeting_005",
+    "speaker": "测试负责人",
+    "text": "整体功能层面无重大上线风险，核心会员、结算、看板功能流程通畅，可正常使用。",
+    "context_before": [
+      "敲定上线时间、灰度方案、故障应急预案。",
+      "首先由我同步整体测试情况和现存问题。",
+      "本次迭代版本共完成28个功能点测试，累计测试时长12天，提交bug共计42个，其中严重bug0个、一般bug28个、轻微UIbug14个，目前所有一般bug已全部修复复测通过，剩余14个轻微UIbug不影响功能使用、不影响用户核心体验。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "progress_update"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "completed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_007",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "关于排期压力，我同意前端建议，将两个非核心P2看板功能砍掉至下期，保证本期核心功能稳定上线。",
+    "context_before": [
+      "好，针对大家提出的问题我们逐一对齐。",
+      "首先，UI设计周期一周，所有人严格遵循设计定稿后再开发，禁止边改边开发。",
+      "后端核心账务、会员权益优先保障，风险极高，必须做单元测试、联调测试、灰度测试三层保障。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "decision"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_008",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "先由我完整讲解需求背景、功能流程、用户场景，之后各部门依次提出问题、优化建议和落地难点，我们现场对齐方案，敲定最终需求版本和开发排期。",
+    "context_before": [
+      "各位同事，大家下午好，本次售后退款需求评审会预计30分钟，全员对齐新版自动退款系统需求，解决当前人工退款效率低、用户咨询量大、退款状态不透明的核心痛点。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "decision"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_009",
+    "meeting_id": "meeting_002",
+    "speaker": "UI设计师",
+    "text": "原型中所有退款提交后无任何二次确认弹窗，用户极易误操作发起退款，尤其是大额订单，一旦误退款，追回流程非常繁琐，会造成平台资金损失。",
+    "context_before": [
+      "后台新增退款订单管理列表，支持运营、客服筛选、导出、统计数据。",
+      "以上就是本次需求的完整核心内容，大家有疑问可以随时提出。",
+      "我整体看完了本次需求原型和交互流程，首先整体逻辑是通顺的，但存在明显的体验和风控漏洞。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "decision"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_010",
+    "meeting_id": "meeting_001",
+    "speaker": "前端负责人",
+    "text": "建议将2个P2级的次要看板功能延后至下一期迭代。",
+    "context_before": [
+      "结算逻辑重构涉及核心账务，不能快速上线，需要单独灰度验证。",
+      "前端主要工作量在会员页全新重构、个人中心改版、后台报表自适应开发。",
+      "本期适配移动端、PC端双端，部分自定义图表组件没有现成开源方案，需要自研，开发成本较高。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "proposal"
+      ],
+      "forbidden_primary_intents": [
+        "decision"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "proposed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_011",
+    "meeting_id": "meeting_001",
+    "speaker": "测试负责人",
+    "text": "我建议本期需求**全程锁死，禁止临时加需求**。",
+    "context_before": [
+      "建议将2个P2级的次要看板功能延后至下一期迭代。",
+      "我从测试角度说一下，本期涉及账务、会员权益，属于高风险业务，回归范围极大。",
+      "如果需求频繁微调，会导致测试用例大规模重写，严重压缩上线窗口期。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "proposal"
+      ],
+      "forbidden_primary_intents": [
+        "decision"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "proposed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_012",
+    "meeting_id": "meeting_002",
+    "speaker": "前端负责人",
+    "text": "建议新增退款失败原因明细展示，把系统驳回、人工驳回、超时驳回的原因清晰展示，减少用户疑惑。",
+    "context_before": [
+      "前端落地层面，主要存在适配和交互细节问题。",
+      "本次退款页面需要适配小程序、H5、APP三端，目前原型仅适配了APP端，小程序和H5的弹窗尺寸、按钮布局、适配规则均未明确，直接开发会出现多端样式错乱。",
+      "退款进度详情页的时间节点展示逻辑不完整，缺少审核中、退款中、退款失败的细分节点，用户看不到完整流程，依然会进线咨询。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "proposal"
+      ],
+      "forbidden_primary_intents": [
+        "decision"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "proposed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_013",
+    "meeting_id": "meeting_001",
+    "speaker": "UI设计师",
+    "text": "我补充一下，本期后台看板改版设计量较大，包含十余种图表样式重构，我这边设计排期需要一周时间，前三天出高保真原型，后四天走交互定稿。",
+    "context_before": [
+      "后台数据看板改版，支持运营自定义报表。",
+      "本期一共28个功能点，其中P0级高优先级8个，P1级12个，P2级8个。",
+      "所有需求文档和原型已经全部同步完毕，昨天已经完成预评审。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "commitment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_014",
+    "meeting_id": "meeting_001",
+    "speaker": "后端负责人",
+    "text": "我这边评估一下工作量。",
+    "context_before": [
+      "所有需求文档和原型已经全部同步完毕，昨天已经完成预评审。",
+      "我补充一下，本期后台看板改版设计量较大，包含十余种图表样式重构，我这边设计排期需要一周时间，前三天出高保真原型，后四天走交互定稿。",
+      "如果开发提前介入，会出现设计未定稿导致返工的风险。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "commitment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_015",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "可以，我会后更新迭代范围，剔除两个次要功能，重新同步排期表。",
+    "context_before": [
+      "后端核心账务、会员权益优先保障，风险极高，必须做单元测试、联调测试、灰度测试三层保障。",
+      "关于排期压力，我同意前端建议，将两个非核心P2看板功能砍掉至下期，保证本期核心功能稳定上线。",
+      "测试这边全程锁定需求，从今天起不再接收临时需求变更。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "commitment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_016",
+    "meeting_id": "meeting_001",
+    "speaker": "前端负责人",
+    "text": "前端主要工作量在会员页全新重构、个人中心改版、后台报表自适应开发。",
+    "context_before": [
+      "会员体系需要新增十余张数据表，权益发放、积分时效、自动过期逻辑比较复杂，并且需要对接第三方支付积分接口。",
+      "目前团队两名后端开发，四周周期整体偏紧。",
+      "结算逻辑重构涉及核心账务，不能快速上线，需要单独灰度验证。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "task_assignment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": "前端",
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_017",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "后端核心账务、会员权益优先保障，风险极高，必须做单元测试、联调测试、灰度测试三层保障。",
+    "context_before": [
+      "我建议本期需求**全程锁死，禁止临时加需求**。",
+      "好，针对大家提出的问题我们逐一对齐。",
+      "首先，UI设计周期一周，所有人严格遵循设计定稿后再开发，禁止边改边开发。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "task_assignment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": "后端",
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_018",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "测试这边全程锁定需求，从今天起不再接收临时需求变更。",
+    "context_before": [
+      "首先，UI设计周期一周，所有人严格遵循设计定稿后再开发，禁止边改边开发。",
+      "后端核心账务、会员权益优先保障，风险极高，必须做单元测试、联调测试、灰度测试三层保障。",
+      "关于排期压力，我同意前端建议，将两个非核心P2看板功能砍掉至下期，保证本期核心功能稳定上线。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "task_assignment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": "测试",
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_019",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "有没有其他问题？",
+    "context_before": [
+      "第二、三周：前后端开发、联调、自测",
+      "第四周：全量测试、bug修复、灰度上线。",
+      "所有人严格卡点执行，每日晚同步进度。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "question"
+      ],
+      "forbidden_primary_intents": [
+        "open_issue"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_020",
+    "meeting_id": "meeting_002",
+    "speaker": "后端负责人",
+    "text": "需求未定义重复退款拦截规则，同一订单是否支持多次发起退款、间隔多久可重新申请，这些逻辑缺失会导致重复退款漏洞。",
+    "context_before": [
+      "新增多渠道消息兜底通知。",
+      "从技术落地层面，我梳理出几个核心问题和风险点。",
+      "首先，需求里没有定义第三方支付接口的异常容错逻辑，我们对接的微信、支付宝退款接口存在1-2秒回调延迟，网络波动、接口超时是常态，极端情况下会出现「平台显示退款成功、第三方未到账」或者「第三方退款成功、平台状态未更新」的数据不一致问题，极易引发用户纠纷和资损。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "question"
+      ],
+      "forbidden_primary_intents": [
+        "open_issue"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_021",
+    "meeting_id": "meeting_002",
+    "speaker": "后端负责人",
+    "text": "大额退款人工复核的权限边界不清晰，哪些客服可复核、复核是否需要二次审批、驳回后是否允许用户重新申请，都需要明确规则，否则上线后会出现流程混乱。",
+    "context_before": [
+      "从技术落地层面，我梳理出几个核心问题和风险点。",
+      "首先，需求里没有定义第三方支付接口的异常容错逻辑，我们对接的微信、支付宝退款接口存在1-2秒回调延迟，网络波动、接口超时是常态，极端情况下会出现「平台显示退款成功、第三方未到账」或者「第三方退款成功、平台状态未更新」的数据不一致问题，极易引发用户纠纷和资损。",
+      "需求未定义重复退款拦截规则，同一订单是否支持多次发起退款、间隔多久可重新申请，这些逻辑缺失会导致重复退款漏洞。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "question"
+      ],
+      "forbidden_primary_intents": [
+        "open_issue"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_022",
+    "meeting_id": "meeting_001",
+    "speaker": "后端负责人",
+    "text": "我还有一个疑问，第三方积分接口回调超时没有明确容错方案，需求文档里没有写极端场景，这块需要补充。",
+    "context_before": [
+      "可以，我会后更新迭代范围，剔除两个次要功能，重新同步排期表。",
+      "我补充本期上线标准：P0功能100%交付、零严重bug、零线上故障",
+      "P1功能允许轻微UI问题，后续热修复。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "open_issue"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "blocked",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_023",
+    "meeting_id": "meeting_002",
+    "speaker": "测试负责人",
+    "text": "目前需求文档缺失大量极端场景定义，比如断网重试、重复提交、接口超时、退款中订单关闭页面、退款后订单状态变更等场景，没有明确处理逻辑，会导致测试用例无法全覆盖，上线后极易出现隐性bug。",
+    "context_before": [
+      "针对被驳回的退款订单，需要在页面展示「重新申请」入口和操作指引，减少用户咨询成本。",
+      "建议新增客服快捷操作模板，统一驳回话术、审核备注，规范客服操作标准。",
+      "从测试角度，本次属于资金类高风险需求，测试覆盖难度大、异常场景多。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "open_issue"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "blocked",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_024",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "补齐后端缺失的容错逻辑、重复退款拦截、大额复核权限规则，明确所有异常场景处理方案。",
+    "context_before": [
+      "本次迭代必须增加回归测试轮次，上线前完成多轮压力测试和异常场景测试。",
+      "非常感谢大家的细致梳理，大家提出的所有问题和优化建议都非常关键，我现场统一对齐优化方案。",
+      "采纳UI全部建议，新增退款二次确认弹窗，区分大小额订单文案，优化状态视觉样式，增加多渠道兜底通知。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "open_issue"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "blocked",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_025",
+    "meeting_id": "meeting_001",
+    "speaker": "UI设计师",
+    "text": "如果开发提前介入，会出现设计未定稿导致返工的风险。",
+    "context_before": [
+      "本期一共28个功能点，其中P0级高优先级8个，P1级12个，P2级8个。",
+      "所有需求文档和原型已经全部同步完毕，昨天已经完成预评审。",
+      "我补充一下，本期后台看板改版设计量较大，包含十余种图表样式重构，我这边设计排期需要一周时间，前三天出高保真原型，后四天走交互定稿。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "risk_warning"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "pending",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_026",
+    "meeting_id": "meeting_001",
+    "speaker": "测试负责人",
+    "text": "我从测试角度说一下，本期涉及账务、会员权益，属于高风险业务，回归范围极大。",
+    "context_before": [
+      "前端主要工作量在会员页全新重构、个人中心改版、后台报表自适应开发。",
+      "本期适配移动端、PC端双端，部分自定义图表组件没有现成开源方案，需要自研，开发成本较高。",
+      "建议将2个P2级的次要看板功能延后至下一期迭代。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "risk_warning"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "pending",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_027",
+    "meeting_id": "meeting_001",
+    "speaker": "测试负责人",
+    "text": "如果需求频繁微调，会导致测试用例大规模重写，严重压缩上线窗口期。",
+    "context_before": [
+      "本期适配移动端、PC端双端，部分自定义图表组件没有现成开源方案，需要自研，开发成本较高。",
+      "建议将2个P2级的次要看板功能延后至下一期迭代。",
+      "我从测试角度说一下，本期涉及账务、会员权益，属于高风险业务，回归范围极大。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "risk_warning"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "pending",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_028",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "订单结算逻辑优化，解决多商品拆分结算异常问题",
+    "context_before": [
+      "首先请产品整体介绍本期迭代内容。",
+      "好的，本期V3.2迭代周期四周，核心有三大模块：",
+      "用户会员体系升级，包含会员等级、权益发放、积分抵扣"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "requirement"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_029",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "后台数据看板改版，支持运营自定义报表。",
+    "context_before": [
+      "好的，本期V3.2迭代周期四周，核心有三大模块：",
+      "用户会员体系升级，包含会员等级、权益发放、积分抵扣",
+      "订单结算逻辑优化，解决多商品拆分结算异常问题"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "requirement"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_030",
+    "meeting_id": "meeting_001",
+    "speaker": "后端负责人",
+    "text": "会员体系需要新增十余张数据表，权益发放、积分时效、自动过期逻辑比较复杂，并且需要对接第三方支付积分接口。",
+    "context_before": [
+      "我补充一下，本期后台看板改版设计量较大，包含十余种图表样式重构，我这边设计排期需要一周时间，前三天出高保真原型，后四天走交互定稿。",
+      "如果开发提前介入，会出现设计未定稿导致返工的风险。",
+      "我这边评估一下工作量。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "requirement"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_031",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "首先，UI设计周期一周，所有人严格遵循设计定稿后再开发，禁止边改边开发。",
+    "context_before": [
+      "如果需求频繁微调，会导致测试用例大规模重写，严重压缩上线窗口期。",
+      "我建议本期需求**全程锁死，禁止临时加需求**。",
+      "好，针对大家提出的问题我们逐一对齐。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "rejection"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "rejected",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_032",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "核心目标是把本期所有需求、排期、责任人、交付标准全部对齐，避免开发中途反复变更。",
+    "context_before": [
+      "各位大家下午好，今天我们召开V3.2版本迭代启动会，整体会议控制在30分钟。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_033",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "好的，本期V3.2迭代周期四周，核心有三大模块：",
+    "context_before": [
+      "各位大家下午好，今天我们召开V3.2版本迭代启动会，整体会议控制在30分钟。",
+      "核心目标是把本期所有需求、排期、责任人、交付标准全部对齐，避免开发中途反复变更。",
+      "首先请产品整体介绍本期迭代内容。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_034",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "用户会员体系升级，包含会员等级、权益发放、积分抵扣",
+    "context_before": [
+      "核心目标是把本期所有需求、排期、责任人、交付标准全部对齐，避免开发中途反复变更。",
+      "首先请产品整体介绍本期迭代内容。",
+      "好的，本期V3.2迭代周期四周，核心有三大模块："
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_035",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "本期一共28个功能点，其中P0级高优先级8个，P1级12个，P2级8个。",
+    "context_before": [
+      "用户会员体系升级，包含会员等级、权益发放、积分抵扣",
+      "订单结算逻辑优化，解决多商品拆分结算异常问题",
+      "后台数据看板改版，支持运营自定义报表。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_036",
+    "meeting_id": "meeting_001",
+    "speaker": "后端负责人",
+    "text": "目前团队两名后端开发，四周周期整体偏紧。",
+    "context_before": [
+      "如果开发提前介入，会出现设计未定稿导致返工的风险。",
+      "我这边评估一下工作量。",
+      "会员体系需要新增十余张数据表，权益发放、积分时效、自动过期逻辑比较复杂，并且需要对接第三方支付积分接口。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_037",
+    "meeting_id": "meeting_001",
+    "speaker": "后端负责人",
+    "text": "结算逻辑重构涉及核心账务，不能快速上线，需要单独灰度验证。",
+    "context_before": [
+      "我这边评估一下工作量。",
+      "会员体系需要新增十余张数据表，权益发放、积分时效、自动过期逻辑比较复杂，并且需要对接第三方支付积分接口。",
+      "目前团队两名后端开发，四周周期整体偏紧。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "requirement"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_038",
+    "meeting_id": "meeting_001",
+    "speaker": "前端负责人",
+    "text": "本期适配移动端、PC端双端，部分自定义图表组件没有现成开源方案，需要自研，开发成本较高。",
+    "context_before": [
+      "目前团队两名后端开发，四周周期整体偏紧。",
+      "结算逻辑重构涉及核心账务，不能快速上线，需要单独灰度验证。",
+      "前端主要工作量在会员页全新重构、个人中心改版、后台报表自适应开发。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "requirement"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_039",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "好，针对大家提出的问题我们逐一对齐。",
+    "context_before": [
+      "我从测试角度说一下，本期涉及账务、会员权益，属于高风险业务，回归范围极大。",
+      "如果需求频繁微调，会导致测试用例大规模重写，严重压缩上线窗口期。",
+      "我建议本期需求**全程锁死，禁止临时加需求**。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_040",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "我补充本期上线标准：P0功能100%交付、零严重bug、零线上故障",
+    "context_before": [
+      "关于排期压力，我同意前端建议，将两个非核心P2看板功能砍掉至下期，保证本期核心功能稳定上线。",
+      "测试这边全程锁定需求，从今天起不再接收临时需求变更。",
+      "可以，我会后更新迭代范围，剔除两个次要功能，重新同步排期表。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "risk_warning"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "pending",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_041",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "P1功能允许轻微UI问题，后续热修复。",
+    "context_before": [
+      "测试这边全程锁定需求，从今天起不再接收临时需求变更。",
+      "可以，我会后更新迭代范围，剔除两个次要功能，重新同步排期表。",
+      "我补充本期上线标准：P0功能100%交付、零严重bug、零线上故障"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_042",
+    "meeting_id": "meeting_001",
+    "speaker": "产品经理",
+    "text": "确实遗漏，我会后补充异常场景、超时重试、失败回滚方案，今天内更新文档。",
+    "context_before": [
+      "我补充本期上线标准：P0功能100%交付、零严重bug、零线上故障",
+      "P1功能允许轻微UI问题，后续热修复。",
+      "我还有一个疑问，第三方积分接口回调超时没有明确容错方案，需求文档里没有写极端场景，这块需要补充。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "commitment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_043",
+    "meeting_id": "meeting_001",
+    "speaker": "测试负责人",
+    "text": "那我这边等文档更新完毕后，明日启动测试用例编写，提前覆盖异常场景。",
+    "context_before": [
+      "P1功能允许轻微UI问题，后续热修复。",
+      "我还有一个疑问，第三方积分接口回调超时没有明确容错方案，需求文档里没有写极端场景，这块需要补充。",
+      "确实遗漏，我会后补充异常场景、超时重试、失败回滚方案，今天内更新文档。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "commitment"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_044",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "第一周：设计定稿、需求最终锁定、技术方案评审",
+    "context_before": [
+      "确实遗漏，我会后补充异常场景、超时重试、失败回滚方案，今天内更新文档。",
+      "那我这边等文档更新完毕后，明日启动测试用例编写，提前覆盖异常场景。",
+      "最后统一整体节奏。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_045",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "第四周：全量测试、bug修复、灰度上线。",
+    "context_before": [
+      "最后统一整体节奏。",
+      "第一周：设计定稿、需求最终锁定、技术方案评审",
+      "第二、三周：前后端开发、联调、自测"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_046",
+    "meeting_id": "meeting_001",
+    "speaker": "项目负责人",
+    "text": "所有人严格卡点执行，每日晚同步进度。",
+    "context_before": [
+      "第一周：设计定稿、需求最终锁定、技术方案评审",
+      "第二、三周：前后端开发、联调、自测",
+      "第四周：全量测试、bug修复、灰度上线。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_047",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "各位同事，大家下午好，本次售后退款需求评审会预计30分钟，全员对齐新版自动退款系统需求，解决当前人工退款效率低、用户咨询量大、退款状态不透明的核心痛点。",
+    "context_before": [],
+    "expected": {
+      "allowed_primary_intents": [
+        "agenda_statement"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_048",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "首先说明背景，目前平台所有售后退款均为客服人工审核，日均退款订单300\\+，高峰期突破500单，客服人员80%的工作时间都消耗在退款审核上，人力成本极高，且人工审核存在审核标准不统一、处理时效不稳定的问题，用户退款投诉率连续两个月环比上涨15%，严重影响用户体验和平台口碑。",
+    "context_before": [
+      "各位同事，大家下午好，本次售后退款需求评审会预计30分钟，全员对齐新版自动退款系统需求，解决当前人工退款效率低、用户咨询量大、退款状态不透明的核心痛点。",
+      "先由我完整讲解需求背景、功能流程、用户场景，之后各部门依次提出问题、优化建议和落地难点，我们现场对齐方案，敲定最终需求版本和开发排期。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_049",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "基于此，我们计划上线全自动退款体系，覆盖小额自动退款、大额人工复核、退款进度实时查询、超时自动驳回四大核心能力，实现退款流程标准化、自动化、可视化。",
+    "context_before": [
+      "各位同事，大家下午好，本次售后退款需求评审会预计30分钟，全员对齐新版自动退款系统需求，解决当前人工退款效率低、用户咨询量大、退款状态不透明的核心痛点。",
+      "先由我完整讲解需求背景、功能流程、用户场景，之后各部门依次提出问题、优化建议和落地难点，我们现场对齐方案，敲定最终需求版本和开发排期。",
+      "首先说明背景，目前平台所有售后退款均为客服人工审核，日均退款订单300\\+，高峰期突破500单，客服人员80%的工作时间都消耗在退款审核上，人力成本极高，且人工审核存在审核标准不统一、处理时效不稳定的问题，用户退款投诉率连续两个月环比上涨15%，严重影响用户体验和平台口碑。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_050",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "接下来我讲解具体功能流程，用户发起退款申请后，系统自动校验订单状态、售后原因、订单金额，小额订单无条件自动审核通过，触发自动退款",
+    "context_before": [
+      "先由我完整讲解需求背景、功能流程、用户场景，之后各部门依次提出问题、优化建议和落地难点，我们现场对齐方案，敲定最终需求版本和开发排期。",
+      "首先说明背景，目前平台所有售后退款均为客服人工审核，日均退款订单300\\+，高峰期突破500单，客服人员80%的工作时间都消耗在退款审核上，人力成本极高，且人工审核存在审核标准不统一、处理时效不稳定的问题，用户退款投诉率连续两个月环比上涨15%，严重影响用户体验和平台口碑。",
+      "基于此，我们计划上线全自动退款体系，覆盖小额自动退款、大额人工复核、退款进度实时查询、超时自动驳回四大核心能力，实现退款流程标准化、自动化、可视化。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_051",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "大额订单自动流转至客服后台待复核",
+    "context_before": [
+      "首先说明背景，目前平台所有售后退款均为客服人工审核，日均退款订单300\\+，高峰期突破500单，客服人员80%的工作时间都消耗在退款审核上，人力成本极高，且人工审核存在审核标准不统一、处理时效不稳定的问题，用户退款投诉率连续两个月环比上涨15%，严重影响用户体验和平台口碑。",
+      "基于此，我们计划上线全自动退款体系，覆盖小额自动退款、大额人工复核、退款进度实时查询、超时自动驳回四大核心能力，实现退款流程标准化、自动化、可视化。",
+      "接下来我讲解具体功能流程，用户发起退款申请后，系统自动校验订单状态、售后原因、订单金额，小额订单无条件自动审核通过，触发自动退款"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_052",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "所有订单实时同步退款进度，用户可在订单页自主查看",
+    "context_before": [
+      "基于此，我们计划上线全自动退款体系，覆盖小额自动退款、大额人工复核、退款进度实时查询、超时自动驳回四大核心能力，实现退款流程标准化、自动化、可视化。",
+      "接下来我讲解具体功能流程，用户发起退款申请后，系统自动校验订单状态、售后原因、订单金额，小额订单无条件自动审核通过，触发自动退款",
+      "大额订单自动流转至客服后台待复核"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_053",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "超过48小时未处理订单，系统自动驳回并推送消息告知用户。",
+    "context_before": [
+      "接下来我讲解具体功能流程，用户发起退款申请后，系统自动校验订单状态、售后原因、订单金额，小额订单无条件自动审核通过，触发自动退款",
+      "大额订单自动流转至客服后台待复核",
+      "所有订单实时同步退款进度，用户可在订单页自主查看"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_054",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "后台新增退款订单管理列表，支持运营、客服筛选、导出、统计数据。",
+    "context_before": [
+      "大额订单自动流转至客服后台待复核",
+      "所有订单实时同步退款进度，用户可在订单页自主查看",
+      "超过48小时未处理订单，系统自动驳回并推送消息告知用户。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "requirement"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_055",
+    "meeting_id": "meeting_002",
+    "speaker": "产品经理",
+    "text": "以上就是本次需求的完整核心内容，大家有疑问可以随时提出。",
+    "context_before": [
+      "所有订单实时同步退款进度，用户可在订单页自主查看",
+      "超过48小时未处理订单，系统自动驳回并推送消息告知用户。",
+      "后台新增退款订单管理列表，支持运营、客服筛选、导出、统计数据。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "agenda_statement"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_056",
+    "meeting_id": "meeting_002",
+    "speaker": "UI设计师",
+    "text": "我整体看完了本次需求原型和交互流程，首先整体逻辑是通顺的，但存在明显的体验和风控漏洞。",
+    "context_before": [
+      "超过48小时未处理订单，系统自动驳回并推送消息告知用户。",
+      "后台新增退款订单管理列表，支持运营、客服筛选、导出、统计数据。",
+      "以上就是本次需求的完整核心内容，大家有疑问可以随时提出。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "agenda_statement"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "discussing",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_057",
+    "meeting_id": "meeting_002",
+    "speaker": "UI设计师",
+    "text": "退款成功、退款驳回、审核中三种状态的页面样式完全一致，用户无法快速区分状态，咨询量依然无法降低。",
+    "context_before": [
+      "以上就是本次需求的完整核心内容，大家有疑问可以随时提出。",
+      "我整体看完了本次需求原型和交互流程，首先整体逻辑是通顺的，但存在明显的体验和风控漏洞。",
+      "原型中所有退款提交后无任何二次确认弹窗，用户极易误操作发起退款，尤其是大额订单，一旦误退款，追回流程非常繁琐，会造成平台资金损失。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_058",
+    "meeting_id": "meeting_002",
+    "speaker": "UI设计师",
+    "text": "超时驳回仅推送系统消息，无短信、公众号兜底通知，部分用户会错过消息，引发投诉。",
+    "context_before": [
+      "我整体看完了本次需求原型和交互流程，首先整体逻辑是通顺的，但存在明显的体验和风控漏洞。",
+      "原型中所有退款提交后无任何二次确认弹窗，用户极易误操作发起退款，尤其是大额订单，一旦误退款，追回流程非常繁琐，会造成平台资金损失。",
+      "退款成功、退款驳回、审核中三种状态的页面样式完全一致，用户无法快速区分状态，咨询量依然无法降低。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "information"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "unknown",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_059",
+    "meeting_id": "meeting_002",
+    "speaker": "UI设计师",
+    "text": "我的建议是，新增退款提交二次确认弹窗，区分小额、大额弹窗文案",
+    "context_before": [
+      "原型中所有退款提交后无任何二次确认弹窗，用户极易误操作发起退款，尤其是大额订单，一旦误退款，追回流程非常繁琐，会造成平台资金损失。",
+      "退款成功、退款驳回、审核中三种状态的页面样式完全一致，用户无法快速区分状态，咨询量依然无法降低。",
+      "超时驳回仅推送系统消息，无短信、公众号兜底通知，部分用户会错过消息，引发投诉。"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "decision"
+      ],
+      "forbidden_primary_intents": [],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  },
+  {
+    "case_id": "real_case_060",
+    "meeting_id": "meeting_002",
+    "speaker": "UI设计师",
+    "text": "优化三种状态的视觉样式，增加颜色、图标区分",
+    "context_before": [
+      "退款成功、退款驳回、审核中三种状态的页面样式完全一致，用户无法快速区分状态，咨询量依然无法降低。",
+      "超时驳回仅推送系统消息，无短信、公众号兜底通知，部分用户会错过消息，引发投诉。",
+      "我的建议是，新增退款提交二次确认弹窗，区分小额、大额弹窗文案"
+    ],
+    "expected": {
+      "allowed_primary_intents": [
+        "requirement"
+      ],
+      "forbidden_primary_intents": [
+        "risk_warning"
+      ],
+      "expected_owner": null,
+      "expected_deadline": null,
+      "expected_status": "confirmed",
+      "must_need_review": false
+    }
+  }
+]

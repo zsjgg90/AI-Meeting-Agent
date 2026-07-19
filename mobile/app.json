@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Meeting Agent MVP",
+    "slug": "meeting-agent-mvp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "This app records meeting audio for transcription and meeting analysis."
+      }
+    },
+    "android": {
+      "permissions": ["RECORD_AUDIO"]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+# Changelog
+
+## 2026-07-20
+
+- Added Agent v1.0 Phase 0 baseline freeze documentation and baseline dataset
+  directory specification.
+- Added API and Worker Agent rollout guardrail settings:
+  `AGENT_MODE_ENABLED=false`, `AGENT_SHADOW_MODE=true`, and
+  `AGENT_ACTIONS_ENABLED=false`.
+- Fixed a production analysis stall where stale `transcript_segments`
+  `speaker_name` update locks blocked subsequent summary analysis runs.
+- Changed Worker summary orchestration to commit speaker-name backfill before
+  RAG/Qwen inference so long model calls do not hold transcript row locks.
+- Added `RAG_EMBEDDING_LOCAL_FILES_ONLY=true` Worker setting and made
+  `RagRetriever` load the embedding model from local cache by default to avoid
+  blocking on Hugging Face metadata requests during manual Worker starts.
+- Repaired meeting `73c47be6-0ea0-41eb-ac73-81e458574abd` by rerunning Worker
+  analysis successfully; generated summary
+  `33db99a1-634d-4d57-b28b-f720c4d9bcde`.
+
+## 2026-07-15
+
+- Added Phase 4 unified meeting analysis schema boundary.
+- Added Worker analysis contract normalization before persistence.
+- Added summary response `metadata.schema_version`.
+- Added schema boundary documentation and ADR 0003.
+- Added Phase 5 prompt and RAG version management.
+- Moved the formal Qwen3 Meeting Analyst prompt into a versioned prompt template and registry.
+- Added RAG dataset manifest, configurable RAG settings, retrieved chunk id tracking, and summary metadata persistence.
+- Added Alembic migration `20260715_0011` for prompt/RAG metadata fields.
+- Added Phase 6 testing and observability improvements.
+- Added Worker/API `/ready` checks, structured Worker analysis logs with redaction, and local service diagnostics.
+- Added fake Qwen/RAG Meeting Analyst service tests and regression fixture shape checks.
+- Added observability documentation and ADR 0005.

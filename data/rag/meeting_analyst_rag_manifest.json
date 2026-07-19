@@ -1,0 +1,11 @@
+{
+  "dataset_id": "meeting_analyst_rules",
+  "dataset_version": "meeting_analyst_rag_v1",
+  "chunk_schema_version": "rag-chunk-v1",
+  "source_file": "meeting_analyst_rag_350_chunks.jsonl",
+  "expected_chunk_count": 350,
+  "stable_id_field": "chunk_id",
+  "collection_name": "meeting_analyst_rules",
+  "embedding_model": "BAAI/bge-small-zh-v1.5",
+  "notes": "Formal Meeting Analyst RAG rules. RAG chunks define classification rules only and must not provide meeting facts."
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "case_id": "agenda_basic",
+    "transcript": "speaker_0：今天先同步背景，再评估方案，最后确认分工。",
+    "expected_dimensions": ["meeting_agenda"]
+  },
+  {
+    "case_id": "summary_not_copy",
+    "transcript": "speaker_0：用户反馈下载失败。speaker_1：我们需要优化接口。",
+    "expected_dimensions": ["meeting_summary"]
+  },
+  {
+    "case_id": "decision_confirmed",
+    "transcript": "speaker_0：就按当前方案推进，本周不再调整范围。",
+    "expected_dimensions": ["key_conclusions"]
+  },
+  {
+    "case_id": "action_owner_deadline",
+    "transcript": "speaker_0：张明周五前补充验收标准。",
+    "expected_dimensions": ["action_items"]
+  },
+  {
+    "case_id": "action_no_owner",
+    "transcript": "speaker_0：需要补充默认标签分组规则。",
+    "expected_dimensions": ["action_items"]
+  },
+  {
+    "case_id": "open_issue",
+    "transcript": "speaker_0：用户行为数据体系还没有搭建，推荐功能暂时没有依据。",
+    "expected_dimensions": ["unresolved_issues"]
+  },
+  {
+    "case_id": "risk_future",
+    "transcript": "speaker_0：如果接口延期，联调时间会被压缩。",
+    "expected_dimensions": ["risks_and_focus"]
+  },
+  {
+    "case_id": "risk_not_current_bug",
+    "transcript": "speaker_0：当前下载接口已经出现失败，需要先定位原因。",
+    "expected_dimensions": ["unresolved_issues"]
+  },
+  {
+    "case_id": "proposal_not_decision",
+    "transcript": "speaker_0：我建议可以先灰度发布，但还需要确认。",
+    "expected_dimensions": ["topics"]
+  },
+  {
+    "case_id": "rejection_as_decision",
+    "transcript": "speaker_0：确认本期砍掉个性化推荐，后续单独排期。",
+    "expected_dimensions": ["key_conclusions"]
+  },
+  {
+    "case_id": "deadline_not_infer",
+    "transcript": "speaker_0：版本 8 月 1 日上线。speaker_1：产品补充标签规则。",
+    "expected_dimensions": ["action_items"]
+  },
+  {
+    "case_id": "owner_not_infer",
+    "transcript": "speaker_0：需要完成回归测试。",
+    "expected_dimensions": ["action_items"]
+  },
+  {
+    "case_id": "speaker_prefix",
+    "transcript": "speaker_0：我会整理方案。speaker_1：我负责联调。",
+    "expected_dimensions": ["action_items"]
+  },
+  {
+    "case_id": "multi_topic",
+    "transcript": "speaker_0：第一讨论缓存兼容，第二讨论接口限流，第三确认上线时间。",
+    "expected_dimensions": ["meeting_agenda", "topics"]
+  },
+  {
+    "case_id": "empty_risk",
+    "transcript": "speaker_0：目前没有其他风险。",
+    "expected_dimensions": []
+  },
+  {
+    "case_id": "issue_vs_action",
+    "transcript": "speaker_0：接口规范还没确定。speaker_1：后端明天给出接口规范。",
+    "expected_dimensions": ["action_items", "unresolved_issues"]
+  },
+  {
+    "case_id": "risk_with_mitigation",
+    "transcript": "speaker_0：如果数据迁移规则临时变更，会导致返工，需要冻结需求。",
+    "expected_dimensions": ["risks_and_focus", "key_conclusions"]
+  },
+  {
+    "case_id": "summary_full_context",
+    "transcript": "speaker_0：线上用户反馈路径复杂。speaker_1：技术上可以收敛入口。speaker_0：本期先优化入口，下期再做推荐。",
+    "expected_dimensions": ["meeting_summary", "key_conclusions", "topics"]
+  }
+]

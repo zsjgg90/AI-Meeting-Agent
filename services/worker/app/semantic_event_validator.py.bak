@@ -1,0 +1,218 @@
+﻿from __future__ import annotations
+
+import re
+from dataclasses import dataclass
+
+from app.semantic_clause_splitter import BUSINESS_SIGNALS, is_pure_flow_utterance
+from app.semantic_event_schema import SemanticEvent
+
+
+PROPOSAL_PATTERNS = [
+    "建议",
+    "可以考虑",
+    "是否可以",
+    "要不要",
+    "我觉得",
+    "是不是可以",
+]
+
+CONFIRMATION_PATTERNS = [
+    "同意",
+    "确认",
+    "决定",
+    "就这么定",
+    "按此执行",
+    "采纳",
+    "确定",
+    "敲定",
+    "定下来",
+    "达成一致",
+]
+
+REJECTION_PATTERNS = [
+    "取消",
+    "砍掉",
+    "否决",
+    "不做",
+    "不上线",
+    "暂停",
+    "暂缓",
+    "延后",
+    "禁止",
+    "不再",
+]
+
+COMMITMENT_PATTERNS = [
+    "我会",
+    "我负责",
+    "我今天完成",
+    "我后续跟进",
+    "我来",
+    "我这边会",
+    "我今天",
+    "我明天",
+]
+
+ASSIGNMENT_PATTERNS = [
+    "由",
+    "负责",
+    "周一前完成",
+    "周二前完成",
+    "周三前完成",
+    "周四前完成",
+    "周五前完成",
+    "今天完成",
+    "明天完成",
+]
+
+TIME_PATTERN = re.compile(
+    r"(\d{1,2}\s*[月/.-]\s*\d{1,2}\s*[日号]?|"
+    r"\d{4}\s*[年/.-]\s*\d{1,2}\s*[月/.-]\s*\d{1,2}\s*[日号]?|"
+    r"今天|明天|后天|本周|下周|周[一二三四五六日天]|"
+    r"月底|月中|上午|下午|晚上|今早|今晚|会后|"
+    r"\d+\s*(天|小时|分钟|周|个月)内|\d+\s*(天|小时|分钟|周|个月)后)"
+)
+
+RISK_PATTERN = re.compile(
+    r"(如果|一旦|可能|风险|隐患|导致|影响|无法|失败|延迟|延期|阻塞|返工|损失|下降|不可用|事故|超时|丢失)"
+)
+
+OPEN_ISSUE_PATTERN = re.compile(
+    r"(未确定|没确定|没有确定|尚未|暂时无法|无法现场|待确认|等待.*确认|缺少|缺失|不清楚|还没方案|没有方案|没有排期|外部.*未|第三方.*未)"
+)
+
+QUESTION_PATTERN = re.compile(r"(吗|么|是否|能不能|可不可以|有没有|什么|为什么|如何|\?)")
+
+
+@dataclass
+class ValidationSummary:
+    changed: bool = False
+    reasons: list[str] | None = None
+
+    def add(self, reason: str) -> None:
+        if self.reasons is None:
+            self.reasons = []
+        self.changed = True
+        self.reasons.append(reason)
+
+
+def _combined_text(event: SemanticEvent, context: list[str]) -> str:
+    return "\n".join([event.source_text or "", *(item for item in context if item)])
+
+
+def _contains_any(text: str, patterns: list[str]) -> bool:
+    return any(pattern in text for pattern in patterns)
+
+
+def _has_business_signal(text: str) -> bool:
+    return any(signal in text for signal in BUSINESS_SIGNALS)
+
+
+def validate_semantic_event(
+    event: SemanticEvent,
+    context: list[str] | None = None,
+) -> tuple[SemanticEvent, ValidationSummary]:
+    context = context or []
+    summary = ValidationSummary()
+    source_text = event.source_text or ""
+    combined_text = _combined_text(event, context)
+
+    if event.primary_intent == "non_event" and not is_pure_flow_utterance(source_text):
+        event.primary_intent = "information" if not _has_business_signal(source_text) else "open_issue"
+        event.needs_review = True
+        summary.add("non_event_with_business_content_reclassified")
+
+    if event.primary_intent == "agenda_statement":
+        agenda_signals = ["议题", "流程", "今天主要", "本次主要", "首先", "接下来", "最后", "会议目标", "会议控制"]
+        if not _contains_any(source_text, agenda_signals):
+            event.primary_intent = "information"
+            event.needs_review = True
+            summary.add("weak_agenda_reclassified_to_information")
+
+    if (
+        event.primary_intent == "decision"
+        and _contains_any(source_text, PROPOSAL_PATTERNS)
+        and not _contains_any(source_text, CONFIRMATION_PATTERNS)
+    ):
+        event.primary_intent = "proposal"
+        event.event_type = "proposed"
+        event.attributes.status = "proposed"
+        event.needs_review = True
+        summary.add("proposal_text_downgraded_from_decision")
+
+    if _contains_any(source_text, CONFIRMATION_PATTERNS) and _contains_any(source_text, REJECTION_PATTERNS):
+        if event.primary_intent == "rejection":
+            event.primary_intent = "decision"
+            if "rejection" not in event.secondary_intents:
+                event.secondary_intents.append("rejection")
+            event.event_type = "confirmed"
+            event.attributes.status = "confirmed"
+            summary.add("confirmed_rejection_promoted_to_decision")
+
+    if event.primary_intent == "risk_warning" and not RISK_PATTERN.search(source_text):
+        if OPEN_ISSUE_PATTERN.search(source_text):
+            event.primary_intent = "open_issue"
+            event.attributes.status = "blocked"
+            summary.add("risk_without_future_signal_reclassified_to_open_issue")
+        else:
+            event.needs_review = True
+            summary.add("risk_warning_without_risk_signal")
+
+    if event.primary_intent == "open_issue":
+        if QUESTION_PATTERN.search(source_text) and not OPEN_ISSUE_PATTERN.search(source_text):
+            event.primary_intent = "question"
+            event.event_type = "discussing"
+            event.attributes.status = "discussing"
+            event.needs_review = True
+            summary.add("plain_question_reclassified_from_open_issue")
+
+    if event.primary_intent == "commitment" and not _contains_any(source_text, COMMITMENT_PATTERNS):
+        if _contains_any(source_text, ASSIGNMENT_PATTERNS):
+            event.primary_intent = "task_assignment"
+            summary.add("assignment_text_reclassified_from_commitment")
+        else:
+            event.needs_review = True
+            summary.add("commitment_without_first_person_signal")
+
+    owner = event.attributes.owner
+    if owner and owner not in combined_text and owner != event.speaker:
+        event.attributes.owner = None
+        event.needs_review = True
+        summary.add("owner_not_supported_by_source")
+
+    deadline = event.attributes.deadline
+    if deadline and not TIME_PATTERN.search(combined_text):
+        event.attributes.deadline = None
+        event.needs_review = True
+        summary.add("deadline_not_supported_by_source")
+
+    if event.evidence.source_text not in source_text:
+        event.evidence.source_text = source_text
+        event.needs_review = True
+        summary.add("evidence_source_text_replaced")
+
+    if event.evidence.quote and event.evidence.quote not in source_text:
+        event.evidence.quote = None
+        event.needs_review = True
+        summary.add("evidence_quote_removed")
+
+    if event.confidence.overall < 0.7 and not event.needs_review:
+        event.needs_review = True
+        summary.add("low_confidence_marked_for_review")
+
+    return event, summary
+
+
+def validate_semantic_events(
+    events: list[SemanticEvent],
+    context: list[str] | None = None,
+) -> tuple[list[SemanticEvent], list[ValidationSummary]]:
+    validated: list[SemanticEvent] = []
+    summaries: list[ValidationSummary] = []
+
+    for event in events:
+        next_event, summary = validate_semantic_event(event, context=context)
+        validated.append(next_event)
+        summaries.append(summary)
+
+    return validated, summaries

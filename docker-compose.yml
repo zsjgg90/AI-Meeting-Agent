@@ -1,0 +1,57 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-meeting_agent}
+      POSTGRES_USER: ${POSTGRES_USER:-meeting_agent}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-meeting_agent}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-meeting_agent} -d ${POSTGRES_DB:-meeting_agent}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./services/api
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://meeting_agent:meeting_agent@db:5432/meeting_agent}
+      STORAGE_DIR: /app/storage
+      WORKER_URL: ${WORKER_URL:-http://worker:8001}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ./services/worker
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://meeting_agent:meeting_agent@db:5432/meeting_agent}
+      STORAGE_DIR: /app/storage
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:14b}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_TEMPERATURE: ${OLLAMA_TEMPERATURE:-0}
+      OLLAMA_TOP_P: ${OLLAMA_TOP_P:-0.8}
+      OLLAMA_CONTEXT: ${OLLAMA_CONTEXT:-8192}
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

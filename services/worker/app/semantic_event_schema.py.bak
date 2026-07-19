@@ -1,0 +1,130 @@
+from __future__ import annotations
+
+from typing import Literal
+
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+
+SemanticIntent = Literal[
+    "agenda_statement",
+    "progress_update",
+    "decision",
+    "proposal",
+    "commitment",
+    "task_assignment",
+    "question",
+    "open_issue",
+    "risk_warning",
+    "requirement",
+    "rejection",
+    "information",
+    "non_event",
+]
+
+EventStatus = Literal[
+    "proposed",
+    "discussing",
+    "confirmed",
+    "rejected",
+    "completed",
+    "pending",
+    "blocked",
+    "cancelled",
+    "unknown",
+]
+
+Certainty = Literal[
+    "explicit",
+    "contextual",
+    "inferred",
+    "unknown",
+]
+
+
+class SemanticEntities(BaseModel):
+    persons: list[str] = Field(default_factory=list)
+    teams: list[str] = Field(default_factory=list)
+    projects: list[str] = Field(default_factory=list)
+    features: list[str] = Field(default_factory=list)
+    dates: list[str] = Field(default_factory=list)
+    versions: list[str] = Field(default_factory=list)
+    numbers: list[str] = Field(default_factory=list)
+
+
+class SemanticAttributes(BaseModel):
+    owner: str | None = None
+    deadline: str | None = None
+    priority: Literal["low", "medium", "high", "unknown"] = "unknown"
+    status: EventStatus = "unknown"
+    polarity: Literal["positive", "negative", "neutral", "unknown"] = "unknown"
+    certainty: Certainty = "unknown"
+
+
+class SemanticEvidence(BaseModel):
+    source_text: str
+    quote: str | None = None
+
+
+class SemanticConfidence(BaseModel):
+    intent: float = Field(default=0.0, ge=0, le=1)
+    entity: float = Field(default=0.0, ge=0, le=1)
+    overall: float = Field(default=0.0, ge=0, le=1)
+
+    @field_validator(
+        "intent",
+        "entity",
+        "overall",
+        mode="before",
+    )
+    @classmethod
+    def clamp_confidence(cls, value: object) -> float:
+        try:
+            number = float(value)
+        except (TypeError, ValueError):
+            return 0.0
+        return min(1.0, max(0.0, number))
+
+
+class SemanticEvent(BaseModel):
+    event_id: str
+    utterance_id: str
+    segment_id: str | None = None
+    speaker: str | None = None
+    speaker_role: str | None = None
+    start_time: float | None = None
+    end_time: float | None = None
+    source_text: str
+    normalized_text: str
+    primary_intent: SemanticIntent
+    secondary_intents: list[SemanticIntent] = Field(default_factory=list)
+    event_type: EventStatus = "unknown"
+    subject: str | None = None
+    action: str | None = None
+    object: str | None = None
+    entities: SemanticEntities = Field(default_factory=SemanticEntities)
+    attributes: SemanticAttributes = Field(default_factory=SemanticAttributes)
+    evidence: SemanticEvidence
+    confidence: SemanticConfidence = Field(default_factory=SemanticConfidence)
+    needs_review: bool = False
+
+    @model_validator(mode="after")
+    def sync_review_flag(self) -> "SemanticEvent":
+        if self.confidence.overall < 0.7:
+            self.needs_review = True
+        return self
+
+
+class SemanticEventExtractionResult(BaseModel):
+    events: list[SemanticEvent] = Field(default_factory=list, min_length=0, max_length=3)
+
+
+class UtteranceInput(BaseModel):
+    utterance_id: str
+    segment_id: str | None = None
+    speaker: str | None = None
+    speaker_role: str | None = None
+    start_time: float | None = None
+    end_time: float | None = None
+    text: str
+    topic: str | None = None
+    context: list[str] = Field(default_factory=list)
