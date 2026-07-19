@@ -94,6 +94,66 @@ meeting_analysis: dict[str, Any]
 Callers may add extra metadata, but they cannot override the Agent contract
 schema version.
 
+`MeetingType` is defined in `agent_contract.py` and is shared by later Agent
+contract layers. Current values are:
+
+- `requirement_review`
+- `project_weekly`
+- `technical_review`
+- `version_planning`
+- `cross_department`
+- `project_retrospective`
+- `management_decision`
+- `customer_requirement`
+- `unknown`
+
+## Meeting Scenario Policy Schema
+
+MeetMind Agent v1.0 Phase 2 adds a Worker-internal scenario policy layer:
+
+- `services/worker/app/meeting_scenarios/`
+
+Current scenario policy schema version:
+
+```text
+meeting-scenario-policy-v1
+```
+
+`MeetingScenarioPolicy` is an immutable Pydantic model. It defines:
+
+- `meeting_type`
+- `display_name`
+- `description`
+- `required_context`
+- `optional_context`
+- `focus_entities`
+- `validation_rules`
+- `allowed_actions`
+- `confirmation_required_actions`
+- `classification_hints`
+- `needs_review`
+- `schema_version`
+
+Allowed context, entity, action, and classification-source values are defined
+centrally in `services/worker/app/meeting_scenarios/base.py`. Scenario modules
+only declare configuration; they must not call models, databases, RAG, network,
+files, or services.
+
+The policy registry is pure in-memory and deterministic:
+
+- `get_policy(meeting_type)`
+- `list_policies()`
+- `has_policy(meeting_type)`
+
+`unknown` has a safe default policy. It requires no historical context, uses a
+minimal allowed action set, requires review, does not allow high-risk actions
+such as `update_project_health`, and must not be used by later Runtime code to
+automatically modify project state.
+
+`MeetingClassificationResult` defines the future classification result
+contract only. It reuses `EvidenceRef`; it does not implement manual override,
+rule classification, model classification, or fallback logic in Phase 2.
+
 ## Schema Version
 
 Current schema version:
@@ -137,6 +197,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Six Dimension Mapper | Rule mapping from `TopicEventGroup` into `SixDimensionResult` | LLM calls, database writes, API response shaping |
 | Six Dimension Validator | Quality control for `SixDimensionResult` evidence, status, and duplicates | LLM calls, database writes, API response shaping |
 | Agent Contract | Worker-internal Agent v1 business objects and per-run `AgentContext` validation | API contracts, database writes, raw LLM persistence, Agent runtime orchestration, tool execution |
+| Meeting Scenario Policy | Worker-internal read-only meeting type policies and classification result contract | Real classification, model calls, database/RAG/network access, Agent runtime orchestration, tool execution |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -155,6 +216,9 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
   `MeetingAnalysisSchema`.
 - Raw LLM output must not directly become formal Agent business objects. Later
   phases must use controlled conversion and validation before any state update.
+- Meeting scenario policies and `MeetingClassificationResult` are internal
+  Agent v1 Phase 2 contracts. They are not persisted, exposed through the API,
+  or connected to the formal analysis chain.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

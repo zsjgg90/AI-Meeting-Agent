@@ -89,6 +89,7 @@ if (-not $SkipWorkerTests) {
         services.worker.tests.test_prompt_rag_versioning `
         services.worker.tests.test_agent_config `
         services.worker.tests.test_agent_contract `
+        services.worker.tests.test_meeting_scenarios `
         services.worker.tests.test_volcengine_speaker_diarization }
 }
 

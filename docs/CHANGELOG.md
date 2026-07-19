@@ -2,6 +2,12 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 2 Worker-internal meeting scenario policies with
+  schema version `meeting-scenario-policy-v1`.
+- Added eight formal meeting scenario policies plus safe `unknown` defaults,
+  an immutable policy contract, a deterministic in-memory registry, and a
+  `MeetingClassificationResult` contract that reuses `EvidenceRef`.
+- Added Phase 2 meeting scenario tests to the default Worker test gate.
 - Added Agent v1.0 Phase 1 Worker-internal contract schemas:
   `EvidenceRef`, `Requirement`, `Decision`, `AgentActionItem`, `Issue`, `Risk`,
   `Dependency`, `Milestone`, `CustomerRequest`, `ProjectState`,

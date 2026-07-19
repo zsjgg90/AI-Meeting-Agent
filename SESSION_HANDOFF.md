@@ -12,6 +12,12 @@ Agent v1.0 Phase 1 adds Worker-internal contract schemas in
 `agent-contract-v1`. These contracts are not wired into API responses,
 database persistence, Prompt/RAG, Validator, or the formal Qwen3 + RAG analysis
 path.
+Agent v1.0 Phase 2 adds Worker-internal meeting scenario policies in
+`services/worker/app/meeting_scenarios/` with schema version
+`meeting-scenario-policy-v1`. The registry covers eight formal meeting types
+plus safe `unknown` and remains pure in-memory. It does not classify meetings,
+call models, read databases/RAG, execute actions, or modify the formal analysis
+path.
 
 Repository freeze metadata:
 
@@ -110,11 +116,13 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review and accept Agent v1.0 Phase 1 contract behavior after tests pass.
+1. Review and accept Agent v1.0 Phase 2 meeting scenario policy behavior after
+   tests pass.
 2. Import the 19 required Agent baseline meeting artifacts under
    `data/eval/agent_v1_baseline/`.
-3. Design Phase 2 eight-scenario strategy contracts without modifying Prompt,
-   RAG, Validator, API, database, or formal analysis output.
+3. Prepare Phase 3 toolization by wrapping existing capabilities as controlled
+   tools without changing Prompt, RAG, Validator, API, database, or formal
+   analysis output.
 4. Run `.\scripts\check-services.ps1` with local services available.
 5. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.

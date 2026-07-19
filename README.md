@@ -65,6 +65,14 @@ milestones, customer requests, project state, action proposals, and per-run
 `AgentContext`. They are not exposed through the API and do not replace the
 formal six-dimension `MeetingAnalysisSchema`.
 
+Agent v1.0 Phase 2 introduces Worker-internal meeting scenario policies in
+`services/worker/app/meeting_scenarios/` with schema version
+`meeting-scenario-policy-v1`. The policy registry covers eight formal meeting
+types plus `unknown`, and defines required context, focus entities, validation
+rules, allowed action proposal names, and confirmation requirements. It is a
+read-only contract layer only; it does not classify meetings, call Qwen3,
+execute actions, update project state, or change the formal analysis path.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`

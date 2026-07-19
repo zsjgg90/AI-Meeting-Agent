@@ -2,8 +2,8 @@
 
 ## Active Priority
 
-1. Continue Agent v1.0 Phase 1 contract validation and prepare Phase 2 meeting
-   scenario strategy design.
+1. Review and accept Agent v1.0 Phase 2 meeting scenario policy behavior, then
+   prepare Phase 3 toolization of existing capabilities.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -20,8 +20,11 @@
   `main`.
 - Import the 19 required Agent v1.0 baseline meeting artifact folders under
   `data/eval/agent_v1_baseline/`.
-- Design Phase 2 eight-scenario strategy contracts without changing Prompt,
-  RAG, Validator, API, database, or formal analysis output.
+- Keep Phase 2 meeting scenario policies as read-only contracts until a later
+  Agent Runtime phase explicitly wires them in.
+- Prepare Phase 3 by identifying existing ASR, transcript, RAG retrieval,
+  formal analysis, semantic shadow, and validation capabilities that can be
+  wrapped as controlled tools without changing their behavior.
 - Decide whether to archive or remove legacy `api` and `mobile` directories.
 - Move backup Worker files out of active source paths.
 - Keep API, Worker, AI, and Expo schemas aligned through the Phase 4 schema boundary.
@@ -69,3 +72,4 @@
 - No queue system migration.
 - No Agent Runtime, Tool Registry, or cross-meeting matching until later Agent
   phases.
+- No real meeting classifier or Agent action execution in Phase 2.

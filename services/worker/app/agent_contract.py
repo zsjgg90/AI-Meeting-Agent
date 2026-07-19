@@ -8,6 +8,18 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 AGENT_CONTRACT_SCHEMA_VERSION = "agent-contract-v1"
 
+MeetingType = Literal[
+    "requirement_review",
+    "project_weekly",
+    "technical_review",
+    "version_planning",
+    "cross_department",
+    "project_retrospective",
+    "management_decision",
+    "customer_requirement",
+    "unknown",
+]
+
 EvidenceSourceType = Literal[
     "transcript",
     "meeting_history",
@@ -237,7 +249,7 @@ class AgentContext(BaseModel):
     meeting_id: str = ""
     project_id: str = ""
     user_id: str = ""
-    meeting_type: str = ""
+    meeting_type: MeetingType = "unknown"
     objective: str = ""
     transcript: list[dict[str, Any]] = Field(default_factory=list)
     meeting_analysis: dict[str, Any] = Field(default_factory=dict)
@@ -262,6 +274,7 @@ class AgentContext(BaseModel):
 
 __all__ = [
     "AGENT_CONTRACT_SCHEMA_VERSION",
+    "MeetingType",
     "EvidenceSourceType",
     "RequirementStatus",
     "DecisionStatus",

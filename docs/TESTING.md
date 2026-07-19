@@ -75,6 +75,7 @@ python -m unittest services.worker.tests.test_worker_contract
 python -m unittest services.worker.tests.test_volcengine_speaker_diarization
 python -m unittest services.worker.tests.test_agent_config
 python -m unittest services.worker.tests.test_agent_contract
+python -m unittest services.worker.tests.test_meeting_scenarios
 ```
 
 Worker tests are split into two groups:
@@ -142,6 +143,14 @@ schemas. It covers serialization, enum validation, shared `EvidenceRef`
 structure, confidence bounds, mutable default isolation, `AgentContext`
 metadata merging, and isolation from the formal `MeetingAnalysisSchema` without
 calling Qwen3, Ollama, Chroma, PostgreSQL, API, or Expo.
+
+`test_meeting_scenarios.py` validates the Worker-internal Agent v1 Phase 2
+meeting scenario policies. It covers all eight formal meeting types plus
+`unknown`, registry behavior, duplicate registration rejection, enum validation,
+policy serialization, immutable policies, classification result validation,
+safe unknown defaults, mutable default isolation, and isolation from the formal
+`MeetingAnalysisSchema` without calling Qwen3, Ollama, Chroma, PostgreSQL, API,
+RAG, or Expo.
 
 Semantic shadow trace files are written under:
 
