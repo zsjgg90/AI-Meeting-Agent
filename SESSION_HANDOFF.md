@@ -8,6 +8,15 @@ baseline document is `docs/AGENT_V1_PHASE_0_BASELINE.md`.
 The Phase 0 runtime diagnostic currently fails because API port 8002 is not
 reachable; Worker 8001, PostgreSQL, Ollama, RAG, and Alembic head are OK.
 
+Repository freeze metadata:
+
+- Repository: `https://github.com/zsjgg90/AI-Meeting-Agent`
+- Baseline branch: `main`
+- Baseline commit: `85dca9cb6e2944bfed2926d0a26b5f40d64ffc10`
+- Baseline tag: `agent-v1-phase0-baseline`
+- Agent development branch: `feature/agent-v1`
+- Freeze date: `2026-07-20`
+
 Completed phases:
 
 1. Project audit
@@ -96,8 +105,8 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Repair or reclone Git metadata, then create and record the Agent upgrade
-   branch.
+1. Push `main`, `agent-v1-phase0-baseline`, and `feature/agent-v1` after GitHub
+   connectivity or authorization is available.
 2. Import the 19 required Agent baseline meeting artifacts under
    `data/eval/agent_v1_baseline/`.
 3. Run `.\scripts\test-all.ps1`.

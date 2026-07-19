@@ -2,6 +2,17 @@
 
 Last updated: 2026-07-20
 
+## Repository Freeze Metadata
+
+| Item | Value |
+| --- | --- |
+| Repository | `https://github.com/zsjgg90/AI-Meeting-Agent` |
+| Baseline branch | `main` |
+| Baseline commit | `85dca9cb6e2944bfed2926d0a26b5f40d64ffc10` |
+| Baseline tag | `agent-v1-phase0-baseline` |
+| Agent development branch | `feature/agent-v1` |
+| Freeze date | `2026-07-20` |
+
 ## Scope
 
 This document freezes the current Release Candidate baseline before the
@@ -12,8 +23,8 @@ pipeline and does not introduce Agent orchestration.
 
 | Item | Baseline |
 | --- | --- |
-| Git branch | Blocked: current workspace `.git` directory is not recognized by `git status`. |
-| Git commit | Blocked: `git rev-parse HEAD` fails with `fatal: not a git repository`. |
+| Git branch | `main` baseline, `feature/agent-v1` for Agent development. |
+| Git commit | `85dca9cb6e2944bfed2926d0a26b5f40d64ffc10`. |
 | Alembic head | `20260715_0011_add_prompt_rag_metadata.py`, revision `20260715_0011`. |
 | Prompt version | `meeting-analyst-v1`. |
 | Prompt file | `services/worker/app/prompts/meeting_analyst_qwen3.md`. |
@@ -113,12 +124,12 @@ actual 19 meeting baseline artifacts have not been imported or verified.
 | Expo, API, Worker run normally | Failed runtime diagnostic on 2026-07-20: Worker 8001, PostgreSQL, Ollama, RAG, and Alembic head OK; API 8002 health/ready unreachable. |
 | Agent can be fully disabled by flags | Implemented at configuration level with default off. |
 | Reusable baseline test set saved | Not complete; artifact requirement documented. |
-| Agent upgrade branch established | Blocked by invalid local Git metadata. |
+| Agent upgrade branch established | Local branch `feature/agent-v1` created from tag `agent-v1-phase0-baseline`; remote push pending GitHub connectivity. |
 
 ## Next Required Actions
 
-1. Repair or reclone Git metadata, then create an Agent upgrade branch and record
-   branch plus commit in this document.
+1. Push `main`, `agent-v1-phase0-baseline`, and `feature/agent-v1` after GitHub
+   connectivity or authorization is available.
 2. Import and verify the 19 required baseline meeting artifact folders.
 3. Start or repair local API on the expected port, then rerun
    `.\scripts\check-services.ps1`.
