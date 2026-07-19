@@ -73,6 +73,15 @@ rules, allowed action proposal names, and confirmation requirements. It is a
 read-only contract layer only; it does not classify meetings, call Qwen3,
 execute actions, update project state, or change the formal analysis path.
 
+Agent v1.0 Phase 3 starts toolization with thin Worker-internal adapters in
+`services/worker/app/agent_tools/`. The first batch contains
+`get_meeting_context`, `search_meeting_history`, `search_project_knowledge`,
+`get_open_action_items`, `analyze_meeting`, and
+`validate_meeting_analysis`. These tools standardize inputs, results, timeouts,
+call limits, and structured errors around existing services. They do not create
+a Tool Registry, Agent Runtime, Orchestrator, write-path tool, project-state
+update, action execution, ASR/diarization tool, or formal-chain integration.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`

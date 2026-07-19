@@ -154,6 +154,52 @@ automatically modify project state.
 contract only. It reuses `EvidenceRef`; it does not implement manual override,
 rule classification, model classification, or fallback logic in Phase 2.
 
+## Agent Tool Adapter Contracts
+
+MeetMind Agent v1.0 Phase 3 adds Worker-internal thin adapters:
+
+- `services/worker/app/agent_tools/`
+
+The first completed tools are:
+
+- `get_meeting_context`
+- `search_meeting_history`
+- `search_project_knowledge`
+- `get_open_action_items`
+- `analyze_meeting`
+- `validate_meeting_analysis`
+
+Tool contracts are defined in `services/worker/app/agent_tools/base.py`:
+
+- `AgentTool`
+- `ToolExecutionContext`
+- `ToolResult`
+- `ToolError`
+- `ToolPolicy`
+- `ToolStatus`
+
+`ToolStatus` is restricted to `success`, `failed`, `timeout`, `skipped`, or
+`fallback`. `ToolResult` always records `tool_name`, `status`, `data`, `error`,
+`duration_ms`, `result_source`, `retryable`, and `metadata`.
+
+The first six tools are read-only from the Agent contract perspective:
+
+```text
+read_only = true
+has_side_effects = false
+requires_confirmation = false
+```
+
+`analyze_meeting` may call the existing model/RAG analysis service, but it must
+not call `summarize_meeting()` or `save_summary()` and must not write database
+state. `validate_meeting_analysis` wraps the existing validator with audit and
+does not change validator rules.
+
+`get_project_context` and `get_active_risks` are intentionally deferred because
+there is no authoritative Project table, persisted `ProjectState`, or
+independent risk state model. Later phases may add them only after a formal
+state source and persistence boundary exist.
+
 ## Schema Version
 
 Current schema version:
@@ -198,6 +244,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Six Dimension Validator | Quality control for `SixDimensionResult` evidence, status, and duplicates | LLM calls, database writes, API response shaping |
 | Agent Contract | Worker-internal Agent v1 business objects and per-run `AgentContext` validation | API contracts, database writes, raw LLM persistence, Agent runtime orchestration, tool execution |
 | Meeting Scenario Policy | Worker-internal read-only meeting type policies and classification result contract | Real classification, model calls, database/RAG/network access, Agent runtime orchestration, tool execution |
+| Agent Tool Adapter | Thin wrappers around existing read services, RAG retrieval, model analysis, and validation with structured results | Tool Registry, Agent Runtime, database writes, action execution, project state mutation, duplicated business logic |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -219,6 +266,10 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 - Meeting scenario policies and `MeetingClassificationResult` are internal
   Agent v1 Phase 2 contracts. They are not persisted, exposed through the API,
   or connected to the formal analysis chain.
+- Agent Tool adapters are internal Phase 3 wrappers. Importing them must not
+  open DB sessions, instantiate RAG/embedding/model clients, access Chroma, or
+  call the network. They are not exposed through the API and are not wired into
+  the formal analysis chain.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

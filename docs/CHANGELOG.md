@@ -2,6 +2,14 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 3 first-batch Worker-internal Tool Adapters:
+  `get_meeting_context`, `search_meeting_history`,
+  `search_project_knowledge`, `get_open_action_items`, `analyze_meeting`, and
+  `validate_meeting_analysis`.
+- Added Tool contracts for `AgentTool`, `ToolExecutionContext`, `ToolResult`,
+  `ToolError`, `ToolPolicy`, and `ToolStatus`, with unified duration, timeout,
+  call-limit, structured-error, and result-source handling.
+- Added Agent Tool tests to the default Worker test gate.
 - Added Agent v1.0 Phase 2 Worker-internal meeting scenario policies with
   schema version `meeting-scenario-policy-v1`.
 - Added eight formal meeting scenario policies plus safe `unknown` defaults,

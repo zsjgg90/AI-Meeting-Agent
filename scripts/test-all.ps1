@@ -90,6 +90,8 @@ if (-not $SkipWorkerTests) {
         services.worker.tests.test_agent_config `
         services.worker.tests.test_agent_contract `
         services.worker.tests.test_meeting_scenarios `
+        services.worker.tests.test_agent_tools_contract `
+        services.worker.tests.test_agent_tools_adapters `
         services.worker.tests.test_volcengine_speaker_diarization }
 }
 

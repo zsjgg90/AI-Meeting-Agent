@@ -2,8 +2,7 @@
 
 ## Active Priority
 
-1. Review and accept Agent v1.0 Phase 2 meeting scenario policy behavior, then
-   prepare Phase 3 toolization of existing capabilities.
+1. Review and accept Agent v1.0 Phase 3 first-batch Tool Adapter behavior.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -22,9 +21,11 @@
   `data/eval/agent_v1_baseline/`.
 - Keep Phase 2 meeting scenario policies as read-only contracts until a later
   Agent Runtime phase explicitly wires them in.
-- Prepare Phase 3 by identifying existing ASR, transcript, RAG retrieval,
-  formal analysis, semantic shadow, and validation capabilities that can be
-  wrapped as controlled tools without changing their behavior.
+- Keep Phase 3 Tool Adapters as thin wrappers only. Do not add Tool Registry,
+  Agent Runtime, Orchestrator integration, write-path tools, or action
+  execution before a later phase explicitly requires them.
+- Defer `get_project_context` and `get_active_risks` until a formal Project
+  state source and independent risk state model exist.
 - Decide whether to archive or remove legacy `api` and `mobile` directories.
 - Move backup Worker files out of active source paths.
 - Keep API, Worker, AI, and Expo schemas aligned through the Phase 4 schema boundary.
@@ -73,3 +74,5 @@
 - No Agent Runtime, Tool Registry, or cross-meeting matching until later Agent
   phases.
 - No real meeting classifier or Agent action execution in Phase 2.
+- No Tool Registry, Agent Runtime, write-path Tool, ASR Tool, diarization Tool,
+  project-state update Tool, or cross-meeting object matching in Phase 3.

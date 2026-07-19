@@ -76,6 +76,8 @@ python -m unittest services.worker.tests.test_volcengine_speaker_diarization
 python -m unittest services.worker.tests.test_agent_config
 python -m unittest services.worker.tests.test_agent_contract
 python -m unittest services.worker.tests.test_meeting_scenarios
+python -m unittest services.worker.tests.test_agent_tools_contract
+python -m unittest services.worker.tests.test_agent_tools_adapters
 ```
 
 Worker tests are split into two groups:
@@ -151,6 +153,17 @@ policy serialization, immutable policies, classification result validation,
 safe unknown defaults, mutable default isolation, and isolation from the formal
 `MeetingAnalysisSchema` without calling Qwen3, Ollama, Chroma, PostgreSQL, API,
 RAG, or Expo.
+
+`test_agent_tools_contract.py` validates the Phase 3 Tool contract and unified
+execution wrapper. It covers serialization, policy validation, status
+validation, structured errors, duration recording, max calls per run, deadline
+handling, timeout conversion, ordinary exception conversion, retryable error
+reporting, mutable default isolation, and isolation from `MeetingAnalysisSchema`.
+
+`test_agent_tools_adapters.py` validates the first six Phase 3 Tool Adapters
+using fake DB, fake RAG retriever, fake analysis service, and fake validator
+dependencies. These tests do not call real Qwen3, Ollama, Chroma, PostgreSQL,
+external network, API, or Expo.
 
 Semantic shadow trace files are written under:
 

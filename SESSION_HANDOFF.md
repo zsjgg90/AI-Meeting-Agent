@@ -18,6 +18,19 @@ Agent v1.0 Phase 2 adds Worker-internal meeting scenario policies in
 plus safe `unknown` and remains pure in-memory. It does not classify meetings,
 call models, read databases/RAG, execute actions, or modify the formal analysis
 path.
+Agent v1.0 Phase 3 first-batch Tool Adapters are in
+`services/worker/app/agent_tools/`. They wrap existing read/context, RAG,
+analysis, action-item read, history-search, and validator capabilities with
+structured `ToolResult` output, timeout/call-limit policy, and dependency
+injection. They do not implement Tool Registry, Agent Runtime, Orchestrator
+integration, ASR/diarization tools, write tools, project state updates, action
+execution, or formal-chain integration.
+Phase 3 caveats: the outer synchronous Tool timeout returns a structured
+`timeout` result but cannot forcibly stop a blocking underlying synchronous
+call; `analyze_meeting` still relies on the existing `OLLAMA_TIMEOUT_SECONDS`
+for the real model request. `search_meeting_history` is currently deterministic
+database search only. `get_project_context` and `get_active_risks` remain
+unimplemented until authoritative project and risk state sources exist.
 
 Repository freeze metadata:
 
@@ -116,13 +129,12 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review and accept Agent v1.0 Phase 2 meeting scenario policy behavior after
+1. Review and accept Agent v1.0 Phase 3 first-batch Tool Adapter behavior after
    tests pass.
 2. Import the 19 required Agent baseline meeting artifacts under
    `data/eval/agent_v1_baseline/`.
-3. Prepare Phase 3 toolization by wrapping existing capabilities as controlled
-   tools without changing Prompt, RAG, Validator, API, database, or formal
-   analysis output.
+3. Prepare Phase 4 Agent Runtime design only after Tool Adapter behavior and
+   boundaries are accepted. Do not wire tools into an Orchestrator yet.
 4. Run `.\scripts\check-services.ps1` with local services available.
 5. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.
