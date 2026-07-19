@@ -74,6 +74,7 @@ python -m unittest services.worker.tests.test_regression_fixtures
 python -m unittest services.worker.tests.test_worker_contract
 python -m unittest services.worker.tests.test_volcengine_speaker_diarization
 python -m unittest services.worker.tests.test_agent_config
+python -m unittest services.worker.tests.test_agent_contract
 ```
 
 Worker tests are split into two groups:
@@ -135,6 +136,12 @@ legacy fallback stub. It validates the integrated semantic pipeline, empty-resul
 fallback behavior, long-meeting rule-based fast path, schema compatibility,
 shadow-mode behavior, seven-stage trace generation, and evidence traceability
 without calling real Qwen3, Ollama, Chroma, PostgreSQL, API, or Expo.
+
+`test_agent_contract.py` validates the Worker-internal Agent v1 contract
+schemas. It covers serialization, enum validation, shared `EvidenceRef`
+structure, confidence bounds, mutable default isolation, `AgentContext`
+metadata merging, and isolation from the formal `MeetingAnalysisSchema` without
+calling Qwen3, Ollama, Chroma, PostgreSQL, API, or Expo.
 
 Semantic shadow trace files are written under:
 

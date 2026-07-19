@@ -1,6 +1,6 @@
 # Schema And Module Boundaries
 
-Last updated: 2026-07-17
+Last updated: 2026-07-20
 
 ## Authoritative Meeting Analysis Schema
 
@@ -27,6 +27,72 @@ LLM raw JSON
 ```
 
 Model raw output must not be written to the database directly.
+
+## Agent Contract Schema
+
+MeetMind Agent v1.0 Phase 1 adds a Worker-internal Agent contract:
+
+- `services/worker/app/agent_contract.py`
+
+Current Agent contract schema version:
+
+```text
+agent-contract-v1
+```
+
+The Agent contract defines the business objects that later Agent Runtime,
+validators, and controlled service conversions may use:
+
+- `Requirement`
+- `Decision`
+- `AgentActionItem`
+- `Issue`
+- `Risk`
+- `Dependency`
+- `Milestone`
+- `CustomerRequest`
+- `ProjectState`
+- `AgentActionProposal`
+- `AgentContext`
+
+`AgentActionItem` intentionally uses an Agent-specific class name so it does
+not collide with the existing six-dimension action item type or the API/DB
+action item read models.
+
+All Agent business objects use `EvidenceRef` for source evidence. `EvidenceRef`
+contains:
+
+- `source_type`
+- `source_meeting_id`
+- `source_segment_id`
+- `source_text`
+- `start_time`
+- `end_time`
+- `speaker`
+- `confidence`
+- `metadata`
+
+`source_type` is restricted to `transcript`, `meeting_history`,
+`project_knowledge`, `manual`, or `unknown`. `confidence` may be `None`, and
+when present it must be between `0.0` and `1.0`; the contract does not fabricate
+a default confidence score.
+
+`AgentContext` is a per-run context only. It keeps `transcript` and
+`meeting_analysis` loosely coupled:
+
+```text
+transcript: list[dict[str, Any]]
+meeting_analysis: dict[str, Any]
+```
+
+`AgentContext.runtime_metadata` always contains:
+
+```json
+{"schema_version": "agent-contract-v1"}
+```
+
+Callers may add extra metadata, but they cannot override the Agent contract
+schema version.
 
 ## Schema Version
 
@@ -70,6 +136,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Topic Event Aggregator | Grouping of validated `SemanticEvent` rows into `TopicEventGroup` | LLM calls, database writes, API response shaping |
 | Six Dimension Mapper | Rule mapping from `TopicEventGroup` into `SixDimensionResult` | LLM calls, database writes, API response shaping |
 | Six Dimension Validator | Quality control for `SixDimensionResult` evidence, status, and duplicates | LLM calls, database writes, API response shaping |
+| Agent Contract | Worker-internal Agent v1 business objects and per-run `AgentContext` validation | API contracts, database writes, raw LLM persistence, Agent runtime orchestration, tool execution |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -81,6 +148,13 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 - Formal Qwen3 + RAG results now pass through `MeetingAnalysisSchema` before persistence.
 - Semantic pipeline results pass through `MeetingAnalysisSchema` before persistence.
 - `SemanticEvent`, `TopicEventGroup`, `SixDimensionResult`, and validation flags remain internal Worker-side structures; introducing API or persistence output for them requires a separate contract change.
+- `Requirement`, `Decision`, `AgentActionItem`, `Issue`, `Risk`, `Dependency`,
+  `Milestone`, `CustomerRequest`, `ProjectState`, `AgentActionProposal`, and
+  `AgentContext` are internal Agent contract objects in Phase 1. They are not
+  persisted to PostgreSQL, exposed through the API, or used to replace
+  `MeetingAnalysisSchema`.
+- Raw LLM output must not directly become formal Agent business objects. Later
+  phases must use controlled conversion and validation before any state update.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

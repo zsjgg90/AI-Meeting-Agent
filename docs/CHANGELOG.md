@@ -2,6 +2,13 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 1 Worker-internal contract schemas:
+  `EvidenceRef`, `Requirement`, `Decision`, `AgentActionItem`, `Issue`, `Risk`,
+  `Dependency`, `Milestone`, `CustomerRequest`, `ProjectState`,
+  `AgentActionProposal`, and `AgentContext`.
+- Added `agent-contract-v1` schema version metadata and tests for Agent contract
+  serialization, enum validation, evidence validation, mutable defaults, and
+  isolation from the formal `MeetingAnalysisSchema`.
 - Added Agent v1.0 Phase 0 baseline freeze documentation and baseline dataset
   directory specification.
 - Added API and Worker Agent rollout guardrail settings:

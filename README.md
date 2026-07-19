@@ -57,6 +57,14 @@ AGENT_SHADOW_MODE=true
 AGENT_ACTIONS_ENABLED=false
 ```
 
+Agent v1.0 Phase 1 introduces Worker-internal contract schemas in
+`services/worker/app/agent_contract.py` with schema version
+`agent-contract-v1`. These schemas define evidence-backed objects such as
+requirements, decisions, Agent action items, issues, risks, dependencies,
+milestones, customer requests, project state, action proposals, and per-run
+`AgentContext`. They are not exposed through the API and do not replace the
+formal six-dimension `MeetingAnalysisSchema`.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`

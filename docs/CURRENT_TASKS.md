@@ -2,8 +2,8 @@
 
 ## Active Priority
 
-1. Complete Agent v1.0 Phase 0 baseline freeze before starting Agent schema or
-   runtime work.
+1. Continue Agent v1.0 Phase 1 contract validation and prepare Phase 2 meeting
+   scenario strategy design.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -16,10 +16,12 @@
 
 ## Pending Engineering Tasks
 
-- Repair or reclone Git metadata, create the Agent upgrade branch, and record
-  branch plus commit in `docs/AGENT_V1_PHASE_0_BASELINE.md`.
+- Keep Agent v1.0 work on `feature/agent-v1`; do not continue Agent work on
+  `main`.
 - Import the 19 required Agent v1.0 baseline meeting artifact folders under
   `data/eval/agent_v1_baseline/`.
+- Design Phase 2 eight-scenario strategy contracts without changing Prompt,
+  RAG, Validator, API, database, or formal analysis output.
 - Decide whether to archive or remove legacy `api` and `mobile` directories.
 - Move backup Worker files out of active source paths.
 - Keep API, Worker, AI, and Expo schemas aligned through the Phase 4 schema boundary.
@@ -65,3 +67,5 @@
 - No Qwen3/RAG prompt or validator changes.
 - No UI redesign.
 - No queue system migration.
+- No Agent Runtime, Tool Registry, or cross-meeting matching until later Agent
+  phases.

@@ -7,6 +7,11 @@ Agent v1.0 upgrade preparation has started at Phase 0 baseline freeze. The
 baseline document is `docs/AGENT_V1_PHASE_0_BASELINE.md`.
 The Phase 0 runtime diagnostic currently fails because API port 8002 is not
 reachable; Worker 8001, PostgreSQL, Ollama, RAG, and Alembic head are OK.
+Agent v1.0 Phase 1 adds Worker-internal contract schemas in
+`services/worker/app/agent_contract.py` with schema version
+`agent-contract-v1`. These contracts are not wired into API responses,
+database persistence, Prompt/RAG, Validator, or the formal Qwen3 + RAG analysis
+path.
 
 Repository freeze metadata:
 
@@ -105,11 +110,11 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Push `main`, `agent-v1-phase0-baseline`, and `feature/agent-v1` after GitHub
-   connectivity or authorization is available.
+1. Review and accept Agent v1.0 Phase 1 contract behavior after tests pass.
 2. Import the 19 required Agent baseline meeting artifacts under
    `data/eval/agent_v1_baseline/`.
-3. Run `.\scripts\test-all.ps1`.
+3. Design Phase 2 eight-scenario strategy contracts without modifying Prompt,
+   RAG, Validator, API, database, or formal analysis output.
 4. Run `.\scripts\check-services.ps1` with local services available.
 5. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.
