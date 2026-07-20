@@ -205,6 +205,31 @@ conflicts, permission denial, non-whitelisted fields, idempotency duplicate
 commands, high-risk confirmation, audit records, rollback plans, missing target
 and evidence rejection, and the guarantee that no database write is performed.
 
+`test_agent_confirmation_api.py` validates the Phase 8 API confirmation loop
+with an offline SQLite in-memory database and FastAPI dependency overrides. It
+does not call real Qwen3, Ollama, Chroma, PostgreSQL, external network, Worker,
+or Expo. It covers database authoritative-state reads for `Requirement`,
+`AgentActionItem`, and `Risk`, proposal save/list/detail, approve/reject,
+missing reviewer, insufficient permissions, duplicate approval idempotency,
+version conflicts, expired proposals, missing target objects, non-whitelisted
+fields, stable idempotency keys, terminal proposal states, duplicate
+approve/reject no-op behavior, rollback on mid-transaction failures,
+unique-constraint duplicate recovery, command/audit persistence, OpenAPI
+compatibility, and the guarantee that the formal `ActionItem` row is not
+changed by approval.
+
+`services/api/scripts/run_agent_phase8_postgres_checks.py` validates the Phase
+8 PostgreSQL path that SQLite cannot prove. It checks that Alembic has one
+head, upgrades to head, seeds synthetic Agent-only test data, runs two
+concurrent approval calls for one proposal, verifies that at most one ready
+command and one confirmation are created, verifies one stable idempotency key,
+and verifies the formal `action_items` row is not changed. Run it with:
+
+```powershell
+$env:PYTHONPATH="D:\codex_work\会议声纹识别;D:\codex_work\会议声纹识别\services\api;D:\codex_work\会议声纹识别\services\worker"
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase8_postgres_checks.py
+```
+
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance
 infrastructure for `project_weekly`, `requirement_review`, and
 `cross_department`. It covers the 9 synthetic fixtures, manual `meeting_type`
@@ -338,6 +363,8 @@ inference-parameter equality.
 - Expo screen tests.
 - End-to-end recording/upload/process/analyze/display smoke test.
 - Migration upgrade/current verification against a clean PostgreSQL instance.
+- CI coverage for the Phase 8 PostgreSQL concurrency script against a disposable
+  PostgreSQL service.
 - Live Qwen3 + RAG evaluation gate in CI.
 - Human semantic-quality review for live semantic-pipeline acceptance reports.
 - Automated regression script for API analyze background tasks using seeded transcript segments.

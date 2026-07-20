@@ -2,6 +2,35 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 8 minimum API-side confirmation loop.
+- Added `DatabaseAuthoritativeStateProvider` for read-only production snapshots:
+  `AgentActionItem` from `action_items`, and `Requirement`/`Risk` from existing
+  `meeting_summaries` JSON fields.
+- Added Alembic revision `20260720_0012` with
+  `agent_action_proposals`, `agent_proposal_confirmations`,
+  `controlled_write_commands`, and `agent_audit_records`.
+- Added `/agent/action-proposals` endpoints for saving proposals, listing
+  pending proposals, reading proposal details, approving proposals, and
+  rejecting proposals.
+- Approval now re-reads authoritative state, uses the saved expected object
+  version, checks permissions, expiry, idempotency, evidence, audit context, and
+  field whitelists through `ControlledWritePlanner`, then persists an inert
+  command and audit record. It still does not execute formal business writes.
+- Hardened Phase 8 approval/rejection consistency: command idempotency keys no
+  longer include per-request confirmation ids; approval/rejection reads lock the
+  proposal row with PostgreSQL `SELECT ... FOR UPDATE`; only
+  `pending -> approved/rejected/expired/conflict` is allowed; approved
+  confirmations are persisted only after planner success; repeated
+  approve/reject calls reuse existing results; and database unique-constraint
+  conflicts are recovered as idempotent duplicate results instead of 500s.
+- Added offline API tests for provider reads, proposal persistence and query,
+  approve/reject, unauthorized confirmation rejection, idempotent duplicate
+  approval, version conflict, expiry, missing target, non-whitelisted fields,
+  command/audit persistence, formal business object isolation, and OpenAPI
+  compatibility.
+- Added `services/api/scripts/run_agent_phase8_postgres_checks.py` for
+  PostgreSQL Alembic head, migration, command idempotency uniqueness,
+  concurrent approval, and formal business-row isolation checks.
 - Added Agent v1.0 Phase 7 Worker-internal write-control contracts in
   `services/worker/app/agent_write_control.py`.
 - Phase 7 defines `AuthoritativeStateProvider`,

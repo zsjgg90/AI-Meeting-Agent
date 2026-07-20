@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import BigInteger, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import BigInteger, Boolean, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -211,3 +211,95 @@ class UserFeedback(Base):
     image_urls: Mapped[list[str]] = mapped_column(JSONB, default=list)
     status: Mapped[str] = mapped_column(String(32), default="open", index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+
+class AgentActionProposalRecord(Base):
+    __tablename__ = "agent_action_proposals"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    action_type: Mapped[str] = mapped_column(String(32), index=True)
+    target_object_type: Mapped[str] = mapped_column(String(64), index=True)
+    target_object_id: Mapped[str | None] = mapped_column(String(128), nullable=True, index=True)
+    expected_object_version: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    title: Mapped[str] = mapped_column(String(255), default="")
+    description: Mapped[str] = mapped_column(Text, default="")
+    proposed_changes: Mapped[dict] = mapped_column(JSONB, default=dict)
+    evidence: Mapped[list[dict]] = mapped_column(JSONB, default=list)
+    confidence: Mapped[float | None] = mapped_column(Float, nullable=True)
+    risk_level: Mapped[str] = mapped_column(String(32), default="unknown")
+    requires_confirmation: Mapped[bool] = mapped_column(Boolean, default=True)
+    status: Mapped[str] = mapped_column(String(32), default="pending", index=True)
+    reason: Mapped[str] = mapped_column(Text, default="")
+    metadata_: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, onupdate=utc_now)
+
+    confirmations: Mapped[list["AgentProposalConfirmationRecord"]] = relationship(
+        back_populates="proposal",
+        cascade="all, delete-orphan",
+    )
+    commands: Mapped[list["ControlledWriteCommandRecord"]] = relationship(
+        back_populates="proposal",
+        cascade="all, delete-orphan",
+    )
+    audits: Mapped[list["AgentAuditRecord"]] = relationship(back_populates="proposal", cascade="all, delete-orphan")
+
+
+class AgentProposalConfirmationRecord(Base):
+    __tablename__ = "agent_proposal_confirmations"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    proposal_id: Mapped[str] = mapped_column(ForeignKey("agent_action_proposals.id"), index=True)
+    decision: Mapped[str] = mapped_column(String(32), index=True)
+    reviewer: Mapped[str] = mapped_column(String(255))
+    reviewed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, index=True)
+    comment: Mapped[str] = mapped_column(Text, default="")
+    expected_object_version: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    permissions: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    metadata_: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
+
+    proposal: Mapped[AgentActionProposalRecord] = relationship(back_populates="confirmations")
+
+
+class ControlledWriteCommandRecord(Base):
+    __tablename__ = "controlled_write_commands"
+    __table_args__ = (UniqueConstraint("idempotency_key", name="uq_controlled_write_commands_idempotency_key"),)
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    proposal_id: Mapped[str] = mapped_column(ForeignKey("agent_action_proposals.id"), index=True)
+    target_object_type: Mapped[str] = mapped_column(String(64), index=True)
+    target_object_id: Mapped[str] = mapped_column(String(128), index=True)
+    operation: Mapped[str] = mapped_column(String(32), index=True)
+    expected_version: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    changes: Mapped[dict] = mapped_column(JSONB, default=dict)
+    idempotency_key: Mapped[str] = mapped_column(String(128), nullable=False)
+    confirmation_id: Mapped[str] = mapped_column(ForeignKey("agent_proposal_confirmations.id"), index=True)
+    audit_context: Mapped[dict] = mapped_column(JSONB, default=dict)
+    rollback_plan: Mapped[dict] = mapped_column(JSONB, default=dict)
+    status: Mapped[str] = mapped_column(String(32), default="ready", index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+    proposal: Mapped[AgentActionProposalRecord] = relationship(back_populates="commands")
+
+
+class AgentAuditRecord(Base):
+    __tablename__ = "agent_audit_records"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    proposal_id: Mapped[str] = mapped_column(ForeignKey("agent_action_proposals.id"), index=True)
+    confirmation_id: Mapped[str | None] = mapped_column(ForeignKey("agent_proposal_confirmations.id"), nullable=True, index=True)
+    command_id: Mapped[str | None] = mapped_column(ForeignKey("controlled_write_commands.id"), nullable=True, index=True)
+    target_object_type: Mapped[str] = mapped_column(String(64), index=True)
+    target_object_id: Mapped[str] = mapped_column(String(128), index=True)
+    operation: Mapped[str] = mapped_column(String(32), index=True)
+    reviewer: Mapped[str] = mapped_column(String(255), default="")
+    decision: Mapped[str] = mapped_column(String(32), default="")
+    result: Mapped[str] = mapped_column(String(32), index=True)
+    reasons: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    authoritative_source: Mapped[str] = mapped_column(String(255), default="unknown")
+    authoritative_version: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    audit_context: Mapped[dict] = mapped_column(JSONB, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+    proposal: Mapped[AgentActionProposalRecord] = relationship(back_populates="audits")

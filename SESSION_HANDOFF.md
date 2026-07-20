@@ -113,6 +113,26 @@ an inert command plus audit and rollback information. Phase 7 does not execute
 database writes, add write-path Tools, expose API contracts, modify migrations,
 change Prompt/RAG/Validator, alter Expo UI, promote Shadow results, implement
 automatic approval, or execute Agent actions.
+Agent v1.0 Phase 8 adds the minimum API-side confirmation loop. The read-only
+production `DatabaseAuthoritativeStateProvider` in
+`services/api/app/authoritative_state.py` reads `AgentActionItem` from
+`action_items` and reads `Requirement`/`Risk` snapshots from existing
+`meeting_summaries` JSON fields. Alembic revision `20260720_0012` adds
+`agent_action_proposals`, `agent_proposal_confirmations`,
+`controlled_write_commands`, and `agent_audit_records`. The new
+`/agent/action-proposals` API supports saving proposals, listing pending
+proposals, reading details, approving, and rejecting. Approval re-reads
+authoritative state, uses the stored expected object version, checks reviewer
+permissions, proposal expiry, field whitelist, evidence, audit context, and
+idempotency through `ControlledWritePlanner`, then persists an inert command
+and audit record. Phase 8 does not execute Agent actions, does not write formal
+Requirement/ActionItem/Risk state, does not connect Expo UI, does not change
+Prompt/RAG/Validator, and does not promote Shadow output.
+Phase 8 approval/rejection was hardened after read-only acceptance: PostgreSQL
+proposal reads now use row locks, stable idempotency keys exclude
+confirmation-specific ids, terminal proposal states are immutable, approved
+confirmations are created only after planner success, and database
+unique-constraint conflicts are recovered as idempotent duplicate results.
 
 Repository freeze metadata:
 
@@ -211,15 +231,20 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 7 write-control output and decide the production authoritative
-   state source for requirements, action items, and risks.
-2. Define any future confirmation API/UI contract separately before exposing
-   `AgentProposalConfirmation` outside Worker internals.
-3. Keep Agent action execution disabled until a controlled write service,
-   audit model, idempotency strategy, rollback behavior, and permissions are
-   specified.
-4. Import the remaining required Agent baseline meeting artifact folders under
+1. Review Phase 8 confirmation API output before adding any command execution
+   service.
+2. Keep the Phase 8 non-blocking risks visible: proposal list/detail evidence
+   and metadata exposure, Requirement/Risk JSON scan behavior, duplicated
+   API/Worker Agent contracts, FK `ondelete` policy, and header permissions as
+   development-only authorization.
+3. Decide whether Requirement and Risk need independent production business
+   tables before any write execution phase; Phase 8 reads them only from
+   existing summary JSON snapshots.
+4. Keep Agent action execution disabled until a real write service, production
+   authorization integration, command persistence semantics, and rollback
+   transactions are specified.
+5. Import the remaining required Agent baseline meeting artifact folders under
    `data/eval/agent_v1_baseline/` when available.
-5. Run `.\scripts\check-services.ps1` with local services available.
-6. Continue embedding model offline/cache setup, shared API/Worker model
+6. Run `.\scripts\check-services.ps1` with local services available.
+7. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.

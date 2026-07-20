@@ -286,3 +286,107 @@ class SummaryRead(BaseModel):
     unresolved_issues: list[dict[str, Any]] = []
     risks_and_focus: list[dict[str, Any]] = []
     metadata: dict[str, Any] = {}
+
+
+class AgentActionProposalCreate(BaseModel):
+    proposal_id: str = Field(default="", max_length=64)
+    action_type: str = Field(min_length=1, max_length=32)
+    target_object_type: str = Field(min_length=1, max_length=64)
+    target_object_id: str | None = Field(default=None, max_length=128)
+    title: str = Field(default="", max_length=255)
+    description: str = ""
+    proposed_changes: dict[str, Any] = Field(default_factory=dict)
+    evidence: list[dict[str, Any]] = Field(default_factory=list)
+    confidence: float | None = Field(default=None, ge=0.0, le=1.0)
+    risk_level: str = Field(default="unknown", max_length=32)
+    requires_confirmation: bool = True
+    reason: str = ""
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+
+class AgentActionProposalRead(BaseModel):
+    id: str
+    action_type: str
+    target_object_type: str
+    target_object_id: str | None = None
+    expected_object_version: str | None = None
+    title: str
+    description: str
+    proposed_changes: dict[str, Any]
+    evidence: list[dict[str, Any]]
+    confidence: float | None = None
+    risk_level: str
+    requires_confirmation: bool
+    status: str
+    reason: str
+    metadata_: dict[str, Any] = Field(validation_alias="metadata_", serialization_alias="metadata")
+    expires_at: datetime | None = None
+    created_at: datetime
+    updated_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class AgentProposalConfirmationRequest(BaseModel):
+    comment: str = Field(default="", max_length=1000)
+
+
+class AgentProposalConfirmationRead(BaseModel):
+    id: str
+    proposal_id: str
+    decision: str
+    reviewer: str
+    reviewed_at: datetime
+    comment: str
+    expected_object_version: str | None = None
+    permissions: list[str]
+    metadata_: dict[str, Any] = Field(validation_alias="metadata_", serialization_alias="metadata")
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ControlledWriteCommandRead(BaseModel):
+    id: str
+    proposal_id: str
+    target_object_type: str
+    target_object_id: str
+    operation: str
+    expected_version: str | None = None
+    changes: dict[str, Any]
+    idempotency_key: str
+    confirmation_id: str
+    audit_context: dict[str, Any]
+    rollback_plan: dict[str, Any]
+    status: str
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class AgentAuditRecordRead(BaseModel):
+    id: str
+    proposal_id: str
+    confirmation_id: str | None = None
+    command_id: str | None = None
+    target_object_type: str
+    target_object_id: str
+    operation: str
+    reviewer: str
+    decision: str
+    result: str
+    reasons: list[str]
+    authoritative_source: str
+    authoritative_version: str | None = None
+    audit_context: dict[str, Any]
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class AgentProposalDecisionRead(BaseModel):
+    proposal: AgentActionProposalRead
+    confirmation: AgentProposalConfirmationRead
+    command: ControlledWriteCommandRead | None = None
+    audit: AgentAuditRecordRead | None = None
+    status: str
+    rejection_reasons: list[str] = Field(default_factory=list)

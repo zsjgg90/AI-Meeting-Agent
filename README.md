@@ -149,6 +149,25 @@ not execute database writes, add write-path Tools, expose confirmation API,
 modify Expo UI, change Prompt/RAG/Validator, promote Shadow output, or perform
 automatic approval.
 
+Agent v1.0 Phase 8 adds the minimum API-side confirmation loop. The production
+read-only authoritative provider is `services/api/app/authoritative_state.py`.
+It reads `AgentActionItem` from the existing `action_items` table and reads
+`Requirement`/`Risk` snapshots from existing `meeting_summaries` JSON fields.
+There is still no independent production Requirement or Risk business table.
+Agent proposal, confirmation, command, and audit persistence is added through
+Alembic revision `20260720_0012` and API-only models:
+`agent_action_proposals`, `agent_proposal_confirmations`,
+`controlled_write_commands`, and `agent_audit_records`. Approval re-reads the
+authoritative object, checks the saved object version, proposal expiry,
+reviewer permissions, field whitelist, evidence, audit context, and idempotency,
+then saves an inert `ControlledWriteCommand` plus audit record. Phase 8 still
+does not execute the command, write formal Requirement/ActionItem/Risk state,
+connect Expo UI, change Prompt/RAG/Validator, or promote Shadow results.
+Approval and rejection lock the proposal row in PostgreSQL, allow only
+`pending -> approved/rejected/expired/conflict`, treat those destination states
+as terminal, and use a stable command idempotency key based on proposal, target,
+operation, and expected version rather than confirmation id.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -415,6 +434,11 @@ npx expo run:android
 - `GET /meetings/{id}/transcript` 获取转写结果
 - `GET /meetings/{id}/summary` 获取六大维度结构化会议分析
 - `PUT /meetings/{id}/speakers/{speaker_label}` 保存 `speaker_label -> display_name` 映射
+- `POST /agent/action-proposals` 保存待确认 Agent 提案
+- `GET /agent/action-proposals` 查询待确认提案
+- `GET /agent/action-proposals/{proposal_id}` 查询提案详情
+- `POST /agent/action-proposals/{proposal_id}/approve` 人工批准并生成受控写入命令
+- `POST /agent/action-proposals/{proposal_id}/reject` 人工拒绝提案
 
 `GET /meetings/{id}/summary` 返回结构：
 

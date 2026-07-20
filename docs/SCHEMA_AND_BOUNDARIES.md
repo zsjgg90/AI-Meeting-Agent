@@ -421,6 +421,56 @@ the idempotency key has already been seen; or when proposal evidence or audit
 context is missing. High-risk operations require explicit approved
 confirmation. Generated commands remain inert and carry `writes_performed=false`.
 
+## Agent Phase 8 Confirmation API Boundary
+
+MeetMind Agent v1.0 Phase 8 adds the minimum API-side confirmation loop:
+
+- `services/api/app/authoritative_state.py`
+- `services/api/app/agent_write_control.py`
+- `services/api/app/agent_confirmation_service.py`
+- `services/api/app/routers/agent_proposals.py`
+- Alembic revision `20260720_0012`
+
+The production `DatabaseAuthoritativeStateProvider` is read-only and returns
+`AuthoritativeStateSnapshot` for one requested bounded object. It reads:
+
+- `AgentActionItem` from the existing `action_items` table.
+- `Requirement` from existing `meeting_summaries` JSON fields such as
+  `meeting_agenda`.
+- `Risk` from existing `meeting_summaries.risks_and_focus` or `risks` JSON.
+
+There is still no independent production Requirement or Risk authoritative
+business table. Requirement and Risk versions are therefore the owning
+`meeting_summaries.updated_at` timestamp, while ActionItem versions are
+`action_items.updated_at`.
+
+Phase 8 persists only the confirmation loop:
+
+- `agent_action_proposals`
+- `agent_proposal_confirmations`
+- `controlled_write_commands`
+- `agent_audit_records`
+
+`ControlledWriteCommand` is still an inert command record and does not
+represent a formal state change. Approval must go through
+`ControlledWritePlanner`; the API must not accept client-submitted commands or
+client-submitted expected versions. Missing confirmation, insufficient
+permissions, version conflicts, expired proposals, non-whitelisted fields,
+missing evidence, missing audit context, duplicate idempotency keys, and missing
+target objects are rejected. Version conflicts mark proposals as `conflict` and
+write audit records without creating a ready command.
+
+Approval and rejection lock the proposal row with `SELECT ... FOR UPDATE` on
+PostgreSQL so confirmations for the same proposal are serialized. The only
+allowed terminal transitions are `pending -> approved`, `pending -> rejected`,
+`pending -> expired`, and `pending -> conflict`; terminal proposals cannot be
+approved or rejected again. Repeated approval returns the existing ready command
+and does not create another confirmation or audit record. Approved
+confirmations are persisted only after `ControlledWritePlanner` returns a ready
+command. The command idempotency key is generated from stable business fields:
+proposal id, target object type, target object id, operation, and expected
+version.
+
 ## Schema Version
 
 Current schema version:
@@ -470,6 +520,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Agent Orchestrator | Worker-internal Shadow Mode orchestration, scenario-to-plan mapping, file audit output, deterministic formal-vs-shadow comparison | API response changes, formal result overwrite, database writes, action execution, model free planning, semantic scoring |
 | Agent State Tracker | Worker-internal cross-meeting candidate normalization, deterministic matching, state-change classification, and proposal generation | Database writes, write-path Tools, API contracts, Prompt/RAG/Validator changes, action execution, free database scanning |
 | Agent Write Control | Worker-internal authoritative-state read contract, confirmation validation, inert command generation, audit records, rollback plans, idempotency and permission checks | Database writes, write-path Tools, API contracts, Expo confirmation UI, automatic approval, action execution |
+| Agent Confirmation API | API-side proposal persistence, read-only authoritative snapshots, manual approve/reject decisions, inert command persistence, and audit records | Client-submitted commands, formal Requirement/ActionItem/Risk writes, Expo UI, Prompt/RAG/Validator changes, Shadow promotion, automatic approval |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -513,6 +564,11 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
   authoritative state re-read, version check, permission check, whitelist check,
   idempotency check, evidence check, and audit check. It does not execute those
   commands, does not write PostgreSQL, and is not exposed through API or Expo.
+- Agent Phase 8 exposes a minimum confirmation API and persists proposals,
+  confirmations, inert commands, and audit records. It does not execute
+  commands, does not write formal business state, does not add Expo UI, does
+  not modify the formal Qwen3 + RAG or Shadow result-promotion behavior, and
+  does not implement automatic approval.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

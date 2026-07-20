@@ -2,8 +2,8 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 7 write-control contracts and decide the real
-   authoritative state source before any production write-path phase.
+1. Review Agent v1.0 Phase 8 confirmation API output before adding any command
+   execution service or Expo confirmation UI.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -51,6 +51,23 @@
 - Phase 7 commands must not be executed, persisted, exposed through API, or
   connected to Expo confirmation UI until a later phase defines the production
   state source and controlled write service.
+- Keep Phase 8 confirmation API as a minimum backend loop only. It may persist
+  `AgentActionProposal`, `AgentProposalConfirmation`,
+  `ControlledWriteCommand`, and `AgentAuditRecord` rows, but commands remain
+  inert and must not update formal `action_items` rows or summary JSON.
+- Phase 8 approval/rejection must keep proposal terminal states immutable. The
+  current backend lock path uses PostgreSQL row locking and stable command
+  idempotency keys; SQLite tests are functional checks only and are not
+  concurrency evidence.
+- `DatabaseAuthoritativeStateProvider` is the current production read source:
+  `AgentActionItem` reads from `action_items`, while `Requirement` and `Risk`
+  read from existing `meeting_summaries` JSON snapshots. There is still no
+  independent production Requirement or Risk table.
+- Phase 8 non-blocking risks to resolve before production confirmation UI or
+  command execution: proposal list/detail response exposure of evidence and
+  metadata, Requirement/Risk JSON scan behavior, duplicated API/Worker Agent
+  contract drift, foreign-key `ondelete` policy, and header-based reviewer
+  permissions being development-only rather than production authentication.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -132,3 +149,6 @@
   cross-meeting state persistence, real classifier, Prompt/RAG/Validator
   change, API change, database migration, Expo change, frontend confirmation
   flow, automatic approval, or command execution in Phase 7.
+- No Agent Action execution, automatic approval, Expo confirmation UI,
+  Prompt/RAG/Validator change, Shadow promotion, or formal business object
+  write in Phase 8.
