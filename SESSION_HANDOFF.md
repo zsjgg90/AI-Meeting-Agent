@@ -101,6 +101,18 @@ and emits evidence-backed `AgentActionProposal` objects. Phase 6 does not write
 formal business tables, add write-path Tools, expose API contracts, modify
 database migrations, change Prompt/RAG/Validator, alter Expo UI, promote
 Shadow results, or execute Agent actions.
+Agent v1.0 Phase 7 adds Worker-internal write-control contracts in
+`services/worker/app/agent_write_control.py`. It defines the read-only
+`AuthoritativeStateProvider`, `AuthoritativeStateSnapshot`,
+`AgentProposalConfirmation`, `ControlledWriteCommand`, `AuditRecord`,
+`RollbackPlan`, `InMemoryAuthoritativeStateProvider`, and offline
+`ControlledWritePlanner`. The planner re-reads a bounded authoritative object,
+checks approved confirmation, expected version, permissions, field whitelist,
+idempotency, high-risk confirmation, evidence, and audit context, then produces
+an inert command plus audit and rollback information. Phase 7 does not execute
+database writes, add write-path Tools, expose API contracts, modify migrations,
+change Prompt/RAG/Validator, alter Expo UI, promote Shadow results, implement
+automatic approval, or execute Agent actions.
 
 Repository freeze metadata:
 
@@ -199,10 +211,10 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 6 cross-meeting proposal output and decide the authoritative
-   historical state source for requirements, action items, and risks.
-2. Define the Phase 7 human confirmation contract before adding API/UI or
-   write-path behavior.
+1. Review Phase 7 write-control output and decide the production authoritative
+   state source for requirements, action items, and risks.
+2. Define any future confirmation API/UI contract separately before exposing
+   `AgentProposalConfirmation` outside Worker internals.
 3. Keep Agent action execution disabled until a controlled write service,
    audit model, idempotency strategy, rollback behavior, and permissions are
    specified.

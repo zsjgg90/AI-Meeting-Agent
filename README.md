@@ -137,6 +137,18 @@ API contract, change Prompt/RAG/Validator, promote Shadow output, or modify
 Expo UI. Uncertain matches and insufficient evidence set `needs_review=true`
 and require human confirmation.
 
+Agent v1.0 Phase 7 adds Worker-internal write-control contracts in
+`services/worker/app/agent_write_control.py`. It defines a read-only
+`AuthoritativeStateProvider`, `AuthoritativeStateSnapshot`,
+`AgentProposalConfirmation`, `ControlledWriteCommand`, audit records, rollback
+plans, and an offline `ControlledWritePlanner`. The planner re-reads the
+bounded authoritative object, validates approval, permissions, optimistic
+version, proposal expiry, field whitelist, evidence, audit context, high-risk
+confirmation, and idempotency before producing a command. Phase 7 still does
+not execute database writes, add write-path Tools, expose confirmation API,
+modify Expo UI, change Prompt/RAG/Validator, promote Shadow output, or perform
+automatic approval.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`

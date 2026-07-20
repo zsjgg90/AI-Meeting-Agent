@@ -359,6 +359,68 @@ Human confirmation is required for owner changes, due-date changes,
 requirement cancellation, closing high-risk items, formal status changes,
 `uncertain` matches, insufficient evidence, and historical fact conflicts.
 
+## Agent Write Control Contracts
+
+MeetMind Agent v1.0 Phase 7 adds Worker-internal write-control contracts:
+
+- `services/worker/app/agent_write_control.py`
+
+Current write-control schema version:
+
+```text
+agent-write-control-v1
+```
+
+The Phase 7 flow is offline and non-executing:
+
+```text
+AgentActionProposal
+-> AuthoritativeStateProvider.get_state(object_type, object_id)
+-> AgentProposalConfirmation validation
+-> ControlledWriteCommand generation
+-> AuditRecord + RollbackPlan
+```
+
+`AuthoritativeStateProvider` is a read-only interface. It returns only the
+specified bounded object as an `AuthoritativeStateSnapshot` with object type,
+object id, current version, status, updated timestamp, source, data, and
+metadata. The included `InMemoryAuthoritativeStateProvider` is for offline tests
+and fixtures only; it does not scan databases.
+
+`AgentProposalConfirmation` records:
+
+- `confirmation_id`
+- `proposal_id`
+- `decision`
+- `reviewer`
+- `reviewed_at`
+- `comment`
+- `expected_object_version`
+- `permissions`
+- `metadata`
+
+`ControlledWriteCommand` records:
+
+- `command_id`
+- `proposal_id`
+- `target_object_type`
+- `target_object_id`
+- `operation`
+- `expected_version`
+- `changes`
+- `idempotency_key`
+- `confirmation_id`
+- `audit_context`
+- `status`
+
+The planner refuses to generate a ready command when confirmation is missing,
+rejected, expired, or needs changes; when the authoritative object is missing;
+when the current version differs from the confirmed expected version; when
+permissions are insufficient; when a field is outside the object whitelist; when
+the idempotency key has already been seen; or when proposal evidence or audit
+context is missing. High-risk operations require explicit approved
+confirmation. Generated commands remain inert and carry `writes_performed=false`.
+
 ## Schema Version
 
 Current schema version:
@@ -407,6 +469,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Agent Runtime | Worker-internal Tool Registry, static execution plans, in-memory Agent run state, step/result recording | Formal analysis entry wiring, Shadow Mode, Orchestrator, model free planning, multi-Agent execution, database writes, action execution |
 | Agent Orchestrator | Worker-internal Shadow Mode orchestration, scenario-to-plan mapping, file audit output, deterministic formal-vs-shadow comparison | API response changes, formal result overwrite, database writes, action execution, model free planning, semantic scoring |
 | Agent State Tracker | Worker-internal cross-meeting candidate normalization, deterministic matching, state-change classification, and proposal generation | Database writes, write-path Tools, API contracts, Prompt/RAG/Validator changes, action execution, free database scanning |
+| Agent Write Control | Worker-internal authoritative-state read contract, confirmation validation, inert command generation, audit records, rollback plans, idempotency and permission checks | Database writes, write-path Tools, API contracts, Expo confirmation UI, automatic approval, action execution |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -445,6 +508,11 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
   `AgentActionProposal` objects only and records `writes_performed=false`; it is
   not exposed through the API, not persisted to PostgreSQL, and not wired into a
   confirmation or execution flow.
+- Agent Write Control is internal Phase 7 scaffolding. It can generate
+  `ControlledWriteCommand` objects only after approved confirmation,
+  authoritative state re-read, version check, permission check, whitelist check,
+  idempotency check, evidence check, and audit check. It does not execute those
+  commands, does not write PostgreSQL, and is not exposed through API or Expo.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

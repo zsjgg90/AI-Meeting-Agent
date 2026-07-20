@@ -2,8 +2,8 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 6 cross-meeting state tracker output and decide the
-   authoritative historical state source before any write-path phase.
+1. Review Agent v1.0 Phase 7 write-control contracts and decide the real
+   authoritative state source before any production write-path phase.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -43,6 +43,14 @@
 - Phase 6 proposals must not be executed, persisted, exposed through API, or
   connected to Expo confirmation UI until a later phase defines the state
   source, confirmation contract, and controlled write boundary.
+- Keep Phase 7 write control as Worker-internal offline command generation
+  only. The module is `services/worker/app/agent_write_control.py` and defines
+  `AuthoritativeStateProvider`, `AgentProposalConfirmation`,
+  `ControlledWriteCommand`, audit records, rollback plans, permission checks,
+  optimistic version checks, field whitelists, and idempotency checks.
+- Phase 7 commands must not be executed, persisted, exposed through API, or
+  connected to Expo confirmation UI until a later phase defines the production
+  state source and controlled write service.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -120,3 +128,7 @@
   cross-meeting state persistence, real classifier, Prompt/RAG/Validator
   change, API change, database migration, Expo change, or frontend
   confirmation flow in Phase 6.
+- No Agent result promotion, action execution, write-path Tool,
+  cross-meeting state persistence, real classifier, Prompt/RAG/Validator
+  change, API change, database migration, Expo change, frontend confirmation
+  flow, automatic approval, or command execution in Phase 7.

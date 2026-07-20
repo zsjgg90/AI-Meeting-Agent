@@ -81,6 +81,7 @@ python -m unittest services.worker.tests.test_agent_tools_adapters
 python -m unittest services.worker.tests.test_agent_runtime
 python -m unittest services.worker.tests.test_agent_orchestrator
 python -m unittest services.worker.tests.test_agent_state_tracker
+python -m unittest services.worker.tests.test_agent_write_control
 python -m unittest services.worker.tests.test_agent_shadow_acceptance
 python -m unittest services.worker.tests.test_agent_shadow_live_acceptance
 ```
@@ -195,6 +196,14 @@ object detection, uncertain matches with `needs_review`, owner and deadline
 confirmation, insufficient evidence confirmation, historical conflict handling,
 high-risk closure confirmation, and the guarantee that the tracker does not
 write database state.
+
+`test_agent_write_control.py` validates the Phase 7 write-control contracts
+without calling real Qwen3, Ollama, Chroma, PostgreSQL, external network, API,
+or Expo. It covers authoritative state reads, approved/rejected/needs-changes
+and expired confirmations, missing confirmation rejection, optimistic version
+conflicts, permission denial, non-whitelisted fields, idempotency duplicate
+commands, high-risk confirmation, audit records, rollback plans, missing target
+and evidence rejection, and the guarantee that no database write is performed.
 
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance
 infrastructure for `project_weekly`, `requirement_review`, and

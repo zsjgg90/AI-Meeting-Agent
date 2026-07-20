@@ -2,6 +2,20 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 7 Worker-internal write-control contracts in
+  `services/worker/app/agent_write_control.py`.
+- Phase 7 defines `AuthoritativeStateProvider`,
+  `AuthoritativeStateSnapshot`, `AgentProposalConfirmation`,
+  `ControlledWriteCommand`, `AuditRecord`, `RollbackPlan`, and offline
+  `ControlledWritePlanner` support.
+- Added safety checks for approved confirmations, expired/rejected decisions,
+  optimistic version conflicts, permission denial, object-not-found cases,
+  field whitelist violations, duplicate idempotency keys, missing evidence,
+  missing audit context, high-risk confirmation, audit record generation, and
+  rollback plan generation. Commands remain inert and record
+  `writes_performed=false`.
+- Added Phase 7 unit tests to the default Worker test gate without calling real
+  Qwen3, Ollama, Chroma, PostgreSQL, external network, API, or Expo.
 - Added Agent v1.0 Phase 6 Worker-internal cross-meeting state tracker in
   `services/worker/app/agent_state_tracker.py`.
 - Phase 6 supports bounded candidate reading, object normalization,
