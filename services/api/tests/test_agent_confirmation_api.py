@@ -12,6 +12,7 @@ from sqlalchemy.pool import StaticPool
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
 from app.agent_confirmation_service import approve_proposal, recover_duplicate_after_integrity_error
 from app.agent_write_control import AgentActionProposal, AgentProposalConfirmation, build_idempotency_key
+from app.config import Settings
 from app.database import Base, get_db
 from app.main import create_app
 from app.models import (
@@ -487,6 +488,148 @@ class AgentConfirmationApiTest(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200, response.text)
         self.assertFalse(response.json()["command"]["audit_context"]["writes_performed"])
+
+    def test_dry_run_command_generates_audit_and_rollback_preview_without_business_write(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={"comment": "approved"},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+
+        with patch(
+            "app.agent_command_executor.get_settings",
+            return_value=Settings(agent_command_execution_enabled=True, agent_command_dry_run_only=True),
+        ):
+            response = self.client.post(
+                f"/agent/commands/{command_id}/dry-run",
+                headers=self.auth_headers(),
+            )
+
+        self.assertEqual(response.status_code, 200, response.text)
+        body = response.json()
+        self.assertEqual(body["status"], "dry_run")
+        self.assertEqual(body["expected_changes"], {"owner": "Bob"})
+        self.assertEqual(body["rollback_preview"]["restore_changes"], {"owner": "Alice"})
+        self.assertFalse(body["writes_performed"])
+        self.assertFalse(body["audit"]["audit_context"]["writes_performed"])
+
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            summary = db.get(MeetingSummary, "summary-agent-phase8")
+            self.assertEqual(item.owner, "Alice")
+            self.assertEqual(summary.meeting_agenda[0]["owner"], "Alice")
+        finally:
+            db.close()
+
+    def test_dry_run_is_rejected_when_execution_switch_is_disabled(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+
+        response = self.client.post(
+            f"/agent/commands/{command_id}/dry-run",
+            headers=self.auth_headers(),
+        )
+
+        self.assertEqual(response.status_code, 403)
+        self.assertIn("command_execution_disabled", response.json()["detail"]["reasons"])
+
+    def test_non_ready_command_is_rejected_by_dry_run(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        db = self.SessionLocal()
+        try:
+            command = db.get(ControlledWriteCommandRecord, command_id)
+            command.status = "duplicate"
+            db.commit()
+        finally:
+            db.close()
+
+        with patch(
+            "app.agent_command_executor.get_settings",
+            return_value=Settings(agent_command_execution_enabled=True, agent_command_dry_run_only=True),
+        ):
+            response = self.client.post(
+                f"/agent/commands/{command_id}/dry-run",
+                headers=self.auth_headers(),
+            )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("command_not_ready", response.json()["detail"]["reasons"])
+
+    def test_dry_run_rejects_version_conflict(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            item.updated_at = datetime(2026, 7, 22, 12, 0, tzinfo=timezone.utc)
+            db.commit()
+        finally:
+            db.close()
+
+        with patch(
+            "app.agent_command_executor.get_settings",
+            return_value=Settings(agent_command_execution_enabled=True, agent_command_dry_run_only=True),
+        ):
+            response = self.client.post(
+                f"/agent/commands/{command_id}/dry-run",
+                headers=self.auth_headers(),
+            )
+
+        self.assertEqual(response.status_code, 409)
+        self.assertIn("version_conflict", response.json()["detail"]["reasons"])
+
+    def test_repeated_dry_run_is_idempotent(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+
+        with patch(
+            "app.agent_command_executor.get_settings",
+            return_value=Settings(agent_command_execution_enabled=True, agent_command_dry_run_only=True),
+        ):
+            first = self.client.post(f"/agent/commands/{command_id}/dry-run", headers=self.auth_headers())
+            second = self.client.post(f"/agent/commands/{command_id}/dry-run", headers=self.auth_headers())
+
+        self.assertEqual(first.status_code, 200, first.text)
+        self.assertEqual(second.status_code, 200, second.text)
+        self.assertEqual(second.json()["status"], "duplicate")
+        db = self.SessionLocal()
+        try:
+            dry_run_audits = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "dry_run")
+            ).all()
+            self.assertEqual(len(dry_run_audits), 1)
+        finally:
+            db.close()
+
+    def test_agent_command_routes_are_in_openapi(self) -> None:
+        openapi = self.client.get("/openapi.json").json()
+
+        self.assertIn("/agent/commands", openapi["paths"])
+        self.assertIn("/agent/commands/{command_id}/dry-run", openapi["paths"])
 
     def assert_no_approved_confirmation(self) -> None:
         db = self.SessionLocal()

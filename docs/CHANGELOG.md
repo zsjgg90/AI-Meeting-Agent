@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-07-21
+
+- Added Agent v1.0 Phase 9 minimum Expo Agent Review workbench under the AI tab.
+- The UI lists proposal states including `pending`, `approved`, `rejected`,
+  `expired`, `conflict`, `duplicate`, and `ready`; shows target object, current
+  state, suggested changes, evidence, confidence, risk level, confirmation
+  requirement, version state, ready commands, dry-run results, audit records,
+  and rollback previews.
+- Approval and rejection actions use second confirmation dialogs and call the
+  existing Phase 8 proposal confirmation API.
+- Added API command routes under `/agent/commands` for command read, dry-run,
+  and command audit reads. These routes do not accept client-submitted
+  commands, expected versions, changes, or idempotency keys.
+- Added `services/api/app/agent_command_executor.py`, a dry-run-only command
+  sandbox that re-reads authoritative state, validates command `ready` status,
+  optimistic version, permissions, idempotency key, target existence, and
+  expected changes, then writes dry-run audit records with rollback previews.
+- Added runtime switches `AGENT_COMMAND_EXECUTION_ENABLED=false` and
+  `AGENT_COMMAND_DRY_RUN_ONLY=true`. Default configuration rejects command
+  execution; tests explicitly enable dry-run only.
+- Added API tests for dry-run success, execution switch rejection, non-ready
+  command rejection, version-conflict rejection, repeated dry-run idempotency,
+  audit and rollback preview generation, and formal business-row isolation.
+- Added Mobile type/static checks for the Agent Review UI and ensured the
+  client does not submit `expected_object_version` or `idempotency_key`.
+
 ## 2026-07-20
 
 - Added Agent v1.0 Phase 8 minimum API-side confirmation loop.

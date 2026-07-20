@@ -390,3 +390,14 @@ class AgentProposalDecisionRead(BaseModel):
     audit: AgentAuditRecordRead | None = None
     status: str
     rejection_reasons: list[str] = Field(default_factory=list)
+
+
+class AgentCommandDryRunRead(BaseModel):
+    command: ControlledWriteCommandRead
+    audit: AgentAuditRecordRead
+    status: str
+    rejection_reasons: list[str] = Field(default_factory=list)
+    authoritative_state: dict[str, Any] | None = None
+    expected_changes: dict[str, Any] = Field(default_factory=dict)
+    rollback_preview: dict[str, Any] = Field(default_factory=dict)
+    writes_performed: bool = False

@@ -50,6 +50,7 @@ Mobile type check:
 cd apps/mobile
 npm run typecheck
 npm run test:numbered-list
+npm run test:agent-review-ui
 ```
 
 ## Existing Worker Tests
@@ -218,6 +219,20 @@ unique-constraint duplicate recovery, command/audit persistence, OpenAPI
 compatibility, and the guarantee that the formal `ActionItem` row is not
 changed by approval.
 
+The same API test module now covers the Phase 9 command dry-run sandbox. It
+validates dry-run success, execution-switch rejection, non-ready command
+rejection, optimistic version conflict rejection, repeated dry-run idempotency,
+audit and rollback preview generation, OpenAPI command routes, and the
+guarantee that formal `ActionItem` rows and summary JSON are unchanged by
+dry-run.
+
+`npm run test:agent-review-ui` performs a lightweight static check of the Expo
+Agent Review workbench. It verifies the presence of proposal list/detail,
+approve/reject second-confirmation text, `conflict`/`expired`/`duplicate`
+status handling, dry-run action, audit records, rollback preview, writes
+performed display, and Agent API helpers. It also checks that mobile request
+bodies do not submit `expected_object_version` or `idempotency_key`.
+
 `services/api/scripts/run_agent_phase8_postgres_checks.py` validates the Phase
 8 PostgreSQL path that SQLite cannot prove. It checks that Alembic has one
 head, upgrades to head, seeds synthetic Agent-only test data, runs two
@@ -361,6 +376,7 @@ inference-parameter equality.
 
 - API to Worker integration tests with real background tasks.
 - Expo screen tests.
+- Runtime UI automation for the Agent Review workbench against a live API.
 - End-to-end recording/upload/process/analyze/display smoke test.
 - Migration upgrade/current verification against a clean PostgreSQL instance.
 - CI coverage for the Phase 8 PostgreSQL concurrency script against a disposable

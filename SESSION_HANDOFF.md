@@ -133,6 +133,19 @@ proposal reads now use row locks, stable idempotency keys exclude
 confirmation-specific ids, terminal proposal states are immutable, approved
 confirmations are created only after planner success, and database
 unique-constraint conflicts are recovered as idempotent duplicate results.
+Agent v1.0 Phase 9 adds the minimum Expo Agent Review workbench and API
+dry-run command sandbox. The AI tab now lists proposal statuses, shows proposal
+detail evidence/changes/confidence/risk/version state, uses second confirmation
+dialogs for approve/reject, lists ready commands, runs dry-run, and displays
+audit records plus rollback previews. API command routes under
+`/agent/commands` read persisted commands, run dry-run, and read command
+audits. The dry-run executor re-reads authoritative state, checks command
+`ready` status, optimistic version, permissions, idempotency key, target
+existence, and expected changes, then writes dry-run audit records only.
+Runtime flags default to `AGENT_COMMAND_EXECUTION_ENABLED=false` and
+`AGENT_COMMAND_DRY_RUN_ONLY=true`. Phase 9 still does not update `action_items`,
+summary JSON, Requirement, Risk, Prompt, RAG, Validator, Shadow promotion, or
+real rollback state.
 
 Repository freeze metadata:
 
@@ -231,9 +244,9 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 8 confirmation API output before adding any command execution
-   service.
-2. Keep the Phase 8 non-blocking risks visible: proposal list/detail evidence
+1. Review Phase 9 dry-run audit and rollback preview output before adding any
+   real command execution service.
+2. Keep the Phase 8/9 non-blocking risks visible: proposal list/detail evidence
    and metadata exposure, Requirement/Risk JSON scan behavior, duplicated
    API/Worker Agent contracts, FK `ondelete` policy, and header permissions as
    development-only authorization.

@@ -108,6 +108,7 @@ if (-not $SkipMobile) {
     Push-Location $MobileDir
     try {
         Invoke-Checked { npm run typecheck }
+        Invoke-Checked { npm run test:agent-review-ui }
     }
     finally {
         Pop-Location

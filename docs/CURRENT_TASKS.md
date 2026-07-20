@@ -2,8 +2,8 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 8 confirmation API output before adding any command
-   execution service or Expo confirmation UI.
+1. Review Agent v1.0 Phase 9 dry-run sandbox output before considering any
+   real command execution service.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -68,6 +68,15 @@
   metadata, Requirement/Risk JSON scan behavior, duplicated API/Worker Agent
   contract drift, foreign-key `ondelete` policy, and header-based reviewer
   permissions being development-only rather than production authentication.
+- Keep Phase 9 command execution as dry-run only. The API command sandbox may
+  read persisted ready commands, re-read authoritative state, validate version,
+  permission, idempotency, and target state, and write dry-run audit records
+  with rollback previews. It must not update `action_items`, summary JSON,
+  Requirement, or Risk state.
+- Phase 9 Expo Agent Review UI is a minimum internal workbench under the AI tab.
+  It must call the API only, use approve/reject confirmation endpoints for
+  human decisions, and must not construct `expected_version`,
+  `ControlledWriteCommand`, or idempotency keys on the client.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -152,3 +161,6 @@
 - No Agent Action execution, automatic approval, Expo confirmation UI,
   Prompt/RAG/Validator change, Shadow promotion, or formal business object
   write in Phase 8.
+- No real Agent command execution, automatic approval, production permission
+  replacement, rollback executor, Prompt/RAG/Validator change, Shadow
+  promotion, or formal Requirement/ActionItem/Risk write in Phase 9.

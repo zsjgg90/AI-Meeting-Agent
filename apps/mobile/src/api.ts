@@ -168,6 +168,101 @@ export type FeedbackCreated = FeedbackPayload & {
   created_at: string;
 };
 
+export type AgentProposalStatus = 'pending' | 'approved' | 'rejected' | 'expired' | 'conflict' | 'duplicate' | 'ready' | string;
+
+export type AgentActionProposal = {
+  id: string;
+  action_type: string;
+  target_object_type: string;
+  target_object_id: string | null;
+  expected_object_version: string | null;
+  title: string;
+  description: string;
+  proposed_changes: Record<string, any>;
+  evidence: Array<Record<string, any>>;
+  confidence: number | null;
+  risk_level: string;
+  requires_confirmation: boolean;
+  status: AgentProposalStatus;
+  reason: string;
+  metadata: Record<string, any>;
+  expires_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type AgentConfirmation = {
+  id: string;
+  proposal_id: string;
+  decision: string;
+  reviewer: string;
+  reviewed_at: string;
+  comment: string;
+  expected_object_version: string | null;
+  permissions: string[];
+  metadata: Record<string, any>;
+};
+
+export type ControlledWriteCommand = {
+  id: string;
+  proposal_id: string;
+  target_object_type: string;
+  target_object_id: string;
+  operation: string;
+  expected_version: string | null;
+  changes: Record<string, any>;
+  idempotency_key: string;
+  confirmation_id: string;
+  audit_context: Record<string, any>;
+  rollback_plan: Record<string, any>;
+  status: string;
+  created_at: string;
+};
+
+export type AgentAuditRecord = {
+  id: string;
+  proposal_id: string;
+  confirmation_id: string | null;
+  command_id: string | null;
+  target_object_type: string;
+  target_object_id: string;
+  operation: string;
+  reviewer: string;
+  decision: string;
+  result: string;
+  reasons: string[];
+  authoritative_source: string;
+  authoritative_version: string | null;
+  audit_context: Record<string, any>;
+  created_at: string;
+};
+
+export type AgentProposalDecision = {
+  proposal: AgentActionProposal;
+  confirmation: AgentConfirmation;
+  command: ControlledWriteCommand | null;
+  audit: AgentAuditRecord | null;
+  status: string;
+  rejection_reasons: string[];
+};
+
+export type AgentCommandDryRunResult = {
+  command: ControlledWriteCommand;
+  audit: AgentAuditRecord;
+  status: string;
+  rejection_reasons: string[];
+  authoritative_state: Record<string, any> | null;
+  expected_changes: Record<string, any>;
+  rollback_preview: Record<string, any>;
+  writes_performed: boolean;
+};
+
+const agentHeaders = {
+  'Content-Type': 'application/json',
+  'X-Agent-Reviewer': 'mobile-reviewer',
+  'X-Agent-Permissions': 'agent_review,agent_write',
+};
+
 async function requestJson<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}${path}`, options);
   if (!response.ok) {
@@ -364,5 +459,52 @@ export function submitFeedback(payload: FeedbackPayload): Promise<FeedbackCreate
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
+  });
+}
+
+export function listAgentProposals(status: AgentProposalStatus = 'pending'): Promise<AgentActionProposal[]> {
+  return requestJson<AgentActionProposal[]>(`/agent/action-proposals?status=${encodeURIComponent(status)}`, {
+    headers: agentHeaders,
+  });
+}
+
+export function getAgentProposal(proposalId: string): Promise<AgentActionProposal> {
+  return requestJson<AgentActionProposal>(`/agent/action-proposals/${encodeURIComponent(proposalId)}`, {
+    headers: agentHeaders,
+  });
+}
+
+export function approveAgentProposal(proposalId: string, comment = ''): Promise<AgentProposalDecision> {
+  return requestJson<AgentProposalDecision>(`/agent/action-proposals/${encodeURIComponent(proposalId)}/approve`, {
+    method: 'POST',
+    headers: agentHeaders,
+    body: JSON.stringify({ comment }),
+  });
+}
+
+export function rejectAgentProposal(proposalId: string, comment = ''): Promise<AgentProposalDecision> {
+  return requestJson<AgentProposalDecision>(`/agent/action-proposals/${encodeURIComponent(proposalId)}/reject`, {
+    method: 'POST',
+    headers: agentHeaders,
+    body: JSON.stringify({ comment }),
+  });
+}
+
+export function listAgentCommands(status = 'ready'): Promise<ControlledWriteCommand[]> {
+  return requestJson<ControlledWriteCommand[]>(`/agent/commands?status=${encodeURIComponent(status)}`, {
+    headers: agentHeaders,
+  });
+}
+
+export function dryRunAgentCommand(commandId: string): Promise<AgentCommandDryRunResult> {
+  return requestJson<AgentCommandDryRunResult>(`/agent/commands/${encodeURIComponent(commandId)}/dry-run`, {
+    method: 'POST',
+    headers: agentHeaders,
+  });
+}
+
+export function listAgentCommandAudits(commandId: string): Promise<AgentAuditRecord[]> {
+  return requestJson<AgentAuditRecord[]>(`/agent/commands/${encodeURIComponent(commandId)}/audits`, {
+    headers: agentHeaders,
   });
 }

@@ -1,6 +1,6 @@
 # Schema And Module Boundaries
 
-Last updated: 2026-07-20
+Last updated: 2026-07-21
 
 ## Authoritative Meeting Analysis Schema
 
@@ -471,6 +471,59 @@ command. The command idempotency key is generated from stable business fields:
 proposal id, target object type, target object id, operation, and expected
 version.
 
+## Agent Phase 9 Dry-Run Command Sandbox
+
+MeetMind Agent v1.0 Phase 9 adds the minimum execution sandbox while keeping
+formal business writes disabled:
+
+- `services/api/app/agent_command_executor.py`
+- `services/api/app/routers/agent_commands.py`
+- `apps/mobile/src/screens/AIAssistantScreen.tsx`
+
+The API command routes are limited to reading persisted commands, running
+dry-run validation, and reading command audit records:
+
+- `GET /agent/commands`
+- `GET /agent/commands/{command_id}`
+- `POST /agent/commands/{command_id}/dry-run`
+- `GET /agent/commands/{command_id}/audits`
+
+The dry-run executor accepts only a persisted command id. It does not accept
+client-submitted `ControlledWriteCommand`, `expected_version`, changes,
+permissions in the request body, or idempotency keys. The executor re-reads the
+current authoritative state through `DatabaseAuthoritativeStateProvider`,
+validates command `ready` status, reviewer permissions from the existing
+internal Agent headers, optimistic version, command idempotency key, target
+existence, and non-empty changes, then writes an `agent_audit_records` dry-run
+audit with:
+
+```json
+{
+  "dry_run": true,
+  "writes_performed": false,
+  "expected_changes": {},
+  "rollback_preview": {},
+  "authoritative_state": {}
+}
+```
+
+Repeated successful dry-runs return the existing dry-run audit as a duplicate
+result and do not create duplicate dry-run audit records. Rejected dry-runs
+write rejected audit records only. Phase 9 does not update `action_items`,
+`meeting_summaries`, Requirement, Risk, Shadow output, Prompt, RAG, or
+Validator behavior.
+
+Runtime guardrails are:
+
+```text
+AGENT_COMMAND_EXECUTION_ENABLED=false
+AGENT_COMMAND_DRY_RUN_ONLY=true
+```
+
+`AGENT_COMMAND_EXECUTION_ENABLED=false` rejects command dry-run by default.
+`AGENT_COMMAND_DRY_RUN_ONLY=true` keeps real writes unsupported even when dry
+run is explicitly enabled for tests or local diagnostics.
+
 ## Schema Version
 
 Current schema version:
@@ -521,6 +574,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Agent State Tracker | Worker-internal cross-meeting candidate normalization, deterministic matching, state-change classification, and proposal generation | Database writes, write-path Tools, API contracts, Prompt/RAG/Validator changes, action execution, free database scanning |
 | Agent Write Control | Worker-internal authoritative-state read contract, confirmation validation, inert command generation, audit records, rollback plans, idempotency and permission checks | Database writes, write-path Tools, API contracts, Expo confirmation UI, automatic approval, action execution |
 | Agent Confirmation API | API-side proposal persistence, read-only authoritative snapshots, manual approve/reject decisions, inert command persistence, and audit records | Client-submitted commands, formal Requirement/ActionItem/Risk writes, Expo UI, Prompt/RAG/Validator changes, Shadow promotion, automatic approval |
+| Agent Command Sandbox | API-side dry-run validation for persisted ready commands, expected-change preview, rollback preview, and dry-run audit records | Formal Requirement/ActionItem/Risk writes, client-submitted commands or versions, automatic approval, real rollback execution, Prompt/RAG/Validator changes |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -569,6 +623,11 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
   commands, does not write formal business state, does not add Expo UI, does
   not modify the formal Qwen3 + RAG or Shadow result-promotion behavior, and
   does not implement automatic approval.
+- Agent Phase 9 exposes a minimum Expo confirmation workbench and API dry-run
+  sandbox for persisted ready commands. It writes dry-run audit records only,
+  does not execute real business writes, does not accept client-submitted
+  commands or versions, and does not implement automatic approval or rollback
+  execution.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

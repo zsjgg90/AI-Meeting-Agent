@@ -6,7 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test:numbered-list": "node scripts/test-numbered-list.js"
+    "test:numbered-list": "node scripts/test-numbered-list.js",
+    "test:agent-review-ui": "node scripts/test-agent-review-ui.js"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",

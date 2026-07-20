@@ -168,6 +168,25 @@ Approval and rejection lock the proposal row in PostgreSQL, allow only
 as terminal, and use a stable command idempotency key based on proposal, target,
 operation, and expected version rather than confirmation id.
 
+Agent v1.0 Phase 9 adds the minimum human confirmation UI and dry-run command
+sandbox. Expo uses the existing Agent proposal approval/rejection API from the
+AI tab, shows proposal evidence, changes, status, confidence, risk, version
+state, ready commands, dry-run results, audit records, and rollback previews.
+The API adds command read/dry-run endpoints under `/agent/commands`. The
+executor re-reads authoritative state, checks command `ready` status, version,
+permissions, idempotency key, expected changes, and rollback preview, then
+writes dry-run audit records only. It does not update `action_items`, summary
+JSON, Requirement, or Risk state. Runtime guardrails are:
+
+```env
+AGENT_COMMAND_EXECUTION_ENABLED=false
+AGENT_COMMAND_DRY_RUN_ONLY=true
+```
+
+When execution is not explicitly enabled, command dry-run is rejected. Even
+when enabled in tests or local diagnostics, this phase supports only dry-run;
+real business writes remain unsupported.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -351,6 +370,8 @@ RAG_EMBEDDING_LOCAL_FILES_ONLY=true
 AGENT_MODE_ENABLED=false
 AGENT_SHADOW_MODE=true
 AGENT_ACTIONS_ENABLED=false
+AGENT_COMMAND_EXECUTION_ENABLED=false
+AGENT_COMMAND_DRY_RUN_ONLY=true
 ```
 
 Formal legacy Qwen3 + RAG summaries are normalized, then passed through
@@ -439,6 +460,10 @@ npx expo run:android
 - `GET /agent/action-proposals/{proposal_id}` 查询提案详情
 - `POST /agent/action-proposals/{proposal_id}/approve` 人工批准并生成受控写入命令
 - `POST /agent/action-proposals/{proposal_id}/reject` 人工拒绝提案
+- `GET /agent/commands` 查询已生成的受控命令
+- `GET /agent/commands/{command_id}` 查询受控命令详情
+- `POST /agent/commands/{command_id}/dry-run` 对 ready 命令执行 dry-run 沙箱校验
+- `GET /agent/commands/{command_id}/audits` 查询命令审计记录
 
 `GET /meetings/{id}/summary` 返回结构：
 
