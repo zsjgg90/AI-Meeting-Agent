@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 
 from app.config import get_settings
 from app.analysis_contract import analysis_to_persistence_payload, normalize_meeting_analysis_result
+from app.agent_orchestrator import maybe_run_agent_shadow
 from app.meeting_analysis_pipeline import analyze_meeting_shadow_mode
 from app.observability import log_event, log_stage
 from app.meeting_analysis_schema import (
@@ -1326,6 +1327,12 @@ def summarize_meeting(db: Session, meeting_id: str) -> MeetingSummary:
             summary_id=summary.id,
             model_name=payload.get("model_name"),
             confidence_score=payload.get("confidence_score"),
+        )
+        maybe_run_agent_shadow(
+            db=db,
+            meeting=meeting,
+            formal_analysis=payload,
+            transcript=transcript_rows,
         )
         return summary
     except Exception as exc:

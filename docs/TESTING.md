@@ -79,6 +79,7 @@ python -m unittest services.worker.tests.test_meeting_scenarios
 python -m unittest services.worker.tests.test_agent_tools_contract
 python -m unittest services.worker.tests.test_agent_tools_adapters
 python -m unittest services.worker.tests.test_agent_runtime
+python -m unittest services.worker.tests.test_agent_orchestrator
 ```
 
 Worker tests are split into two groups:
@@ -174,6 +175,14 @@ skips, stop-or-continue failure handling, timeout/deadline/call-limit handling,
 step duration/status recording, fallback preservation, previous-step payload
 handoff, and import isolation from real Qwen3, Chroma, PostgreSQL, external
 network, API, and Expo.
+
+`test_agent_orchestrator.py` validates Phase 4B controlled Orchestrator and
+Shadow Mode sidecar behavior. It covers Shadow disabled/enabled switches, Agent
+Mode non-promotion, scenario-to-static-plan mapping, `unknown` minimal plan,
+file audit writing, failure/timeout isolation from formal results, fallback and
+`result_source` preservation, deterministic comparison summaries, no formal DB
+write calls from Shadow wiring, and import isolation from real Qwen3, Chroma,
+PostgreSQL, external network, API, and Expo.
 
 Semantic shadow trace files are written under:
 

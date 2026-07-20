@@ -90,6 +90,15 @@ in-memory `AgentRunState`, and executes a caller-supplied static
 does not implement Shadow Mode or Orchestrator integration, and does not execute
 Agent actions or database writes.
 
+Agent v1.0 Phase 4B adds a controlled Worker-internal `AgentOrchestrator` in
+`services/worker/app/agent_orchestrator.py`. When `AGENT_SHADOW_MODE=true`, it
+runs after the formal summary has been persisted, builds a static plan from the
+meeting scenario policy, executes Agent Runtime beside the formal result, and
+writes file audit output under `data/debug/agent_shadow_trace/<meeting_id>/`.
+The Shadow result is not exposed through the API, does not overwrite
+`MeetingSummary` or `ActionItem`, and does not execute actions even if
+`AGENT_ACTIONS_ENABLED` is changed.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`

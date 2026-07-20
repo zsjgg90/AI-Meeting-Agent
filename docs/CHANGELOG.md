@@ -2,6 +2,14 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 4B controlled Worker-internal Orchestrator and Shadow
+  Mode sidecar execution after formal summary persistence.
+- Added file audit output under `data/debug/agent_shadow_trace/<meeting_id>/`
+  with Agent run status, steps, result source, shadow analysis, validator audit,
+  fallback reason, and deterministic comparison summary.
+- Added Agent Orchestrator tests for Shadow switches, static plan generation,
+  unknown minimal plans, audit writing, timeout/failure isolation, fallback
+  preservation, deterministic comparisons, and import-side-effect boundaries.
 - Added Agent v1.0 Phase 4A Worker-internal Tool Registry and controlled
   Runtime infrastructure.
 - Added `ExecutionPlan`, `ExecutionStep`, `AgentRunState`, and

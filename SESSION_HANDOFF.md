@@ -38,6 +38,19 @@ supplied static `ExecutionPlan` steps, and records in-memory `AgentRunState`
 and `AgentStepResult` output. It is not wired into the formal meeting analysis
 entry, Shadow Mode, Orchestrator, API, database writes, project-state updates,
 or Agent action execution.
+Agent v1.0 Phase 4B adds a controlled Worker-internal Orchestrator in
+`services/worker/app/agent_orchestrator.py`. When `AGENT_SHADOW_MODE=true`, it
+runs after `save_summary()` has persisted the formal result, maps meeting
+scenario policy context to a static Runtime plan, writes audit JSON under
+`data/debug/agent_shadow_trace/<meeting_id>/`, and records deterministic
+formal-vs-shadow comparison data. It never overwrites `MeetingSummary` or
+`ActionItem`, never executes Agent actions, and is not exposed through the API
+or Expo UI. `AGENT_MODE_ENABLED=true` is recorded but ignored in Phase 4B, so
+Agent output is never promoted. With `AGENT_SHADOW_MODE=true`, the static plan
+includes `analyze_meeting` and may call the existing model analysis path one
+additional time. There is still no real meeting classifier; if no meeting type
+is available from metadata, the Orchestrator uses the safe `unknown` minimal
+plan.
 
 Repository freeze metadata:
 
@@ -136,13 +149,13 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review and accept Agent v1.0 Phase 4A Tool Registry and Runtime behavior
+1. Review and accept Agent v1.0 Phase 4B Orchestrator Shadow Mode behavior
    after tests pass.
 2. Import the 19 required Agent baseline meeting artifacts under
    `data/eval/agent_v1_baseline/`.
-3. Prepare Phase 4B Shadow Mode and controlled Orchestrator design only after
-   Phase 4A Runtime boundaries are accepted. Do not wire tools into the formal
-   analysis entry until that phase is explicitly approved.
+3. Prepare Phase 5 first core scenario implementation only after Phase 4B
+   Shadow audit behavior is accepted. Do not add action execution or Agent
+   result promotion yet.
 4. Run `.\scripts\check-services.ps1` with local services available.
 5. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.

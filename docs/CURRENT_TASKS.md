@@ -2,8 +2,8 @@
 
 ## Active Priority
 
-1. Review and accept Agent v1.0 Phase 4A Tool Registry and Runtime
-   infrastructure behavior.
+1. Review and accept Agent v1.0 Phase 4B controlled Orchestrator and Shadow
+   Mode behavior.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -25,8 +25,9 @@
 - Keep Phase 3 Tool Adapters as thin wrappers only. Phase 4A may register and
   execute them through static plans, but must not add Orchestrator integration,
   write-path tools, or action execution.
-- Keep Phase 4A Agent Runtime internal to Worker tests until Phase 4B explicitly
-  wires Shadow Mode. It must not be called by the formal meeting analysis entry.
+- Keep Phase 4B Agent Shadow Mode as a sidecar only. It may write debug audit
+  files, but must not overwrite formal summaries, action items, project state,
+  requirements, risks, issues, or decisions.
 - Defer `get_project_context` and `get_active_risks` until a formal Project
   state source and independent risk state model exist.
 - Decide whether to archive or remove legacy `api` and `mobile` directories.
@@ -81,3 +82,6 @@
 - No Shadow Mode wiring, Orchestrator integration, model free planning,
   multi-Agent execution, write-path Tool, Action execution, project-state
   update, or formal-chain integration in Phase 4A.
+- No Agent result promotion, action execution, database persistence for Agent
+  business objects, API exposure, frontend confirmation flow, or semantic
+  comparison scoring in Phase 4B.

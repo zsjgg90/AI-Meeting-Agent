@@ -249,6 +249,57 @@ Phase 4A does not implement Shadow Mode, Orchestrator integration, model free
 planning, multi-Agent execution, write-path tools, action execution, project
 state mutation, real meeting classification, or formal-chain integration.
 
+## Agent Orchestrator Shadow Mode
+
+MeetMind Agent v1.0 Phase 4B adds a controlled Worker-internal Orchestrator:
+
+- `services/worker/app/agent_orchestrator.py`
+
+`AgentOrchestrator` reads the meeting scenario policy, converts policy context
+requirements into a static `ExecutionPlan`, calls the Phase 4A Runtime, creates
+a deterministic comparison summary, and writes a file audit result. It does not
+modify API responses, database schemas, migrations, Prompt, RAG rules,
+Validator rules, Expo UI, or the formal six-dimension persistence payload.
+
+Agent Shadow audit files are written to:
+
+```text
+data/debug/agent_shadow_trace/<meeting_id>/<agent_run_id>.json
+data/debug/agent_shadow_trace/<meeting_id>/latest.json
+```
+
+Shadow audit fields include:
+
+- `agent_run_id`
+- `meeting_id`
+- `meeting_type`
+- `status`
+- `started_at`
+- `finished_at`
+- `duration_ms`
+- `steps`
+- `result_source`
+- `shadow_analysis`
+- `validation_audit`
+- `comparison_summary`
+- `error`
+- `fallback_reason`
+- `metadata`
+
+Static plan mapping:
+
+- `previous_meetings` or `previous_same_type_meeting` enables
+  `search_meeting_history`.
+- `project_knowledge` enables `search_project_knowledge`.
+- `open_action_items` enables `get_open_action_items`.
+- `unknown` disables all optional context steps and records
+  `needs_review=true`.
+
+`comparison_summary` is deterministic only. It compares six-dimension field
+presence, item counts, schema field availability, Validator warning count, and
+formal-vs-shadow `result_source`. It does not perform semantic quality scoring
+and does not ask a model to compare results.
+
 ## Schema Version
 
 Current schema version:
@@ -295,6 +346,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Meeting Scenario Policy | Worker-internal read-only meeting type policies and classification result contract | Real classification, model calls, database/RAG/network access, Agent runtime orchestration, tool execution |
 | Agent Tool Adapter | Thin wrappers around existing read services, RAG retrieval, model analysis, and validation with structured results | Tool Registry, Agent Runtime, database writes, action execution, project state mutation, duplicated business logic |
 | Agent Runtime | Worker-internal Tool Registry, static execution plans, in-memory Agent run state, step/result recording | Formal analysis entry wiring, Shadow Mode, Orchestrator, model free planning, multi-Agent execution, database writes, action execution |
+| Agent Orchestrator | Worker-internal Shadow Mode orchestration, scenario-to-plan mapping, file audit output, deterministic formal-vs-shadow comparison | API response changes, formal result overwrite, database writes, action execution, model free planning, semantic scoring |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -324,6 +376,11 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
   must not access databases, RAG, models, files, or networks. It is not exposed
   through the API, not connected to the formal analysis chain, and not enabled
   by Agent rollout switches until a later phase explicitly wires it in.
+- Agent Orchestrator Shadow Mode is internal Phase 4B sidecar execution. It runs
+  only after formal summary persistence when `AGENT_SHADOW_MODE=true`; when the
+  switch is false it does not run. Its audit files must not be treated as
+  formal API or database output. Agent failures, timeouts, and fallback statuses
+  must not trigger formal-chain retries or overwrite formal results.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks
