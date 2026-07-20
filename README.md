@@ -82,6 +82,14 @@ call limits, and structured errors around existing services. They do not create
 a Tool Registry, Agent Runtime, Orchestrator, write-path tool, project-state
 update, action execution, ASR/diarization tool, or formal-chain integration.
 
+Agent v1.0 Phase 4A adds Worker-internal controlled runtime infrastructure in
+`services/worker/app/agent_runtime/`. It registers the six Phase 3 tools,
+retrieves tools by name, validates read-only ToolPolicy boundaries, creates an
+in-memory `AgentRunState`, and executes a caller-supplied static
+`ExecutionPlan` step by step. It is not wired into the formal analysis entry,
+does not implement Shadow Mode or Orchestrator integration, and does not execute
+Agent actions or database writes.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`

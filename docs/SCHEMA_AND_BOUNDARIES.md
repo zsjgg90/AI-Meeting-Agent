@@ -200,6 +200,55 @@ there is no authoritative Project table, persisted `ProjectState`, or
 independent risk state model. Later phases may add them only after a formal
 state source and persistence boundary exist.
 
+## Agent Runtime Contracts
+
+MeetMind Agent v1.0 Phase 4A adds Worker-internal controlled runtime
+infrastructure:
+
+- `services/worker/app/agent_runtime/registry.py`
+- `services/worker/app/agent_runtime/runtime.py`
+
+`ToolRegistry` owns in-memory registration for the six Phase 3 tools:
+
+- `get_meeting_context`
+- `search_meeting_history`
+- `search_project_knowledge`
+- `get_open_action_items`
+- `analyze_meeting`
+- `validate_meeting_analysis`
+
+The registry supports registration, lookup by name, listing, duplicate
+registration rejection, unknown-tool rejection, and ToolPolicy boundary checks.
+Phase 4A rejects side-effecting or confirmation-required tools. Creating or
+importing the registry does not open database sessions, initialize RAG/Chroma,
+load models, or call the network. The default registry factory receives
+providers/factories and passes them through to the existing Tool Adapters.
+
+`AgentRuntime` accepts an `AgentContext` plus a caller-supplied static
+`ExecutionPlan`. It creates an in-memory `AgentRunState`, converts the context
+to `ToolExecutionContext`, executes enabled steps in order, records
+`AgentStepResult` entries, preserves `ToolResult.status` and `result_source`,
+and stops or continues based on each step's `continue_on_failure` flag.
+Optional steps are skipped only when the plan disables them; the model does not
+choose tools or modify the plan.
+`create_default_execution_plan()` provides the fixed Phase 4A sequence:
+`get_meeting_context` -> optional `search_meeting_history` -> optional
+`search_project_knowledge` -> optional `get_open_action_items` ->
+`analyze_meeting` -> `validate_meeting_analysis`.
+
+Runtime contract objects:
+
+- `ExecutionStep`
+- `ExecutionPlan`
+- `AgentStepResult`
+- `AgentRunState`
+- `AgentRuntime`
+- `create_default_execution_plan()`
+
+Phase 4A does not implement Shadow Mode, Orchestrator integration, model free
+planning, multi-Agent execution, write-path tools, action execution, project
+state mutation, real meeting classification, or formal-chain integration.
+
 ## Schema Version
 
 Current schema version:
@@ -245,6 +294,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Agent Contract | Worker-internal Agent v1 business objects and per-run `AgentContext` validation | API contracts, database writes, raw LLM persistence, Agent runtime orchestration, tool execution |
 | Meeting Scenario Policy | Worker-internal read-only meeting type policies and classification result contract | Real classification, model calls, database/RAG/network access, Agent runtime orchestration, tool execution |
 | Agent Tool Adapter | Thin wrappers around existing read services, RAG retrieval, model analysis, and validation with structured results | Tool Registry, Agent Runtime, database writes, action execution, project state mutation, duplicated business logic |
+| Agent Runtime | Worker-internal Tool Registry, static execution plans, in-memory Agent run state, step/result recording | Formal analysis entry wiring, Shadow Mode, Orchestrator, model free planning, multi-Agent execution, database writes, action execution |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -270,6 +320,10 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
   open DB sessions, instantiate RAG/embedding/model clients, access Chroma, or
   call the network. They are not exposed through the API and are not wired into
   the formal analysis chain.
+- Agent Runtime infrastructure is internal Phase 4A scaffolding. Importing it
+  must not access databases, RAG, models, files, or networks. It is not exposed
+  through the API, not connected to the formal analysis chain, and not enabled
+  by Agent rollout switches until a later phase explicitly wires it in.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

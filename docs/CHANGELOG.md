@@ -2,6 +2,13 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 4A Worker-internal Tool Registry and controlled
+  Runtime infrastructure.
+- Added `ExecutionPlan`, `ExecutionStep`, `AgentRunState`, and
+  `AgentStepResult` contracts for static, in-memory Tool execution.
+- Added Agent Runtime unit tests for registry behavior, ordered execution,
+  optional skips, stop/continue failure handling, timeout/deadline/call limits,
+  fallback preservation, and import-side-effect boundaries.
 - Added Agent v1.0 Phase 3 first-batch Worker-internal Tool Adapters:
   `get_meeting_context`, `search_meeting_history`,
   `search_project_knowledge`, `get_open_action_items`, `analyze_meeting`, and

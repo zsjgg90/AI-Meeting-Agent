@@ -78,6 +78,7 @@ python -m unittest services.worker.tests.test_agent_contract
 python -m unittest services.worker.tests.test_meeting_scenarios
 python -m unittest services.worker.tests.test_agent_tools_contract
 python -m unittest services.worker.tests.test_agent_tools_adapters
+python -m unittest services.worker.tests.test_agent_runtime
 ```
 
 Worker tests are split into two groups:
@@ -164,6 +165,15 @@ reporting, mutable default isolation, and isolation from `MeetingAnalysisSchema`
 using fake DB, fake RAG retriever, fake analysis service, and fake validator
 dependencies. These tests do not call real Qwen3, Ollama, Chroma, PostgreSQL,
 external network, API, or Expo.
+
+`test_agent_runtime.py` validates the Phase 4A Worker-internal Tool Registry
+and controlled Runtime. It covers registration, lookup, duplicate registration,
+unknown tools, read-only policy enforcement, default six-tool registry
+construction without calling providers, ordered static execution, optional
+skips, stop-or-continue failure handling, timeout/deadline/call-limit handling,
+step duration/status recording, fallback preservation, previous-step payload
+handoff, and import isolation from real Qwen3, Chroma, PostgreSQL, external
+network, API, and Expo.
 
 Semantic shadow trace files are written under:
 

@@ -31,6 +31,13 @@ call; `analyze_meeting` still relies on the existing `OLLAMA_TIMEOUT_SECONDS`
 for the real model request. `search_meeting_history` is currently deterministic
 database search only. `get_project_context` and `get_active_risks` remain
 unimplemented until authoritative project and risk state sources exist.
+Agent v1.0 Phase 4A adds Worker-internal Tool Registry and controlled Runtime
+infrastructure in `services/worker/app/agent_runtime/`. It registers the six
+Phase 3 tools, validates read-only ToolPolicy boundaries, executes caller
+supplied static `ExecutionPlan` steps, and records in-memory `AgentRunState`
+and `AgentStepResult` output. It is not wired into the formal meeting analysis
+entry, Shadow Mode, Orchestrator, API, database writes, project-state updates,
+or Agent action execution.
 
 Repository freeze metadata:
 
@@ -129,12 +136,13 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review and accept Agent v1.0 Phase 3 first-batch Tool Adapter behavior after
-   tests pass.
+1. Review and accept Agent v1.0 Phase 4A Tool Registry and Runtime behavior
+   after tests pass.
 2. Import the 19 required Agent baseline meeting artifacts under
    `data/eval/agent_v1_baseline/`.
-3. Prepare Phase 4 Agent Runtime design only after Tool Adapter behavior and
-   boundaries are accepted. Do not wire tools into an Orchestrator yet.
+3. Prepare Phase 4B Shadow Mode and controlled Orchestrator design only after
+   Phase 4A Runtime boundaries are accepted. Do not wire tools into the formal
+   analysis entry until that phase is explicitly approved.
 4. Run `.\scripts\check-services.ps1` with local services available.
 5. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.
