@@ -91,6 +91,16 @@ and meetings 2-9 showed no sustained monotonic GPU memory growth. RAG retrieval
 hit the same 8 chunks in all 9 meetings; keep this as a retrieval diversity
 observation for later phases. Quality scoring remains rule-assisted and keeps
 `manual_review_required=true`.
+Agent v1.0 Phase 6 adds the Worker-internal cross-meeting state tracker in
+`services/worker/app/agent_state_tracker.py`. It supports only
+`Requirement`, `AgentActionItem`, and `Risk`, reads bounded historical
+candidates from `AgentContext` or explicit in-memory inputs, normalizes objects,
+uses deterministic matching plus similarity-assisted ordering, classifies
+`new`, `update`, `complete`, `defer`, `cancel`, `duplicate`, and `uncertain`,
+and emits evidence-backed `AgentActionProposal` objects. Phase 6 does not write
+formal business tables, add write-path Tools, expose API contracts, modify
+database migrations, change Prompt/RAG/Validator, alter Expo UI, promote
+Shadow results, or execute Agent actions.
 
 Repository freeze metadata:
 
@@ -189,21 +199,15 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review and accept the Phase 5B live Shadow acceptance tool implementation.
-2. Run Phase 5B smoke only after explicit approval:
-   `services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke --allow-live-model --ollama-timeout 300 --gpu-monitor --stop-on-failure`.
-3. Before live smoke/full, start Worker with stdout/stderr captured under
-   `data/debug/agent_shadow_live_acceptance/worker-phase5b.log` so any
-   post-run health/ready stall has evidence.
-4. Run Phase 5B full 9-meeting acceptance only after smoke passes and is
-   reviewed:
-   `services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode full --allow-live-model --ollama-timeout 300 --gpu-monitor --stop-on-failure`.
-5. Prepare Phase 6 cross-meeting state tracking design only after Phase 5B is
-   accepted. Do not add action execution, write-path Tools, or Agent result
-   promotion yet. Phase 6 still needs an explicit formal cross-meeting state
-   source and write-boundary design before implementation.
-6. Import the remaining required Agent baseline meeting artifact folders under
+1. Review Phase 6 cross-meeting proposal output and decide the authoritative
+   historical state source for requirements, action items, and risks.
+2. Define the Phase 7 human confirmation contract before adding API/UI or
+   write-path behavior.
+3. Keep Agent action execution disabled until a controlled write service,
+   audit model, idempotency strategy, rollback behavior, and permissions are
+   specified.
+4. Import the remaining required Agent baseline meeting artifact folders under
    `data/eval/agent_v1_baseline/` when available.
-7. Run `.\scripts\check-services.ps1` with local services available.
-7. Continue embedding model offline/cache setup, shared API/Worker model
+5. Run `.\scripts\check-services.ps1` with local services available.
+6. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.

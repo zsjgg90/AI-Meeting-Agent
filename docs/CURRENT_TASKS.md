@@ -2,9 +2,8 @@
 
 ## Active Priority
 
-1. Review and run Agent v1.0 Phase 5B live Shadow acceptance for
-   `project_weekly`, `requirement_review`, and `cross_department` after tool
-   implementation is accepted.
+1. Review Agent v1.0 Phase 6 cross-meeting state tracker output and decide the
+   authoritative historical state source before any write-path phase.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -36,6 +35,14 @@
   `data/debug/agent_shadow_live_acceptance/`. The tool is
   `services/worker/scripts/run_agent_shadow_live_acceptance.py`; default runs
   must not call real Qwen3 unless `--allow-live-model` is explicitly passed.
+- Keep Phase 6 cross-meeting state tracking as Worker-internal proposal
+  generation only. The module is `services/worker/app/agent_state_tracker.py`
+  and supports `Requirement`, `AgentActionItem`, and `Risk` with bounded
+  historical candidates, deterministic matching, and evidence-backed
+  `AgentActionProposal` output.
+- Phase 6 proposals must not be executed, persisted, exposed through API, or
+  connected to Expo confirmation UI until a later phase defines the state
+  source, confirmation contract, and controlled write boundary.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -66,10 +73,10 @@
   It found first semantic errors in `model_raw_output.json`; normalized output
   preserved those errors rather than creating new ones.
 - Add live Qwen3 + RAG evaluation gate outside default unit tests.
-- Run Phase 5B smoke first:
-  `phase5-project_weekly-1`, `phase5-requirement_review-1`, and
-  `phase5-cross_department-1`. Only run the full 9-meeting live gate after
-  smoke is reviewed and passes.
+- Phase 5B full live acceptance has completed locally under
+  `data/debug/agent_shadow_live_acceptance/20260720-163624` with 9/9 meetings
+  passed and `overall_passed=true`; keep those artifacts ignored and treat
+  quality scoring as rule-assisted with manual review required.
 - Review the 2026-07-18 `prompt_stability_eval` artifacts before production
   rollout. The deterministic PostProcessor fixed proposal leakage and metadata
   cleanup, but duplicate-run semantic stability still fails for agenda/action
@@ -91,7 +98,8 @@
 - No Qwen3/RAG prompt or validator changes.
 - No UI redesign.
 - No queue system migration.
-- No cross-meeting object matching until later Agent phases.
+- No cross-meeting object persistence or Agent action execution until later
+  Agent phases.
 - No real meeting classifier or Agent action execution in Phase 2.
 - No Tool Registry, Agent Runtime, write-path Tool, ASR Tool, diarization Tool,
   project-state update Tool, or cross-meeting object matching in Phase 3.
@@ -108,3 +116,7 @@
   cross-meeting state persistence, real classifier, Prompt/RAG/Validator
   change, API change, database migration, Expo change, or Phase 6 work in
   Phase 5B.
+- No Agent result promotion, action execution, write-path Tool,
+  cross-meeting state persistence, real classifier, Prompt/RAG/Validator
+  change, API change, database migration, Expo change, or frontend
+  confirmation flow in Phase 6.

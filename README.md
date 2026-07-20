@@ -125,6 +125,18 @@ audit, quality scoring template, GPU samples, GPU summary, and pipeline log.
 If a layer is unavailable, the artifact is written with `available=false`
 instead of being fabricated.
 
+Agent v1.0 Phase 6 adds a Worker-internal cross-meeting state tracker in
+`services/worker/app/agent_state_tracker.py`. It reads only caller-supplied
+current objects and bounded historical candidates from `AgentContext` or
+explicit in-memory inputs, normalizes `Requirement`, `AgentActionItem`, and
+`Risk`, applies deterministic candidate matching, classifies state changes as
+`new`, `update`, `complete`, `defer`, `cancel`, `duplicate`, or `uncertain`,
+and emits evidence-backed `AgentActionProposal` objects. Phase 6 does not add
+write-path Tools, execute Agent actions, scan or mutate PostgreSQL, expose a new
+API contract, change Prompt/RAG/Validator, promote Shadow output, or modify
+Expo UI. Uncertain matches and insufficient evidence set `needs_review=true`
+and require human confirmation.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`

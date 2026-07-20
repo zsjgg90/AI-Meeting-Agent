@@ -59,6 +59,25 @@ validators, and controlled service conversions may use:
 not collide with the existing six-dimension action item type or the API/DB
 action item read models.
 
+Phase 6 extends `AgentActionProposal` for cross-meeting state proposals while
+keeping the original fields backward compatible. The proposal now supports:
+
+- `proposal_id`
+- `action_type`
+- `target_object_type`
+- `target_object_id`
+- `proposed_changes`
+- `evidence`
+- `confidence`
+- `risk_level`
+- `requires_confirmation`
+- `status`
+- `reason`
+- `metadata`
+
+Supported Phase 6 `action_type` values are `new`, `update`, `complete`,
+`defer`, `cancel`, `duplicate`, and `uncertain`.
+
 All Agent business objects use `EvidenceRef` for source evidence. `EvidenceRef`
 contains:
 
@@ -300,6 +319,46 @@ presence, item counts, schema field availability, Validator warning count, and
 formal-vs-shadow `result_source`. It does not perform semantic quality scoring
 and does not ask a model to compare results.
 
+## Agent Cross-Meeting State Tracker
+
+MeetMind Agent v1.0 Phase 6 adds a Worker-internal cross-meeting state module:
+
+- `services/worker/app/agent_state_tracker.py`
+
+Current tracker schema version:
+
+```text
+agent-state-tracker-v1
+```
+
+The tracker supports only the first three core Agent objects:
+
+- `Requirement`
+- `AgentActionItem`
+- `Risk`
+
+It performs bounded in-memory processing:
+
+```text
+current Agent objects + supplied historical candidates
+-> historical candidate reader
+-> object normalization
+-> deterministic candidate matching
+-> state-change classification
+-> AgentActionProposal generation
+-> proposal validation and confirmation flags
+```
+
+The deterministic matching rules use object type, `project_id`, normalized
+title, keywords, owner, source meeting, and current status. String similarity is
+used only as an auxiliary score for already bounded candidates. The tracker does
+not freely scan databases, does not initialize RAG or Qwen, and does not execute
+or persist proposals.
+
+Human confirmation is required for owner changes, due-date changes,
+requirement cancellation, closing high-risk items, formal status changes,
+`uncertain` matches, insufficient evidence, and historical fact conflicts.
+
 ## Schema Version
 
 Current schema version:
@@ -347,6 +406,7 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Agent Tool Adapter | Thin wrappers around existing read services, RAG retrieval, model analysis, and validation with structured results | Tool Registry, Agent Runtime, database writes, action execution, project state mutation, duplicated business logic |
 | Agent Runtime | Worker-internal Tool Registry, static execution plans, in-memory Agent run state, step/result recording | Formal analysis entry wiring, Shadow Mode, Orchestrator, model free planning, multi-Agent execution, database writes, action execution |
 | Agent Orchestrator | Worker-internal Shadow Mode orchestration, scenario-to-plan mapping, file audit output, deterministic formal-vs-shadow comparison | API response changes, formal result overwrite, database writes, action execution, model free planning, semantic scoring |
+| Agent State Tracker | Worker-internal cross-meeting candidate normalization, deterministic matching, state-change classification, and proposal generation | Database writes, write-path Tools, API contracts, Prompt/RAG/Validator changes, action execution, free database scanning |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
@@ -381,6 +441,10 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
   switch is false it does not run. Its audit files must not be treated as
   formal API or database output. Agent failures, timeouts, and fallback statuses
   must not trigger formal-chain retries or overwrite formal results.
+- Agent State Tracker is internal Phase 6 scaffolding. It returns
+  `AgentActionProposal` objects only and records `writes_performed=false`; it is
+  not exposed through the API, not persisted to PostgreSQL, and not wired into a
+  confirmation or execution flow.
 - Qwen3 + RAG analysis remains the fallback path and must log `fallback_reason` when used after semantic pipeline failure.
 
 ## Known Remaining Risks

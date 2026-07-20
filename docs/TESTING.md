@@ -80,6 +80,7 @@ python -m unittest services.worker.tests.test_agent_tools_contract
 python -m unittest services.worker.tests.test_agent_tools_adapters
 python -m unittest services.worker.tests.test_agent_runtime
 python -m unittest services.worker.tests.test_agent_orchestrator
+python -m unittest services.worker.tests.test_agent_state_tracker
 python -m unittest services.worker.tests.test_agent_shadow_acceptance
 python -m unittest services.worker.tests.test_agent_shadow_live_acceptance
 ```
@@ -185,6 +186,15 @@ file audit writing, failure/timeout isolation from formal results, fallback and
 `result_source` preservation, deterministic comparison summaries, no formal DB
 write calls from Shadow wiring, and import isolation from real Qwen3, Chroma,
 PostgreSQL, external network, API, and Expo.
+
+`test_agent_state_tracker.py` validates the Phase 6 cross-meeting state
+tracker without calling real Qwen3, Ollama, Chroma, PostgreSQL, external
+network, API, or Expo. It covers bounded candidate reading, same object
+matching, new object detection, complete/defer/cancel classification, duplicate
+object detection, uncertain matches with `needs_review`, owner and deadline
+confirmation, insufficient evidence confirmation, historical conflict handling,
+high-risk closure confirmation, and the guarantee that the tracker does not
+write database state.
 
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance
 infrastructure for `project_weekly`, `requirement_review`, and

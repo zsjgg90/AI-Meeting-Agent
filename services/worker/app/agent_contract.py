@@ -78,10 +78,21 @@ AgentActionProposalType = Literal[
     "complete",
     "defer",
     "cancel",
+    "duplicate",
     "notify",
+    "uncertain",
     "unknown",
 ]
 AgentActionProposalStatus = Literal["proposed", "confirmed", "rejected", "executed", "cancelled"]
+AgentStateChangeType = Literal[
+    "new",
+    "update",
+    "complete",
+    "defer",
+    "cancel",
+    "duplicate",
+    "uncertain",
+]
 
 
 class EvidenceRef(BaseModel):
@@ -232,14 +243,28 @@ class AgentActionProposal(BaseModel):
 
     proposal_id: str = ""
     proposal_type: AgentActionProposalType = "unknown"
+    action_type: AgentStateChangeType | None = None
     target_object_type: str = ""
     target_object_id: str | None = None
     title: str = ""
     description: str = ""
     proposed_changes: dict[str, Any] = Field(default_factory=dict)
     evidence: list[EvidenceRef] = Field(default_factory=list)
+    confidence: float | None = Field(default=None, ge=0.0, le=1.0)
+    risk_level: RiskLevel = "unknown"
+    requires_confirmation: bool = True
     status: AgentActionProposalStatus = "proposed"
     needs_confirmation: bool = True
+    reason: str = ""
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def sync_confirmation_and_proposal_type(self) -> "AgentActionProposal":
+        self.needs_confirmation = bool(self.needs_confirmation or self.requires_confirmation)
+        self.requires_confirmation = bool(self.requires_confirmation or self.needs_confirmation)
+        if self.proposal_type == "unknown" and self.action_type:
+            self.proposal_type = _proposal_type_for_action(self.action_type)
+        return self
 
 
 class AgentContext(BaseModel):
@@ -288,6 +313,7 @@ __all__ = [
     "ProjectHealth",
     "AgentActionProposalType",
     "AgentActionProposalStatus",
+    "AgentStateChangeType",
     "EvidenceRef",
     "Requirement",
     "Decision",
@@ -301,3 +327,11 @@ __all__ = [
     "AgentActionProposal",
     "AgentContext",
 ]
+
+
+def _proposal_type_for_action(action_type: AgentStateChangeType) -> AgentActionProposalType:
+    if action_type == "new":
+        return "create"
+    if action_type in {"duplicate", "uncertain"}:
+        return action_type
+    return action_type

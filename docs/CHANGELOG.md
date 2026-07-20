@@ -2,6 +2,21 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 6 Worker-internal cross-meeting state tracker in
+  `services/worker/app/agent_state_tracker.py`.
+- Phase 6 supports bounded candidate reading, object normalization,
+  deterministic matching, state-change classification, evidence-backed
+  `AgentActionProposal` generation, proposal validation, and human-confirmation
+  flags for `Requirement`, `AgentActionItem`, and `Risk`.
+- Extended the internal `AgentActionProposal` contract with Phase 6 fields:
+  `action_type`, `confidence`, `risk_level`, `requires_confirmation`, `reason`,
+  and `metadata`, while preserving existing `proposal_type` and
+  `needs_confirmation` compatibility.
+- Added Phase 6 unit tests to the default Worker test gate. The tests cover same
+  object matching, new object detection, complete/defer/cancel classification,
+  duplicate detection, uncertain review flags, owner/deadline confirmation,
+  insufficient evidence confirmation, historical conflicts, high-risk closure
+  confirmation, and no database/model/RAG/network side effects.
 - Added Agent v1.0 Phase 5B live Shadow acceptance tooling in
   `services/worker/scripts/run_agent_shadow_live_acceptance.py`.
 - The Phase 5B tool supports offline-by-default runs, explicit
