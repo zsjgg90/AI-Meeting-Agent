@@ -8,6 +8,7 @@ POLICY = create_policy(
     display_name="跨部门协调会",
     description="协调团队间任务、依赖、问题和风险传导。",
     required_context=(
+        "previous_meetings",
         "open_action_items",
         "dependencies",
         "open_issues",

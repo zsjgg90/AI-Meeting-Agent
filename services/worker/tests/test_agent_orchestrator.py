@@ -215,7 +215,7 @@ class AgentOrchestratorTests(unittest.TestCase):
         self.assertTrue(weekly.steps[1].enabled)
         self.assertFalse(weekly.steps[2].enabled)
         self.assertTrue(weekly.steps[3].enabled)
-        self.assertFalse(requirement.steps[1].enabled)
+        self.assertTrue(requirement.steps[1].enabled)
         self.assertTrue(requirement.steps[2].enabled)
         self.assertFalse(requirement.steps[3].enabled)
         self.assertFalse(technical.steps[1].enabled)

@@ -80,6 +80,7 @@ python -m unittest services.worker.tests.test_agent_tools_contract
 python -m unittest services.worker.tests.test_agent_tools_adapters
 python -m unittest services.worker.tests.test_agent_runtime
 python -m unittest services.worker.tests.test_agent_orchestrator
+python -m unittest services.worker.tests.test_agent_shadow_acceptance
 ```
 
 Worker tests are split into two groups:
@@ -183,6 +184,27 @@ file audit writing, failure/timeout isolation from formal results, fallback and
 `result_source` preservation, deterministic comparison summaries, no formal DB
 write calls from Shadow wiring, and import isolation from real Qwen3, Chroma,
 PostgreSQL, external network, API, and Expo.
+
+`test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance
+infrastructure for `project_weekly`, `requirement_review`, and
+`cross_department`. It covers the 9 synthetic fixtures, manual `meeting_type`
+strategy selection, safe degradation when history/RAG fixture results are empty,
+Tool failure/timeout/fallback statistics, report JSON serialization, and the
+default guarantee that the acceptance script does not call the real model.
+
+Phase 5 Shadow acceptance can be run offline with:
+
+```powershell
+services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_acceptance.py
+```
+
+It writes `acceptance_report.json`, `acceptance_report.md`, per-meeting
+summaries, and Shadow audit files under
+`data/debug/agent_shadow_acceptance/<timestamp>/`. The script uses offline
+fixture analysis by default. Passing `--allow-live-model` is required before it
+may call the existing `analyze_meeting` Tool and therefore Qwen3/RAG. Offline
+fixture durations such as `0.15 ms` validate only the report and Runtime
+structure; they must not be used as real Qwen3/RAG performance evidence.
 
 Semantic shadow trace files are written under:
 

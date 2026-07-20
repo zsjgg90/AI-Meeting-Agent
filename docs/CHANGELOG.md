@@ -2,6 +2,18 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 5 Shadow acceptance fixtures for three core
+  scenarios: `project_weekly`, `requirement_review`, and `cross_department`.
+- Added `run_agent_shadow_acceptance.py`, an offline-by-default acceptance
+  script that writes `acceptance_report.json/.md`, per-meeting summaries, and
+  Shadow audit files under `data/debug/agent_shadow_acceptance/<timestamp>/`.
+- Calibrated Phase 2 scenario context policy for `requirement_review` and
+  `cross_department` so Phase 4B static plans include meeting history for the
+  Phase 5 core scenario acceptance gate.
+- Added Phase 5 acceptance tests to the default Worker test gate, covering
+  scenario plan selection, manual meeting type control, safe degradation for
+  missing history/RAG results, failure/timeout/fallback statistics, report
+  serialization, and default no-real-model behavior.
 - Added Agent v1.0 Phase 4B controlled Worker-internal Orchestrator and Shadow
   Mode sidecar execution after formal summary persistence.
 - Added file audit output under `data/debug/agent_shadow_trace/<meeting_id>/`

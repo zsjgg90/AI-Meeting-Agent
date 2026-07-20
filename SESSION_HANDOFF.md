@@ -51,6 +51,20 @@ includes `analyze_meeting` and may call the existing model analysis path one
 additional time. There is still no real meeting classifier; if no meeting type
 is available from metadata, the Orchestrator uses the safe `unknown` minimal
 plan.
+Agent v1.0 Phase 5 adds offline-by-default Shadow acceptance for
+`project_weekly`, `requirement_review`, and `cross_department`. The 9 sanitized
+synthetic fixtures are under
+`data/eval/agent_v1_baseline/phase5_core_scenarios/`; generated acceptance
+reports are under ignored `data/debug/agent_shadow_acceptance/<timestamp>/`.
+The local run `phase5-local-acceptance` completed all 9 fixtures with plan hit
+rate 1.0, Shadow completion rate 1.0, Tool failure rate 0.0, fallback rate 0.0,
+six-dimension field completeness 1.0, average offline Shadow duration 0.15 ms,
+and real model call count 0. The 0.15 ms fixture duration is not a real
+Qwen3/RAG performance measurement. Phase 5 only
+calibrated scenario context policy to enable meeting history for
+`requirement_review` and `cross_department`; it did not change Prompt, RAG,
+Validator, formal API, database, Expo, Tool core logic, action execution, or
+project state persistence.
 
 Repository freeze metadata:
 
@@ -149,13 +163,14 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review and accept Agent v1.0 Phase 4B Orchestrator Shadow Mode behavior
-   after tests pass.
-2. Import the 19 required Agent baseline meeting artifacts under
-   `data/eval/agent_v1_baseline/`.
-3. Prepare Phase 5 first core scenario implementation only after Phase 4B
-   Shadow audit behavior is accepted. Do not add action execution or Agent
-   result promotion yet.
+1. Review and accept Agent v1.0 Phase 5 Shadow acceptance report and fixture
+   coverage.
+2. Prepare Phase 6 cross-meeting state tracking design only after Phase 5 is
+   accepted. Do not add action execution, write-path Tools, or Agent result
+   promotion yet. Phase 6 still needs an explicit formal cross-meeting state
+   source and write-boundary design before implementation.
+3. Import the remaining required Agent baseline meeting artifact folders under
+   `data/eval/agent_v1_baseline/` when available.
 4. Run `.\scripts\check-services.ps1` with local services available.
 5. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.

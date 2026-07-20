@@ -8,6 +8,7 @@ POLICY = create_policy(
     display_name="需求评审会",
     description="评审候选需求、确认边界、识别待澄清问题和后续行动。",
     optional_context=(
+        "previous_meetings",
         "requirements",
         "decisions",
         "milestones",

@@ -1,0 +1,1219 @@
+{
+  "schema_version": "agent-v1-phase5-acceptance-fixtures-v1",
+  "source": "user_provided_synthetic_9_meeting_scripts",
+  "fixture_count": 9,
+  "meetings": [
+    {
+      "meeting_id": "phase5-project_weekly-1",
+      "project_id": "phase5-project_weekly-project",
+      "title": "第1场｜项目周会（主导：项目经理｜互联网APP迭代场景）",
+      "meeting_type": "project_weekly",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "项目经理、前端开发、后端开发、测试、产品专员",
+        "duration_minutes": 30,
+        "manual_meeting_type": "project_weekly"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "项目经理",
+          "text": "各位，本周项目周会正式开始，时长30分钟。核心内容：同步上周迭代进度、核对本周计划、暴露卡点风险、对齐问题解决方案、敲定下周交付节点。咱们本周是V2.4迭代中期，重点解决进度滞后、bug堆积、联调卡顿问题，所有人据实同步问题，不藏短板。先从后端开始同步上周进度。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "后端开发",
+          "text": "上周计划完成6个核心接口开发、用户权限重构、订单数据同步逻辑。目前完成5个接口，权限重构基本完成，订单同步逻辑还差异常兜底场景未开发。滞后原因是周三临时处理线上紧急bug，占用大半天开发时间。当前无阻塞依赖，本周可以补齐滞后内容，预计周三前全部完工。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "前端开发",
+          "text": "上周完成个人中心、消息列表页面开发，完成基础联调。目前卡点有两个：第一，后端部分接口返回字段不统一，导致前端适配返工；第二，产品上周临时微调弹窗交互逻辑，导致部分页面需要二次修改，进度延后半天。本周优先完成剩余页面开发，配合后端联调，解决字段适配问题。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "测试",
+          "text": "上周完成已开发模块第一轮功能测试，累计发现21个bug，严重bug3个、普通bug18个。目前仅修复12个，剩余9个未修复。主要问题是开发修复优先级不明确，部分低优先级bug长期搁置。另外，本周迭代新增的功能无提前测试文档，需要临时梳理用例，压缩测试时间。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "产品专员",
+          "text": "上周主要完成需求答疑、交互微调、竞品参考梳理。针对前端提到的交互修改，是因为原交互存在用户误操作痛点，属于必要优化，后续迭代中期不再接收任何交互、需求微调，保证版本稳定。本周重点配合答疑、验收已完成功能，输出下期迭代初步需求清单。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "项目经理",
+          "text": "好，我梳理下整体问题。第一，上周整体进度小幅滞后，后端接口、前端页面、bug修复均有延期；第二，接口字段不统一、需求小幅变动造成返工；第三，bug修复无优先级，堆积严重；第四，测试用例前置不足。现在统一对齐解决方案。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "项目经理",
+          "text": "首先，后端今日内统一所有对外接口返回字段规范，同步前端、测试，杜绝适配返工。其次，所有存量bug今日梳理优先级，严重bug24小时内修复，普通bug本周内清零。再次，本周起迭代中期全面锁需求、锁交互，无紧急线上问题不做任何变更。最后，产品提前输出待开发功能简要文档，测试提前介入写用例。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "后端开发",
+          "text": "没问题，今天下班前输出接口字段规范文档，本周三前补齐所有滞后开发内容，同步跟进bug修复。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "前端开发",
+          "text": "我这边按新字段规范整改页面，本周内完成所有页面开发和联调，无额外卡点。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "测试",
+          "text": "我今天梳理全部bug优先级清单，同步全员，跟进闭环，同时提前筹备后续功能测试用例。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s011",
+          "speaker": "项目经理",
+          "text": "本周核心目标：补齐上周滞后进度、清零所有存量bug、完成本期迭代80%开发联调工作。每日晚上8点同步简短进度，有卡点即时提报，不许堆积。大家有无异议？",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s012",
+          "speaker": "全员",
+          "text": "无异议。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s013",
+          "speaker": "项目经理",
+          "text": "好，本周进度安排对齐完毕，会议结束。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "各岗位同步上周迭代完成进度与滞后情况",
+          "逐一暴露开发、联调、测试、需求侧卡点问题",
+          "分析进度滞后、返工、bug堆积核心原因",
+          "现场敲定整改方案、优先级规则与进度追赶计划",
+          "对齐本周核心目标与日常进度同步机制。"
+        ],
+        "meeting_summary": "本次周会完成V2.4迭代中期进度全面复盘，明确上周存在开发进度小幅滞后、接口字段不统一引发返工、bug堆积无序、迭代中期需求微调打乱节奏、测试前置不足等核心问题。现场统一接口规范、bug修复优先级、需求锁版规则，明确本周抢工计划与过程管控机制，保障迭代进度回归正轨。",
+        "key_conclusions": [
+          "上周迭代整体小幅滞后，多岗位存在任务未闭环问题",
+          "接口不规范、临时交互变更为主要返工诱因",
+          "迭代中期正式锁需求、锁交互，杜绝非必要变更",
+          "建立bug分级修复机制，清零存量问题",
+          "本周全力追赶进度，完成迭代主体开发联调工作。"
+        ],
+        "action_items": [
+          "后端：当日输出统一接口字段规范，周三前补齐滞后开发内容，按优先级修复bug",
+          "前端：按新规范整改页面，完成剩余开发与联调",
+          "测试：梳理bug优先级清单，跟进闭环，前置编写测试用例",
+          "产品：停止中期需求变更，持续答疑，输出下期需求初稿",
+          "项目经理：每日监控进度，卡点即时协调。"
+        ],
+        "unresolved_issues": [
+          "无长期遗留问题，需持续跟进接口规范落地与bug闭环进度。"
+        ],
+        "risks_and_focus": [
+          "临时线上突发问题，挤占迭代开发时间",
+          "新旧字段适配不彻底，引发隐性功能bug",
+          "bug修复不及时，累积影响版本提测节奏。"
+        ],
+        "metadata": {
+          "meeting_type": "project_weekly",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "project_weekly",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-project_weekly-2",
+      "project_id": "phase5-project_weekly-project",
+      "title": "第2场｜项目周会（主导：研发负责人｜ToB企业系统开发场景）",
+      "meeting_type": "project_weekly",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "研发负责人、后端组长、前端组长、测试组长、运维专员",
+        "duration_minutes": 30,
+        "manual_meeting_type": "project_weekly"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "研发负责人",
+          "text": "各位，本周研发团队周会开始，30分钟高效对齐。本次核心聚焦ToB客户管理系统迭代进度、技术债务、线上稳定性、测试质量和运维保障。本周重点解决版本提测延期、线上偶发报错、技术迭代滞后的问题，各组依次同步进度和问题。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "后端组长",
+          "text": "上周完成客户分级、权限分配、数据统计三大模块开发，整体进度基本达标。现存两个问题：第一，历史老代码冗余较多，新增功能适配成本高，存在技术债务；第二，部分复杂统计逻辑运算耗时过长，页面加载卡顿，性能不达标；第三，本周有2个线上偶发数据同步报错，暂未定位根因。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "前端组长",
+          "text": "上周完成后台管理页面、客户列表、数据看板开发，已配合后端完成初步联调。卡点主要是后端部分复杂接口响应慢，导致前端页面渲染卡顿，无法优化用户体验；另外部分组件复用性差，重复开发工作量大，效率偏低。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "测试组长",
+          "text": "上周完成两轮集成测试，当前版本功能性问题较少，但性能问题、兼容性问题突出。大数据量场景下页面加载超时、导出功能卡死；同时回归测试效率低，暂无自动化用例支撑，全靠人工测试，迭代越往后测试压力越大。本周版本暂不具备提测条件。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "运维专员",
+          "text": "上周系统整体运行稳定，无宕机事故。但存在服务器资源利用率不均、日志收集不规范的问题，线上报错日志碎片化，排查问题效率极低；另外新旧版本交替部署存在风险，回滚机制需要优化。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "研发负责人",
+          "text": "我汇总所有问题，核心四大痛点：老代码技术债务拖累开发效率、接口性能不达标、无自动化测试支撑、线上日志排查低效、部署回滚机制不完善。现在统一落地整改方案。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "研发负责人",
+          "text": "第一，性能优化：后端本周优先重构统计逻辑，优化SQL语句，解决加载卡顿问题，周五前完成性能自测，保证大数据量场景流畅运行。第二，技术债务治理：本周抽离公共组件、梳理冗余代码，建立代码规范文档，后续新增功能严格遵循新规范，逐步清理历史债务。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "研发负责人",
+          "text": "第三，测试提效：测试组本周启动核心功能自动化用例编写，优先覆盖高频、核心业务，逐步替代人工回归。第四，运维优化：运维今日内优化日志收集规则，统一日志格式，完善版本部署、回滚流程文档，降低上线风险。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "研发负责人",
+          "text": "另外，线上偶发报错，后端、运维联合排查，周三前必须定位根因并修复，杜绝隐性线上风险。本周必须完成版本性能优化、问题清零，确保周五正常提测。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "各组负责人",
+          "text": "所有方案可落地，按时完成对应工作。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s011",
+          "speaker": "研发负责人",
+          "text": "各组每日同步优化进度，出现卡点立即上报，本周必须保障版本正常提测。有无异议？",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s012",
+          "speaker": "全员",
+          "text": "无异议。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s013",
+          "speaker": "研发负责人",
+          "text": "好，会议结束，各组推进工作。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "各研发小组同步本周系统开发、测试、运维工作进度",
+          "梳理技术债务、性能问题、线上报错、测试效率短板",
+          "分析版本提测延期核心原因",
+          "敲定性能优化、代码规范、自动化测试、运维流程优化方案",
+          "明确本周提测节点与问题排查时限。"
+        ],
+        "meeting_summary": "本次研发周会复盘ToB系统迭代全流程问题，明确团队存在历史技术债务拖累效率、接口性能不达标、自动化测试缺失、运维日志体系不完善、线上隐性报错等多重问题。通过会议敲定专项优化方案、技术规范落地、自动化建设、运维体系升级计划，明确版本提测节点，保障版本质量与迭代效率双提升。",
+        "key_conclusions": [
+          "当前版本功能性基本达标，但性能、稳定性、测试效率存在明显短板",
+          "本周重点攻坚性能优化、线上报错排查，保障周五正常提测",
+          "启动技术债务治理，落地统一代码开发规范",
+          "搭建核心功能自动化测试体系，提升回归效率",
+          "优化运维日志与部署回滚机制，降低线上风险。"
+        ],
+        "action_items": [
+          "后端组：优化SQL与统计逻辑，排查线上报错，梳理代码规范",
+          "前端组：配合性能优化，复用公共组件，减少重复开发",
+          "测试组：编写核心自动化用例，保障版本全面回归测试",
+          "运维组：优化日志收集、完善部署回滚流程",
+          "研发负责人：全程统筹进度，验收优化成果。"
+        ],
+        "unresolved_issues": [
+          "历史存量冗余代码较多，需多迭代逐步清理，无法一次性整改完毕。"
+        ],
+        "risks_and_focus": [
+          "性能优化不到位，导致版本无法按时提测",
+          "线上偶发报错无法定位，存在隐性故障风险",
+          "自动化用例建设周期长，短期测试压力无法完全缓解",
+          "代码整改不当，引发新的功能bug。"
+        ],
+        "metadata": {
+          "meeting_type": "project_weekly",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "project_weekly",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-project_weekly-3",
+      "project_id": "phase5-project_weekly-project",
+      "title": "第3场｜项目周会（主导：中小团队管理者｜小微企业SaaS项目轻量化迭代场景）",
+      "meeting_type": "project_weekly",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "中小团队管理者、全职开发2名、兼职设计、运营对接人",
+        "duration_minutes": 30,
+        "manual_meeting_type": "project_weekly"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "中小团队管理者",
+          "text": "大家下午好，咱们小微企业SaaS项目本周周会，限时30分钟。咱们团队人少、身兼多职，会议重点务实对齐进度、梳理瓶颈、简化流程、保障小版本快速交付。所有人直接说进度、讲卡点、提需求，不用走形式。先同步各自工作。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "开发1",
+          "text": "上周完成客户台账录入、数据保存、基础查询功能开发，功能基本可用。卡点是没有统一的数据校验规则，部分特殊字符、空数据会导致提交异常，需要产品/运营明确规则。另外兼职设计的最新页面样式稿还没交付，前端页面无法收尾。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "开发2",
+          "text": "上周完成用户登录权限、基础数据同步功能，目前自测完成。卡点是运营侧提供的测试模拟数据不齐全，很多真实业务场景无法自测，导致自测覆盖度不足，不敢提测。同时兼顾另外一个小项目，时间被拆分，开发效率有限。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "兼职设计",
+          "text": "上周手头并行3个需求，本次SaaS页面设计进度滞后，目前完成70%，主要是弹窗、表单细节样式未定稿。今天晚上可以全部输出完毕，不耽误下周开发进度。后续希望固定需求对接时间，避免临时改需求反复返工。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "运营对接人",
+          "text": "上周主要梳理业务场景、整理基础数据。目前测试数据确实不全，因为部分线下业务流程未梳理完毕。另外上线后需要的操作指引、用户话术还未筹备，版本上线后无法直接落地使用。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "中小团队管理者",
+          "text": "我总结咱们团队核心问题，完全是小团队典型痛点：人力不足、多任务并行、资源碎片化、规则不明确、配套资料滞后、上下游衔接松散。现在全部敲定落地规则，适配咱们轻量化团队模式。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "中小团队管理者",
+          "text": "第一，设计侧今晚务必输出全部页面定稿样式，后续本版本禁止任何样式微调，锁死设计稿。第二，运营今日下班前补齐全套测试模拟数据、明确数据校验规则，同步开发。第三，两名开发本周全力聚焦本SaaS版本，暂停次要小项目工作，保障本周完成开发自测、周五提测。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "中小团队管理者",
+          "text": "第四，运营同步筹备上线配套的操作手册、用户话术，版本提测同步输出，实现上线即用。第五，建立轻量化同步机制，每日中午10分钟短会，同步进度、报卡点，避免问题堆积。小团队不靠流程，靠高频对齐。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "全员",
+          "text": "可以落地，无问题。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "中小团队管理者",
+          "text": "本周核心目标：完成全功能开发、自测、提测，补齐所有业务规则和上线配套资料。大家有无异议？",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s011",
+          "speaker": "全员",
+          "text": "无异议。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s012",
+          "speaker": "中小团队管理者",
+          "text": "好，各司其职，每日同步进度，会议结束。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "团队全员同步本周轻量化迭代工作进度",
+          "梳理设计滞后、数据缺失、规则不明、多任务并行卡点",
+          "分析小团队迭代效率偏低、衔接不畅的核心问题",
+          "敲定资源聚焦、规则补齐、流程简化的解决方案",
+          "明确本周版本提测目标与轻量化同步机制。"
+        ],
+        "meeting_summary": "本次轻量化项目周会针对小微企业小团队人力少、多任务并行、资源分散的特点，复盘本周迭代问题，明确设计交付滞后、业务规则缺失、测试数据不足、上线配套不完善等核心卡点。通过聚焦人力、锁死设计、补齐业务资料、建立高频短会机制，快速打通上下游衔接问题，保障小版本高效交付。",
+        "key_conclusions": [
+          "小团队迭代核心问题为资源分散、上下游衔接松散、业务规则不完善",
+          "暂停次要任务，全员聚焦本期SaaS版本迭代交付",
+          "当日补齐设计稿、业务规则、测试数据，扫清开发障碍",
+          "同步筹备上线配套资料，实现版本落地即用",
+          "建立每日短会机制，常态化对齐进度与卡点。"
+        ],
+        "action_items": [
+          "兼职设计：当晚输出全部定稿设计稿，锁死样式",
+          "运营：当日补齐测试数据、数据校验规则、上线配套资料",
+          "开发人员：聚焦核心迭代，本周完成开发自测、周五提测",
+          "团队管理者：组织每日短会，统筹卡点协调与进度管控。"
+        ],
+        "unresolved_issues": [
+          "团队人力有限，长期多任务并行的效率问题无法一次性根治。"
+        ],
+        "risks_and_focus": [
+          "业务规则定义不清晰，上线后出现功能不符合业务需求问题",
+          "设计交付滞后，压缩开发测试周期",
+          "配套资料缺失，版本上线后无法正常落地使用。 第二部分：需求评审会（3场｜不同主导人+差异化场景）"
+        ],
+        "metadata": {
+          "meeting_type": "project_weekly",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "project_weekly",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-requirement_review-1",
+      "project_id": "phase5-requirement_review-project",
+      "title": "第4场｜需求评审会（主导：产品经理｜C端用户商城功能迭代场景）",
+      "meeting_type": "requirement_review",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "产品经理、UI设计、前端、后端、测试、运营",
+        "duration_minutes": 30,
+        "manual_meeting_type": "requirement_review"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "产品经理",
+          "text": "各位，本次商城V3.1迭代需求评审会正式开始，限时30分钟。本次评审内容：商城拼团功能、下单立减优惠、订单分享裂变三大新增功能。会议目标：全员对齐需求逻辑、确认可行性、排查漏洞、锁定排期，评审通过后需求正式锁版，不再变更。我先快速同步整体需求。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "产品经理",
+          "text": "第一，拼团功能：用户选择商品开团、分享好友、指定人数成团、超时自动退款，支持多人拼团、原价购买两种模式；第二，下单立减：根据商品品类、满减门槛自动匹配优惠，可与优惠券叠加，有最高减免上限；第三，订单分享裂变：支持订单海报分享、好友点击查看商品、直接跳转下单。所有功能适配APP、小程序双端。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "后端开发",
+          "text": "我从技术侧提问题。第一，拼团超时退款的时效判定、退款原路返回规则、失败回滚机制，需求文档没有明确；第二，立减与优惠券叠加的优先级、冲突排除规则缺失；第三，拼团人数未达标时，库存是否锁定、是否释放无明确说明，存在超卖、库存错乱风险。整体技术逻辑存在多处场景缺失。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "前端开发",
+          "text": "前端交互层面有漏洞。拼团成功、失败、超时的弹窗提示、页面跳转逻辑不清晰；订单海报分享的尺寸、适配规则、加载异常场景未定义；双端交互细节不统一，容易出现两端体验不一致问题。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "UI设计",
+          "text": "目前仅提供核心页面原型，缺少失败状态、空数据状态、加载状态、弹窗样式，异常场景设计缺失，无法直接输出完整高保真设计稿。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "测试",
+          "text": "目前需求仅覆盖正常流程，未覆盖超时、退款失败、优惠叠加冲突、拼团重复参与、库存不足等高风险异常场景，测试用例无法完整覆盖，上线风险极高。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "运营",
+          "text": "我补充业务侧需求，希望新增拼团数据统计、裂变分享数据看板，方便后续运营活动复盘，目前需求无数据埋点和统计模块。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "产品经理",
+          "text": "好的，所有问题全部接收，我统一对齐整改方案。第一，我今日内补齐拼团退款规则、库存锁定释放机制、优惠叠加优先级、异常冲突处理逻辑；第二，补齐所有空状态、异常状态、加载状态交互和设计说明；第三，新增全功能数据埋点与运营统计看板需求，满足复盘需求。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "产品经理",
+          "text": "本次评审暂缓通过，待我补齐所有遗漏场景、更新PRD和原型后，明日快速二次评审。评审通过后需求正式锁版，所有人员按排期推进设计、开发、测试。本次迭代核心功能不变，仅补全异常场景和配套能力，不新增额外需求。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "全员",
+          "text": "无异议，等待更新后二次评审。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s011",
+          "speaker": "产品经理",
+          "text": "好，本次评审问题对齐完毕，散会。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "产品宣讲本次商城三大新增功能整体需求与业务逻辑",
+          "技术、设计、测试、运营多维度排查需求漏洞与场景缺失",
+          "梳理技术逻辑、交互样式、异常场景、数据统计短板",
+          "敲定需求补全方案与二次评审计划",
+          "确认需求锁版规则与迭代推进前提。"
+        ],
+        "meeting_summary": "本次C端商城功能需求评审会，全面排查拼团、立减、裂变功能需求文档，发现需求仅覆盖正常流程，缺失大量技术规则、异常交互、异常处理、数据统计场景，无法支撑开发、设计、测试落地。会议明确产品需补齐所有遗漏场景，更新文档后二次评审，保障需求完整、可落地、无漏洞。",
+        "key_conclusions": [
+          "当前版本需求不完善，异常场景、技术规则、数据能力缺失，评审暂不通过",
+          "产品当日补齐退款、库存、优惠叠加、异常交互核心规则",
+          "补齐全场景UI状态设计规范",
+          "新增数据埋点与运营统计看板功能",
+          "文档更新完毕后明日二次评审，通过后锁版迭代。"
+        ],
+        "action_items": [
+          "产品经理：当日补齐所有遗漏场景、更新PRD与原型，筹备二次评审",
+          "UI设计：等待定稿文档，输出全套页面与状态设计稿",
+          "前后端开发：待评审通过后启动技术方案与开发",
+          "测试：跟进需求更新，提前梳理全场景测试用例",
+          "运营：等待数据看板落地，后续对接活动复盘工作。"
+        ],
+        "unresolved_issues": [
+          "无长期遗留问题，需完成二次评审确认需求完整性。"
+        ],
+        "risks_and_focus": [
+          "异常场景补全不到位，上线后出现功能异常、资损风险",
+          "二次评审延期，压缩整体迭代周期",
+          "数据埋点缺失，后续运营活动无法复盘统计。"
+        ],
+        "metadata": {
+          "meeting_type": "requirement_review",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "requirement_review",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-requirement_review-2",
+      "project_id": "phase5-requirement_review-project",
+      "title": "第5场｜需求评审会（主导：创业团队负责人｜初创工具类产品新增功能场景）",
+      "meeting_type": "requirement_review",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "创业团队负责人、产品、全栈开发、运营、用户对接专员",
+        "duration_minutes": 30,
+        "manual_meeting_type": "requirement_review"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "创业团队负责人",
+          "text": "今天我们召开工具类产品新增批量导入功能需求评审会，限时30分钟。咱们初创团队，需求以快速落地、解决用户核心痛点、低成本迭代为核心，不做冗余功能。今天重点对齐批量导入、模板下载、数据校验、错误提示功能，确认可行性、简化冗余逻辑、敲定落地节奏。先由产品讲需求。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "产品",
+          "text": "本次核心需求是新增用户数据批量导入功能，解决用户逐条录入效率低的痛点。核心功能：支持Excel模板下载、批量上传、自动数据校验、错误行提示、成功批量入库；支持部分导入、错误数据单独导出，方便用户修改重传。目标是降低用户操作成本，提升产品使用效率。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "全栈开发",
+          "text": "从开发成本和落地难度来讲，完整的精细化校验、错误单独导出开发量较大，且我们目前用户体量小，现阶段优先级不高。我的建议是精简需求，首期只保留模板下载、批量上传、基础字段校验、整体错误提示，去掉精细化错误导出功能，降低开发成本、加快上线速度，后续根据用户反馈迭代优化。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "运营",
+          "text": "我对接用户反馈，用户核心痛点就是批量导入代替手动录入，对精细化错误导出需求不强，首期精简功能完全可以满足90%以上用户使用场景，优先快速上线验证需求价值。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "用户对接专员",
+          "text": "日常用户咨询中，极少用户提及错误导出功能，现阶段属于非刚需冗余功能，没必要首期投入开发资源。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "创业团队负责人",
+          "text": "非常符合我们初创团队的迭代逻辑，小步快跑、先上线再优化。现在现场敲定需求取舍：第一，首期精简需求，砍掉错误数据单独导出功能，保留核心批量导入、模板下载、基础校验、整体报错能力；第二，明确校验规则：空值、格式错误、重复数据三类基础校验，不做复杂自定义校验；第三，交互简化，减少用户操作步骤，优先保证功能稳定、快速上线。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "创业团队负责人",
+          "text": "产品今日更新精简版PRD，锁定最终需求，不再新增功能。开发本周内完成开发自测，下周灰度上线。上线后运营持续收集用户反馈，后续迭代再补充精细化能力。所有人对齐这个轻量化迭代思路。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "全员",
+          "text": "无异议，方案合理，可快速落地。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "创业团队负责人",
+          "text": "好，本次需求评审通过，精简版需求正式定稿，各岗位推进工作，会议结束。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "产品宣讲批量导入功能核心需求与用户痛点",
+          "技术、运营、用户侧评估需求落地成本与实用价值",
+          "讨论冗余功能取舍，适配初创团队轻量化迭代模式",
+          "敲定精简版最终需求、校验规则与交互逻辑",
+          "对齐开发上线节奏与后续迭代思路。"
+        ],
+        "meeting_summary": "本次初创工具产品需求评审会，结合创业团队低成本、快迭代的核心目标，对批量导入功能需求进行精简优化，砍掉非刚需冗余功能，保留用户核心刚需能力。在不影响核心体验的前提下，大幅降低开发成本、缩短上线周期，实现快速上线验证产品价值的目标。",
+        "key_conclusions": [
+          "批量导入为用户刚需功能，需优先快速落地",
+          "首期精简冗余功能，舍弃低优先级的错误数据导出能力",
+          "仅保留基础核心校验规则，简化开发与交互逻辑",
+          "需求今日定稿锁版，本周完成开发自测、下周灰度上线",
+          "上线后收集用户反馈，持续迭代优化精细化能力。"
+        ],
+        "action_items": [
+          "产品：当日更新精简版PRD，锁定最终需求",
+          "开发：本周完成功能开发、自测，准备灰度上线",
+          "运营：上线后收集用户使用反馈，整理迭代建议",
+          "用户对接：同步用户新功能上线信息，解答用户咨询",
+          "团队负责人：统筹上线节奏与版本管控。"
+        ],
+        "unresolved_issues": [
+          "精细化错误导出、复杂数据校验功能，需二期迭代优化。"
+        ],
+        "risks_and_focus": [
+          "功能精简过度，无法完全匹配用户核心使用场景",
+          "基础校验规则不完善，出现数据导入异常问题",
+          "上线后用户反馈不佳，需二次快速迭代整改。"
+        ],
+        "metadata": {
+          "meeting_type": "requirement_review",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "requirement_review",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-requirement_review-3",
+      "project_id": "phase5-requirement_review-project",
+      "title": "第6场｜需求评审会（主导：项目经理｜企业内部OA优化需求场景）",
+      "meeting_type": "requirement_review",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "项目经理、产品、前后端开发、测试、行政对接人",
+        "duration_minutes": 30,
+        "manual_meeting_type": "requirement_review"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "项目经理",
+          "text": "各位，本次OA系统审批流程优化需求评审会开始，限时30分钟。本次需求来源于公司内部行政办公痛点，主要优化请假、报销、出差三类审批流程，解决审批卡顿、流程混乱、审批记录无法追溯的问题。今天评审需求可行性、流程逻辑、落地风险，对齐排期，评审通过后启动开发。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "产品",
+          "text": "本次优化需求核心三点：第一，简化审批发起字段，删减非必要填写项；第二，新增审批节点驳回、撤回、重新发起逻辑；第三，新增审批记录台账、支持筛选导出；第四，设置多级自动抄送规则，对应部门自动接收审批通知。整体目标是提升内部办公审批效率，规范审批流程。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "后端开发",
+          "text": "技术层面有两个问题。第一，原有OA系统老旧，底层架构固化，新增自动抄送、台账导出功能需要改动底层部分逻辑，存在兼容风险；第二，审批撤回、驳回后的数据状态回滚规则不明确，容易造成数据错乱、台账记录错误。需要明确状态流转标准。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "前端开发",
+          "text": "前端问题主要是新旧页面样式、流程弹窗不统一，优化后需要做视觉和交互统一；另外审批状态过多，需要明确每种状态的展示文案、颜色标识，避免员工识别混乱。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "测试",
+          "text": "目前需求缺少权限界定，普通员工、部门负责人、管理员的操作权限没有区分，存在越权操作风险；同时缺少审批超时、节点空置的异常处理场景。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "行政对接人",
+          "text": "从办公使用角度，希望新增审批超时提醒功能，节点负责人长期不审批会导致流程卡死，影响员工办公体验，目前需求无提醒机制。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "项目经理",
+          "text": "我统一汇总问题并敲定方案。第一，产品今日补齐权限划分规则、审批状态流转标准、超时提醒机制、节点空置异常处理场景；第二，后端优先做兼容性评估，最小改动底层架构，避免系统不稳定；第三，前端统一新旧页面交互视觉规范，明确状态展示样式；第四，所有状态、权限、提醒规则补齐后，需求正式定稿锁版。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "项目经理",
+          "text": "本次优化属于内部效能迭代，优先级高，需求补齐后即刻启动开发，两周内完成全量优化上线，解决内部办公卡点。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "产品",
+          "text": "今日内补齐所有缺失规则，更新PRD，完成需求定稿。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "全员",
+          "text": "无异议，按方案执行。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s011",
+          "speaker": "项目经理",
+          "text": "好，本次评审初步对齐，补齐内容后正式生效，会议结束。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "产品宣讲OA审批流程优化整体需求与办公痛点",
+          "技术、测试、行政多维度排查需求漏洞与兼容风险",
+          "梳理权限、状态流转、异常处理、配套提醒短板",
+          "敲定需求补全方案与技术落地规避策略",
+          "对齐迭代周期与上线目标。"
+        ],
+        "meeting_summary": "本次OA内部优化需求评审会，针对现有审批流程卡顿、记录混乱、无提醒、权限模糊的问题，梳理出需求存在状态规则缺失、权限未区分、异常场景不足、老旧系统兼容风险等问题。明确需补齐全套规则、规避架构兼容问题，统一交互视觉，保障优化后系统稳定、流程规范、办公高效。",
+        "key_conclusions": [
+          "OA审批优化为内部刚需，需快速落地提效",
+          "当前需求存在权限、状态、异常、提醒四大内容缺失，需补全定稿",
+          "技术侧最小化改动底层架构，严控系统兼容风险",
+          "统一全页面交互视觉规范，保证使用一致性",
+          "整体迭代周期两周，完成全量优化上线。"
+        ],
+        "action_items": [
+          "产品：当日补齐权限、状态、超时提醒、异常处理规则，定稿PRD",
+          "后端：评估架构兼容性，制定最小改动开发方案",
+          "前端：梳理新旧页面，统一交互视觉规范",
+          "测试：待需求定稿，梳理全场景测试用例",
+          "项目经理：全程管控迭代进度与系统稳定性。"
+        ],
+        "unresolved_issues": [
+          "老旧OA底层架构固化，长期优化存在持续兼容问题。"
+        ],
+        "risks_and_focus": [
+          "底层架构改动引发系统兼容bug，影响内部办公使用",
+          "状态流转规则不清，造成审批数据错乱",
+          "权限划分模糊，存在员工越权查看审批信息风险。 第三部分：跨部门协调会（3场｜不同主导人｜全差异化场景）"
+        ],
+        "metadata": {
+          "meeting_type": "requirement_review",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "requirement_review",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-cross_department-1",
+      "project_id": "phase5-cross_department-project",
+      "title": "第7场｜跨部门协调会（主导：产品经理｜市场+研发+运营上线落地协调场景）",
+      "meeting_type": "cross_department",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "产品经理、研发代表、市场部、运营部、用户增长部",
+        "duration_minutes": 30,
+        "manual_meeting_type": "cross_department"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "产品经理",
+          "text": "各位好，本次新版本上线跨部门协调会限时30分钟。核心目标：对齐新版本上线时间、各部门前置准备工作、上线后运营推广节奏、问题兜底方案，解决研发交付、物料筹备、推广节奏、用户承接的跨部门衔接问题，确保版本平稳上线、顺利放量。各部门依次同步现状和卡点。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "研发代表",
+          "text": "目前版本开发、自测、联调基本完成，本周四可以完成提测，下周二可以正式打包上线。卡点是：市场、运营的推广物料、活动规则还未最终确认，如果上线前临时改规则，会导致开发二次改动，延误上线窗口。需要今日内锁定所有上线活动规则。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "市场部",
+          "text": "目前品牌宣传海报、推文、短视频物料已完成初稿，但因为最终上线功能权益未锁定，物料无法定稿输出。同时外部渠道投放素材需要提前审核，若本周无法定稿，会错过上线首日的流量投放窗口期。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "运营部",
+          "text": "内部活动玩法、用户福利、社群承接话术已初稿完成，但依赖新版功能权益，功能不定则活动无法定稿。另外上线后用户咨询、退款、售后承接方案未对齐，需要研发明确异常兜底机制，避免用户问题无法处理。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "用户增长部",
+          "text": "我们的拉新裂变活动完全依托新版本功能，目前活动节奏、投放计划全部待定，长期等待会错过月度流量节点，影响月度增长目标。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "产品经理",
+          "text": "我现在统一全部跨部门对齐规则，锁定所有节点。第一，今日内全面锁死新版本功能权益、活动玩法、福利规则，不再做任何修改，给研发、市场、运营稳定落地依据。第二，时间节点锁定：本周四提测、下周二正式全量上线，无特殊情况绝不延期。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "产品经理",
+          "text": "第三，市场部本周日前完成所有宣传物料定稿、审核、储备，提前布局外部投放；第四，运营部同步定稿社群话术、售后承接方案、用户问题FAQ，上线前完成全员培训；第五，增长部根据定稿玩法，敲定上线首日拉新裂变节奏，抢占流量窗口；第六，研发上线后预留24小时值守，随时处理线上突发问题。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "产品经理",
+          "text": "各部门以周二上线为最终节点，倒排工作，每日同步前置准备进度，有卡点即时协调。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "各部门",
+          "text": "无异议，按锁定节点推进工作。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "产品经理",
+          "text": "好，跨部门工作全部对齐，会议结束。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "各跨部门同步新版本上线前置准备进度与核心卡点",
+          "对齐研发交付、物料制作、活动运营、流量投放衔接问题",
+          "排查跨部门信息不同步、节奏不统一的风险",
+          "锁定版本规则、上线时间、各部门工作节点",
+          "敲定上线值守、用户承接、问题兜底方案。"
+        ],
+        "meeting_summary": "本次跨部门协调会解决了研发、市场、运营、增长多部门节奏错位、信息不对称、规则不锁定的核心问题，明确版本上线时间、锁版规则、各部门前置筹备工作。打通了技术交付、物料宣传、用户运营、流量增长的全链路衔接，保障新版本平稳上线、同步推广放量。",
+        "key_conclusions": [
+          "版本开发进度达标，下周二为固定全量上线节点",
+          "当日锁定所有功能权益、活动玩法，杜绝临时变更",
+          "各部门倒排工期，上线前完成物料、话术、活动方案储备",
+          "研发上线后24小时值守，兜底线上突发问题",
+          "全部门统一节奏，上线即同步推广、拉新、用户承接。"
+        ],
+        "action_items": [
+          "产品：当日锁定所有上线规则、权益、玩法，同步全部门",
+          "研发：按时提测、上线，做好上线值守与问题兜底",
+          "市场：本周完成全部宣传物料定稿审核、投放筹备",
+          "运营：定稿话术、FAQ、售后承接方案，完成内部培训",
+          "增长部：敲定上线拉新方案，同步落地流量投放。"
+        ],
+        "unresolved_issues": [
+          "无长期遗留问题，需持续跟进各部门前置筹备进度。"
+        ],
+        "risks_and_focus": [
+          "部门筹备进度滞后，错过上线流量窗口期",
+          "上线后出现隐性bug，影响用户体验与推广效果",
+          "各部门承接不及时，引发用户咨询堆积、投诉问题。"
+        ],
+        "metadata": {
+          "meeting_type": "cross_department",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "cross_department",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-cross_department-2",
+      "project_id": "phase5-cross_department-project",
+      "title": "第8场｜跨部门协调会（主导：研发负责人｜技术部+财务部+行政部成本管控协调场景）",
+      "meeting_type": "cross_department",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "研发负责人、技术开发、财务专员、行政采购、设备运维",
+        "duration_minutes": 30,
+        "manual_meeting_type": "cross_department"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "研发负责人",
+          "text": "各位下午好，本次技术成本管控跨部门协调会限时30分钟。核心解决目前研发服务器资源浪费、采购流程滞后、成本对账混乱、设备运维衔接不畅的跨部门问题，对齐采购规范、资源使用标准、对账流程、运维责任，实现降本增效。各部门同步现存问题。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "技术开发",
+          "text": "目前研发存在大量闲置服务器、废弃测试环境未释放资源，每月产生无效云服务费用；新增测试资源申请流程繁琐、审批周期长，耽误开发测试进度；资源使用无统一台账，无法精准定位浪费资源。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "财务专员",
+          "text": "财务侧卡点主要是技术采购、云服务续费、设备报销单据不规范，票据提交滞后，每月对账耗时极长；部分资源采购无审批备案，导致账实不符，成本核算不准确；无月度成本复盘机制，无法管控无效支出。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "行政采购",
+          "text": "技术侧临时采购、紧急续费情况多，不走常规采购流程，导致采购合规性不足、价格无比价、无备案存档；技术需求提报不规范、参数不清晰，导致采购反复沟通、效率低下。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "设备运维",
+          "text": "运维侧无固定资源盘点机制，闲置资源、过期服务无法及时清理；技术人员私自扩容、新增资源无报备，运维无法统一管控，造成资源浪费。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "研发负责人",
+          "text": "我统一敲定跨部门标准化方案，彻底打通卡点。第一，资源管控：运维每周开展云资源盘点，清理闲置、废弃环境，建立资源使用台账，杜绝无效扣费；所有资源扩容、新增必须提前报备审批，禁止私自操作。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "研发负责人",
+          "text": "第二，采购流程：技术侧所有采购、续费统一走行政常规采购流程，紧急场景单独报备审批，杜绝无备案采购；技术提报需求必须明确参数、用途、周期，保证采购一次到位。第三，财务对账：技术、运维每月5号前提交资源使用、采购明细，财务统一对账，规范票据提交标准，杜绝账实不符。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "研发负责人",
+          "text": "第四，建立月度成本复盘会，技术、财务、行政共同复盘无效支出、浪费问题，持续优化降本方案。从本月起严格落地所有规范，违规支出不予报销、不予备案。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "各部门",
+          "text": "所有流程规范可落地，严格执行。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "研发负责人",
+          "text": "好，所有跨部门规则、流程、机制全部对齐，本月正式落地，会议结束。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "技术、财务、行政、运维分别同步成本、采购、运维现存卡点",
+          "梳理资源浪费、流程不规范、对账混乱、采购无序问题根源",
+          "讨论跨部门标准化流程与管控机制",
+          "敲定资源盘点、采购规范、对账标准、复盘机制",
+          "明确各部门责任与落地执行时间。"
+        ],
+        "meeting_summary": "本次跨部门协调会针对技术成本管控乱象，解决了研发资源浪费、采购流程不合规、财务对账混乱、运维管控缺失的跨部门衔接问题，搭建起资源盘点、规范采购、精准对账、月度复盘的全流程管控体系，实现技术成本精细化、合规化管控。",
+        "key_conclusions": [
+          "原有无规范机制导致资源浪费、采购无序、对账混乱、合规风险",
+          "建立每周资源盘点机制，清理闲置无效资源，降本增效",
+          "统一技术采购、续费标准化流程，杜绝私自操作、无备案支出",
+          "规范财务对账票据与提报标准，保证账实相符",
+          "启动月度成本复盘机制，持续优化成本管控方案。"
+        ],
+        "action_items": [
+          "运维：每周资源盘点、清理闲置资源、建立资源台账",
+          "技术团队：严格执行资源报备、规范采购需求提报",
+          "行政采购：按规范完成技术采购、比价、备案存档",
+          "财务：统一对账标准，规范票据审核与成本核算",
+          "研发负责人：组织月度成本复盘，监督制度落地。"
+        ],
+        "unresolved_issues": [
+          "历史闲置资源存量较大，需要1-2个月逐步清理完毕。"
+        ],
+        "risks_and_focus": [
+          "新流程落地执行不到位，违规操作反复出现",
+          "资源盘点不彻底，持续产生无效成本",
+          "票据提交不规范，引发财务对账、合规风险。"
+        ],
+        "metadata": {
+          "meeting_type": "cross_department",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "cross_department",
+        "source_data_is_synthetic": true
+      }
+    },
+    {
+      "meeting_id": "phase5-cross_department-3",
+      "project_id": "phase5-cross_department-project",
+      "title": "第9场｜跨部门协调会（主导：中小团队管理者｜销售+交付+售后客户问题闭环协调场景）",
+      "meeting_type": "cross_department",
+      "metadata": {
+        "source": "user_provided_synthetic_phase5_script",
+        "roles": "中小团队管理者、销售部、项目交付、售后客服、产品对接人",
+        "duration_minutes": 30,
+        "manual_meeting_type": "cross_department"
+      },
+      "transcript": [
+        {
+          "segment_id": "s001",
+          "speaker": "中小团队管理者",
+          "text": "各位，今天召开客户问题闭环跨部门协调会，限时30分钟。咱们中小团队，最大的问题就是销售、交付、售后信息脱节，客户问题推诿、闭环慢、体验差。今天彻底对齐客户问题流转机制、权责划分、响应时效，解决售前承诺不符、交付落地偏差、售后响应滞后的跨部门痛点。各部门同步问题。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s002",
+          "speaker": "销售部",
+          "text": "目前最大问题是交付和销售信息不同步，部分客户定制需求我前端已经对接确认，但交付侧未同步到位，导致落地功能和客户预期不符，引发客户投诉；另外售后处理进度不同步，销售无法回复客户咨询，影响客户维护。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s003",
+          "speaker": "项目交付",
+          "text": "问题主要是销售前端存在过度承诺情况，部分功能、服务周期超出产品现有能力，导致交付无法兑现，产生客诉；同时售后反馈的客户问题无统一对接通道，重复对接、重复沟通，效率极低。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s004",
+          "speaker": "售后客服",
+          "text": "我们承接所有客户售后问题，但问题流转无固定流程，销售、交付互相推诿，部分问题无人认领；客户问题处理进度无同步机制，客服无法及时回复客户，导致客户满意度持续下降；另外产品问题无固定反馈通道，同类问题反复出现。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s005",
+          "speaker": "产品对接人",
+          "text": "目前缺少客户问题汇总机制，一线客诉、需求反馈零散，无法统一迭代优化，导致同类体验问题重复发生，持续影响客户口碑。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s006",
+          "speaker": "中小团队管理者",
+          "text": "我直接落地一套适配小团队的极简闭环机制，彻底解决推诿、脱节、滞后问题。第一，权责划分：售前所有承诺必须同步交付、产品备案，禁止过度承诺、超范围承诺，所有客户需求书面留痕。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s007",
+          "speaker": "中小团队管理者",
+          "text": "第二，问题流转：所有客户问题统一由售后归集、建单、分派，对应销售或交付专人认领处理，24小时响应、48小时闭环，超时未处理自动预警。第三，进度同步：处理人每日同步工单进度，售后统一对接客户回复，杜绝客户多头咨询。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s008",
+          "speaker": "中小团队管理者",
+          "text": "第四，问题复盘：每周汇总高频客诉、体验问题，同步产品侧，纳入迭代优化清单，从根源解决重复问题。第五，杜绝部门推诿，工单认领后责任到人，纳入月度考核。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s009",
+          "speaker": "全员",
+          "text": "机制简单清晰，适配团队现状，可以全面落地。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s010",
+          "speaker": "中小团队管理者",
+          "text": "即日起正式执行，所有客户问题按新机制流转，本周启动第一期问题复盘。有无异议？",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s011",
+          "speaker": "全员",
+          "text": "无异议。",
+          "start_time": null,
+          "end_time": null
+        },
+        {
+          "segment_id": "s012",
+          "speaker": "中小团队管理者",
+          "text": "好，会议结束，各部门严格落地执行。",
+          "start_time": null,
+          "end_time": null
+        }
+      ],
+      "formal_analysis": {
+        "meeting_agenda": [
+          "销售、交付、售后、产品同步客户服务现存跨部门问题",
+          "梳理售前承诺不符、信息脱节、问题推诿、闭环滞后根源",
+          "讨论适配中小团队的极简客户问题流转机制",
+          "敲定权责划分、响应时效、进度同步、问题复盘规则",
+          "明确制度落地时间与考核约束机制。"
+        ],
+        "meeting_summary": "本次跨部门协调会针对中小团队销售、交付、售后、产品部门信息割裂、权责不清、问题推诿、客户问题闭环效率低的核心痛点，全面梳理售前过度承诺、信息不同步、工单流转无规范、问题无复盘等现存问题。结合小团队轻量化、高效率、重落地的管理特点，敲定标准化客户问题流转机制、权责划分、响应时效、进度同步与复盘考核规则，彻底打通各部门协作壁垒，解决客户问题处理滞后、客诉反复、服务体验差的问题，同时建立长效优化机制，从业务根源降低客户投诉率、提升客户留存与满意度。",
+        "key_conclusions": [
+          "团队原有客户服务无标准化流转流程、无权责界定、无复盘机制，是部门推诿、客户问题积压、服务体验差的核心根源",
+          "严格规范售前承诺机制，所有客户需求、服务承诺必须书面留痕、全员备案，杜绝超能力过度承诺",
+          "建立售后统一工单归集、分派、闭环机制，固定24小时响应、48小时办结的服务时效标准",
+          "搭建客户问题周复盘机制，将高频客诉、体验痛点同步产品迭代，实现问题根治",
+          "将工单处理时效、问题闭环率纳入月度考核，杜绝部门推诿不作为。"
+        ],
+        "action_items": [
+          "售后客服：即日启用统一客户工单系统，所有客诉、咨询、问题全部归集建单，按时分派、跟进进度、同步客户反馈",
+          "销售部：严格执行售前承诺留痕备案制度，所有客户定制需求、服务周期同步交付、产品部门，禁止口头超范围承诺",
+          "项目交付：认领对应工单任务，按时办结客户问题，每日同步处理进度，杜绝拖延积压",
+          "产品对接人：每周汇总工单高频问题，整理痛点清单，纳入产品迭代优化池",
+          "中小团队管理者：监督新机制落地执行，每周组织客户问题复盘，落实月度考核管控。"
+        ],
+        "unresolved_issues": [
+          "历史积压的零散客户问题无统一台账，需要1周时间全部梳理归集、统一闭环处理。"
+        ],
+        "risks_and_focus": [
+          "各部门习惯性推诿，新工单机制落地执行不到位，恢复原有混乱协作模式",
+          "售前隐性过度承诺问题无法彻底杜绝，持续引发交付客诉矛盾",
+          "高频问题复盘落地流于形式，产品迭代不及时，同类客户问题反复出现",
+          "工单响应、闭环时效不达标，影响客户服务口碑与续约转化。"
+        ],
+        "metadata": {
+          "meeting_type": "cross_department",
+          "result_source": "fixture_formal",
+          "schema_version": "phase5-fixture-v1"
+        }
+      },
+      "expected_acceptance_points": {
+        "must_preserve_formal_result": true,
+        "manual_meeting_type": "cross_department",
+        "source_data_is_synthetic": true
+      }
+    }
+  ]
+}

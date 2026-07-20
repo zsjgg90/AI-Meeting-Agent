@@ -2,8 +2,8 @@
 
 ## Active Priority
 
-1. Review and accept Agent v1.0 Phase 4B controlled Orchestrator and Shadow
-   Mode behavior.
+1. Review and accept Agent v1.0 Phase 5 Shadow acceptance results for
+   `project_weekly`, `requirement_review`, and `cross_department`.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -28,6 +28,13 @@
 - Keep Phase 4B Agent Shadow Mode as a sidecar only. It may write debug audit
   files, but must not overwrite formal summaries, action items, project state,
   requirements, risks, issues, or decisions.
+- Keep Phase 5 acceptance data synthetic and sanitized under
+  `data/eval/agent_v1_baseline/phase5_core_scenarios/`. Generated reports must
+  remain under ignored `data/debug/agent_shadow_acceptance/`.
+- Phase 5 calibrated only scenario context requirements for
+  `requirement_review` and `cross_department` so their static plans load meeting
+  history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
+  formal analysis behavior remain unchanged.
 - Defer `get_project_context` and `get_active_risks` until a formal Project
   state source and independent risk state model exist.
 - Decide whether to archive or remove legacy `api` and `mobile` directories.
@@ -85,3 +92,6 @@
 - No Agent result promotion, action execution, database persistence for Agent
   business objects, API exposure, frontend confirmation flow, or semantic
   comparison scoring in Phase 4B.
+- No Agent result promotion, action execution, write-path Tool, cross-meeting
+  state persistence, real classifier, Prompt/RAG/Validator change, API change,
+  database migration, or Expo change in Phase 5.

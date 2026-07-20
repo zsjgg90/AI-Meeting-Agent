@@ -99,6 +99,19 @@ The Shadow result is not exposed through the API, does not overwrite
 `MeetingSummary` or `ActionItem`, and does not execute actions even if
 `AGENT_ACTIONS_ENABLED` is changed.
 
+Agent v1.0 Phase 5 adds a Shadow acceptance gate for the first three core
+scenarios: `project_weekly`, `requirement_review`, and `cross_department`.
+Sanitized synthetic fixtures live under
+`data/eval/agent_v1_baseline/phase5_core_scenarios/`, and the acceptance script
+is `services/worker/scripts/run_agent_shadow_acceptance.py`. By default it uses
+offline fixture analysis and does not call the real model; `--allow-live-model`
+is required before the script may call the existing `analyze_meeting` Tool.
+Generated reports and per-meeting Shadow traces are written under
+`data/debug/agent_shadow_acceptance/<timestamp>/` and remain debug-only. The
+offline fixture runtime may report sub-millisecond average durations such as
+`0.15 ms`; that number validates structure only and does not represent real
+Qwen3/RAG performance.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -199,6 +212,7 @@ npx expo start --host lan --port 8081
 .\scripts\check-services.ps1
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_meeting_pipeline_acceptance.py --limit 3 --ollama-timeout 60
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_real_production_analysis.py --meeting-id meeting_001 --ollama-timeout 600
+services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_acceptance.py
 ```
 
 `run_meeting_pipeline_acceptance.py` 会使用真实 Qwen3/Ollama 和现有 RAG
