@@ -2,6 +2,20 @@
 
 ## 2026-07-20
 
+- Added Agent v1.0 Phase 5B live Shadow acceptance tooling in
+  `services/worker/scripts/run_agent_shadow_live_acceptance.py`.
+- The Phase 5B tool supports offline-by-default runs, explicit
+  `--allow-live-model`, smoke/full selection, `--meeting-id`, `--scenario`,
+  per-run `--ollama-timeout`, optional `nvidia-smi` GPU monitoring,
+  stop-on-failure gates, quality scoring templates, formal-result snapshot
+  hashes, and per-meeting debug artifacts under
+  `data/debug/agent_shadow_live_acceptance/<run_id>/`.
+- Added Phase 5B unit tests to the default Worker test gate. The tests cover
+  default no-real-model behavior, smoke/full and filtered fixture selection,
+  serial stop-on-failure behavior, timeout propagation, GPU monitor failure
+  degradation, artifact structure, unavailable layer markers, and formal-result
+  isolation checks without calling real Qwen3, Chroma, PostgreSQL, or external
+  network services.
 - Added Agent v1.0 Phase 5 Shadow acceptance fixtures for three core
   scenarios: `project_weekly`, `requirement_review`, and `cross_department`.
 - Added `run_agent_shadow_acceptance.py`, an offline-by-default acceptance

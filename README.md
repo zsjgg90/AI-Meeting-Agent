@@ -112,6 +112,19 @@ offline fixture runtime may report sub-millisecond average durations such as
 `0.15 ms`; that number validates structure only and does not represent real
 Qwen3/RAG performance.
 
+Agent v1.0 Phase 5B adds a separate live Shadow acceptance tool:
+`services/worker/scripts/run_agent_shadow_live_acceptance.py`. It reuses the
+Phase 5 fixtures, controlled Agent Orchestrator, existing RAG, Qwen3,
+PostProcessor, and Validator components, but does not call the real model
+unless `--allow-live-model` is explicitly passed. It writes run-level reports
+and per-meeting artifacts under the ignored directory
+`data/debug/agent_shadow_live_acceptance/<run_id>/`, including transcript,
+RAG context, prompt, raw model output, parsed result, normalized result before
+postprocessing, postprocessed result, validated result, Validator audit, Shadow
+audit, quality scoring template, GPU samples, GPU summary, and pipeline log.
+If a layer is unavailable, the artifact is written with `available=false`
+instead of being fabricated.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -213,12 +226,23 @@ npx expo start --host lan --port 8081
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_meeting_pipeline_acceptance.py --limit 3 --ollama-timeout 60
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_real_production_analysis.py --meeting-id meeting_001 --ollama-timeout 600
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_acceptance.py
+services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke
 ```
 
 `run_meeting_pipeline_acceptance.py` 会使用真实 Qwen3/Ollama 和现有 RAG
 对比语义候选链路与旧 Qwen3 + RAG 链路，报告输出到
 `data/debug/meeting_pipeline_acceptance/`。该脚本属于 live gate，不纳入默认
 `test-all.ps1`。当前正式 Worker 输出仍以旧 Qwen3 + RAG 为准。
+`run_agent_shadow_live_acceptance.py` is the Phase 5B live Shadow acceptance
+tool. Without `--allow-live-model`, it only validates selection, reporting,
+artifact structure, and non-promotion safeguards. With `--allow-live-model`, it
+runs selected fixtures serially through the current Qwen3 + RAG analysis
+components, records cold/warm durations, optional `nvidia-smi` GPU samples,
+quality scoring templates, timeout/fallback/error gates, and formal-result
+snapshot hashes. Smoke mode selects
+`phase5-project_weekly-1`, `phase5-requirement_review-1`, and
+`phase5-cross_department-1`; full mode selects all 9 Phase 5 fixtures. Run
+smoke successfully before running full.
 `run_real_production_analysis.py` uses the current V3.2 `meeting_001`
 transcript by default and writes transcript, RAG context, prompt, raw model
 output, normalized result, and pipeline log under

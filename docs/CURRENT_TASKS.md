@@ -2,8 +2,9 @@
 
 ## Active Priority
 
-1. Review and accept Agent v1.0 Phase 5 Shadow acceptance results for
-   `project_weekly`, `requirement_review`, and `cross_department`.
+1. Review and run Agent v1.0 Phase 5B live Shadow acceptance for
+   `project_weekly`, `requirement_review`, and `cross_department` after tool
+   implementation is accepted.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -31,6 +32,10 @@
 - Keep Phase 5 acceptance data synthetic and sanitized under
   `data/eval/agent_v1_baseline/phase5_core_scenarios/`. Generated reports must
   remain under ignored `data/debug/agent_shadow_acceptance/`.
+- Keep Phase 5B live Shadow acceptance artifacts under ignored
+  `data/debug/agent_shadow_live_acceptance/`. The tool is
+  `services/worker/scripts/run_agent_shadow_live_acceptance.py`; default runs
+  must not call real Qwen3 unless `--allow-live-model` is explicitly passed.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -61,6 +66,10 @@
   It found first semantic errors in `model_raw_output.json`; normalized output
   preserved those errors rather than creating new ones.
 - Add live Qwen3 + RAG evaluation gate outside default unit tests.
+- Run Phase 5B smoke first:
+  `phase5-project_weekly-1`, `phase5-requirement_review-1`, and
+  `phase5-cross_department-1`. Only run the full 9-meeting live gate after
+  smoke is reviewed and passes.
 - Review the 2026-07-18 `prompt_stability_eval` artifacts before production
   rollout. The deterministic PostProcessor fixed proposal leakage and metadata
   cleanup, but duplicate-run semantic stability still fails for agenda/action
@@ -95,3 +104,7 @@
 - No Agent result promotion, action execution, write-path Tool, cross-meeting
   state persistence, real classifier, Prompt/RAG/Validator change, API change,
   database migration, or Expo change in Phase 5.
+- No Agent result promotion, action execution, write-path Tool,
+  cross-meeting state persistence, real classifier, Prompt/RAG/Validator
+  change, API change, database migration, Expo change, or Phase 6 work in
+  Phase 5B.

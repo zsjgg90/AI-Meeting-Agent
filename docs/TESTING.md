@@ -81,6 +81,7 @@ python -m unittest services.worker.tests.test_agent_tools_adapters
 python -m unittest services.worker.tests.test_agent_runtime
 python -m unittest services.worker.tests.test_agent_orchestrator
 python -m unittest services.worker.tests.test_agent_shadow_acceptance
+python -m unittest services.worker.tests.test_agent_shadow_live_acceptance
 ```
 
 Worker tests are split into two groups:
@@ -192,6 +193,16 @@ strategy selection, safe degradation when history/RAG fixture results are empty,
 Tool failure/timeout/fallback statistics, report JSON serialization, and the
 default guarantee that the acceptance script does not call the real model.
 
+`test_agent_shadow_live_acceptance.py` validates the Phase 5B live Shadow
+acceptance tooling without calling real Qwen3, Ollama, Chroma, PostgreSQL,
+external network, API, or Expo. It covers default `--allow-live-model=false`,
+smoke/full fixture selection, `--meeting-id` and `--scenario` filtering,
+serial stop-on-failure behavior, `--ollama-timeout` propagation into the live
+layer runner, `nvidia-smi` monitor start/stop and failure degradation, required
+artifact structure, unavailable layer markers when live model execution is not
+allowed, GPU CSV parsing for `nvidia-smi` headers with comma-space separators
+and unit-suffixed values, and formal-result snapshot isolation.
+
 Phase 5 Shadow acceptance can be run offline with:
 
 ```powershell
@@ -205,6 +216,53 @@ fixture analysis by default. Passing `--allow-live-model` is required before it
 may call the existing `analyze_meeting` Tool and therefore Qwen3/RAG. Offline
 fixture durations such as `0.15 ms` validate only the report and Runtime
 structure; they must not be used as real Qwen3/RAG performance evidence.
+
+Phase 5B live Shadow acceptance tooling can be exercised offline with:
+
+```powershell
+services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke
+```
+
+This default command does not call Qwen3/RAG. It writes run configuration,
+report files, per-meeting artifacts, unavailable markers for live-only layers,
+formal-result snapshot hashes, and optional GPU summaries under:
+
+```text
+data/debug/agent_shadow_live_acceptance/<run_id>/
+```
+
+After explicit approval to run the real model, use smoke first:
+
+```powershell
+services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke --allow-live-model --ollama-timeout 300 --gpu-monitor --stop-on-failure
+```
+
+For live acceptance, start Worker with stdout/stderr captured under the ignored
+debug directory before running smoke/full:
+
+```powershell
+cd "D:\codex_work\会议声纹识别\services\worker"
+.\.venv\Scripts\python.exe -m uvicorn app.main:app `
+  --host 0.0.0.0 `
+  --port 8001 `
+  *> "..\..\data\debug\agent_shadow_live_acceptance\worker-phase5b.log"
+```
+
+If real-time viewing is needed, use `Tee-Object` or another PowerShell logging
+pattern that does not change Worker business logic. If Worker keeps the port
+open but `/health` or `/ready` stop responding, first preserve this log and
+collect a process/thread stack snapshot before changing Worker code.
+
+Only after the 3-meeting smoke run passes should the full 9-meeting run be
+executed:
+
+```powershell
+services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode full --allow-live-model --ollama-timeout 300 --gpu-monitor --stop-on-failure
+```
+
+The Phase 5B live gate is intentionally outside default unit tests because it
+can be slow and depends on local `qwen3:14b`, Ollama, RAG/Chroma, local
+embedding cache, and GPU runtime state.
 
 Semantic shadow trace files are written under:
 

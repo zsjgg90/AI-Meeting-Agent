@@ -95,6 +95,7 @@ if (-not $SkipWorkerTests) {
         services.worker.tests.test_agent_runtime `
         services.worker.tests.test_agent_orchestrator `
         services.worker.tests.test_agent_shadow_acceptance `
+        services.worker.tests.test_agent_shadow_live_acceptance `
         services.worker.tests.test_volcengine_speaker_diarization }
 }
 

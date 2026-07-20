@@ -65,6 +65,32 @@ calibrated scenario context policy to enable meeting history for
 `requirement_review` and `cross_department`; it did not change Prompt, RAG,
 Validator, formal API, database, Expo, Tool core logic, action execution, or
 project state persistence.
+Agent v1.0 Phase 5B adds the live Shadow acceptance tool
+`services/worker/scripts/run_agent_shadow_live_acceptance.py`. It is
+offline-by-default and will not call Qwen3 unless `--allow-live-model` is
+passed. The tool supports smoke/full modes, `--meeting-id`, `--scenario`,
+`--ollama-timeout`, optional `nvidia-smi` GPU monitoring, stop-on-failure
+gates, per-meeting layer artifacts, quality score templates, GPU summaries,
+and formal-result snapshot hashes under ignored
+`data/debug/agent_shadow_live_acceptance/<run_id>/`. Phase 5B implementation
+did not run the real model and did not modify Prompt, RAG data/retrieval rules,
+Validator, API, database, migrations, Expo, Agent result promotion, or action
+execution.
+Phase 5B live runs should start Worker with stdout/stderr redirected to
+`data/debug/agent_shadow_live_acceptance/worker-phase5b.log` or an equivalent
+ignored log file. If Worker keeps port 8001 open but `/health` or `/ready`
+timeout after live smoke/full, preserve the Worker log and collect a
+process/thread stack snapshot before changing Worker business logic.
+Phase 5B full live acceptance was completed locally under
+`data/debug/agent_shadow_live_acceptance/20260720-163624` as ignored evidence
+only. Results: 9/9 meetings completed, `overall_passed=true`, average quality
+score 95.78, minimum quality score 90, cold start about 42.69 seconds, warm
+start average about 28.96 seconds, timeout/fallback/error all 0, CUDA OOM 0,
+formal-result isolation 9/9 passed, Worker and Ollama healthy after the run,
+and meetings 2-9 showed no sustained monotonic GPU memory growth. RAG retrieval
+hit the same 8 chunks in all 9 meetings; keep this as a retrieval diversity
+observation for later phases. Quality scoring remains rule-assisted and keeps
+`manual_review_required=true`.
 
 Repository freeze metadata:
 
@@ -163,14 +189,21 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review and accept Agent v1.0 Phase 5 Shadow acceptance report and fixture
-   coverage.
-2. Prepare Phase 6 cross-meeting state tracking design only after Phase 5 is
+1. Review and accept the Phase 5B live Shadow acceptance tool implementation.
+2. Run Phase 5B smoke only after explicit approval:
+   `services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke --allow-live-model --ollama-timeout 300 --gpu-monitor --stop-on-failure`.
+3. Before live smoke/full, start Worker with stdout/stderr captured under
+   `data/debug/agent_shadow_live_acceptance/worker-phase5b.log` so any
+   post-run health/ready stall has evidence.
+4. Run Phase 5B full 9-meeting acceptance only after smoke passes and is
+   reviewed:
+   `services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode full --allow-live-model --ollama-timeout 300 --gpu-monitor --stop-on-failure`.
+5. Prepare Phase 6 cross-meeting state tracking design only after Phase 5B is
    accepted. Do not add action execution, write-path Tools, or Agent result
    promotion yet. Phase 6 still needs an explicit formal cross-meeting state
    source and write-boundary design before implementation.
-3. Import the remaining required Agent baseline meeting artifact folders under
+6. Import the remaining required Agent baseline meeting artifact folders under
    `data/eval/agent_v1_baseline/` when available.
-4. Run `.\scripts\check-services.ps1` with local services available.
-5. Continue embedding model offline/cache setup, shared API/Worker model
+7. Run `.\scripts\check-services.ps1` with local services available.
+7. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.
