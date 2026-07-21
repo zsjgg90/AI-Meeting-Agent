@@ -1,9 +1,16 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from hashlib import sha256
 from typing import Literal
 
-from fastapi import HTTPException, Request
+from fastapi import Depends, HTTPException, Request
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from app.database import get_db
+from app.models import AgentAuthSession, AgentUser
 
 
 AgentPermission = Literal[
@@ -28,6 +35,15 @@ class AgentPrincipal:
     tenant_id: str | None = None
     project_ids: tuple[str, ...] = field(default_factory=tuple)
     object_scopes: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    authentication_source: str = "unknown"
+
+    @property
+    def project_scope(self) -> tuple[str, ...]:
+        return self.project_ids
+
+    @property
+    def object_scope(self) -> dict[str, tuple[str, ...]]:
+        return self.object_scopes
 
     def has_permission(self, permission: str) -> bool:
         return "*" in self.permissions or permission in self.permissions
@@ -58,15 +74,48 @@ class AgentPrincipal:
         return bool(set(self.roles) & HIGH_RISK_ROLES) or self.has_permission(HIGH_RISK_PERMISSION)
 
 
-async def get_agent_principal(_: Request) -> AgentPrincipal:
-    """Production auth adapter placeholder.
+async def get_agent_principal(request: Request, db: Session = Depends(get_db)) -> AgentPrincipal:
+    token = bearer_token_from_request(request)
+    if not token:
+        raise HTTPException(status_code=401, detail="Agent authentication is required.")
+    return principal_from_bearer_token(db, token)
 
-    The project currently has no real auth/session/JWT module. Agent APIs must
-    therefore fail closed until a production provider replaces this dependency.
-    Tests inject a server-side principal through FastAPI dependency overrides.
-    """
 
-    raise HTTPException(status_code=401, detail="Agent authentication provider is not configured.")
+def bearer_token_from_request(request: Request) -> str | None:
+    authorization = request.headers.get("authorization") or ""
+    scheme, _, token = authorization.partition(" ")
+    if scheme.lower() != "bearer" or not token.strip():
+        return None
+    return token.strip()
+
+
+def principal_from_bearer_token(db: Session, token: str) -> AgentPrincipal:
+    token_hash = hash_agent_token(token)
+    session = db.scalars(select(AgentAuthSession).where(AgentAuthSession.token_hash == token_hash)).first()
+    if session is None:
+        raise HTTPException(status_code=401, detail="Agent session is invalid.")
+    now = datetime.now(timezone.utc)
+    expires_at = ensure_aware(session.expires_at)
+    revoked_at = ensure_aware(session.revoked_at) if session.revoked_at else None
+    if revoked_at is not None or expires_at <= now:
+        raise HTTPException(status_code=401, detail="Agent session has expired.")
+    user = db.get(AgentUser, session.user_id)
+    if user is None or not user.is_active:
+        raise HTTPException(status_code=401, detail="Agent user is inactive.")
+    return AgentPrincipal(
+        user_id=user.id,
+        reviewer_identity=user.display_name or user.id,
+        roles=tuple(str(item) for item in (user.roles or [])),
+        permissions=tuple(str(item) for item in (user.permissions or [])),
+        tenant_id=user.tenant_id,
+        project_ids=tuple(str(item) for item in (user.project_scope or [])),
+        object_scopes=normalize_object_scope(user.object_scope or {}),
+        authentication_source=session.authentication_source,
+    )
+
+
+def hash_agent_token(token: str) -> str:
+    return sha256(token.encode("utf-8")).hexdigest()
 
 
 def require_agent_permission(
@@ -121,3 +170,19 @@ def proposal_tenant_id(metadata: dict | None) -> str | None:
         return None
     value = metadata.get("tenant_id") or metadata.get("tenant")
     return str(value) if value else None
+
+
+def normalize_object_scope(value: dict) -> dict[str, tuple[str, ...]]:
+    normalized: dict[str, tuple[str, ...]] = {}
+    for object_type, ids in value.items():
+        if isinstance(ids, str):
+            normalized[str(object_type)] = (ids,)
+        elif isinstance(ids, list):
+            normalized[str(object_type)] = tuple(str(item) for item in ids)
+    return normalized
+
+
+def ensure_aware(value: datetime) -> datetime:
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value

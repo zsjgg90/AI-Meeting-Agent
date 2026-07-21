@@ -46,7 +46,7 @@ def save_action_proposal(
         risk_level=payload.risk_level,
         operation=payload.action_type,
     )
-    return create_proposal(db, payload.model_dump(mode="json"))
+    return create_proposal(db, payload.model_dump(mode="json"), principal=principal)
 
 
 @router.get("", response_model=list[AgentActionProposalRead])
@@ -107,6 +107,7 @@ def approve_action_proposal(
         reviewer=principal.reviewer_identity,
         permissions=write_control_permissions_for(principal, proposal.target_object_type),
         comment=payload.comment,
+        principal=principal,
     )
     command = db.scalars(
         select(ControlledWriteCommandRecord)

@@ -168,6 +168,27 @@ transition for a later phase. Runtime flags are
 `AGENT_ROLLBACK_EXECUTION_ENABLED=false`. Phase 10 still does not update
 `action_items`, summary JSON, Requirement, Risk, Prompt, RAG, Validator,
 Shadow output, or production business state.
+Agent v1.0 Phase 11 adds production identity and first-class authoritative
+state foundations while keeping real writes disabled. API Agent auth now uses
+`Authorization: Bearer <token>` only: the token is hashed, matched against
+`agent_auth_sessions`, checked for expiry/revocation, joined to active
+`agent_users`, and converted into `AgentPrincipal` with `user_id`, `tenant_id`,
+`roles`, `permissions`, `project_scope`, `object_scope`, and
+`authentication_source`. Missing, invalid, expired, revoked, or inactive
+sessions return 401; permission/scope denials return 403. Tests may still use
+dependency overrides.
+Phase 11 Alembic revision `20260721_0013` adds `requirements`, `risks`,
+`agent_users`, `agent_auth_sessions`, and tenant/project columns on
+`action_items`. Migration copies Requirement/Risk candidates from existing
+summary JSON into first-class tables, puts incomplete candidates into `review`,
+keeps source meeting/summary/field/index plus raw references, preserves the
+original summary JSON, and supports downgrade. `DatabaseAuthoritativeStateProvider`
+now reads `Requirement` from `requirements`, `AgentActionItem` from
+`action_items`, and `Risk` from `risks`; it no longer scans summary JSON as the
+formal authoritative source. Provider reads validate server-side principal
+tenant, project, object type, object id, and operation permission. Phase 11
+still does not update `requirements`, `risks`, `action_items`, summary JSON,
+Prompt, RAG, Validator, Shadow output, or production business state.
 
 Repository freeze metadata:
 
@@ -266,16 +287,17 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 10 auth adapter, permission mapping, rollback dry-run, and
-   PostgreSQL safety acceptance before considering a real write pilot.
-2. Wire a real production auth/session provider into `AgentPrincipal` before
-   exposing Agent APIs beyond controlled local/testing contexts.
+1. Review Phase 11 token/session auth, scoped Provider reads, Requirement/Risk
+   migration, and PostgreSQL rollback acceptance before considering a real write
+   pilot.
+2. Decide how `agent_users` and `agent_auth_sessions` should integrate with the
+   broader product identity/session system before exposing Agent APIs broadly.
 3. Keep the remaining Agent risks visible: proposal list/detail evidence and
-   metadata exposure, Requirement/Risk JSON scan behavior, duplicated API/Worker
-   Agent contracts, FK `ondelete` policy, and no real rollback executor.
-4. Decide whether Requirement and Risk need independent production business
-   tables before any write execution phase; Phase 8 reads them only from
-   existing summary JSON snapshots.
+   metadata exposure, default historical tenant/project backfill, duplicated
+   API/Worker Agent contracts, FK `ondelete` policy, and no real rollback
+   executor.
+4. Review first-class Requirement/Risk lifecycle semantics before any command
+   executor can mutate those tables.
 5. Keep Agent action execution disabled until a real write service, production
    authorization integration, command persistence semantics, rollback
    transactions, and failure drills are approved.

@@ -219,8 +219,9 @@ unique-constraint duplicate recovery, command/audit persistence, OpenAPI
 compatibility, and the guarantee that the formal `ActionItem` row is not
 changed by approval.
 
-The same API test module now covers the Phase 9 command dry-run sandbox and
-Phase 10 pre-real-write safety layer. It validates dry-run success,
+The same API test module now covers the Phase 9 command dry-run sandbox, Phase
+10 pre-real-write safety layer, and Phase 11 production auth/authoritative-state
+foundation. It validates dry-run success,
 execution-switch rejection, non-ready command rejection, optimistic version
 conflict rejection, repeated dry-run idempotency, audit and rollback preview
 generation, OpenAPI command routes, and the guarantee that formal `ActionItem`
@@ -230,7 +231,10 @@ unauthenticated request rejection, forged `X-Agent-Reviewer`/
 object isolation, high-risk approval denial for ordinary reviewers, dry-run and
 audit permission checks, audit-failure rollback, service-restart idempotency,
 rollback dry-run success, duplicate rollback dry-run, rollback conflict
-rejection, and the real-write contract stub refusing writes.
+rejection, and the real-write contract stub refusing writes. Phase 11 coverage
+adds valid Bearer token authentication, expired/revoked token 401,
+Requirement/Risk formal table reads, Provider no-summary-JSON behavior,
+tenant/project/object isolation, and unchanged formal business data.
 
 `npm run test:agent-review-ui` performs a lightweight static check of the Expo
 Agent Review workbench. It verifies the presence of proposal list/detail,
@@ -265,6 +269,22 @@ idempotently, rejects rollback version conflict, and verifies the formal
 ```powershell
 $env:PYTHONPATH="D:\codex_work\浼氳澹扮汗璇嗗埆;D:\codex_work\浼氳澹扮汗璇嗗埆\services\api;D:\codex_work\浼氳澹扮汗璇嗗埆\services\worker"
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase10_security_acceptance.py
+```
+
+`services/api/scripts/run_agent_phase11_postgres_acceptance.py` validates the
+Phase 11 PostgreSQL migration and isolation path. It uses synthetic prefixed
+data, downgrades to Phase 10, seeds Phase-10-shape summary/action rows, upgrades
+to head, verifies Requirement/Risk migration and `review` fallback, runs
+upgrade idempotency, validates production Bearer token auth and expired/revoked
+session denial, checks tenant/project/object Provider isolation, verifies the
+original `meeting_summaries` JSON is unchanged, verifies the formal
+`ActionItem` row is unchanged, downgrades to Phase 10 to prove rollback, and
+restores Alembic head. Run it only against a database where Phase 11 downgrade
+is acceptable:
+
+```powershell
+$env:PYTHONPATH="D:\codex_work\会议声纹识别;D:\codex_work\会议声纹识别\services\api;D:\codex_work\会议声纹识别\services\worker"
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase11_postgres_acceptance.py
 ```
 
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance
@@ -400,8 +420,9 @@ inference-parameter equality.
 - Expo screen tests.
 - Runtime UI automation for the Agent Review workbench against a live API.
 - End-to-end recording/upload/process/analyze/display smoke test.
-- Migration upgrade/current verification against a clean PostgreSQL instance.
 - CI coverage for the Phase 8 PostgreSQL concurrency script against a disposable
+  PostgreSQL service.
+- CI coverage for the Phase 11 migration rollback script against a disposable
   PostgreSQL service.
 - Live Qwen3 + RAG evaluation gate in CI.
 - Human semantic-quality review for live semantic-pipeline acceptance reports.

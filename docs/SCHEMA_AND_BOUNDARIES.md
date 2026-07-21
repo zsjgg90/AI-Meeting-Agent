@@ -599,6 +599,66 @@ Changing environment variables must not bypass the unimplemented real write
 executor or real rollback executor; both executors remain unsupported until a
 later phase implements and verifies them.
 
+## Agent Phase 11 Production Auth And Authoritative State
+
+MeetMind Agent v1.0 Phase 11 adds the minimum production identity and
+first-class authoritative-state foundation while keeping all formal business
+writes disabled:
+
+- `services/api/app/agent_security.py`
+- `services/api/app/authoritative_state.py`
+- `services/api/app/models.py`
+- Alembic revision `20260721_0013`
+- `services/api/scripts/run_agent_phase11_postgres_acceptance.py`
+
+The production Agent authentication path accepts only
+`Authorization: Bearer <token>`. The API hashes the token, reads
+`agent_auth_sessions`, rejects missing/unknown/expired/revoked sessions with
+401, joins `agent_users`, rejects inactive users with 401, and builds
+`AgentPrincipal` from server-side fields only:
+
+- `user_id`
+- `tenant_id`
+- `roles`
+- `permissions`
+- `project_scope`
+- `object_scope`
+- `authentication_source`
+
+Tests may still use FastAPI dependency overrides, but production code no longer
+uses client-submitted reviewer or permission headers.
+
+Phase 11 formalizes first-class state sources:
+
+- `requirements`
+- existing `action_items`
+- `risks`
+
+`requirements` and `risks` contain `id`, `tenant_id`, `project_id`, `title`,
+`description`, `status`, `owner`, `due_date`, `priority`, `version`,
+`source_meeting_id`, source JSON reference fields, `source_ref`, and timestamps.
+`risks` also keeps risk-specific fields such as `level`, `category`, `impact`,
+`probability`, and `mitigation`. Existing `action_items` gain `tenant_id` and
+`project_id` columns for scoped reads.
+
+Migration copies Requirement/Risk candidates from existing summary JSON into
+the formal tables, defaults incomplete candidates to `review`, records source
+meeting/summary/field/index and raw source reference, does not delete or mutate
+the original summary JSON, and uses source-reference uniqueness to avoid
+duplicate migration. Downgrade removes the Phase 11 tables and action scope
+columns.
+
+`DatabaseAuthoritativeStateProvider` now returns:
+
+- `Requirement` from `postgresql.requirements`
+- `AgentActionItem` from `postgresql.action_items`
+- `Risk` from `postgresql.risks`
+
+It no longer scans `meeting_summaries` JSON as the formal authoritative source.
+Every Agent API state read passes a server-side principal into the provider and
+validates tenant, project, object type, object id, and operation permission.
+Provider reads remain read-only and return `writes_performed=false`.
+
 ## Schema Version
 
 Current schema version:

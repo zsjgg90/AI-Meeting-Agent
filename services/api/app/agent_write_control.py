@@ -17,9 +17,9 @@ ControlledWriteCommandStatus = Literal["ready", "rejected", "duplicate", "blocke
 WriteControlResultStatus = Literal["ready", "rejected", "duplicate"]
 
 ALLOWED_CHANGE_FIELDS: dict[TrackedObjectType, set[str]] = {
-    "Requirement": {"title", "description", "status", "priority", "owner", "target_version"},
+    "Requirement": {"title", "description", "status", "priority", "owner", "due_date", "target_version"},
     "AgentActionItem": {"title", "description", "owner", "due_date", "status", "priority", "dependencies"},
-    "Risk": {"title", "description", "category", "level", "impact", "probability", "mitigation", "owner", "status"},
+    "Risk": {"title", "description", "category", "level", "impact", "probability", "mitigation", "owner", "due_date", "priority", "status"},
 }
 HIGH_RISK_ACTIONS = {"cancel", "complete"}
 

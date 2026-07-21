@@ -17,6 +17,7 @@ from app.agent_write_control import (
     WriteControlResult,
 )
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
+from app.agent_security import AgentPrincipal
 from app.models import (
     AgentActionProposalRecord,
     AgentAuditRecord,
@@ -37,11 +38,15 @@ REJECTION_STATUS_BY_REASON = {
 _DEFAULT_CONFIRMATION_ID = object()
 
 
-def create_proposal(db: Session, payload: dict[str, Any]) -> AgentActionProposalRecord:
+def create_proposal(
+    db: Session,
+    payload: dict[str, Any],
+    principal: AgentPrincipal | None = None,
+) -> AgentActionProposalRecord:
     proposal = AgentActionProposal.model_validate(payload)
     if proposal.target_object_type not in {"Requirement", "AgentActionItem", "Risk"}:
         raise HTTPException(status_code=400, detail="Unsupported Agent proposal target object type.")
-    provider = DatabaseAuthoritativeStateProvider(db)
+    provider = DatabaseAuthoritativeStateProvider(db, principal=principal, view_permission="proposal_review")
     snapshot = None
     if proposal.target_object_id and proposal.action_type not in {"new", "create"}:
         snapshot = provider.get_state(object_type=proposal.target_object_type, object_id=proposal.target_object_id)  # type: ignore[arg-type]
@@ -79,6 +84,7 @@ def approve_proposal(
     reviewer: str,
     permissions: list[str],
     comment: str = "",
+    principal: AgentPrincipal | None = None,
 ) -> tuple[AgentActionProposalRecord, AgentProposalConfirmationRecord, WriteControlResult]:
     row = lock_proposal_or_404(db, proposal_id)
     existing_command = get_ready_command(db, proposal_id)
@@ -102,7 +108,7 @@ def approve_proposal(
         permissions=permissions,
         metadata={"expires_at": row.expires_at.isoformat() if row.expires_at else None},
     )
-    result = plan_controlled_write(db, row=row, confirmation=pending_confirmation)
+    result = plan_controlled_write(db, row=row, confirmation=pending_confirmation, principal=principal)
     if result.status == "duplicate":
         duplicate = get_ready_command(db, proposal_id)
         duplicate_confirmation = get_latest_confirmation(db, proposal_id)
@@ -206,8 +212,9 @@ def plan_controlled_write(
     *,
     row: AgentActionProposalRecord,
     confirmation: AgentProposalConfirmation,
+    principal: AgentPrincipal | None = None,
 ) -> WriteControlResult:
-    provider = DatabaseAuthoritativeStateProvider(db)
+    provider = DatabaseAuthoritativeStateProvider(db, principal=principal, view_permission="proposal_review")
     existing_keys = set(db.scalars(select(ControlledWriteCommandRecord.idempotency_key)).all())
     planner = ControlledWritePlanner(state_provider=provider, seen_idempotency_keys=existing_keys)
     return planner.plan(proposal=proposal_from_record(row), confirmation=confirmation)

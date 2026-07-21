@@ -138,6 +138,8 @@ class ActionItem(Base):
     __tablename__ = "action_items"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    tenant_id: Mapped[str] = mapped_column(String(64), default="default-tenant", index=True)
+    project_id: Mapped[str] = mapped_column(String(64), default="default-project", index=True)
     meeting_id: Mapped[str] = mapped_column(ForeignKey("meetings.id"), index=True)
     summary_id: Mapped[str | None] = mapped_column(ForeignKey("meeting_summaries.id"), nullable=True, index=True)
     task: Mapped[str] = mapped_column(Text)
@@ -156,6 +158,102 @@ class ActionItem(Base):
 
     meeting: Mapped[Meeting] = relationship(back_populates="action_items")
     summary: Mapped[MeetingSummary | None] = relationship(back_populates="action_items")
+
+
+class Requirement(Base):
+    __tablename__ = "requirements"
+    __table_args__ = (
+        UniqueConstraint(
+            "tenant_id",
+            "project_id",
+            "source_summary_id",
+            "source_json_field",
+            "source_json_index",
+            name="uq_requirements_source_json_ref",
+        ),
+    )
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    title: Mapped[str] = mapped_column(String(255))
+    description: Mapped[str] = mapped_column(Text, default="")
+    status: Mapped[str] = mapped_column(String(32), default="review", index=True)
+    owner: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    due_date: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    priority: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    version: Mapped[int] = mapped_column(Integer, default=1)
+    source_meeting_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    source_summary_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    source_json_field: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    source_json_index: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    source_ref: Mapped[dict] = mapped_column(JSONB, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, onupdate=utc_now)
+
+
+class Risk(Base):
+    __tablename__ = "risks"
+    __table_args__ = (
+        UniqueConstraint(
+            "tenant_id",
+            "project_id",
+            "source_summary_id",
+            "source_json_field",
+            "source_json_index",
+            name="uq_risks_source_json_ref",
+        ),
+    )
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    title: Mapped[str] = mapped_column(String(255))
+    description: Mapped[str] = mapped_column(Text, default="")
+    status: Mapped[str] = mapped_column(String(32), default="review", index=True)
+    owner: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    due_date: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    priority: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    version: Mapped[int] = mapped_column(Integer, default=1)
+    source_meeting_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    source_summary_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    source_json_field: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    source_json_index: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    level: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    category: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    impact: Mapped[str | None] = mapped_column(Text, nullable=True)
+    probability: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    mitigation: Mapped[str | None] = mapped_column(Text, nullable=True)
+    source_ref: Mapped[dict] = mapped_column(JSONB, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, onupdate=utc_now)
+
+
+class AgentUser(Base):
+    __tablename__ = "agent_users"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    display_name: Mapped[str] = mapped_column(String(255), default="")
+    roles: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    permissions: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    project_scope: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    object_scope: Mapped[dict] = mapped_column(JSONB, default=dict)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, onupdate=utc_now)
+
+
+class AgentAuthSession(Base):
+    __tablename__ = "agent_auth_sessions"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    user_id: Mapped[str] = mapped_column(ForeignKey("agent_users.id"), index=True)
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    authentication_source: Mapped[str] = mapped_column(String(64), default="bearer_token")
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
 
 
 class SpeakerMapping(Base):

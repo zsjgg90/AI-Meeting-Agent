@@ -2,6 +2,33 @@
 
 ## 2026-07-21
 
+- Added Agent v1.0 Phase 11 production identity and first-class authoritative
+  state foundation.
+- Added Alembic revision `20260721_0013` with `requirements`, `risks`,
+  `agent_users`, and `agent_auth_sessions`, plus `tenant_id` and `project_id`
+  columns on `action_items`.
+- Added server-side Bearer token/session authentication for Agent APIs.
+  `AgentPrincipal` is now built from `agent_auth_sessions` and `agent_users`
+  and includes `user_id`, `tenant_id`, `roles`, `permissions`,
+  `project_scope`, `object_scope`, and `authentication_source`. Missing,
+  unknown, expired, revoked, or inactive sessions return 401.
+- Updated `DatabaseAuthoritativeStateProvider` so `Requirement` reads from
+  `requirements`, `AgentActionItem` reads from `action_items`, and `Risk` reads
+  from `risks`. Requirement/Risk provider reads no longer scan
+  `meeting_summaries` JSON.
+- Added migration extraction from summary JSON into first-class Requirement/Risk
+  tables. Complete candidates keep source status, incomplete candidates enter
+  `review`, source meeting/summary/field/index and raw source references are
+  retained, original summary JSON is preserved, and source uniqueness prevents
+  duplicate migration.
+- Expanded API tests for valid token authentication, expired/revoked token 401,
+  Requirement/Risk formal table reads, Provider no-summary-JSON behavior,
+  tenant/project/object isolation, and unchanged formal business data.
+- Added `services/api/scripts/run_agent_phase11_postgres_acceptance.py` for
+  PostgreSQL migration and isolation acceptance covering token auth,
+  expired/revoked denial, Requirement/Risk migration, review fallback,
+  idempotency, rollback, tenant/project/object isolation, summary JSON
+  retention, and no Agent business writes.
 - Added Agent v1.0 Phase 10 production-permission safety layer before any real
   writes. Agent APIs no longer trust client-submitted `X-Agent-Reviewer` or
   `X-Agent-Permissions`; authorization now goes through the server-side

@@ -2,9 +2,10 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 10 production-auth adapter, permission mapping,
-   rollback dry-run, and PostgreSQL safety acceptance before considering any
-   real command execution pilot.
+1. Review Agent v1.0 Phase 11 production token/session auth, scoped
+   authoritative-state provider, Requirement/Risk first-class tables, and
+   PostgreSQL migration acceptance before considering any real command
+   execution pilot.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -61,14 +62,15 @@
   idempotency keys; SQLite tests are functional checks only and are not
   concurrency evidence.
 - `DatabaseAuthoritativeStateProvider` is the current production read source:
-  `AgentActionItem` reads from `action_items`, while `Requirement` and `Risk`
-  read from existing `meeting_summaries` JSON snapshots. There is still no
-  independent production Requirement or Risk table.
-- Phase 8 non-blocking risks to resolve before production confirmation UI or
+  `Requirement` reads from `requirements`, `AgentActionItem` reads from
+  `action_items`, and `Risk` reads from `risks`. It no longer scans
+  `meeting_summaries` JSON as the formal authoritative source.
+- Phase 8/11 non-blocking risks to resolve before production confirmation UI or
   command execution: proposal list/detail response exposure of evidence and
-  metadata, Requirement/Risk JSON scan behavior, duplicated API/Worker Agent
-  contract drift, foreign-key `ondelete` policy, and header-based reviewer
-  permissions being development-only rather than production authentication.
+  metadata, default historical tenant/project backfill for older `action_items`,
+  duplicated API/Worker Agent contract drift, foreign-key `ondelete` policy,
+  and the minimal Agent auth tables needing integration with the broader
+  product identity system.
 - Keep Phase 9 command execution as dry-run only. The API command sandbox may
   read persisted ready commands, re-read authoritative state, validate version,
   permission, idempotency, and target state, and write dry-run audit records
@@ -97,6 +99,17 @@
   PostgreSQL safety acceptance script for auth fail-closed, scope/risk denial,
   dry-run idempotency, rollback dry-run, conflict rejection, and formal
   business-row isolation.
+- Keep Phase 11 as read-only authoritative-state foundation only. Production
+  Agent auth comes from `agent_auth_sessions` and `agent_users`; missing,
+  expired, revoked, or inactive sessions return 401, while tenant/project/object
+  scope failures return 403. Requirement/Risk first-class tables are migration
+  targets and read sources only; Agent must not modify `requirements`, `risks`,
+  `action_items`, or summary JSON in this phase.
+- `services/api/scripts/run_agent_phase11_postgres_acceptance.py` is the
+  PostgreSQL migration and isolation acceptance script for production token
+  auth, expired/revoked denial, Requirement/Risk migration, review fallback,
+  migration idempotency, rollback, tenant/project/object isolation, summary JSON
+  retention, and formal business-row isolation.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -188,3 +201,7 @@
   provider, real rollback execution, Prompt/RAG/Validator change, Shadow
   promotion, production release, or formal Requirement/ActionItem/Risk write in
   Phase 10.
+- No real Agent command execution, automatic approval, real business object
+  mutation, real rollback execution, Prompt/RAG/Validator change, Shadow
+  promotion, production release, or formal Requirement/ActionItem/Risk write in
+  Phase 11.

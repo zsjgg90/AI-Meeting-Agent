@@ -68,7 +68,11 @@ def dry_run_command(
         raise HTTPException(status_code=403, detail={"status": "rejected", "reasons": ["real_write_not_supported"]})
 
     existing = get_existing_dry_run_audit(db, command.id)
-    snapshot = DatabaseAuthoritativeStateProvider(db).get_state(
+    snapshot = DatabaseAuthoritativeStateProvider(
+        db,
+        principal=principal,
+        view_permission="command_dry_run",
+    ).get_state(
         object_type=command.target_object_type,  # type: ignore[arg-type]
         object_id=command.target_object_id,
     )
@@ -157,7 +161,11 @@ def rollback_dry_run_command(
         raise HTTPException(status_code=403, detail={"status": "rejected", "reasons": ["real_rollback_not_supported"]})
 
     existing = get_existing_rollback_dry_run_audit(db, command.id)
-    snapshot = DatabaseAuthoritativeStateProvider(db).get_state(
+    snapshot = DatabaseAuthoritativeStateProvider(
+        db,
+        principal=principal,
+        view_permission="rollback_execute",
+    ).get_state(
         object_type=command.target_object_type,  # type: ignore[arg-type]
         object_id=command.target_object_id,
     )

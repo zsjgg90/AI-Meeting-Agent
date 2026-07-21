@@ -208,6 +208,28 @@ code but deliberately rejects execution. Phase 10 still does not write
 `action_items`, summary JSON, Requirement, Risk, Prompt, RAG, Validator, Shadow
 output, or any production business state.
 
+Agent v1.0 Phase 11 wires the API Agent auth adapter to a minimal production
+server-side token/session model. `Authorization: Bearer <token>` is hashed and
+matched against `agent_auth_sessions`; active sessions join `agent_users` to
+build `AgentPrincipal` with `user_id`, `tenant_id`, `roles`, `permissions`,
+`project_scope`, `object_scope`, and `authentication_source`. Missing,
+unknown, expired, revoked, or inactive sessions return 401. Scope or permission
+denials return 403. Tests may still inject principals through FastAPI
+dependency overrides, but the production path fails closed and never trusts
+client-reported identity or permissions.
+
+Phase 11 also adds first-class authoritative state tables for `Requirement` and
+`Risk` through Alembic revision `20260721_0013`. The migration copies
+confirmable candidates from existing `meeting_summaries` JSON into
+`requirements` and `risks`, puts incomplete candidates into `review`, records
+source meeting/summary/JSON references, preserves the original summary JSON,
+and uses source-reference uniqueness to avoid duplicate migration. The
+production `DatabaseAuthoritativeStateProvider` now reads `Requirement` from
+`requirements`, `AgentActionItem` from `action_items`, and `Risk` from `risks`;
+it no longer scans summary JSON as the formal authoritative source. Real
+ControlledWriteCommand execution, real rollback execution, automatic approval,
+Prompt/RAG/Validator changes, and Shadow promotion remain disabled.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -311,6 +333,7 @@ services\worker\.venv\Scripts\python.exe services\worker\scripts\run_real_produc
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_acceptance.py
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase10_security_acceptance.py
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase11_postgres_acceptance.py
 ```
 
 `run_meeting_pipeline_acceptance.py` 会使用真实 Qwen3/Ollama 和现有 RAG

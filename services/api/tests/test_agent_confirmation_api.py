@@ -12,7 +12,7 @@ from sqlalchemy.pool import StaticPool
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
 from app.agent_command_executor import dry_run_command, execute_command_in_transaction
 from app.agent_confirmation_service import approve_proposal, recover_duplicate_after_integrity_error
-from app.agent_security import AgentPrincipal, get_agent_principal
+from app.agent_security import AgentPrincipal, get_agent_principal, hash_agent_token
 from app.agent_write_control import AgentActionProposal, AgentProposalConfirmation, build_idempotency_key
 from app.config import Settings
 from app.database import Base, get_db
@@ -21,10 +21,14 @@ from app.models import (
     ActionItem,
     AgentActionProposalRecord,
     AgentAuditRecord,
+    AgentAuthSession,
     AgentProposalConfirmationRecord,
+    AgentUser,
     ControlledWriteCommandRecord,
     Meeting,
     MeetingSummary,
+    Requirement,
+    Risk,
 )
 
 
@@ -100,6 +104,8 @@ class AgentConfirmationApiTest(unittest.TestCase):
             )
             item = ActionItem(
                 id="action-1",
+                tenant_id="tenant-1",
+                project_id="project-1",
                 meeting_id=meeting.id,
                 summary_id=summary.id,
                 task="补齐导出权限配置",
@@ -110,7 +116,42 @@ class AgentConfirmationApiTest(unittest.TestCase):
                 source_text="Alice 负责补齐导出权限配置。",
                 updated_at=now,
             )
-            db.add_all([meeting, summary, item])
+            requirement = Requirement(
+                id="req-1",
+                tenant_id="tenant-1",
+                project_id="project-1",
+                title="导出权限配置",
+                description="Requirement from formal table.",
+                status="confirmed",
+                owner="Alice",
+                priority="medium",
+                version=1,
+                source_meeting_id=meeting.id,
+                source_summary_id=summary.id,
+                source_json_field="meeting_agenda",
+                source_json_index=0,
+                source_ref={"raw": summary.meeting_agenda[0], "migration_status": "confirmed"},
+                updated_at=now,
+            )
+            risk = Risk(
+                id="risk-1",
+                tenant_id="tenant-1",
+                project_id="project-1",
+                title="供应商延期",
+                description="Risk from formal table.",
+                status="active",
+                owner="Alice",
+                priority="high",
+                version=1,
+                source_meeting_id=meeting.id,
+                source_summary_id=summary.id,
+                source_json_field="risks",
+                source_json_index=0,
+                level="high",
+                source_ref={"raw": summary.risks[0], "migration_status": "confirmed"},
+                updated_at=now,
+            )
+            db.add_all([meeting, summary, item, requirement, risk])
             db.commit()
         finally:
             db.close()
@@ -147,6 +188,45 @@ class AgentConfirmationApiTest(unittest.TestCase):
 
     def auth_headers(self, permissions: str = "") -> dict[str, str]:
         return {}
+
+    def use_production_token_auth(
+        self,
+        *,
+        token: str = "phase11-token",
+        expires_at: datetime | None = None,
+        revoked_at: datetime | None = None,
+        permissions: list[str] | None = None,
+        project_scope: list[str] | None = None,
+        tenant_id: str = "tenant-1",
+    ) -> dict[str, str]:
+        self.app.dependency_overrides.pop(get_agent_principal, None)
+        db = self.SessionLocal()
+        try:
+            user = AgentUser(
+                id="agent-user-1",
+                tenant_id=tenant_id,
+                display_name="Production Reviewer",
+                roles=["agent_high_risk_approver"],
+                permissions=permissions
+                or ["proposal_view", "proposal_review", "command_dry_run", "audit_view", "rollback_execute"],
+                project_scope=project_scope or ["project-1"],
+                object_scope={},
+                is_active=True,
+            )
+            session = AgentAuthSession(
+                id="agent-session-1",
+                user_id=user.id,
+                token_hash=hash_agent_token(token),
+                authentication_source="phase11_test_bearer",
+                expires_at=expires_at or datetime(2026, 7, 30, 12, 0, tzinfo=timezone.utc),
+                revoked_at=revoked_at,
+            )
+            db.merge(user)
+            db.merge(session)
+            db.commit()
+        finally:
+            db.close()
+        return {"Authorization": f"Bearer {token}"}
 
     def create_action_proposal(self, **overrides) -> dict:
         payload = {
@@ -192,10 +272,46 @@ class AgentConfirmationApiTest(unittest.TestCase):
 
             self.assertEqual(action.source, "postgresql.action_items")
             self.assertEqual(action.data["owner"], "Alice")
+            self.assertEqual(requirement.source, "postgresql.requirements")
             self.assertEqual(requirement.status, "confirmed")
+            self.assertEqual(risk.source, "postgresql.risks")
             self.assertEqual(risk.data["level"], "high")
         finally:
             db.close()
+
+    def test_provider_does_not_read_requirement_or_risk_from_summary_json(self) -> None:
+        db = self.SessionLocal()
+        try:
+            db.query(Requirement).delete()
+            db.query(Risk).delete()
+            db.commit()
+            provider = DatabaseAuthoritativeStateProvider(db)
+
+            self.assertIsNone(provider.get_state(object_type="Requirement", object_id="req-1"))
+            self.assertIsNone(provider.get_state(object_type="Risk", object_id="risk-1"))
+            summary = db.get(MeetingSummary, "summary-agent-phase8")
+            self.assertEqual(summary.meeting_agenda[0]["requirement_id"], "req-1")
+            self.assertEqual(summary.risks[0]["risk_id"], "risk-1")
+        finally:
+            db.close()
+
+    def test_valid_bearer_token_builds_agent_principal(self) -> None:
+        headers = self.use_production_token_auth()
+        response = self.client.get("/agent/action-proposals", headers=headers)
+
+        self.assertEqual(response.status_code, 200, response.text)
+
+    def test_expired_bearer_token_is_rejected(self) -> None:
+        headers = self.use_production_token_auth(expires_at=datetime(2026, 7, 1, 12, 0, tzinfo=timezone.utc))
+        response = self.client.get("/agent/action-proposals", headers=headers)
+
+        self.assertEqual(response.status_code, 401)
+
+    def test_revoked_bearer_token_is_rejected(self) -> None:
+        headers = self.use_production_token_auth(revoked_at=datetime(2026, 7, 20, 12, 0, tzinfo=timezone.utc))
+        response = self.client.get("/agent/action-proposals", headers=headers)
+
+        self.assertEqual(response.status_code, 401)
 
     def test_proposal_save_and_query(self) -> None:
         created = self.create_action_proposal()
@@ -788,6 +904,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
                 user_id="user-1",
                 reviewer_identity="reviewer-1",
                 permissions=("command_dry_run",),
+                tenant_id="tenant-1",
                 project_ids=("project-1",),
             )
             with patch("app.agent_command_executor.persist_dry_run_audit", side_effect=RuntimeError("audit failed")):
