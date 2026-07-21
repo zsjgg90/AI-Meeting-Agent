@@ -2,6 +2,25 @@
 
 ## 2026-07-21
 
+- Added Agent v1.0 Phase 12 real-write preparation without enabling real
+  writes.
+- Added Alembic revision `20260721_0014` with
+  `action_item_scope_backfill_audits` for historical `action_items`
+  tenant/project backfill audit, review, idempotency, and rollback evidence.
+- Added `services/api/app/action_item_scope_backfill.py`. Backfill applies
+  tenant/project only from a unique, non-default, verifiable Requirement/Risk
+  scope for the same summary or meeting; existing valid scopes are preserved
+  and unverifiable/conflicting rows enter `review`.
+- Added Phase 12 transaction rehearsal in `agent_command_executor.py`. It locks
+  the command row, re-reads authoritative state, validates ready/version/scope,
+  and writes Agent audit records with `business_writes_performed=false`; it
+  does not update Requirement, Risk, ActionItem, or summary JSON business data.
+- Added `services/api/scripts/run_agent_phase12_postgres_acceptance.py` for
+  PostgreSQL safety acceptance on synthetic prefixed data, covering backfill
+  success/review/idempotency/rollback, existing-scope preservation, migration
+  rollback, transaction failure rollback, concurrent idempotency, restart
+  idempotency, rollback conflict rejection, isolation, and unchanged formal
+  business data.
 - Added Agent v1.0 Phase 11 production identity and first-class authoritative
   state foundation.
 - Added Alembic revision `20260721_0013` with `requirements`, `risks`,

@@ -160,6 +160,26 @@ class ActionItem(Base):
     summary: Mapped[MeetingSummary | None] = relationship(back_populates="action_items")
 
 
+class ActionItemScopeBackfillAudit(Base):
+    __tablename__ = "action_item_scope_backfill_audits"
+    __table_args__ = (UniqueConstraint("run_id", "action_item_id", name="uq_action_item_scope_backfill_run_item"),)
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    run_id: Mapped[str] = mapped_column(String(64), index=True)
+    action_item_id: Mapped[str] = mapped_column(ForeignKey("action_items.id"), index=True)
+    old_tenant_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    old_project_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    resolved_tenant_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    resolved_project_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    status: Mapped[str] = mapped_column(String(32), default="review", index=True)
+    reason: Mapped[str] = mapped_column(Text, default="")
+    source_ref: Mapped[dict] = mapped_column(JSONB, default=dict)
+    dry_run: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    applied_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    rolled_back_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+
 class Requirement(Base):
     __tablename__ = "requirements"
     __table_args__ = (

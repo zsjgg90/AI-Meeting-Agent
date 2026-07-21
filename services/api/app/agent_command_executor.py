@@ -38,6 +38,16 @@ class RollbackDryRunResult:
     writes_performed: bool = False
 
 
+@dataclass(frozen=True)
+class TransactionRehearsalResult:
+    command: ControlledWriteCommandRecord
+    audit: AgentAuditRecord
+    status: str
+    rejection_reasons: list[str]
+    authoritative_state: dict[str, Any] | None
+    writes_performed: bool = False
+
+
 def dry_run_command(
     db: Session,
     *,
@@ -349,18 +359,149 @@ def get_original_dry_run_marker(command: ControlledWriteCommandRecord) -> bool:
     return context.get("writes_performed") is False and bool(command.idempotency_key)
 
 
+def rehearse_command_transaction(
+    db: Session,
+    *,
+    command_id: str,
+    principal: AgentPrincipal,
+    fail_stage: str | None = None,
+) -> TransactionRehearsalResult:
+    command = db.scalars(
+        select(ControlledWriteCommandRecord)
+        .where(ControlledWriteCommandRecord.id == command_id)
+        .with_for_update()
+    ).first()
+    if command is None:
+        raise HTTPException(status_code=404, detail="Controlled write command not found.")
+    existing = get_existing_rehearsal_audit(db, command_id)
+    if existing is not None:
+        return TransactionRehearsalResult(
+            command=command,
+            audit=existing,
+            status="duplicate",
+            rejection_reasons=["duplicate_execution_rehearsal"],
+            authoritative_state=existing.audit_context.get("authoritative_state"),
+        )
+    if fail_stage == "after_command_lock":
+        db.rollback()
+        raise RuntimeError("phase12 rehearsal failure after command lock")
+
+    snapshot = DatabaseAuthoritativeStateProvider(
+        db,
+        principal=principal,
+        view_permission="command_execute",
+    ).get_state(
+        object_type=command.target_object_type,  # type: ignore[arg-type]
+        object_id=command.target_object_id,
+    )
+    authoritative_state = snapshot.model_dump(mode="json") if snapshot else None
+    reasons = validate_dry_run_request(command=command, snapshot=authoritative_state)
+    if reasons:
+        audit = persist_rehearsal_audit(
+            db,
+            command=command,
+            reviewer=principal.reviewer_identity,
+            result="rejected",
+            reasons=reasons,
+            authoritative_state=authoritative_state,
+        )
+        db.commit()
+        db.refresh(audit)
+        status_code = 409 if "version_conflict" in reasons else 400
+        raise HTTPException(status_code=status_code, detail={"status": "rejected", "reasons": reasons})
+    if fail_stage == "before_audit":
+        db.rollback()
+        raise RuntimeError("phase12 rehearsal failure before audit")
+
+    audit = persist_rehearsal_audit(
+        db,
+        command=command,
+        reviewer=principal.reviewer_identity,
+        result="execution_rehearsal",
+        reasons=[],
+        authoritative_state=authoritative_state,
+    )
+    if fail_stage == "after_audit":
+        db.rollback()
+        raise RuntimeError("phase12 rehearsal failure after audit")
+    db.commit()
+    db.refresh(audit)
+    return TransactionRehearsalResult(
+        command=command,
+        audit=audit,
+        status="execution_rehearsal",
+        rejection_reasons=[],
+        authoritative_state=authoritative_state,
+    )
+
+
+def persist_rehearsal_audit(
+    db: Session,
+    *,
+    command: ControlledWriteCommandRecord,
+    reviewer: str,
+    result: str,
+    reasons: list[str],
+    authoritative_state: dict[str, Any] | None,
+) -> AgentAuditRecord:
+    audit = AgentAuditRecord(
+        id=stable_dry_run_audit_id(command.id, result, reasons),
+        proposal_id=command.proposal_id,
+        confirmation_id=command.confirmation_id,
+        command_id=command.id,
+        target_object_type=command.target_object_type,
+        target_object_id=command.target_object_id,
+        operation=command.operation,
+        reviewer=reviewer,
+        decision="execution_rehearsal",
+        result=result,
+        reasons=sorted(set(reasons)),
+        authoritative_source=authoritative_state.get("source") if authoritative_state else "none",
+        authoritative_version=authoritative_state.get("object_version") if authoritative_state else None,
+        audit_context={
+            "phase": "agent-v1-phase12",
+            "transaction_rehearsal": True,
+            "writes_performed": False,
+            "business_writes_performed": False,
+            "idempotency_key": command.idempotency_key,
+            "expected_changes": dict(command.changes or {}),
+            "rollback_preview": dict(command.rollback_plan or {}),
+            "authoritative_state": authoritative_state,
+            "transaction_order": [
+                "lock_command",
+                "validate_ready",
+                "reread_authoritative_state",
+                "validate_permission_and_version",
+                "skip_business_change_for_rehearsal",
+                "write_agent_audit",
+                "commit_single_transaction",
+            ],
+        },
+    )
+    return db.merge(audit)
+
+
+def get_existing_rehearsal_audit(db: Session, command_id: str) -> AgentAuditRecord | None:
+    return db.scalars(
+        select(AgentAuditRecord)
+        .where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_rehearsal")
+        .order_by(AgentAuditRecord.created_at.desc())
+    ).first()
+
+
 def stable_dry_run_audit_id(command_id: str, result: str, reasons: list[str]) -> str:
     reason_key = ",".join(sorted(set(reasons)))
     return f"audit-dry-run-{uuid5(NAMESPACE_URL, f'{command_id}|{result}|{reason_key}')}"
 
 
 def execute_command_in_transaction(*_: Any, **__: Any) -> None:
-    """Phase 10 contract stub for the future real write executor.
+    """Fail-closed stub for the future real write executor.
 
     A later phase must implement authoritative re-read, expected-version check,
     command status check, idempotency recovery, one database transaction,
     business write, same-transaction audit, failure rollback, and final command
-    status transition. Phase 10 deliberately refuses real writes.
+    status transition. Phase 12 rehearses this path without business mutation;
+    this formal executor deliberately refuses real writes.
     """
 
     raise HTTPException(status_code=403, detail={"status": "rejected", "reasons": ["real_write_not_supported"]})

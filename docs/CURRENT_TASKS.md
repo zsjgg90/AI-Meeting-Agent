@@ -2,10 +2,9 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 11 production token/session auth, scoped
-   authoritative-state provider, Requirement/Risk first-class tables, and
-   PostgreSQL migration acceptance before considering any real command
-   execution pilot.
+1. Review Agent v1.0 Phase 12 historical action-item scope backfill, real-write
+   transaction rehearsal, rollback strategy, and PostgreSQL safety acceptance
+   before considering any limited real command execution pilot.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -67,10 +66,10 @@
   `meeting_summaries` JSON as the formal authoritative source.
 - Phase 8/11 non-blocking risks to resolve before production confirmation UI or
   command execution: proposal list/detail response exposure of evidence and
-  metadata, default historical tenant/project backfill for older `action_items`,
-  duplicated API/Worker Agent contract drift, foreign-key `ondelete` policy,
-  and the minimal Agent auth tables needing integration with the broader
-  product identity system.
+  metadata, production-scale review of Phase 12 historical `action_items`
+  tenant/project backfill results, duplicated API/Worker Agent contract drift,
+  foreign-key `ondelete` policy, and the minimal Agent auth tables needing
+  integration with the broader product identity system.
 - Keep Phase 9 command execution as dry-run only. The API command sandbox may
   read persisted ready commands, re-read authoritative state, validate version,
   permission, idempotency, and target state, and write dry-run audit records
@@ -110,6 +109,18 @@
   auth, expired/revoked denial, Requirement/Risk migration, review fallback,
   migration idempotency, rollback, tenant/project/object isolation, summary JSON
   retention, and formal business-row isolation.
+- Keep Phase 12 as real-write preparation only. Historical `action_items`
+  tenant/project backfill may only use a unique, non-default, verifiable
+  Requirement/Risk scope from the same summary or meeting; unverifiable or
+  conflicting rows must enter review and must not be guessed from defaults.
+- Phase 12 transaction rehearsal may lock commands, re-read authoritative
+  state, validate permissions/version/idempotency, and write Agent audit
+  records, but it must not mutate `requirements`, `risks`, `action_items`, or
+  summary JSON business fields.
+- `services/api/scripts/run_agent_phase12_postgres_acceptance.py` is the
+  PostgreSQL safety acceptance script for synthetic Phase 12 data. Run it only
+  against a database where Phase 12 downgrade/upgrade rehearsal is acceptable;
+  do not run it directly on production data.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and

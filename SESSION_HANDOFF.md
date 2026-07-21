@@ -190,6 +190,26 @@ tenant, project, object type, object id, and operation permission. Phase 11
 still does not update `requirements`, `risks`, `action_items`, summary JSON,
 Prompt, RAG, Validator, Shadow output, or production business state.
 
+Agent v1.0 Phase 12 adds real-write preparation and historical action-item
+scope backfill support while keeping real writes disabled. Alembic revision
+`20260721_0014` adds `action_item_scope_backfill_audits`; the backfill service
+only applies tenant/project to default-scoped historical `action_items` when
+the same summary or meeting has exactly one non-default first-class
+Requirement/Risk tenant/project pair. Existing valid scopes are preserved.
+Unverifiable or conflicting data is recorded as `review` with source references
+and no scope change. The backfill utility is explicit operator-run tooling and
+does not automatically act on production data.
+
+Phase 12 also adds transaction rehearsal for the future command executor. The
+rehearsal locks the `controlled_write_commands` row, checks `ready`, re-reads
+the authoritative provider, validates permission and `expected_version`, and
+writes an Agent audit record in one transaction. It intentionally skips
+business mutation and records `business_writes_performed=false`; it does not
+update `requirements`, `risks`, `action_items`, or summary JSON. The real write
+executor and real rollback executor remain unsupported. Phase 12 is sufficient
+only for Phase 13 pilot preparation, not for directly enabling production real
+writes.
+
 Repository freeze metadata:
 
 - Repository: `https://github.com/zsjgg90/AI-Meeting-Agent`
@@ -287,15 +307,15 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 11 token/session auth, scoped Provider reads, Requirement/Risk
-   migration, and PostgreSQL rollback acceptance before considering a real write
-   pilot.
+1. Review Phase 12 action-item tenant/project backfill, transaction rehearsal,
+   rollback conflict strategy, and PostgreSQL safety acceptance before
+   considering a real write pilot.
 2. Decide how `agent_users` and `agent_auth_sessions` should integrate with the
    broader product identity/session system before exposing Agent APIs broadly.
 3. Keep the remaining Agent risks visible: proposal list/detail evidence and
-   metadata exposure, default historical tenant/project backfill, duplicated
-   API/Worker Agent contracts, FK `ondelete` policy, and no real rollback
-   executor.
+   metadata exposure, production-scale historical tenant/project backfill
+   rollout, duplicated API/Worker Agent contracts, FK `ondelete` policy, and no
+   real rollback executor.
 4. Review first-class Requirement/Risk lifecycle semantics before any command
    executor can mutate those tables.
 5. Keep Agent action execution disabled until a real write service, production

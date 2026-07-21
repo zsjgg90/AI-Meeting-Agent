@@ -659,6 +659,64 @@ Every Agent API state read passes a server-side principal into the provider and
 validates tenant, project, object type, object id, and operation permission.
 Provider reads remain read-only and return `writes_performed=false`.
 
+## Agent Phase 12 Real-Write Preparation
+
+MeetMind Agent v1.0 Phase 12 prepares for future real writes while keeping real
+business mutation disabled:
+
+- `services/api/app/action_item_scope_backfill.py`
+- `services/api/app/agent_command_executor.py`
+- Alembic revision `20260721_0014`
+- `services/api/scripts/run_agent_phase12_postgres_acceptance.py`
+
+Phase 12 adds `action_item_scope_backfill_audits` to support historical
+`action_items` tenant/project backfill. Backfill rules are fail-closed:
+
+- Existing non-default `tenant_id` and `project_id` are treated as valid and
+  are not overwritten.
+- Default `default-tenant` / `default-project` values are placeholders, not
+  verifiable production scope.
+- A row is backfilled only when related first-class `Requirement` or `Risk`
+  records for the same `summary_id` or `meeting_id` produce exactly one
+  non-default `(tenant_id, project_id)` pair.
+- No unique verifiable pair, or multiple conflicting pairs, records `review`
+  and leaves `action_items.tenant_id/project_id` unchanged.
+- Every dry-run, applied row, skipped valid row, review row, and rollback is
+  recorded with source references and reasons.
+
+The future real-write contract is explicit but not enabled. Supported object
+types are `Requirement`, `AgentActionItem`, and `Risk`; allowed operations are
+`update`, `complete`, `defer`, and `cancel`. Commands must carry a field
+whitelist-valid change set, required permission, risk level,
+`expected_version`, `idempotency_key`, `confirmation_id`, `audit_context`, and
+`rollback_plan`.
+
+The designed transaction order is:
+
+```text
+lock command
+-> validate ready
+-> re-read authoritative state
+-> validate permission and expected_version
+-> execute business change in a future phase
+-> write audit
+-> update command state
+-> single transaction commit
+```
+
+Phase 12 rehearsal follows that order through the validation and audit steps
+but skips business mutation. It writes only `agent_audit_records` with
+`transaction_rehearsal=true`, `writes_performed=false`, and
+`business_writes_performed=false`. PostgreSQL row locks and stable audit ids
+make repeated or concurrent rehearsal idempotent. A failed audit or injected
+mid-transaction exception rolls back the rehearsal record.
+
+Rollback remains dry-run/offline only. The design requires rollback to target a
+previously successful command, use the pre-execution authoritative snapshot,
+validate the current object version, reject conflicts instead of automatic
+rollback, require independent confirmation and permission, and be auditable and
+idempotent. Real rollback execution is still unsupported.
+
 ## Schema Version
 
 Current schema version:

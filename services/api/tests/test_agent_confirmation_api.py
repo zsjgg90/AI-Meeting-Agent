@@ -10,7 +10,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
-from app.agent_command_executor import dry_run_command, execute_command_in_transaction
+from app.action_item_scope_backfill import backfill_action_item_scopes, rollback_action_item_scope_backfill
+from app.agent_command_executor import dry_run_command, execute_command_in_transaction, rehearse_command_transaction
 from app.agent_confirmation_service import approve_proposal, recover_duplicate_after_integrity_error
 from app.agent_security import AgentPrincipal, get_agent_principal, hash_agent_token
 from app.agent_write_control import AgentActionProposal, AgentProposalConfirmation, build_idempotency_key
@@ -19,6 +20,7 @@ from app.database import Base, get_db
 from app.main import create_app
 from app.models import (
     ActionItem,
+    ActionItemScopeBackfillAudit,
     AgentActionProposalRecord,
     AgentAuditRecord,
     AgentAuthSession,
@@ -1055,6 +1057,167 @@ class AgentConfirmationApiTest(unittest.TestCase):
         self.assertIn("/agent/commands", openapi["paths"])
         self.assertIn("/agent/commands/{command_id}/dry-run", openapi["paths"])
         self.assertIn("/agent/commands/{command_id}/rollback/dry-run", openapi["paths"])
+
+    def test_action_item_scope_backfill_uses_unique_authoritative_scope(self) -> None:
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            item.tenant_id = "default-tenant"
+            item.project_id = "default-project"
+            db.commit()
+
+            stats = backfill_action_item_scopes(db, run_id="phase12-backfill", dry_run=False)
+            item = db.get(ActionItem, "action-1")
+            audit = db.scalars(select(ActionItemScopeBackfillAudit)).one()
+
+            self.assertEqual(stats.applied, 1)
+            self.assertEqual(item.tenant_id, "tenant-1")
+            self.assertEqual(item.project_id, "project-1")
+            self.assertEqual(audit.status, "applied")
+            self.assertFalse(audit.dry_run)
+            self.assertEqual(audit.reason, "unique_authoritative_requirement_or_risk_scope")
+        finally:
+            db.close()
+
+    def test_action_item_scope_backfill_review_for_unverifiable_scope(self) -> None:
+        db = self.SessionLocal()
+        try:
+            meeting = Meeting(id="phase12-review-meeting", title="Phase 12 review", status="completed")
+            summary = MeetingSummary(
+                id="phase12-review-summary",
+                meeting_id=meeting.id,
+                overview="summary",
+                agenda=[],
+                topics=[],
+                speaker_summaries=[],
+                decisions=[],
+                risks=[],
+                open_questions=[],
+                next_steps=[],
+                meeting_agenda=[],
+                meeting_summary="summary",
+                key_conclusions=[],
+                unresolved_issues=[],
+                risks_and_focus=[],
+                rag_chunk_ids=[],
+            )
+            item = ActionItem(
+                id="phase12-review-action",
+                meeting_id=meeting.id,
+                summary_id=summary.id,
+                task="Needs review",
+                status="open",
+            )
+            db.add_all([meeting, summary, item])
+            db.commit()
+
+            stats = backfill_action_item_scopes(db, run_id="phase12-review", dry_run=False)
+            item = db.get(ActionItem, "phase12-review-action")
+            audit = db.scalars(
+                select(ActionItemScopeBackfillAudit).where(ActionItemScopeBackfillAudit.action_item_id == item.id)
+            ).one()
+
+            self.assertGreaterEqual(stats.review, 1)
+            self.assertEqual(item.tenant_id, "default-tenant")
+            self.assertEqual(item.project_id, "default-project")
+            self.assertEqual(audit.status, "review")
+            self.assertEqual(audit.reason, "no_unique_verifiable_scope")
+        finally:
+            db.close()
+
+    def test_action_item_scope_backfill_is_idempotent_and_preserves_existing_scope(self) -> None:
+        db = self.SessionLocal()
+        try:
+            first = backfill_action_item_scopes(db, run_id="phase12-idempotent", dry_run=False)
+            second = backfill_action_item_scopes(db, run_id="phase12-idempotent", dry_run=False)
+            item = db.get(ActionItem, "action-1")
+            audits = db.scalars(select(ActionItemScopeBackfillAudit)).all()
+
+            self.assertEqual(first.skipped_existing, 1)
+            self.assertEqual(second.skipped_idempotent, 1)
+            self.assertEqual(item.tenant_id, "tenant-1")
+            self.assertEqual(item.project_id, "project-1")
+            self.assertEqual(len(audits), 1)
+        finally:
+            db.close()
+
+    def test_action_item_scope_backfill_rollback_restores_previous_scope(self) -> None:
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            item.tenant_id = "default-tenant"
+            item.project_id = "default-project"
+            db.commit()
+
+            backfill_action_item_scopes(db, run_id="phase12-rollback", dry_run=False)
+            rollback_stats = rollback_action_item_scope_backfill(db, run_id="phase12-rollback")
+            item = db.get(ActionItem, "action-1")
+            audit = db.scalars(select(ActionItemScopeBackfillAudit)).one()
+
+            self.assertEqual(rollback_stats.rolled_back, 1)
+            self.assertEqual(item.tenant_id, "default-tenant")
+            self.assertEqual(item.project_id, "default-project")
+            self.assertEqual(audit.status, "rolled_back")
+        finally:
+            db.close()
+
+    def test_transaction_rehearsal_writes_only_agent_audit(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post("/agent/action-proposals/proposal-action-1/approve", json={})
+        command_id = approved.json()["command"]["id"]
+        db = self.SessionLocal()
+        try:
+            principal = AgentPrincipal(
+                user_id="user-1",
+                reviewer_identity="reviewer-1",
+                permissions=("command_execute",),
+                tenant_id="tenant-1",
+                project_ids=("project-1",),
+            )
+            result = rehearse_command_transaction(db, command_id=command_id, principal=principal)
+            duplicate = rehearse_command_transaction(db, command_id=command_id, principal=principal)
+            item = db.get(ActionItem, "action-1")
+            requirement = db.get(Requirement, "req-1")
+            risk = db.get(Risk, "risk-1")
+            audits = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_rehearsal")
+            ).all()
+
+            self.assertEqual(result.status, "execution_rehearsal")
+            self.assertEqual(duplicate.status, "duplicate")
+            self.assertEqual(len(audits), 1)
+            self.assertFalse(audits[0].audit_context["business_writes_performed"])
+            self.assertEqual(item.owner, "Alice")
+            self.assertEqual(item.status, "open")
+            self.assertEqual(requirement.version, 1)
+            self.assertEqual(risk.version, 1)
+        finally:
+            db.close()
+
+    def test_transaction_rehearsal_mid_failure_rolls_back_audit(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post("/agent/action-proposals/proposal-action-1/approve", json={})
+        command_id = approved.json()["command"]["id"]
+        db = self.SessionLocal()
+        try:
+            principal = AgentPrincipal(
+                user_id="user-1",
+                reviewer_identity="reviewer-1",
+                permissions=("command_execute",),
+                tenant_id="tenant-1",
+                project_ids=("project-1",),
+            )
+            with self.assertRaises(RuntimeError):
+                rehearse_command_transaction(db, command_id=command_id, principal=principal, fail_stage="after_audit")
+            item = db.get(ActionItem, "action-1")
+            audits = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_rehearsal")
+            ).all()
+
+            self.assertEqual(audits, [])
+            self.assertEqual(item.owner, "Alice")
+        finally:
+            db.close()
 
     def assert_no_approved_confirmation(self) -> None:
         db = self.SessionLocal()

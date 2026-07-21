@@ -234,7 +234,12 @@ rollback dry-run success, duplicate rollback dry-run, rollback conflict
 rejection, and the real-write contract stub refusing writes. Phase 11 coverage
 adds valid Bearer token authentication, expired/revoked token 401,
 Requirement/Risk formal table reads, Provider no-summary-JSON behavior,
-tenant/project/object isolation, and unchanged formal business data.
+tenant/project/object isolation, and unchanged formal business data. Phase 12
+coverage adds historical `action_items` tenant/project backfill from a unique
+verifiable Requirement/Risk scope, unverifiable rows entering review,
+idempotent repeat backfill, rollback, preservation of existing valid scope,
+transaction rehearsal audit-only behavior, and rehearsal mid-transaction
+rollback without changing formal business rows.
 
 `npm run test:agent-review-ui` performs a lightweight static check of the Expo
 Agent Review workbench. It verifies the presence of proposal list/detail,
@@ -285,6 +290,21 @@ is acceptable:
 ```powershell
 $env:PYTHONPATH="D:\codex_work\会议声纹识别;D:\codex_work\会议声纹识别\services\api;D:\codex_work\会议声纹识别\services\worker"
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase11_postgres_acceptance.py
+```
+
+`services/api/scripts/run_agent_phase12_postgres_acceptance.py` validates the
+Phase 12 PostgreSQL safety path on synthetic `phase12_pg_` data. It upgrades to
+head, seeds scoped/unscoped action items plus first-class Requirement/Risk
+sources, verifies dry-run/apply/repeat/rollback backfill behavior, downgrades
+to Phase 11 to prove migration rollback, upgrades again, verifies transaction
+rehearsal failure rollback, concurrent idempotency, restart idempotency,
+rollback conflict rejection, tenant/project isolation, and unchanged formal
+business data. Run it only against a database where Phase 12
+downgrade/upgrade rehearsal is acceptable:
+
+```powershell
+$env:PYTHONPATH="D:\codex_work\会议声纹识别;D:\codex_work\会议声纹识别\services\api;D:\codex_work\会议声纹识别\services\worker"
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase12_postgres_acceptance.py
 ```
 
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance

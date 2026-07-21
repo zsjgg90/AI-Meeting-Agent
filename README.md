@@ -230,6 +230,27 @@ it no longer scans summary JSON as the formal authoritative source. Real
 ControlledWriteCommand execution, real rollback execution, automatic approval,
 Prompt/RAG/Validator changes, and Shadow promotion remain disabled.
 
+Agent v1.0 Phase 12 adds the pre-real-write preparation layer without enabling
+real writes. Alembic revision `20260721_0014` adds
+`action_item_scope_backfill_audits` for historical `action_items`
+tenant/project backfill evidence. The backfill service only applies a scope
+when `summary_id` or `meeting_id` links to exactly one non-default
+Requirement/Risk tenant/project pair; existing valid scopes are preserved, and
+unverifiable or conflicting rows are recorded for `review`. Backfill supports
+dry-run, persisted audit, idempotent repeat execution, and rollback of applied
+scope updates. It is an explicit operator-run utility and does not
+automatically act on production data.
+
+Phase 12 also adds an offline transaction rehearsal for future real command
+execution. The rehearsal locks the command row, checks readiness, re-reads the
+authoritative state, validates permission and version, and writes an Agent
+audit record in one transaction. It deliberately skips the business mutation
+step and records `business_writes_performed=false`; `Requirement`, `Risk`, and
+`ActionItem` business fields remain unchanged. The real write executor and real
+rollback executor still reject execution and the default safety switches remain
+closed. Phase 12 provides the basis for Phase 13 pilot preparation only; it is
+not sufficient to directly enable production real writes.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
