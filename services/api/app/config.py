@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     agent_actions_enabled: bool = False
     agent_command_execution_enabled: bool = False
     agent_command_dry_run_only: bool = True
+    agent_rollback_execution_enabled: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

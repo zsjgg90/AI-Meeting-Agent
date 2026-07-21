@@ -401,3 +401,14 @@ class AgentCommandDryRunRead(BaseModel):
     expected_changes: dict[str, Any] = Field(default_factory=dict)
     rollback_preview: dict[str, Any] = Field(default_factory=dict)
     writes_performed: bool = False
+
+
+class AgentRollbackDryRunRead(BaseModel):
+    command: ControlledWriteCommandRead
+    audit: AgentAuditRecordRead
+    status: str
+    rejection_reasons: list[str] = Field(default_factory=list)
+    rollback_command: dict[str, Any] = Field(default_factory=dict)
+    rollback_preview: dict[str, Any] = Field(default_factory=dict)
+    authoritative_state: dict[str, Any] | None = None
+    writes_performed: bool = False

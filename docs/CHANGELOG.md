@@ -2,6 +2,40 @@
 
 ## 2026-07-21
 
+- Added Agent v1.0 Phase 10 production-permission safety layer before any real
+  writes. Agent APIs no longer trust client-submitted `X-Agent-Reviewer` or
+  `X-Agent-Permissions`; authorization now goes through the server-side
+  `AgentPrincipal` adapter in `services/api/app/agent_security.py`.
+- The default Agent auth adapter fails closed with 401 because the project has
+  no production auth/session/JWT module yet. Tests and local acceptance scripts
+  inject principals through FastAPI dependency overrides only.
+- Added operation permissions `proposal_view`, `proposal_review`,
+  `command_dry_run`, `command_execute`, `audit_view`, and `rollback_execute`
+  with user identity, project scope, object scope, operation, and risk-level
+  checks. High-risk approvals require elevated role/permission.
+- Added rollback dry-run support under
+  `POST /agent/commands/{command_id}/rollback/dry-run`. It requires a persisted
+  command id and original dry-run audit, re-reads authoritative state, checks
+  version/idempotency, generates a rollback command preview, and writes audit
+  records with `writes_performed=false`.
+- Added the explicit real-write transaction contract stub in
+  `agent_command_executor.py`; it documents authoritative re-read,
+  expected-version optimistic locking, ready-state check, idempotency recovery,
+  single-transaction business write plus audit, failure rollback, and success
+  status transition, but Phase 10 deliberately rejects real writes.
+- Added `AGENT_ROLLBACK_EXECUTION_ENABLED=false` and kept
+  `AGENT_COMMAND_EXECUTION_ENABLED=false` plus
+  `AGENT_COMMAND_DRY_RUN_ONLY=true` as default safety flags.
+- Expanded API tests for unauthenticated access, forged client permission
+  headers, insufficient permission, project/object isolation, high-risk
+  approval denial, dry-run/audit permissions, audit-failure rollback,
+  service-restart idempotency, rollback dry-run success/duplicate/conflict,
+  and business-row isolation.
+- Added `services/api/scripts/run_agent_phase10_security_acceptance.py` for
+  PostgreSQL safety acceptance covering auth fail-closed, scope/risk denial,
+  idempotent dry-run, rollback dry-run, conflict rejection, and unchanged
+  formal business data.
+
 - Added Agent v1.0 Phase 9 minimum Expo Agent Review workbench under the AI tab.
 - The UI lists proposal states including `pending`, `approved`, `rejected`,
   `expired`, `conflict`, `duplicate`, and `ready`; shows target object, current

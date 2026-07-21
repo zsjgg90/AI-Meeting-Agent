@@ -146,6 +146,28 @@ Runtime flags default to `AGENT_COMMAND_EXECUTION_ENABLED=false` and
 `AGENT_COMMAND_DRY_RUN_ONLY=true`. Phase 9 still does not update `action_items`,
 summary JSON, Requirement, Risk, Prompt, RAG, Validator, Shadow promotion, or
 real rollback state.
+Agent v1.0 Phase 10 adds the production-permission safety layer before any
+real writes. Agent APIs now use the server-side `AgentPrincipal` adapter in
+`services/api/app/agent_security.py` and no longer trust client-provided
+`X-Agent-Reviewer` or `X-Agent-Permissions`. Because there is still no
+production auth/session/JWT module, the default adapter fails closed with 401;
+tests and the PostgreSQL safety script inject principals through dependency
+overrides only. The permission model includes `proposal_view`,
+`proposal_review`, `command_dry_run`, `command_execute`, `audit_view`, and
+`rollback_execute`, with user, project, object, operation, and risk-level
+checks. High-risk approval requires elevated role/permission.
+Phase 10 also adds rollback dry-run at
+`POST /agent/commands/{command_id}/rollback/dry-run`, requiring a persisted
+command id and original dry-run audit before generating a rollback command
+preview and audit with `writes_performed=false`. The future real-write executor
+contract is documented as a rejecting stub; it specifies authoritative re-read,
+expected-version optimistic lock, ready-state validation, idempotency recovery,
+single-transaction write plus audit, failure rollback, and success state
+transition for a later phase. Runtime flags are
+`AGENT_COMMAND_EXECUTION_ENABLED=false`, `AGENT_COMMAND_DRY_RUN_ONLY=true`, and
+`AGENT_ROLLBACK_EXECUTION_ENABLED=false`. Phase 10 still does not update
+`action_items`, summary JSON, Requirement, Risk, Prompt, RAG, Validator,
+Shadow output, or production business state.
 
 Repository freeze metadata:
 
@@ -244,20 +266,21 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 9 dry-run audit and rollback preview output before adding any
-   real command execution service.
-2. Keep the Phase 8/9 non-blocking risks visible: proposal list/detail evidence
-   and metadata exposure, Requirement/Risk JSON scan behavior, duplicated
-   API/Worker Agent contracts, FK `ondelete` policy, and header permissions as
-   development-only authorization.
-3. Decide whether Requirement and Risk need independent production business
+1. Review Phase 10 auth adapter, permission mapping, rollback dry-run, and
+   PostgreSQL safety acceptance before considering a real write pilot.
+2. Wire a real production auth/session provider into `AgentPrincipal` before
+   exposing Agent APIs beyond controlled local/testing contexts.
+3. Keep the remaining Agent risks visible: proposal list/detail evidence and
+   metadata exposure, Requirement/Risk JSON scan behavior, duplicated API/Worker
+   Agent contracts, FK `ondelete` policy, and no real rollback executor.
+4. Decide whether Requirement and Risk need independent production business
    tables before any write execution phase; Phase 8 reads them only from
    existing summary JSON snapshots.
-4. Keep Agent action execution disabled until a real write service, production
-   authorization integration, command persistence semantics, and rollback
-   transactions are specified.
-5. Import the remaining required Agent baseline meeting artifact folders under
+5. Keep Agent action execution disabled until a real write service, production
+   authorization integration, command persistence semantics, rollback
+   transactions, and failure drills are approved.
+6. Import the remaining required Agent baseline meeting artifact folders under
    `data/eval/agent_v1_baseline/` when available.
-6. Run `.\scripts\check-services.ps1` with local services available.
-7. Continue embedding model offline/cache setup, shared API/Worker model
+7. Run `.\scripts\check-services.ps1` with local services available.
+8. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.

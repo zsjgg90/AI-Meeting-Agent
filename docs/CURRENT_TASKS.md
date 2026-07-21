@@ -2,8 +2,9 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 9 dry-run sandbox output before considering any
-   real command execution service.
+1. Review Agent v1.0 Phase 10 production-auth adapter, permission mapping,
+   rollback dry-run, and PostgreSQL safety acceptance before considering any
+   real command execution pilot.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -77,6 +78,25 @@
   It must call the API only, use approve/reject confirmation endpoints for
   human decisions, and must not construct `expected_version`,
   `ControlledWriteCommand`, or idempotency keys on the client.
+- Keep Phase 10 as a pre-real-write safety layer only. Agent APIs must use the
+  server-side `AgentPrincipal` auth adapter and must not trust
+  `X-Agent-Reviewer` or `X-Agent-Permissions` headers. The current adapter
+  fails closed until a production auth/session provider is wired in; tests use
+  dependency overrides only.
+- Phase 10 permissions are explicit operation scopes:
+  `proposal_view`, `proposal_review`, `command_dry_run`, `command_execute`,
+  `audit_view`, and `rollback_execute`. Authorization must check user identity,
+  project scope, object scope, operation type, and risk level; high-risk
+  approvals require elevated role/permission.
+- Keep rollback execution in Phase 10 as dry-run only. Rollback dry-run must
+  require a persisted command id and original dry-run audit, re-read
+  authoritative state, validate version/idempotency, generate a rollback
+  command preview, write audit records with `writes_performed=false`, and must
+  not update formal business tables.
+- `services/api/scripts/run_agent_phase10_security_acceptance.py` is the
+  PostgreSQL safety acceptance script for auth fail-closed, scope/risk denial,
+  dry-run idempotency, rollback dry-run, conflict rejection, and formal
+  business-row isolation.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -164,3 +184,7 @@
 - No real Agent command execution, automatic approval, production permission
   replacement, rollback executor, Prompt/RAG/Validator change, Shadow
   promotion, or formal Requirement/ActionItem/Risk write in Phase 9.
+- No real Agent command execution, automatic approval, real production auth
+  provider, real rollback execution, Prompt/RAG/Validator change, Shadow
+  promotion, production release, or formal Requirement/ActionItem/Risk write in
+  Phase 10.

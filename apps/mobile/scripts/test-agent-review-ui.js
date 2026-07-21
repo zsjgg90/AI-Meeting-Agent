@@ -49,4 +49,8 @@ if (submittedBodies.includes('idempotency_key')) {
   throw new Error('Client API helpers must not submit idempotency_key.');
 }
 
+if (api.includes('X-Agent-Reviewer') || api.includes('X-Agent-Permissions')) {
+  throw new Error('Client API helpers must not submit Agent identity or permissions headers.');
+}
+
 console.log('Agent review UI static checks passed.');

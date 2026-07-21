@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-
-from fastapi import APIRouter, Depends, Header, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -11,6 +9,14 @@ from app.agent_confirmation_service import (
     create_proposal,
     get_proposal_or_404,
     reject_proposal,
+)
+from app.agent_security import (
+    AgentPrincipal,
+    get_agent_principal,
+    proposal_project_id,
+    proposal_tenant_id,
+    require_agent_permission,
+    write_control_permissions_for,
 )
 from app.database import get_db
 from app.models import AgentAuditRecord, ControlledWriteCommandRecord, AgentActionProposalRecord
@@ -24,33 +30,22 @@ from app.schemas import (
 router = APIRouter(prefix="/agent/action-proposals", tags=["agent"])
 
 
-@dataclass(frozen=True)
-class AgentReviewer:
-    reviewer: str
-    permissions: list[str]
-
-
-def get_agent_reviewer(
-    x_agent_reviewer: str | None = Header(default=None),
-    x_agent_permissions: str | None = Header(default=None),
-) -> AgentReviewer:
-    reviewer = (x_agent_reviewer or "").strip()
-    permissions = [item.strip() for item in (x_agent_permissions or "").split(",") if item.strip()]
-    if not reviewer:
-        raise HTTPException(status_code=401, detail="X-Agent-Reviewer is required.")
-    if not permissions:
-        raise HTTPException(status_code=403, detail="Agent permissions are required.")
-    return AgentReviewer(reviewer=reviewer, permissions=permissions)
-
-
 @router.post("", response_model=AgentActionProposalRead, status_code=201)
 def save_action_proposal(
     payload: AgentActionProposalCreate,
-    reviewer: AgentReviewer = Depends(get_agent_reviewer),
+    principal: AgentPrincipal = Depends(get_agent_principal),
     db: Session = Depends(get_db),
 ) -> AgentActionProposalRecord:
-    if "agent_proposal:create" not in reviewer.permissions and "*" not in reviewer.permissions:
-        raise HTTPException(status_code=403, detail="Agent proposal create permission is required.")
+    require_agent_permission(
+        principal,
+        "proposal_review",
+        tenant_id=proposal_tenant_id(payload.metadata),
+        project_id=proposal_project_id(payload.metadata),
+        object_type=payload.target_object_type,
+        object_id=payload.target_object_id or payload.proposal_id,
+        risk_level=payload.risk_level,
+        operation=payload.action_type,
+    )
     return create_proposal(db, payload.model_dump(mode="json"))
 
 
@@ -58,11 +53,10 @@ def save_action_proposal(
 def list_action_proposals(
     status: str = Query(default="pending"),
     limit: int = Query(default=50, ge=1, le=100),
-    reviewer: AgentReviewer = Depends(get_agent_reviewer),
+    principal: AgentPrincipal = Depends(get_agent_principal),
     db: Session = Depends(get_db),
 ) -> list[AgentActionProposalRecord]:
-    require_review_access(reviewer.permissions)
-    return list(
+    rows = list(
         db.scalars(
             select(AgentActionProposalRecord)
             .where(AgentActionProposalRecord.status == status)
@@ -70,30 +64,48 @@ def list_action_proposals(
             .limit(limit)
         ).all()
     )
+    visible: list[AgentActionProposalRecord] = []
+    for row in rows:
+        if has_agent_access(
+            principal,
+            "proposal_view",
+            tenant_id=proposal_tenant_id(row.metadata_),
+            project_id=proposal_project_id(row.metadata_),
+            object_type=row.target_object_type,
+            object_id=row.target_object_id or row.id,
+            risk_level=row.risk_level,
+            operation=row.action_type,
+            raise_on_denied=False,
+        ):
+            visible.append(row)
+    return visible
 
 
 @router.get("/{proposal_id}", response_model=AgentActionProposalRead)
 def get_action_proposal(
     proposal_id: str,
-    reviewer: AgentReviewer = Depends(get_agent_reviewer),
+    principal: AgentPrincipal = Depends(get_agent_principal),
     db: Session = Depends(get_db),
 ) -> AgentActionProposalRecord:
-    require_review_access(reviewer.permissions)
-    return get_proposal_or_404(db, proposal_id)
+    row = get_proposal_or_404(db, proposal_id)
+    require_proposal_access(principal, row, "proposal_view")
+    return row
 
 
 @router.post("/{proposal_id}/approve", response_model=AgentProposalDecisionRead)
 def approve_action_proposal(
     proposal_id: str,
     payload: AgentProposalConfirmationRequest,
-    reviewer: AgentReviewer = Depends(get_agent_reviewer),
+    principal: AgentPrincipal = Depends(get_agent_principal),
     db: Session = Depends(get_db),
 ) -> AgentProposalDecisionRead:
+    proposal = get_proposal_or_404(db, proposal_id)
+    require_proposal_access(principal, proposal, "proposal_review")
     row, confirmation, result = approve_proposal(
         db,
         proposal_id=proposal_id,
-        reviewer=reviewer.reviewer,
-        permissions=reviewer.permissions,
+        reviewer=principal.reviewer_identity,
+        permissions=write_control_permissions_for(principal, proposal.target_object_type),
         comment=payload.comment,
     )
     command = db.scalars(
@@ -130,14 +142,16 @@ def approve_action_proposal(
 def reject_action_proposal(
     proposal_id: str,
     payload: AgentProposalConfirmationRequest,
-    reviewer: AgentReviewer = Depends(get_agent_reviewer),
+    principal: AgentPrincipal = Depends(get_agent_principal),
     db: Session = Depends(get_db),
 ) -> AgentProposalDecisionRead:
+    proposal = get_proposal_or_404(db, proposal_id)
+    require_proposal_access(principal, proposal, "proposal_review")
     row, confirmation, audit = reject_proposal(
         db,
         proposal_id=proposal_id,
-        reviewer=reviewer.reviewer,
-        permissions=reviewer.permissions,
+        reviewer=principal.reviewer_identity,
+        permissions=write_control_permissions_for(principal, proposal.target_object_type),
         comment=payload.comment,
     )
     return AgentProposalDecisionRead(
@@ -150,6 +164,44 @@ def reject_action_proposal(
     )
 
 
-def require_review_access(permissions: list[str]) -> None:
-    if not set(permissions) & {"*", "agent_review", "agent_write"}:
-        raise HTTPException(status_code=403, detail="Agent proposal review permission is required.")
+def require_proposal_access(principal: AgentPrincipal, row: AgentActionProposalRecord, permission: str) -> None:
+    require_agent_permission(
+        principal,
+        permission,  # type: ignore[arg-type]
+        tenant_id=proposal_tenant_id(row.metadata_),
+        project_id=proposal_project_id(row.metadata_),
+        object_type=row.target_object_type,
+        object_id=row.target_object_id or row.id,
+        risk_level=row.risk_level,
+        operation=row.action_type,
+    )
+
+
+def has_agent_access(
+    principal: AgentPrincipal,
+    permission: str,
+    *,
+    tenant_id: str | None,
+    project_id: str | None,
+    object_type: str,
+    object_id: str | None,
+    risk_level: str | None,
+    operation: str | None,
+    raise_on_denied: bool,
+) -> bool:
+    try:
+        require_agent_permission(
+            principal,
+            permission,  # type: ignore[arg-type]
+            tenant_id=tenant_id,
+            project_id=project_id,
+            object_type=object_type,
+            object_id=object_id,
+            risk_level=risk_level,
+            operation=operation,
+        )
+        return True
+    except HTTPException:
+        if raise_on_denied:
+            raise
+        return False

@@ -219,19 +219,28 @@ unique-constraint duplicate recovery, command/audit persistence, OpenAPI
 compatibility, and the guarantee that the formal `ActionItem` row is not
 changed by approval.
 
-The same API test module now covers the Phase 9 command dry-run sandbox. It
-validates dry-run success, execution-switch rejection, non-ready command
-rejection, optimistic version conflict rejection, repeated dry-run idempotency,
-audit and rollback preview generation, OpenAPI command routes, and the
-guarantee that formal `ActionItem` rows and summary JSON are unchanged by
-dry-run.
+The same API test module now covers the Phase 9 command dry-run sandbox and
+Phase 10 pre-real-write safety layer. It validates dry-run success,
+execution-switch rejection, non-ready command rejection, optimistic version
+conflict rejection, repeated dry-run idempotency, audit and rollback preview
+generation, OpenAPI command routes, and the guarantee that formal `ActionItem`
+rows and summary JSON are unchanged by dry-run. Phase 10 coverage adds
+unauthenticated request rejection, forged `X-Agent-Reviewer`/
+`X-Agent-Permissions` header rejection, insufficient permission, project and
+object isolation, high-risk approval denial for ordinary reviewers, dry-run and
+audit permission checks, audit-failure rollback, service-restart idempotency,
+rollback dry-run success, duplicate rollback dry-run, rollback conflict
+rejection, and the real-write contract stub refusing writes.
 
 `npm run test:agent-review-ui` performs a lightweight static check of the Expo
 Agent Review workbench. It verifies the presence of proposal list/detail,
 approve/reject second-confirmation text, `conflict`/`expired`/`duplicate`
 status handling, dry-run action, audit records, rollback preview, writes
 performed display, and Agent API helpers. It also checks that mobile request
-bodies do not submit `expected_object_version` or `idempotency_key`.
+bodies do not submit `expected_object_version` or `idempotency_key`. It also
+checks that Expo no longer sends `X-Agent-Reviewer` or `X-Agent-Permissions`
+headers; Agent identity and permissions must come from the API server-side auth
+adapter.
 
 `services/api/scripts/run_agent_phase8_postgres_checks.py` validates the Phase
 8 PostgreSQL path that SQLite cannot prove. It checks that Alembic has one
@@ -243,6 +252,19 @@ and verifies the formal `action_items` row is not changed. Run it with:
 ```powershell
 $env:PYTHONPATH="D:\codex_work\会议声纹识别;D:\codex_work\会议声纹识别\services\api;D:\codex_work\会议声纹识别\services\worker"
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase8_postgres_checks.py
+```
+
+`services/api/scripts/run_agent_phase10_security_acceptance.py` validates the
+Phase 10 PostgreSQL safety path. It upgrades Alembic to head, uses synthetic
+prefixed Agent data, verifies default auth fails closed, verifies forged client
+Agent headers are ignored, checks project/object/risk denials, approves one
+proposal idempotently, runs command dry-run idempotently, runs rollback dry-run
+idempotently, rejects rollback version conflict, and verifies the formal
+`ActionItem` owner remains unchanged. Run it with:
+
+```powershell
+$env:PYTHONPATH="D:\codex_work\浼氳澹扮汗璇嗗埆;D:\codex_work\浼氳澹扮汗璇嗗埆\services\api;D:\codex_work\浼氳澹扮汗璇嗗埆\services\worker"
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase10_security_acceptance.py
 ```
 
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance

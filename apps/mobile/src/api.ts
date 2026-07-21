@@ -257,11 +257,7 @@ export type AgentCommandDryRunResult = {
   writes_performed: boolean;
 };
 
-const agentHeaders = {
-  'Content-Type': 'application/json',
-  'X-Agent-Reviewer': 'mobile-reviewer',
-  'X-Agent-Permissions': 'agent_review,agent_write',
-};
+const jsonHeaders = { 'Content-Type': 'application/json' };
 
 async function requestJson<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}${path}`, options);
@@ -463,21 +459,17 @@ export function submitFeedback(payload: FeedbackPayload): Promise<FeedbackCreate
 }
 
 export function listAgentProposals(status: AgentProposalStatus = 'pending'): Promise<AgentActionProposal[]> {
-  return requestJson<AgentActionProposal[]>(`/agent/action-proposals?status=${encodeURIComponent(status)}`, {
-    headers: agentHeaders,
-  });
+  return requestJson<AgentActionProposal[]>(`/agent/action-proposals?status=${encodeURIComponent(status)}`);
 }
 
 export function getAgentProposal(proposalId: string): Promise<AgentActionProposal> {
-  return requestJson<AgentActionProposal>(`/agent/action-proposals/${encodeURIComponent(proposalId)}`, {
-    headers: agentHeaders,
-  });
+  return requestJson<AgentActionProposal>(`/agent/action-proposals/${encodeURIComponent(proposalId)}`);
 }
 
 export function approveAgentProposal(proposalId: string, comment = ''): Promise<AgentProposalDecision> {
   return requestJson<AgentProposalDecision>(`/agent/action-proposals/${encodeURIComponent(proposalId)}/approve`, {
     method: 'POST',
-    headers: agentHeaders,
+    headers: jsonHeaders,
     body: JSON.stringify({ comment }),
   });
 }
@@ -485,26 +477,21 @@ export function approveAgentProposal(proposalId: string, comment = ''): Promise<
 export function rejectAgentProposal(proposalId: string, comment = ''): Promise<AgentProposalDecision> {
   return requestJson<AgentProposalDecision>(`/agent/action-proposals/${encodeURIComponent(proposalId)}/reject`, {
     method: 'POST',
-    headers: agentHeaders,
+    headers: jsonHeaders,
     body: JSON.stringify({ comment }),
   });
 }
 
 export function listAgentCommands(status = 'ready'): Promise<ControlledWriteCommand[]> {
-  return requestJson<ControlledWriteCommand[]>(`/agent/commands?status=${encodeURIComponent(status)}`, {
-    headers: agentHeaders,
-  });
+  return requestJson<ControlledWriteCommand[]>(`/agent/commands?status=${encodeURIComponent(status)}`);
 }
 
 export function dryRunAgentCommand(commandId: string): Promise<AgentCommandDryRunResult> {
   return requestJson<AgentCommandDryRunResult>(`/agent/commands/${encodeURIComponent(commandId)}/dry-run`, {
     method: 'POST',
-    headers: agentHeaders,
   });
 }
 
 export function listAgentCommandAudits(commandId: string): Promise<AgentAuditRecord[]> {
-  return requestJson<AgentAuditRecord[]>(`/agent/commands/${encodeURIComponent(commandId)}/audits`, {
-    headers: agentHeaders,
-  });
+  return requestJson<AgentAuditRecord[]>(`/agent/commands/${encodeURIComponent(commandId)}/audits`);
 }

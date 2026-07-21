@@ -16,6 +16,7 @@ class AgentConfigTest(unittest.TestCase):
         self.assertFalse(settings.agent_actions_enabled)
         self.assertFalse(settings.agent_command_execution_enabled)
         self.assertTrue(settings.agent_command_dry_run_only)
+        self.assertFalse(settings.agent_rollback_execution_enabled)
 
     def test_agent_rollout_flags_can_be_overridden(self) -> None:
         settings = Settings(
@@ -24,6 +25,7 @@ class AgentConfigTest(unittest.TestCase):
             agent_actions_enabled=True,
             agent_command_execution_enabled=True,
             agent_command_dry_run_only=False,
+            agent_rollback_execution_enabled=True,
         )
 
         self.assertTrue(settings.agent_mode_enabled)
@@ -31,6 +33,7 @@ class AgentConfigTest(unittest.TestCase):
         self.assertTrue(settings.agent_actions_enabled)
         self.assertTrue(settings.agent_command_execution_enabled)
         self.assertFalse(settings.agent_command_dry_run_only)
+        self.assertTrue(settings.agent_rollback_execution_enabled)
 
 
 if __name__ == "__main__":

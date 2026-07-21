@@ -187,6 +187,27 @@ When execution is not explicitly enabled, command dry-run is rejected. Even
 when enabled in tests or local diagnostics, this phase supports only dry-run;
 real business writes remain unsupported.
 
+Agent v1.0 Phase 10 adds the pre-real-write safety layer. Agent APIs no longer
+trust client-reported `X-Agent-Reviewer` or `X-Agent-Permissions` headers. The
+API now uses a server-side `AgentPrincipal` adapter in
+`services/api/app/agent_security.py`; because the project still has no
+production auth/session/JWT module, the default adapter fails closed with 401
+until a real provider is wired in. Tests and local acceptance scripts inject a
+server-side principal only through dependency overrides. Permissions are
+operation scoped as `proposal_view`, `proposal_review`, `command_dry_run`,
+`command_execute`, `audit_view`, and `rollback_execute`, with project scope,
+object scope, operation, and risk-level checks. High-risk commands require an
+elevated role or permission.
+
+Phase 10 also adds a dry-run-only rollback executor and a formal real-write
+transaction contract stub. Rollback dry-run accepts only a persisted command id,
+requires the original dry-run audit, re-reads authoritative state, checks object
+version and idempotency, generates a rollback command preview, and writes audit
+records with `writes_performed=false`. The real-write contract is documented in
+code but deliberately rejects execution. Phase 10 still does not write
+`action_items`, summary JSON, Requirement, Risk, Prompt, RAG, Validator, Shadow
+output, or any production business state.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -289,6 +310,7 @@ services\worker\.venv\Scripts\python.exe services\worker\scripts\run_meeting_pip
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_real_production_analysis.py --meeting-id meeting_001 --ollama-timeout 600
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_acceptance.py
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase10_security_acceptance.py
 ```
 
 `run_meeting_pipeline_acceptance.py` 会使用真实 Qwen3/Ollama 和现有 RAG
@@ -372,6 +394,7 @@ AGENT_SHADOW_MODE=true
 AGENT_ACTIONS_ENABLED=false
 AGENT_COMMAND_EXECUTION_ENABLED=false
 AGENT_COMMAND_DRY_RUN_ONLY=true
+AGENT_ROLLBACK_EXECUTION_ENABLED=false
 ```
 
 Formal legacy Qwen3 + RAG summaries are normalized, then passed through
@@ -463,6 +486,7 @@ npx expo run:android
 - `GET /agent/commands` 查询已生成的受控命令
 - `GET /agent/commands/{command_id}` 查询受控命令详情
 - `POST /agent/commands/{command_id}/dry-run` 对 ready 命令执行 dry-run 沙箱校验
+- `POST /agent/commands/{command_id}/rollback/dry-run` 生成受控 rollback dry-run 预览
 - `GET /agent/commands/{command_id}/audits` 查询命令审计记录
 
 `GET /meetings/{id}/summary` 返回结构：

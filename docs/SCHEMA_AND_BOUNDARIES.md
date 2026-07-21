@@ -492,10 +492,9 @@ The dry-run executor accepts only a persisted command id. It does not accept
 client-submitted `ControlledWriteCommand`, `expected_version`, changes,
 permissions in the request body, or idempotency keys. The executor re-reads the
 current authoritative state through `DatabaseAuthoritativeStateProvider`,
-validates command `ready` status, reviewer permissions from the existing
-internal Agent headers, optimistic version, command idempotency key, target
-existence, and non-empty changes, then writes an `agent_audit_records` dry-run
-audit with:
+validates command `ready` status, server-side reviewer authorization,
+optimistic version, command idempotency key, target existence, and non-empty
+changes, then writes an `agent_audit_records` dry-run audit with:
 
 ```json
 {
@@ -523,6 +522,82 @@ AGENT_COMMAND_DRY_RUN_ONLY=true
 `AGENT_COMMAND_EXECUTION_ENABLED=false` rejects command dry-run by default.
 `AGENT_COMMAND_DRY_RUN_ONLY=true` keeps real writes unsupported even when dry
 run is explicitly enabled for tests or local diagnostics.
+
+## Agent Phase 10 Auth, Permission, And Rollback Safety
+
+MeetMind Agent v1.0 Phase 10 adds the pre-real-write safety layer while keeping
+all formal business writes disabled:
+
+- `services/api/app/agent_security.py`
+- `services/api/app/agent_command_executor.py`
+- `services/api/app/routers/agent_proposals.py`
+- `services/api/app/routers/agent_commands.py`
+- `services/api/scripts/run_agent_phase10_security_acceptance.py`
+
+Agent APIs must not trust client-submitted `X-Agent-Reviewer` or
+`X-Agent-Permissions`. Expo no longer sends those headers. The API obtains an
+`AgentPrincipal` from the server-side authentication adapter. Because the
+project has no complete production auth/session/JWT implementation yet, the
+default adapter fails closed with HTTP 401. Unit tests and PostgreSQL safety
+checks inject test principals with FastAPI dependency overrides; this is not a
+production authentication implementation.
+
+Phase 10 permission scopes are:
+
+- `proposal_view`
+- `proposal_review`
+- `command_dry_run`
+- `command_execute`
+- `audit_view`
+- `rollback_execute`
+
+Every Agent authorization check must validate user identity, project scope,
+object scope, operation type, and risk level. High-risk actions, including
+`high`/`critical` risk levels and high-risk operations such as cancel/complete,
+require an elevated role (`agent_admin` or `agent_high_risk_approver`) or the
+`high_risk_approve` permission. A regular reviewer must not approve high-risk
+commands alone.
+
+Rollback execution is still dry-run only. The rollback dry-run endpoint is:
+
+```text
+POST /agent/commands/{command_id}/rollback/dry-run
+```
+
+It accepts only a persisted command id. It checks the original command and
+audit, requires an existing original dry-run audit, re-reads authoritative
+state, validates the current object version, generates a rollback command
+preview, writes an audit record, and preserves `writes_performed=false`.
+Repeated rollback dry-run returns the existing rollback audit as a duplicate
+result. Rollback conflicts are rejected and audited; no formal
+Requirement/ActionItem/Risk state is modified.
+
+The future real-write executor contract is present only as a rejecting stub.
+Before any later phase can enable it, implementation must prove:
+
+- authoritative state is re-read immediately before write;
+- `expected_version` optimistic lock is checked;
+- command status is `ready`;
+- idempotency key recovery is deterministic after process restart;
+- all formal writes and audit writes happen in one database transaction;
+- mid-transaction failures and audit failures roll back completely;
+- successful execution transitions command state only after the audit is
+  durable;
+- rollback execution is separately permissioned and audited.
+
+Runtime guardrails are:
+
+```text
+AGENT_COMMAND_EXECUTION_ENABLED=false
+AGENT_COMMAND_DRY_RUN_ONLY=true
+AGENT_ROLLBACK_EXECUTION_ENABLED=false
+```
+
+Unset or default configuration must reject real command execution and real
+rollback execution. Test environments must not enable formal business writes.
+Changing environment variables must not bypass the unimplemented real write
+executor or real rollback executor; both executors remain unsupported until a
+later phase implements and verifies them.
 
 ## Schema Version
 
@@ -573,8 +648,8 @@ Legacy fields remain for backward compatibility. New code should prefer canonica
 | Agent Orchestrator | Worker-internal Shadow Mode orchestration, scenario-to-plan mapping, file audit output, deterministic formal-vs-shadow comparison | API response changes, formal result overwrite, database writes, action execution, model free planning, semantic scoring |
 | Agent State Tracker | Worker-internal cross-meeting candidate normalization, deterministic matching, state-change classification, and proposal generation | Database writes, write-path Tools, API contracts, Prompt/RAG/Validator changes, action execution, free database scanning |
 | Agent Write Control | Worker-internal authoritative-state read contract, confirmation validation, inert command generation, audit records, rollback plans, idempotency and permission checks | Database writes, write-path Tools, API contracts, Expo confirmation UI, automatic approval, action execution |
-| Agent Confirmation API | API-side proposal persistence, read-only authoritative snapshots, manual approve/reject decisions, inert command persistence, and audit records | Client-submitted commands, formal Requirement/ActionItem/Risk writes, Expo UI, Prompt/RAG/Validator changes, Shadow promotion, automatic approval |
-| Agent Command Sandbox | API-side dry-run validation for persisted ready commands, expected-change preview, rollback preview, and dry-run audit records | Formal Requirement/ActionItem/Risk writes, client-submitted commands or versions, automatic approval, real rollback execution, Prompt/RAG/Validator changes |
+| Agent Confirmation API | API-side proposal persistence, read-only authoritative snapshots, manual approve/reject decisions, inert command persistence, server-side principal authorization, and audit records | Client-submitted permissions, client-submitted commands, formal Requirement/ActionItem/Risk writes, Prompt/RAG/Validator changes, Shadow promotion, automatic approval |
+| Agent Command Sandbox | API-side dry-run validation for persisted ready commands, expected-change preview, rollback dry-run preview, server-side principal authorization, and dry-run audit records | Formal Requirement/ActionItem/Risk writes, client-submitted commands or versions, automatic approval, real rollback execution, Prompt/RAG/Validator changes |
 | Repository/persistence mapping | DB-compatible payload and rows | Prompt building, model calls |
 
 ## Compatibility Strategy
