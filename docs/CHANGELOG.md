@@ -2,6 +2,12 @@
 
 ## 2026-07-22
 
+- Fixed Expo recent-meeting cards that stayed in the analyzing/loading state
+  after service startup when the latest meeting was only `audio_uploaded`.
+  Uploaded meetings now render as `已上传`/`待处理`, completed-meeting summaries
+  are the only ones fetched for home statistics, and API startup recovers stale
+  `queued`/`running` meeting tasks left by a service restart.
+
 - Added Agent v1.0 Phase 15 final acceptance and release decision artifacts.
 - Added `services/api/scripts/run_agent_phase15_final_acceptance.py` for a
   synthetic PostgreSQL API acceptance using real Bearer token auth,

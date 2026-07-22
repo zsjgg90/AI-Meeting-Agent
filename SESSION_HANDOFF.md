@@ -3,6 +3,12 @@
 ## Current State
 
 The project is in Release Candidate verification state after completing the seven-phase maintainability hardening plan.
+Expo recent-meeting startup loading has a targeted RC fix: the mobile recent
+list no longer treats `audio_uploaded`/`uploaded` as active AI analysis, the
+home statistics summary fetch only requests completed meetings, local Expo
+configuration points to API port 8002, and API startup recovers stale
+`queued`/`running` meeting tasks so service restarts do not leave meetings
+permanently in `processing`/`summarizing`.
 Agent v1.0 upgrade preparation has started at Phase 0 baseline freeze. The
 baseline document is `docs/AGENT_V1_PHASE_0_BASELINE.md`.
 The Phase 0 runtime diagnostic currently fails because API port 8002 is not

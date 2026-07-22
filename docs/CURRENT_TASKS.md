@@ -2,15 +2,18 @@
 
 ## Active Priority
 
-1. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
+1. Keep Expo Go recent-meeting startup flow stable; uploaded meetings must not
+   be displayed as active AI analysis, and stale API background tasks must be
+   recovered on service restart.
+2. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
    grey only under the approved Phase 13/14 scope.
-2. Keep formal Qwen3 + RAG meeting analysis stable.
-3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
-4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
+3. Keep formal Qwen3 + RAG meeting analysis stable.
+4. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
+5. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
    maintenance issues that remain relevant.
-5. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
+6. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
    semantic quality errors before considering formal semantic output again.
-6. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
+7. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
    Expo-visible summary, especially when the meeting metadata indicates a
    manual fixture such as `fixture-gold-standard`.
 

@@ -1,17 +1,29 @@
+from collections.abc import Callable
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import httpx
 from sqlalchemy import text
+from sqlalchemy.orm import Session
 
 from app.config import get_settings
 from app.database import SessionLocal
 from app.observability import log_event, safe_error
 from app.routers import agent_commands, agent_ops, agent_proposals, feedback, meetings, tasks
+from app.services.meeting_task_recovery import recover_stale_meeting_tasks_on_startup
 
 
-def create_app() -> FastAPI:
+def create_app(session_factory: Callable[[], Session] | None = None) -> FastAPI:
     settings = get_settings()
-    app = FastAPI(title="Meeting Voiceprint AI Agent API", version="1.0.0")
+    task_recovery_session_factory = session_factory or SessionLocal
+
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):  # noqa: ARG001
+        recover_stale_meeting_tasks_on_startup(task_recovery_session_factory)
+        yield
+
+    app = FastAPI(title="Meeting Voiceprint AI Agent API", version="1.0.0", lifespan=lifespan)
 
     app.add_middleware(
         CORSMiddleware,

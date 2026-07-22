@@ -60,9 +60,13 @@ npm run test:agent-review-ui
 ```powershell
 services\api\.venv\Scripts\python.exe -m unittest services.api.tests.test_api_contract
 services\api\.venv\Scripts\python.exe -m unittest services.api.tests.test_agent_config
+cd services\api
+.\.venv\Scripts\python.exe -m unittest tests.test_meeting_task_recovery
 ```
 
-These tests validate route registration and response schemas through OpenAPI. They do not require a live database.
+These tests validate route registration, response schemas, and restart recovery
+for stale meeting tasks. The meeting task recovery test uses an in-memory
+SQLite database with JSONB compatibility.
 
 ## Existing Worker Tests
 

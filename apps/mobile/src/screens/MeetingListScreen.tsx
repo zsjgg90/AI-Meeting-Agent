@@ -24,7 +24,7 @@ type Props = {
   onShowAll?: () => void;
 };
 
-type DisplayStatus = 'recording' | 'analyzing' | 'completed' | 'pending' | 'failed';
+type DisplayStatus = 'recording' | 'analyzing' | 'uploaded' | 'completed' | 'pending' | 'failed';
 
 type SummaryByMeeting = Record<string, MeetingSummary | null>;
 
@@ -43,6 +43,7 @@ type HomeStats = {
 const statusText: Record<DisplayStatus, string> = {
   recording: '录音中',
   analyzing: '分析中',
+  uploaded: '已上传',
   completed: '已完成',
   pending: '待录音',
   failed: '失败',
@@ -50,9 +51,10 @@ const statusText: Record<DisplayStatus, string> = {
 
 function normalizeStatus(status: string): DisplayStatus {
   if (status === 'completed') return 'completed';
-  if (['processing', 'transcribing', 'transcribed', 'summarizing', 'audio_uploaded', 'uploaded'].includes(status)) {
+  if (['processing', 'transcribing', 'transcribed', 'summarizing'].includes(status)) {
     return 'analyzing';
   }
+  if (status === 'audio_uploaded' || status === 'uploaded') return 'uploaded';
   if (status === 'recording') return 'recording';
   if (status.includes('failed') || status === 'failed') return 'failed';
   return 'pending';
@@ -136,6 +138,7 @@ function meetingDurationText(meeting: Meeting, status: DisplayStatus): string {
   if (status === 'pending') return '待录音';
   if (status === 'recording') return '进行中';
   if (status === 'analyzing') return '处理中';
+  if (status === 'uploaded') return '待处理';
   if (status === 'failed') return '未完成';
   return '未计算';
 }
@@ -461,7 +464,7 @@ export function MeetingListScreen({
     }
 
     let cancelled = false;
-    const meetingsForStats = meetings.slice(0, 8);
+    const meetingsForStats = meetings.filter((meeting) => normalizeStatus(meeting.status) === 'completed').slice(0, 8);
 
     async function loadSummaries() {
       const results = await Promise.allSettled(
@@ -1172,6 +1175,12 @@ const styles = StyleSheet.create({
   },
   analyzingText: {
     color: '#6657ff',
+  },
+  uploadedBadge: {
+    backgroundColor: '#eef8ff',
+  },
+  uploadedText: {
+    color: '#0284c7',
   },
   completedBadge: {
     backgroundColor: '#dcfce7',
