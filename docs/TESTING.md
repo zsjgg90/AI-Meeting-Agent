@@ -345,6 +345,19 @@ disposable or explicitly safe test database:
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase14_postgres_acceptance.py
 ```
 
+`services/api/scripts/run_agent_phase15_final_acceptance.py` validates the
+Phase 15 final API/DB gate on synthetic `phase15_pg_` data. It uses the real
+Bearer token provider backed by `agent_users` and `agent_auth_sessions`, opens
+only process-local internal grey settings, creates an Agent proposal, approves
+it manually, executes the restricted ActionItem write, verifies duplicate
+execute idempotency, queries redacted audit and metrics, executes controlled
+rollback, runs `/agent/ops/preflight`, checks Requirement/Risk/summary
+isolation, cleans up synthetic rows, and restores Alembic head:
+
+```powershell
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase15_final_acceptance.py
+```
+
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance
 infrastructure for `project_weekly`, `requirement_review`, and
 `cross_department`. It covers the 9 synthetic fixtures, manual `meeting_type`

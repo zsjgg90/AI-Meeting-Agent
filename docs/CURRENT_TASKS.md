@@ -2,9 +2,8 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 14 grey safety guardrails, PostgreSQL grey
-   acceptance, audit evidence, and release preflight output before considering
-   Phase 15 final acceptance.
+1. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
+   grey only under the approved Phase 13/14 scope.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -156,6 +155,17 @@
 - `services/api/scripts/run_agent_phase14_postgres_acceptance.py` is the
   PostgreSQL grey acceptance script for synthetic `phase14_pg_` data. Run it
   only against a disposable or explicitly safe test database.
+- Agent v1.0 Phase 15 final decision is `GO` for internal controlled grey only.
+  This is not production-wide enablement. The approved scope remains
+  `AgentActionItem`, `update` / `complete`, fields `owner`, `due_date`,
+  `priority`, `status`, low/medium risk, manual approval, and explicit
+  tenant/project/user grey whitelists with quotas, concurrency limits,
+  preflight, audit, metrics, circuit breakers, pause, and kill switch.
+- `services/api/scripts/run_agent_phase15_final_acceptance.py` is the Phase 15
+  final API/DB acceptance script for synthetic `phase15_pg_` data. It validates
+  real Bearer token auth, proposal approval, controlled execute, duplicate
+  execute idempotency, audit query, metrics, controlled rollback, preflight,
+  and unchanged Requirement/Risk/summary data.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
@@ -209,6 +219,8 @@
 - No business logic rewrite.
 - No database migration unless a future phase explicitly requires one.
 - No Qwen3/RAG prompt or validator changes.
+- No Phase 15 production-wide enablement, default grey enablement, or scope
+  expansion beyond internal controlled grey.
 - No UI redesign.
 - No queue system migration.
 - No cross-meeting object persistence or Agent action execution until later

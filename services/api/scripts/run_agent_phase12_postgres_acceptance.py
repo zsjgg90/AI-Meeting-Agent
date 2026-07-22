@@ -24,6 +24,7 @@ if str(API_ROOT) not in sys.path:
 from app.action_item_scope_backfill import backfill_action_item_scopes, rollback_action_item_scope_backfill  # noqa: E402
 from app.agent_command_executor import dry_run_command, rehearse_command_transaction, rollback_dry_run_command  # noqa: E402
 from app.agent_security import AgentPrincipal  # noqa: E402
+from app.authoritative_state import DatabaseAuthoritativeStateProvider  # noqa: E402
 from app.config import Settings, get_settings  # noqa: E402
 from app.models import (  # noqa: E402
     ActionItem,
@@ -210,12 +211,17 @@ def seed_ready_command(SessionLocal: sessionmaker[Session]) -> str:
     now = datetime(2026, 7, 21, 16, 5, tzinfo=timezone.utc)
     with SessionLocal() as db:
         action = db.get(ActionItem, f"{PREFIX}existing_action")
+        snapshot = DatabaseAuthoritativeStateProvider(db, principal=principal()).get_state(
+            object_type="AgentActionItem",
+            object_id=action.id,
+        )
+        expected_version = snapshot.object_version
         proposal = AgentActionProposalRecord(
             id=f"{PREFIX}proposal",
             action_type="update",
             target_object_type="AgentActionItem",
             target_object_id=action.id,
-            expected_object_version=action.updated_at.isoformat(),
+            expected_object_version=expected_version,
             title="Update owner",
             description="rehearsal only",
             proposed_changes={"owner": {"from": "Alice", "to": "Bob"}},
@@ -236,7 +242,7 @@ def seed_ready_command(SessionLocal: sessionmaker[Session]) -> str:
             reviewer="Phase 12 Reviewer",
             reviewed_at=now,
             comment="approved",
-            expected_object_version=action.updated_at.isoformat(),
+            expected_object_version=expected_version,
             permissions=["agent_write:AgentActionItem"],
             metadata_={},
         )
@@ -246,7 +252,7 @@ def seed_ready_command(SessionLocal: sessionmaker[Session]) -> str:
             target_object_type="AgentActionItem",
             target_object_id=action.id,
             operation="update",
-            expected_version=action.updated_at.isoformat(),
+            expected_version=expected_version,
             changes={"owner": "Bob"},
             idempotency_key=f"{PREFIX}idempotency",
             confirmation_id=confirmation.id,

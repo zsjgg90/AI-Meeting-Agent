@@ -2,6 +2,22 @@
 
 ## 2026-07-22
 
+- Added Agent v1.0 Phase 15 final acceptance and release decision artifacts.
+- Added `services/api/scripts/run_agent_phase15_final_acceptance.py` for a
+  synthetic PostgreSQL API acceptance using real Bearer token auth,
+  AgentActionProposal approval, controlled ActionItem execute, duplicate
+  execute idempotency, audit query, metrics, controlled rollback, release
+  preflight, and Requirement/Risk/summary isolation checks.
+- Updated Phase 12 PostgreSQL acceptance data generation to use the current
+  authoritative `AgentActionItem` version after Phase 13 introduced
+  `action_items.version`.
+- Added Phase 15 final acceptance report, release decision, risk/open-item
+  list, grey checklist, rollback/emergency runbook, and conversation document.
+- Final decision is `GO` for internal controlled grey only; production-wide
+  writes, Requirement/Risk writes, summary JSON writes, cancel, high/critical,
+  batch execution, automatic approval, Prompt/RAG/Validator changes, Shadow
+  promotion, and default grey enablement remain out of scope.
+
 - Added Agent v1.0 Phase 14 production safety hardening and grey acceptance
   guardrails without expanding the Phase 13 write contract.
 - Added fail-closed grey settings for tenant/project/user whitelists, grey

@@ -250,6 +250,20 @@ batch execution, automatic approval, Prompt/RAG/Validator changes, Shadow
 promotion, default grey enablement, production-wide release, and Phase 15 work
 remain out of scope.
 
+Agent v1.0 Phase 15 completes final acceptance and release decision. The final
+decision is `GO` for internal controlled grey only, under the existing Phase
+13/14 scope and guardrails. Phase 15 added final acceptance tooling
+`services/api/scripts/run_agent_phase15_final_acceptance.py` and archive docs:
+`docs/AGENT_PHASE15_FINAL_ACCEPTANCE_REPORT.md`,
+`docs/AGENT_PHASE15_RELEASE_DECISION.md`,
+`docs/AGENT_PHASE15_RISKS_AND_OPEN_ITEMS.md`,
+`docs/AGENT_PHASE15_GREY_CHECKLIST.md`, and
+`docs/AGENT_PHASE15_ROLLBACK_EMERGENCY_RUNBOOK.md`. Validation passed
+`test-all.ps1`, Phase 11-14 PostgreSQL acceptance, Phase 5B full live Qwen3 +
+RAG Shadow acceptance, `meeting_001` real production analysis, and Phase 15
+API/DB final acceptance. Phase 15 did not enable default grey, change
+production config, expand write scope, or approve production-wide writes.
+
 Repository freeze metadata:
 
 - Repository: `https://github.com/zsjgg90/AI-Meeting-Agent`
@@ -347,9 +361,8 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 14 grey safety guardrails, PostgreSQL grey acceptance, audit
-   evidence, and `/agent/ops/preflight` output before considering Phase 15 final
-   acceptance.
+1. Archive Phase 15 final acceptance with an explicit tag after review; the
+   suggested tag is `agent-v1-phase15-final-acceptance`.
 2. Decide how `agent_users` and `agent_auth_sessions` should integrate with the
    broader product identity/session system before exposing Agent APIs broadly.
 3. Keep the remaining Agent risks visible: proposal list/detail evidence and

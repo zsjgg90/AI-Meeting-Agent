@@ -299,6 +299,23 @@ endpoints, and a preflight release gate. Emergency close rejects new command
 execution but still allows audit queries and controlled rollback of already
 successful Phase 13 commands.
 
+Agent v1.0 Phase 15 completes final acceptance and release decision without
+adding product functionality or expanding the write contract. The final
+decision is `GO` for internal controlled grey only, under the same Phase 13/14
+scope and guardrails. Phase 15 adds final acceptance tooling and archive
+documents:
+
+- `services/api/scripts/run_agent_phase15_final_acceptance.py`
+- `docs/AGENT_PHASE15_FINAL_ACCEPTANCE_REPORT.md`
+- `docs/AGENT_PHASE15_RELEASE_DECISION.md`
+- `docs/AGENT_PHASE15_RISKS_AND_OPEN_ITEMS.md`
+- `docs/AGENT_PHASE15_GREY_CHECKLIST.md`
+- `docs/AGENT_PHASE15_ROLLBACK_EMERGENCY_RUNBOOK.md`
+
+This does not approve production-wide write enablement, Requirement/Risk
+writes, summary JSON writes, `cancel`, high/critical commands, batch execution,
+automatic approval, Prompt/RAG/Validator changes, or Shadow promotion.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -403,6 +420,7 @@ services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shado
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_live_acceptance.py --mode smoke
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase10_security_acceptance.py
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase11_postgres_acceptance.py
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase15_final_acceptance.py
 ```
 
 `run_meeting_pipeline_acceptance.py` 会使用真实 Qwen3/Ollama 和现有 RAG
