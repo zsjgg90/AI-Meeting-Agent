@@ -27,6 +27,8 @@ type Props = {
 type DisplayStatus = 'recording' | 'analyzing' | 'uploaded' | 'completed' | 'pending' | 'failed';
 
 type SummaryByMeeting = Record<string, MeetingSummary | null>;
+const HOME_MEETING_LIMIT = 10;
+const HISTORY_PAGE_SIZE = 30;
 
 type HomeStats = {
   weeklyMeetings: number;
@@ -421,28 +423,45 @@ export function MeetingListScreen({
   const [selecting, setSelecting] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [summaryByMeeting, setSummaryByMeeting] = useState<SummaryByMeeting>({});
+  const [hasMoreMeetings, setHasMoreMeetings] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
 
-  const loadMeetings = useCallback(async () => {
+  const loadMeetings = useCallback(async (append = false, offset = 0) => {
     try {
       setError(null);
-      const data = await listMeetings();
-      setMeetings(data);
-      setSelectedIds((current) => current.filter((id) => data.some((meeting) => meeting.id === id)));
+      const limit = mode === 'home' ? HOME_MEETING_LIMIT : HISTORY_PAGE_SIZE;
+      const data = await listMeetings({ limit, offset });
+      setMeetings((current) => (append ? [...current, ...data] : data));
+      setHasMoreMeetings(mode === 'all' && data.length === limit);
+      if (!append) {
+        setSelectedIds((current) => current.filter((id) => data.some((meeting) => meeting.id === id)));
+      }
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '会议列表加载失败。');
     } finally {
       setLoading(false);
       setRefreshing(false);
+      setLoadingMore(false);
     }
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
-    loadMeetings();
+    setLoading(true);
+    setMeetings([]);
+    setHasMoreMeetings(false);
+    setSelectedIds([]);
+    loadMeetings(false);
   }, [loadMeetings]);
 
   function refresh() {
     setRefreshing(true);
-    loadMeetings();
+    loadMeetings(false);
+  }
+
+  function loadMoreMeetings() {
+    if (mode !== 'all' || loading || loadingMore || !hasMoreMeetings) return;
+    setLoadingMore(true);
+    loadMeetings(true, meetings.length);
   }
 
   function handleOpenMeeting(meeting: Meeting) {
@@ -454,7 +473,7 @@ export function MeetingListScreen({
     onOpenMeeting(meeting.id);
   }
 
-  const visibleMeetings = useMemo(() => (mode === 'home' ? meetings.slice(0, 10) : meetings), [meetings, mode]);
+  const visibleMeetings = useMemo(() => (mode === 'home' ? meetings.slice(0, HOME_MEETING_LIMIT) : meetings), [meetings, mode]);
   const homeStats = useMemo(() => buildHomeStats(meetings, summaryByMeeting), [meetings, summaryByMeeting]);
 
   useEffect(() => {
@@ -581,6 +600,15 @@ export function MeetingListScreen({
           contentContainerStyle={styles.recentListContent}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refresh} tintColor="#6657ff" />}
           ListEmptyComponent={!loading ? <Text style={styles.empty}>暂无历史会议。</Text> : null}
+          onEndReached={loadMoreMeetings}
+          onEndReachedThreshold={0.3}
+          ListFooterComponent={
+            hasMoreMeetings ? (
+              <Pressable onPress={loadMoreMeetings} disabled={loadingMore} style={styles.loadMoreButton}>
+                {loadingMore ? <ActivityIndicator color="#6657ff" /> : <Text style={styles.loadMoreText}>加载更多</Text>}
+              </Pressable>
+            ) : null
+          }
           renderItem={({ item }) => {
             const card = (
               <MeetingCard
@@ -1206,6 +1234,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     paddingTop: 28,
     textAlign: 'center',
+  },
+  loadMoreButton: {
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderColor: '#d9ddf0',
+    borderRadius: 18,
+    borderWidth: 1,
+    justifyContent: 'center',
+    marginTop: 12,
+    minHeight: 44,
+    minWidth: 132,
+    paddingHorizontal: 18,
+  },
+  loadMoreText: {
+    color: '#6657ff',
+    fontSize: 14,
+    fontWeight: '800',
   },
   error: {
     color: '#ef4444',

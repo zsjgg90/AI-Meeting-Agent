@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 import httpx
-from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, HTTPException, Query, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
@@ -86,8 +86,12 @@ def create_meeting(payload: MeetingCreate, db: Session = Depends(get_db)) -> Mee
 
 
 @router.get("", response_model=list[MeetingListItem])
-def list_meetings(db: Session = Depends(get_db)) -> list[Meeting]:
-    return list(db.scalars(select(Meeting).order_by(Meeting.created_at.desc())).all())
+def list_meetings(
+    db: Session = Depends(get_db),
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+) -> list[Meeting]:
+    return list(db.scalars(select(Meeting).order_by(Meeting.created_at.desc()).limit(limit).offset(offset)).all())
 
 
 @router.post("/bulk-delete", response_model=MeetingBulkDeleteResult)
@@ -251,14 +255,15 @@ def upload_audio_chunk(
 
     transcript_segment_count = 0
     try:
-        worker_url = get_settings().worker_url.rstrip("/")
+        settings = get_settings()
+        worker_url = settings.worker_url.rstrip("/")
         response = httpx.post(
             f"{worker_url}/meetings/{meeting_id}/transcribe-chunk",
             json={
                 "audio_file_id": audio_file.id,
                 "start_offset_seconds": start_offset_seconds,
             },
-            timeout=None,
+            timeout=settings.worker_request_timeout_seconds,
         )
         response.raise_for_status()
         transcript_segment_count = int(response.json().get("transcript_segment_count", 0))

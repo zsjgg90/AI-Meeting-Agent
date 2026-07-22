@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-07-23
+
+- Fixed history meeting loading timeouts by bounding `GET /meetings` with
+  `limit`/`offset`, adding mobile request timeout handling, loading only the
+  first home/history page initially, and adding load-more support plus a static
+  history loading regression check.
+- Fixed recording upload regressions by routing mobile recording uploads
+  through the shared timeout wrapper, mapping upload failures to Chinese user
+  messages, preserving Expo `m4a` metadata as `audio/x-m4a`, adding API upload
+  regression coverage, and using a finite Worker timeout for realtime chunk
+  transcription requests.
+
 ## 2026-07-22
 
 - Fixed Expo recent-meeting cards that stayed in the analyzing/loading state

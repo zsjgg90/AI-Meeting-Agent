@@ -76,7 +76,8 @@ if (-not $SkipApiTests) {
     Invoke-Checked { & $ApiPython -m unittest `
         services.api.tests.test_api_contract `
         services.api.tests.test_agent_config `
-        services.api.tests.test_agent_confirmation_api }
+        services.api.tests.test_agent_confirmation_api `
+        services.api.tests.test_meeting_upload_api }
 }
 
 if (-not $SkipWorkerTests) {
@@ -109,6 +110,8 @@ if (-not $SkipMobile) {
     try {
         Invoke-Checked { npm run typecheck }
         Invoke-Checked { npm run test:agent-review-ui }
+        Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-meeting-history-ui.js') }
+        Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-recording-upload-ui.js') }
     }
     finally {
         Pop-Location

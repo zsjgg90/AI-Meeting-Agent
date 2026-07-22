@@ -51,6 +51,8 @@ cd apps/mobile
 npm run typecheck
 npm run test:numbered-list
 npm run test:agent-review-ui
+node apps/mobile/scripts/test-meeting-history-ui.js
+node apps/mobile/scripts/test-recording-upload-ui.js
 ```
 
 ## Existing Worker Tests
@@ -60,6 +62,7 @@ npm run test:agent-review-ui
 ```powershell
 services\api\.venv\Scripts\python.exe -m unittest services.api.tests.test_api_contract
 services\api\.venv\Scripts\python.exe -m unittest services.api.tests.test_agent_config
+services\api\.venv\Scripts\python.exe -m unittest services.api.tests.test_meeting_upload_api
 cd services\api
 .\.venv\Scripts\python.exe -m unittest tests.test_meeting_task_recovery
 ```
@@ -67,6 +70,9 @@ cd services\api
 These tests validate route registration, response schemas, and restart recovery
 for stale meeting tasks. The meeting task recovery test uses an in-memory
 SQLite database with JSONB compatibility.
+`test_meeting_upload_api` verifies Expo-style `audio/x-m4a` recording uploads,
+`audio_uploaded` status persistence, audio file metadata persistence, and empty
+recording rejection without losing the meeting row.
 
 ## Existing Worker Tests
 
@@ -250,6 +256,17 @@ ActionItem update, `version + 1`, same-transaction execution audit, injected
 failure rollback, repeated execution idempotency, rollback success, rollback
 version-conflict rejection, duplicate rollback idempotency, tenant/project
 scope denial, and unchanged Requirement/Risk formal rows.
+
+`node apps/mobile/scripts/test-meeting-history-ui.js` performs a lightweight
+static check of the Expo meeting history loading path. It verifies bounded
+home/history meeting list requests, `limit`/`offset` usage, load-more controls,
+and mobile request timeout handling so one slow meeting-list or summary request
+cannot keep the history page loading indefinitely.
+
+`node apps/mobile/scripts/test-recording-upload-ui.js` performs a lightweight
+static check of the Expo recording upload path. It verifies upload timeout
+handling, Expo `audio/x-m4a` metadata, Chinese upload error messages, and the
+record-upload-process-analyze call sequence.
 
 `npm run test:agent-review-ui` performs a lightweight static check of the Expo
 Agent Review workbench. It verifies the presence of proposal list/detail,

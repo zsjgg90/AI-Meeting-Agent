@@ -9,6 +9,19 @@ home statistics summary fetch only requests completed meetings, local Expo
 configuration points to API port 8002, and API startup recovers stale
 `queued`/`running` meeting tasks so service restarts do not leave meetings
 permanently in `processing`/`summarizing`.
+History meeting loading was bounded after reports of repeated timeouts.
+`GET /meetings` now supports `limit` and `offset` with a default cap, Expo
+loads only the first page initially, the full history page supports load-more,
+and mobile JSON requests abort with a Chinese timeout message instead of
+waiting indefinitely.
+Recording upload was hardened after Expo recording uploads failed without a
+clear bounded error path. Mobile `uploadAudio` and `uploadAudioChunk` now use
+the shared request timeout wrapper, keep Expo `.m4a` uploads as `audio/x-m4a`,
+and map upload failures to Chinese user-facing messages. API upload coverage
+now verifies `audio/x-m4a` acceptance, `audio_uploaded` persistence, audio file
+metadata persistence, and empty-recording rejection without losing the meeting
+row. Realtime chunk transcription Worker calls now use the configured finite
+Worker request timeout.
 Agent v1.0 upgrade preparation has started at Phase 0 baseline freeze. The
 baseline document is `docs/AGENT_V1_PHASE_0_BASELINE.md`.
 The Phase 0 runtime diagnostic currently fails because API port 8002 is not

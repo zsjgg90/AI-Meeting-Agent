@@ -9,6 +9,10 @@
    grey only under the approved Phase 13/14 scope.
 3. Keep formal Qwen3 + RAG meeting analysis stable.
 4. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
+   Recording upload now has timeout-bounded mobile requests, Chinese upload
+   errors, Expo `audio/x-m4a` API regression coverage, and a local HTTP upload
+   smoke check. History meeting loading remains bounded with `limit`/`offset`
+   and load-more pagination.
 5. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
    maintenance issues that remain relevant.
 6. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate

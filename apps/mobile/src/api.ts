@@ -268,18 +268,69 @@ export type AgentCommandExecutionResult = {
 };
 
 const jsonHeaders = { 'Content-Type': 'application/json' };
+const DEFAULT_REQUEST_TIMEOUT_MS = 15000;
 
-async function requestJson<T>(path: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}${path}`, options);
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(body || `请求失败，状态码：${response.status}`);
+async function fetchWithTimeout(url: string, options?: RequestInit): Promise<Response> {
+  const controller = typeof AbortController !== 'undefined' && !options?.signal ? new AbortController() : null;
+  const timer = controller ? setTimeout(() => controller.abort(), DEFAULT_REQUEST_TIMEOUT_MS) : null;
+  try {
+    return await fetch(url, {
+      ...options,
+      signal: options?.signal || controller?.signal,
+    });
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error('网络请求超时，请稍后重试');
+    }
+    throw error;
+  } finally {
+    if (timer) clearTimeout(timer);
   }
-  return response.json() as Promise<T>;
 }
 
-export function listMeetings(): Promise<Meeting[]> {
-  return requestJson<Meeting[]>('/meetings');
+async function requestJson<T>(path: string, options?: RequestInit): Promise<T> {
+  const controller = typeof AbortController !== 'undefined' && !options?.signal ? new AbortController() : null;
+  const timer = controller ? setTimeout(() => controller.abort(), DEFAULT_REQUEST_TIMEOUT_MS) : null;
+  try {
+    const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}${path}`, {
+      ...options,
+      signal: options?.signal || controller?.signal,
+    });
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(friendlyApiError(response.status, body));
+    }
+    return response.json() as Promise<T>;
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error('网络请求超时，请稍后重试');
+    }
+    throw error;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
+function friendlyApiError(status: number, body: string): string {
+  const text = body || '';
+  if (status === 401) return '登录已失效，请重新登录后再试';
+  if (status === 403) return '没有权限访问这条记录';
+  if (status === 404) return '记录不存在或已被删除';
+  if (status === 409) {
+    if (text.includes('version_conflict')) return '数据已更新，请刷新后再处理';
+    if (text.includes('confirmation_expired')) return '记录已过期';
+    if (text.includes('already')) return '记录已被其他人处理';
+    return '提交冲突，请刷新后再试';
+  }
+  if (status >= 500) return '服务暂时不可用，请稍后重试';
+  return '网络请求失败，请稍后重试';
+}
+
+export function listMeetings(options?: { limit?: number; offset?: number }): Promise<Meeting[]> {
+  const params = new URLSearchParams();
+  params.set('limit', String(options?.limit ?? 50));
+  params.set('offset', String(options?.offset ?? 0));
+  return requestJson<Meeting[]>(`/meetings?${params.toString()}`);
 }
 
 export function listTasks(options?: {
@@ -324,12 +375,12 @@ export function getMeetingTranscript(meetingId: string): Promise<MeetingTranscri
 }
 
 export async function deleteMeeting(meetingId: string): Promise<void> {
-  const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}/meetings/${meetingId}`, {
+  const response = await fetchWithTimeout(`${apiBaseUrl.replace(/\/+$/, '')}/meetings/${meetingId}`, {
     method: 'DELETE',
   });
   if (!response.ok) {
     const body = await response.text();
-    throw new Error(body || `删除失败，状态码：${response.status}`);
+    throw new Error(friendlyApiError(response.status, body));
   }
 }
 
@@ -383,6 +434,17 @@ function audioUploadMetadata(uri: string): { name: string; type: string } {
   };
 }
 
+function friendlyUploadError(status: number, body: string): string {
+  if (status === 400) {
+    if (body.includes('Unsupported audio')) return '录音文件格式暂不支持，请重新录制后上传';
+    if (body.includes('empty')) return '录音文件为空，请重新录制';
+    return '录音文件无法上传，请重新录制后再试';
+  }
+  if (status === 404) return '会议不存在，请返回重新创建会议';
+  if (status >= 500) return '录音上传服务暂时不可用，请稍后重试';
+  return '录音上传失败，请稍后重试';
+}
+
 export async function uploadAudio(meetingId: string, uri: string, endedAt?: string): Promise<AudioUploaded> {
   const metadata = audioUploadMetadata(uri);
   const form = new FormData();
@@ -395,13 +457,13 @@ export async function uploadAudio(meetingId: string, uri: string, endedAt?: stri
     form.append('ended_at', endedAt);
   }
 
-  const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}/meetings/${meetingId}/audio`, {
+  const response = await fetchWithTimeout(`${apiBaseUrl.replace(/\/+$/, '')}/meetings/${meetingId}/audio`, {
     method: 'POST',
     body: form,
   });
   if (!response.ok) {
     const body = await response.text();
-    throw new Error(body || `上传失败，状态码：${response.status}`);
+    throw new Error(friendlyUploadError(response.status, body));
   }
   return response.json() as Promise<AudioUploaded>;
 }
@@ -424,13 +486,13 @@ export async function uploadAudioChunk(
     form.append('ended_at', endedAt);
   }
 
-  const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}/meetings/${meetingId}/audio-chunks`, {
+  const response = await fetchWithTimeout(`${apiBaseUrl.replace(/\/+$/, '')}/meetings/${meetingId}/audio-chunks`, {
     method: 'POST',
     body: form,
   });
   if (!response.ok) {
     const body = await response.text();
-    throw new Error(body || `实时音频分片上传失败，状态码：${response.status}`);
+    throw new Error(friendlyUploadError(response.status, body));
   }
   return response.json() as Promise<AudioChunkUploaded>;
 }
