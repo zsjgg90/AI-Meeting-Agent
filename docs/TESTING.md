@@ -239,7 +239,13 @@ coverage adds historical `action_items` tenant/project backfill from a unique
 verifiable Requirement/Risk scope, unverifiable rows entering review,
 idempotent repeat backfill, rollback, preservation of existing valid scope,
 transaction rehearsal audit-only behavior, and rehearsal mid-transaction
-rollback without changing formal business rows.
+rollback without changing formal business rows. Phase 13 coverage adds the
+restricted internal ActionItem real-write pilot: default switch rejection,
+non-whitelisted tenant/project denial, non-pilot field/risk denial, successful
+ActionItem update, `version + 1`, same-transaction execution audit, injected
+failure rollback, repeated execution idempotency, rollback success, rollback
+version-conflict rejection, duplicate rollback idempotency, tenant/project
+scope denial, and unchanged Requirement/Risk formal rows.
 
 `npm run test:agent-review-ui` performs a lightweight static check of the Expo
 Agent Review workbench. It verifies the presence of proposal list/detail,
@@ -247,9 +253,10 @@ approve/reject second-confirmation text, `conflict`/`expired`/`duplicate`
 status handling, dry-run action, audit records, rollback preview, writes
 performed display, and Agent API helpers. It also checks that mobile request
 bodies do not submit `expected_object_version` or `idempotency_key`. It also
-checks that Expo no longer sends `X-Agent-Reviewer` or `X-Agent-Permissions`
-headers; Agent identity and permissions must come from the API server-side auth
-adapter.
+checks that mobile request bodies do not submit Agent command changes or
+permissions. It also checks that Expo no longer sends `X-Agent-Reviewer` or
+`X-Agent-Permissions` headers; Agent identity and permissions must come from
+the API server-side auth adapter.
 
 `services/api/scripts/run_agent_phase8_postgres_checks.py` validates the Phase
 8 PostgreSQL path that SQLite cannot prove. It checks that Alembic has one
@@ -305,6 +312,22 @@ downgrade/upgrade rehearsal is acceptable:
 ```powershell
 $env:PYTHONPATH="D:\codex_work\会议声纹识别;D:\codex_work\会议声纹识别\services\api;D:\codex_work\会议声纹识别\services\worker"
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase12_postgres_acceptance.py
+```
+
+`services/api/scripts/run_agent_phase13_postgres_acceptance.py` validates the
+Phase 13 restricted PostgreSQL pilot on synthetic `phase13_pg_` data. It
+upgrades to head, seeds a whitelisted internal ActionItem plus Requirement/Risk
+control rows, verifies migration downgrade to Phase 12 and upgrade back to
+head, verifies default execution rejection, injected transaction failure
+rollback, concurrent execution idempotency, service-restart idempotency,
+rollback success, duplicate rollback, rollback conflict rejection, tenant/
+project whitelist enforcement, and unchanged Requirement/Risk/summary JSON.
+Run it only against a disposable or explicitly safe test database where
+downgrade/upgrade rehearsal is acceptable:
+
+```powershell
+$env:PYTHONPATH="D:\codex_work\浼氳澹扮汗璇嗗埆;D:\codex_work\浼氳澹扮汗璇嗗埆\services\api;D:\codex_work\浼氳澹扮汗璇嗗埆\services\worker"
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase13_postgres_acceptance.py
 ```
 
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance

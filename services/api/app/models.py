@@ -149,6 +149,7 @@ class ActionItem(Base):
     deadline: Mapped[str | None] = mapped_column(String(64), nullable=True)
     priority: Mapped[str | None] = mapped_column(String(32), nullable=True)
     status: Mapped[str] = mapped_column(String(32), default="open")
+    version: Mapped[int] = mapped_column(Integer, default=1)
     source: Mapped[str | None] = mapped_column(Text, nullable=True)
     source_text: Mapped[str | None] = mapped_column(Text, nullable=True)
     source_segment_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)

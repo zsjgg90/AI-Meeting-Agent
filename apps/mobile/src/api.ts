@@ -257,6 +257,16 @@ export type AgentCommandDryRunResult = {
   writes_performed: boolean;
 };
 
+export type AgentCommandExecutionResult = {
+  command: ControlledWriteCommand;
+  audit: AgentAuditRecord;
+  status: string;
+  rejection_reasons: string[];
+  before_state: Record<string, any> | null;
+  after_state: Record<string, any> | null;
+  writes_performed: boolean;
+};
+
 const jsonHeaders = { 'Content-Type': 'application/json' };
 
 async function requestJson<T>(path: string, options?: RequestInit): Promise<T> {
@@ -489,6 +499,22 @@ export function listAgentCommands(status = 'ready'): Promise<ControlledWriteComm
 export function dryRunAgentCommand(commandId: string): Promise<AgentCommandDryRunResult> {
   return requestJson<AgentCommandDryRunResult>(`/agent/commands/${encodeURIComponent(commandId)}/dry-run`, {
     method: 'POST',
+  });
+}
+
+export function executeAgentCommand(commandId: string, comment = ''): Promise<AgentCommandExecutionResult> {
+  return requestJson<AgentCommandExecutionResult>(`/agent/commands/${encodeURIComponent(commandId)}/execute`, {
+    method: 'POST',
+    headers: jsonHeaders,
+    body: JSON.stringify({ comment }),
+  });
+}
+
+export function rollbackExecuteAgentCommand(commandId: string, comment = ''): Promise<AgentCommandExecutionResult> {
+  return requestJson<AgentCommandExecutionResult>(`/agent/commands/${encodeURIComponent(commandId)}/rollback/execute`, {
+    method: 'POST',
+    headers: jsonHeaders,
+    body: JSON.stringify({ comment }),
   });
 }
 

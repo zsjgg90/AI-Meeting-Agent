@@ -16,6 +16,9 @@ class AgentConfigTest(unittest.TestCase):
         self.assertFalse(settings.agent_actions_enabled)
         self.assertFalse(settings.agent_command_execution_enabled)
         self.assertTrue(settings.agent_command_dry_run_only)
+        self.assertFalse(settings.agent_command_pilot_enabled)
+        self.assertEqual(settings.command_pilot_tenant_set, set())
+        self.assertEqual(settings.command_pilot_project_set, set())
         self.assertFalse(settings.agent_rollback_execution_enabled)
 
     def test_agent_rollout_flags_can_be_overridden(self) -> None:
@@ -25,6 +28,9 @@ class AgentConfigTest(unittest.TestCase):
             agent_actions_enabled=True,
             agent_command_execution_enabled=True,
             agent_command_dry_run_only=False,
+            agent_command_pilot_enabled=True,
+            agent_command_pilot_tenants="tenant-1, tenant-2",
+            agent_command_pilot_projects="project-1, project-2",
             agent_rollback_execution_enabled=True,
         )
 
@@ -33,6 +39,9 @@ class AgentConfigTest(unittest.TestCase):
         self.assertTrue(settings.agent_actions_enabled)
         self.assertTrue(settings.agent_command_execution_enabled)
         self.assertFalse(settings.agent_command_dry_run_only)
+        self.assertTrue(settings.agent_command_pilot_enabled)
+        self.assertEqual(settings.command_pilot_tenant_set, {"tenant-1", "tenant-2"})
+        self.assertEqual(settings.command_pilot_project_set, {"project-1", "project-2"})
         self.assertTrue(settings.agent_rollback_execution_enabled)
 
 

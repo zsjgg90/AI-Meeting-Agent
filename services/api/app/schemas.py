@@ -331,6 +331,10 @@ class AgentProposalConfirmationRequest(BaseModel):
     comment: str = Field(default="", max_length=1000)
 
 
+class AgentCommandExecutionRequest(BaseModel):
+    comment: str = Field(default="", max_length=1000)
+
+
 class AgentProposalConfirmationRead(BaseModel):
     id: str
     proposal_id: str
@@ -412,3 +416,23 @@ class AgentRollbackDryRunRead(BaseModel):
     rollback_preview: dict[str, Any] = Field(default_factory=dict)
     authoritative_state: dict[str, Any] | None = None
     writes_performed: bool = False
+
+
+class AgentCommandExecutionRead(BaseModel):
+    command: ControlledWriteCommandRead
+    audit: AgentAuditRecordRead
+    status: str
+    rejection_reasons: list[str] = Field(default_factory=list)
+    before_state: dict[str, Any] | None = None
+    after_state: dict[str, Any] | None = None
+    writes_performed: bool = True
+
+
+class AgentRollbackExecutionRead(BaseModel):
+    command: ControlledWriteCommandRead
+    audit: AgentAuditRecordRead
+    status: str
+    rejection_reasons: list[str] = Field(default_factory=list)
+    before_state: dict[str, Any] | None = None
+    after_state: dict[str, Any] | None = None
+    writes_performed: bool = True

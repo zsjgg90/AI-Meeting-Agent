@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.agent_command_executor import dry_run_command, rollback_dry_run_command
+from app.agent_command_executor import dry_run_command, execute_command_in_transaction, rollback_command_in_transaction, rollback_dry_run_command
 from app.agent_security import (
     AgentPrincipal,
     get_agent_principal,
@@ -14,7 +14,15 @@ from app.agent_security import (
 )
 from app.database import get_db
 from app.models import AgentActionProposalRecord, AgentAuditRecord, ControlledWriteCommandRecord
-from app.schemas import AgentAuditRecordRead, AgentCommandDryRunRead, AgentRollbackDryRunRead, ControlledWriteCommandRead
+from app.schemas import (
+    AgentAuditRecordRead,
+    AgentCommandDryRunRead,
+    AgentCommandExecutionRead,
+    AgentCommandExecutionRequest,
+    AgentRollbackDryRunRead,
+    AgentRollbackExecutionRead,
+    ControlledWriteCommandRead,
+)
 
 router = APIRouter(prefix="/agent/commands", tags=["agent"])
 
@@ -75,6 +83,31 @@ def dry_run_agent_command(
     )
 
 
+@router.post("/{command_id}/execute", response_model=AgentCommandExecutionRead)
+def execute_agent_command(
+    command_id: str,
+    payload: AgentCommandExecutionRequest | None = None,
+    principal: AgentPrincipal = Depends(get_agent_principal),
+    db: Session = Depends(get_db),
+) -> AgentCommandExecutionRead:
+    command = get_command_or_404(db, command_id)
+    require_command_access(db, principal, command, "command_execute")
+    result = execute_command_in_transaction(
+        db,
+        command_id=command_id,
+        principal=principal,
+    )
+    return AgentCommandExecutionRead(
+        command=ControlledWriteCommandRead.model_validate(result.command),
+        audit=AgentAuditRecordRead.model_validate(result.audit),
+        status=result.status,
+        rejection_reasons=result.rejection_reasons,
+        before_state=result.before_state,
+        after_state=result.after_state,
+        writes_performed=result.writes_performed,
+    )
+
+
 @router.post("/{command_id}/rollback/dry-run", response_model=AgentRollbackDryRunRead)
 def rollback_dry_run_agent_command(
     command_id: str,
@@ -92,6 +125,32 @@ def rollback_dry_run_agent_command(
         rollback_command=result.rollback_command,
         rollback_preview=result.rollback_preview,
         authoritative_state=result.authoritative_state,
+        writes_performed=result.writes_performed,
+    )
+
+
+@router.post("/{command_id}/rollback/execute", response_model=AgentRollbackExecutionRead)
+def rollback_execute_agent_command(
+    command_id: str,
+    payload: AgentCommandExecutionRequest | None = None,
+    principal: AgentPrincipal = Depends(get_agent_principal),
+    db: Session = Depends(get_db),
+) -> AgentRollbackExecutionRead:
+    command = get_command_or_404(db, command_id)
+    require_command_access(db, principal, command, "rollback_execute")
+    result = rollback_command_in_transaction(
+        db,
+        command_id=command_id,
+        principal=principal,
+        confirmation_comment=(payload.comment if payload else ""),
+    )
+    return AgentRollbackExecutionRead(
+        command=ControlledWriteCommandRead.model_validate(result.command),
+        audit=AgentAuditRecordRead.model_validate(result.audit),
+        status=result.status,
+        rejection_reasons=result.rejection_reasons,
+        before_state=result.before_state,
+        after_state=result.after_state,
         writes_performed=result.writes_performed,
     )
 

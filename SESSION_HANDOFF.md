@@ -210,6 +210,29 @@ executor and real rollback executor remain unsupported. Phase 12 is sufficient
 only for Phase 13 pilot preparation, not for directly enabling production real
 writes.
 
+Agent v1.0 Phase 13 adds a restricted real-write pilot for internal test
+tenant/project scopes only. Alembic revision `20260721_0015` adds
+`action_items.version`, which is now the authoritative `AgentActionItem`
+version. Default switches remain closed:
+`AGENT_COMMAND_EXECUTION_ENABLED=false`,
+`AGENT_COMMAND_DRY_RUN_ONLY=true`,
+`AGENT_COMMAND_PILOT_ENABLED=false`,
+`AGENT_COMMAND_PILOT_TENANTS=`,
+`AGENT_COMMAND_PILOT_PROJECTS=`, and
+`AGENT_ROLLBACK_EXECUTION_ENABLED=false`. The pilot executor can write only
+`AgentActionItem` `update` / `complete` commands in whitelisted internal
+projects, only low/medium risk, and only `owner`, `due_date`, `priority`, and
+`status`. It locks command and action item rows, revalidates server-side
+principal permission/scope, checks `expected_version`, updates the action item,
+increments `version`, writes execution audit, and marks the command
+`succeeded` in one PostgreSQL transaction. Pilot rollback is limited to Phase
+13 succeeded commands, requires rollback permission and confirmation comment,
+checks the execution-audit version, restores recorded before values, writes
+rollback audit, and marks the command `rolled_back` in one transaction.
+Requirement/Risk writes, cancel, high/critical commands, non-whitelisted
+projects, automatic approval, batch execution, Prompt/RAG/Validator changes,
+Shadow promotion, and production-wide release remain disabled.
+
 Repository freeze metadata:
 
 - Repository: `https://github.com/zsjgg90/AI-Meeting-Agent`
@@ -307,20 +330,20 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 12 action-item tenant/project backfill, transaction rehearsal,
-   rollback conflict strategy, and PostgreSQL safety acceptance before
-   considering a real write pilot.
+1. Review Phase 13 restricted ActionItem pilot execution, rollback audit,
+   PostgreSQL acceptance, and UI evidence before considering Phase 14 grey
+   acceptance.
 2. Decide how `agent_users` and `agent_auth_sessions` should integrate with the
    broader product identity/session system before exposing Agent APIs broadly.
 3. Keep the remaining Agent risks visible: proposal list/detail evidence and
    metadata exposure, production-scale historical tenant/project backfill
-   rollout, duplicated API/Worker Agent contracts, FK `ondelete` policy, and no
-   real rollback executor.
+   rollout, duplicated API/Worker Agent contracts, FK `ondelete` policy, and
+   the pilot-only rollback executor not being production-wide rollback.
 4. Review first-class Requirement/Risk lifecycle semantics before any command
    executor can mutate those tables.
-5. Keep Agent action execution disabled until a real write service, production
-   authorization integration, command persistence semantics, rollback
-   transactions, and failure drills are approved.
+5. Keep Agent action execution disabled outside explicit Phase 13 pilot
+   whitelists until production authorization integration, command persistence
+   semantics, rollback transactions, and failure drills are approved.
 6. Import the remaining required Agent baseline meeting artifact folders under
    `data/eval/agent_v1_baseline/` when available.
 7. Run `.\scripts\check-services.ps1` with local services available.

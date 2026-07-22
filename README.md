@@ -251,6 +251,43 @@ rollback executor still reject execution and the default safety switches remain
 closed. Phase 12 provides the basis for Phase 13 pilot preparation only; it is
 not sufficient to directly enable production real writes.
 
+Agent v1.0 Phase 13 adds a restricted real-write pilot for internal test
+tenants/projects only. Alembic revision `20260721_0015` adds
+`action_items.version`, and `DatabaseAuthoritativeStateProvider` now uses that
+integer as the `AgentActionItem` optimistic version. Real execution remains
+closed unless all pilot switches are intentionally opened:
+
+```text
+AGENT_COMMAND_EXECUTION_ENABLED=false
+AGENT_COMMAND_DRY_RUN_ONLY=true
+AGENT_COMMAND_PILOT_ENABLED=false
+AGENT_COMMAND_PILOT_TENANTS=
+AGENT_COMMAND_PILOT_PROJECTS=
+AGENT_ROLLBACK_EXECUTION_ENABLED=false
+```
+
+When enabled for a whitelisted internal scope, the pilot executor supports only
+`AgentActionItem` `update` and `complete` commands with low/medium risk and the
+fields `owner`, `due_date`, `priority`, and `status`. It locks the command and
+target action item, revalidates server-side principal permissions, tenant,
+project, object scope, risk, field whitelist, and `expected_version`, updates
+the action item with `version + 1`, writes an execution audit, and marks the
+command `succeeded` in the same PostgreSQL transaction. Repeated or concurrent
+execution returns the existing success result without duplicate audit or
+business mutation.
+
+Phase 13 also adds pilot rollback execution for successful Phase 13 commands
+only. Rollback requires `rollback_execute`, the same internal tenant/project
+pilot scope, a separate confirmation action, and a current-version match
+against the execution audit. Conflicts are rejected; successful rollback
+restores the recorded before values, increments `action_items.version`, writes
+rollback audit, and marks the command `rolled_back` in one transaction.
+Requirement/Risk writes, cancel, high/critical commands, non-whitelisted
+projects, automatic approval, batch execution, Prompt/RAG/Validator changes,
+Shadow promotion, and production release remain out of scope. Phase 13 is fit
+for Phase 14 grey acceptance planning only, not direct production-wide real
+writes.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -438,6 +475,9 @@ AGENT_SHADOW_MODE=true
 AGENT_ACTIONS_ENABLED=false
 AGENT_COMMAND_EXECUTION_ENABLED=false
 AGENT_COMMAND_DRY_RUN_ONLY=true
+AGENT_COMMAND_PILOT_ENABLED=false
+AGENT_COMMAND_PILOT_TENANTS=
+AGENT_COMMAND_PILOT_PROJECTS=
 AGENT_ROLLBACK_EXECUTION_ENABLED=false
 ```
 

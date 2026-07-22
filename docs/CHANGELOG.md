@@ -1,5 +1,40 @@
 # Changelog
 
+## 2026-07-22
+
+- Added Agent v1.0 Phase 13 restricted real-write pilot for internal
+  tenant/project scopes only.
+- Added Alembic revision `20260721_0015` with `action_items.version`, and
+  switched `AgentActionItem` authoritative versions to that integer field.
+- Added fail-closed pilot switches:
+  `AGENT_COMMAND_PILOT_ENABLED=false`,
+  `AGENT_COMMAND_PILOT_TENANTS=`, and
+  `AGENT_COMMAND_PILOT_PROJECTS=`, while keeping execution disabled and
+  dry-run-only enabled by default.
+- Implemented pilot execution for `AgentActionItem` `update` / `complete` only,
+  with low/medium risk, field whitelist `owner`, `due_date`, `priority`,
+  `status`, tenant/project whitelist validation, row locks, expected-version
+  checks, `version + 1`, same-transaction audit, and idempotent duplicate
+  handling.
+- Implemented pilot rollback execution for successful Phase 13 commands only,
+  requiring rollback permission, confirmation comment, execution-audit version
+  match, same-transaction rollback audit, conflict rejection, and idempotent
+  duplicate rollback.
+- Added `POST /agent/commands/{command_id}/execute` and
+  `POST /agent/commands/{command_id}/rollback/execute`, plus Agent Review UI
+  controls that display internal pilot scope, before/after values, and rollback
+  status without allowing the client to submit changes, permissions, versions,
+  or idempotency keys.
+- Added Phase 13 unit coverage and
+  `services/api/scripts/run_agent_phase13_postgres_acceptance.py` for
+  PostgreSQL pilot acceptance on synthetic `phase13_pg_` data, covering
+  default rejection, whitelist denial, real ActionItem write, transaction
+  rollback, concurrency, restart idempotency, rollback success/conflict, and
+  unchanged Requirement/Risk/summary JSON.
+- Requirement/Risk writes, cancel, high/critical commands, non-whitelisted
+  projects, automatic approval, batch execution, Prompt/RAG/Validator changes,
+  Shadow promotion, and production-wide release remain disabled.
+
 ## 2026-07-21
 
 - Added Agent v1.0 Phase 12 real-write preparation without enabling real

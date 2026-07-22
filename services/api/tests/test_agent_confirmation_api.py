@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
@@ -11,7 +11,7 @@ from sqlalchemy.pool import StaticPool
 
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
 from app.action_item_scope_backfill import backfill_action_item_scopes, rollback_action_item_scope_backfill
-from app.agent_command_executor import dry_run_command, execute_command_in_transaction, rehearse_command_transaction
+from app.agent_command_executor import dry_run_command, execute_command_in_transaction, rehearse_command_transaction, rollback_command_in_transaction
 from app.agent_confirmation_service import approve_proposal, recover_duplicate_after_integrity_error
 from app.agent_security import AgentPrincipal, get_agent_principal, hash_agent_token
 from app.agent_write_control import AgentActionProposal, AgentProposalConfirmation, build_idempotency_key
@@ -83,7 +83,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
                 risks=[
                     {
                         "risk_id": "risk-1",
-                        "title": "供应商延期",
+                        "title": "Supplier delay",
                         "status": "active",
                         "level": "high",
                     }
@@ -93,7 +93,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
                 meeting_agenda=[
                     {
                         "requirement_id": "req-1",
-                        "title": "导出权限配置",
+                        "title": "Export permission configuration",
                         "status": "confirmed",
                         "owner": "Alice",
                     }
@@ -110,19 +110,19 @@ class AgentConfirmationApiTest(unittest.TestCase):
                 project_id="project-1",
                 meeting_id=meeting.id,
                 summary_id=summary.id,
-                task="补齐导出权限配置",
+                task="Update export permission configuration",
                 owner="Alice",
                 due_date="2026-07-30",
                 priority="medium",
                 status="open",
-                source_text="Alice 负责补齐导出权限配置。",
+                source_text="Alice owns the export permission configuration.",
                 updated_at=now,
             )
             requirement = Requirement(
                 id="req-1",
                 tenant_id="tenant-1",
                 project_id="project-1",
-                title="导出权限配置",
+                title="Export permission configuration",
                 description="Requirement from formal table.",
                 status="confirmed",
                 owner="Alice",
@@ -139,7 +139,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
                 id="risk-1",
                 tenant_id="tenant-1",
                 project_id="project-1",
-                title="供应商延期",
+                title="Supplier delay",
                 description="Risk from formal table.",
                 status="active",
                 owner="Alice",
@@ -236,14 +236,14 @@ class AgentConfirmationApiTest(unittest.TestCase):
             "action_type": "update",
             "target_object_type": "AgentActionItem",
             "target_object_id": "action-1",
-            "title": "补齐导出权限配置",
+            "title": "Update export permission configuration",
             "description": "update owner",
             "proposed_changes": {"owner": {"from": "Alice", "to": "Bob"}},
             "evidence": [
                 {
                     "source_type": "transcript",
                     "source_meeting_id": "meeting-agent-phase8",
-                    "source_text": "Bob 接手导出权限配置。",
+                    "source_text": "Bob takes over the export permission configuration.",
                 }
             ],
             "confidence": 0.86,
@@ -263,6 +263,16 @@ class AgentConfirmationApiTest(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 201, response.text)
         return response.json()
+
+    def pilot_settings(self, *, rollback: bool = False) -> Settings:
+        return Settings(
+            agent_command_execution_enabled=True,
+            agent_command_dry_run_only=False,
+            agent_command_pilot_enabled=True,
+            agent_command_pilot_tenants="tenant-1",
+            agent_command_pilot_projects="project-1",
+            agent_rollback_execution_enabled=rollback,
+        )
 
     def test_database_authoritative_state_reads_supported_objects(self) -> None:
         db = self.SessionLocal()
@@ -319,7 +329,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
         created = self.create_action_proposal()
 
         self.assertEqual(created["status"], "pending")
-        self.assertEqual(created["expected_object_version"], "2026-07-20T12:00:00")
+        self.assertEqual(created["expected_object_version"], "1")
         listed = self.client.get("/agent/action-proposals", headers=self.auth_headers("agent_review")).json()
         detail = self.client.get(
             "/agent/action-proposals/proposal-action-1",
@@ -483,7 +493,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
             target_object_type="AgentActionItem",
             target_object_id="action-1",
             proposed_changes={"owner": {"from": "Alice", "to": "Bob"}},
-            evidence=[{"source_text": "Bob 接手。"}],
+            evidence=[{"source_text": "Bob takes over."}],
             reason="owner changed",
             metadata={"schema_version": "agent-state-tracker-v1"},
         )
@@ -507,7 +517,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
         db = self.SessionLocal()
         try:
             item = db.get(ActionItem, "action-1")
-            item.updated_at = datetime(2026, 7, 21, 12, 0, tzinfo=timezone.utc)
+            item.version += 1
             db.commit()
         finally:
             db.close()
@@ -618,7 +628,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
         db = self.SessionLocal()
         try:
             item = db.get(ActionItem, "action-1")
-            item.updated_at = datetime(2026, 7, 21, 12, 0, tzinfo=timezone.utc)
+            item.version += 1
             db.commit()
         finally:
             db.close()
@@ -826,7 +836,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
         db = self.SessionLocal()
         try:
             item = db.get(ActionItem, "action-1")
-            item.updated_at = datetime(2026, 7, 22, 12, 0, tzinfo=timezone.utc)
+            item.version += 1
             db.commit()
         finally:
             db.close()
@@ -927,13 +937,296 @@ class AgentConfirmationApiTest(unittest.TestCase):
         finally:
             db.close()
 
-    def test_real_write_contract_stub_rejects_and_preserves_business_data(self) -> None:
+    def test_real_write_rejects_under_default_switches_and_preserves_business_data(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+
+        response = self.client.post(f"/agent/commands/{command_id}/execute", json={"comment": "execute"})
+
+        self.assertEqual(response.status_code, 403)
+        self.assertIn("command_execution_disabled", response.json()["detail"]["reasons"])
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            self.assertEqual(item.owner, "Alice")
+            self.assertEqual(item.version, 1)
+        finally:
+            db.close()
+
+    def test_pilot_execute_updates_action_item_and_audit_in_one_transaction(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings()):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={"comment": "execute"})
+
+        self.assertEqual(response.status_code, 200, response.text)
+        body = response.json()
+        self.assertEqual(body["status"], "succeeded")
+        self.assertTrue(body["writes_performed"])
+        self.assertEqual(body["before_state"]["data"]["owner"], "Alice")
+        self.assertEqual(body["after_state"]["data"]["owner"], "Bob")
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            command = db.get(ControlledWriteCommandRecord, command_id)
+            audit = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_succeeded")
+            ).one()
+            self.assertEqual(item.owner, "Bob")
+            self.assertEqual(item.version, 2)
+            self.assertEqual(command.status, "succeeded")
+            self.assertTrue(audit.audit_context["business_writes_performed"])
+        finally:
+            db.close()
+
+    def test_pilot_execute_is_idempotent(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings()):
+            first = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+            second = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(first.status_code, 200, first.text)
+        self.assertEqual(second.status_code, 200, second.text)
+        self.assertEqual(second.json()["status"], "duplicate")
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            audits = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_succeeded")
+            ).all()
+            self.assertEqual(item.owner, "Bob")
+            self.assertEqual(item.version, 2)
+            self.assertEqual(len(audits), 1)
+        finally:
+            db.close()
+
+    def test_pilot_execute_rejects_non_whitelisted_tenant_project(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+
+        settings = Settings(
+            agent_command_execution_enabled=True,
+            agent_command_dry_run_only=False,
+            agent_command_pilot_enabled=True,
+            agent_command_pilot_tenants="other-tenant",
+            agent_command_pilot_projects="other-project",
+        )
+        with patch("app.agent_command_executor.get_settings", return_value=settings):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(response.status_code, 403)
+        self.assertIn("pilot_tenant_not_whitelisted", response.json()["detail"]["reasons"])
+
+    def test_pilot_execute_rejects_non_pilot_field_and_risk(self) -> None:
+        self.create_action_proposal(proposed_changes={"dependencies": {"from": [], "to": ["other"]}}, risk_level="high")
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings()):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(response.status_code, 403)
+        reasons = response.json()["detail"]["reasons"]
+        self.assertIn("pilot_risk_not_allowed", reasons)
+        self.assertIn("pilot_field_not_allowed:dependencies", reasons)
+
+    def test_pilot_execute_failure_rolls_back_business_and_audit(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        db = self.SessionLocal()
+        try:
+            principal = AgentPrincipal(
+                user_id="user-1",
+                reviewer_identity="reviewer-1",
+                roles=("agent_high_risk_approver",),
+                permissions=("command_execute",),
+                tenant_id="tenant-1",
+                project_ids=("project-1",),
+            )
+            with self.assertRaises(RuntimeError):
+                execute_command_in_transaction(
+                    db,
+                    command_id=command_id,
+                    principal=principal,
+                    settings=self.pilot_settings(),
+                    fail_stage="after_audit",
+                )
+            item = db.get(ActionItem, "action-1")
+            command = db.get(ControlledWriteCommandRecord, command_id)
+            audits = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_succeeded")
+            ).all()
+            self.assertEqual(item.owner, "Alice")
+            self.assertEqual(item.version, 1)
+            self.assertEqual(command.status, "ready")
+            self.assertEqual(audits, [])
+        finally:
+            db.close()
+
+    def test_pilot_rollback_restores_action_item_and_is_idempotent(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings(rollback=True)):
+            execute_response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+            rollback_response = self.client.post(f"/agent/commands/{command_id}/rollback/execute", json={"comment": "rollback"})
+            duplicate_response = self.client.post(f"/agent/commands/{command_id}/rollback/execute", json={"comment": "rollback again"})
+
+        self.assertEqual(execute_response.status_code, 200, execute_response.text)
+        self.assertEqual(rollback_response.status_code, 200, rollback_response.text)
+        self.assertEqual(duplicate_response.status_code, 200, duplicate_response.text)
+        self.assertEqual(duplicate_response.json()["status"], "duplicate")
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            command = db.get(ControlledWriteCommandRecord, command_id)
+            rollback_audits = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "rollback_succeeded")
+            ).all()
+            self.assertEqual(item.owner, "Alice")
+            self.assertEqual(item.version, 3)
+            self.assertEqual(command.status, "rolled_back")
+            self.assertEqual(len(rollback_audits), 1)
+        finally:
+            db.close()
+
+    def test_pilot_rollback_rejects_version_conflict(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings(rollback=True)):
+            self.client.post(f"/agent/commands/{command_id}/execute", json={})
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            item.version += 1
+            db.commit()
+        finally:
+            db.close()
+
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings(rollback=True)):
+            response = self.client.post(f"/agent/commands/{command_id}/rollback/execute", json={"comment": "rollback"})
+
+        self.assertEqual(response.status_code, 409)
+        self.assertIn("rollback_version_conflict", response.json()["detail"]["reasons"])
+
+    def test_pilot_execute_does_not_modify_requirement_or_risk(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings()):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(response.status_code, 200, response.text)
+        db = self.SessionLocal()
+        try:
+            requirement = db.get(Requirement, "req-1")
+            risk = db.get(Risk, "risk-1")
+            self.assertEqual(requirement.version, 1)
+            self.assertEqual(requirement.status, "confirmed")
+            self.assertEqual(risk.version, 1)
+            self.assertEqual(risk.status, "active")
+        finally:
+            db.close()
+
+    def test_real_write_requires_principal_scope(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute"),
+            project_ids=("other-project",),
+        )
+
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings()):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(response.status_code, 403)
+
+    def test_real_write_direct_call_without_required_principal_is_rejected(self) -> None:
         db = self.SessionLocal()
         try:
             with self.assertRaises(Exception) as raised:
-                execute_command_in_transaction(db=db, command_id="any")
+                execute_command_in_transaction(
+                    db=db,
+                    command_id="any",
+                    principal=AgentPrincipal(user_id="user-1", reviewer_identity="reviewer-1"),
+                    settings=self.pilot_settings(),
+                )
             item = db.get(ActionItem, "action-1")
-            self.assertEqual(getattr(raised.exception, "status_code", None), 403)
+            self.assertEqual(getattr(raised.exception, "status_code", None), 404)
             self.assertEqual(item.owner, "Alice")
         finally:
             db.close()
@@ -1041,7 +1334,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
         db = self.SessionLocal()
         try:
             item = db.get(ActionItem, "action-1")
-            item.updated_at = datetime(2026, 7, 23, 12, 0, tzinfo=timezone.utc)
+            item.version += 1
             db.commit()
         finally:
             db.close()
@@ -1056,7 +1349,9 @@ class AgentConfirmationApiTest(unittest.TestCase):
 
         self.assertIn("/agent/commands", openapi["paths"])
         self.assertIn("/agent/commands/{command_id}/dry-run", openapi["paths"])
+        self.assertIn("/agent/commands/{command_id}/execute", openapi["paths"])
         self.assertIn("/agent/commands/{command_id}/rollback/dry-run", openapi["paths"])
+        self.assertIn("/agent/commands/{command_id}/rollback/execute", openapi["paths"])
 
     def test_action_item_scope_backfill_uses_unique_authoritative_scope(self) -> None:
         db = self.SessionLocal()

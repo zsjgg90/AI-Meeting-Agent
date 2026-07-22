@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any
 from uuid import uuid5, NAMESPACE_URL
 
@@ -9,9 +10,14 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
-from app.agent_security import AgentPrincipal
+from app.agent_security import AgentPrincipal, require_agent_permission
 from app.config import Settings, get_settings
-from app.models import AgentAuditRecord, ControlledWriteCommandRecord
+from app.models import ActionItem, AgentAuditRecord, ControlledWriteCommandRecord
+
+
+PHASE13_PILOT_FIELDS = {"owner", "due_date", "priority", "status"}
+PHASE13_PILOT_OPERATIONS = {"update", "complete"}
+PHASE13_PILOT_RISK_LEVELS = {"low", "medium"}
 
 
 @dataclass(frozen=True)
@@ -46,6 +52,28 @@ class TransactionRehearsalResult:
     rejection_reasons: list[str]
     authoritative_state: dict[str, Any] | None
     writes_performed: bool = False
+
+
+@dataclass(frozen=True)
+class CommandExecutionResult:
+    command: ControlledWriteCommandRecord
+    audit: AgentAuditRecord
+    status: str
+    rejection_reasons: list[str]
+    before_state: dict[str, Any] | None
+    after_state: dict[str, Any] | None
+    writes_performed: bool = True
+
+
+@dataclass(frozen=True)
+class CommandRollbackExecutionResult:
+    command: ControlledWriteCommandRecord
+    audit: AgentAuditRecord
+    status: str
+    rejection_reasons: list[str]
+    before_state: dict[str, Any] | None
+    after_state: dict[str, Any] | None
+    writes_performed: bool = True
 
 
 def dry_run_command(
@@ -489,19 +517,458 @@ def get_existing_rehearsal_audit(db: Session, command_id: str) -> AgentAuditReco
     ).first()
 
 
+def execute_command_in_transaction(
+    db: Session,
+    *,
+    command_id: str,
+    principal: AgentPrincipal,
+    settings: Settings | None = None,
+    fail_stage: str | None = None,
+) -> CommandExecutionResult:
+    resolved_settings = settings or get_settings()
+    validate_pilot_switches(resolved_settings, rollback=False)
+    try:
+        command = lock_command(db, command_id)
+        existing = get_existing_execution_audit(db, command_id)
+        if existing is not None and command.status == "succeeded":
+            return CommandExecutionResult(
+                command=command,
+                audit=existing,
+                status="duplicate",
+                rejection_reasons=["duplicate_execution"],
+                before_state=existing.audit_context.get("before_state"),
+                after_state=existing.audit_context.get("after_state"),
+            )
+        if command.status != "ready":
+            db.rollback()
+            raise HTTPException(status_code=400, detail={"status": "rejected", "reasons": ["command_not_ready"]})
+        if fail_stage == "after_command_lock":
+            raise RuntimeError("phase13 execution failure after command lock")
+
+        item = lock_action_item(db, command.target_object_id)
+        before_state = action_item_snapshot(item)
+        validate_pilot_command(
+            command=command,
+            item=item,
+            principal=principal,
+            settings=resolved_settings,
+            snapshot=before_state,
+        )
+        if fail_stage == "before_business_update":
+            raise RuntimeError("phase13 execution failure before business update")
+
+        apply_action_item_changes(item, command.changes or {})
+        item.version += 1
+        item.updated_at = utc_now()
+        after_state = action_item_snapshot(item)
+        if fail_stage == "after_business_update":
+            raise RuntimeError("phase13 execution failure after business update")
+
+        audit = persist_execution_audit(
+            db,
+            command=command,
+            reviewer=principal.reviewer_identity,
+            before_state=before_state,
+            after_state=after_state,
+        )
+        if fail_stage == "after_audit":
+            raise RuntimeError("phase13 execution failure after audit")
+        command.status = "succeeded"
+        command.audit_context = {
+            **dict(command.audit_context or {}),
+            "phase": "agent-v1-phase13",
+            "pilot_execution": True,
+            "writes_performed": True,
+            "business_writes_performed": True,
+            "execution_audit_id": audit.id,
+            "before_state": before_state,
+            "after_state": after_state,
+        }
+        db.commit()
+        db.refresh(command)
+        db.refresh(audit)
+        return CommandExecutionResult(
+            command=command,
+            audit=audit,
+            status="succeeded",
+            rejection_reasons=[],
+            before_state=before_state,
+            after_state=after_state,
+        )
+    except HTTPException:
+        db.rollback()
+        raise
+    except Exception:
+        db.rollback()
+        raise
+
+
+def rollback_command_in_transaction(
+    db: Session,
+    *,
+    command_id: str,
+    principal: AgentPrincipal,
+    confirmation_comment: str = "",
+    settings: Settings | None = None,
+    fail_stage: str | None = None,
+) -> CommandRollbackExecutionResult:
+    resolved_settings = settings or get_settings()
+    validate_pilot_switches(resolved_settings, rollback=True)
+    try:
+        command = lock_command(db, command_id)
+        existing = get_existing_rollback_execution_audit(db, command_id)
+        if existing is not None and command.status == "rolled_back":
+            return CommandRollbackExecutionResult(
+                command=command,
+                audit=existing,
+                status="duplicate",
+                rejection_reasons=["duplicate_rollback"],
+                before_state=existing.audit_context.get("before_state"),
+                after_state=existing.audit_context.get("after_state"),
+            )
+        if command.status != "succeeded":
+            db.rollback()
+            raise HTTPException(status_code=400, detail={"status": "rejected", "reasons": ["command_not_succeeded"]})
+        execution_audit = get_existing_execution_audit(db, command_id)
+        if execution_audit is None:
+            db.rollback()
+            raise HTTPException(status_code=400, detail={"status": "rejected", "reasons": ["missing_execution_audit"]})
+        if fail_stage == "after_command_lock":
+            raise RuntimeError("phase13 rollback failure after command lock")
+
+        item = lock_action_item(db, command.target_object_id)
+        before_state = action_item_snapshot(item)
+        validate_pilot_rollback(
+            command=command,
+            item=item,
+            principal=principal,
+            settings=resolved_settings,
+            execution_audit=execution_audit,
+        )
+        if fail_stage == "before_business_update":
+            raise RuntimeError("phase13 rollback failure before business update")
+
+        restore_changes = dict((command.rollback_plan or {}).get("restore_changes") or {})
+        apply_action_item_changes(item, restore_changes)
+        item.version += 1
+        item.updated_at = utc_now()
+        after_state = action_item_snapshot(item)
+        if fail_stage == "after_business_update":
+            raise RuntimeError("phase13 rollback failure after business update")
+
+        audit = persist_rollback_execution_audit(
+            db,
+            command=command,
+            reviewer=principal.reviewer_identity,
+            confirmation_comment=confirmation_comment,
+            before_state=before_state,
+            after_state=after_state,
+            execution_audit=execution_audit,
+        )
+        if fail_stage == "after_audit":
+            raise RuntimeError("phase13 rollback failure after audit")
+        command.status = "rolled_back"
+        command.audit_context = {
+            **dict(command.audit_context or {}),
+            "phase": "agent-v1-phase13",
+            "pilot_rollback": True,
+            "rollback_audit_id": audit.id,
+            "rollback_confirmation": {
+                "reviewer": principal.reviewer_identity,
+                "comment": confirmation_comment,
+            },
+        }
+        db.commit()
+        db.refresh(command)
+        db.refresh(audit)
+        return CommandRollbackExecutionResult(
+            command=command,
+            audit=audit,
+            status="rolled_back",
+            rejection_reasons=[],
+            before_state=before_state,
+            after_state=after_state,
+        )
+    except HTTPException:
+        db.rollback()
+        raise
+    except Exception:
+        db.rollback()
+        raise
+
+
 def stable_dry_run_audit_id(command_id: str, result: str, reasons: list[str]) -> str:
     reason_key = ",".join(sorted(set(reasons)))
     return f"audit-dry-run-{uuid5(NAMESPACE_URL, f'{command_id}|{result}|{reason_key}')}"
 
 
-def execute_command_in_transaction(*_: Any, **__: Any) -> None:
-    """Fail-closed stub for the future real write executor.
+def validate_pilot_switches(settings: Settings, *, rollback: bool) -> None:
+    reasons: list[str] = []
+    if not settings.agent_command_execution_enabled:
+        reasons.append("command_execution_disabled")
+    if settings.agent_command_dry_run_only:
+        reasons.append("command_dry_run_only")
+    if not settings.agent_command_pilot_enabled:
+        reasons.append("command_pilot_disabled")
+    if rollback and not settings.agent_rollback_execution_enabled:
+        reasons.append("rollback_execution_disabled")
+    if reasons:
+        raise HTTPException(status_code=403, detail={"status": "rejected", "reasons": reasons})
 
-    A later phase must implement authoritative re-read, expected-version check,
-    command status check, idempotency recovery, one database transaction,
-    business write, same-transaction audit, failure rollback, and final command
-    status transition. Phase 12 rehearses this path without business mutation;
-    this formal executor deliberately refuses real writes.
-    """
 
-    raise HTTPException(status_code=403, detail={"status": "rejected", "reasons": ["real_write_not_supported"]})
+def lock_command(db: Session, command_id: str) -> ControlledWriteCommandRecord:
+    command = db.scalars(
+        select(ControlledWriteCommandRecord)
+        .where(ControlledWriteCommandRecord.id == command_id)
+        .with_for_update()
+    ).first()
+    if command is None:
+        raise HTTPException(status_code=404, detail="Controlled write command not found.")
+    return command
+
+
+def lock_action_item(db: Session, action_item_id: str) -> ActionItem:
+    item = db.scalars(
+        select(ActionItem)
+        .where(ActionItem.id == action_item_id)
+        .with_for_update()
+    ).first()
+    if item is None:
+        db.rollback()
+        raise HTTPException(status_code=404, detail={"status": "rejected", "reasons": ["target_not_found"]})
+    return item
+
+
+def validate_pilot_command(
+    *,
+    command: ControlledWriteCommandRecord,
+    item: ActionItem,
+    principal: AgentPrincipal,
+    settings: Settings,
+    snapshot: dict[str, Any],
+) -> None:
+    reasons = pilot_rejection_reasons(command=command, item=item, settings=settings, snapshot=snapshot)
+    if reasons:
+        raise HTTPException(status_code=pilot_status_code(reasons), detail={"status": "rejected", "reasons": reasons})
+    require_agent_permission(
+        principal,
+        "command_execute",
+        tenant_id=item.tenant_id,
+        project_id=item.project_id,
+        object_type="AgentActionItem",
+        object_id=item.id,
+        risk_level=proposal_risk_level(command),
+        operation=command.operation,
+    )
+
+
+def validate_pilot_rollback(
+    *,
+    command: ControlledWriteCommandRecord,
+    item: ActionItem,
+    principal: AgentPrincipal,
+    settings: Settings,
+    execution_audit: AgentAuditRecord,
+) -> None:
+    snapshot = action_item_snapshot(item)
+    reasons = pilot_rejection_reasons(command=command, item=item, settings=settings, snapshot=snapshot, rollback=True)
+    after_state = execution_audit.audit_context.get("after_state") or {}
+    expected_current_version = after_state.get("object_version")
+    if expected_current_version and str(item.version) != str(expected_current_version):
+        reasons.append("rollback_version_conflict")
+    if reasons:
+        raise HTTPException(status_code=pilot_status_code(reasons), detail={"status": "rejected", "reasons": sorted(set(reasons))})
+    require_agent_permission(
+        principal,
+        "rollback_execute",
+        tenant_id=item.tenant_id,
+        project_id=item.project_id,
+        object_type="AgentActionItem",
+        object_id=item.id,
+        risk_level=proposal_risk_level(command),
+        operation="rollback",
+    )
+
+
+def pilot_rejection_reasons(
+    *,
+    command: ControlledWriteCommandRecord,
+    item: ActionItem,
+    settings: Settings,
+    snapshot: dict[str, Any],
+    rollback: bool = False,
+) -> list[str]:
+    reasons: list[str] = []
+    if command.target_object_type != "AgentActionItem":
+        reasons.append("pilot_object_not_allowed")
+    if command.operation not in PHASE13_PILOT_OPERATIONS:
+        reasons.append("pilot_operation_not_allowed")
+    if item.tenant_id not in settings.command_pilot_tenant_set:
+        reasons.append("pilot_tenant_not_whitelisted")
+    if item.project_id not in settings.command_pilot_project_set:
+        reasons.append("pilot_project_not_whitelisted")
+    risk_level = proposal_risk_level(command)
+    if risk_level not in PHASE13_PILOT_RISK_LEVELS:
+        reasons.append("pilot_risk_not_allowed")
+    changes = dict((command.rollback_plan or {}).get("restore_changes") or {}) if rollback else dict(command.changes or {})
+    if not changes:
+        reasons.append("missing_changes")
+    invalid_fields = sorted(field for field in changes if field not in PHASE13_PILOT_FIELDS)
+    if invalid_fields:
+        reasons.append("pilot_field_not_allowed:" + ",".join(invalid_fields))
+    if not rollback and command.operation == "complete" and changes.get("status") not in {"completed", "done"}:
+        reasons.append("pilot_complete_requires_completed_status")
+    if not rollback and command.expected_version != snapshot.get("object_version"):
+        reasons.append("version_conflict")
+    return sorted(set(reasons))
+
+
+def pilot_status_code(reasons: list[str]) -> int:
+    if "version_conflict" in reasons or "rollback_version_conflict" in reasons:
+        return 409
+    if any("not_whitelisted" in reason or "not_allowed" in reason for reason in reasons):
+        return 403
+    return 400
+
+
+def proposal_risk_level(command: ControlledWriteCommandRecord) -> str:
+    proposal = command.proposal
+    if proposal is None:
+        return "unknown"
+    return str(proposal.risk_level or "unknown").lower()
+
+
+def action_item_snapshot(item: ActionItem) -> dict[str, Any]:
+    updated_at = item.updated_at.isoformat() if item.updated_at else ""
+    return {
+        "object_type": "AgentActionItem",
+        "object_id": item.id,
+        "object_version": str(item.version),
+        "status": item.status or "unknown",
+        "updated_at": updated_at,
+        "source": "postgresql.action_items",
+        "data": {
+            "title": item.task,
+            "description": item.source_text or item.source or "",
+            "owner": item.owner or item.owner_name,
+            "due_date": item.due_date or item.deadline,
+            "status": item.status,
+            "priority": item.priority,
+            "version": item.version,
+            "tenant_id": item.tenant_id,
+            "project_id": item.project_id,
+            "meeting_id": item.meeting_id,
+            "summary_id": item.summary_id,
+        },
+        "metadata": {"table": "action_items", "writes_performed": False},
+    }
+
+
+def apply_action_item_changes(item: ActionItem, changes: dict[str, Any]) -> None:
+    for field in PHASE13_PILOT_FIELDS:
+        if field in changes:
+            setattr(item, field, changes[field])
+
+
+def persist_execution_audit(
+    db: Session,
+    *,
+    command: ControlledWriteCommandRecord,
+    reviewer: str,
+    before_state: dict[str, Any],
+    after_state: dict[str, Any],
+) -> AgentAuditRecord:
+    audit = AgentAuditRecord(
+        id=stable_execution_audit_id(command.id, "execution_succeeded"),
+        proposal_id=command.proposal_id,
+        confirmation_id=command.confirmation_id,
+        command_id=command.id,
+        target_object_type=command.target_object_type,
+        target_object_id=command.target_object_id,
+        operation=command.operation,
+        reviewer=reviewer,
+        decision="execute",
+        result="execution_succeeded",
+        reasons=[],
+        authoritative_source=after_state.get("source") or "postgresql.action_items",
+        authoritative_version=after_state.get("object_version"),
+        audit_context={
+            "phase": "agent-v1-phase13",
+            "pilot_execution": True,
+            "writes_performed": True,
+            "business_writes_performed": True,
+            "idempotency_key": command.idempotency_key,
+            "expected_changes": dict(command.changes or {}),
+            "rollback_preview": dict(command.rollback_plan or {}),
+            "before_state": before_state,
+            "after_state": after_state,
+        },
+    )
+    return db.merge(audit)
+
+
+def persist_rollback_execution_audit(
+    db: Session,
+    *,
+    command: ControlledWriteCommandRecord,
+    reviewer: str,
+    confirmation_comment: str,
+    before_state: dict[str, Any],
+    after_state: dict[str, Any],
+    execution_audit: AgentAuditRecord,
+) -> AgentAuditRecord:
+    audit = AgentAuditRecord(
+        id=stable_execution_audit_id(command.id, "rollback_succeeded"),
+        proposal_id=command.proposal_id,
+        confirmation_id=command.confirmation_id,
+        command_id=command.id,
+        target_object_type=command.target_object_type,
+        target_object_id=command.target_object_id,
+        operation="rollback",
+        reviewer=reviewer,
+        decision="rollback_execute",
+        result="rollback_succeeded",
+        reasons=[],
+        authoritative_source=after_state.get("source") or "postgresql.action_items",
+        authoritative_version=after_state.get("object_version"),
+        audit_context={
+            "phase": "agent-v1-phase13",
+            "pilot_rollback": True,
+            "writes_performed": True,
+            "business_writes_performed": True,
+            "original_command_id": command.id,
+            "execution_audit_id": execution_audit.id,
+            "rollback_changes": dict((command.rollback_plan or {}).get("restore_changes") or {}),
+            "rollback_confirmation": {
+                "reviewer": reviewer,
+                "comment": confirmation_comment,
+            },
+            "before_state": before_state,
+            "after_state": after_state,
+        },
+    )
+    return db.merge(audit)
+
+
+def get_existing_execution_audit(db: Session, command_id: str) -> AgentAuditRecord | None:
+    return db.scalars(
+        select(AgentAuditRecord)
+        .where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_succeeded")
+        .order_by(AgentAuditRecord.created_at.desc())
+    ).first()
+
+
+def get_existing_rollback_execution_audit(db: Session, command_id: str) -> AgentAuditRecord | None:
+    return db.scalars(
+        select(AgentAuditRecord)
+        .where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "rollback_succeeded")
+        .order_by(AgentAuditRecord.created_at.desc())
+    ).first()
+
+
+def stable_execution_audit_id(command_id: str, result: str) -> str:
+    return f"audit-execution-{uuid5(NAMESPACE_URL, f'{command_id}|{result}')}"
+
+
+def utc_now() -> datetime:
+    return datetime.now(timezone.utc)

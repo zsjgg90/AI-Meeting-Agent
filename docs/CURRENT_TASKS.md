@@ -2,9 +2,9 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 12 historical action-item scope backfill, real-write
-   transaction rehearsal, rollback strategy, and PostgreSQL safety acceptance
-   before considering any limited real command execution pilot.
+1. Review Agent v1.0 Phase 13 restricted ActionItem real-write pilot,
+   rollback execution, PostgreSQL safety acceptance, and audit evidence before
+   considering any broader grey acceptance.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -121,6 +121,27 @@
   PostgreSQL safety acceptance script for synthetic Phase 12 data. Run it only
   against a database where Phase 12 downgrade/upgrade rehearsal is acceptable;
   do not run it directly on production data.
+- Keep Phase 13 as a restricted internal pilot only. Real execution is allowed
+  only when `AGENT_COMMAND_EXECUTION_ENABLED=true`,
+  `AGENT_COMMAND_DRY_RUN_ONLY=false`, `AGENT_COMMAND_PILOT_ENABLED=true`, and
+  the target tenant/project is explicitly listed in
+  `AGENT_COMMAND_PILOT_TENANTS` / `AGENT_COMMAND_PILOT_PROJECTS`.
+- Phase 13 may write only `AgentActionItem` rows in whitelisted internal test
+  projects, only for `update` / `complete`, only fields `owner`, `due_date`,
+  `priority`, and `status`, and only low/medium risk commands that are already
+  manually approved and `ready`. Existing high-risk approval rules still apply
+  to `complete`.
+- Phase 13 rollback execution is limited to successful Phase 13 pilot commands.
+  It requires independent confirmation, `rollback_execute`, current version
+  match, and same-transaction rollback audit. Conflicts must be rejected.
+- Phase 13 must not write Requirement/Risk rows, must not run `cancel`,
+  high/critical, non-whitelisted tenant/project, automatic approval, batch
+  execution, Prompt/RAG/Validator changes, Shadow promotion, production
+  release, or production-wide real writes.
+- `services/api/scripts/run_agent_phase13_postgres_acceptance.py` is the
+  PostgreSQL pilot acceptance script for synthetic `phase13_pg_` data. Run it
+  only against a disposable or explicitly safe test database where
+  downgrade/upgrade rehearsal is acceptable.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and

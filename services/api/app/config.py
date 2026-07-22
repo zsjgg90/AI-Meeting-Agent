@@ -31,6 +31,9 @@ class Settings(BaseSettings):
     agent_actions_enabled: bool = False
     agent_command_execution_enabled: bool = False
     agent_command_dry_run_only: bool = True
+    agent_command_pilot_enabled: bool = False
+    agent_command_pilot_tenants: str = ""
+    agent_command_pilot_projects: str = ""
     agent_rollback_execution_enabled: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
@@ -51,7 +54,19 @@ class Settings(BaseSettings):
             return ["*"]
         return [origin.strip() for origin in self.api_cors_origins.split(",") if origin.strip()]
 
+    @property
+    def command_pilot_tenant_set(self) -> set[str]:
+        return parse_csv_set(self.agent_command_pilot_tenants)
+
+    @property
+    def command_pilot_project_set(self) -> set[str]:
+        return parse_csv_set(self.agent_command_pilot_projects)
+
 
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+
+
+def parse_csv_set(value: str) -> set[str]:
+    return {item.strip() for item in value.split(",") if item.strip()}

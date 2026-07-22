@@ -5,18 +5,21 @@ import {
   AgentActionProposal,
   AgentAuditRecord,
   AgentCommandDryRunResult,
+  AgentCommandExecutionResult,
   AgentProposalStatus,
   ControlledWriteCommand,
   approveAgentProposal,
   dryRunAgentCommand,
+  executeAgentCommand,
   getAgentProposal,
   listAgentCommandAudits,
   listAgentCommands,
   listAgentProposals,
   rejectAgentProposal,
+  rollbackExecuteAgentCommand,
 } from '../api';
 
-const proposalStatuses: AgentProposalStatus[] = ['pending', 'approved', 'rejected', 'expired', 'conflict', 'duplicate', 'ready'];
+const proposalStatuses: AgentProposalStatus[] = ['pending', 'approved', 'rejected', 'expired', 'conflict', 'duplicate', 'ready', 'succeeded', 'rolled_back'];
 
 function formatJson(value: unknown): string {
   if (value === null || value === undefined) return '-';
@@ -29,7 +32,7 @@ function formatJson(value: unknown): string {
 }
 
 function statusTone(status: string): 'neutral' | 'good' | 'bad' | 'warn' {
-  if (['approved', 'ready', 'dry_run', 'duplicate'].includes(status)) return 'good';
+  if (['approved', 'ready', 'dry_run', 'duplicate', 'succeeded', 'rolled_back'].includes(status)) return 'good';
   if (['rejected', 'conflict', 'expired'].includes(status)) return 'bad';
   if (status === 'pending') return 'warn';
   return 'neutral';
@@ -43,6 +46,7 @@ export function AIAssistantScreen() {
   const [selectedCommand, setSelectedCommand] = useState<ControlledWriteCommand | null>(null);
   const [audits, setAudits] = useState<AgentAuditRecord[]>([]);
   const [dryRunResult, setDryRunResult] = useState<AgentCommandDryRunResult | null>(null);
+  const [executionResult, setExecutionResult] = useState<AgentCommandExecutionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -161,6 +165,60 @@ export function AIAssistantScreen() {
     }
   }
 
+  function confirmExecute() {
+    const command = selectedReadyCommand;
+    if (!command) return;
+    Alert.alert('Execute internal pilot?', 'This can modify formal ActionItem fields for whitelisted internal projects only.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Execute',
+        style: 'destructive',
+        onPress: async () => {
+          setLoading(true);
+          setError(null);
+          try {
+            const result = await executeAgentCommand(command.id, 'Executed in internal pilot UI.');
+            setExecutionResult(result);
+            setSelectedCommand(result.command);
+            await loadAudits(command.id);
+            await refresh();
+          } catch (err) {
+            setError(err instanceof Error ? err.message : 'Pilot execution failed.');
+          } finally {
+            setLoading(false);
+          }
+        },
+      },
+    ]);
+  }
+
+  function confirmRollback() {
+    const command = selectedReadyCommand;
+    if (!command) return;
+    Alert.alert('Rollback internal pilot?', 'This restores recorded before values only if the current version still matches.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Rollback',
+        style: 'destructive',
+        onPress: async () => {
+          setLoading(true);
+          setError(null);
+          try {
+            const result = await rollbackExecuteAgentCommand(command.id, 'Rollback confirmed in internal pilot UI.');
+            setExecutionResult(result);
+            setSelectedCommand(result.command);
+            await loadAudits(command.id);
+            await refresh();
+          } catch (err) {
+            setError(err instanceof Error ? err.message : 'Pilot rollback failed.');
+          } finally {
+            setLoading(false);
+          }
+        },
+      },
+    ]);
+  }
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.headerRow}>
@@ -183,6 +241,7 @@ export function AIAssistantScreen() {
               setSelectedProposal(null);
               setSelectedCommand(null);
               setDryRunResult(null);
+              setExecutionResult(null);
             }}
           >
             <Text style={[styles.statusTabText, status === item ? styles.statusTabTextActive : null]}>{item}</Text>
@@ -211,6 +270,7 @@ export function AIAssistantScreen() {
                 setSelectedProposal(proposal);
                 setSelectedCommand(commands.find((command) => command.proposal_id === proposal.id) || null);
                 setDryRunResult(null);
+                setExecutionResult(null);
               }}
             >
               <View style={styles.rowTop}>
@@ -234,6 +294,7 @@ export function AIAssistantScreen() {
             </Text>
           </View>
           <Field label="Target object" value={`${selectedProposal.target_object_type} / ${selectedProposal.target_object_id || 'new object'}`} />
+          <Field label="Tenant / project" value={`${selectedProposal.metadata?.tenant_id || '-'} / ${selectedProposal.metadata?.project_id || '-'}`} />
           <Field label="Current status" value={selectedProposal.status} />
           <Field label="Suggested changes" value={formatJson(selectedProposal.proposed_changes)} mono />
           <Field label="Evidence" value={formatJson(selectedProposal.evidence)} mono />
@@ -287,6 +348,23 @@ export function AIAssistantScreen() {
         >
           <Text style={styles.dryRunText}>Dry-run selected command</Text>
         </Pressable>
+        <Text style={styles.pilotText}>Internal pilot: ActionItem update/complete only</Text>
+        <View style={styles.actionRow}>
+          <Pressable
+            style={[styles.actionButton, styles.executeButton, !selectedReadyCommand || loading ? styles.disabledButton : null]}
+            onPress={confirmExecute}
+            disabled={!selectedReadyCommand || loading}
+          >
+            <Text style={styles.actionText}>Execute pilot</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.actionButton, styles.rollbackButton, !selectedReadyCommand || loading ? styles.disabledButton : null]}
+            onPress={confirmRollback}
+            disabled={!selectedReadyCommand || loading}
+          >
+            <Text style={styles.actionText}>Rollback pilot</Text>
+          </Pressable>
+        </View>
       </View>
 
       {dryRunResult ? (
@@ -299,6 +377,18 @@ export function AIAssistantScreen() {
           <Field label="Rollback preview" value={formatJson(dryRunResult.rollback_preview)} mono />
           <Field label="Authoritative state" value={formatJson(dryRunResult.authoritative_state)} mono />
           <Field label="Writes performed" value={dryRunResult.writes_performed ? 'yes' : 'no'} />
+        </View>
+      ) : null}
+
+      {executionResult ? (
+        <View style={styles.section}>
+          <View style={styles.rowTop}>
+            <Text style={styles.sectionTitle}>Pilot Write Result</Text>
+            <Text style={[styles.badge, styles[`badge_${statusTone(executionResult.status)}`]]}>{executionResult.status}</Text>
+          </View>
+          <Field label="Before values" value={formatJson(executionResult.before_state?.data)} mono />
+          <Field label="After values" value={formatJson(executionResult.after_state?.data)} mono />
+          <Field label="Writes performed" value={executionResult.writes_performed ? 'yes' : 'no'} />
         </View>
       ) : null}
 
@@ -530,6 +620,12 @@ const styles = StyleSheet.create({
   rejectButton: {
     backgroundColor: '#dc2626',
   },
+  executeButton: {
+    backgroundColor: '#7c3aed',
+  },
+  rollbackButton: {
+    backgroundColor: '#b45309',
+  },
   actionText: {
     color: '#ffffff',
     fontSize: 13,
@@ -547,6 +643,11 @@ const styles = StyleSheet.create({
   dryRunText: {
     color: '#ffffff',
     fontSize: 13,
+    fontWeight: '900',
+  },
+  pilotText: {
+    color: '#7c2d12',
+    fontSize: 12,
     fontWeight: '900',
   },
 });

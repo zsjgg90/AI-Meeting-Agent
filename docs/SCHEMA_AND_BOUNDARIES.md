@@ -717,6 +717,69 @@ validate the current object version, reject conflicts instead of automatic
 rollback, require independent confirmation and permission, and be auditable and
 idempotent. Real rollback execution is still unsupported.
 
+## Agent Phase 13 Restricted Real-Write Pilot
+
+MeetMind Agent v1.0 Phase 13 opens a restricted real-write pilot for internal
+test tenant/project scopes only:
+
+- Alembic revision `20260721_0015` adds `action_items.version`.
+- `AgentActionItem` authoritative snapshots now use `action_items.version` as
+  `object_version`; `updated_at` remains a timestamp only.
+- Runtime switches remain fail-closed by default:
+
+```text
+AGENT_COMMAND_EXECUTION_ENABLED=false
+AGENT_COMMAND_DRY_RUN_ONLY=true
+AGENT_COMMAND_PILOT_ENABLED=false
+AGENT_COMMAND_PILOT_TENANTS=
+AGENT_COMMAND_PILOT_PROJECTS=
+AGENT_ROLLBACK_EXECUTION_ENABLED=false
+```
+
+The executor permits real writes only when execution is enabled, dry-run-only
+is disabled, pilot mode is enabled, the locked `ActionItem` tenant/project is
+whitelisted, and the command is inside the Phase 13 pilot contract. The pilot
+contract is intentionally small:
+
+- Object type: `AgentActionItem`.
+- Operations: `update`, `complete`.
+- Fields: `owner`, `due_date`, `priority`, `status`.
+- Risk: low/medium only. Existing elevated approval checks still apply where
+  the security layer treats an operation, such as `complete`, as high-risk.
+- Command state: persisted, manually approved, and `ready`.
+
+Execution transaction order:
+
+```text
+lock command
+-> lock target action item
+-> re-read authoritative state from the locked row
+-> validate tenant/project/object scope, permission, pilot whitelist, risk, fields, expected_version
+-> update whitelisted business fields
+-> increment action_items.version
+-> write execution audit
+-> mark command succeeded
+-> single PostgreSQL transaction commit
+```
+
+Any exception rolls back the business update, audit, and command status change.
+Repeated execution or service restart after success returns the existing
+execution audit as a duplicate result. PostgreSQL row locks ensure concurrent
+execution can produce at most one successful business mutation.
+
+Pilot rollback execution is limited to successful Phase 13 pilot commands. It
+requires a separate confirmation action, `rollback_execute`, the same
+tenant/project pilot whitelist, the execution audit's after-version, and the
+stored rollback plan. On success it restores recorded before values, increments
+`action_items.version`, writes rollback audit, and marks the command
+`rolled_back` in one transaction. If the current object version has changed,
+rollback is rejected and no automatic rollback is attempted.
+
+Phase 13 still does not allow Requirement/Risk writes, `cancel`, high/critical
+commands, non-whitelisted tenant/project writes, automatic approval, batch
+execution, Prompt/RAG/Validator changes, Shadow promotion, or production-wide
+release.
+
 ## Schema Version
 
 Current schema version:

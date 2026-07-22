@@ -14,6 +14,9 @@ const requiredScreenSnippets = [
   'expired',
   'duplicate',
   'Dry-run selected command',
+  'Execute internal pilot?',
+  'Rollback internal pilot?',
+  'Pilot Write Result',
   'Audit Records',
   'Rollback preview',
   'Writes performed',
@@ -24,6 +27,8 @@ const requiredApiSnippets = [
   'approveAgentProposal',
   'rejectAgentProposal',
   'dryRunAgentCommand',
+  'executeAgentCommand',
+  'rollbackExecuteAgentCommand',
   'listAgentCommandAudits',
 ];
 
@@ -47,6 +52,14 @@ if (submittedBodies.includes('expected_object_version')) {
 
 if (submittedBodies.includes('idempotency_key')) {
   throw new Error('Client API helpers must not submit idempotency_key.');
+}
+
+if (submittedBodies.includes('changes')) {
+  throw new Error('Client API helpers must not submit Agent command changes.');
+}
+
+if (submittedBodies.includes('permissions')) {
+  throw new Error('Client API helpers must not submit Agent permissions.');
 }
 
 if (api.includes('X-Agent-Reviewer') || api.includes('X-Agent-Permissions')) {

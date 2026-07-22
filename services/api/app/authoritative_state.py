@@ -46,7 +46,7 @@ class DatabaseAuthoritativeStateProvider:
         return AuthoritativeStateSnapshot(
             object_type="AgentActionItem",
             object_id=item.id,
-            object_version=updated_at,
+            object_version=str(item.version),
             status=item.status or "unknown",
             updated_at=updated_at,
             source="postgresql.action_items",
@@ -57,6 +57,7 @@ class DatabaseAuthoritativeStateProvider:
                 "due_date": item.due_date or item.deadline,
                 "status": item.status,
                 "priority": item.priority,
+                "version": item.version,
                 "tenant_id": item.tenant_id,
                 "project_id": item.project_id,
                 "meeting_id": item.meeting_id,
