@@ -171,8 +171,10 @@ class AgentToolContractTests(unittest.TestCase):
 
     def test_import_does_not_change_meeting_analysis_schema(self) -> None:
         before = MeetingAnalysisSchema().model_dump()
+        before["metadata"].pop("generated_at", None)
         __import__("app.agent_tools")
         after = MeetingAnalysisSchema().model_dump()
+        after["metadata"].pop("generated_at", None)
 
         self.assertEqual(after, before)
 

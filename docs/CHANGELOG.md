@@ -2,6 +2,28 @@
 
 ## 2026-07-22
 
+- Added Agent v1.0 Phase 14 production safety hardening and grey acceptance
+  guardrails without expanding the Phase 13 write contract.
+- Added fail-closed grey settings for tenant/project/user whitelists, grey
+  percentage, per-project and per-user daily execution limits, concurrency
+  limit, UTC time window, manual pause, tenant/project pause, global kill
+  switch, circuit thresholds, and manual audit-backed recovery.
+- Added `services/api/app/agent_phase14_guardrails.py` and wired it before the
+  Phase 13 pilot mutation step. Unconfigured grey execution is rejected and
+  audited with `writes_performed=false`.
+- Added operational APIs under `/agent/ops` for scoped metrics, redacted audit
+  search, circuit status, circuit reset, and preflight release-gate checks.
+- Added `services/api/scripts/run_agent_phase14_postgres_acceptance.py` for
+  PostgreSQL grey acceptance on synthetic `phase14_pg_` data, covering default
+  rejection, whitelist rejection, quota/concurrency, circuit breakers, kill
+  switch, tenant/project pause, restart-persistent circuit state, audit tenant
+  isolation, controlled rollback after emergency close, and unchanged
+  Requirement/Risk/summary JSON.
+- Requirement/Risk writes, summary JSON writes, cancel, high/critical commands,
+  non-whitelisted writes, automatic approval, batch execution,
+  Prompt/RAG/Validator changes, Shadow promotion, default grey enablement, and
+  production-wide release remain disabled.
+
 - Added Agent v1.0 Phase 13 restricted real-write pilot for internal
   tenant/project scopes only.
 - Added Alembic revision `20260721_0015` with `action_items.version`, and

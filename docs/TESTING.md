@@ -330,6 +330,21 @@ $env:PYTHONPATH="D:\codex_work\浼氳澹扮汗璇嗗埆;D:\codex_work\浼氳�
 services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase13_postgres_acceptance.py
 ```
 
+`services/api/scripts/run_agent_phase14_postgres_acceptance.py` validates the
+Phase 14 PostgreSQL grey safety gate on synthetic `phase14_pg_` data. It
+upgrades to head, verifies default grey rejection even when Phase 13 pilot
+switches are open, rejects non-whitelisted users, validates daily quota and
+concurrency guardrails, triggers consecutive-failure and version-conflict
+circuits, verifies global kill switch and tenant/project pause decisions,
+proves audit-backed circuit state survives process restart, verifies scoped
+audit evidence, allows controlled rollback after emergency close, and verifies
+Requirement/Risk/summary JSON remain unchanged. Run it only against a
+disposable or explicitly safe test database:
+
+```powershell
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_phase14_postgres_acceptance.py
+```
+
 `test_agent_shadow_acceptance.py` validates the Phase 5 Shadow acceptance
 infrastructure for `project_weekly`, `requirement_review`, and
 `cross_department`. It covers the 9 synthetic fixtures, manual `meeting_type`

@@ -346,11 +346,19 @@ def pilot_settings(*, rollback: bool = False) -> Settings:
     return Settings(
         agent_command_execution_enabled=True,
         agent_command_dry_run_only=False,
-        agent_command_pilot_enabled=True,
-        agent_command_pilot_tenants=TENANT_ID,
-        agent_command_pilot_projects=PROJECT_ID,
-        agent_rollback_execution_enabled=rollback,
-    )
+            agent_command_pilot_enabled=True,
+            agent_command_pilot_tenants=TENANT_ID,
+            agent_command_pilot_projects=PROJECT_ID,
+            agent_rollback_execution_enabled=rollback,
+            agent_grey_enabled=True,
+            agent_grey_tenants=TENANT_ID,
+            agent_grey_projects=PROJECT_ID,
+            agent_grey_users=f"{PREFIX}user",
+            agent_grey_percentage=100,
+            agent_grey_project_daily_limit=100,
+            agent_grey_user_daily_limit=100,
+            agent_grey_concurrency_limit=1,
+        )
 
 
 def assert_action_version_removed(engine) -> None:  # noqa: ANN001

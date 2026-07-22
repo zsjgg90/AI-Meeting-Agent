@@ -288,6 +288,17 @@ Shadow promotion, and production release remain out of scope. Phase 13 is fit
 for Phase 14 grey acceptance planning only, not direct production-wide real
 writes.
 
+Agent v1.0 Phase 14 adds production safety guardrails around the Phase 13 pilot
+without expanding the write contract. Real execution now also requires explicit
+server-side grey configuration: tenant/project/user whitelists, non-zero grey
+percentage, non-zero project/user daily limits, non-zero concurrency limit, and
+an optional UTC time window. Defaults remain closed. Phase 14 also adds a
+global kill switch, tenant/project pause lists, audit-backed circuit breakers,
+scoped metrics, scoped and redacted audit search, circuit status/reset
+endpoints, and a preflight release gate. Emergency close rejects new command
+execution but still allows audit queries and controlled rollback of already
+successful Phase 13 commands.
+
 最终交付文档：
 
 - `PROJECT_FINAL_REPORT.md`
@@ -479,6 +490,24 @@ AGENT_COMMAND_PILOT_ENABLED=false
 AGENT_COMMAND_PILOT_TENANTS=
 AGENT_COMMAND_PILOT_PROJECTS=
 AGENT_ROLLBACK_EXECUTION_ENABLED=false
+AGENT_GLOBAL_KILL_SWITCH=false
+AGENT_GREY_ENABLED=false
+AGENT_GREY_TENANTS=
+AGENT_GREY_PROJECTS=
+AGENT_GREY_USERS=
+AGENT_GREY_PERCENTAGE=0
+AGENT_GREY_PROJECT_DAILY_LIMIT=0
+AGENT_GREY_USER_DAILY_LIMIT=0
+AGENT_GREY_CONCURRENCY_LIMIT=0
+AGENT_GREY_WINDOW_START=
+AGENT_GREY_WINDOW_END=
+AGENT_GREY_MANUAL_PAUSED=false
+AGENT_PAUSED_TENANTS=
+AGENT_PAUSED_PROJECTS=
+AGENT_CIRCUIT_CONSECUTIVE_FAILURES=0
+AGENT_CIRCUIT_VERSION_CONFLICT_RATE=0
+AGENT_CIRCUIT_ROLLBACK_FAILURES=0
+AGENT_CIRCUIT_RECOVERED_AFTER=
 ```
 
 Formal legacy Qwen3 + RAG summaries are normalized, then passed through
@@ -571,7 +600,14 @@ npx expo run:android
 - `GET /agent/commands/{command_id}` 查询受控命令详情
 - `POST /agent/commands/{command_id}/dry-run` 对 ready 命令执行 dry-run 沙箱校验
 - `POST /agent/commands/{command_id}/rollback/dry-run` 生成受控 rollback dry-run 预览
+- `POST /agent/commands/{command_id}/execute` 执行 Phase 13/14 受限真实写入
+- `POST /agent/commands/{command_id}/rollback/execute` 执行受控 pilot rollback
 - `GET /agent/commands/{command_id}/audits` 查询命令审计记录
+- `GET /agent/ops/metrics` 查询 Agent 内部指标
+- `GET /agent/ops/audits` 受控检索 Agent 审计
+- `GET /agent/ops/circuit-breakers` 查询熔断状态
+- `POST /agent/ops/circuit-breakers/reset` 人工恢复审计型熔断
+- `GET /agent/ops/preflight` 查询灰度发布门禁
 
 `GET /meetings/{id}/summary` 返回结构：
 

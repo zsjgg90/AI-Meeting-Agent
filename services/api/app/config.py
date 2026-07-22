@@ -35,6 +35,24 @@ class Settings(BaseSettings):
     agent_command_pilot_tenants: str = ""
     agent_command_pilot_projects: str = ""
     agent_rollback_execution_enabled: bool = False
+    agent_global_kill_switch: bool = False
+    agent_grey_enabled: bool = False
+    agent_grey_tenants: str = ""
+    agent_grey_projects: str = ""
+    agent_grey_users: str = ""
+    agent_grey_percentage: int = 0
+    agent_grey_project_daily_limit: int = 0
+    agent_grey_user_daily_limit: int = 0
+    agent_grey_concurrency_limit: int = 0
+    agent_grey_window_start: str = ""
+    agent_grey_window_end: str = ""
+    agent_grey_manual_paused: bool = False
+    agent_paused_tenants: str = ""
+    agent_paused_projects: str = ""
+    agent_circuit_consecutive_failures: int = 0
+    agent_circuit_version_conflict_rate: float = 0.0
+    agent_circuit_rollback_failures: int = 0
+    agent_circuit_recovered_after: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -61,6 +79,26 @@ class Settings(BaseSettings):
     @property
     def command_pilot_project_set(self) -> set[str]:
         return parse_csv_set(self.agent_command_pilot_projects)
+
+    @property
+    def agent_grey_tenant_set(self) -> set[str]:
+        return parse_csv_set(self.agent_grey_tenants)
+
+    @property
+    def agent_grey_project_set(self) -> set[str]:
+        return parse_csv_set(self.agent_grey_projects)
+
+    @property
+    def agent_grey_user_set(self) -> set[str]:
+        return parse_csv_set(self.agent_grey_users)
+
+    @property
+    def agent_paused_tenant_set(self) -> set[str]:
+        return parse_csv_set(self.agent_paused_tenants)
+
+    @property
+    def agent_paused_project_set(self) -> set[str]:
+        return parse_csv_set(self.agent_paused_projects)
 
 
 @lru_cache

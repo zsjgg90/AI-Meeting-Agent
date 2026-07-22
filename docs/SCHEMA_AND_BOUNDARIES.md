@@ -780,6 +780,57 @@ commands, non-whitelisted tenant/project writes, automatic approval, batch
 execution, Prompt/RAG/Validator changes, Shadow promotion, or production-wide
 release.
 
+## Agent Phase 14 Grey Safety And Operations
+
+MeetMind Agent v1.0 Phase 14 adds production safety guardrails and operational
+read APIs around the Phase 13 restricted pilot:
+
+- `services/api/app/agent_phase14_guardrails.py`
+- `services/api/app/routers/agent_ops.py`
+- `services/api/scripts/run_agent_phase14_postgres_acceptance.py`
+
+Phase 14 does not add a database migration. It uses existing command,
+proposal, action item, and Agent audit tables. Real execution must pass both
+the Phase 13 pilot contract and the Phase 14 grey guardrails. Defaults remain
+closed:
+
+```text
+AGENT_GLOBAL_KILL_SWITCH=false
+AGENT_GREY_ENABLED=false
+AGENT_GREY_TENANTS=
+AGENT_GREY_PROJECTS=
+AGENT_GREY_USERS=
+AGENT_GREY_PERCENTAGE=0
+AGENT_GREY_PROJECT_DAILY_LIMIT=0
+AGENT_GREY_USER_DAILY_LIMIT=0
+AGENT_GREY_CONCURRENCY_LIMIT=0
+```
+
+The grey gate requires explicit tenant/project/user whitelists, a non-zero
+percentage, non-zero per-project and per-user daily limits, a non-zero
+concurrency limit, and an open UTC time window when configured. It also
+supports global kill switch, manual pause, tenant/project pause lists,
+consecutive-failure circuit breaking, version-conflict-rate circuit breaking,
+rollback-failure circuit breaking, and audit-backed manual circuit reset.
+
+New API operations are operational only:
+
+- `GET /agent/ops/metrics`
+- `GET /agent/ops/audits`
+- `GET /agent/ops/circuit-breakers`
+- `POST /agent/ops/circuit-breakers/reset`
+- `GET /agent/ops/preflight`
+
+Audit search is scoped by the server-side `AgentPrincipal` and redacts
+sensitive keys such as tokens, passwords, secrets, and API keys. Emergency
+close rejects new command execution but does not block audit queries or
+controlled rollback of already successful Phase 13 pilot commands.
+
+Phase 14 still does not allow Requirement/Risk writes, summary JSON writes,
+`cancel`, high/critical commands, batch execution, automatic approval,
+Prompt/RAG/Validator changes, Shadow promotion, grey enablement by default, or
+production-wide release.
+
 ## Schema Version
 
 Current schema version:

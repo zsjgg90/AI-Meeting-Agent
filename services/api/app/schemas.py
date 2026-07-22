@@ -436,3 +436,47 @@ class AgentRollbackExecutionRead(BaseModel):
     before_state: dict[str, Any] | None = None
     after_state: dict[str, Any] | None = None
     writes_performed: bool = True
+
+
+class AgentAuditSearchRead(BaseModel):
+    items: list[AgentAuditRecordRead]
+    total: int
+    limit: int
+    offset: int
+    has_more: bool
+
+
+class AgentMetricsRead(BaseModel):
+    totals: dict[str, int]
+    execution_latency_ms: dict[str, float | None]
+    by_tenant: dict[str, int]
+    by_project: dict[str, int]
+    by_user: dict[str, int]
+
+
+class AgentCircuitStatusRead(BaseModel):
+    status: str
+    reasons: list[str] = Field(default_factory=list)
+    tenant_id: str | None = None
+    project_id: str | None = None
+    kill_switch_enabled: bool = False
+    manual_paused: bool = False
+    recovery_hint: str = ""
+
+
+class AgentCircuitResetRequest(BaseModel):
+    tenant_id: str = Field(min_length=1, max_length=64)
+    project_id: str = Field(min_length=1, max_length=64)
+    reason: str = Field(min_length=1, max_length=1000)
+
+
+class AgentCircuitResetRead(BaseModel):
+    audit: AgentAuditRecordRead
+    status: str
+
+
+class AgentPreflightRead(BaseModel):
+    status: str
+    can_enter_grey: bool
+    hard_failures: list[str] = Field(default_factory=list)
+    checks: dict[str, dict[str, Any]]

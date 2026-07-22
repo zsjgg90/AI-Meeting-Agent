@@ -10,6 +10,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
+from app.agent_phase14_guardrails import evaluate_execution_guardrails, persist_guardrail_rejection_audit
 from app.agent_security import AgentPrincipal, require_agent_permission
 from app.config import Settings, get_settings
 from app.models import ActionItem, AgentAuditRecord, ControlledWriteCommandRecord
@@ -547,6 +548,25 @@ def execute_command_in_transaction(
 
         item = lock_action_item(db, command.target_object_id)
         before_state = action_item_snapshot(item)
+        guardrail = evaluate_execution_guardrails(
+            db,
+            command=command,
+            item=item,
+            principal=principal,
+            settings=resolved_settings,
+        )
+        if not guardrail.allowed:
+            audit = persist_guardrail_rejection_audit(
+                db,
+                command=command,
+                reviewer=principal.reviewer_identity,
+                reasons=guardrail.reasons,
+                item=item,
+                context=guardrail.details,
+            )
+            db.commit()
+            db.refresh(audit)
+            raise HTTPException(status_code=guardrail.status_code, detail={"status": "rejected", "reasons": guardrail.reasons})
         validate_pilot_command(
             command=command,
             item=item,
@@ -568,6 +588,7 @@ def execute_command_in_transaction(
             db,
             command=command,
             reviewer=principal.reviewer_identity,
+            principal_user_id=principal.user_id,
             before_state=before_state,
             after_state=after_state,
         )
@@ -580,6 +601,7 @@ def execute_command_in_transaction(
             "pilot_execution": True,
             "writes_performed": True,
             "business_writes_performed": True,
+            "principal_user_id": principal.user_id,
             "execution_audit_id": audit.id,
             "before_state": before_state,
             "after_state": after_state,
@@ -875,6 +897,7 @@ def persist_execution_audit(
     *,
     command: ControlledWriteCommandRecord,
     reviewer: str,
+    principal_user_id: str,
     before_state: dict[str, Any],
     after_state: dict[str, Any],
 ) -> AgentAuditRecord:
@@ -897,6 +920,7 @@ def persist_execution_audit(
             "pilot_execution": True,
             "writes_performed": True,
             "business_writes_performed": True,
+            "principal_user_id": principal_user_id,
             "idempotency_key": command.idempotency_key,
             "expected_changes": dict(command.changes or {}),
             "rollback_preview": dict(command.rollback_plan or {}),

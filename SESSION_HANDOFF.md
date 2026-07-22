@@ -233,6 +233,23 @@ Requirement/Risk writes, cancel, high/critical commands, non-whitelisted
 projects, automatic approval, batch execution, Prompt/RAG/Validator changes,
 Shadow promotion, and production-wide release remain disabled.
 
+Agent v1.0 Phase 14 adds production safety guardrails and grey acceptance
+without expanding the Phase 13 write contract. The API now has
+`agent_phase14_guardrails.py` and `/agent/ops` endpoints for metrics, redacted
+audit search, circuit status/reset, and release preflight. Real execution must
+pass Phase 13 pilot switches plus explicit Phase 14 grey settings:
+tenant/project/user whitelist, non-zero grey percentage, non-zero per-project
+and per-user daily limit, non-zero concurrency limit, optional UTC time window,
+no manual pause, no tenant/project pause, no global kill switch, and no open
+audit-backed circuit. Defaults remain closed. Emergency close rejects new
+command execution but still allows audit queries and controlled rollback of
+already successful Phase 13 pilot commands. Phase 14 uses existing tables and
+does not add an Alembic revision; Alembic head remains `20260721_0015`.
+Requirement/Risk writes, summary JSON writes, cancel, high/critical commands,
+batch execution, automatic approval, Prompt/RAG/Validator changes, Shadow
+promotion, default grey enablement, production-wide release, and Phase 15 work
+remain out of scope.
+
 Repository freeze metadata:
 
 - Repository: `https://github.com/zsjgg90/AI-Meeting-Agent`
@@ -330,8 +347,8 @@ healthy after restart.
 
 Do not continue broad refactoring immediately. First stabilize:
 
-1. Review Phase 13 restricted ActionItem pilot execution, rollback audit,
-   PostgreSQL acceptance, and UI evidence before considering Phase 14 grey
+1. Review Phase 14 grey safety guardrails, PostgreSQL grey acceptance, audit
+   evidence, and `/agent/ops/preflight` output before considering Phase 15 final
    acceptance.
 2. Decide how `agent_users` and `agent_auth_sessions` should integrate with the
    broader product identity/session system before exposing Agent APIs broadly.

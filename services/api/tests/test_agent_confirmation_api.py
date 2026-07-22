@@ -272,6 +272,14 @@ class AgentConfirmationApiTest(unittest.TestCase):
             agent_command_pilot_tenants="tenant-1",
             agent_command_pilot_projects="project-1",
             agent_rollback_execution_enabled=rollback,
+            agent_grey_enabled=True,
+            agent_grey_tenants="tenant-1",
+            agent_grey_projects="project-1",
+            agent_grey_users="user-1",
+            agent_grey_percentage=100,
+            agent_grey_project_daily_limit=100,
+            agent_grey_user_daily_limit=100,
+            agent_grey_concurrency_limit=1,
         )
 
     def test_database_authoritative_state_reads_supported_objects(self) -> None:
@@ -1045,6 +1053,14 @@ class AgentConfirmationApiTest(unittest.TestCase):
             agent_command_pilot_enabled=True,
             agent_command_pilot_tenants="other-tenant",
             agent_command_pilot_projects="other-project",
+            agent_grey_enabled=True,
+            agent_grey_tenants="tenant-1",
+            agent_grey_projects="project-1",
+            agent_grey_users="user-1",
+            agent_grey_percentage=100,
+            agent_grey_project_daily_limit=100,
+            agent_grey_user_daily_limit=100,
+            agent_grey_concurrency_limit=1,
         )
         with patch("app.agent_command_executor.get_settings", return_value=settings):
             response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
@@ -1230,6 +1246,165 @@ class AgentConfirmationApiTest(unittest.TestCase):
             self.assertEqual(item.owner, "Alice")
         finally:
             db.close()
+
+    def test_phase14_grey_config_is_required_even_when_phase13_pilot_is_enabled(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post(
+            "/agent/action-proposals/proposal-action-1/approve",
+            json={},
+            headers=self.auth_headers(),
+        )
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+        phase13_only = Settings(
+            agent_command_execution_enabled=True,
+            agent_command_dry_run_only=False,
+            agent_command_pilot_enabled=True,
+            agent_command_pilot_tenants="tenant-1",
+            agent_command_pilot_projects="project-1",
+        )
+
+        with patch("app.agent_command_executor.get_settings", return_value=phase13_only):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(response.status_code, 403, response.text)
+        reasons = response.json()["detail"]["reasons"]
+        self.assertIn("grey_disabled", reasons)
+        self.assertIn("grey_user_not_whitelisted", reasons)
+        self.assertIn("grey_percentage_zero", reasons)
+        self.assertIn("project_daily_limit_zero", reasons)
+        db = self.SessionLocal()
+        try:
+            item = db.get(ActionItem, "action-1")
+            audit = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "rejected")
+            ).one()
+            self.assertEqual(item.owner, "Alice")
+            self.assertEqual(audit.result, "rejected")
+            self.assertFalse(audit.audit_context["writes_performed"])
+            self.assertTrue(audit.audit_context["guardrail_rejection"])
+        finally:
+            db.close()
+
+    def test_phase14_rejects_non_whitelisted_user(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post("/agent/action-proposals/proposal-action-1/approve", json={})
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+        settings = Settings(
+            agent_command_execution_enabled=True,
+            agent_command_dry_run_only=False,
+            agent_command_pilot_enabled=True,
+            agent_command_pilot_tenants="tenant-1",
+            agent_command_pilot_projects="project-1",
+            agent_grey_enabled=True,
+            agent_grey_tenants="tenant-1",
+            agent_grey_projects="project-1",
+            agent_grey_users="other-user",
+            agent_grey_percentage=100,
+            agent_grey_project_daily_limit=100,
+            agent_grey_user_daily_limit=100,
+            agent_grey_concurrency_limit=1,
+        )
+
+        with patch("app.agent_command_executor.get_settings", return_value=settings):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(response.status_code, 403)
+        self.assertIn("grey_user_not_whitelisted", response.json()["detail"]["reasons"])
+
+    def test_phase14_global_kill_switch_rejects_new_execute(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post("/agent/action-proposals/proposal-action-1/approve", json={})
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+        settings = Settings(
+            agent_command_execution_enabled=True,
+            agent_command_dry_run_only=False,
+            agent_command_pilot_enabled=True,
+            agent_command_pilot_tenants="tenant-1",
+            agent_command_pilot_projects="project-1",
+            agent_global_kill_switch=True,
+            agent_grey_enabled=True,
+            agent_grey_tenants="tenant-1",
+            agent_grey_projects="project-1",
+            agent_grey_users="user-1",
+            agent_grey_percentage=100,
+            agent_grey_project_daily_limit=100,
+            agent_grey_user_daily_limit=100,
+            agent_grey_concurrency_limit=1,
+        )
+
+        with patch("app.agent_command_executor.get_settings", return_value=settings):
+            response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+
+        self.assertEqual(response.status_code, 403)
+        self.assertIn("global_kill_switch_enabled", response.json()["detail"]["reasons"])
+
+    def test_phase14_ops_metrics_and_audit_search_are_scoped_and_sanitized(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post("/agent/action-proposals/proposal-action-1/approve", json={})
+        command_id = approved.json()["command"]["id"]
+        self.set_principal(
+            permissions=("proposal_view", "proposal_review", "command_dry_run", "command_execute", "audit_view", "rollback_execute")
+        )
+        with patch("app.agent_command_executor.get_settings", return_value=self.pilot_settings()):
+            execute_response = self.client.post(f"/agent/commands/{command_id}/execute", json={})
+        self.assertEqual(execute_response.status_code, 200, execute_response.text)
+        db = self.SessionLocal()
+        try:
+            audit = db.scalars(
+                select(AgentAuditRecord).where(AgentAuditRecord.command_id == command_id, AgentAuditRecord.result == "execution_succeeded")
+            ).one()
+            audit.audit_context = {**audit.audit_context, "token": "secret-token"}
+            db.add(audit)
+            db.commit()
+        finally:
+            db.close()
+
+        metrics = self.client.get("/agent/ops/metrics")
+        audits = self.client.get("/agent/ops/audits", params={"command_id": command_id})
+
+        self.assertEqual(metrics.status_code, 200, metrics.text)
+        self.assertGreaterEqual(metrics.json()["totals"]["success"], 1)
+        self.assertEqual(audits.status_code, 200, audits.text)
+        self.assertEqual(audits.json()["total"], 2)
+        contexts = [item["audit_context"] for item in audits.json()["items"]]
+        self.assertTrue(any(context.get("token") == "[redacted]" for context in contexts))
+
+        self.set_principal(tenant_id="other-tenant")
+        denied = self.client.get("/agent/ops/audits", params={"command_id": command_id})
+        self.assertEqual(denied.json()["total"], 0)
+
+    def test_phase14_circuit_status_and_reset_endpoints(self) -> None:
+        self.set_principal(permissions=("audit_view",), project_ids=("project-1",))
+
+        status = self.client.get("/agent/ops/circuit-breakers", params={"tenant_id": "tenant-1", "project_id": "project-1"})
+        reset = self.client.post(
+            "/agent/ops/circuit-breakers/reset",
+            json={"tenant_id": "tenant-1", "project_id": "project-1", "reason": "manual recovery"},
+        )
+
+        self.assertEqual(status.status_code, 200, status.text)
+        self.assertEqual(status.json()["status"], "closed")
+        self.assertEqual(reset.status_code, 200, reset.text)
+        self.assertEqual(reset.json()["status"], "reset")
+        self.assertEqual(reset.json()["audit"]["result"], "circuit_reset")
+
+    def test_phase14_ops_routes_are_in_openapi(self) -> None:
+        openapi = self.client.get("/openapi.json").json()
+
+        self.assertIn("/agent/ops/metrics", openapi["paths"])
+        self.assertIn("/agent/ops/audits", openapi["paths"])
+        self.assertIn("/agent/ops/circuit-breakers", openapi["paths"])
+        self.assertIn("/agent/ops/circuit-breakers/reset", openapi["paths"])
+        self.assertIn("/agent/ops/preflight", openapi["paths"])
 
     def test_rollback_dry_run_generates_command_preview_and_audit(self) -> None:
         self.create_action_proposal()

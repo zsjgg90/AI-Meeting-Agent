@@ -6,7 +6,7 @@ from sqlalchemy import text
 from app.config import get_settings
 from app.database import SessionLocal
 from app.observability import log_event, safe_error
-from app.routers import agent_commands, agent_proposals, feedback, meetings, tasks
+from app.routers import agent_commands, agent_ops, agent_proposals, feedback, meetings, tasks
 
 
 def create_app() -> FastAPI:
@@ -55,6 +55,7 @@ def create_app() -> FastAPI:
     app.include_router(feedback.router)
     app.include_router(agent_proposals.router)
     app.include_router(agent_commands.router)
+    app.include_router(agent_ops.router)
     return app
 
 

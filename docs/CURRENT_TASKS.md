@@ -2,9 +2,9 @@
 
 ## Active Priority
 
-1. Review Agent v1.0 Phase 13 restricted ActionItem real-write pilot,
-   rollback execution, PostgreSQL safety acceptance, and audit evidence before
-   considering any broader grey acceptance.
+1. Review Agent v1.0 Phase 14 grey safety guardrails, PostgreSQL grey
+   acceptance, audit evidence, and release preflight output before considering
+   Phase 15 final acceptance.
 2. Keep formal Qwen3 + RAG meeting analysis stable.
 3. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
 4. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
@@ -142,6 +142,20 @@
   PostgreSQL pilot acceptance script for synthetic `phase13_pg_` data. Run it
   only against a disposable or explicitly safe test database where
   downgrade/upgrade rehearsal is acceptable.
+- Keep Phase 14 as production safety hardening and grey acceptance only. It may
+  add grey guardrails, monitoring, audit search, circuit breaker status/reset,
+  preflight checks, and failure drills around the Phase 13 ActionItem pilot,
+  but must not expand the object, operation, field, or risk scope.
+- Phase 14 real execution is still allowed only for Phase 13
+  `AgentActionItem` `update` / `complete`, low/medium risk, and fields
+  `owner`, `due_date`, `priority`, and `status`, after explicit tenant/project
+  pilot whitelist and explicit grey tenant/project/user whitelist, percentage,
+  quota, and concurrency settings.
+- Phase 14 defaults reject real execution because grey is disabled and all
+  limits are 0. It must not enable production grey by default.
+- `services/api/scripts/run_agent_phase14_postgres_acceptance.py` is the
+  PostgreSQL grey acceptance script for synthetic `phase14_pg_` data. Run it
+  only against a disposable or explicitly safe test database.
 - Phase 5 calibrated only scenario context requirements for
   `requirement_review` and `cross_department` so their static plans load meeting
   history as required by acceptance. Prompt, RAG, Validator, API, DB, Expo, and
