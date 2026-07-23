@@ -77,6 +77,7 @@ if (-not $SkipApiTests) {
         services.api.tests.test_api_contract `
         services.api.tests.test_agent_config `
         services.api.tests.test_agent_confirmation_api `
+        services.api.tests.test_knowledge_api `
         services.api.tests.test_meeting_upload_api }
 }
 

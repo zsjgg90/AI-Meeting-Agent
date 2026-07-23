@@ -11,6 +11,22 @@ Expo -> API -> Worker -> Qwen3 + RAG -> MeetingAnalysisSchema
 -> MeetingAnalysisPostProcessor -> AntiHallucinationValidator -> PostgreSQL -> Expo
 ```
 
+企业会议知识库 MVP 在正式 Summary 与 ActionItem 入库后由 API 侧扩展：
+
+```text
+MeetingSummary + ActionItem + TranscriptSegment
+-> API knowledge_sync_service
+-> meeting_knowledge_items / meeting_knowledge_syncs
+-> /knowledge 分类浏览与搜索 API
+-> Expo 知识库页面
+-> MeetingDetailScreen 来源会议与原文证据
+```
+
+知识同步不进入 Worker。Worker 继续负责 ASR、说话人分离、RAG、Qwen3、
+Validator 和正式 Summary 持久化。知识同步失败只记录同步失败状态，不阻塞会议
+`completed`、Summary、待办和会议详情。
+
+
 语义事件链路当前处于 shadow mode，仅用于后台诊断和质量对比，不覆盖正式会议纪要：
 
 ```text
@@ -633,6 +649,13 @@ npx expo run:android
 - `GET /agent/ops/circuit-breakers` 查询熔断状态
 - `POST /agent/ops/circuit-breakers/reset` 人工恢复审计型熔断
 - `GET /agent/ops/preflight` 查询灰度发布门禁
+- `GET /knowledge/overview` 查询知识库首页计数和同步状态概览
+- `GET /knowledge/meetings` 分页查询已完成会议记录
+- `GET /knowledge/decisions` 分页查询关键决策
+- `GET /knowledge/issues` 分页查询遗留问题
+- `GET /knowledge/risks` 分页查询风险记录
+- `GET /knowledge/search` 基于 PostgreSQL 关键词搜索会议知识
+- `POST /meetings/{id}/knowledge/reindex` 手动重试指定会议知识同步
 
 `GET /meetings/{id}/summary` 返回结构：
 

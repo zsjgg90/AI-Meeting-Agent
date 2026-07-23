@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-07-24
+
+- Added the Enterprise Meeting Knowledge Base MVP as an API-side PostgreSQL
+  read model. Alembic revision `20260724_0016` creates
+  `meeting_knowledge_items` and `meeting_knowledge_syncs`.
+- Added idempotent `knowledge_sync_service` that maps completed
+  `MeetingSummary`, persisted `ActionItem`, and `TranscriptSegment` rows into
+  active knowledge items. Re-analysis updates matching source keys, marks
+  removed old items `stale`, and meeting deletion marks knowledge `deleted`.
+- Knowledge sync runs after successful Worker process/analyze responses and
+  is isolated from the meeting completed state, Summary, ActionItems, and
+  MeetingDetail reads. Worker models, Prompt, RAG, Validator, Shadow, and Agent
+  write boundaries were not changed.
+- Added Knowledge APIs: `/knowledge/overview`, `/knowledge/meetings`,
+  `/knowledge/decisions`, `/knowledge/issues`, `/knowledge/risks`,
+  `/knowledge/search`, plus `POST /meetings/{meeting_id}/knowledge/reindex`.
+  MVP search uses PostgreSQL keyword matching and preserves project filtering
+  as closed until meeting data has stable project scope.
+- Replaced the basic Knowledge Base empty state with mobile pages for the
+  knowledge home, meeting records, key decisions, issue/risk tabs, search home,
+  search results, filter sheet, cards, empty/error states, and skeletons.
+  The home page keeps four entries and a large search box only, with no recent
+  meetings, AI Q&A, or AI assistant entry.
+- Extended `MeetingDetailScreen` with `initialTab`, `sourceSegmentId`,
+  `startTime`, and `evidenceText` so knowledge results can open the source
+  meeting and narrow the transcript to the evidence text or segment.
+- Added API knowledge tests and expanded the mobile Knowledge Base static test.
+
 ## 2026-07-23
 
 - Replaced the default Expo bottom navigation AI Assistant entry with a

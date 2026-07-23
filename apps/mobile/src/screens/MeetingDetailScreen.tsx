@@ -30,6 +30,10 @@ type Props = {
   meetingId: string;
   onRecord: (meeting: Meeting) => void;
   onOpenAudioPlayer: (meetingId: string) => void;
+  initialTab?: DetailTab;
+  sourceSegmentId?: string | null;
+  startTime?: number | null;
+  evidenceText?: string | null;
 };
 
 type DetailTab = 'summary' | 'transcript' | 'decisions' | 'questions' | 'actions' | 'risks';
@@ -140,10 +144,10 @@ function cleanSummaryText(value: string): string {
     .trim();
 }
 
-export function MeetingDetailScreen({ meetingId, onRecord, onOpenAudioPlayer }: Props) {
+export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceSegmentId, startTime, evidenceText, onRecord, onOpenAudioPlayer }: Props) {
   const [meeting, setMeeting] = useState<MeetingDetail | null>(null);
   const [summaryOverride, setSummaryOverride] = useState<MeetingSummary | null>(null);
-  const [activeTab, setActiveTab] = useState<DetailTab>('summary');
+  const [activeTab, setActiveTab] = useState<DetailTab>(initialTab);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [speakerNameDrafts, setSpeakerNameDrafts] = useState<Record<string, string>>({});
@@ -153,7 +157,7 @@ export function MeetingDetailScreen({ meetingId, onRecord, onOpenAudioPlayer }: 
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [playingAudioId, setPlayingAudioId] = useState<string | null>(null);
   const [playingSegmentId, setPlayingSegmentId] = useState<string | null>(null);
-  const [transcriptSearch, setTranscriptSearch] = useState('');
+  const [transcriptSearch, setTranscriptSearch] = useState(evidenceText || '');
 
   const loadMeeting = useCallback(async () => {
     try {
@@ -178,6 +182,10 @@ export function MeetingDetailScreen({ meetingId, onRecord, onOpenAudioPlayer }: 
   }, [loadMeeting]);
 
   useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab, meetingId]);
+
+  useEffect(() => {
     return () => {
       sound?.unloadAsync().catch(() => undefined);
     };
@@ -200,6 +208,23 @@ export function MeetingDetailScreen({ meetingId, onRecord, onOpenAudioPlayer }: 
     setSpeakerNameDrafts((current) => ({ ...names, ...current }));
     setSpeakerNoteDrafts((current) => ({ ...notes, ...current }));
   }, [meeting]);
+
+  useEffect(() => {
+    if (!meeting || activeTab !== 'transcript') return;
+    if (evidenceText?.trim()) {
+      setTranscriptSearch(evidenceText.trim());
+      return;
+    }
+    if (sourceSegmentId) {
+      const segment = meeting.transcript_segments.find((item) => item.id === sourceSegmentId);
+      if (segment?.text) setTranscriptSearch(segment.text);
+      return;
+    }
+    if (typeof startTime === 'number') {
+      const segment = meeting.transcript_segments.find((item) => item.start_time <= startTime && item.end_time >= startTime);
+      if (segment?.text) setTranscriptSearch(segment.text);
+    }
+  }, [activeTab, evidenceText, meeting, sourceSegmentId, startTime]);
 
   useEffect(() => {
     if (!meeting || !['processing', 'transcribing', 'transcribed', 'summarizing'].includes(meeting.status)) {

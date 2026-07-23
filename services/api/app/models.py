@@ -161,6 +161,46 @@ class ActionItem(Base):
     summary: Mapped[MeetingSummary | None] = relationship(back_populates="action_items")
 
 
+class MeetingKnowledgeItem(Base):
+    __tablename__ = "meeting_knowledge_items"
+    __table_args__ = (
+        UniqueConstraint("meeting_id", "content_type", "source_item_key", name="uq_meeting_knowledge_source_item"),
+    )
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    tenant_id: Mapped[str] = mapped_column(String(64), default="default-tenant", index=True)
+    project_id: Mapped[str] = mapped_column(String(64), default="default-project", index=True)
+    meeting_id: Mapped[str] = mapped_column(String(36), index=True)
+    content_type: Mapped[str] = mapped_column(String(32), index=True)
+    source_item_key: Mapped[str] = mapped_column(String(128))
+    content_hash: Mapped[str] = mapped_column(String(64), index=True)
+    title: Mapped[str] = mapped_column(String(255), default="")
+    content: Mapped[str] = mapped_column(Text)
+    evidence_text: Mapped[str | None] = mapped_column(Text, nullable=True)
+    source_segment_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
+    speaker_label: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    start_time: Mapped[float | None] = mapped_column(Float, nullable=True)
+    end_time: Mapped[float | None] = mapped_column(Float, nullable=True)
+    status: Mapped[str] = mapped_column(String(16), default="active", index=True)
+    source_version: Mapped[str] = mapped_column(String(128), default="", index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, onupdate=utc_now)
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+
+
+class MeetingKnowledgeSync(Base):
+    __tablename__ = "meeting_knowledge_syncs"
+
+    meeting_id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    status: Mapped[str] = mapped_column(String(16), default="pending", index=True)
+    source_version: Mapped[str] = mapped_column(String(128), default="")
+    item_count: Mapped[int] = mapped_column(Integer, default=0)
+    sync_error: Mapped[str | None] = mapped_column(Text, nullable=True)
+    started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now, onupdate=utc_now)
+
+
 class ActionItemScopeBackfillAudit(Base):
     __tablename__ = "action_item_scope_backfill_audits"
     __table_args__ = (UniqueConstraint("run_id", "action_item_id", name="uq_action_item_scope_backfill_run_item"),)

@@ -64,6 +64,72 @@ export type TaskListResponse = {
   has_more: boolean;
 };
 
+export type KnowledgeOverview = {
+  meeting_count: number;
+  decision_count: number;
+  unresolved_issue_count: number;
+  risk_count: number;
+  all_count: number;
+  sync_status: Record<string, number>;
+};
+
+export type KnowledgeContentType =
+  | 'all'
+  | 'meeting_summary'
+  | 'meeting_agenda'
+  | 'key_decision'
+  | 'action_item'
+  | 'unresolved_issue'
+  | 'risk'
+  | 'transcript';
+
+export type KnowledgeItem = {
+  id: string;
+  content_type: Exclude<KnowledgeContentType, 'all'> | string;
+  title: string;
+  content: string;
+  meeting_id: string;
+  meeting_title: string;
+  meeting_date: string | null;
+  evidence_text: string | null;
+  source_segment_id: string | null;
+  speaker_label: string | null;
+  start_time: number | null;
+  end_time: number | null;
+  highlight: string | null;
+};
+
+export type KnowledgeMeetingItem = {
+  meeting_id: string;
+  title: string;
+  meeting_type: string | null;
+  meeting_time: string | null;
+  duration: number | null;
+  summary_status: string;
+  conclusion_count: number;
+  action_count: number;
+  unresolved_issue_count: number;
+  risk_count: number;
+};
+
+export type KnowledgeListResponse<T = KnowledgeItem> = {
+  items: T[];
+  total: number;
+  limit: number;
+  offset: number;
+  has_more: boolean;
+};
+
+export type KnowledgeQueryOptions = {
+  query?: string;
+  content_type?: KnowledgeContentType | string;
+  meeting_type?: string;
+  date_from?: string;
+  date_to?: string;
+  limit?: number;
+  offset?: number;
+};
+
 export type SpeakerMapping = {
   id: string;
   speaker_label: string;
@@ -360,6 +426,42 @@ export function listTasks(options?: {
     params.set('q', options.q.trim());
   }
   return requestJson<TaskListResponse>(`/tasks?${params.toString()}`);
+}
+
+function knowledgeParams(options?: KnowledgeQueryOptions): string {
+  const params = new URLSearchParams();
+  params.set('limit', String(options?.limit ?? 20));
+  params.set('offset', String(options?.offset ?? 0));
+  if (options?.query?.trim()) params.set('query', options.query.trim());
+  if (options?.content_type && options.content_type !== 'all') params.set('content_type', options.content_type);
+  if (options?.meeting_type && options.meeting_type !== 'all') params.set('meeting_type', options.meeting_type);
+  if (options?.date_from) params.set('date_from', options.date_from);
+  if (options?.date_to) params.set('date_to', options.date_to);
+  return params.toString();
+}
+
+export function getKnowledgeOverview(): Promise<KnowledgeOverview> {
+  return requestJson<KnowledgeOverview>('/knowledge/overview');
+}
+
+export function listKnowledgeMeetings(options?: KnowledgeQueryOptions): Promise<KnowledgeListResponse<KnowledgeMeetingItem>> {
+  return requestJson<KnowledgeListResponse<KnowledgeMeetingItem>>(`/knowledge/meetings?${knowledgeParams(options)}`);
+}
+
+export function listKnowledgeDecisions(options?: KnowledgeQueryOptions): Promise<KnowledgeListResponse> {
+  return requestJson<KnowledgeListResponse>(`/knowledge/decisions?${knowledgeParams(options)}`);
+}
+
+export function listKnowledgeIssues(options?: KnowledgeQueryOptions): Promise<KnowledgeListResponse> {
+  return requestJson<KnowledgeListResponse>(`/knowledge/issues?${knowledgeParams(options)}`);
+}
+
+export function listKnowledgeRisks(options?: KnowledgeQueryOptions): Promise<KnowledgeListResponse> {
+  return requestJson<KnowledgeListResponse>(`/knowledge/risks?${knowledgeParams(options)}`);
+}
+
+export function searchKnowledge(options?: KnowledgeQueryOptions): Promise<KnowledgeListResponse> {
+  return requestJson<KnowledgeListResponse>(`/knowledge/search?${knowledgeParams(options)}`);
 }
 
 export function createMeeting(

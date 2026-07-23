@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.config import get_settings
 from app.database import SessionLocal
 from app.observability import log_event, safe_error
-from app.routers import agent_commands, agent_ops, agent_proposals, feedback, meetings, tasks
+from app.routers import agent_commands, agent_ops, agent_proposals, feedback, knowledge, meetings, tasks
 from app.services.meeting_task_recovery import recover_stale_meeting_tasks_on_startup
 
 
@@ -63,6 +63,7 @@ def create_app(session_factory: Callable[[], Session] | None = None) -> FastAPI:
         return {"status": status, "checks": checks}
 
     app.include_router(meetings.router)
+    app.include_router(knowledge.router)
     app.include_router(tasks.router)
     app.include_router(feedback.router)
     app.include_router(agent_proposals.router)

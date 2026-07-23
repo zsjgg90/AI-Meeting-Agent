@@ -859,6 +859,78 @@ metadata.schema_version
 
 Legacy fields remain for backward compatibility. New code should prefer canonical fields.
 
+## Knowledge Base MVP Schema
+
+The enterprise meeting knowledge base is an API-side PostgreSQL read model.
+It does not change Worker-owned ASR, RAG, Qwen3, PostProcessor, Validator, or
+Shadow behavior.
+
+Tables:
+
+- `meeting_knowledge_items`
+- `meeting_knowledge_syncs`
+
+`meeting_knowledge_items` stores:
+
+- `id`
+- `tenant_id`
+- `project_id`
+- `meeting_id`
+- `content_type`
+- `source_item_key`
+- `content_hash`
+- `title`
+- `content`
+- `evidence_text`
+- `source_segment_id`
+- `speaker_label`
+- `start_time`
+- `end_time`
+- `status`
+- `source_version`
+- `created_at`
+- `updated_at`
+- `deleted_at`
+
+`meeting_knowledge_syncs` stores one sync state row per meeting:
+
+- `meeting_id`
+- `status`
+- `source_version`
+- `item_count`
+- `sync_error`
+- `started_at`
+- `completed_at`
+- `updated_at`
+
+Status values:
+
+- knowledge item: `active`, `stale`, `deleted`
+- sync: `pending`, `indexing`, `completed`, `failed`
+
+Idempotency:
+
+- unique key: `meeting_id + content_type + source_item_key`
+- six-dimension array source key: `content_type:index`
+- transcript source key: `transcript:segment_id`
+- `content_hash` detects content changes but is not the business key
+
+Mapping:
+
+| Source | Knowledge `content_type` |
+| --- | --- |
+| `meeting_summary` | `meeting_summary` |
+| `meeting_agenda[]` | `meeting_agenda` |
+| `key_conclusions[]` | `key_decision` |
+| `action_items` | `action_item` |
+| `unresolved_issues[]` | `unresolved_issue` |
+| `risks_and_focus[]` | `risk` |
+| `transcript_segments` | `transcript` |
+
+Deleted meetings keep their knowledge rows as soft-deleted records because the
+current meeting delete API hard-deletes `meetings`. The knowledge table
+therefore stores `meeting_id` as a source identifier rather than a foreign key.
+
 ## Module Boundaries
 
 | Layer | Owns | Must not own |

@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Animated, PanResponder, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-import { deleteMeeting, Meeting } from './src/api';
+import { deleteMeeting, KnowledgeItem, Meeting } from './src/api';
 import { AppHeader } from './src/components/AppHeader';
 import { BottomNav, BottomTab } from './src/components/BottomNav';
 import { featureFlags } from './src/config';
@@ -15,6 +15,11 @@ import { FaqScreen } from './src/screens/FaqScreen';
 import { FeedbackScreen } from './src/screens/FeedbackScreen';
 import { HelpFeedbackScreen } from './src/screens/HelpFeedbackScreen';
 import { KnowledgeBaseScreen } from './src/screens/KnowledgeBaseScreen';
+import { KnowledgeDecisionListScreen } from './src/screens/KnowledgeDecisionListScreen';
+import { KnowledgeIssueRiskScreen } from './src/screens/KnowledgeIssueRiskScreen';
+import { KnowledgeMeetingListScreen } from './src/screens/KnowledgeMeetingListScreen';
+import { KnowledgeSearchResultsScreen } from './src/screens/KnowledgeSearchResultsScreen';
+import { KnowledgeSearchScreen } from './src/screens/KnowledgeSearchScreen';
 import { MeetingDetailScreen } from './src/screens/MeetingDetailScreen';
 import { MeetingListScreen } from './src/screens/MeetingListScreen';
 import { NewMeetingScreen } from './src/screens/NewMeetingScreen';
@@ -27,6 +32,11 @@ type Route =
   | { name: 'home' }
   | { name: 'allMeetings' }
   | { name: 'knowledge' }
+  | { name: 'knowledgeMeetings' }
+  | { name: 'knowledgeDecisions' }
+  | { name: 'knowledgeIssueRisks' }
+  | { name: 'knowledgeSearch'; query?: string }
+  | { name: 'knowledgeSearchResults'; query: string }
   | { name: 'ai' }
   | { name: 'todo' }
   | { name: 'me' }
@@ -46,7 +56,7 @@ type Route =
       endedAt: string;
       realtimeTranscriptReady?: boolean;
     }
-  | { name: 'detail'; meetingId: string };
+  | { name: 'detail'; meetingId: string; initialTab?: 'summary' | 'transcript' | 'decisions' | 'questions' | 'actions' | 'risks'; sourceSegmentId?: string | null; startTime?: number | null; evidenceText?: string | null };
 
 const floatingWaveHeights = [12, 22, 32, 22, 12];
 
@@ -93,7 +103,7 @@ function FloatingRecordingIcon() {
 
 function bottomTabForRoute(route: Route): BottomTab | null {
   if (route.name === 'home') return 'home';
-  if (route.name === 'knowledge') return 'knowledge';
+  if (['knowledge', 'knowledgeMeetings', 'knowledgeDecisions', 'knowledgeIssueRisks', 'knowledgeSearch', 'knowledgeSearchResults'].includes(route.name)) return 'knowledge';
   if (featureFlags.enableAiAssistantUi && route.name === 'ai') return 'ai';
   if (route.name === 'todo') return 'todo';
   if (route.name === 'me') return 'me';
@@ -115,6 +125,28 @@ export default function App() {
 
   const goHome = useCallback(() => setRoute({ name: 'home' }), []);
   const openDetail = useCallback((meetingId: string) => setRoute({ name: 'detail', meetingId }), []);
+  const openKnowledgeSource = useCallback((item: KnowledgeItem) => {
+    const initialTab =
+      item.content_type === 'transcript'
+        ? 'transcript'
+        : item.content_type === 'key_decision'
+          ? 'decisions'
+          : item.content_type === 'unresolved_issue'
+            ? 'questions'
+            : item.content_type === 'risk'
+              ? 'risks'
+              : item.content_type === 'action_item'
+                ? 'actions'
+                : 'summary';
+    setRoute({
+      name: 'detail',
+      meetingId: item.meeting_id,
+      initialTab,
+      sourceSegmentId: item.source_segment_id,
+      startTime: item.start_time,
+      evidenceText: item.evidence_text || item.highlight || item.content,
+    });
+  }, []);
   const openMeeting = useCallback((meetingId: string) => {
     const current = recordingSessionRef.current;
     if (current?.started && current.meeting.id === meetingId) {
@@ -230,6 +262,15 @@ export default function App() {
       return;
     }
 
+    if (['knowledgeMeetings', 'knowledgeDecisions', 'knowledgeIssueRisks', 'knowledgeSearch'].includes(route.name)) {
+      setRoute({ name: 'knowledge' });
+      return;
+    }
+    if (route.name === 'knowledgeSearchResults') {
+      setRoute({ name: 'knowledgeSearch', query: route.query });
+      return;
+    }
+
     goHome();
   }
 
@@ -282,7 +323,32 @@ export default function App() {
         />
       ) : null}
 
-      {route.name === 'knowledge' && featureFlags.enableKnowledgeBaseUi ? <KnowledgeBaseScreen /> : null}
+      {route.name === 'knowledge' && featureFlags.enableKnowledgeBaseUi ? (
+        <KnowledgeBaseScreen
+          onOpenMeetings={() => setRoute({ name: 'knowledgeMeetings' })}
+          onOpenDecisions={() => setRoute({ name: 'knowledgeDecisions' })}
+          onOpenIssueRisks={() => setRoute({ name: 'knowledgeIssueRisks' })}
+          onOpenSearch={(query) => setRoute({ name: 'knowledgeSearch', query })}
+        />
+      ) : null}
+      {route.name === 'knowledgeMeetings' ? <KnowledgeMeetingListScreen onBack={() => setRoute({ name: 'knowledge' })} onOpenMeeting={openMeeting} /> : null}
+      {route.name === 'knowledgeDecisions' ? <KnowledgeDecisionListScreen onBack={() => setRoute({ name: 'knowledge' })} onOpenSource={openKnowledgeSource} /> : null}
+      {route.name === 'knowledgeIssueRisks' ? <KnowledgeIssueRiskScreen onBack={() => setRoute({ name: 'knowledge' })} onOpenSource={openKnowledgeSource} /> : null}
+      {route.name === 'knowledgeSearch' ? (
+        <KnowledgeSearchScreen
+          initialQuery={route.query}
+          onBack={() => setRoute({ name: 'knowledge' })}
+          onSearch={(query) => setRoute({ name: 'knowledgeSearchResults', query })}
+        />
+      ) : null}
+      {route.name === 'knowledgeSearchResults' ? (
+        <KnowledgeSearchResultsScreen
+          query={route.query}
+          onBack={() => setRoute({ name: 'knowledgeSearch', query: route.query })}
+          onCancel={() => setRoute({ name: 'knowledge' })}
+          onOpenSource={openKnowledgeSource}
+        />
+      ) : null}
 
       {featureFlags.enableAiAssistantUi && route.name === 'ai' ? <AIAssistantScreen /> : null}
       {route.name === 'todo' ? <TodoScreen /> : null}
@@ -350,6 +416,10 @@ export default function App() {
       {route.name === 'detail' ? (
         <MeetingDetailScreen
           meetingId={route.meetingId}
+          initialTab={route.initialTab}
+          sourceSegmentId={route.sourceSegmentId}
+          startTime={route.startTime}
+          evidenceText={route.evidenceText}
           onRecord={(meeting) => setRoute({ name: 'recording', meeting })}
           onOpenAudioPlayer={(meetingId) => setRoute({ name: 'audioPlayer', meetingId })}
         />

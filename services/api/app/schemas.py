@@ -145,6 +145,73 @@ class TaskListRead(BaseModel):
     has_more: bool
 
 
+class KnowledgeOverviewRead(BaseModel):
+    meeting_count: int
+    decision_count: int
+    unresolved_issue_count: int
+    risk_count: int
+    all_count: int
+    sync_status: dict[str, int] = Field(default_factory=dict)
+
+
+class KnowledgeMeetingItemRead(BaseModel):
+    meeting_id: str
+    title: str
+    meeting_type: str | None = None
+    meeting_time: datetime | None = None
+    duration: float | None = None
+    summary_status: str
+    conclusion_count: int
+    action_count: int
+    unresolved_issue_count: int
+    risk_count: int
+
+
+class KnowledgeItemRead(BaseModel):
+    id: str
+    content_type: str
+    title: str
+    content: str
+    meeting_id: str
+    meeting_title: str
+    meeting_date: datetime | None = None
+    evidence_text: str | None = None
+    source_segment_id: str | None = None
+    speaker_label: str | None = None
+    start_time: float | None = None
+    end_time: float | None = None
+    highlight: str | None = None
+
+
+class KnowledgeListRead(BaseModel):
+    items: list[KnowledgeItemRead]
+    total: int
+    limit: int
+    offset: int
+    has_more: bool
+
+
+class KnowledgeMeetingListRead(BaseModel):
+    items: list[KnowledgeMeetingItemRead]
+    total: int
+    limit: int
+    offset: int
+    has_more: bool
+
+
+class KnowledgeSyncRead(BaseModel):
+    meeting_id: str
+    status: str
+    source_version: str
+    item_count: int
+    sync_error: str | None = None
+    started_at: datetime | None = None
+    completed_at: datetime | None = None
+    updated_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 class MeetingSummaryRead(BaseModel):
     id: str
     overview: str

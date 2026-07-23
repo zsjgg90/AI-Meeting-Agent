@@ -14,7 +14,8 @@ from sqlalchemy.orm import Session, selectinload
 from app.config import get_settings
 from app.analysis_contract import build_summary_metadata
 from app.database import SessionLocal, get_db
-from app.models import AudioFile, Meeting, MeetingSummary, TranscriptSegment, TranscriptionTask
+from app.knowledge_sync_service import mark_meeting_knowledge_deleted, run_knowledge_sync_safely, sync_meeting_knowledge
+from app.models import AudioFile, Meeting, MeetingKnowledgeSync, MeetingSummary, TranscriptSegment, TranscriptionTask
 from app.models import SpeakerMapping
 from app.schemas import (
     AudioUploaded,
@@ -27,6 +28,7 @@ from app.schemas import (
     MeetingRead,
     MeetingUpdate,
     ProcessStarted,
+    KnowledgeSyncRead,
     SummaryRead,
     SpeakerMappingRead,
     SpeakerMappingUpdate,
@@ -152,6 +154,7 @@ def list_meetings(
 def bulk_delete_meetings(payload: MeetingBulkDelete, db: Session = Depends(get_db)) -> MeetingBulkDeleteResult:
     meetings = list(db.scalars(select(Meeting).where(Meeting.id.in_(payload.meeting_ids))).all())
     for meeting in meetings:
+        mark_meeting_knowledge_deleted(db, meeting.id)
         db.delete(meeting)
     db.commit()
 
@@ -172,9 +175,26 @@ def delete_meeting(meeting_id: str, db: Session = Depends(get_db)) -> None:
     if meeting is None:
         raise HTTPException(status_code=404, detail="Meeting not found.")
 
+    mark_meeting_knowledge_deleted(db, meeting_id)
     db.delete(meeting)
     db.commit()
     remove_meeting_storage(meeting_id)
+
+
+@router.post("/{meeting_id}/knowledge/reindex", response_model=KnowledgeSyncRead)
+def reindex_meeting_knowledge(
+    meeting_id: str,
+    db: Session = Depends(get_db),
+) -> MeetingKnowledgeSync:
+    meeting = db.get(Meeting, meeting_id)
+    if meeting is None:
+        raise HTTPException(status_code=404, detail="Meeting not found.")
+    if meeting.status != "completed":
+        raise HTTPException(status_code=400, detail="Completed meeting is required before knowledge reindex.")
+    if db.scalars(select(MeetingSummary.id).where(MeetingSummary.meeting_id == meeting_id)).first() is None:
+        raise HTTPException(status_code=400, detail="Completed meeting summary is required before knowledge reindex.")
+
+    return sync_meeting_knowledge(db, meeting_id)
 
 
 @router.patch("/{meeting_id}", response_model=MeetingRead)
@@ -696,6 +716,7 @@ def run_meeting_processing_task(task_id: str) -> None:
         )
         _raise_for_worker_status(response, stage="process")
 
+        run_knowledge_sync_safely(meeting.id, SessionLocal)
         task.status = "completed"
         task.completed_at = datetime.now(timezone.utc)
         task.error_message = None
@@ -756,6 +777,7 @@ def run_meeting_analysis_task(task_id: str) -> None:
 
             generate_action_item_proposals_for_meeting(db, meeting.id, persist=True)
 
+        run_knowledge_sync_safely(meeting.id, SessionLocal)
         task.status = "completed"
         task.completed_at = datetime.now(timezone.utc)
         task.error_message = None

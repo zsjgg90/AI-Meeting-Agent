@@ -5,12 +5,15 @@ export type LucideIconName =
   | 'bell'
   | 'calendar-days'
   | 'camera'
+  | 'chevron-down'
   | 'chevron-left'
   | 'chevron-right'
   | 'circle-check-big'
   | 'circle-help'
   | 'clock-3'
   | 'file-text'
+  | 'filter'
+  | 'flag'
   | 'house'
   | 'image-plus'
   | 'info'
@@ -19,11 +22,13 @@ export type LucideIconName =
   | 'mic'
   | 'pencil-line'
   | 'phone'
+  | 'rotate-ccw'
   | 'search'
   | 'settings'
   | 'sparkles'
   | 'square-check-big'
   | 'triangle-alert'
+  | 'user'
   | 'user-round'
   | 'video';
 
@@ -89,6 +94,8 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
       );
     case 'chevron-left':
       return <Polyline {...common} points="15 18 9 12 15 6" />;
+    case 'chevron-down':
+      return <Polyline {...common} points="6 9 12 15 18 9" />;
     case 'chevron-right':
       return <Polyline {...common} points="9 18 15 12 9 6" />;
     case 'circle-check-big':
@@ -121,6 +128,21 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Path {...common} d="M16 13H8" />
           <Path {...common} d="M16 17H8" />
           <Path {...common} d="M10 9H8" />
+        </>
+      );
+    case 'filter':
+      return (
+        <>
+          <Path {...common} d="M22 3H2l8 9.5V20l4 2v-9.5z" />
+          <Path {...common} d="M18 14h-4" />
+          <Path {...common} d="M18 18h-7" />
+        </>
+      );
+    case 'flag':
+      return (
+        <>
+          <Path {...common} d="M4 22V4" />
+          <Path {...common} d="M4 4h11l-1 4 1 4H4" />
         </>
       );
     case 'house':
@@ -185,6 +207,13 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Path {...common} d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2z" />
         </>
       );
+    case 'rotate-ccw':
+      return (
+        <>
+          <Path {...common} d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+          <Path {...common} d="M3 3v5h5" />
+        </>
+      );
     case 'search':
       return (
         <>
@@ -222,6 +251,13 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Path {...common} d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z" />
           <Path {...common} d="M12 9v4" />
           <Path {...common} d="M12 17h.01" />
+        </>
+      );
+    case 'user':
+      return (
+        <>
+          <Path {...common} d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+          <Circle {...common} cx="12" cy="7" r="4" />
         </>
       );
     case 'user-round':

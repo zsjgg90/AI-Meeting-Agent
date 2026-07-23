@@ -52,6 +52,33 @@ class ApiContractTest(unittest.TestCase):
         self.assert_route_exists("/tasks", "get")
         self.assert_route_exists("/feedback", "post")
 
+
+    def test_knowledge_routes_are_registered(self) -> None:
+        routes = [
+            ("/knowledge/overview", "get"),
+            ("/knowledge/meetings", "get"),
+            ("/knowledge/decisions", "get"),
+            ("/knowledge/issues", "get"),
+            ("/knowledge/risks", "get"),
+            ("/knowledge/search", "get"),
+            ("/meetings/{meeting_id}/knowledge/reindex", "post"),
+        ]
+
+        for path, method in routes:
+            with self.subTest(path=path, method=method):
+                self.assert_route_exists(path, method)
+
+    def test_knowledge_list_contract_exposes_pagination(self) -> None:
+        schemas = self.openapi["components"]["schemas"]
+        list_schema = schemas["KnowledgeListRead"]
+        meeting_list_schema = schemas["KnowledgeMeetingListRead"]
+
+        for schema in [list_schema, meeting_list_schema]:
+            properties = schema["properties"]
+            for field in ["items", "total", "limit", "offset", "has_more"]:
+                with self.subTest(field=field):
+                    self.assertIn(field, properties)
+
     def test_summary_contract_exposes_six_dimensions(self) -> None:
         schemas = self.openapi["components"]["schemas"]
         summary_schema = schemas["SummaryRead"]

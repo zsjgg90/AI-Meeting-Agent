@@ -2,10 +2,50 @@
 
 ## Current State
 
+The Enterprise Meeting Knowledge Base MVP is now implemented as an API-side
+PostgreSQL read model. Alembic revision `20260724_0016` adds
+`meeting_knowledge_items` and `meeting_knowledge_syncs`. The API
+`knowledge_sync_service` runs after successful Worker process/analyze responses
+and maps completed `MeetingSummary`, persisted `ActionItem`, and
+`TranscriptSegment` rows into active knowledge items. Re-analysis updates the
+same `meeting_id + content_type + source_item_key`, removed source keys become
+`stale`, and meeting deletion marks knowledge rows `deleted` before preserving
+the existing hard-delete meeting behavior. Sync failures are recorded in
+`meeting_knowledge_syncs.status=failed` and do not block meeting completed
+state, summaries, tasks, or meeting detail reads.
+
+Knowledge APIs are registered as `/knowledge/overview`, `/knowledge/meetings`,
+`/knowledge/decisions`, `/knowledge/issues`, `/knowledge/risks`, and
+`/knowledge/search`, plus `POST /meetings/{meeting_id}/knowledge/reindex` for
+manual retry. MVP search is PostgreSQL keyword search over generated knowledge
+items and joined meeting titles. Project filtering is intentionally not
+exposed because `project_id` is not yet stable on meeting rows. Worker models,
+Prompt, RAG rules, Validator, Shadow, and Agent formal write boundaries remain
+unchanged.
+
+Expo now has knowledge home, meeting record list, key decision list,
+issue/risk tabs, search home, search results, filter sheet, cards, empty/error
+states, and skeleton loading. The Knowledge Base home keeps only four entries
+and a large search box, with no recent meetings, AI Q&A, or AI assistant entry.
+Knowledge result clicks reuse `MeetingDetailScreen` with `initialTab`,
+`sourceSegmentId`, `startTime`, and `evidenceText` to open the source meeting
+and narrow transcript evidence.
+
+Knowledge Base verification on 2026-07-24 used real completed meeting
+`ffe4d629-05ea-4578-ac92-816e69751fb7` with audio
+`recording-CAA3FDFB-3B64-4A44-9336-DF621A8A4D9C.m4a`. The meeting had 47
+transcript segments, a persisted Summary, and 3 ActionItems. Manual
+`/meetings/{id}/knowledge/reindex` completed with `item_count=60`; running it
+twice kept the count at 60. `/knowledge/search?query=接口` returned 15 results
+with structured results ranked before transcript evidence, and transcript-only
+search returned timestamped source segments. `.\scripts\test-all.ps1` and
+`.\scripts\check-services.ps1` passed; the services check still reports Redis
+port 6379 as WARN, but the script completed successfully.
+
 The project is in Release Candidate verification state after completing the seven-phase maintainability hardening plan.
 The default Expo bottom navigation now exposes Knowledge Base instead of AI
-Assistant. Knowledge Base currently has only a basic page and empty state; it
-does not call RAG, Worker, Ollama, Chroma, or any question-answering API.
+Assistant. Knowledge Base calls API-side PostgreSQL knowledge endpoints only;
+it does not call RAG, Worker, Ollama, Chroma, or any question-answering API.
 Existing AI Assistant, Agent review records, local Agent login, Proposal,
 Command, Audit, and Rollback code and database structures remain in place but
 are hidden/closed by default. The relevant switches are

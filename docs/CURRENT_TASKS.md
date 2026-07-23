@@ -3,8 +3,10 @@
 ## Active Priority
 
 1. Keep the default mobile bottom navigation on Knowledge Base instead of AI
-   Assistant. The Knowledge Base page is currently a basic empty state only;
-   do not wire RAG question answering until a later explicit task.
+   Assistant. The Knowledge Base MVP now uses API-side PostgreSQL knowledge
+   items generated from completed meeting summaries, action items, and
+   transcript segments. Do not wire RAG question answering or AI assistant
+   entry points into the Knowledge Base until a later explicit task.
 2. Keep Agent review auth fail-closed and hidden by default. Expo Agent review
    pages and local Agent login remain available only when the UI/config is
    explicitly re-enabled.
@@ -40,6 +42,10 @@
 
 - Keep Agent v1.0 work on `feature/agent-v1`; do not continue Agent work on
   `main`.
+- Verify the enterprise Knowledge Base MVP against more real meetings before
+  considering a separate `meeting_knowledge` Chroma collection. PostgreSQL is
+  the current source of truth; project filtering remains closed until
+  `project_id` is consistently present on meeting data.
 - Import the 19 required Agent v1.0 baseline meeting artifact folders under
   `data/eval/agent_v1_baseline/`.
 - Keep Phase 2 meeting scenario policies as read-only contracts until a later

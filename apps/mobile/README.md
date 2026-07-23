@@ -25,4 +25,5 @@ For Expo Go on a physical phone, use the computer LAN IP instead of `localhost` 
 - Home: meeting list and create entry
 - New meeting: enter a meeting name and create it through the API
 - Recording: start, pause, resume, end, and upload audio with `expo-av`
+- Knowledge Base: enterprise meeting knowledge home, categorized lists, keyword search, filters, and source meeting traceability. Full RAG question answering is not implemented in this stage.
 - Meeting detail: transcript, AI summary, decisions, risks, and action items. Summary dimensions render through the shared `NumberedList` component for agenda, conclusions, unresolved issues, follow-up actions, and risks. Packed strings such as `1. A；2. B` are normalized into independent rows before rendering.

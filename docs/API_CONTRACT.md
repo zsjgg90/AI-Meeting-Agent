@@ -29,6 +29,7 @@ http://{LAN_IP}:8002
 - `GET /meetings/{meeting_id}/summary`
 - `GET /meetings/{meeting_id}/exports/{kind}.{file_format}`
 - `PUT /meetings/{meeting_id}/speakers/{speaker_label}`
+- `POST /meetings/{meeting_id}/knowledge/reindex`
 
 ## Task Endpoints
 
@@ -40,6 +41,69 @@ Supports:
 - `offset`
 - `meeting_id`
 - `q`
+
+## Knowledge Endpoints
+
+Knowledge APIs are API-side read models over PostgreSQL. They read only active
+knowledge items generated from completed meetings that have a formal
+`meeting_summaries` row. They do not call Worker, Ollama, Chroma, Prompt, RAG,
+Validator, or Agent write paths.
+
+- `GET /knowledge/overview`
+- `GET /knowledge/meetings`
+- `GET /knowledge/decisions`
+- `GET /knowledge/issues`
+- `GET /knowledge/risks`
+- `GET /knowledge/search`
+
+List endpoints return:
+
+```json
+{
+  "items": [],
+  "total": 0,
+  "limit": 20,
+  "offset": 0,
+  "has_more": false
+}
+```
+
+Supported MVP filters:
+
+- `query`
+- `content_type`
+- `meeting_type`
+- `date_from`
+- `date_to`
+- `limit`
+- `offset`
+
+`meeting_type` is accepted for contract stability, but project and meeting
+type filtering remain effectively closed until those fields are consistently
+present on meeting data. Project filtering is intentionally not exposed in MVP.
+
+Knowledge item fields:
+
+- `id`
+- `content_type`
+- `title`
+- `content`
+- `meeting_id`
+- `meeting_title`
+- `meeting_date`
+- `evidence_text`
+- `source_segment_id`
+- `speaker_label`
+- `start_time`
+- `end_time`
+- `highlight`
+
+Manual retry:
+
+- `POST /meetings/{meeting_id}/knowledge/reindex`
+
+The retry requires a completed meeting and a formal summary. It re-runs the
+same idempotent sync path and returns the `meeting_knowledge_syncs` row.
 
 ## Feedback Endpoints
 
