@@ -14,6 +14,7 @@ class AgentConfigTest(unittest.TestCase):
         self.assertFalse(settings.agent_mode_enabled)
         self.assertTrue(settings.agent_shadow_mode)
         self.assertFalse(settings.agent_actions_enabled)
+        self.assertFalse(settings.agent_proposal_auto_generation_enabled)
         self.assertFalse(settings.agent_command_execution_enabled)
         self.assertTrue(settings.agent_command_dry_run_only)
         self.assertFalse(settings.agent_command_pilot_enabled)
@@ -41,6 +42,7 @@ class AgentConfigTest(unittest.TestCase):
             agent_mode_enabled=True,
             agent_shadow_mode=False,
             agent_actions_enabled=True,
+            agent_proposal_auto_generation_enabled=True,
             agent_command_execution_enabled=True,
             agent_command_dry_run_only=False,
             agent_command_pilot_enabled=True,
@@ -67,6 +69,7 @@ class AgentConfigTest(unittest.TestCase):
         self.assertTrue(settings.agent_mode_enabled)
         self.assertFalse(settings.agent_shadow_mode)
         self.assertTrue(settings.agent_actions_enabled)
+        self.assertTrue(settings.agent_proposal_auto_generation_enabled)
         self.assertTrue(settings.agent_command_execution_enabled)
         self.assertFalse(settings.agent_command_dry_run_only)
         self.assertTrue(settings.agent_command_pilot_enabled)

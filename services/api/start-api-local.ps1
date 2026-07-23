@@ -8,6 +8,7 @@ Set-EnvDefault -Name 'DATABASE_URL' -Value 'postgresql+psycopg://meeting_agent:m
 Set-EnvDefault -Name 'STORAGE_DIR' -Value (Join-Path $ProjectRoot 'storage')
 Set-EnvDefault -Name 'WORKER_URL' -Value 'http://127.0.0.1:8001'
 Set-EnvDefault -Name 'API_CORS_ORIGINS' -Value '*'
+Set-EnvDefault -Name 'AGENT_LOCAL_AUTH_ENABLED' -Value 'false'
 
 $env:DATABASE_URL = Convert-LocalDatabaseUrl $env:DATABASE_URL
 $env:WORKER_URL = Convert-LocalWorkerUrl $env:WORKER_URL

@@ -5,6 +5,7 @@ import { Alert, Animated, PanResponder, SafeAreaView, StyleSheet, Text, View } f
 import { deleteMeeting, Meeting } from './src/api';
 import { AppHeader } from './src/components/AppHeader';
 import { BottomNav, BottomTab } from './src/components/BottomNav';
+import { featureFlags } from './src/config';
 import { AIAssistantScreen } from './src/screens/AIAssistantScreen';
 import { AIProcessingScreen } from './src/screens/AIProcessingScreen';
 import { AboutScreen } from './src/screens/AboutScreen';
@@ -13,6 +14,7 @@ import { EditProfileScreen } from './src/screens/EditProfileScreen';
 import { FaqScreen } from './src/screens/FaqScreen';
 import { FeedbackScreen } from './src/screens/FeedbackScreen';
 import { HelpFeedbackScreen } from './src/screens/HelpFeedbackScreen';
+import { KnowledgeBaseScreen } from './src/screens/KnowledgeBaseScreen';
 import { MeetingDetailScreen } from './src/screens/MeetingDetailScreen';
 import { MeetingListScreen } from './src/screens/MeetingListScreen';
 import { NewMeetingScreen } from './src/screens/NewMeetingScreen';
@@ -24,6 +26,7 @@ import { TodoScreen } from './src/screens/TodoScreen';
 type Route =
   | { name: 'home' }
   | { name: 'allMeetings' }
+  | { name: 'knowledge' }
   | { name: 'ai' }
   | { name: 'todo' }
   | { name: 'me' }
@@ -90,7 +93,8 @@ function FloatingRecordingIcon() {
 
 function bottomTabForRoute(route: Route): BottomTab | null {
   if (route.name === 'home') return 'home';
-  if (route.name === 'ai') return 'ai';
+  if (route.name === 'knowledge') return 'knowledge';
+  if (featureFlags.enableAiAssistantUi && route.name === 'ai') return 'ai';
   if (route.name === 'todo') return 'todo';
   if (route.name === 'me') return 'me';
   return null;
@@ -240,7 +244,8 @@ export default function App() {
 
   function handleTabPress(tab: BottomTab) {
     if (tab === 'home') setRoute({ name: 'home' });
-    if (tab === 'ai') setRoute({ name: 'ai' });
+    if (tab === 'knowledge') setRoute({ name: 'knowledge' });
+    if (tab === 'ai' && featureFlags.enableAiAssistantUi) setRoute({ name: 'ai' });
     if (tab === 'todo') setRoute({ name: 'todo' });
     if (tab === 'me') setRoute({ name: 'me' });
   }
@@ -277,7 +282,9 @@ export default function App() {
         />
       ) : null}
 
-      {route.name === 'ai' ? <AIAssistantScreen /> : null}
+      {route.name === 'knowledge' && featureFlags.enableKnowledgeBaseUi ? <KnowledgeBaseScreen /> : null}
+
+      {featureFlags.enableAiAssistantUi && route.name === 'ai' ? <AIAssistantScreen /> : null}
       {route.name === 'todo' ? <TodoScreen /> : null}
       {route.name === 'me' ? (
         <ProfileScreen

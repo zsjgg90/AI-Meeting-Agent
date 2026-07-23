@@ -751,6 +751,11 @@ def run_meeting_analysis_task(task_id: str) -> None:
         )
         _raise_for_worker_status(response, stage="summary")
 
+        if settings.agent_proposal_auto_generation_enabled:
+            from app.agent_proposal_generation import generate_action_item_proposals_for_meeting
+
+            generate_action_item_proposals_for_meeting(db, meeting.id, persist=True)
+
         task.status = "completed"
         task.completed_at = datetime.now(timezone.utc)
         task.error_message = None

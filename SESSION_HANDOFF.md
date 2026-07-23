@@ -3,7 +3,17 @@
 ## Current State
 
 The project is in Release Candidate verification state after completing the seven-phase maintainability hardening plan.
-Expo recent-meeting startup loading has a targeted RC fix: the mobile recent
+The default Expo bottom navigation now exposes Knowledge Base instead of AI
+Assistant. Knowledge Base currently has only a basic page and empty state; it
+does not call RAG, Worker, Ollama, Chroma, or any question-answering API.
+Existing AI Assistant, Agent review records, local Agent login, Proposal,
+Command, Audit, and Rollback code and database structures remain in place but
+are hidden/closed by default. The relevant switches are
+`EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false`,
+`EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true`, and
+`AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=false`. Local Agent login also remains
+closed by default through `AGENT_LOCAL_AUTH_ENABLED=false`, including local API
+startup defaults.Expo recent-meeting startup loading has a targeted RC fix: the mobile recent
 list no longer treats `audio_uploaded`/`uploaded` as active AI analysis, the
 home statistics summary fetch only requests completed meetings, local Expo
 configuration points to API port 8002, and API startup recovers stale

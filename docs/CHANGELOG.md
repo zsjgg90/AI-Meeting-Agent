@@ -2,7 +2,20 @@
 
 ## 2026-07-23
 
-- Fixed real end-to-end meeting analysis failures after upload/transcript
+- Replaced the default Expo bottom navigation AI Assistant entry with a
+  Knowledge Base entry. The Knowledge Base screen currently provides only a
+  basic page and empty state; full RAG question answering is not implemented.
+- Added frontend feature switches:
+  `EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false` by default and
+  `EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true` by default. Existing AI
+  Assistant, Agent review records, Proposal, Command, Audit, and Rollback UI
+  code remains in the codebase and can be re-exposed by configuration.
+- Added API switch `AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=false` so completed
+  meeting analysis no longer auto-creates Agent review proposals by default.
+  Existing manual Agent proposal, confirmation, command, audit, rollback, auth,
+  and review APIs remain registered.
+- Changed local API startup defaults so `AGENT_LOCAL_AUTH_ENABLED=false` unless
+  explicitly overridden for local RC validation.- Fixed real end-to-end meeting analysis failures after upload/transcript
   success by preventing local API/Worker startup scripts from reusing
   non-project Python uvicorn processes, preserving Worker structured
   `error_code`/`error_stage`/`error_message` responses in

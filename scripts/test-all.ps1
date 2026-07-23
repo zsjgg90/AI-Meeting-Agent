@@ -109,6 +109,7 @@ if (-not $SkipMobile) {
     Push-Location $MobileDir
     try {
         Invoke-Checked { npm run typecheck }
+        Invoke-Checked { npm run test:knowledge-base-ui }
         Invoke-Checked { npm run test:agent-review-ui }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-ai-processing-ui.js') }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-meeting-history-ui.js') }

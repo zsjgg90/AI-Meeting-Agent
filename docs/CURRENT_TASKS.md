@@ -2,13 +2,25 @@
 
 ## Active Priority
 
-1. Keep Expo Go recent-meeting startup flow stable; uploaded meetings must not
+1. Keep the default mobile bottom navigation on Knowledge Base instead of AI
+   Assistant. The Knowledge Base page is currently a basic empty state only;
+   do not wire RAG question answering until a later explicit task.
+2. Keep Agent review auth fail-closed and hidden by default. Expo Agent review
+   pages and local Agent login remain available only when the UI/config is
+   explicitly re-enabled.
+3. Keep real-meeting Proposal generation evidence-bound and disabled by
+   default. Completed summaries may auto-create pending ActionItem proposals
+   only when `AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=true`, and still only for
+   same-scope historical object changes across `owner`, `due_date`,
+   `priority`, and `status`; new objects, ambiguous matches, no-change items,
+   and insufficient evidence must be skipped with diagnostics.
+4. Keep Expo Go recent-meeting startup flow stable; uploaded meetings must not
    be displayed as active AI analysis, and stale API background tasks must be
    recovered on service restart.
-2. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
+5. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
    grey only under the approved Phase 13/14 scope.
-3. Keep formal Qwen3 + RAG meeting analysis stable.
-4. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
+6. Keep formal Qwen3 + RAG meeting analysis stable.
+7. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
    Recording upload now has timeout-bounded mobile requests, Chinese upload
    errors, Expo `audio/x-m4a` API regression coverage, and a local HTTP upload
    smoke check. History meeting loading remains bounded with `limit`/`offset`
@@ -16,11 +28,11 @@
    End-to-end summary failure recovery now requires project-venv API/Worker
    port ownership, structured Worker error persistence, and retry-only mobile
    re-analysis from existing audio/transcript.
-5. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
+8. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
    maintenance issues that remain relevant.
-6. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
+9. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
    semantic quality errors before considering formal semantic output again.
-7. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
+10. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
    Expo-visible summary, especially when the meeting metadata indicates a
    manual fixture such as `fixture-gold-standard`.
 

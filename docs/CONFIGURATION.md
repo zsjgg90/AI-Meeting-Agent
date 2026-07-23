@@ -19,7 +19,7 @@ Use these values when API and Worker run directly on Windows:
 
 ```env
 DATABASE_URL=postgresql+psycopg://meeting_agent:meeting_agent@127.0.0.1:5432/meeting_agent
-STORAGE_DIR=D:\codex_work\会议声纹识别\storage
+STORAGE_DIR=D:\codex_work\浼氳澹扮汗璇嗗埆\storage
 WORKER_URL=http://127.0.0.1:8001
 WORKER_REQUEST_TIMEOUT_SECONDS=600
 OLLAMA_MODEL=qwen3:14b
@@ -35,6 +35,8 @@ Physical phones cannot use `localhost` or `127.0.0.1` to reach the computer API.
 
 ```env
 EXPO_PUBLIC_API_BASE_URL=http://{LAN_IP}:8002
+EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false
+EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ```
 
 `apps/mobile/src/config.ts` has a local-only fallback:
@@ -43,7 +45,10 @@ EXPO_PUBLIC_API_BASE_URL=http://{LAN_IP}:8002
 http://127.0.0.1:8002
 ```
 
-Use `apps/mobile/.env` for real device testing.
+Use `apps/mobile/.env` for real device testing. The bottom navigation shows
+the Knowledge Base entry by default. Set
+`EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=true` only when the Agent review UI should
+be exposed again for controlled validation.
 
 ## Docker Values
 
@@ -128,6 +133,7 @@ Agent v1.0 rollout flags are read by both API and Worker settings:
 AGENT_MODE_ENABLED=false
 AGENT_SHADOW_MODE=true
 AGENT_ACTIONS_ENABLED=false
+AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=false
 ```
 
 Default values keep the Release Candidate formal Qwen3 + RAG path unchanged.
@@ -135,6 +141,11 @@ Default values keep the Release Candidate formal Qwen3 + RAG path unchanged.
 summary result. `AGENT_SHADOW_MODE=true` allows future background Agent
 diagnostics once implemented. `AGENT_ACTIONS_ENABLED=false` prevents Agent
 suggestions from executing state-changing operations.
+`AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=false` prevents completed meeting
+analysis from automatically creating review proposals while preserving the
+manual Agent proposal, confirmation, command, audit, and rollback APIs.
+`AGENT_LOCAL_AUTH_ENABLED=false` keeps the local Agent login endpoint closed by
+default; use it only for explicit local RC validation.
 
 Phase 0 baseline details are documented in:
 

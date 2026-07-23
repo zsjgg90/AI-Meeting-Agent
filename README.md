@@ -1,4 +1,4 @@
-﻿# 会议声纹识别 AI Agent MVP 1.0
+# 会议声纹识别 AI Agent MVP 1.0
 
 这是一个会议后处理 MVP，用来快速验证从手机录音到后端转写、说话人归并、六维会议纪要和行动项生成的完整链路。
 
@@ -55,6 +55,7 @@ Agent rollout guardrails are available as:
 AGENT_MODE_ENABLED=false
 AGENT_SHADOW_MODE=true
 AGENT_ACTIONS_ENABLED=false
+AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=false
 ```
 
 Agent v1.0 Phase 1 introduces Worker-internal contract schemas in
@@ -502,6 +503,7 @@ RAG_EMBEDDING_LOCAL_FILES_ONLY=true
 AGENT_MODE_ENABLED=false
 AGENT_SHADOW_MODE=true
 AGENT_ACTIONS_ENABLED=false
+AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=false
 AGENT_COMMAND_EXECUTION_ENABLED=false
 AGENT_COMMAND_DRY_RUN_ONLY=true
 AGENT_COMMAND_PILOT_ENABLED=false
@@ -526,6 +528,7 @@ AGENT_CIRCUIT_CONSECUTIVE_FAILURES=0
 AGENT_CIRCUIT_VERSION_CONFLICT_RATE=0
 AGENT_CIRCUIT_ROLLBACK_FAILURES=0
 AGENT_CIRCUIT_RECOVERED_AFTER=
+AGENT_LOCAL_AUTH_ENABLED=false
 ```
 
 Formal legacy Qwen3 + RAG summaries are normalized, then passed through
@@ -555,12 +558,16 @@ npm run start:dev
 
 ```env
 EXPO_PUBLIC_API_BASE_URL=http://localhost:8000
+EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false
+EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ```
 
 如果使用真机 Dev Client，请把 `localhost` 改为电脑的局域网 IP，例如：
 
 ```env
 EXPO_PUBLIC_API_BASE_URL=http://192.168.1.10:8000
+EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false
+EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ```
 
 ### 实时字幕真机调试

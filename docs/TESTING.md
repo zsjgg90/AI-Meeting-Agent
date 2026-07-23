@@ -15,6 +15,7 @@ Default checks:
 3. Run API contract tests.
 4. Run Worker unit tests.
 5. Run Mobile TypeScript typecheck.
+6. Run the mobile Knowledge Base static UI check.
 
 Optional health checks against already-running local services:
 
@@ -50,6 +51,7 @@ Mobile type check:
 cd apps/mobile
 npm run typecheck
 npm run test:numbered-list
+npm run test:knowledge-base-ui
 npm run test:agent-review-ui
 node apps/mobile/scripts/test-meeting-history-ui.js
 node apps/mobile/scripts/test-recording-upload-ui.js

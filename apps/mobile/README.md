@@ -14,6 +14,8 @@ Configure the API base URL in `.env`:
 
 ```env
 EXPO_PUBLIC_API_BASE_URL=http://YOUR_LAN_IP:8002
+EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false
+EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ```
 
 For Expo Go on a physical phone, use the computer LAN IP instead of `localhost` or `127.0.0.1`. The local API startup script serves on port `8002`.

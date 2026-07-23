@@ -1,7 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { featureFlags } from '../config';
 import { LucideIcon, type LucideIconName } from './LucideIcon';
 
-export type BottomTab = 'home' | 'ai' | 'todo' | 'me';
+export type BottomTab = 'home' | 'knowledge' | 'ai' | 'todo' | 'me';
 
 type Props = {
   active: BottomTab;
@@ -10,7 +12,9 @@ type Props = {
 
 const tabs: Array<{ key: BottomTab; label: string; icon: LucideIconName }> = [
   { key: 'home', label: '首页', icon: 'house' },
-  { key: 'ai', label: '知识库', icon: 'book-open' },
+  featureFlags.enableAiAssistantUi
+    ? { key: 'ai', label: 'AI 助手', icon: 'sparkles' }
+    : { key: 'knowledge', label: '知识库', icon: 'book-open' },
   { key: 'todo', label: '待办', icon: 'square-check-big' },
   { key: 'me', label: '我的', icon: 'user-round' },
 ];

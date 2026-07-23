@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     agent_mode_enabled: bool = False
     agent_shadow_mode: bool = True
     agent_actions_enabled: bool = False
+    agent_proposal_auto_generation_enabled: bool = False
     agent_command_execution_enabled: bool = False
     agent_command_dry_run_only: bool = True
     agent_command_pilot_enabled: bool = False
