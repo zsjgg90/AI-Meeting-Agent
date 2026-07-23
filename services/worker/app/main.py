@@ -42,6 +42,15 @@ class ChunkTranscriptionResult(BaseModel):
 app = FastAPI(title="Meeting Worker", version="1.0.0")
 
 
+def _error_detail(exc: BaseException, stage: str, *, error_code: str | None = None) -> dict[str, str]:
+    info = classify_exception(exc, stage)
+    return {
+        "error_code": error_code or info.error_code,
+        "error_stage": info.pipeline_stage,
+        "error_message": info.safe_message,
+    }
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -140,10 +149,28 @@ def process_meeting(meeting_id: str) -> ProcessResult:
                 for agent_result in result.agent_results
             ],
         )
-    except (TranscriptionError, DiarizationError, SummaryAgentError) as exc:
-        info = classify_exception(exc, "summary")
-        log_event("worker.process.failed", level="error", meeting_id=meeting_id, **info.__dict__)
-        raise HTTPException(status_code=400, detail=info.safe_message) from exc
+    except TranscriptionError as exc:
+        detail = _error_detail(exc, "transcription")
+        log_event("worker.process.failed", level="error", meeting_id=meeting_id, **detail)
+        raise HTTPException(status_code=400, detail=detail) from exc
+    except DiarizationError as exc:
+        detail = _error_detail(exc, "diarization")
+        log_event("worker.process.failed", level="error", meeting_id=meeting_id, **detail)
+        raise HTTPException(status_code=400, detail=detail) from exc
+    except SummaryAgentError as exc:
+        detail = _error_detail(exc, "summary")
+        log_event("worker.process.failed", level="error", meeting_id=meeting_id, **detail)
+        raise HTTPException(status_code=400, detail=detail) from exc
+    except Exception as exc:
+        detail = _error_detail(exc, "process", error_code="unknown_worker_error")
+        log_event(
+            "worker.process.failed",
+            level="error",
+            meeting_id=meeting_id,
+            error_type=exc.__class__.__name__,
+            **detail,
+        )
+        raise HTTPException(status_code=500, detail=detail) from exc
     finally:
         db.close()
 
@@ -155,9 +182,19 @@ def analyze_meeting(meeting_id: str) -> AnalyzeResult:
         summary = summarize_meeting(db, meeting_id)
         return AnalyzeResult(meeting_id=meeting_id, status="completed", summary_id=summary.id)
     except SummaryAgentError as exc:
-        info = classify_exception(exc, "summary")
-        log_event("worker.analyze.failed", level="error", meeting_id=meeting_id, **info.__dict__)
-        raise HTTPException(status_code=400, detail=info.safe_message) from exc
+        detail = _error_detail(exc, "summary")
+        log_event("worker.analyze.failed", level="error", meeting_id=meeting_id, **detail)
+        raise HTTPException(status_code=400, detail=detail) from exc
+    except Exception as exc:
+        detail = _error_detail(exc, "summary", error_code="unknown_worker_error")
+        log_event(
+            "worker.analyze.failed",
+            level="error",
+            meeting_id=meeting_id,
+            error_type=exc.__class__.__name__,
+            **detail,
+        )
+        raise HTTPException(status_code=500, detail=detail) from exc
     finally:
         db.close()
 

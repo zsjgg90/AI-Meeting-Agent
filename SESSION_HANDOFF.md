@@ -22,6 +22,11 @@ now verifies `audio/x-m4a` acceptance, `audio_uploaded` persistence, audio file
 metadata persistence, and empty-recording rejection without losing the meeting
 row. Realtime chunk transcription Worker calls now use the configured finite
 Worker request timeout.
+End-to-end summary failure recovery was validated against real uploaded audio.
+Local API/Worker startup now rejects non-project Python uvicorn owners, Worker
+non-2xx errors are persisted as structured task JSON, `summary_failed`
+meetings can be re-analyzed from existing transcript/audio, and the mobile AI
+processing screen stops on the real failed stage with retry-only analysis.
 Agent v1.0 upgrade preparation has started at Phase 0 baseline freeze. The
 baseline document is `docs/AGENT_V1_PHASE_0_BASELINE.md`.
 The Phase 0 runtime diagnostic currently fails because API port 8002 is not

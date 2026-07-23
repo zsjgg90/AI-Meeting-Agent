@@ -268,6 +268,11 @@ static check of the Expo recording upload path. It verifies upload timeout
 handling, Expo `audio/x-m4a` metadata, Chinese upload error messages, and the
 record-upload-process-analyze call sequence.
 
+`node apps/mobile/scripts/test-ai-processing-ui.js` performs a lightweight
+static check of the Expo AI processing screen. It verifies real task-driven
+step states, structured failure-stage display, safe Chinese error text, retry
+analysis without re-uploading audio, and non-technical error details.
+
 `npm run test:agent-review-ui` performs a lightweight static check of the Expo
 Agent Review workbench. It verifies the presence of proposal list/detail,
 approve/reject second-confirmation text, `conflict`/`expired`/`duplicate`

@@ -110,6 +110,7 @@ if (-not $SkipMobile) {
     try {
         Invoke-Checked { npm run typecheck }
         Invoke-Checked { npm run test:agent-review-ui }
+        Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-ai-processing-ui.js') }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-meeting-history-ui.js') }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-recording-upload-ui.js') }
     }

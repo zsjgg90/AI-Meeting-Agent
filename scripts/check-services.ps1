@@ -40,6 +40,28 @@ function Test-Port {
     }
 }
 
+function Test-PortOwner {
+    param(
+        [string]$Name,
+        [int]$Port,
+        [string]$ExpectedPath
+    )
+
+    $listener = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
+    if (-not $listener) {
+        Write-Check -Name "$Name port owner" -Ok $false -Detail "port $Port is not listening"
+        return
+    }
+
+    $owner = Get-Process -Id $listener.OwningProcess -ErrorAction SilentlyContinue
+    $actualPath = if ($owner) { $owner.Path } else { '' }
+    $ownerInfo = Get-CimInstance Win32_Process -Filter "ProcessId=$($listener.OwningProcess)" -ErrorAction SilentlyContinue
+    $parent = if ($ownerInfo) { Get-Process -Id $ownerInfo.ParentProcessId -ErrorAction SilentlyContinue } else { $null }
+    $parentPath = if ($parent) { $parent.Path } else { '' }
+    $ok = ($actualPath -ieq $ExpectedPath) -or ($parentPath -ieq $ExpectedPath)
+    Write-Check -Name "$Name port owner" -Ok $ok -Detail "pid=$($listener.OwningProcess) path=$actualPath parent=$parentPath"
+}
+
 function Test-Http {
     param(
         [string]$Name,
@@ -70,6 +92,9 @@ Test-Port -Name 'Ollama' -Port 11434
 Test-Port -Name 'Worker' -Port 8001
 Test-Port -Name 'API' -Port 8002
 Test-Port -Name 'Expo Metro' -Port 8081 -Optional
+
+Test-PortOwner -Name 'Worker' -Port 8001 -ExpectedPath (Join-Path $ProjectRoot 'services\worker\.venv\Scripts\python.exe')
+Test-PortOwner -Name 'API' -Port 8002 -ExpectedPath (Join-Path $ProjectRoot 'services\api\.venv\Scripts\python.exe')
 
 Test-Http -Name 'API health' -Url "$ApiBaseUrl/health"
 Test-Http -Name 'API ready' -Url "$ApiBaseUrl/ready"

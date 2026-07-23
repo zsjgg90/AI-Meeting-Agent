@@ -73,6 +73,16 @@ export type SpeakerMapping = {
   updated_at: string;
 };
 
+export type TranscriptionTask = {
+  id: string;
+  meeting_id: string;
+  status: string;
+  error_message: string | null;
+  created_at: string;
+  started_at: string | null;
+  completed_at: string | null;
+};
+
 export type MeetingSummary = {
   id?: string;
   overview?: string | null;
@@ -109,6 +119,7 @@ export type MeetingDetail = Meeting & {
   summary: MeetingSummary | null;
   action_items: ActionItem[];
   speaker_mappings: SpeakerMapping[];
+  tasks: TranscriptionTask[];
   output: null | {
     raw_transcript: string;
     speaker_segments: Array<{ speaker: string; text: string }>;

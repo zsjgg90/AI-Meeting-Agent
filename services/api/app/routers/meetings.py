@@ -39,6 +39,60 @@ from app.services.meeting_exports import create_export_file
 router = APIRouter(prefix="/meetings", tags=["meetings"])
 
 
+def _safe_worker_error_message(
+    *,
+    response: httpx.Response | None = None,
+    exc: Exception | None = None,
+    fallback_code: str,
+    fallback_stage: str,
+    fallback_message: str,
+) -> str:
+    payload = {
+        "error_code": fallback_code,
+        "error_stage": fallback_stage,
+        "error_message": fallback_message,
+    }
+    if response is not None:
+        try:
+            body = response.json()
+        except ValueError:
+            body = {"detail": response.text.strip()}
+        detail = body.get("detail") if isinstance(body, dict) else None
+        if isinstance(detail, dict):
+            payload["error_code"] = str(detail.get("error_code") or payload["error_code"])
+            payload["error_stage"] = str(detail.get("error_stage") or payload["error_stage"])
+            payload["error_message"] = str(detail.get("error_message") or payload["error_message"])
+        elif isinstance(detail, str) and detail.strip():
+            payload["error_message"] = detail.strip()
+        elif isinstance(body, dict) and body:
+            payload["error_message"] = str(body)
+        elif response.text.strip():
+            payload["error_message"] = response.text.strip()
+    elif exc is not None:
+        payload["error_message"] = str(exc) or payload["error_message"]
+    return json.dumps(payload, ensure_ascii=False)
+
+
+def _raise_for_worker_status(response: httpx.Response, *, stage: str) -> None:
+    if response.status_code < 400:
+        return
+    message = _safe_worker_error_message(
+        response=response,
+        fallback_code="worker_request_failed",
+        fallback_stage=stage,
+        fallback_message="AI 处理服务返回错误。",
+    )
+    raise RuntimeError(message)
+
+
+def _is_structured_error_message(value: str) -> bool:
+    try:
+        payload = json.loads(value)
+    except ValueError:
+        return False
+    return isinstance(payload, dict) and {"error_code", "error_stage", "error_message"}.issubset(payload)
+
+
 def meeting_detail_options():
     return (
         selectinload(Meeting.audio_files),
@@ -640,7 +694,7 @@ def run_meeting_processing_task(task_id: str) -> None:
             f"{worker_url}/meetings/{meeting.id}/process",
             timeout=settings.worker_request_timeout_seconds,
         )
-        response.raise_for_status()
+        _raise_for_worker_status(response, stage="process")
 
         task.status = "completed"
         task.completed_at = datetime.now(timezone.utc)
@@ -651,11 +705,19 @@ def run_meeting_processing_task(task_id: str) -> None:
         task = db.get(TranscriptionTask, task_id)
         if task is not None:
             task.status = "failed"
-            task.error_message = str(exc)
+            task.error_message = str(exc) if _is_structured_error_message(str(exc)) else _safe_worker_error_message(
+                exc=exc,
+                fallback_code="worker_process_failed",
+                fallback_stage="process",
+                fallback_message="音频处理失败，请稍后重试。",
+            )
             task.completed_at = datetime.now(timezone.utc)
             meeting = db.get(Meeting, task.meeting_id)
             if meeting is not None:
-                meeting.status = "failed"
+                has_transcript = db.scalar(
+                    select(TranscriptSegment.id).where(TranscriptSegment.meeting_id == task.meeting_id).limit(1)
+                )
+                meeting.status = "summary_failed" if has_transcript else "transcription_failed"
             db.commit()
     finally:
         db.close()
@@ -687,7 +749,7 @@ def run_meeting_analysis_task(task_id: str) -> None:
             f"{worker_url}/meetings/{meeting.id}/analyze",
             timeout=settings.worker_request_timeout_seconds,
         )
-        response.raise_for_status()
+        _raise_for_worker_status(response, stage="summary")
 
         task.status = "completed"
         task.completed_at = datetime.now(timezone.utc)
@@ -699,7 +761,12 @@ def run_meeting_analysis_task(task_id: str) -> None:
         task = db.get(TranscriptionTask, task_id)
         if task is not None:
             task.status = "failed"
-            task.error_message = str(exc)
+            task.error_message = str(exc) if _is_structured_error_message(str(exc)) else _safe_worker_error_message(
+                exc=exc,
+                fallback_code="worker_analysis_failed",
+                fallback_stage="summary",
+                fallback_message="会议纪要生成失败，请稍后重试。",
+            )
             task.completed_at = datetime.now(timezone.utc)
             meeting = db.get(Meeting, task.meeting_id)
             if meeting is not None:

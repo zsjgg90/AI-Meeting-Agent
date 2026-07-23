@@ -2,6 +2,13 @@
 
 ## 2026-07-23
 
+- Fixed real end-to-end meeting analysis failures after upload/transcript
+  success by preventing local API/Worker startup scripts from reusing
+  non-project Python uvicorn processes, preserving Worker structured
+  `error_code`/`error_stage`/`error_message` responses in
+  `transcription_tasks.error_message`, mapping post-transcript failures to
+  `summary_failed`, and updating the mobile AI processing screen to show the
+  actual failed stage with retry-only analysis.
 - Fixed history meeting loading timeouts by bounding `GET /meetings` with
   `limit`/`offset`, adding mobile request timeout handling, loading only the
   first home/history page initially, and adding load-more support plus a static

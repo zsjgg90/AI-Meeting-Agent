@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import {
   analyzeMeeting,
@@ -10,6 +10,7 @@ import {
   MeetingDetail,
   MeetingSummary,
   processMeeting,
+  TranscriptionTask,
   updateMeeting,
   uploadAudio,
 } from '../api';
@@ -23,22 +24,31 @@ type Props = {
   onOpenDetail: (meetingId: string) => void;
 };
 
-type StepStatus = 'pending' | 'running' | 'done' | 'failed';
+type StepStatus = 'pending' | 'running' | 'completed' | 'failed';
+type StageKey = 'upload' | 'audio' | 'transcript' | 'speaker' | 'summary';
 
 type ProcessingStage = {
-  key: string;
+  key: StageKey;
   label: string;
   status: StepStatus;
 };
 
+type StructuredTaskError = {
+  error_code?: string;
+  error_stage?: string;
+  error_message?: string;
+};
+
+const failedStatuses = new Set(['failed', 'transcription_failed', 'summary_failed']);
+
 function statusRank(status: StepStatus): number {
-  if (status === 'done') return 1;
+  if (status === 'completed') return 1;
   if (status === 'running') return 0.5;
   return 0;
 }
 
 function isMeetingFailed(meeting: MeetingDetail | null): boolean {
-  return meeting?.status === 'failed' || meeting?.status === 'transcription_failed' || meeting?.status === 'summary_failed';
+  return Boolean(meeting && failedStatuses.has(meeting.status));
 }
 
 function hasSummaryContent(summary: MeetingSummary | null | undefined): boolean {
@@ -47,6 +57,87 @@ function hasSummaryContent(summary: MeetingSummary | null | undefined): boolean 
 
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function latestTask(tasks: TranscriptionTask[] | undefined): TranscriptionTask | null {
+  const sorted = [...(tasks || [])].sort((left, right) => {
+    const leftTime = new Date(left.created_at).getTime();
+    const rightTime = new Date(right.created_at).getTime();
+    return rightTime - leftTime;
+  });
+  return sorted[0] || null;
+}
+
+function parseTaskError(task: TranscriptionTask | null): StructuredTaskError | null {
+  if (!task?.error_message) return null;
+  try {
+    const parsed = JSON.parse(task.error_message);
+    if (parsed && typeof parsed === 'object') return parsed;
+  } catch {
+    return { error_message: task.error_message };
+  }
+  return null;
+}
+
+function safeErrorMessage(error: StructuredTaskError | null, fallback = 'AI 处理失败，请稍后重试。'): string {
+  const message = error?.error_message?.trim();
+  if (!message) return fallback;
+  if (message.includes('timeout') || message.includes('timed out')) return 'AI 处理超时，请稍后重新分析。';
+  if (message.includes('Connection') || message.includes('connect')) return 'AI 服务暂时不可用，请稍后重新分析。';
+  if (message.includes('Transcript') || message.includes('transcript')) return '转写结果不完整，请稍后重新处理。';
+  if (message.length > 120) return `${message.slice(0, 120)}...`;
+  return message;
+}
+
+function failureStage(meeting: MeetingDetail | null, taskError: StructuredTaskError | null): StageKey | null {
+  const rawStage = taskError?.error_stage;
+  if (rawStage === 'summary' || rawStage === 'rag_retrieval' || rawStage === 'model_inference' || rawStage === 'validation') {
+    return 'summary';
+  }
+  if (rawStage === 'diarization') return 'speaker';
+  if (rawStage === 'transcription') return 'transcript';
+  if (rawStage === 'process') {
+    return meeting?.transcript_segments.length ? 'summary' : 'transcript';
+  }
+  if (meeting?.status === 'summary_failed') return 'summary';
+  if (meeting?.status === 'transcription_failed') return 'transcript';
+  if (meeting?.status === 'failed') return meeting.audio_files.length ? 'transcript' : 'upload';
+  return null;
+}
+
+function stageLabel(key: StageKey, status: StepStatus): string {
+  const completedLabels: Record<StageKey, string> = {
+    upload: '音频上传完成',
+    audio: '音频处理完成',
+    transcript: '转写完成',
+    speaker: '说话人识别完成',
+    summary: '会议纪要生成完成',
+  };
+  const runningLabels: Record<StageKey, string> = {
+    upload: '正在上传音频',
+    audio: '正在处理音频',
+    transcript: '正在转写',
+    speaker: '正在识别说话人',
+    summary: '正在生成会议纪要',
+  };
+  const pendingLabels: Record<StageKey, string> = {
+    upload: '等待音频上传',
+    audio: '等待音频处理',
+    transcript: '等待转写',
+    speaker: '等待识别说话人',
+    summary: '等待生成会议纪要',
+  };
+  const failedLabels: Record<StageKey, string> = {
+    upload: '音频上传失败',
+    audio: '音频处理失败',
+    transcript: '转写失败',
+    speaker: '说话人识别失败',
+    summary: '会议纪要生成失败',
+  };
+  if (status === 'completed') return completedLabels[key];
+  if (status === 'running') return runningLabels[key];
+  if (status === 'failed') return failedLabels[key];
+  return pendingLabels[key];
 }
 
 export function AIProcessingScreen({
@@ -62,12 +153,73 @@ export function AIProcessingScreen({
   const [meetingDetail, setMeetingDetail] = useState<MeetingDetail | null>(null);
   const [summaryResult, setSummaryResult] = useState<MeetingSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [retrying, setRetrying] = useState(false);
+  const [showErrorDetail, setShowErrorDetail] = useState(false);
   const startedRef = useRef(false);
 
   const refreshMeeting = useCallback(async () => {
     const nextMeeting = await getMeeting(meeting.id);
     setMeetingDetail(nextMeeting);
+    return nextMeeting;
   }, [meeting.id]);
+
+  const latest = useMemo(() => latestTask(meetingDetail?.tasks), [meetingDetail?.tasks]);
+  const taskError = useMemo(() => parseTaskError(latest), [latest]);
+
+  const waitForTranscript = useCallback(
+    async (cancelled: () => boolean): Promise<boolean> => {
+      const startedAt = Date.now();
+      while (!cancelled() && Date.now() - startedAt < 120000) {
+        await wait(3000);
+        const nextTranscript = await getMeetingTranscript(meeting.id);
+        const nextMeeting = await refreshMeeting();
+        if (nextTranscript.segments.length > 0 || nextMeeting.transcript_segments.length > 0) return true;
+        if (isMeetingFailed(nextMeeting)) return false;
+      }
+      return false;
+    },
+    [meeting.id, refreshMeeting],
+  );
+
+  const waitForSummary = useCallback(
+    async (cancelled: () => boolean): Promise<void> => {
+      const startedAt = Date.now();
+      while (!cancelled() && Date.now() - startedAt < 600000) {
+        await wait(3000);
+        const nextSummary = await getMeetingSummary(meeting.id);
+        setSummaryResult(nextSummary);
+        const nextMeeting = await refreshMeeting();
+        if (hasSummaryContent(nextSummary) || hasSummaryContent(nextMeeting.summary) || nextMeeting.status === 'completed') {
+          setProcessStatus('completed');
+          return;
+        }
+        if (isMeetingFailed(nextMeeting)) {
+          setProcessStatus('failed');
+          setError(safeErrorMessage(parseTaskError(latestTask(nextMeeting.tasks)), '会议纪要生成失败，请重新分析。'));
+          return;
+        }
+      }
+      throw new Error('会议纪要生成超时，请稍后重新分析。');
+    },
+    [meeting.id, refreshMeeting],
+  );
+
+  const startAnalysisOnly = useCallback(async () => {
+    setRetrying(true);
+    setError(null);
+    setProcessStatus('running');
+    try {
+      await analyzeMeeting(meeting.id);
+      await waitForSummary(() => false);
+    } catch (nextError) {
+      const nextMeeting = await refreshMeeting().catch(() => null);
+      const structured = parseTaskError(latestTask(nextMeeting?.tasks));
+      setProcessStatus('failed');
+      setError(safeErrorMessage(structured, nextError instanceof Error ? nextError.message : '会议纪要生成失败，请重新分析。'));
+    } finally {
+      setRetrying(false);
+    }
+  }, [meeting.id, refreshMeeting, waitForSummary]);
 
   useEffect(() => {
     if (startedRef.current) return;
@@ -81,12 +233,12 @@ export function AIProcessingScreen({
         setMeetingDetail(currentMeeting);
         if (hasSummaryContent(currentMeeting.summary)) {
           setSummaryResult(currentMeeting.summary);
-          setUploadStatus('done');
-          setProcessStatus('done');
+          setUploadStatus('completed');
+          setProcessStatus('completed');
           return;
         }
 
-        setUploadStatus('running');
+        setUploadStatus(currentMeeting.audio_files.length ? 'completed' : 'running');
         try {
           await updateMeeting(meeting.id, { end_at: endedAt });
         } catch {
@@ -96,37 +248,32 @@ export function AIProcessingScreen({
           await uploadAudio(meeting.id, recordingUri, endedAt);
         }
         if (cancelled) return;
-        setUploadStatus('done');
+        setUploadStatus('completed');
 
         setProcessStatus('running');
         const initialTranscript = await getMeetingTranscript(meeting.id);
-        let hasTranscriptSegments = initialTranscript.segments.length > 0;
+        let hasTranscriptSegments = initialTranscript.segments.length > 0 || currentMeeting.transcript_segments.length > 0;
 
         if (!hasTranscriptSegments) {
           await processMeeting(meeting.id);
-          const startedAt = Date.now();
-          while (!cancelled && Date.now() - startedAt < 120000) {
-            await wait(3000);
-            const nextTranscript = await getMeetingTranscript(meeting.id);
-            hasTranscriptSegments = nextTranscript.segments.length > 0;
-            refreshMeeting().catch(() => undefined);
-            if (hasTranscriptSegments) break;
-          }
+          hasTranscriptSegments = await waitForTranscript(() => cancelled);
         }
 
         if (cancelled) return;
         if (!hasTranscriptSegments) {
-          throw new Error('转写未完成，请稍后重试');
+          throw new Error('转写未完成，请稍后重试。');
         }
 
         await refreshMeeting();
         await analyzeMeeting(meeting.id);
-        await refreshMeeting();
+        await waitForSummary(() => cancelled);
       } catch (nextError) {
         if (cancelled) return;
-        setUploadStatus((current) => (current === 'done' ? current : 'failed'));
+        const nextMeeting = await refreshMeeting().catch(() => null);
+        const structured = parseTaskError(latestTask(nextMeeting?.tasks));
+        setUploadStatus((current) => (current === 'completed' ? current : 'failed'));
         setProcessStatus('failed');
-        setError(nextError instanceof Error ? nextError.message : 'AI 处理启动失败。');
+        setError(safeErrorMessage(structured, nextError instanceof Error ? nextError.message : 'AI 处理启动失败。'));
       }
     }
 
@@ -134,77 +281,57 @@ export function AIProcessingScreen({
     return () => {
       cancelled = true;
     };
-  }, [endedAt, meeting.id, realtimeTranscriptReady, recordingUri, refreshMeeting]);
-
-  useEffect(() => {
-    if (hasSummaryContent(summaryResult) || hasSummaryContent(meetingDetail?.summary) || isMeetingFailed(meetingDetail)) {
-      return undefined;
-    }
-    if (processStatus === 'failed') return undefined;
-    if (processStatus !== 'running') return undefined;
-    const timer = setInterval(() => {
-      getMeetingSummary(meeting.id)
-        .then((nextSummary) => {
-          setSummaryResult(nextSummary);
-          if (hasSummaryContent(nextSummary)) {
-            setProcessStatus('done');
-          }
-        })
-        .catch((nextError) => {
-          setError(nextError instanceof Error ? nextError.message : '会议纪要刷新失败。');
-        });
-      refreshMeeting().catch(() => undefined);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [meeting.id, meetingDetail, processStatus, refreshMeeting, summaryResult]);
+  }, [endedAt, meeting.id, realtimeTranscriptReady, recordingUri, refreshMeeting, waitForSummary, waitForTranscript]);
 
   useEffect(() => {
     if (!meetingDetail) return;
     if (isMeetingFailed(meetingDetail)) {
       setProcessStatus('failed');
-      setError('AI 处理失败，请稍后在历史会议中重试或查看错误信息。');
+      setError(safeErrorMessage(taskError, 'AI 处理失败，请稍后在历史会议中重新分析。'));
     }
-  }, [meetingDetail]);
+  }, [meetingDetail, taskError]);
 
   const stages = useMemo<ProcessingStage[]>(() => {
-    const hasAudio = uploadStatus === 'done' || Boolean(meetingDetail?.audio_files.length);
+    const hasAudio = uploadStatus === 'completed' || Boolean(meetingDetail?.audio_files.length);
     const hasTranscript = Boolean(meetingDetail?.transcript_segments.length);
-    const hasSpeaker = hasTranscript;
-    const hasSummary = hasSummaryContent(summaryResult) || hasSummaryContent(meetingDetail?.summary) || meetingDetail?.status === 'completed';
-    const failed = processStatus === 'failed' || isMeetingFailed(meetingDetail);
+    const hasSpeaker = Boolean(
+      meetingDetail?.transcript_segments.some((segment) => segment.speaker_label || segment.speaker_name),
+    );
+    const hasSummary =
+      hasSummaryContent(summaryResult) || hasSummaryContent(meetingDetail?.summary) || meetingDetail?.status === 'completed';
+    const failedStage = processStatus === 'failed' || isMeetingFailed(meetingDetail) ? failureStage(meetingDetail, taskError) : null;
 
-    return [
-      {
-        key: 'upload',
-        label: '音频上传完成',
-        status: failed && !hasAudio ? 'failed' : hasAudio ? 'done' : uploadStatus,
-      },
-      {
-        key: 'audio',
-        label: hasAudio ? '音频处理中' : '等待音频上传',
-        status: failed && !hasTranscript ? 'failed' : hasTranscript ? 'done' : hasAudio ? 'running' : 'pending',
-      },
-      {
-        key: 'transcript',
-        label: '正在转写',
-        status: failed && !hasTranscript ? 'failed' : hasTranscript ? 'done' : hasAudio ? 'running' : 'pending',
-      },
-      {
-        key: 'speaker',
-        label: '正在识别说话人',
-        status: failed && !hasSpeaker ? 'failed' : hasSpeaker ? 'done' : hasTranscript ? 'running' : 'pending',
-      },
-      {
-        key: 'summary',
-        label: '正在生成会议纪要...',
-        status: failed && !hasSummary ? 'failed' : hasSummary ? 'done' : hasTranscript ? 'running' : 'pending',
-      },
-    ];
-  }, [meetingDetail, processStatus, uploadStatus]);
+    const statuses: Record<StageKey, StepStatus> = {
+      upload: hasAudio ? 'completed' : uploadStatus,
+      audio: hasTranscript ? 'completed' : hasAudio ? 'running' : 'pending',
+      transcript: hasTranscript ? 'completed' : hasAudio ? 'running' : 'pending',
+      speaker: hasSpeaker ? 'completed' : hasTranscript ? 'running' : 'pending',
+      summary: hasSummary ? 'completed' : hasTranscript ? processStatus : 'pending',
+    };
+    if (failedStage) {
+      const order: StageKey[] = ['upload', 'audio', 'transcript', 'speaker', 'summary'];
+      const failedIndex = order.indexOf(failedStage);
+      for (let index = 0; index < order.length; index += 1) {
+        const key = order[index];
+        if (index < failedIndex && statuses[key] !== 'completed') statuses[key] = 'completed';
+        if (index === failedIndex) statuses[key] = 'failed';
+        if (index > failedIndex) statuses[key] = 'pending';
+      }
+    }
+
+    return (['upload', 'audio', 'transcript', 'speaker', 'summary'] as StageKey[]).map((key) => ({
+      key,
+      label: stageLabel(key, statuses[key]),
+      status: statuses[key],
+    }));
+  }, [meetingDetail, processStatus, summaryResult, taskError, uploadStatus]);
 
   const progress = Math.round((stages.reduce((sum, stage) => sum + statusRank(stage.status), 0) / stages.length) * 100);
-  const finished = stages.every((stage) => stage.status === 'done');
+  const finished = stages.every((stage) => stage.status === 'completed');
   const failed = stages.some((stage) => stage.status === 'failed');
+  const errorDetail = taskError
+    ? `错误阶段：${taskError.error_stage || '未知'}\n错误代码：${taskError.error_code || 'unknown'}\n错误说明：${safeErrorMessage(taskError)}`
+    : error || '暂无更多错误详情。';
 
   return (
     <View style={styles.container}>
@@ -212,7 +339,7 @@ export function AIProcessingScreen({
         <Text numberOfLines={1} style={styles.meetingTitle}>
           {meeting.title}
         </Text>
-        <Text style={styles.people}>AI 分析中</Text>
+        <Text style={styles.people}>{failed ? 'AI 分析失败' : finished ? 'AI 分析完成' : 'AI 分析中'}</Text>
       </View>
 
       <View style={[styles.progressRing, failed ? styles.progressRingFailed : null]}>
@@ -228,14 +355,17 @@ export function AIProcessingScreen({
             <View
               style={[
                 styles.stageIcon,
-                stage.status === 'done' ? styles.stageIconDone : null,
+                stage.status === 'completed' ? styles.stageIconDone : null,
                 stage.status === 'failed' ? styles.stageIconFailed : null,
+                stage.status === 'pending' ? styles.stageIconPending : null,
               ]}
             >
               {stage.status === 'running' ? (
                 <ActivityIndicator color="#6657ff" size="small" />
               ) : (
-                <Text style={styles.stageIconText}>{stage.status === 'failed' ? '!' : '✓'}</Text>
+                <Text style={[styles.stageIconText, stage.status === 'failed' ? styles.stageIconTextFailed : null]}>
+                  {stage.status === 'failed' ? '!' : stage.status === 'completed' ? '✓' : ''}
+                </Text>
               )}
             </View>
             <Text style={styles.stageLabel}>{stage.label}</Text>
@@ -247,6 +377,14 @@ export function AIProcessingScreen({
         <View style={styles.errorCard}>
           <Text style={styles.errorTitle}>处理失败</Text>
           <Text style={styles.error}>{error}</Text>
+          <View style={styles.errorActions}>
+            <Pressable disabled={retrying} onPress={startAnalysisOnly} style={styles.retryButton}>
+              {retrying ? <ActivityIndicator color="#ffffff" size="small" /> : <Text style={styles.retryText}>重新分析</Text>}
+            </Pressable>
+            <Pressable onPress={() => setShowErrorDetail(true)} style={styles.detailButton}>
+              <Text style={styles.detailText}>查看错误详情</Text>
+            </Pressable>
+          </View>
         </View>
       ) : null}
 
@@ -262,6 +400,18 @@ export function AIProcessingScreen({
           <Text style={styles.primaryText}>{finished ? '查看纪要' : '查看历史会议'}</Text>
         </Pressable>
       </View>
+
+      <Modal transparent visible={showErrorDetail} animationType="fade" onRequestClose={() => setShowErrorDetail(false)}>
+        <View style={styles.modalBackdrop}>
+          <View style={styles.modalCard}>
+            <Text style={styles.modalTitle}>错误详情</Text>
+            <Text style={styles.modalText}>{errorDetail}</Text>
+            <Pressable onPress={() => setShowErrorDetail(false)} style={styles.modalButton}>
+              <Text style={styles.modalButtonText}>知道了</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -363,10 +513,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fee2e2',
     borderColor: '#fee2e2',
   },
+  stageIconPending: {
+    backgroundColor: '#f3f4f6',
+    borderColor: '#e5e7eb',
+  },
   stageIconText: {
     color: '#16a34a',
     fontSize: 12,
     fontWeight: '900',
+  },
+  stageIconTextFailed: {
+    color: '#ef4444',
   },
   stageLabel: {
     color: '#374151',
@@ -378,7 +535,7 @@ const styles = StyleSheet.create({
     borderColor: '#fecdd3',
     borderRadius: 16,
     borderWidth: 1,
-    gap: 5,
+    gap: 9,
     marginTop: 14,
     padding: 13,
   },
@@ -391,6 +548,39 @@ const styles = StyleSheet.create({
     color: '#ef4444',
     fontSize: 12,
     lineHeight: 18,
+  },
+  errorActions: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 2,
+  },
+  retryButton: {
+    alignItems: 'center',
+    backgroundColor: '#ef4444',
+    borderRadius: 12,
+    flex: 1,
+    minHeight: 38,
+    justifyContent: 'center',
+  },
+  retryText: {
+    color: '#ffffff',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+  detailButton: {
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderColor: '#fecdd3',
+    borderRadius: 12,
+    borderWidth: 1,
+    flex: 1,
+    minHeight: 38,
+    justifyContent: 'center',
+  },
+  detailText: {
+    color: '#ef4444',
+    fontSize: 12,
+    fontWeight: '900',
   },
   tipCard: {
     alignItems: 'center',
@@ -437,6 +627,41 @@ const styles = StyleSheet.create({
   },
   secondaryText: {
     color: '#6b7280',
+    fontWeight: '900',
+  },
+  modalBackdrop: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(17, 24, 39, 0.42)',
+    flex: 1,
+    justifyContent: 'center',
+    padding: 24,
+  },
+  modalCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 18,
+    gap: 12,
+    padding: 18,
+    width: '100%',
+  },
+  modalTitle: {
+    color: '#111827',
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  modalText: {
+    color: '#4b5563',
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  modalButton: {
+    alignItems: 'center',
+    backgroundColor: '#6657ff',
+    borderRadius: 12,
+    minHeight: 42,
+    justifyContent: 'center',
+  },
+  modalButtonText: {
+    color: '#ffffff',
     fontWeight: '900',
   },
 });

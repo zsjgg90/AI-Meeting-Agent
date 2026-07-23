@@ -14,9 +14,18 @@ Set-EnvDefault -Name 'TRANSFORMERS_OFFLINE' -Value '1'
 $env:DATABASE_URL = Convert-LocalDatabaseUrl $env:DATABASE_URL
 
 $port = 8001
+$expectedPython = Resolve-Path (Join-Path $ProjectRoot 'services\worker\.venv\Scripts\python.exe')
 $listener = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
 if ($listener) {
-    Write-Host "Worker already listening on port $port. PID: $($listener.OwningProcess)"
+    $owner = Get-Process -Id $listener.OwningProcess -ErrorAction SilentlyContinue
+    $ownerInfo = Get-CimInstance Win32_Process -Filter "ProcessId=$($listener.OwningProcess)" -ErrorAction SilentlyContinue
+    $parent = if ($ownerInfo) { Get-Process -Id $ownerInfo.ParentProcessId -ErrorAction SilentlyContinue } else { $null }
+    $isProjectProcess = ($null -ne $owner -and $owner.Path -ieq $expectedPython.Path) -or ($null -ne $parent -and $parent.Path -ieq $expectedPython.Path)
+    if (-not $isProjectProcess) {
+        Write-Error "Port $port is already owned by a non-project Worker process. PID=$($listener.OwningProcess) Path=$($owner.Path). Stop it before starting the local Worker."
+        exit 1
+    }
+    Write-Host "Worker already listening on port $port from project venv. PID: $($listener.OwningProcess)"
     Write-Host 'No new Worker process was started.'
     exit 0
 }

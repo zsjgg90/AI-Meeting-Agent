@@ -13,6 +13,9 @@
    errors, Expo `audio/x-m4a` API regression coverage, and a local HTTP upload
    smoke check. History meeting loading remains bounded with `limit`/`offset`
    and load-more pagination.
+   End-to-end summary failure recovery now requires project-venv API/Worker
+   port ownership, structured Worker error persistence, and retry-only mobile
+   re-analysis from existing audio/transcript.
 5. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
    maintenance issues that remain relevant.
 6. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
