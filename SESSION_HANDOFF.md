@@ -2,6 +2,69 @@
 
 ## Current State
 
+On 2026-07-28 the Expo meeting detail AI summary tab was rebuilt from
+`docs/design/meeting-minutes.html`. It still lives inside
+`MeetingDetailScreen`, reuses the detail top navigation, inline `expo-av`
+player, and three-tab bar, and remains in the same single vertical `FlatList`
+page structure. The tab now shows a real meeting base card, `summary` export
+buttons for MD/PDF/DOCX/TXT through the existing
+`/meetings/{id}/exports/summary.{format}` API, basic info from meeting data and
+speaker labels, canonical six-dimension fields with legacy alias fallback,
+read-only action item status, owner/deadline/priority metadata when available,
+and existing evidence/time anchors where the summary payload includes
+`source_text`, `evidence`, `timestamp`, `start_time`, `segment_id`, or
+`source_segment_id`. It does not add action status writes, Agent tools,
+backend endpoints, database migrations, Worker calls, Prompt/RAG/Validator
+changes, or schema changes.
+Final acceptance tightened this tab so paragraph breaks in `meeting_summary`
+are preserved, `timestamp` accepts numeric seconds plus `mm:ss` and `hh:mm:ss`,
+evidence jumps wait until the transcript tab is visible before scrolling,
+missing segment anchors degrade with a clear inline message, six empty
+dimensions show an overall empty state, and empty action objects do not render
+blank todo rows. Summary export regression now verifies MD, TXT, PDF, and DOCX
+responses through the existing API endpoint.
+
+On 2026-07-28 the Expo meeting detail page was rebuilt for the transcript
+stage. `MeetingDetailScreen` now owns its own top navigation for the detail
+route, defaults to `会议原文`, and uses one vertical `FlatList` with an inline
+`expo-av` player, three-tab bar (`会议原文`, `AI纪要`, `Agent工具`), transcript
+quick look, transcript export entry, and real `transcript_segments` timeline.
+The player reuses `meetingAudioUrl()` and supports play/pause, draggable
+progress, centered 15-second seek controls, timestamp jumps, bounded segment
+play, ended-state handling, and loading/missing/failed audio states. Segment
+playback can be paused by tapping the active segment icon and stops at the
+segment end; the top player no longer exposes a speed control. Final
+acceptance tightened audio resource selection so detail playback no longer
+uses `audio_files[0]`; both detail playback and the standalone audio player use
+a shared playable-audio selector, release stale `expo-av` sounds on
+meeting/audio switches, and guard rapid play/pause/seek actions.
+Quick look is derived only from real transcript segments; no model calls,
+backend endpoints, database schema, Worker, Prompt, RAG, Validator, or
+six-dimension schema were changed. AI summary rendering remains on the
+existing summary data path, while `Agent工具` is a placeholder for this stage.
+
+On 2026-07-28 the Expo home screen was updated to the MeetMind AI RC1 home
+prototype. The current home route still uses `MeetingListScreen mode="home"`
+and real `GET /meetings` data. Completed-meeting summaries are fetched only for
+home card preview data and degrade to no preview if a summary request fails.
+The page is a single full-page `FlatList` with brand/search header, real-time
+recording, audio import, `全部会议`, and the existing fixed bottom navigation.
+Completed cards prefer canonical `meeting_agenda`, `key_conclusions`, and
+`action_items` fields, then fall back to legacy `agenda`, `decisions`, and
+`next_steps`. The home section date renders as `M月D日 今天` for the current
+day and `M月D日 周X` otherwise; completed-card preview rows are black,
+single-line, tail-ellipsized, and card height adapts to the number of available
+preview rows.
+
+The real-time recording action still uses the existing create-meeting and
+recording flow. The audio import action opens `ImportMeetingScreen`, uses
+`expo-document-picker` to select one local audio file, creates a meeting,
+and then reuses the existing `AIProcessingScreen` upload/process/analyze flow.
+No backend, database, Worker, RAG, Prompt, Validator, or six-dimension schema
+behavior was changed. The history list mode, refresh, pagination, delete,
+detail navigation, Knowledge Base, Todo, Profile, and existing bottom tab
+keys/routes remain intact.
+
 The Enterprise Meeting Knowledge Base MVP is now implemented as an API-side
 PostgreSQL read model. Alembic revision `20260724_0016` adds
 `meeting_knowledge_items` and `meeting_knowledge_syncs`. The API
@@ -53,17 +116,35 @@ are hidden/closed by default. The relevant switches are
 `EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true`, and
 `AGENT_PROPOSAL_AUTO_GENERATION_ENABLED=false`. Local Agent login also remains
 closed by default through `AGENT_LOCAL_AUTH_ENABLED=false`, including local API
-startup defaults.Expo recent-meeting startup loading has a targeted RC fix: the mobile recent
+startup defaults.
+Expo recent-meeting startup loading has a targeted RC fix: the mobile recent
 list no longer treats `audio_uploaded`/`uploaded` as active AI analysis, the
 home statistics summary fetch only requests completed meetings, local Expo
 configuration points to API port 8002, and API startup recovers stale
 `queued`/`running` meeting tasks so service restarts do not leave meetings
 permanently in `processing`/`summarizing`.
-History meeting loading was bounded after reports of repeated timeouts.
+The Expo AI assistant review UI has been productized on top of Agent v1.0-rc1
+review data. The AI tab now shows pending suggestions, approve/reject
+confirmation flows, recent records, paginated all-records filters, and record
+details. API added read-only `/agent/review/overview`,
+`/agent/review/records`, and `/agent/review/records/{record_id}` DTO endpoints
+that aggregate existing proposal, confirmation, command, audit, authoritative
+object, and meeting data with server-side Bearer-token scope checks. This did
+not expand Agent write scope, did not enable grey or real execution by default,
+and did not modify Prompt, RAG, Validator, or Shadow.
+Meeting detail summary fallback display was fixed after a regression where
+legacy `meeting_outputs.summary` content could render with raw
+`result_source=unknown` and a failed badge. The summary fallback now receives
+display metadata, the mobile detail page shows user-facing source text, and
+available summary content is not marked failed solely because the meeting row
+has stale `failed` or `summary_failed` status. `npm run test:meeting-detail-ui`
+is now part of `scripts/test-all.ps1`.
+History meeting loading was also bounded after reports of repeated timeouts.
 `GET /meetings` now supports `limit` and `offset` with a default cap, Expo
 loads only the first page initially, the full history page supports load-more,
 and mobile JSON requests abort with a Chinese timeout message instead of
-waiting indefinitely.
+waiting indefinitely. `npm run test:meeting-history-ui` is part of
+`scripts/test-all.ps1`.
 Recording upload was hardened after Expo recording uploads failed without a
 clear bounded error path. Mobile `uploadAudio` and `uploadAudioChunk` now use
 the shared request timeout wrapper, keep Expo `.m4a` uploads as `audio/x-m4a`,
@@ -77,6 +158,19 @@ Local API/Worker startup now rejects non-project Python uvicorn owners, Worker
 non-2xx errors are persisted as structured task JSON, `summary_failed`
 meetings can be re-analyzed from existing transcript/audio, and the mobile AI
 processing screen stops on the real failed stage with retry-only analysis.
+Agent review auth and real Proposal generation now have a minimal RC path.
+Local Agent login is fail-closed by default and enabled only by the local API
+startup environment; it creates real `agent_users` and `agent_auth_sessions`
+rows with scoped server-side permissions. Expo stores the Bearer session in
+AsyncStorage, restores it on AI assistant entry, injects Authorization for
+`/agent/*` only, clears expired sessions on 401, and shows distinct
+unauthenticated/forbidden/empty/data/error states. Completed meeting analysis
+now invokes an API-side Proposal generator after summary and ActionItems are
+persisted. The generator only creates pending `AgentActionProposal` rows for
+same tenant/project historical `AgentActionItem` matches with transcript-backed
+`owner`, `due_date`, `priority`, or `status` changes; it skips new objects,
+ambiguous matches, no-change candidates, unsupported fields, insufficient
+evidence, and duplicates with diagnostics.
 Agent v1.0 upgrade preparation has started at Phase 0 baseline freeze. The
 baseline document is `docs/AGENT_V1_PHASE_0_BASELINE.md`.
 The Phase 0 runtime diagnostic currently fails because API port 8002 is not

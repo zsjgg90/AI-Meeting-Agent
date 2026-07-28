@@ -19,11 +19,15 @@ EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ```
 
 For Expo Go on a physical phone, use the computer LAN IP instead of `localhost` or `127.0.0.1`. The local API startup script serves on port `8002`.
+The default bottom navigation exposes Knowledge Base instead of AI Assistant.
+The AI Assistant entry can be restored later by setting
+`EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=true`.
 
 ## Screens
 
-- Home: meeting list and create entry
+- Home: MeetMind AI brand header, search entry, real-time recording entry, audio import entry, and a full-page scrollable meeting list from real API data. Completed cards preview the first agenda, conclusion, and action task from canonical six-dimension fields with legacy fallback.
 - New meeting: enter a meeting name and create it through the API
 - Recording: start, pause, resume, end, and upload audio with `expo-av`
+- Import meeting: pick a local audio file with `expo-document-picker`, create a meeting through the API, and reuse the existing upload/process/analyze screen.
 - Knowledge Base: enterprise meeting knowledge home, categorized lists, keyword search, filters, and source meeting traceability. Full RAG question answering is not implemented in this stage.
-- Meeting detail: transcript, AI summary, decisions, risks, and action items. Summary dimensions render through the shared `NumberedList` component for agenda, conclusions, unresolved issues, follow-up actions, and risks. Packed strings such as `1. A；2. B` are normalized into independent rows before rendering.
+- Meeting detail: defaults to the rebuilt meeting transcript page with an inline `expo-av` audio player, draggable progress, centered 15-second seek controls, timestamp seek, bounded transcript-segment playback, transcript quick look, transcript export entry, and a FlatList timeline from real `transcript_segments`. The AI summary tab reuses the same top nav, player, and tab bar, then displays real meeting metadata, summary export buttons for `summary` MD/PDF/DOCX/TXT, basic info, canonical six-dimension fields with legacy fallback, read-only action item status, and available evidence/time anchors. Agent tools are a placeholder in this stage.

@@ -1,11 +1,14 @@
-import { Audio } from 'expo-av';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Audio, AVPlaybackStatus } from 'expo-av';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
+  FlatList,
   Linking,
   Modal,
+  PanResponder,
   Pressable,
-  ScrollView,
+  Share,
   StyleSheet,
   Text,
   TextInput,
@@ -13,6 +16,7 @@ import {
 } from 'react-native';
 
 import {
+  ActionItem,
   getMeeting,
   getMeetingSummary,
   Meeting,
@@ -20,32 +24,39 @@ import {
   meetingExportUrl,
   MeetingDetail,
   MeetingSummary,
+  TranscriptSegment,
   updateSpeakerMapping,
 } from '../api';
 import { LucideIcon } from '../components/LucideIcon';
 import { NumberedList } from '../components/NumberedList';
+import { chooseMeetingAudioFile } from '../utils/audioFiles';
 import { normalizeNumberedListItems } from '../utils/numberedList';
 
 type Props = {
   meetingId: string;
-  onRecord: (meeting: Meeting) => void;
-  onOpenAudioPlayer: (meetingId: string) => void;
-  initialTab?: DetailTab;
+  initialTab?: LegacyDetailTab | DetailTab;
   sourceSegmentId?: string | null;
   startTime?: number | null;
   evidenceText?: string | null;
+  onBack: () => void;
+  onRecord: (meeting: Meeting) => void;
+  onOpenAudioPlayer: (meetingId: string) => void;
 };
 
-type DetailTab = 'summary' | 'transcript' | 'decisions' | 'questions' | 'actions' | 'risks';
+type LegacyDetailTab = 'decisions' | 'questions' | 'actions' | 'risks';
+type DetailTab = 'transcript' | 'summary' | 'agent';
 type ExportFormat = 'md' | 'pdf' | 'docx' | 'txt';
+type AudioLoadState = 'idle' | 'loading' | 'ready' | 'missing' | 'failed';
+
+const brandBlue = '#2B6CFF';
+const speakerColors = ['#2B6CFF', '#F59E0B', '#10B981', '#8B5CF6', '#EF4444', '#0EA5E9', '#14B8A6', '#F97316'];
+const supportedTranscriptExports: ExportFormat[] = ['md', 'pdf', 'docx', 'txt'];
+const supportedSummaryExports: ExportFormat[] = ['md', 'pdf', 'docx', 'txt'];
 
 const tabs: Array<{ key: DetailTab; label: string }> = [
-  { key: 'summary', label: '纪要' },
-  { key: 'transcript', label: '全文记录' },
-  { key: 'decisions', label: '核心结论' },
-  { key: 'questions', label: '遗留问题' },
-  { key: 'actions', label: '待办与后续安排' },
-  { key: 'risks', label: '风险与关注点' },
+  { key: 'transcript', label: '会议原文' },
+  { key: 'summary', label: 'AI纪要' },
+  { key: 'agent', label: 'Agent工具' },
 ];
 
 const meetingStatusText: Record<string, string> = {
@@ -66,12 +77,42 @@ function statusText(status: string): string {
   return meetingStatusText[status] || status;
 }
 
+function normalizeInitialTab(initialTab: Props['initialTab']): DetailTab {
+  if (initialTab === 'summary' || initialTab === 'agent') return initialTab;
+  return 'transcript';
+}
+
 function resultSourceText(summary: MeetingSummary | null | undefined): string {
   const source = summary?.metadata?.result_source;
-  if (source === 'fixture') return 'fixture 人工结果';
-  if (source === 'legacy_qwen_rag') return '旧 Qwen3 + RAG';
-  if (source === 'semantic_pipeline') return '语义 shadow';
-  return '来源未知';
+  if (source === 'fixture') return '人工校准纪要';
+  if (source === 'legacy_qwen_rag') return 'AI 生成纪要';
+  if (source === 'semantic_pipeline') return '语义分析纪要';
+  return '历史纪要';
+}
+
+function hasSummaryContent(
+  summary: MeetingSummary | null | undefined,
+  fallbackOutput: MeetingDetail['output'] | null | undefined,
+): boolean {
+  return Boolean(
+    summary?.meeting_summary?.trim() ||
+      summary?.overview?.trim() ||
+      fallbackOutput?.summary?.trim() ||
+      summary?.key_conclusions?.length ||
+      summary?.action_items?.length,
+  );
+}
+
+function summaryDisplayStatus(
+  meeting: MeetingDetail | null,
+  summary: MeetingSummary | null | undefined,
+  fallbackOutput: MeetingDetail['output'] | null | undefined,
+): string {
+  const status = meeting?.status || '';
+  if ((status === 'failed' || status === 'summary_failed') && hasSummaryContent(summary, fallbackOutput)) {
+    return 'completed';
+  }
+  return status;
 }
 
 function textValue(item: unknown, keys: string[]): string {
@@ -96,15 +137,16 @@ function formatDateTime(value: string | null | undefined): string {
   if (!value) return '未设置';
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '未设置';
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
   return `${date.getFullYear()}-${month}-${day} ${hours}:${minutes}`;
 }
 
-function formatClock(seconds: number): string {
-  const safe = Math.max(0, Math.round(seconds));
+function formatDuration(seconds: number | null | undefined): string {
+  if (typeof seconds !== 'number' || !Number.isFinite(seconds) || seconds <= 0) return '未知';
+  const safe = Math.round(seconds);
   const hours = Math.floor(safe / 3600);
   const minutes = Math.floor((safe % 3600) / 60);
   const rest = safe % 60;
@@ -113,9 +155,15 @@ function formatClock(seconds: number): string {
   return `${rest}秒`;
 }
 
-function formatSegmentTime(seconds: number): string {
-  const minutes = Math.floor(seconds / 60);
-  const rest = Math.floor(seconds % 60);
+function formatTimestamp(seconds: number | null | undefined): string {
+  if (typeof seconds !== 'number' || !Number.isFinite(seconds)) return '--:--';
+  const safe = Math.max(0, Math.floor(seconds));
+  const hours = Math.floor(safe / 3600);
+  const minutes = Math.floor((safe % 3600) / 60);
+  const rest = safe % 60;
+  if (hours > 0) {
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(rest).padStart(2, '0')}`;
+  }
   return `${String(minutes).padStart(2, '0')}:${String(rest).padStart(2, '0')}`;
 }
 
@@ -124,40 +172,192 @@ function speakerSortValue(label: string): number {
   return match ? Number(match[0]) : 999;
 }
 
-function meetingDuration(meeting: MeetingDetail): string {
+function segmentStart(segment: TranscriptSegment): number {
+  return typeof segment.start_time === 'number' && Number.isFinite(segment.start_time) ? segment.start_time : 0;
+}
+
+function segmentEnd(segment: TranscriptSegment): number {
+  return typeof segment.end_time === 'number' && Number.isFinite(segment.end_time) ? segment.end_time : segmentStart(segment);
+}
+
+function meetingDurationSeconds(meeting: MeetingDetail): number | null {
+  const lastSegment = meeting.transcript_segments[meeting.transcript_segments.length - 1];
+  if (lastSegment && segmentEnd(lastSegment) > 0) return segmentEnd(lastSegment);
   if (meeting.created_at && meeting.end_at) {
     const start = new Date(meeting.created_at).getTime();
     const end = new Date(meeting.end_at).getTime();
-    if (!Number.isNaN(start) && !Number.isNaN(end) && end > start) {
-      return formatClock((end - start) / 1000);
-    }
+    if (!Number.isNaN(start) && !Number.isNaN(end) && end > start) return (end - start) / 1000;
   }
-  const lastSegment = meeting.transcript_segments[meeting.transcript_segments.length - 1];
-  if (lastSegment?.end_time) return formatClock(lastSegment.end_time);
-  return '未计算';
+  return null;
 }
 
 function cleanSummaryText(value: string): string {
   return value
-    .replace(/\[[^\]]+\]\s*[^:：]+[:：]\s*/g, '')
-    .replace(/\s+/g, ' ')
+    .replace(/\r\n?/g, '\n')
+    .replace(/\[[^\]]+\]\s*[^:；]+[:；]\s*/g, '')
+    .replace(/[ \t\f\v]+/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
 
-export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceSegmentId, startTime, evidenceText, onRecord, onOpenAudioPlayer }: Props) {
+function parseTimeValue(value: string): number | null {
+  const normalized = value.trim();
+  if (!normalized) return null;
+  const numeric = Number(normalized.replace(/s$/, ''));
+  if (Number.isFinite(numeric)) return numeric;
+  if (!/^\d{1,2}:\d{1,2}(?::\d{1,2})?$/.test(normalized)) return null;
+  const parts = normalized.split(':').map(Number);
+  if (parts.some((part) => !Number.isFinite(part))) return null;
+  if (parts.length === 2) return parts[0] * 60 + parts[1];
+  return parts[0] * 3600 + parts[1] * 60 + parts[2];
+}
+
+function objectValue(item: unknown, keys: string[]): string {
+  if (!item || typeof item !== 'object') return '';
+  const record = item as Record<string, unknown>;
+  for (const key of keys) {
+    const value = record[key];
+    if (typeof value === 'string' && value.trim()) return value.trim();
+    if (typeof value === 'number' && Number.isFinite(value)) return String(value);
+  }
+  return '';
+}
+
+function getEvidenceText(item: unknown): string {
+  const direct = objectValue(item, ['source_text', 'evidence', 'source']);
+  if (direct) return direct;
+  if (!item || typeof item !== 'object') return '';
+  const evidence = (item as Record<string, unknown>).evidence;
+  if (Array.isArray(evidence)) {
+    return evidence
+      .map((value) => textValue(value, ['source_text', 'text', 'content']))
+      .filter(Boolean)
+      .join('；');
+  }
+  return '';
+}
+
+function evidenceStartSeconds(item: unknown): number | null {
+  if (!item || typeof item !== 'object') return null;
+  const record = item as Record<string, unknown>;
+  for (const key of ['start_time', 'timestamp']) {
+    const value = record[key];
+    if (typeof value === 'number' && Number.isFinite(value)) return value;
+    if (typeof value === 'string' && value.trim()) {
+      const seconds = parseTimeValue(value);
+      if (seconds !== null) return seconds;
+    }
+  }
+  return null;
+}
+
+function evidenceSegmentId(item: unknown): string {
+  return objectValue(item, ['source_segment_id', 'segment_id']);
+}
+
+function statusLabel(value: string | null | undefined): string {
+  if (!value) return '未开始';
+  const normalized = value.toLowerCase();
+  if (['completed', 'done', 'closed', 'finished'].includes(normalized)) return '已完成';
+  if (['in_progress', 'running', 'processing'].includes(normalized)) return '进行中';
+  if (['blocked', 'review'].includes(normalized)) return '需关注';
+  return value;
+}
+
+function isCompletedStatus(value: string | null | undefined): boolean {
+  return Boolean(value && ['completed', 'done', 'closed', 'finished'].includes(value.toLowerCase()));
+}
+
+function compactMetaParts(parts: Array<string | null | undefined>): string[] {
+  return parts.map((part) => (part || '').trim()).filter(Boolean);
+}
+
+function buildQuickLookSegments(segments: TranscriptSegment[]) {
+  if (segments.length < 3) return [];
+  const result: TranscriptSegment[] = [];
+  let previousSpeaker = '';
+  for (const segment of segments) {
+    const speaker = segment.speaker_label || segment.speaker_name || '';
+    const gap = result.length ? segmentStart(segment) - segmentStart(result[result.length - 1]) : Number.POSITIVE_INFINITY;
+    if (!result.length || (speaker && speaker !== previousSpeaker && gap >= 20) || gap >= 90) {
+      result.push(segment);
+      previousSpeaker = speaker;
+    }
+    if (result.length >= 6) break;
+  }
+  return result;
+}
+
+export function MeetingDetailScreen({
+  meetingId,
+  initialTab = 'transcript',
+  sourceSegmentId,
+  startTime,
+  evidenceText,
+  onBack,
+  onRecord,
+}: Props) {
   const [meeting, setMeeting] = useState<MeetingDetail | null>(null);
   const [summaryOverride, setSummaryOverride] = useState<MeetingSummary | null>(null);
-  const [activeTab, setActiveTab] = useState<DetailTab>(initialTab);
+  const [activeTab, setActiveTab] = useState<DetailTab>(normalizeInitialTab(initialTab));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [audioState, setAudioState] = useState<AudioLoadState>('idle');
+  const [audioError, setAudioError] = useState<string | null>(null);
+  const [, setSound] = useState<Audio.Sound | null>(null);
+  const soundRef = useRef<Audio.Sound | null>(null);
+  const audioBusyRef = useRef(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [positionMillis, setPositionMillis] = useState(0);
+  const [durationMillis, setDurationMillis] = useState(0);
+  const [segmentPlaybackId, setSegmentPlaybackId] = useState<string | null>(null);
   const [speakerNameDrafts, setSpeakerNameDrafts] = useState<Record<string, string>>({});
   const [speakerNoteDrafts, setSpeakerNoteDrafts] = useState<Record<string, string>>({});
   const [savingSpeaker, setSavingSpeaker] = useState<string | null>(null);
   const [editingSpeakerLabel, setEditingSpeakerLabel] = useState<string | null>(null);
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
-  const [playingAudioId, setPlayingAudioId] = useState<string | null>(null);
-  const [playingSegmentId, setPlayingSegmentId] = useState<string | null>(null);
-  const [transcriptSearch, setTranscriptSearch] = useState(evidenceText || '');
+  const [exportingSummaryFormat, setExportingSummaryFormat] = useState<ExportFormat | null>(null);
+  const [exportingTranscriptFormat, setExportingTranscriptFormat] = useState<ExportFormat | null>(null);
+  const progressWidthRef = useRef(1);
+  const listRef = useRef<FlatList<TranscriptSegment>>(null);
+  const segmentPlaybackRef = useRef<{ id: string; endMillis: number } | null>(null);
+  const loadedAudioKeyRef = useRef<string | null>(null);
+  const pendingSeekMillisRef = useRef<number | null>(null);
+  const isScrubbingRef = useRef(false);
+
+  const selectedAudio = useMemo(() => chooseMeetingAudioFile(meeting?.audio_files || []), [meeting?.audio_files]);
+  const selectedAudioKey = meeting && selectedAudio ? `${meeting.id}:${selectedAudio.id}` : null;
+  const transcriptSegments = meeting?.transcript_segments || [];
+  const summary = summaryOverride || meeting?.summary;
+  const fallbackOutput = meeting?.output;
+  const progress = durationMillis > 0 ? Math.min(1, positionMillis / durationMillis) : 0;
+  const currentSeconds = positionMillis / 1000;
+  const isMainPlaybackActive = isPlaying && !segmentPlaybackId;
+
+  const speakerDisplayNames = useMemo(
+    () =>
+      meeting?.speaker_mappings.reduce<Record<string, string>>((acc, mapping) => {
+        acc[mapping.speaker_label] = mapping.display_name;
+        return acc;
+      }, {}) || {},
+    [meeting],
+  );
+
+  const speakerLabels = useMemo(
+    () =>
+      Array.from(
+        new Set(transcriptSegments.map((segment) => segment.speaker_label || segment.speaker_name).filter(Boolean) as string[]),
+      ).sort((left, right) => speakerSortValue(left) - speakerSortValue(right)),
+    [transcriptSegments],
+  );
+
+  const currentSegmentId = useMemo(() => {
+    if (!isPlaying && positionMillis === 0) return null;
+    return (
+      transcriptSegments.find((segment) => segmentStart(segment) <= currentSeconds && segmentEnd(segment) >= currentSeconds)?.id || null
+    );
+  }, [currentSeconds, isPlaying, positionMillis, transcriptSegments]);
+
+  const quickLookSegments = useMemo(() => buildQuickLookSegments(transcriptSegments), [transcriptSegments]);
 
   const loadMeeting = useCallback(async () => {
     try {
@@ -165,6 +365,7 @@ export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceS
       setError(null);
       const nextMeeting = await getMeeting(meetingId);
       setMeeting(nextMeeting);
+      setAudioState(chooseMeetingAudioFile(nextMeeting.audio_files) ? 'idle' : 'missing');
       try {
         setSummaryOverride(await getMeetingSummary(meetingId));
       } catch {
@@ -182,49 +383,49 @@ export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceS
   }, [loadMeeting]);
 
   useEffect(() => {
-    setActiveTab(initialTab);
+    const activeSound = soundRef.current;
+    soundRef.current = null;
+    loadedAudioKeyRef.current = null;
+    segmentPlaybackRef.current = null;
+    audioBusyRef.current = false;
+    setSound(null);
+    setIsPlaying(false);
+    setPositionMillis(0);
+    setDurationMillis(0);
+    setSegmentPlaybackId(null);
+    setAudioError(null);
+    setAudioState('idle');
+    activeSound?.unloadAsync().catch(() => undefined);
+  }, [meetingId]);
+
+  useEffect(() => {
+    setActiveTab(normalizeInitialTab(initialTab));
   }, [initialTab, meetingId]);
 
   useEffect(() => {
     return () => {
-      sound?.unloadAsync().catch(() => undefined);
+      soundRef.current?.unloadAsync().catch(() => undefined);
+      soundRef.current = null;
+      loadedAudioKeyRef.current = null;
     };
-  }, [sound]);
+  }, []);
 
   useEffect(() => {
-    if (!meeting) return;
-    const names: Record<string, string> = {};
-    const notes: Record<string, string> = {};
-    for (const segment of meeting.transcript_segments) {
-      if (segment.speaker_label) {
-        names[segment.speaker_label] = '';
-        notes[segment.speaker_label] = '';
-      }
-    }
-    for (const mapping of meeting.speaker_mappings) {
-      names[mapping.speaker_label] = mapping.display_name;
-      notes[mapping.speaker_label] = mapping.note || '';
-    }
-    setSpeakerNameDrafts((current) => ({ ...names, ...current }));
-    setSpeakerNoteDrafts((current) => ({ ...notes, ...current }));
-  }, [meeting]);
-
-  useEffect(() => {
-    if (!meeting || activeTab !== 'transcript') return;
-    if (evidenceText?.trim()) {
-      setTranscriptSearch(evidenceText.trim());
-      return;
-    }
-    if (sourceSegmentId) {
-      const segment = meeting.transcript_segments.find((item) => item.id === sourceSegmentId);
-      if (segment?.text) setTranscriptSearch(segment.text);
-      return;
-    }
-    if (typeof startTime === 'number') {
-      const segment = meeting.transcript_segments.find((item) => item.start_time <= startTime && item.end_time >= startTime);
-      if (segment?.text) setTranscriptSearch(segment.text);
-    }
-  }, [activeTab, evidenceText, meeting, sourceSegmentId, startTime]);
+    if (loadedAudioKeyRef.current === null || loadedAudioKeyRef.current === selectedAudioKey) return;
+    const activeSound = soundRef.current;
+    soundRef.current = null;
+    loadedAudioKeyRef.current = null;
+    segmentPlaybackRef.current = null;
+    audioBusyRef.current = false;
+    setSound(null);
+    setIsPlaying(false);
+    setPositionMillis(0);
+    setDurationMillis(0);
+    setSegmentPlaybackId(null);
+    setAudioError(null);
+    setAudioState(selectedAudioKey ? 'idle' : 'missing');
+    activeSound?.unloadAsync().catch(() => undefined);
+  }, [selectedAudioKey]);
 
   useEffect(() => {
     if (!meeting || !['processing', 'transcribing', 'transcribed', 'summarizing'].includes(meeting.status)) {
@@ -234,61 +435,51 @@ export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceS
     return () => clearInterval(timer);
   }, [loadMeeting, meeting]);
 
-  const summary = summaryOverride || meeting?.summary;
-  const fallbackOutput = meeting?.output;
-  const speakerDisplayNames = useMemo(
-    () =>
-      meeting?.speaker_mappings.reduce<Record<string, string>>((acc, mapping) => {
-        acc[mapping.speaker_label] = mapping.display_name;
-        return acc;
-      }, {}) || {},
-    [meeting],
-  );
-  const speakerLabels = useMemo(
-    () =>
-      Array.from(
-        new Set(meeting?.transcript_segments.map((segment) => segment.speaker_label).filter(Boolean) as string[]),
-      ).sort((left, right) => speakerSortValue(left) - speakerSortValue(right)),
-    [meeting],
-  );
-  const participants = useMemo(() => {
-    const names = speakerLabels.map((label) => displaySpeaker(label));
-    return names.length ? names.join('、') : '待 AI 识别';
-  }, [speakerDisplayNames, speakerLabels]);
-  const actionItems = summary?.action_items?.length
-    ? summary.action_items
-    : meeting?.action_items?.length
-      ? meeting.action_items
-      : fallbackOutput?.action_items || [];
-  const decisions = summary?.key_conclusions?.length
-    ? summary.key_conclusions
-    : summary?.decisions?.length
-      ? summary.decisions
-      : fallbackOutput?.decisions || [];
-  const filteredTranscriptSegments = useMemo(() => {
-    const segments = meeting?.transcript_segments || [];
-    const keyword = transcriptSearch.trim().toLowerCase();
-    if (!keyword) return segments;
-    return segments.filter((segment) => {
-      const speaker = displaySpeaker(segment.speaker_label).toLowerCase();
-      return segment.text.toLowerCase().includes(keyword) || speaker.includes(keyword);
-    });
-  }, [meeting?.transcript_segments, speakerDisplayNames, transcriptSearch]);
-  const speakerDurations = useMemo(() => {
-    const totals: Record<string, { seconds: number }> = {};
-    for (const segment of meeting?.transcript_segments || []) {
-      const label = displaySpeaker(segment.speaker_label);
-      if (!totals[label]) totals[label] = { seconds: 0 };
-      totals[label].seconds += Math.max(0, segment.end_time - segment.start_time);
+  useEffect(() => {
+    if (!meeting) return;
+    const names: Record<string, string> = {};
+    const notes: Record<string, string> = {};
+    for (const segment of transcriptSegments) {
+      const speakerLabel = segment.speaker_label || segment.speaker_name;
+      if (speakerLabel) {
+        names[speakerLabel] = '';
+        notes[speakerLabel] = '';
+      }
     }
-    return Object.entries(totals).sort(([left], [right]) => speakerSortValue(left) - speakerSortValue(right));
-  }, [meeting?.transcript_segments, speakerDisplayNames]);
+    for (const mapping of meeting.speaker_mappings) {
+      names[mapping.speaker_label] = mapping.display_name;
+      notes[mapping.speaker_label] = mapping.note || '';
+    }
+    setSpeakerNameDrafts((current) => ({ ...names, ...current }));
+    setSpeakerNoteDrafts((current) => ({ ...notes, ...current }));
+  }, [meeting, transcriptSegments]);
+
+  useEffect(() => {
+    if (!meeting || activeTab !== 'transcript') return;
+    let targetIndex = -1;
+    if (sourceSegmentId) {
+      targetIndex = transcriptSegments.findIndex((item) => item.id === sourceSegmentId);
+    } else if (typeof startTime === 'number') {
+      targetIndex = transcriptSegments.findIndex((item) => segmentStart(item) <= startTime && segmentEnd(item) >= startTime);
+    } else if (evidenceText?.trim()) {
+      targetIndex = transcriptSegments.findIndex((item) => item.text.includes(evidenceText.trim()));
+    }
+    if (targetIndex >= 0) {
+      setTimeout(() => listRef.current?.scrollToIndex({ index: targetIndex, animated: true, viewPosition: 0.25 }), 250);
+    }
+  }, [activeTab, evidenceText, meeting, sourceSegmentId, startTime, transcriptSegments]);
 
   function displaySpeaker(speakerLabel: string | null): string {
-    if (!speakerLabel) return '发言人';
+    if (!speakerLabel) return '说话人';
     if (speakerDisplayNames[speakerLabel]) return speakerDisplayNames[speakerLabel];
     const index = speakerLabels.indexOf(speakerLabel);
-    return index >= 0 ? `发言人${index + 1}` : '发言人';
+    return index >= 0 ? `说话人${index + 1}` : '说话人';
+  }
+
+  function speakerColor(speakerLabel: string | null): string {
+    if (!speakerLabel) return brandBlue;
+    const index = Math.max(0, speakerLabels.indexOf(speakerLabel));
+    return speakerColors[index % speakerColors.length];
   }
 
   function replaceSpeakerLabels(value: string | null | undefined): string {
@@ -302,6 +493,221 @@ export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceS
     return result;
   }
 
+  function updatePlaybackStatus(status: AVPlaybackStatus) {
+    if (!status.isLoaded) {
+      setAudioState('failed');
+      setAudioError('音频加载失败，请确认录音文件仍然存在。');
+      return;
+    }
+    setAudioState('ready');
+    setIsPlaying(status.isPlaying);
+    if (!isScrubbingRef.current) setPositionMillis(status.positionMillis);
+    setDurationMillis(status.durationMillis || 0);
+    const segmentPlayback = segmentPlaybackRef.current;
+    if (segmentPlayback && status.isPlaying && status.positionMillis >= segmentPlayback.endMillis) {
+      soundRef.current?.pauseAsync().catch(() => undefined);
+      soundRef.current?.setPositionAsync(segmentPlayback.endMillis).catch(() => undefined);
+      segmentPlaybackRef.current = null;
+      setSegmentPlaybackId(null);
+      setIsPlaying(false);
+      setPositionMillis(segmentPlayback.endMillis);
+      return;
+    }
+    if (status.didJustFinish) {
+      segmentPlaybackRef.current = null;
+      setSegmentPlaybackId(null);
+      setIsPlaying(false);
+      setPositionMillis(status.durationMillis || status.positionMillis || 0);
+    }
+  }
+
+  async function ensureSound(): Promise<Audio.Sound | null> {
+    if (!meeting || !selectedAudio || !selectedAudioKey) {
+      setAudioState('missing');
+      setAudioError('当前会议没有可播放的录音文件。');
+      return null;
+    }
+    if (soundRef.current && loadedAudioKeyRef.current === selectedAudioKey) return soundRef.current;
+    if (soundRef.current) {
+      const staleSound = soundRef.current;
+      soundRef.current = null;
+      loadedAudioKeyRef.current = null;
+      segmentPlaybackRef.current = null;
+      setSound(null);
+      setIsPlaying(false);
+      setSegmentPlaybackId(null);
+      await staleSound.unloadAsync().catch(() => undefined);
+    }
+
+    setAudioState('loading');
+    setAudioError(null);
+    await Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      playsInSilentModeIOS: true,
+      shouldDuckAndroid: true,
+      playThroughEarpieceAndroid: false,
+    });
+
+    const nextSound = new Audio.Sound();
+    nextSound.setOnPlaybackStatusUpdate(updatePlaybackStatus);
+    await nextSound.loadAsync({ uri: meetingAudioUrl(meeting.id, selectedAudio.id) }, { shouldPlay: false });
+    soundRef.current = nextSound;
+    loadedAudioKeyRef.current = selectedAudioKey;
+    setSound(nextSound);
+    updatePlaybackStatus(await nextSound.getStatusAsync());
+    return nextSound;
+  }
+
+  async function runAudioAction(action: (activeSound: Audio.Sound) => Promise<void>) {
+    if (audioBusyRef.current) return;
+    audioBusyRef.current = true;
+    try {
+      const activeSound = await ensureSound();
+      if (!activeSound) return;
+      await action(activeSound);
+      updatePlaybackStatus(await activeSound.getStatusAsync());
+    } catch (nextError) {
+      setIsPlaying(false);
+      setAudioState('failed');
+      setAudioError(nextError instanceof Error ? nextError.message : '音频加载失败，请确认录音文件仍然存在。');
+    } finally {
+      audioBusyRef.current = false;
+    }
+  }
+
+  async function togglePlayback() {
+    await runAudioAction(async (activeSound) => {
+      const status = await activeSound.getStatusAsync();
+      if (!status.isLoaded) return;
+      if (status.isPlaying) {
+        await activeSound.pauseAsync();
+        segmentPlaybackRef.current = null;
+        setSegmentPlaybackId(null);
+      } else {
+        segmentPlaybackRef.current = null;
+        setSegmentPlaybackId(null);
+        const nextPosition = status.didJustFinish || (status.durationMillis && status.positionMillis >= status.durationMillis) ? 0 : status.positionMillis;
+        await activeSound.setPositionAsync(nextPosition);
+        await activeSound.playAsync();
+      }
+    });
+  }
+
+  async function seekToSeconds(seconds: number, shouldPlay?: boolean) {
+    await runAudioAction(async (activeSound) => {
+      segmentPlaybackRef.current = null;
+      setSegmentPlaybackId(null);
+      const status = await activeSound.getStatusAsync();
+      const duration = status.isLoaded ? status.durationMillis || durationMillis || 0 : durationMillis;
+      const nextPosition = Math.max(0, Math.min(duration || Number.MAX_SAFE_INTEGER, seconds * 1000));
+      await activeSound.setPositionAsync(nextPosition);
+      if (shouldPlay) await activeSound.playAsync();
+    });
+  }
+
+  async function seekBy(offsetMillis: number) {
+    await runAudioAction(async (activeSound) => {
+      const status = await activeSound.getStatusAsync();
+      if (!status.isLoaded) return;
+      const duration = status.durationMillis || durationMillis || 0;
+      const nextPosition = Math.max(0, Math.min(duration || Number.MAX_SAFE_INTEGER, status.positionMillis + offsetMillis));
+      segmentPlaybackRef.current = null;
+      setSegmentPlaybackId(null);
+      await activeSound.setPositionAsync(nextPosition);
+    });
+  }
+
+  function previewProgressSeek(x: number) {
+    const nextProgress = Math.max(0, Math.min(1, x / progressWidthRef.current));
+    if (!durationMillis) return;
+    const nextMillis = nextProgress * durationMillis;
+    pendingSeekMillisRef.current = nextMillis;
+    isScrubbingRef.current = true;
+    segmentPlaybackRef.current = null;
+    setSegmentPlaybackId(null);
+    setPositionMillis(nextMillis);
+  }
+
+  function commitProgressSeek() {
+    const nextMillis = pendingSeekMillisRef.current;
+    pendingSeekMillisRef.current = null;
+    isScrubbingRef.current = false;
+    if (nextMillis === null) return;
+    void seekToSeconds(nextMillis / 1000);
+  }
+
+  const progressPanResponder = useMemo(
+    () =>
+      PanResponder.create({
+        onMoveShouldSetPanResponder: () => durationMillis > 0,
+        onPanResponderGrant: (event) => previewProgressSeek(event.nativeEvent.locationX),
+        onPanResponderMove: (event) => previewProgressSeek(event.nativeEvent.locationX),
+        onPanResponderRelease: commitProgressSeek,
+        onPanResponderTerminate: commitProgressSeek,
+        onStartShouldSetPanResponder: () => durationMillis > 0,
+      }),
+    [durationMillis],
+  );
+
+  async function jumpToSegment(segment: TranscriptSegment, shouldPlay?: boolean) {
+    const wasTranscriptTab = activeTab === 'transcript';
+    setActiveTab('transcript');
+    const index = transcriptSegments.findIndex((item) => item.id === segment.id);
+    if (index >= 0) {
+      const scrollToSegment = () => listRef.current?.scrollToIndex({ index, animated: true, viewPosition: 0.25 });
+      if (wasTranscriptTab) {
+        scrollToSegment();
+      } else {
+        setTimeout(scrollToSegment, 250);
+      }
+    }
+    await seekToSeconds(segmentStart(segment), shouldPlay);
+  }
+
+  async function toggleSegmentPlayback(segment: TranscriptSegment) {
+    await runAudioAction(async (activeSound) => {
+      const status = await activeSound.getStatusAsync();
+      if (!status.isLoaded) return;
+      if (segmentPlaybackRef.current?.id === segment.id && status.isPlaying) {
+        await activeSound.pauseAsync();
+        segmentPlaybackRef.current = null;
+        setSegmentPlaybackId(null);
+        return;
+      }
+      const duration = status.isLoaded ? status.durationMillis || durationMillis || 0 : durationMillis;
+      const rawStartMillis = segmentStart(segment) * 1000;
+      const rawEndMillis = Math.max(rawStartMillis, segmentEnd(segment) * 1000);
+      const startMillis = Math.max(0, Math.min(duration || Number.MAX_SAFE_INTEGER, rawStartMillis));
+      const endMillis = Math.max(startMillis, Math.min(duration || rawEndMillis, rawEndMillis));
+      segmentPlaybackRef.current = { id: segment.id, endMillis };
+      setSegmentPlaybackId(segment.id);
+      await activeSound.setPositionAsync(startMillis);
+      await activeSound.playAsync();
+    });
+  }
+
+  async function openExport(kind: 'transcript' | 'summary', format: ExportFormat) {
+    if (kind === 'summary' && exportingSummaryFormat) return;
+    if (kind === 'transcript' && exportingTranscriptFormat) return;
+    try {
+      setError(null);
+      if (kind === 'summary') {
+        setExportingSummaryFormat(format);
+      } else {
+        setExportingTranscriptFormat(format);
+      }
+      await Linking.openURL(meetingExportUrl(meetingId, kind, format));
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '导出失败，请稍后重试。');
+    } finally {
+      if (kind === 'summary') {
+        setExportingSummaryFormat(null);
+      } else {
+        setExportingTranscriptFormat(null);
+      }
+    }
+  }
+
   function openSpeakerEditor(speakerLabel: string) {
     setSpeakerNameDrafts((current) => ({
       ...current,
@@ -310,74 +716,11 @@ export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceS
     setEditingSpeakerLabel(speakerLabel);
   }
 
-  async function toggleAudioPlayback(startSeconds?: number, stopSeconds?: number, segmentId?: string) {
-    if (!meeting) return;
-    const audioFile = meeting.audio_files[0];
-    if (!audioFile) {
-      onRecord(meeting);
-      return;
-    }
-
-    try {
-      setError(null);
-      if (sound && playingAudioId === audioFile.id) {
-        const status = await sound.getStatusAsync();
-        if (status.isLoaded && status.isPlaying) {
-          await sound.pauseAsync();
-          setPlayingAudioId(null);
-          setPlayingSegmentId(null);
-          return;
-        }
-        if (typeof startSeconds === 'number') await sound.setPositionAsync(Math.max(0, startSeconds * 1000));
-        await sound.playAsync();
-        setPlayingAudioId(audioFile.id);
-        setPlayingSegmentId(segmentId || null);
-        return;
-      }
-
-      if (sound) await sound.unloadAsync();
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-        playsInSilentModeIOS: true,
-        shouldDuckAndroid: true,
-        playThroughEarpieceAndroid: false,
-      });
-
-      const nextSound = new Audio.Sound();
-      await nextSound.loadAsync({ uri: meetingAudioUrl(meeting.id, audioFile.id) }, { shouldPlay: true });
-      if (typeof startSeconds === 'number') await nextSound.setPositionAsync(Math.max(0, startSeconds * 1000));
-      nextSound.setOnPlaybackStatusUpdate((status) => {
-        if (!status.isLoaded) return;
-        if (
-          typeof stopSeconds === 'number' &&
-          status.isPlaying &&
-          status.positionMillis >= Math.max(0, stopSeconds * 1000)
-        ) {
-          nextSound.pauseAsync().catch(() => undefined);
-          setPlayingAudioId(null);
-          setPlayingSegmentId(null);
-          return;
-        }
-        if (status.didJustFinish) {
-          setPlayingAudioId(null);
-          setPlayingSegmentId(null);
-        }
-      });
-      setSound(nextSound);
-      setPlayingAudioId(audioFile.id);
-      setPlayingSegmentId(segmentId || null);
-    } catch (nextError) {
-      setPlayingAudioId(null);
-      setPlayingSegmentId(null);
-      setError(nextError instanceof Error ? nextError.message : '录音播放失败，请确认服务端音频文件仍存在。');
-    }
-  }
-
   async function saveSpeaker(speakerLabel: string) {
     const displayName = (speakerNameDrafts[speakerLabel] || '').trim();
     const note = (speakerNoteDrafts[speakerLabel] || '').trim();
     if (!displayName) {
-      setError('发言人姓名不能为空。');
+      setError('说话人名称不能为空。');
       return;
     }
     try {
@@ -387,487 +730,974 @@ export function MeetingDetailScreen({ meetingId, initialTab = 'summary', sourceS
       setEditingSpeakerLabel(null);
       await loadMeeting();
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '保存发言人信息失败。');
+      setError(nextError instanceof Error ? nextError.message : '保存说话人信息失败。');
     } finally {
       setSavingSpeaker(null);
     }
   }
 
-  async function openExport(kind: 'transcript' | 'summary', format: ExportFormat) {
+  async function shareMeeting() {
+    if (!meeting) return;
     try {
-      setError(null);
-      await Linking.openURL(meetingExportUrl(meetingId, kind, format));
-    } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '打开导出文件失败。');
+      await Share.share({ message: `${meeting.title}\n${formatDateTime(meeting.created_at)}` });
+    } catch {
+      Alert.alert('分享失败', '当前设备暂时无法打开系统分享。');
     }
   }
 
-  function renderExportButtons(kind: 'transcript' | 'summary') {
-    const formats: ExportFormat[] = ['md', 'pdf', 'docx', 'txt'];
+  function showMore() {
+    Alert.alert('更多', '本阶段仅保留入口，更多会议操作将在后续版本接入。');
+  }
+
+  function renderAudioPlayer() {
+    const durationText = durationMillis ? formatTimestamp(durationMillis / 1000) : formatTimestamp(meeting ? meetingDurationSeconds(meeting) : null);
+    const audioHint =
+      audioState === 'loading'
+        ? '音频加载中...'
+        : audioState === 'missing'
+          ? '当前会议没有录音文件'
+          : audioState === 'failed'
+            ? audioError || '音频加载失败'
+            : null;
+
     return (
-      <View style={styles.exportRow}>
-        {formats.map((format) => (
-          <Pressable key={`${kind}-${format}`} onPress={() => openExport(kind, format)} style={styles.exportButton}>
-            <Text style={styles.exportText}>{format.toUpperCase()}</Text>
+      <View style={styles.playerCard}>
+        <View style={styles.timeRow}>
+          <Text style={styles.timeTextStrong}>{formatTimestamp(positionMillis / 1000)}</Text>
+          <View
+            onLayout={(event) => {
+              progressWidthRef.current = Math.max(1, event.nativeEvent.layout.width);
+            }}
+            {...progressPanResponder.panHandlers}
+            style={styles.progressTrack}
+          >
+            <View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
+            <View style={[styles.progressThumb, { left: `${progress * 100}%` }]} />
+          </View>
+          <Text style={styles.timeTextMuted}>{durationText}</Text>
+        </View>
+        {audioHint ? <Text style={styles.audioHint}>{audioHint}</Text> : null}
+        <View style={styles.controlsRow}>
+          <Pressable disabled={audioState === 'missing'} onPress={() => seekBy(-15000)} style={styles.skipButton}>
+            <Text style={styles.skipButtonText}>-15</Text>
           </Pressable>
-        ))}
+          <Pressable disabled={audioState === 'missing' || audioState === 'loading'} onPress={togglePlayback} style={styles.playButton}>
+            {audioState === 'loading' ? (
+              <ActivityIndicator color="#ffffff" size="small" />
+            ) : (
+              <LucideIcon name={isMainPlaybackActive ? 'pause' : 'play'} color="#ffffff" size={24} strokeWidth={2.6} />
+            )}
+          </Pressable>
+          <Pressable disabled={audioState === 'missing'} onPress={() => seekBy(15000)} style={styles.skipButton}>
+            <Text style={styles.skipButtonText}>+15</Text>
+          </Pressable>
+        </View>
       </View>
     );
   }
 
-  function renderListSection(title: string, rows: string[]) {
-    const items = normalizeNumberedListItems(rows).map(replaceSpeakerLabels);
-
+  function renderTabs() {
     return (
-      <View style={styles.contentCard}>
-        <Text style={styles.cardTitle}>{title}</Text>
-        <NumberedList items={items} />
-      </View>
-    );
-  }
-
-  function renderSpeakerEditor() {
-    if (!speakerLabels.length) return null;
-    return (
-      <View style={styles.contentCard}>
-        <Text style={styles.cardTitle}>发言人姓名与备注</Text>
-        {speakerLabels.map((speakerLabel) => (
-          <View key={speakerLabel} style={styles.speakerEditor}>
-            <Text style={styles.speakerLabel}>{displaySpeaker(speakerLabel)}</Text>
-            <TextInput
-              value={speakerNameDrafts[speakerLabel] || ''}
-              onChangeText={(value) => setSpeakerNameDrafts((current) => ({ ...current, [speakerLabel]: value }))}
-              placeholder="输入真实姓名"
-              placeholderTextColor="#aeb6c5"
-              style={styles.speakerInput}
-            />
-            <TextInput
-              value={speakerNoteDrafts[speakerLabel] || ''}
-              onChangeText={(value) => setSpeakerNoteDrafts((current) => ({ ...current, [speakerLabel]: value }))}
-              placeholder="备注，如部门、角色、项目职责"
-              placeholderTextColor="#aeb6c5"
-              multiline
-              style={[styles.speakerInput, styles.speakerNoteInput]}
-            />
-            <Pressable onPress={() => saveSpeaker(speakerLabel)} style={styles.saveSpeakerButton}>
-              <Text style={styles.saveSpeakerText}>{savingSpeaker === speakerLabel ? '保存中' : '保存'}</Text>
+      <View style={styles.tabs}>
+        {tabs.map((tab) => {
+          const active = activeTab === tab.key;
+          return (
+            <Pressable key={tab.key} onPress={() => setActiveTab(tab.key)} style={[styles.tabButton, active ? styles.tabButtonActive : null]}>
+              <Text style={[styles.tabText, active ? styles.tabTextActive : null]}>{tab.label}</Text>
             </Pressable>
-          </View>
-        ))}
+          );
+        })}
       </View>
     );
   }
 
-  function renderSummary() {
-    const agendaRows = (summary?.meeting_agenda?.length ? summary.meeting_agenda : summary?.agenda || []).map((item) =>
-      textValue(item, ['item', 'summary', 'status']),
-    );
-    const decisionRows = decisions.map((item) => textValue(item, ['conclusion', 'decision', 'title', 'summary', 'reason']));
-    const issueRows = (summary?.unresolved_issues?.length ? summary.unresolved_issues : summary?.open_questions || []).map((item) =>
-      textValue(item, ['issue', 'question', 'reason', 'blocker', 'source_text', 'source']),
-    );
-    const actionRows = actionItems.map((item) =>
-      textValue(item as Record<string, unknown>, ['task', 'owner_name', 'owner', 'deadline', 'due_date', 'source_text', 'source']),
-    );
-    const riskRows = (summary?.risks_and_focus?.length ? summary.risks_and_focus : summary?.risks || []).map((item) =>
-      textValue(item, ['risk', 'impact', 'focus_area', 'mitigation', 'source_text']),
-    );
-    const transcriptPreview = (meeting?.transcript_segments || [])
-      .slice(0, 5)
-      .map((segment) => segment.text)
-      .join(' ');
-    const overview =
-      replaceSpeakerLabels(cleanSummaryText(summary?.meeting_summary || summary?.overview || fallbackOutput?.summary || transcriptPreview)) ||
-      '暂无会议纪要。';
-
+  function renderQuickLook() {
     return (
-      <>
-        <View style={styles.summaryHero}>
-          <View style={styles.summaryHeroHeader}>
-            <View>
-              <Text style={styles.summaryHeroTitle}>会议总结</Text>
-            </View>
-            <View style={styles.statusPill}>
-              <Text style={styles.statusPillText}>{statusText(meeting?.status || '')}</Text>
-            </View>
-          </View>
-          <View style={styles.sourcePill}>
-            <Text style={styles.sourcePillText}>result_source={summary?.metadata?.result_source || 'unknown'}</Text>
-            <Text style={styles.sourceHintText}>{resultSourceText(summary)}</Text>
-          </View>
-          <Text style={styles.summaryLead}>{overview}</Text>
-          <View style={styles.metricGrid}>
-            <View style={styles.metricCard}>
-              <Text style={styles.metricValue}>{speakerLabels.length}</Text>
-              <Text style={styles.metricLabel}>参会人</Text>
-            </View>
-            <View style={styles.metricCard}>
-              <Text style={styles.metricValue}>{decisions.length}</Text>
-              <Text style={styles.metricLabel}>决议</Text>
-            </View>
-            <View style={styles.metricCard}>
-              <Text style={styles.metricValue}>{actionItems.length}</Text>
-              <Text style={styles.metricLabel}>待办</Text>
-            </View>
-          </View>
-          <Text style={styles.exportTitle}>导出结构化会议纪要</Text>
-          {renderExportButtons('summary')}
-        </View>
-        {renderListSection('会议议程', agendaRows)}
-        {renderListSection('核心结论', decisionRows)}
-        {renderListSection('遗留问题', issueRows)}
-        {renderListSection('待办与后续安排', actionRows)}
-        {renderListSection('风险与关注点', riskRows)}
-      </>
+      <View style={styles.section}>
+        <SectionTitle title="会议速览" />
+        {quickLookSegments.length ? (
+          quickLookSegments.map((segment) => {
+            const speaker = displaySpeaker(segment.speaker_label || segment.speaker_name);
+            const title = segment.text.trim() || `${speaker}发言`;
+            return (
+              <Pressable key={segment.id} onPress={() => jumpToSegment(segment, isPlaying)} style={styles.quickRow}>
+                <View style={styles.quickDot} />
+                <Text style={styles.quickTime}>{formatTimestamp(segmentStart(segment))}</Text>
+                <Text numberOfLines={1} style={styles.quickTitle}>
+                  {title}
+                </Text>
+                <LucideIcon name="chevron-down" color="#9ca3af" size={16} />
+              </Pressable>
+            );
+          })
+        ) : (
+          <Text style={styles.empty}>暂无可靠的章节数据。转写分段不足时不生成会议速览。</Text>
+        )}
+      </View>
     );
   }
 
-  function renderTranscript() {
+  function renderExportButtons() {
     return (
-      <>
-        <View style={styles.contentCard}>
-          <Text style={styles.cardTitle}>导出原始分人转写文稿</Text>
-          {renderExportButtons('transcript')}
+      <View style={styles.exportSection}>
+        <Text style={styles.exportTitle}>导出文稿</Text>
+        <View style={styles.exportRow}>
+          {(['md', 'pdf', 'docx', 'txt'] as ExportFormat[]).map((format) => {
+            const enabled = supportedTranscriptExports.includes(format);
+            const busy = exportingTranscriptFormat === format;
+            return (
+              <Pressable
+                key={format}
+                disabled={!enabled || Boolean(exportingTranscriptFormat)}
+                onPress={() => openExport('transcript', format)}
+                style={[styles.exportButton, !enabled ? styles.exportButtonDisabled : null]}
+              >
+                <Text style={[styles.exportText, !enabled ? styles.exportTextDisabled : null]}>{busy ? '导出中' : format.toUpperCase()}</Text>
+              </Pressable>
+            );
+          })}
         </View>
-        {speakerDurations.length ? (
-          <View style={styles.durationStrip}>
-            {speakerDurations.map(([speaker, meta]) => {
+      </View>
+    );
+  }
+
+  function jumpToEvidence(item: unknown) {
+    const segmentId = evidenceSegmentId(item);
+    const seconds = evidenceStartSeconds(item);
+    const segment =
+      (segmentId ? transcriptSegments.find((candidate) => candidate.id === segmentId) : null) ||
+      (typeof seconds === 'number'
+        ? transcriptSegments.find((candidate) => segmentStart(candidate) <= seconds && segmentEnd(candidate) >= seconds)
+        : null);
+    if (segment) {
+      void jumpToSegment(segment, false);
+    } else if (typeof seconds === 'number') {
+      setActiveTab('transcript');
+      void seekToSeconds(seconds);
+    } else if (segmentId) {
+      setActiveTab('transcript');
+      setError('未找到对应原文片段，已切换到会议原文。');
+    }
+  }
+
+  function renderSummaryExportButtons() {
+    return (
+      <View style={styles.summaryExportBlock}>
+        <Text style={styles.summaryExportTitle}>导出AI文稿</Text>
+        <View style={styles.exportRow}>
+          {(['md', 'pdf', 'docx', 'txt'] as ExportFormat[]).map((format) => {
+            const enabled = supportedSummaryExports.includes(format);
+            const busy = exportingSummaryFormat === format;
+            return (
+              <Pressable
+                key={format}
+                disabled={!enabled || Boolean(exportingSummaryFormat)}
+                onPress={() => openExport('summary', format)}
+                style={[styles.summaryExportButton, !enabled || exportingSummaryFormat ? styles.summaryExportButtonDisabled : null]}
+              >
+                <Text style={[styles.summaryExportText, !enabled ? styles.exportTextDisabled : null]}>{busy ? '导出中' : format.toUpperCase()}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
+    );
+  }
+
+  function renderEvidence(item: unknown) {
+    const text = replaceSpeakerLabels(getEvidenceText(item));
+    const seconds = evidenceStartSeconds(item);
+    const segmentId = evidenceSegmentId(item);
+    if (!text && typeof seconds !== 'number' && !segmentId) return null;
+    return (
+      <View style={styles.evidenceBox}>
+        <View style={styles.evidenceHeader}>
+          <Text style={styles.evidenceLabel}>证据</Text>
+          {typeof seconds === 'number' || segmentId ? (
+            <Pressable onPress={() => jumpToEvidence(item)} style={styles.evidenceTimeButton}>
+              <Text style={styles.evidenceTimeText}>{typeof seconds === 'number' ? formatTimestamp(seconds) : '定位原文'}</Text>
+            </Pressable>
+          ) : null}
+        </View>
+        {text ? <Text style={styles.evidenceText}>{text}</Text> : null}
+      </View>
+    );
+  }
+
+  function renderBulletSection(title: string, rows: unknown[], keys: string[], emptyText: string) {
+    const normalizedRows = rows
+      .map((item) => ({ item, text: replaceSpeakerLabels(textValue(item, keys)) }))
+      .filter((row) => row.text.trim());
+    return (
+      <View style={styles.summarySection}>
+        <Text style={styles.summarySectionTitle}>{title}</Text>
+        {normalizedRows.length ? (
+          <View style={styles.bulletList}>
+            {normalizedRows.map((row, index) => (
+              <View key={`${title}-${index}-${row.text}`} style={styles.bulletItem}>
+                <View style={styles.bulletDot} />
+                <View style={styles.bulletBody}>
+                  <Text style={styles.bulletText}>{row.text}</Text>
+                  {renderEvidence(row.item)}
+                </View>
+              </View>
+            ))}
+          </View>
+        ) : (
+          <Text style={styles.empty}>{emptyText}</Text>
+        )}
+      </View>
+    );
+  }
+
+  function renderAgendaSection(rows: unknown[]) {
+    const values = rows.map((item) => replaceSpeakerLabels(textValue(item, ['item', 'summary', 'title', 'status']))).filter(Boolean);
+    return (
+      <View style={styles.summarySection}>
+        <Text style={styles.summarySectionTitle}>会议议程</Text>
+        <NumberedList items={normalizeNumberedListItems(values)} emptyText="暂无会议议程。" />
+      </View>
+    );
+  }
+
+  function renderActionSection(rows: Array<ActionItem | Record<string, unknown>>) {
+    const normalizedRows = rows
+      .map((item, index) => {
+        const task = replaceSpeakerLabels(textValue(item, ['task', 'content', 'action', 'title', 'summary', 'source_text', 'source']));
+        if (!task) return null;
+        const record = item as Record<string, unknown>;
+        const status = typeof record.status === 'string' ? record.status : '';
+        const completed = isCompletedStatus(status);
+        const owner = replaceSpeakerLabels(objectValue(item, ['owner_name', 'owner']));
+        const deadline = objectValue(item, ['deadline', 'due_date']);
+        const priority = objectValue(item, ['priority']);
+        const meta = compactMetaParts([
+          owner ? `负责人：${owner}` : null,
+          deadline ? `截止：${deadline}` : null,
+          priority ? `优先级：${priority}` : null,
+          `状态：${statusLabel(status)}`,
+        ]);
+        return { completed, index, item, meta, task };
+      })
+      .filter((item): item is NonNullable<typeof item> => Boolean(item));
+
+    return (
+      <View style={styles.summarySection}>
+        <Text style={styles.summarySectionTitle}>待办与后续安排</Text>
+        {normalizedRows.length ? (
+          <View style={styles.actionList}>
+            {normalizedRows.map(({ completed, index, item, meta, task }) => {
               return (
-                <View key={speaker} style={styles.durationChip}>
-                  <Text style={styles.durationName}>{speaker}</Text>
-                  <Text style={styles.durationValue}>{formatClock(meta.seconds)}</Text>
+                <View key={`action-${index}-${task}`} style={styles.actionItem}>
+                  <View style={[styles.readonlyCheckbox, completed ? styles.readonlyCheckboxDone : null]}>
+                    {completed ? <LucideIcon name="circle-check-big" color="#2B6CFF" size={14} strokeWidth={2.5} /> : null}
+                  </View>
+                  <View style={styles.actionBody}>
+                    <Text style={[styles.actionText, completed ? styles.actionTextDone : null]}>{task}</Text>
+                    {meta.length ? <Text style={styles.actionMeta}>{meta.join('  ')}</Text> : null}
+                    {renderEvidence(item)}
+                  </View>
                 </View>
               );
             })}
           </View>
-        ) : null}
+        ) : (
+          <Text style={styles.empty}>暂无待办与后续安排。</Text>
+        )}
+      </View>
+    );
+  }
 
-        <View style={styles.contentCard}>
-          <Text style={styles.cardTitle}>全文记录</Text>
-          {filteredTranscriptSegments.length ? (
-            filteredTranscriptSegments.map((segment) => {
-              const speaker = displaySpeaker(segment.speaker_label);
-              return (
-                <View key={segment.id} style={styles.segment}>
-                  <Text style={styles.timeText}>{formatSegmentTime(segment.start_time)}</Text>
-                  <View style={styles.segmentBody}>
-                    <View style={styles.transcriptSpeakerLine}>
-                      <Text style={styles.speakerName}>{speaker}</Text>
-                      <Text style={styles.segmentSeconds}>{formatClock(segment.end_time - segment.start_time)}</Text>
-                      <Pressable
-                        onPress={() => toggleAudioPlayback(segment.start_time, segment.end_time, segment.id)}
-                        style={styles.segmentPlayButton}
-                      >
-                        <Text style={styles.segmentPlayText}>{playingSegmentId === segment.id ? 'Ⅱ' : '▶'}</Text>
-                      </Pressable>
-                    </View>
-                    <Text style={styles.paragraph}>{replaceSpeakerLabels(segment.text)}</Text>
-                  </View>
-                </View>
-              );
-            })
-          ) : fallbackOutput?.raw_transcript ? (
-            <Text style={styles.paragraph}>{replaceSpeakerLabels(fallbackOutput.raw_transcript)}</Text>
-          ) : (
-            <Text style={styles.empty}>暂无转写文本。</Text>
-          )}
+  function renderSummaryTab() {
+    if (!meeting) return null;
+    const displayStatus = summaryDisplayStatus(meeting, summary, fallbackOutput);
+    const processing = ['processing', 'transcribing', 'transcribed', 'summarizing'].includes(displayStatus);
+    const failed = ['failed', 'summary_failed', 'transcription_failed'].includes(displayStatus) && !hasSummaryContent(summary, fallbackOutput);
+    const agendaRows = summary?.meeting_agenda?.length ? summary.meeting_agenda : summary?.agenda || [];
+    const decisionRows = summary?.key_conclusions?.length ? summary.key_conclusions : summary?.decisions || [];
+    const actionRows = (summary?.action_items?.length ? summary.action_items : meeting.action_items || []) as Array<ActionItem | Record<string, unknown>>;
+    const issueRows = summary?.unresolved_issues?.length ? summary.unresolved_issues : summary?.open_questions || [];
+    const riskRows = summary?.risks_and_focus?.length ? summary.risks_and_focus : summary?.risks || [];
+    const overview = replaceSpeakerLabels(cleanSummaryText(summary?.meeting_summary || summary?.overview || fallbackOutput?.summary || ''));
+    const participants = speakerLabels.map(displaySpeaker);
+    const hasAgendaContent = normalizeNumberedListItems(
+      agendaRows.map((item) => replaceSpeakerLabels(textValue(item, ['item', 'summary', 'title', 'status']))),
+    ).length > 0;
+    const hasDecisionContent = decisionRows.some((item) => textValue(item, ['conclusion', 'decision', 'title', 'summary', 'reason']).trim());
+    const hasActionContent = actionRows.some((item) => textValue(item, ['task', 'content', 'action', 'title', 'summary', 'source_text', 'source']).trim());
+    const hasIssueContent = issueRows.some((item) => textValue(item, ['issue', 'question', 'title', 'reason', 'blocker']).trim());
+    const hasRiskContent = riskRows.some((item) => textValue(item, ['risk', 'title', 'summary', 'impact', 'focus_area', 'mitigation']).trim());
+    const summaryEmpty = !overview && !hasAgendaContent && !hasDecisionContent && !hasActionContent && !hasIssueContent && !hasRiskContent;
+    const basicRows = [
+      ['主题', meeting.title],
+      ['时间', formatDateTime(meeting.start_at || meeting.created_at)],
+      ['地点', meeting.location || '未提供'],
+      ['参会人', participants.length ? participants.join('、') : '未提供'],
+    ];
+
+    return (
+      <View style={styles.summaryContainer}>
+        <View style={styles.summaryCoverCard}>
+          <View style={styles.summaryCoverTop}>
+            <View style={styles.summaryCoverText}>
+              <Text style={styles.summaryCoverTitle}>{meeting.title}</Text>
+              <Text style={styles.summaryCoverMeta}>
+                {formatDateTime(meeting.start_at || meeting.created_at)} · {formatDuration(meetingDurationSeconds(meeting))}
+              </Text>
+            </View>
+            <View style={styles.statusPill}>
+              <Text style={styles.statusPillText}>{statusText(displayStatus)}</Text>
+            </View>
+          </View>
+          {renderSummaryExportButtons()}
         </View>
-      </>
+        <View style={styles.summarySection}>
+          <Text style={styles.summarySectionTitle}>基本信息</Text>
+          <View style={styles.basicInfoList}>
+            {basicRows.map(([label, value]) => (
+              <View key={label} style={styles.basicInfoRow}>
+                <Text style={styles.basicInfoLabel}>{label}</Text>
+                <Text style={styles.basicInfoValue}>{value}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+        {processing ? (
+          <View style={styles.stateCard}>
+            <ActivityIndicator color={brandBlue} size="small" />
+            <Text style={styles.stateTitle}>AI分析处理中</Text>
+            <Text style={styles.stateText}>会议纪要正在生成，页面会自动刷新。</Text>
+          </View>
+        ) : null}
+        {failed ? (
+          <View style={styles.stateCardFailed}>
+            <Text style={styles.stateTitleFailed}>AI分析失败</Text>
+            <Text style={styles.stateText}>请回到处理页或使用现有重试入口重新分析。</Text>
+          </View>
+        ) : null}
+        {!processing && !failed && summaryEmpty ? (
+          <View style={styles.stateCard}>
+            <Text style={styles.stateTitle}>暂无AI纪要内容</Text>
+            <Text style={styles.stateText}>当前会议还没有可展示的六维分析结果。</Text>
+          </View>
+        ) : null}
+        <View style={styles.summarySection}>
+          <View style={styles.summaryHeroHeader}>
+            <Text style={styles.summarySectionTitle}>会议总结</Text>
+            <Text style={styles.sourceHintText}>{resultSourceText(summary)}</Text>
+          </View>
+          {overview ? <Text style={styles.summaryLead}>{overview}</Text> : <Text style={styles.empty}>暂无会议总结。</Text>}
+        </View>
+        {renderAgendaSection(agendaRows)}
+        {renderBulletSection('核心结论', decisionRows, ['conclusion', 'decision', 'title', 'summary', 'reason'], '暂无核心结论。')}
+        {renderBulletSection('遗留问题', issueRows, ['issue', 'question', 'title', 'reason', 'blocker'], '暂无遗留问题。')}
+        {renderBulletSection('风险与关注点', riskRows, ['risk', 'title', 'summary', 'impact', 'focus_area', 'mitigation'], '暂无风险与关注点。')}
+        {renderActionSection(actionRows)}
+      </View>
     );
   }
 
-  function renderActions() {
-    const actionRows = actionItems.map((item) =>
-      textValue(item as Record<string, unknown>, ['task', 'owner_name', 'owner', 'deadline', 'due_date', 'source_text', 'source']),
-    );
-    return renderListSection('待办与后续安排', actionRows);
-  }
-
-  function renderDecisions() {
-    return renderListSection(
-      '核心结论',
-      decisions.map((item) => textValue(item, ['conclusion', 'decision', 'title', 'summary', 'reason'])),
+  function renderAgentTab() {
+    return (
+      <View style={styles.summaryContainer}>
+        <View style={styles.summaryHero}>
+          <Text style={styles.summaryHeroTitle}>Agent工具</Text>
+          <Text style={styles.summaryLead}>功能开发中。本阶段不新增 Agent 能力，也不修改现有 Agent 数据逻辑。</Text>
+        </View>
+      </View>
     );
   }
 
-  function renderQuestions() {
-    const questionRows = (summary?.unresolved_issues?.length ? summary.unresolved_issues : summary?.open_questions || []).map((item) =>
-      textValue(item, ['issue', 'question', 'reason', 'blocker', 'source_text', 'source']),
+  function renderHeader() {
+    if (!meeting) return null;
+    return (
+      <View>
+        <View style={styles.topNav}>
+          <Pressable onPress={onBack} style={styles.iconButton}>
+            <LucideIcon name="chevron-left" color="#111827" size={24} strokeWidth={2.4} />
+          </Pressable>
+          <Text numberOfLines={1} style={styles.navTitle}>
+            {meeting.title}
+          </Text>
+          <View style={styles.navActions}>
+            <Pressable onPress={shareMeeting} style={styles.iconButton}>
+              <LucideIcon name="share-2" color="#111827" size={20} strokeWidth={2.2} />
+            </Pressable>
+            <Pressable onPress={showMore} style={styles.iconButton}>
+              <LucideIcon name="more-horizontal" color="#111827" size={22} strokeWidth={2.4} />
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.sheet}>
+          {renderAudioPlayer()}
+          {renderTabs()}
+          {activeTab === 'transcript' ? (
+            <>
+              <View style={styles.quickMeta}>
+                <Text style={styles.quickMetaText}>
+                  {statusText(meeting.status)} · {formatDateTime(meeting.created_at)} · {formatDuration(meetingDurationSeconds(meeting))}
+                </Text>
+              </View>
+              {renderQuickLook()}
+              {renderExportButtons()}
+              <SectionTitle title="会议原文" />
+              {transcriptSegments.length === 0 && fallbackOutput?.raw_transcript ? (
+                <Text style={styles.fallbackTranscript}>{replaceSpeakerLabels(fallbackOutput.raw_transcript)}</Text>
+              ) : null}
+              {transcriptSegments.length === 0 && !fallbackOutput?.raw_transcript ? (
+                <Text style={styles.empty}>
+                  {['processing', 'transcribing', 'transcribed', 'summarizing'].includes(meeting.status)
+                    ? '转写处理中，请稍后刷新。'
+                    : '暂无转写文本。'}
+                </Text>
+              ) : null}
+            </>
+          ) : null}
+          {activeTab === 'summary' ? renderSummaryTab() : null}
+          {activeTab === 'agent' ? renderAgentTab() : null}
+        </View>
+      </View>
     );
-    return renderListSection('遗留问题', questionRows);
   }
 
-  function renderRisks() {
-    const riskRows = (summary?.risks_and_focus?.length ? summary.risks_and_focus : summary?.risks || []).map((item) =>
-      textValue(item, ['risk', 'impact', 'focus_area', 'mitigation', 'source_text']),
+  function renderSegment({ item, index }: { item: TranscriptSegment; index: number }) {
+    const speakerLabel = item.speaker_label || item.speaker_name;
+    const speaker = displaySpeaker(speakerLabel);
+    const color = speakerColor(speakerLabel);
+    const active = currentSegmentId === item.id;
+    return (
+      <View style={[styles.segmentRow, active ? styles.segmentRowActive : null]}>
+        <View style={styles.timelineRail}>
+          <View style={[styles.avatar, { backgroundColor: color }]}>
+            <Text style={styles.avatarText}>{Math.max(1, speakerLabels.indexOf(speakerLabel || '') + 1)}</Text>
+          </View>
+          {index < transcriptSegments.length - 1 ? <View style={styles.timelineLine} /> : null}
+        </View>
+        <View style={styles.segmentBody}>
+          <View style={styles.segmentMetaRow}>
+            <Pressable onPress={() => openSpeakerEditor(speakerLabel || '')} disabled={!speakerLabel}>
+              <Text style={[styles.speakerName, { color }]}>{speaker}</Text>
+            </Pressable>
+            <Pressable onPress={() => jumpToSegment(item, false)} style={styles.timestampButton}>
+              <Text style={styles.timestampText}>{formatTimestamp(segmentStart(item))}</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => toggleSegmentPlayback(item)}
+              style={[styles.segmentPlayButton, segmentPlaybackId === item.id && isPlaying ? styles.segmentPlayButtonActive : null]}
+            >
+              <LucideIcon name={segmentPlaybackId === item.id && isPlaying ? 'pause' : 'play'} color="#ffffff" size={13} strokeWidth={2.7} />
+            </Pressable>
+          </View>
+          <Text style={styles.paragraph}>{replaceSpeakerLabels(item.text)}</Text>
+        </View>
+      </View>
     );
-    return renderListSection('风险与关注点', riskRows);
+  }
+
+  if (loading && !meeting) {
+    return (
+      <View style={styles.centerState}>
+        <ActivityIndicator color={brandBlue} />
+        <Text style={styles.centerText}>会议加载中...</Text>
+      </View>
+    );
+  }
+
+  if (error && !meeting) {
+    return (
+      <View style={styles.centerState}>
+        <Text style={styles.error}>{error}</Text>
+        <Pressable onPress={loadMeeting} style={styles.retryButton}>
+          <Text style={styles.retryText}>重试</Text>
+        </Pressable>
+      </View>
+    );
   }
 
   return (
     <>
-    <ScrollView contentContainerStyle={styles.container}>
-      {loading ? <ActivityIndicator color="#6657ff" /> : null}
-      {error ? <Text style={styles.error}>{error}</Text> : null}
-
-      {meeting ? (
-        <>
-          <View style={styles.topCard}>
-            <View style={styles.topHeader}>
-              <View style={styles.titleBlock}>
-                <Text style={styles.meetingTitle}>{meeting.title}</Text>
-                <Text style={styles.meetingMeta}>
-                  {statusText(meeting.status)} · {new Date(meeting.created_at).toLocaleDateString()}
-                </Text>
-              </View>
-              <Pressable onPress={() => onOpenAudioPlayer(meeting.id)} style={styles.audioIconButton}>
-                <Text style={styles.audioIconText}>▶</Text>
+      <View style={styles.page}>
+        {error ? <Text style={styles.inlineError}>{error}</Text> : null}
+        <FlatList
+          ref={listRef}
+          data={activeTab === 'transcript' ? transcriptSegments : []}
+          keyExtractor={(item) => item.id}
+          ListHeaderComponent={renderHeader}
+          renderItem={renderSegment}
+          contentContainerStyle={styles.listContent}
+          initialNumToRender={14}
+          maxToRenderPerBatch={12}
+          updateCellsBatchingPeriod={80}
+          windowSize={8}
+          removeClippedSubviews
+          onScrollToIndexFailed={({ index }) => {
+            setTimeout(() => listRef.current?.scrollToIndex({ index, animated: true, viewPosition: 0.25 }), 350);
+          }}
+          ListFooterComponent={<View style={styles.safeBottom} />}
+        />
+      </View>
+      <Modal transparent visible={!!editingSpeakerLabel} animationType="fade" onRequestClose={() => setEditingSpeakerLabel(null)}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.speakerModal}>
+            <Text style={styles.speakerModalTitle}>编辑说话人名称</Text>
+            <Text style={styles.speakerModalSub}>{editingSpeakerLabel ? displaySpeaker(editingSpeakerLabel) : ''}</Text>
+            <TextInput
+              value={editingSpeakerLabel ? speakerNameDrafts[editingSpeakerLabel] || '' : ''}
+              onChangeText={(value) => {
+                if (!editingSpeakerLabel) return;
+                setSpeakerNameDrafts((current) => ({ ...current, [editingSpeakerLabel]: value }));
+              }}
+              placeholder="请输入说话人名称"
+              placeholderTextColor="#aeb6c5"
+              style={styles.speakerModalInput}
+            />
+            <TextInput
+              value={editingSpeakerLabel ? speakerNoteDrafts[editingSpeakerLabel] || '' : ''}
+              onChangeText={(value) => {
+                if (!editingSpeakerLabel) return;
+                setSpeakerNoteDrafts((current) => ({ ...current, [editingSpeakerLabel]: value }));
+              }}
+              placeholder="备注，如部门、角色、项目职责"
+              placeholderTextColor="#aeb6c5"
+              multiline
+              style={[styles.speakerModalInput, styles.speakerNoteInput]}
+            />
+            <View style={styles.speakerModalActions}>
+              <Pressable onPress={() => setEditingSpeakerLabel(null)} style={[styles.speakerModalButton, styles.speakerModalCancel]}>
+                <Text style={styles.speakerModalCancelText}>取消</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  if (editingSpeakerLabel) saveSpeaker(editingSpeakerLabel);
+                }}
+                style={[styles.speakerModalButton, styles.speakerModalSave]}
+              >
+                <Text style={styles.speakerModalSaveText}>{savingSpeaker === editingSpeakerLabel ? '保存中' : '保存'}</Text>
               </Pressable>
             </View>
-
-            <View style={styles.infoGrid}>
-              <View style={styles.infoItem}>
-                <Text style={styles.infoLabel}>会议时长</Text>
-                <Text style={styles.infoValue}>{meetingDuration(meeting)}</Text>
-              </View>
-              <View style={styles.infoItem}>
-                <Text style={styles.infoLabel}>参会人员</Text>
-                {speakerLabels.length ? (
-                  <View style={styles.participantList}>
-                    {speakerLabels.map((speakerLabel) => (
-                      <View key={speakerLabel} style={styles.participantChip}>
-                        <Pressable onPress={() => openSpeakerEditor(speakerLabel)} style={styles.participantEditButton}>
-                          <LucideIcon name="pencil-line" color="#6657ff" size={13} strokeWidth={2.2} />
-                        </Pressable>
-                        <Text style={styles.participantName}>{displaySpeaker(speakerLabel)}</Text>
-                      </View>
-                    ))}
-                  </View>
-                ) : (
-                  <Text style={styles.infoValue}>{participants}</Text>
-                )}
-              </View>
-              <View style={styles.infoItem}>
-                <Text style={styles.infoLabel}>开始时间</Text>
-                <Text style={styles.infoValue}>{formatDateTime(meeting.created_at)} 开始</Text>
-              </View>
-              <View style={styles.infoItem}>
-                <Text style={styles.infoLabel}>结束时间</Text>
-                <Text style={styles.infoValue}>{formatDateTime(meeting.end_at)} 结束</Text>
-              </View>
-              <View style={styles.infoItem}>
-                <Text style={styles.infoLabel}>会议地址</Text>
-                <Text style={styles.infoValue}>{meeting.location || '未填写'}</Text>
-              </View>
-            </View>
-          </View>
-
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs}>
-            {tabs.map((tab) => {
-              const isActive = activeTab === tab.key;
-              return (
-                <Pressable key={tab.key} onPress={() => setActiveTab(tab.key)} style={styles.tabButton}>
-                  <Text style={[styles.tabText, isActive ? styles.tabTextActive : null]}>{tab.label}</Text>
-                  {isActive ? <View style={styles.tabLine} /> : null}
-                </Pressable>
-              );
-            })}
-          </ScrollView>
-
-          {activeTab === 'summary' ? renderSummary() : null}
-          {activeTab === 'transcript' ? renderTranscript() : null}
-          {activeTab === 'actions' ? renderActions() : null}
-          {activeTab === 'decisions' ? renderDecisions() : null}
-          {activeTab === 'questions' ? renderQuestions() : null}
-          {activeTab === 'risks' ? renderRisks() : null}
-        </>
-      ) : null}
-    </ScrollView>
-    <Modal transparent visible={!!editingSpeakerLabel} animationType="fade" onRequestClose={() => setEditingSpeakerLabel(null)}>
-      <View style={styles.modalOverlay}>
-        <View style={styles.speakerModal}>
-          <Text style={styles.speakerModalTitle}>编辑发言人名称</Text>
-          <Text style={styles.speakerModalSub}>{editingSpeakerLabel ? displaySpeaker(editingSpeakerLabel) : ''}</Text>
-          <TextInput
-            value={editingSpeakerLabel ? speakerNameDrafts[editingSpeakerLabel] || '' : ''}
-            onChangeText={(value) => {
-              if (!editingSpeakerLabel) return;
-              setSpeakerNameDrafts((current) => ({ ...current, [editingSpeakerLabel]: value }));
-            }}
-            placeholder="请输入发言人名称"
-            placeholderTextColor="#aeb6c5"
-            style={styles.speakerModalInput}
-          />
-          <View style={styles.speakerModalActions}>
-            <Pressable onPress={() => setEditingSpeakerLabel(null)} style={[styles.speakerModalButton, styles.speakerModalCancel]}>
-              <Text style={styles.speakerModalCancelText}>取消</Text>
-            </Pressable>
-            <Pressable
-              onPress={() => {
-                if (editingSpeakerLabel) saveSpeaker(editingSpeakerLabel);
-              }}
-              style={[styles.speakerModalButton, styles.speakerModalSave]}
-            >
-              <Text style={styles.speakerModalSaveText}>{savingSpeaker === editingSpeakerLabel ? '保存中' : '保存'}</Text>
-            </Pressable>
           </View>
         </View>
-      </View>
-    </Modal>
+      </Modal>
     </>
   );
 }
 
+function SectionTitle({ title }: { title: string }) {
+  return (
+    <View style={styles.sectionTitleRow}>
+      <View style={styles.sectionBar} />
+      <Text style={styles.sectionTitle}>{title}</Text>
+    </View>
+  );
+}
+
+function ListSection({ title, rows }: { title: string; rows: string[] }) {
+  return (
+    <View style={styles.summarySection}>
+      <Text style={styles.summarySectionTitle}>{title}</Text>
+      <NumberedList items={normalizeNumberedListItems(rows)} />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  container: {
-    gap: 12,
-    paddingBottom: 88,
-    paddingHorizontal: 18,
-    paddingTop: 4,
-  },
-  topCard: {
-    backgroundColor: '#ffffff',
-    borderColor: '#eef0f6',
-    borderRadius: 22,
-    borderWidth: 1,
-    gap: 14,
-    padding: 16,
-    shadowColor: '#6b7280',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.08,
-    shadowRadius: 22,
-    elevation: 4,
-  },
-  topHeader: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 12,
-    justifyContent: 'space-between',
-  },
-  titleBlock: {
+  page: {
+    backgroundColor: '#EEF3FA',
     flex: 1,
   },
-  meetingTitle: {
-    color: '#111827',
-    fontSize: 18,
-    fontWeight: '900',
+  listContent: {
+    paddingBottom: 24,
   },
-  meetingMeta: {
-    color: '#8b95a7',
-    fontSize: 12,
-    fontWeight: '700',
-    marginTop: 4,
-  },
-  infoGrid: {
-    gap: 10,
-  },
-  audioIconButton: {
+  topNav: {
     alignItems: 'center',
-    backgroundColor: '#f0efff',
-    borderRadius: 20,
-    height: 40,
-    justifyContent: 'center',
-    width: 40,
-  },
-  audioIconText: {
-    color: '#6657ff',
-    fontSize: 13,
-    fontWeight: '900',
-  },
-  infoItem: {
-    backgroundColor: '#f8f9ff',
-    borderRadius: 14,
-    gap: 4,
-    paddingHorizontal: 12,
+    flexDirection: 'row',
+    gap: 8,
+    paddingHorizontal: 14,
     paddingVertical: 10,
   },
-  infoLabel: {
-    color: '#8b95a7',
+  iconButton: {
+    alignItems: 'center',
+    height: 36,
+    justifyContent: 'center',
+    width: 36,
+  },
+  navTitle: {
+    color: '#111827',
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+  navActions: {
+    flexDirection: 'row',
+  },
+  sheet: {
+    backgroundColor: '#ffffff',
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    paddingHorizontal: 18,
+    paddingTop: 14,
+  },
+  playerCard: {
+    backgroundColor: '#F8FAFD',
+    borderColor: '#EEF1F6',
+    borderRadius: 16,
+    borderWidth: 1,
+    padding: 14,
+  },
+  timeRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  timeTextStrong: {
+    color: '#64748B',
+    fontSize: 11,
+    fontWeight: '800',
+    width: 46,
+  },
+  timeTextMuted: {
+    color: '#94A3B8',
+    fontSize: 11,
+    fontWeight: '800',
+    textAlign: 'right',
+    width: 50,
+  },
+  progressTrack: {
+    backgroundColor: '#E5EAF1',
+    borderRadius: 999,
+    flex: 1,
+    height: 6,
+  },
+  progressFill: {
+    backgroundColor: brandBlue,
+    borderRadius: 999,
+    height: 6,
+  },
+  progressThumb: {
+    backgroundColor: brandBlue,
+    borderColor: '#ffffff',
+    borderRadius: 8,
+    borderWidth: 2,
+    height: 16,
+    marginLeft: -8,
+    position: 'absolute',
+    top: -5,
+    width: 16,
+  },
+  audioHint: {
+    color: '#64748B',
     fontSize: 12,
+    fontWeight: '700',
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  controlsRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 26,
+    justifyContent: 'center',
+    marginTop: 14,
+  },
+  skipButton: {
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderColor: '#E5EAF1',
+    borderRadius: 18,
+    borderWidth: 1,
+    height: 36,
+    justifyContent: 'center',
+    width: 36,
+  },
+  skipButtonText: {
+    color: '#475569',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+  playButton: {
+    alignItems: 'center',
+    backgroundColor: '#111827',
+    borderRadius: 24,
+    height: 48,
+    justifyContent: 'center',
+    width: 48,
+  },
+  tabs: {
+    borderBottomColor: '#EEF1F6',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    marginTop: 12,
+  },
+  tabButton: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    paddingVertical: 12,
+  },
+  tabButtonActive: {
+    borderBottomColor: brandBlue,
+    borderBottomWidth: 2,
+  },
+  tabText: {
+    color: '#94A3B8',
+    fontSize: 15,
     fontWeight: '800',
   },
-  infoValue: {
+  tabTextActive: {
+    color: brandBlue,
+  },
+  quickMeta: {
+    paddingTop: 12,
+  },
+  quickMetaText: {
+    color: '#64748B',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  section: {
+    paddingTop: 14,
+  },
+  sectionTitleRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 16,
+    marginBottom: 10,
+  },
+  sectionBar: {
+    backgroundColor: brandBlue,
+    borderRadius: 2,
+    height: 16,
+    width: 4,
+  },
+  sectionTitle: {
     color: '#111827',
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  quickRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 9,
+    minHeight: 34,
+  },
+  quickDot: {
+    backgroundColor: '#F59E0B',
+    borderRadius: 4,
+    height: 8,
+    width: 8,
+  },
+  quickTime: {
+    color: brandBlue,
+    fontSize: 13,
+    fontWeight: '900',
+    width: 52,
+  },
+  quickTitle: {
+    color: '#111827',
+    flex: 1,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  exportSection: {
+    backgroundColor: '#F8FAFD',
+    borderTopColor: '#EEF1F6',
+    borderTopWidth: 1,
+    marginHorizontal: -18,
+    marginTop: 12,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+  },
+  exportTitle: {
+    color: '#111827',
+    fontSize: 14,
+    fontWeight: '900',
+    marginBottom: 8,
+  },
+  exportRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  exportButton: {
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderColor: '#DCE4F0',
+    borderRadius: 8,
+    borderWidth: 1,
+    flex: 1,
+    paddingVertical: 8,
+  },
+  exportButtonDisabled: {
+    backgroundColor: '#F1F5F9',
+  },
+  exportText: {
+    color: '#334155',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+  exportTextDisabled: {
+    color: '#94A3B8',
+  },
+  fallbackTranscript: {
+    color: '#374151',
+    fontSize: 14,
+    lineHeight: 24,
+    paddingBottom: 16,
+  },
+  segmentRow: {
+    backgroundColor: '#ffffff',
+    flexDirection: 'row',
+    gap: 12,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+  },
+  segmentRowActive: {
+    backgroundColor: '#F4F8FF',
+  },
+  timelineRail: {
+    alignItems: 'center',
+    width: 28,
+  },
+  avatar: {
+    alignItems: 'center',
+    borderRadius: 13,
+    height: 26,
+    justifyContent: 'center',
+    width: 26,
+    zIndex: 1,
+  },
+  avatarText: {
+    color: '#ffffff',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+  timelineLine: {
+    backgroundColor: '#E5EAF1',
+    flex: 1,
+    marginTop: 4,
+    minHeight: 46,
+    width: 1,
+  },
+  segmentBody: {
+    flex: 1,
+    gap: 6,
+  },
+  segmentMetaRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+  },
+  speakerName: {
     fontSize: 13,
     fontWeight: '900',
     lineHeight: 20,
   },
-  participantList: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginTop: 2,
+  timestampButton: {
+    paddingHorizontal: 2,
   },
-  participantChip: {
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderColor: '#edf0f7',
-    borderRadius: 999,
-    borderWidth: 1,
-    flexDirection: 'row',
-    gap: 5,
-    minHeight: 30,
-    paddingLeft: 7,
-    paddingRight: 10,
-  },
-  participantEditButton: {
-    alignItems: 'center',
-    backgroundColor: '#f0efff',
-    borderRadius: 999,
-    height: 22,
-    justifyContent: 'center',
-    width: 22,
-  },
-  participantName: {
-    color: '#111827',
+  timestampText: {
+    color: brandBlue,
     fontSize: 12,
-    fontWeight: '900',
+    fontWeight: '800',
   },
-  tabs: {
+  segmentPlayButton: {
     alignItems: 'center',
-    gap: 10,
-    paddingBottom: 4,
-    paddingTop: 8,
-  },
-  tabButton: {
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderColor: '#eef0f6',
+    backgroundColor: '#111827',
+    borderColor: '#111827',
     borderRadius: 14,
     borderWidth: 1,
-    gap: 4,
+    height: 28,
     justifyContent: 'center',
-    minHeight: 38,
-    minWidth: 64,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
+    width: 28,
   },
-  tabText: {
-    color: '#8b95a7',
+  segmentPlayButtonActive: {
+    backgroundColor: '#111827',
+  },
+  paragraph: {
+    color: '#1F2937',
+    fontSize: 14,
+    lineHeight: 23,
+  },
+  empty: {
+    color: '#64748B',
+    fontSize: 13,
+    lineHeight: 22,
+    paddingBottom: 12,
+  },
+  summaryContainer: {
+    gap: 14,
+    paddingTop: 14,
+  },
+  summaryCoverCard: {
+    backgroundColor: '#ffffff',
+    borderColor: '#E8EEF7',
+    borderRadius: 18,
+    borderWidth: 1,
+    gap: 14,
+    padding: 16,
+    shadowColor: '#8AA0C1',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+  },
+  summaryCoverTop: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    gap: 12,
+  },
+  summaryCoverText: {
+    flex: 1,
+    gap: 7,
+  },
+  summaryCoverTitle: {
+    color: '#0F172A',
+    fontSize: 18,
+    fontWeight: '900',
+    lineHeight: 26,
+  },
+  summaryCoverMeta: {
+    color: '#64748B',
+    fontSize: 12,
+    fontWeight: '800',
+    lineHeight: 18,
+  },
+  summaryExportBlock: {
+    borderTopColor: '#EEF2F7',
+    borderTopWidth: 1,
+    gap: 10,
+    paddingTop: 12,
+  },
+  summaryExportTitle: {
+    color: '#64748B',
     fontSize: 13,
     fontWeight: '800',
   },
-  tabTextActive: {
-    color: '#6657ff',
+  summaryExportButton: {
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderColor: '#DCE4F0',
+    borderRadius: 8,
+    borderWidth: 1,
+    flex: 1,
+    minHeight: 34,
+    justifyContent: 'center',
+    paddingHorizontal: 6,
   },
-  tabLine: {
-    backgroundColor: '#6657ff',
-    borderRadius: 2,
-    height: 2,
-    width: 20,
+  summaryExportButtonDisabled: {
+    backgroundColor: '#F6F8FB',
+  },
+  summaryExportText: {
+    color: '#334155',
+    fontSize: 12,
+    fontWeight: '900',
   },
   summaryHero: {
-    backgroundColor: '#ffffff',
-    borderColor: '#ebeef8',
-    borderRadius: 22,
+    backgroundColor: '#F8FAFD',
+    borderColor: '#EEF1F6',
+    borderRadius: 16,
     borderWidth: 1,
-    gap: 14,
-    padding: 18,
-    shadowColor: '#6b7280',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.08,
-    shadowRadius: 22,
-    elevation: 4,
+    gap: 10,
+    padding: 14,
   },
   summaryHeroHeader: {
     alignItems: 'center',
@@ -876,39 +1706,23 @@ const styles = StyleSheet.create({
   },
   summaryHeroTitle: {
     color: '#111827',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '900',
-    marginTop: 4,
   },
   statusPill: {
-    backgroundColor: '#ecfdf3',
+    backgroundColor: '#ECFDF3',
     borderRadius: 999,
     paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingVertical: 5,
   },
   statusPillText: {
-    color: '#16a34a',
-    fontSize: 12,
-    fontWeight: '900',
-  },
-  sourcePill: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#f8fafc',
-    borderColor: '#dbe3ef',
-    borderRadius: 8,
-    borderWidth: 1,
-    gap: 2,
-    paddingHorizontal: 10,
-    paddingVertical: 7,
-  },
-  sourcePillText: {
-    color: '#334155',
+    color: '#16A34A',
     fontSize: 12,
     fontWeight: '900',
   },
   sourceHintText: {
-    color: '#64748b',
-    fontSize: 11,
+    color: '#64748B',
+    fontSize: 12,
     fontWeight: '700',
   },
   summaryLead: {
@@ -916,180 +1730,220 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 24,
   },
-  metricGrid: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  metricCard: {
-    backgroundColor: '#f7f8ff',
-    borderRadius: 16,
-    flex: 1,
-    paddingVertical: 12,
-  },
-  metricValue: {
-    color: '#111827',
-    fontSize: 18,
-    fontWeight: '900',
-    textAlign: 'center',
-  },
-  metricLabel: {
-    color: '#8b95a7',
-    fontSize: 11,
-    fontWeight: '800',
-    marginTop: 3,
-    textAlign: 'center',
-  },
-  contentCard: {
+  summarySection: {
     backgroundColor: '#ffffff',
-    borderColor: '#eef0f6',
-    borderRadius: 20,
+    borderColor: '#E8EEF7',
+    borderRadius: 16,
     borderWidth: 1,
     gap: 12,
     padding: 16,
-    shadowColor: '#6b7280',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.05,
-    shadowRadius: 18,
-    elevation: 2,
+    shadowColor: '#8AA0C1',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
   },
-  cardTitle: {
-    color: '#111827',
+  summarySectionTitle: {
+    color: '#0F172A',
     fontSize: 16,
     fontWeight: '900',
+    lineHeight: 22,
   },
-  exportTitle: {
-    color: '#8b95a7',
-    fontSize: 12,
-    fontWeight: '800',
+  basicInfoList: {
+    gap: 10,
   },
-  exportRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  exportButton: {
-    backgroundColor: '#f0efff',
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  exportText: {
-    color: '#6657ff',
-    fontSize: 12,
-    fontWeight: '900',
-  },
-  orderedListRow: {
+  basicInfoRow: {
     alignItems: 'flex-start',
     flexDirection: 'row',
-    gap: 2,
+    gap: 10,
   },
-  orderedListIndex: {
-    color: '#6657ff',
+  basicInfoLabel: {
+    color: '#111827',
     fontSize: 13,
     fontWeight: '900',
     lineHeight: 22,
-    minWidth: 24,
+    width: 48,
   },
-  cleanBulletText: {
-    color: '#374151',
+  basicInfoValue: {
+    color: '#475569',
     flex: 1,
     fontSize: 13,
+    fontWeight: '700',
     lineHeight: 22,
   },
-  searchBox: {
+  stateCard: {
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderColor: '#eef0f6',
-    borderRadius: 18,
-    borderWidth: 1,
-    flexDirection: 'row',
-    gap: 8,
-    minHeight: 44,
-    paddingHorizontal: 13,
-  },
-  searchIcon: {
-    color: '#9ca3af',
-    fontSize: 16,
-    fontWeight: '900',
-  },
-  searchInput: {
-    color: '#111827',
-    flex: 1,
-    fontSize: 13,
-    minHeight: 42,
-  },
-  durationStrip: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  durationChip: {
-    alignItems: 'center',
-    backgroundColor: '#f8f9ff',
-    borderColor: '#eef0f6',
-    borderRadius: 999,
-    borderWidth: 1,
-    flexDirection: 'row',
-    gap: 6,
-    paddingHorizontal: 9,
-    paddingVertical: 7,
-  },
-  durationName: {
-    color: '#111827',
-    fontSize: 12,
-    fontWeight: '900',
-  },
-  durationValue: {
-    color: '#8b95a7',
-    fontSize: 11,
-    fontWeight: '800',
-  },
-  paragraph: {
-    color: '#374151',
-    fontSize: 13,
-    lineHeight: 22,
-  },
-  empty: {
-    color: '#8b95a7',
-    fontSize: 13,
-    lineHeight: 22,
-  },
-  speakerEditor: {
-    backgroundColor: '#f8f9ff',
+    backgroundColor: '#F4F8FF',
+    borderColor: '#DCE8FF',
     borderRadius: 16,
+    borderWidth: 1,
     gap: 8,
+    padding: 16,
+  },
+  stateCardFailed: {
+    backgroundColor: '#FEF2F2',
+    borderColor: '#FECACA',
+    borderRadius: 16,
+    borderWidth: 1,
+    gap: 8,
+    padding: 16,
+  },
+  stateTitle: {
+    color: '#1D4ED8',
+    fontSize: 15,
+    fontWeight: '900',
+  },
+  stateTitleFailed: {
+    color: '#DC2626',
+    fontSize: 15,
+    fontWeight: '900',
+  },
+  stateText: {
+    color: '#64748B',
+    fontSize: 13,
+    fontWeight: '700',
+    lineHeight: 21,
+    textAlign: 'center',
+  },
+  bulletList: {
+    gap: 12,
+  },
+  bulletItem: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  bulletDot: {
+    backgroundColor: '#94A3B8',
+    borderRadius: 4,
+    height: 7,
+    marginTop: 8,
+    width: 7,
+  },
+  bulletBody: {
+    flex: 1,
+    gap: 8,
+  },
+  bulletText: {
+    color: '#334155',
+    flex: 1,
+    fontSize: 14,
+    lineHeight: 23,
+  },
+  evidenceBox: {
+    backgroundColor: '#F8FAFD',
+    borderColor: '#E8EEF7',
+    borderRadius: 12,
+    borderWidth: 1,
+    gap: 6,
     padding: 10,
   },
-  speakerLabel: {
-    color: '#6657ff',
-    fontSize: 12,
+  evidenceHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  evidenceLabel: {
+    color: '#64748B',
+    fontSize: 11,
     fontWeight: '900',
   },
-  speakerInput: {
-    backgroundColor: '#ffffff',
-    borderColor: '#eef0f6',
-    borderRadius: 12,
-    borderWidth: 1,
-    color: '#111827',
-    minHeight: 38,
-    paddingHorizontal: 10,
+  evidenceTimeButton: {
+    backgroundColor: '#EAF1FF',
+    borderRadius: 999,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
-  speakerNoteInput: {
-    minHeight: 64,
-    paddingTop: 9,
-    textAlignVertical: 'top',
+  evidenceTimeText: {
+    color: brandBlue,
+    fontSize: 11,
+    fontWeight: '900',
   },
-  saveSpeakerButton: {
+  evidenceText: {
+    color: '#64748B',
+    fontSize: 12,
+    lineHeight: 20,
+  },
+  actionList: {
+    gap: 14,
+  },
+  actionItem: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  readonlyCheckbox: {
     alignItems: 'center',
-    backgroundColor: '#6657ff',
+    backgroundColor: '#ffffff',
+    borderColor: '#CBD5E1',
+    borderRadius: 6,
+    borderWidth: 2,
+    height: 22,
+    justifyContent: 'center',
+    marginTop: 1,
+    width: 22,
+  },
+  readonlyCheckboxDone: {
+    backgroundColor: '#EAF1FF',
+    borderColor: brandBlue,
+  },
+  actionBody: {
+    flex: 1,
+    gap: 6,
+  },
+  actionText: {
+    color: '#334155',
+    fontSize: 14,
+    fontWeight: '800',
+    lineHeight: 23,
+  },
+  actionTextDone: {
+    color: '#94A3B8',
+    textDecorationLine: 'line-through',
+  },
+  actionMeta: {
+    color: '#64748B',
+    fontSize: 12,
+    fontWeight: '700',
+    lineHeight: 20,
+  },
+  inlineError: {
+    backgroundColor: '#FEF2F2',
+    color: '#DC2626',
+    fontSize: 12,
+    fontWeight: '800',
+    paddingHorizontal: 18,
+    paddingVertical: 8,
+  },
+  centerState: {
+    alignItems: 'center',
+    backgroundColor: '#EEF3FA',
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+  },
+  centerText: {
+    color: '#64748B',
+    fontSize: 13,
+    fontWeight: '800',
+    marginTop: 10,
+  },
+  retryButton: {
+    backgroundColor: brandBlue,
     borderRadius: 12,
-    paddingHorizontal: 11,
+    marginTop: 14,
+    paddingHorizontal: 16,
     paddingVertical: 10,
   },
-  saveSpeakerText: {
+  retryText: {
     color: '#ffffff',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '900',
+  },
+  error: {
+    color: '#DC2626',
+    fontSize: 13,
+    lineHeight: 22,
+    textAlign: 'center',
   },
   modalOverlay: {
     alignItems: 'center',
@@ -1100,7 +1954,7 @@ const styles = StyleSheet.create({
   },
   speakerModal: {
     backgroundColor: '#ffffff',
-    borderRadius: 22,
+    borderRadius: 20,
     padding: 18,
     width: '100%',
   },
@@ -1110,22 +1964,27 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   speakerModalSub: {
-    color: '#8b95a7',
+    color: '#64748B',
     fontSize: 12,
     fontWeight: '800',
     marginTop: 6,
   },
   speakerModalInput: {
-    backgroundColor: '#f8f9ff',
-    borderColor: '#eef0f6',
-    borderRadius: 14,
+    backgroundColor: '#F8FAFD',
+    borderColor: '#E2E8F0',
+    borderRadius: 12,
     borderWidth: 1,
     color: '#111827',
     fontSize: 15,
-    fontWeight: '800',
-    marginTop: 14,
-    minHeight: 48,
+    fontWeight: '700',
+    marginTop: 12,
+    minHeight: 46,
     paddingHorizontal: 12,
+  },
+  speakerNoteInput: {
+    minHeight: 72,
+    paddingTop: 10,
+    textAlignVertical: 'top',
   },
   speakerModalActions: {
     flexDirection: 'row',
@@ -1134,19 +1993,19 @@ const styles = StyleSheet.create({
   },
   speakerModalButton: {
     alignItems: 'center',
-    borderRadius: 14,
+    borderRadius: 12,
     flex: 1,
-    minHeight: 44,
     justifyContent: 'center',
+    minHeight: 44,
   },
   speakerModalCancel: {
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#F1F5F9',
   },
   speakerModalSave: {
-    backgroundColor: '#6657ff',
+    backgroundColor: brandBlue,
   },
   speakerModalCancelText: {
-    color: '#6b7280',
+    color: '#475569',
     fontSize: 14,
     fontWeight: '900',
   },
@@ -1155,101 +2014,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '900',
   },
-  segment: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    gap: 12,
-    paddingVertical: 8,
-  },
-  timeText: {
-    color: '#9ca3af',
-    fontSize: 11,
-    fontWeight: '800',
-    lineHeight: 19,
-    paddingTop: 0,
-    width: 54,
-  },
-  segmentBody: {
-    flex: 1,
-    gap: 5,
-  },
-  transcriptSpeakerLine: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    gap: 7,
-  },
-  speakerName: {
-    color: '#111827',
-    fontSize: 13,
-    fontWeight: '900',
-    lineHeight: 19,
-  },
-  segmentSeconds: {
-    color: '#9ca3af',
-    fontSize: 11,
-    fontWeight: '800',
-    lineHeight: 19,
-  },
-  segmentPlayButton: {
-    alignItems: 'center',
-    backgroundColor: '#f0efff',
-    borderRadius: 15,
-    height: 30,
-    justifyContent: 'center',
-    marginLeft: 'auto',
-    width: 30,
-  },
-  segmentPlayText: {
-    color: '#6657ff',
-    fontSize: 12,
-    fontWeight: '900',
-  },
-  todoCard: {
-    alignItems: 'flex-start',
-    backgroundColor: '#ffffff',
-    borderColor: '#eef0f6',
-    borderRadius: 16,
-    borderWidth: 1,
-    flexDirection: 'row',
-    gap: 10,
-    padding: 14,
-  },
-  checkbox: {
-    alignItems: 'center',
-    borderColor: '#6657ff',
-    borderRadius: 4,
-    borderWidth: 1,
-    height: 16,
-    justifyContent: 'center',
-    marginTop: 2,
-    width: 16,
-  },
-  checkboxCompleted: {
-    backgroundColor: '#6657ff',
-  },
-  checkboxCheck: {
-    color: '#ffffff',
-    fontSize: 11,
-    fontWeight: '900',
-    lineHeight: 13,
-  },
-  todoBody: {
-    flex: 1,
-  },
-  todoTitle: {
-    color: '#111827',
-    fontSize: 13,
-    fontWeight: '900',
-  },
-  todoTitleCompleted: {
-    color: '#9ca3af',
-    textDecorationLine: 'line-through',
-  },
-  todoMeta: {
-    color: '#8b95a7',
-    fontSize: 12,
-  },
-  error: {
-    color: '#ef4444',
+  safeBottom: {
+    height: 28,
   },
 });

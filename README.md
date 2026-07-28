@@ -1,4 +1,4 @@
-# 会议声纹识别 AI Agent MVP 1.0
+﻿# 会议声纹识别 AI Agent MVP 1.0
 
 这是一个会议后处理 MVP，用来快速验证从手机录音到后端转写、说话人归并、六维会议纪要和行动项生成的完整链路。
 
@@ -25,7 +25,6 @@ MeetingSummary + ActionItem + TranscriptSegment
 知识同步不进入 Worker。Worker 继续负责 ASR、说话人分离、RAG、Qwen3、
 Validator 和正式 Summary 持久化。知识同步失败只记录同步失败状态，不阻塞会议
 `completed`、Summary、待办和会议详情。
-
 
 语义事件链路当前处于 shadow mode，仅用于后台诊断和质量对比，不覆盖正式会议纪要：
 
@@ -586,6 +585,8 @@ EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false
 EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ```
 
+移动端首页当前按 MeetMind AI RC1 原型展示品牌区、搜索入口、实时录音、导入音频、全部会议列表和固定底部导航。实时录音沿用创建会议、录音、上传和 AI 处理链路；导入音频会选择本地音频文件，创建会议后复用同一上传、处理和分析流程。
+
 ### 实时字幕真机调试
 
 当前实时字幕使用豆包流式会议字幕资源 `volc.seedasr.sauc.duration`，移动端通过原生录音流按 200ms 推送 16kHz、mono、PCM 16-bit 小包。该能力依赖 `@siteed/audio-studio` 原生模块，普通 Expo Go 无法加载，需要使用 Expo Development Build。
@@ -623,7 +624,7 @@ npx expo run:android
 ## 后端接口
 
 - `POST /meetings` 创建会议
-- `GET /meetings` 获取会议列表
+- `GET /meetings` 获取会议列表，支持 `limit` / `offset` 分页参数
 - `GET /meetings/{id}` 获取会议详情
 - `POST /meetings/{id}/audio` 上传音频文件
 - `WS /meetings/{id}/realtime-stream` 实时字幕流式转写
@@ -637,6 +638,9 @@ npx expo run:android
 - `GET /agent/action-proposals/{proposal_id}` 查询提案详情
 - `POST /agent/action-proposals/{proposal_id}/approve` 人工批准并生成受控写入命令
 - `POST /agent/action-proposals/{proposal_id}/reject` 人工拒绝提案
+- `GET /agent/review/overview` 查询 AI 助手首页待确认建议和最近处理聚合视图
+- `GET /agent/review/records` 分页查询 AI 助手全部处理记录，支持状态筛选和时间排序
+- `GET /agent/review/records/{record_id}` 查询单条处理记录详情、证据、确认、命令和审计时间线
 - `GET /agent/commands` 查询已生成的受控命令
 - `GET /agent/commands/{command_id}` 查询受控命令详情
 - `POST /agent/commands/{command_id}/dry-run` 对 ready 命令执行 dry-run 沙箱校验
@@ -725,19 +729,21 @@ curl http://localhost:8000/meetings/{meeting_id}/summary
 
 ## 端到端流程检查
 
-1. 在 APP 首页点击 `New`。
+1. 在 APP 首页点击 `实时录音`。
 2. 输入会议名称并创建会议。
 3. 进入录音页，点击 `Start Recording`。
 4. 可点击 `Pause` / `Resume`，完成后点击 `End`。
-5. 点击 `Upload Audio`，APP 会上传音频并调用 `POST /meetings/{id}/process`。
+5. 录音结束后，APP 会上传音频并调用 `POST /meetings/{id}/process`。
 6. API 创建处理任务，并在后台调用 worker。
    如果同一会议已有 `queued` 或 `running` 任务，API 会返回现有任务，避免重复排队。
 7. Worker 读取 `storage/meetings/{meeting_id}/audio/` 中最新上传的音频。
 8. Worker 使用 `faster-whisper` 写入 `transcript_segments`。
 9. 如果豆包返回 `spk_0/spk_1`，worker 会保存为 `Speaker 1/Speaker 2`；如果没有 provider 说话人信息且配置了 `HUGGINGFACE_TOKEN`，worker 使用 `pyannote.audio` 兜底分离说话人。
 10. Worker 调用 LLM summary agent，写入 `meeting_summaries` 和 `action_items`。
-11. APP 会议详情页会自动刷新处理中状态，并显示转写文本、AI 总结、决策和待办事项；会议议程、核心结论、遗留问题、待办与后续安排、风险与关注点以共享 `NumberedList` 有序编号列表展示。前端会先把 `1. 内容A；2. 内容B`、`1、内容A`、多行文本和分号分隔文本拆成独立条目，并去掉原始编号。
+11. APP 会议详情页会自动刷新处理中状态，默认进入“会议原文”页，使用真实 `transcript_segments` 展示时间轴、说话人、时间戳和原文，并提供基于现有录音文件的播放/暂停、拖动进度、前后 15 秒、时间戳跳转、单段发言播放、会议速览和原文导出入口。AI 纪要保留在同一详情页标签中，复用现有顶部导航、播放器和标签栏，优先展示 canonical 六维字段 `meeting_agenda`、`meeting_summary`、`key_conclusions`、`action_items`、`unresolved_issues`、`risks_and_focus`，继续兼容 legacy 字段，显示只读待办状态和已有证据/时间定位，并通过现有 `/exports/summary.{format}` 能力导出 MD/PDF/DOCX/TXT。
 12. 在会议详情页的发言人名称区域，可以把 `Speaker 1/Speaker 2` 保存为真实姓名；后端会保存 `speaker_label -> display_name` 映射，APP 会用真实姓名显示转写和纪要。
+
+导入音频流程同样从首页进入：点击 `导入音频`，选择音频文件后，APP 创建会议并进入现有 AI 处理页。上传格式和解析能力仍以后端 `/meetings/{id}/audio` 接口为准。
 
 ## MVP 限制
 

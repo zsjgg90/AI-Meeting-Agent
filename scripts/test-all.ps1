@@ -78,7 +78,8 @@ if (-not $SkipApiTests) {
         services.api.tests.test_agent_config `
         services.api.tests.test_agent_confirmation_api `
         services.api.tests.test_knowledge_api `
-        services.api.tests.test_meeting_upload_api }
+        services.api.tests.test_meeting_upload_api `
+        services.api.tests.test_meeting_summary_exports }
 }
 
 if (-not $SkipWorkerTests) {
@@ -113,6 +114,7 @@ if (-not $SkipMobile) {
         Invoke-Checked { npm run test:knowledge-base-ui }
         Invoke-Checked { npm run test:agent-review-ui }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-ai-processing-ui.js') }
+        Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-meeting-detail-ui.js') }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-meeting-history-ui.js') }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-recording-upload-ui.js') }
     }

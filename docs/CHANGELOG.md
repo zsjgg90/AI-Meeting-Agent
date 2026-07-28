@@ -1,5 +1,82 @@
 # Changelog
 
+## 2026-07-28
+
+- Finalized acceptance fixes for the Expo meeting detail `AI纪要` tab: summary
+  text now preserves paragraph breaks, evidence timestamps accept seconds,
+  `mm:ss`, and `hh:mm:ss`, evidence jumps defer transcript scrolling until the
+  transcript tab is visible, missing segment anchors degrade with a clear
+  message, all-empty six-dimension results show an overall empty state, and
+  empty action objects no longer render blank todo rows. Static checks and
+  summary export API regression coverage were expanded.
+- Rebuilt the Expo meeting detail `AI纪要` tab from
+  `docs/design/meeting-minutes.html` while reusing the existing detail top
+  navigation, inline player, and three-tab bar. The tab now shows a meeting
+  base card, real summary export entry for `summary` MD/PDF/DOCX/TXT, basic
+  information, canonical six-dimension sections, read-only action item status,
+  and available evidence/time anchors with legacy summary fallback preserved.
+  No backend, Worker, database, Prompt, RAG, Validator, or six-dimension schema
+  changes were made.
+- Rebuilt the Expo meeting detail transcript tab from
+  `docs/design/meetmind-app_meeting-detail.html` using React Native styles and
+  a single vertical `FlatList`. The page now contains an in-page top nav,
+  inline `expo-av` audio player, three-tab bar (`会议原文`, `AI纪要`, `Agent工具`),
+  transcript quick look, transcript export entry, and a timeline rendering
+  real `transcript_segments`.
+- Added transcript playback controls on the detail page: play/pause,
+  draggable progress, centered 15-second backward/forward seek, timestamp
+  seek, bounded segment play, ended state handling, and explicit
+  loading/missing/failed audio states. Audio still uses the existing
+  `meetingAudioUrl()` and `expo-av` playback path.
+- Updated segment playback so tapping the active segment icon pauses that
+  segment, the preview stops at the segment end, and top-level playback no
+  longer exposes a speed control.
+- Added final transcript-player acceptance fixes: mobile audio selection no
+  longer relies on `audio_files[0]`; meeting detail and the standalone audio
+  player now share a playable-audio selector, release stale `expo-av` sounds
+  when switching meetings/audio files, and guard rapid playback/seek actions.
+- Fixed player progress dragging by switching progress bars to `PanResponder`:
+  dragging now updates the displayed time/thumb immediately and commits a
+  single bounded seek when the gesture ends.
+- Kept AI summary rendering on the existing summary data path and left
+  `Agent工具` as a placeholder for this stage. No API, Worker, database,
+  Prompt, RAG, Validator, or six-dimension schema changes were made.
+
+- Updated the Expo home screen to match the MeetMind AI RC1 home prototype:
+  brand/search header, real-time recording and file import primary actions,
+  `全部会议` cards, and the existing fixed bottom navigation.
+- Replaced the previous home insight block with a single full-page `FlatList`
+  so long meeting lists scroll vertically as part of the page, without
+  nesting `ScrollView` and `FlatList`.
+- Added a real file import screen using `expo-document-picker`. It creates a
+  meeting, then reuses the existing `AIProcessingScreen` upload, process, and
+  analyze flow; no backend, database, Prompt, RAG, Worker, or six-dimension
+  schema changes were made.
+- Home meeting cards now show title, status, start time, duration, AI summary
+  state, todo count, and for completed summaries the first
+  `meeting_agenda`, `key_conclusions`, and `action_items` entries with legacy
+  `agenda`, `decisions`, and `next_steps` fallback.
+- Fixed the mobile API timeout message text to the expected Chinese
+  user-facing copy while keeping the existing request timeout behavior.
+- Adjusted the home action label from `导入文件` to `导入音频`, removed the
+  import action plus marker, changed the section date to `M月D日 今天/周X`,
+  renamed `浏览全部` to `更多`, tightened the `全部会议` spacing, and made
+  completed-card preview rows black, single-line, and content-height adaptive.
+
+## 2026-07-27
+
+- Refactored the Expo home screen to follow the MeetMind AI home prototype with
+  a brand header, real-time recording action, file-import placeholder, weekly
+  insight cards, and recent meeting cards.
+- Kept home data connected to existing `GET /meetings` and completed-meeting
+  summary requests. Summary fetch failures now degrade to empty counts and are
+  cached as `null` for the current screen state so repeated requests for the
+  same completed meeting are avoided.
+- Preserved the existing recording, meeting detail navigation, history page,
+  refresh, pagination, deletion, and bottom-tab route structure. The file
+  import action is intentionally a clickable placeholder that shows
+  "文件导入功能开发中" and does not add dependencies or backend upload behavior.
+
 ## 2026-07-24
 
 - Added the Enterprise Meeting Knowledge Base MVP as an API-side PostgreSQL
@@ -43,17 +120,50 @@
   Existing manual Agent proposal, confirmation, command, audit, rollback, auth,
   and review APIs remain registered.
 - Changed local API startup defaults so `AGENT_LOCAL_AUTH_ENABLED=false` unless
-  explicitly overridden for local RC validation.- Fixed real end-to-end meeting analysis failures after upload/transcript
+  explicitly overridden for local RC validation.
+- Added a fail-closed local Agent login/session flow for Expo acceptance.
+  Mobile stores the Bearer session in AsyncStorage, restores it on AI assistant
+  entry, injects `Authorization` only for `/agent/*` requests, clears expired
+  sessions on 401, and separates unauthenticated, forbidden, empty, data, and
+  error states.
+- Added real-meeting AgentActionProposal generation for completed meeting
+  summaries with persisted ActionItems. The generator reads existing
+  `action_items`, matches only same tenant/project historical ActionItems,
+  emits auditable diagnostics, and creates pending proposals only for
+  evidence-backed `owner`, `due_date`, `priority`, or `status` changes. It does
+  not write Requirement, Risk, or Summary business objects and remains
+  idempotent.
+- Fixed real end-to-end meeting analysis failures after upload/transcript
   success by preventing local API/Worker startup scripts from reusing
   non-project Python uvicorn processes, preserving Worker structured
   `error_code`/`error_stage`/`error_message` responses in
   `transcription_tasks.error_message`, mapping post-transcript failures to
   `summary_failed`, and updating the mobile AI processing screen to show the
   actual failed stage with retry-only analysis.
+- Productized the Expo AI assistant review UI with a Chinese home page,
+  safety banner, expandable pending proposal cards, approve/reject
+  confirmation flows, recent records, all-records pagination, status filtering,
+  time sorting, and record detail pages.
+- Added read-only Agent review aggregation APIs:
+  `GET /agent/review/overview`, `GET /agent/review/records`, and
+  `GET /agent/review/records/{record_id}`. They return display DTOs from
+  existing proposal, confirmation, command, audit, authoritative object, and
+  meeting data, with server-side Bearer-token scope checks and metadata
+  redaction.
+- Kept Agent write scope unchanged. The UI still uses existing
+  approve/reject APIs for human decisions, approval only creates a ready
+  command, and this change does not modify Prompt, RAG, Validator, Shadow,
+  production config, Requirement/Risk writes, or default grey/real execution
+  switches.
+- Fixed the meeting detail summary fallback display for legacy
+  `meeting_outputs` rows. Summary fallback responses now include display
+  metadata, the mobile summary card no longer exposes raw `result_source=...`,
+  and stale failed meeting status no longer makes an available summary look
+  failed. Added `npm run test:meeting-detail-ui` to the full local test script.
 - Fixed history meeting loading timeouts by bounding `GET /meetings` with
   `limit`/`offset`, adding mobile request timeout handling, loading only the
-  first home/history page initially, and adding load-more support plus a static
-  history loading regression check.
+  first home/history page initially, and adding load-more support plus
+  `npm run test:meeting-history-ui`.
 - Fixed recording upload regressions by routing mobile recording uploads
   through the shared timeout wrapper, mapping upload failures to Chinese user
   messages, preserving Expo `m4a` metadata as `audio/x-m4a`, adding API upload

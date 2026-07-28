@@ -19,10 +19,29 @@
 4. Keep Expo Go recent-meeting startup flow stable; uploaded meetings must not
    be displayed as active AI analysis, and stale API background tasks must be
    recovered on service restart.
-5. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
+5. Keep the MeetMind AI RC1 home screen on the current API-only mobile flow:
+   brand/search header, real-time recording, audio import, full-page `全部会议`
+   list, and fixed bottom navigation. Audio import must continue to reuse the
+   existing create-meeting plus `AIProcessingScreen` upload/process/analyze
+   path without backend, database, Prompt, RAG, Worker, or schema changes.
+6. Keep the rebuilt meeting detail transcript page on existing API-only data:
+   `audio_files`, `transcript_segments`, `speaker_mappings`, and transcript
+   exports. The detail page may refine React Native UI, player ergonomics, and
+   timestamp navigation, but must not add model calls, backend changes, fake
+   chapters, or six-dimension schema changes for transcript display.
+7. Keep the rebuilt meeting detail AI summary tab on existing API-only
+   summary data. It should prefer canonical `meeting_agenda`,
+   `meeting_summary`, `key_conclusions`, `action_items`,
+   `unresolved_issues`, and `risks_and_focus`, preserve legacy aliases, use
+   the existing `/exports/summary.{format}` backend export path, and display
+   action item status as read-only until a formal update contract is exposed
+   to this surface.
+8. Keep the hidden Expo AI assistant review UI on top of existing Agent
+   proposal/confirmation/command/audit data without expanding real-write scope.
+9. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
    grey only under the approved Phase 13/14 scope.
-6. Keep formal Qwen3 + RAG meeting analysis stable.
-7. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
+10. Keep formal Qwen3 + RAG meeting analysis stable.
+11. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
    Recording upload now has timeout-bounded mobile requests, Chinese upload
    errors, Expo `audio/x-m4a` API regression coverage, and a local HTTP upload
    smoke check. History meeting loading remains bounded with `limit`/`offset`
@@ -30,11 +49,11 @@
    End-to-end summary failure recovery now requires project-venv API/Worker
    port ownership, structured Worker error persistence, and retry-only mobile
    re-analysis from existing audio/transcript.
-8. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
+12. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
    maintenance issues that remain relevant.
-9. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
+13. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
    semantic quality errors before considering formal semantic output again.
-10. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
+14. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
    Expo-visible summary, especially when the meeting metadata indicates a
    manual fixture such as `fixture-gold-standard`.
 
@@ -102,10 +121,11 @@
   permission, idempotency, and target state, and write dry-run audit records
   with rollback previews. It must not update `action_items`, summary JSON,
   Requirement, or Risk state.
-- Phase 9 Expo Agent Review UI is a minimum internal workbench under the AI tab.
-  It must call the API only, use approve/reject confirmation endpoints for
-  human decisions, and must not construct `expected_version`,
-  `ControlledWriteCommand`, or idempotency keys on the client.
+- Expo AI assistant review UI is now a productized review surface under the AI
+  tab. It must call the API only, use review aggregation endpoints for display,
+  use approve/reject confirmation endpoints for human decisions, and must not
+  construct `expected_version`, `ControlledWriteCommand`, tenant/project scope,
+  reviewer identity, permissions, or idempotency keys on the client.
 - Keep Phase 10 as a pre-real-write safety layer only. Agent APIs must use the
   server-side `AgentPrincipal` auth adapter and must not trust
   `X-Agent-Reviewer` or `X-Agent-Permissions` headers. The current adapter
