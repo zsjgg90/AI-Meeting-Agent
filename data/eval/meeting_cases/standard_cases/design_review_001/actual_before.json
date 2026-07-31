@@ -1,0 +1,130 @@
+{
+  "overview": "会议围绕移动端首页改版方案展开，提出采用卡片式布局的建议，但需结合数据验证。若方案确定，需提前同步组件规范，目前尚未明确后续执行计划。",
+  "meeting_title": "",
+  "meeting_type": "requirement_review",
+  "meeting_type_confidence": 0.85,
+  "meeting_title_candidate": "移动端首页改版方案讨论",
+  "title_basis": [
+    "会议议程中明确讨论移动端首页改版方案",
+    "会议总结涉及布局选择与数据验证讨论"
+  ],
+  "agenda": [
+    {
+      "item": "讨论移动端首页改版方案及布局选择",
+      "order": 1,
+      "source_segment_ids": []
+    }
+  ],
+  "topics": [],
+  "speaker_summaries": [],
+  "decisions": [],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "补充数据验证方案",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "source_segment_id": null,
+      "confidence": 0.6
+    },
+    {
+      "owner_name": null,
+      "task": "同步组件规范",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "如果确定方案，需要提前同步组件规范。",
+      "source_segment_id": null,
+      "confidence": 0.5
+    }
+  ],
+  "risks": [],
+  "open_questions": [
+    {
+      "question": "卡片式布局的数据验证方案未明确",
+      "owner": "",
+      "source": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "issue": "卡片式布局的数据验证方案未明确",
+      "reason": "需结合数据验证但未指定负责人",
+      "blocker": "",
+      "source_text": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "confidence": 0.7
+    },
+    {
+      "question": "组件规范同步未指定执行人",
+      "owner": "",
+      "source": "如果确定方案，需要提前同步组件规范。",
+      "issue": "组件规范同步未指定执行人",
+      "reason": "未明确谁负责同步组件规范",
+      "blocker": "",
+      "source_text": "如果确定方案，需要提前同步组件规范。",
+      "confidence": 0.6
+    }
+  ],
+  "next_steps": [
+    {
+      "item": "补充数据验证方案",
+      "owner": "",
+      "time": "",
+      "note": "方向可以考虑，但需要结合数据验证，目前不能直接确认。"
+    },
+    {
+      "item": "同步组件规范",
+      "owner": "",
+      "time": "",
+      "note": "如果确定方案，需要提前同步组件规范。"
+    }
+  ],
+  "meeting_agenda": [
+    {
+      "item": "讨论移动端首页改版方案及布局选择",
+      "order": 1,
+      "source_segment_ids": []
+    }
+  ],
+  "meeting_summary": "会议围绕移动端首页改版方案展开，提出采用卡片式布局的建议，但需结合数据验证。若方案确定，需提前同步组件规范，目前尚未明确后续执行计划。",
+  "key_conclusions": [],
+  "unresolved_issues": [
+    {
+      "issue": "卡片式布局的数据验证方案未明确",
+      "reason": "需结合数据验证但未指定负责人",
+      "blocker": "",
+      "source_text": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "confidence": 0.7
+    },
+    {
+      "issue": "组件规范同步未指定执行人",
+      "reason": "未明确谁负责同步组件规范",
+      "blocker": "",
+      "source_text": "如果确定方案，需要提前同步组件规范。",
+      "confidence": 0.6
+    }
+  ],
+  "risks_and_focus": [],
+  "model_name": "qwen3:14b+rag",
+  "confidence_score": 0.6,
+  "metadata": {
+    "schema_version": "meeting-analysis-v1",
+    "model_name": "qwen3:14b+rag",
+    "prompt_version": "meeting-analyst-v1",
+    "rag_chunk_ids": [
+      "v4_boundary_rule_049",
+      "v4_boundary_rule_037",
+      "v4_boundary_rule_013",
+      "v4_boundary_rule_025",
+      "v4_boundary_rule_050",
+      "v4_boundary_rule_001",
+      "v4_boundary_rule_038",
+      "v4_boundary_rule_014"
+    ],
+    "rag_dataset_version": "meeting_analyst_rag_v1",
+    "rag_chunk_schema_version": "rag-chunk-v1",
+    "rag_collection_name": "meeting_analyst_rules",
+    "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+    "result_source": "legacy_qwen_rag",
+    "confidence_score": 0.6,
+    "generated_at": "2026-07-31T11:05:14.164811+00:00"
+  }
+}

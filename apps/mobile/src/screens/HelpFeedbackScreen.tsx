@@ -11,19 +11,15 @@ type Props = {
 function HelpEntry({
   title,
   subtitle,
-  icon,
   onPress,
 }: {
   title: string;
   subtitle: string;
-  icon: LucideIconName;
+  icon?: LucideIconName;
   onPress: () => void;
 }) {
   return (
     <Pressable onPress={onPress} style={styles.card}>
-      <View style={styles.entryIcon}>
-        <LucideIcon name={icon} color="#ffffff" size={24} strokeWidth={2} />
-      </View>
       <View style={styles.cardText}>
         <Text style={styles.cardTitle}>{title}</Text>
         <Text style={styles.cardSub}>{subtitle}</Text>
@@ -76,7 +72,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   illustrationGlow: {
-    backgroundColor: '#f0edff',
+    backgroundColor: '#eaf1ff',
     borderRadius: 86,
     height: 172,
     position: 'absolute',
@@ -92,7 +88,7 @@ const styles = StyleSheet.create({
   },
   questionBubble: {
     alignItems: 'center',
-    backgroundColor: '#6c4dff',
+    backgroundColor: '#f7f8fc',
     borderRadius: 30,
     height: 60,
     justifyContent: 'center',
@@ -107,7 +103,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   star: {
-    backgroundColor: '#b3a5ff',
+    backgroundColor: '#8fb5ff',
     borderRadius: 999,
     height: 8,
     position: 'absolute',
@@ -156,18 +152,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 24,
     elevation: 4,
-  },
-  entryIcon: {
-    alignItems: 'center',
-    backgroundColor: '#6c4dff',
-    borderRadius: 24,
-    height: 48,
-    justifyContent: 'center',
-    shadowColor: '#6c4dff',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
-    width: 48,
   },
   cardText: {
     flex: 1,

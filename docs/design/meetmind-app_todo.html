@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>任务详情 - MeetMind AI</title>
+<!-- Tailwind CSS (本地) -->
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<!-- Iconify 图标 (本地) -->
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .iphone-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background-color: #F5F7FA;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px rgba(0,0,0,0.05);
+        }
+
+        .scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 180px; /* 为评论输入和底部导航留出空间 */
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: transparent;
+        }
+
+        .nav-header {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            margin: 0 16px 20px 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .detail-icon {
+            color: #94A3B8;
+            font-size: 20px;
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+
+        .date-btn {
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .date-btn-active {
+            background-color: #EFF6FF;
+            color: #2B6CFF;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding: 10px 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 50;
+        }
+
+        .comment-input-area {
+            position: fixed;
+            bottom: 84px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            padding: 12px 16px;
+            background: white;
+            border-top: 1px solid #F1F5F9;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 40;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body class="">
+<div class="iphone-container">
+<!-- 状态栏 -->
+<div class="status-bar">
+<span>19:07</span>
+<div class="flex items-center gap-1.5">
+<iconify-icon icon="ion:cellular"></iconify-icon>
+<iconify-icon icon="ion:wifi"></iconify-icon>
+<div class="flex items-center text-[#F59E0B]">
+<span class="text-[10px] mr-0.5">66%</span>
+<iconify-icon class="text-lg" icon="ion:battery-charging"></iconify-icon>
+</div>
+</div>
+</div>
+<!-- 导航栏 -->
+<div class="nav-header">
+<a class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/todo.html?render_html=true">
+</a>
+<h1 class="text-lg font-semibold text-gray-900">我的待办</h1>
+<div class="flex items-center gap-2">
+<a class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-all" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/task-search.html?render_html=true">
+<iconify-icon class="text-lg" icon="lucide:search"></iconify-icon>
+</a>
+</div>
+</div>
+<!-- 可滚动内容区 -->
+<div class="scroll-container">
+<!-- 任务分类统计 -->
+<div class="px-4 py-4 grid grid-cols-3 gap-3">
+<div class="bg-white p-3 rounded-2xl border border-blue-50">
+<p class="text-[11px] text-gray-400 mb-1">进行中</p>
+<p class="text-xl font-bold text-gray-900">12</p>
+</div>
+<div class="bg-white p-3 rounded-2xl">
+<p class="text-[11px] text-gray-400 mb-1">已完成</p>
+<p class="text-xl font-bold text-gray-900">48</p>
+</div>
+<div class="bg-white p-3 rounded-2xl">
+<p class="text-[11px] text-gray-400 mb-1">超期</p>
+<p class="text-xl font-bold text-red-500">2</p>
+</div>
+</div>
+<!-- 待办列表 -->
+<div class="px-4 space-y-3">
+<!-- 任务 1 -->
+<a class="block bg-white p-4 rounded-2xl shadow-sm border border-gray-50 active:scale-[0.98] transition-all" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/task-detail.html?render_html=true">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 text-[#10B981] cursor-pointer" onclick="toggleTask(event, this)">
+<iconify-icon class="text-xl" icon="lucide:check-circle-2"></iconify-icon>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-gray-400 text-[15px] mb-1 line-through">完成接口响应延迟问题的优化</h3>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1 text-[11px] text-gray-400">
+<iconify-icon icon="lucide:calendar"></iconify-icon>
+                            今天 18:00
+                        </span>
+<span class="text-gray-200">|</span>
+<span class="flex items-center gap-1 text-[11px] text-gray-400">
+<iconify-icon icon="lucide:presentation"></iconify-icon>
+                            产品需求评审会
+                        </span>
+<span class="px-2 py-0.5 rounded-md bg-red-50 text-red-500 text-[10px] font-bold">高优先级</span>
+</div>
+</div>
+</div>
+</a>
+<!-- 任务 2 -->
+<a class="block bg-white p-4 rounded-2xl shadow-sm border border-gray-50 active:scale-[0.98] transition-all" href="#">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 text-gray-300 cursor-pointer" onclick="toggleTask(event, this)">
+<iconify-icon class="text-xl" icon="lucide:circle"></iconify-icon>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-gray-900 text-[15px] mb-1">更新产品需求文档(PRD)</h3>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1 text-[11px] text-gray-400">
+<iconify-icon icon="lucide:calendar"></iconify-icon>
+                            明天
+                        </span>
+<span class="text-gray-200">|</span>
+<span class="flex items-center gap-1 text-[11px] text-gray-400">
+<iconify-icon icon="lucide:presentation"></iconify-icon>
+                            产品需求评审会
+                        </span>
+<span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-500 text-[10px] font-bold">中优先级</span>
+</div>
+</div>
+</div>
+</a>
+<!-- 任务 3 -->
+<a class="block bg-white p-4 rounded-2xl shadow-sm border border-gray-50 active:scale-[0.98] transition-all" href="#">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 text-gray-300 cursor-pointer" onclick="toggleTask(event, this)">
+<iconify-icon class="text-xl" icon="lucide:circle"></iconify-icon>
+</div>
+<div class="flex-1">
+<h3 class="font-semibold text-gray-900 text-[15px] mb-1">准备周五的团队建设方案</h3>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1 text-[11px] text-gray-400">
+<iconify-icon icon="lucide:calendar"></iconify-icon>
+                            07月30日
+                        </span>
+<span class="text-gray-200">|</span>
+<span class="flex items-center gap-1 text-[11px] text-gray-400">
+<iconify-icon icon="lucide:presentation"></iconify-icon>
+                            团队周会
+                        </span>
+<span class="px-2 py-0.5 rounded-md bg-gray-50 text-gray-500 text-[10px] font-bold">低优先级</span>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<!-- 底部评论输入 -->
+<!-- 底部导航栏 -->
+<nav class="bottom-nav">
+<a class="flex flex-col items-center gap-1 text-gray-400" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/meetmind-app.html?render_html=true">
+<iconify-icon class="text-2xl" icon="lucide:home"></iconify-icon>
+<span class="text-[10px]">首页</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/knowledge-base.html?render_html=true">
+<iconify-icon class="text-2xl" icon="lucide:book-open"></iconify-icon>
+<span class="text-[10px]">知识库</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#2B6CFF] relative" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/todo.html?render_html=true">
+<div class="bg-[#2B6CFF] w-12 h-12 rounded-2xl absolute -top-10 shadow-lg shadow-blue-200 flex items-center justify-center text-white">
+<iconify-icon class="text-2xl" icon="lucide:check-square"></iconify-icon>
+</div>
+<span class="text-[10px] mt-6 font-medium">待办</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400" href="#">
+<iconify-icon class="text-2xl" icon="lucide:user"></iconify-icon>
+<span class="text-[10px]">我的</span>
+</a>
+<!-- Home Indicator -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-gray-200 rounded-full"></div>
+</nav>
+</div>
+<script>
+    // 简单的交互反馈
+    document.querySelectorAll('.date-btn').forEach(btn => {
+        btn.onclick = function() {
+            document.querySelectorAll('.date-btn').forEach(b => {
+                b.classList.remove('date-btn-active', 'bg-[#EFF6FF]', 'text-[#2B6CFF]');
+                b.classList.add('bg-gray-100', 'text-gray-600');
+            });
+            this.classList.add('date-btn-active', 'bg-[#EFF6FF]', 'text-[#2B6CFF]');
+            this.classList.remove('bg-gray-100', 'text-gray-600');
+        };
+    });
+
+    function toggleTask(event, checkboxContainer) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const icon = checkboxContainer.querySelector('iconify-icon');
+        const title = checkboxContainer.nextElementSibling.querySelector('h3');
+        const isCompleted = icon.getAttribute('icon') === 'lucide:check-circle-2';
+        
+        if (isCompleted) {
+            icon.setAttribute('icon', 'lucide:circle');
+            checkboxContainer.classList.remove('text-[#10B981]');
+            checkboxContainer.classList.add('text-gray-300');
+            title.classList.remove('line-through', 'text-gray-400');
+            title.classList.add('text-gray-900');
+        } else {
+            icon.setAttribute('icon', 'lucide:check-circle-2');
+            checkboxContainer.classList.remove('text-gray-300');
+            checkboxContainer.classList.add('text-[#10B981]');
+            title.classList.add('line-through', 'text-gray-400');
+            title.classList.remove('text-gray-900');
+        }
+    }
+</script>
+</body></html>

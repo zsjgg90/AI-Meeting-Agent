@@ -38,6 +38,31 @@ def _dict_items(value: object) -> list[dict[str, Any]]:
     return [dict(item) for item in _list(value) if isinstance(item, dict)]
 
 
+MEETING_TYPE_VALUES = {
+    "project_weekly",
+    "progress_sync",
+    "requirement_review",
+    "solution_review",
+    "project_retrospective",
+    "risk_review",
+    "release_review",
+    "customer_communication",
+    "training",
+    "interview",
+    "one_on_one",
+    "other",
+}
+
+
+def _meeting_type(value: object) -> str:
+    text = _text(value)
+    return text if text in MEETING_TYPE_VALUES else "other"
+
+
+def _text_list(value: object) -> list[str]:
+    return [_text(item) for item in _list(value) if _text(item)]
+
+
 def _agenda_items(value: object) -> list[MeetingAgendaItem]:
     items: list[MeetingAgendaItem] = []
     for index, item in enumerate(_list(value), start=1):
@@ -203,6 +228,11 @@ def normalize_meeting_analysis_result(
         resolved_rag_chunk_ids = []
 
     analysis = MeetingAnalysisSchema(
+        meeting_title=_text(raw_result.get("meeting_title")),
+        meeting_type=_meeting_type(raw_result.get("meeting_type")),
+        meeting_type_confidence=_confidence(raw_result.get("meeting_type_confidence"), default=0.0),
+        meeting_title_candidate=_text(raw_result.get("meeting_title_candidate")),
+        title_basis=_text_list(raw_result.get("title_basis")),
         meeting_agenda=_agenda_items(raw_result.get("meeting_agenda") or raw_result.get("agenda")),
         meeting_summary=_text(raw_result.get("meeting_summary") or raw_result.get("summary")),
         key_conclusions=_key_conclusions(raw_result.get("key_conclusions") or raw_result.get("decisions")),
@@ -242,6 +272,11 @@ def analysis_to_persistence_payload(analysis: MeetingAnalysisSchema) -> dict[str
 
     return {
         "overview": analysis.meeting_summary,
+        "meeting_title": analysis.meeting_title,
+        "meeting_type": analysis.meeting_type,
+        "meeting_type_confidence": analysis.meeting_type_confidence,
+        "meeting_title_candidate": analysis.meeting_title_candidate,
+        "title_basis": analysis.title_basis,
         "agenda": agenda,
         "topics": topics,
         "speaker_summaries": [],

@@ -1,8 +1,10 @@
 import { Audio, AVPlaybackStatus } from 'expo-av';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, GestureResponderEvent, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, PanResponder, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { getMeeting, meetingAudioUrl, MeetingDetail } from '../api';
+import { LucideIcon } from '../components/LucideIcon';
+import { chooseMeetingAudioFile } from '../utils/audioFiles';
 
 type Props = {
   meetingId: string;
@@ -34,13 +36,19 @@ export function AudioPlayerScreen({ meetingId }: Props) {
   const [meeting, setMeeting] = useState<MeetingDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
+  const [, setSound] = useState<Audio.Sound | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [positionMillis, setPositionMillis] = useState(0);
   const [durationMillis, setDurationMillis] = useState(0);
+  const soundRef = useRef<Audio.Sound | null>(null);
+  const loadedAudioKeyRef = useRef<string | null>(null);
+  const audioBusyRef = useRef(false);
   const progressWidthRef = useRef(1);
+  const pendingSeekMillisRef = useRef<number | null>(null);
+  const isScrubbingRef = useRef(false);
 
-  const latestAudio = meeting?.audio_files[0] || null;
+  const selectedAudio = useMemo(() => chooseMeetingAudioFile(meeting?.audio_files || []), [meeting?.audio_files]);
+  const selectedAudioKey = meeting && selectedAudio ? `${meeting.id}:${selectedAudio.id}` : null;
   const progress = durationMillis > 0 ? Math.min(1, positionMillis / durationMillis) : 0;
   const speakerCount = useMemo(() => {
     const speakerLabels = new Set(
@@ -75,21 +83,57 @@ export function AudioPlayerScreen({ meetingId }: Props) {
   }, [loadMeeting]);
 
   useEffect(() => {
-    return () => {
-      sound?.unloadAsync().catch(() => undefined);
-    };
-  }, [sound]);
+    const activeSound = soundRef.current;
+    soundRef.current = null;
+    loadedAudioKeyRef.current = null;
+    audioBusyRef.current = false;
+    setSound(null);
+    setIsPlaying(false);
+    setPositionMillis(0);
+    setDurationMillis(0);
+    activeSound?.unloadAsync().catch(() => undefined);
+  }, [meetingId]);
+
+  useEffect(() => {
+    if (loadedAudioKeyRef.current === null || loadedAudioKeyRef.current === selectedAudioKey) return;
+    const activeSound = soundRef.current;
+    soundRef.current = null;
+    loadedAudioKeyRef.current = null;
+    audioBusyRef.current = false;
+    setSound(null);
+    setIsPlaying(false);
+    setPositionMillis(0);
+    setDurationMillis(0);
+    activeSound?.unloadAsync().catch(() => undefined);
+  }, [selectedAudioKey]);
+
+  useEffect(
+    () => () => {
+      soundRef.current?.unloadAsync().catch(() => undefined);
+      soundRef.current = null;
+      loadedAudioKeyRef.current = null;
+    },
+    [],
+  );
 
   function updatePlaybackStatus(status: AVPlaybackStatus) {
     if (!status.isLoaded) return;
     setIsPlaying(status.isPlaying);
-    setPositionMillis(status.positionMillis);
+    if (!isScrubbingRef.current) setPositionMillis(status.positionMillis);
     setDurationMillis(status.durationMillis || 0);
   }
 
   async function ensureSound(): Promise<Audio.Sound | null> {
-    if (!meeting || !latestAudio) return null;
-    if (sound) return sound;
+    if (!meeting || !selectedAudio || !selectedAudioKey) return null;
+    if (soundRef.current && loadedAudioKeyRef.current === selectedAudioKey) return soundRef.current;
+    if (soundRef.current) {
+      const staleSound = soundRef.current;
+      soundRef.current = null;
+      loadedAudioKeyRef.current = null;
+      setSound(null);
+      setIsPlaying(false);
+      await staleSound.unloadAsync().catch(() => undefined);
+    }
 
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
@@ -100,14 +144,18 @@ export function AudioPlayerScreen({ meetingId }: Props) {
 
     const nextSound = new Audio.Sound();
     nextSound.setOnPlaybackStatusUpdate(updatePlaybackStatus);
-    await nextSound.loadAsync({ uri: meetingAudioUrl(meeting.id, latestAudio.id) }, { shouldPlay: false });
+    await nextSound.loadAsync({ uri: meetingAudioUrl(meeting.id, selectedAudio.id) }, { shouldPlay: false });
+    soundRef.current = nextSound;
+    loadedAudioKeyRef.current = selectedAudioKey;
     const status = await nextSound.getStatusAsync();
     updatePlaybackStatus(status);
     setSound(nextSound);
     return nextSound;
   }
 
-  async function togglePlayback() {
+  async function runAudioAction(action: (activeSound: Audio.Sound) => Promise<void>) {
+    if (audioBusyRef.current) return;
+    audioBusyRef.current = true;
     try {
       setError(null);
       const activeSound = await ensureSound();
@@ -115,37 +163,75 @@ export function AudioPlayerScreen({ meetingId }: Props) {
         setError('暂无可播放的录音文件。');
         return;
       }
+      await action(activeSound);
+      updatePlaybackStatus(await activeSound.getStatusAsync());
+    } catch (nextError) {
+      setIsPlaying(false);
+      setError(nextError instanceof Error ? nextError.message : '播放失败。');
+    } finally {
+      audioBusyRef.current = false;
+    }
+  }
+
+  async function togglePlayback() {
+    await runAudioAction(async (activeSound) => {
       const status = await activeSound.getStatusAsync();
       if (status.isLoaded && status.isPlaying) {
         await activeSound.pauseAsync();
       } else {
         await activeSound.playAsync();
       }
-    } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '播放失败。');
-    }
+    });
   }
 
   async function seekBy(offsetMillis: number) {
-    const activeSound = await ensureSound();
-    if (!activeSound) return;
-    const nextPosition = Math.max(0, Math.min(durationMillis || 0, positionMillis + offsetMillis));
-    await activeSound.setPositionAsync(nextPosition);
+    await runAudioAction(async (activeSound) => {
+      const status = await activeSound.getStatusAsync();
+      if (!status.isLoaded) return;
+      const duration = status.durationMillis || durationMillis || 0;
+      const nextPosition = Math.max(0, Math.min(duration || Number.MAX_SAFE_INTEGER, status.positionMillis + offsetMillis));
+      await activeSound.setPositionAsync(nextPosition);
+    });
   }
 
   async function seekToProgress(nextProgress: number) {
-    const activeSound = await ensureSound();
-    if (!activeSound || !durationMillis) return;
-    const nextPosition = Math.max(0, Math.min(1, nextProgress)) * durationMillis;
-    setPositionMillis(nextPosition);
-    await activeSound.setPositionAsync(nextPosition);
+    if (!durationMillis) return;
+    await runAudioAction(async (activeSound) => {
+      const nextPosition = Math.max(0, Math.min(1, nextProgress)) * durationMillis;
+      setPositionMillis(nextPosition);
+      await activeSound.setPositionAsync(nextPosition);
+    });
   }
 
-  async function seekFromTouch(event: GestureResponderEvent) {
-    const x = event.nativeEvent.locationX;
+  function previewProgressSeek(x: number) {
     const nextProgress = Math.max(0, Math.min(1, x / progressWidthRef.current));
-    await seekToProgress(nextProgress);
+    if (!durationMillis) return;
+    const nextMillis = nextProgress * durationMillis;
+    pendingSeekMillisRef.current = nextMillis;
+    isScrubbingRef.current = true;
+    setPositionMillis(nextMillis);
   }
+
+  function commitProgressSeek() {
+    const nextMillis = pendingSeekMillisRef.current;
+    pendingSeekMillisRef.current = null;
+    isScrubbingRef.current = false;
+    if (nextMillis === null || !durationMillis) return;
+    void seekToProgress(nextMillis / durationMillis);
+  }
+
+  const progressPanResponder = useMemo(
+    () =>
+      PanResponder.create({
+        onMoveShouldSetPanResponder: () => durationMillis > 0,
+        onPanResponderGrant: (event) => previewProgressSeek(event.nativeEvent.locationX),
+        onPanResponderMove: (event) => previewProgressSeek(event.nativeEvent.locationX),
+        onPanResponderRelease: commitProgressSeek,
+        onPanResponderTerminate: commitProgressSeek,
+        onStartShouldSetPanResponder: () => durationMillis > 0,
+      }),
+    [durationMillis],
+  );
 
   return (
     <View style={styles.container}>
@@ -185,10 +271,7 @@ export function AudioPlayerScreen({ meetingId }: Props) {
             onLayout={(event) => {
               progressWidthRef.current = Math.max(1, event.nativeEvent.layout.width);
             }}
-            onMoveShouldSetResponder={() => true}
-            onResponderGrant={seekFromTouch}
-            onResponderMove={seekFromTouch}
-            onStartShouldSetResponder={() => true}
+            {...progressPanResponder.panHandlers}
             style={styles.progressTrack}
           >
             <View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
@@ -202,13 +285,13 @@ export function AudioPlayerScreen({ meetingId }: Props) {
 
           <View style={styles.controls}>
             <Pressable onPress={() => seekBy(-15000)} style={styles.skipButton}>
-              <Text style={styles.skipText}>↺15</Text>
+              <Text style={styles.skipText}>-15</Text>
             </Pressable>
             <Pressable onPress={togglePlayback} style={styles.playButton}>
-              <Text style={styles.playText}>{isPlaying ? 'Ⅱ' : '▶'}</Text>
+              <LucideIcon name={isPlaying ? 'pause' : 'play'} color="#ffffff" size={28} strokeWidth={2.6} />
             </Pressable>
             <Pressable onPress={() => seekBy(15000)} style={styles.skipButton}>
-              <Text style={styles.skipText}>15↻</Text>
+              <Text style={styles.skipText}>+15</Text>
             </Pressable>
           </View>
         </View>
@@ -332,11 +415,11 @@ const styles = StyleSheet.create({
   },
   playButton: {
     alignItems: 'center',
-    backgroundColor: '#6657ff',
+    backgroundColor: '#111827',
     borderRadius: 34,
     height: 68,
     justifyContent: 'center',
-    shadowColor: '#6657ff',
+    shadowColor: '#111827',
     shadowOffset: { width: 0, height: 12 },
     shadowOpacity: 0.24,
     shadowRadius: 18,

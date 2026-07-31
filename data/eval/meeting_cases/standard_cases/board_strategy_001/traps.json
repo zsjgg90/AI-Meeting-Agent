@@ -1,0 +1,14 @@
+[
+  {
+    "type": "proposal_vs_decision",
+    "description": "避免将讨论或建议误判为最终决定"
+  },
+  {
+    "type": "hallucination_control",
+    "description": "禁止生成无证据结论"
+  },
+  {
+    "type": "evidence_validation",
+    "description": "输出必须有原文依据"
+  }
+]

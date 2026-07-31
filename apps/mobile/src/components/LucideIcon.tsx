@@ -14,23 +14,33 @@ export type LucideIconName =
   | 'file-text'
   | 'filter'
   | 'flag'
+  | 'git-branch'
   | 'house'
   | 'image-plus'
   | 'info'
   | 'log-out'
+  | 'mail'
   | 'message-square'
   | 'mic'
+  | 'more-horizontal'
+  | 'pause'
   | 'pencil-line'
   | 'phone'
+  | 'play'
+  | 'plus'
   | 'rotate-ccw'
   | 'search'
+  | 'send'
   | 'settings'
+  | 'share-2'
   | 'sparkles'
+  | 'square'
   | 'square-check-big'
   | 'triangle-alert'
   | 'user'
   | 'user-round'
-  | 'video';
+  | 'video'
+  | 'x';
 
 type Props = {
   name: LucideIconName;
@@ -145,6 +155,15 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Path {...common} d="M4 4h11l-1 4 1 4H4" />
         </>
       );
+    case 'git-branch':
+      return (
+        <>
+          <Line {...common} x1="6" y1="3" x2="6" y2="15" />
+          <Circle {...common} cx="18" cy="6" r="3" />
+          <Circle {...common} cx="6" cy="18" r="3" />
+          <Path {...common} d="M18 9a9 9 0 0 1-9 9" />
+        </>
+      );
     case 'house':
       return (
         <>
@@ -178,6 +197,13 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Path {...common} d="M21 12H9" />
         </>
       );
+    case 'mail':
+      return (
+        <>
+          <Rect {...common} x="3" y="5" width="18" height="14" rx="2" />
+          <Path {...common} d="m3 7 9 6 9-6" />
+        </>
+      );
     case 'message-square':
       return (
         <>
@@ -194,6 +220,21 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Line {...common} x1="12" y1="19" x2="12" y2="22" />
         </>
       );
+    case 'more-horizontal':
+      return (
+        <>
+          <Circle {...common} cx="12" cy="12" r="1" />
+          <Circle {...common} cx="19" cy="12" r="1" />
+          <Circle {...common} cx="5" cy="12" r="1" />
+        </>
+      );
+    case 'pause':
+      return (
+        <>
+          <Path {...common} d="M8 5v14" />
+          <Path {...common} d="M16 5v14" />
+        </>
+      );
     case 'pencil-line':
       return (
         <>
@@ -205,6 +246,15 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
       return (
         <>
           <Path {...common} d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2z" />
+        </>
+      );
+    case 'play':
+      return <Path {...common} d="M6 3l15 9-15 9z" />;
+    case 'plus':
+      return (
+        <>
+          <Path {...common} d="M5 12h14" />
+          <Path {...common} d="M12 5v14" />
         </>
       );
     case 'rotate-ccw':
@@ -221,11 +271,28 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Path {...common} d="m21 21-4.3-4.3" />
         </>
       );
+    case 'send':
+      return (
+        <>
+          <Path {...common} d="m22 2-7 20-4-9-9-4z" />
+          <Path {...common} d="M22 2 11 13" />
+        </>
+      );
     case 'settings':
       return (
         <>
           <Path {...common} d="M12.2 2h-.4a2 2 0 0 0-2 1.7l-.2 1.1a7.6 7.6 0 0 0-1.2.7l-1-.4a2 2 0 0 0-2.4.8l-.2.4a2 2 0 0 0 .3 2.5l.8.7a7.5 7.5 0 0 0 0 1.4l-.8.7a2 2 0 0 0-.3 2.5l.2.4a2 2 0 0 0 2.4.8l1-.4a7.6 7.6 0 0 0 1.2.7l.2 1.1a2 2 0 0 0 2 1.7h.4a2 2 0 0 0 2-1.7l.2-1.1a7.6 7.6 0 0 0 1.2-.7l1 .4a2 2 0 0 0 2.4-.8l.2-.4a2 2 0 0 0-.3-2.5l-.8-.7a7.5 7.5 0 0 0 0-1.4l.8-.7a2 2 0 0 0 .3-2.5l-.2-.4a2 2 0 0 0-2.4-.8l-1 .4a7.6 7.6 0 0 0-1.2-.7l-.2-1.1a2 2 0 0 0-2-1.7Z" />
           <Circle {...common} cx="12" cy="12" r="3" />
+        </>
+      );
+    case 'share-2':
+      return (
+        <>
+          <Circle {...common} cx="18" cy="5" r="3" />
+          <Circle {...common} cx="6" cy="12" r="3" />
+          <Circle {...common} cx="18" cy="19" r="3" />
+          <Path {...common} d="m8.6 13.5 6.8 4" />
+          <Path {...common} d="m15.4 6.5-6.8 4" />
         </>
       );
     case 'sparkles':
@@ -238,6 +305,8 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
           <Path {...common} d="M17 19h4" />
         </>
       );
+    case 'square':
+      return <Rect {...common} x="5" y="5" width="14" height="14" rx="2" />;
     case 'square-check-big':
       return (
         <>
@@ -272,6 +341,13 @@ function renderIcon(name: LucideIconName, color: string, strokeWidth: number) {
         <>
           <Rect {...common} x="3" y="6" width="12" height="12" rx="2" />
           <Path {...common} d="m15 10 5-3v10l-5-3z" />
+        </>
+      );
+    case 'x':
+      return (
+        <>
+          <Path {...common} d="M18 6 6 18" />
+          <Path {...common} d="m6 6 12 12" />
         </>
       );
     default:

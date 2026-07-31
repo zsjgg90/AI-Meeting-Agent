@@ -2,6 +2,227 @@
 
 ## Current State
 
+Latest evaluation note: Phase 0 Evaluation System now exists as an offline-only
+framework under `data/eval/` with schema, metric notes, report location, and
+`scripts/evaluate_meeting_analysis.py`. It compares existing `expected.json`
+and `actual.json` files, optionally checks transcript evidence, and reports
+Decision Precision, Task Recall, Risk Recall, Hallucination Rate, and Evidence
+Coverage. Unit coverage is `python -m unittest tests.test_evaluate_meeting_analysis`.
+It is not wired into API, Worker, DB, Mobile, ASR, Semantic Pipeline, Prompt,
+RAG, or Qwen3/Ollama.
+
+Latest mobile history page note: the full `历史会议` page now shows the loaded
+meeting count in the AppHeader title as `历史会议（n）`. The separate `共 n 场会议`
+subtitle above the date sections was removed, selection controls use black
+text, and the history list/date section spacing is tightened upward. The
+change is UI-only and does not alter meeting pagination, API contracts,
+backend, Worker, Prompt/RAG/Validator, schema, or database behavior.
+
+Latest mobile push config note: Profile `推送配置` now opens an independent
+React Native page for Feishu push, email push, and SMS reminders. The page is
+positioned as an AI meeting result distribution center, but the project has no
+formal Feishu, email, SMS, push-config, or push-history API. All channel
+switches remain disabled/off and the page shows `未配置`, `暂未开放`, and `待接入`
+states only. It does not add OAuth, SMTP, SMS provider integration, backend
+endpoints, database fields, push history, Worker logic, Prompt/RAG/Validator
+changes, or fake connection/delivery success.
+
+Latest mobile voiceprint note: Profile `声纹管理` now opens independent
+React Native pages for voiceprint management and add-sample recording. The
+management page shows `声纹识别` as unavailable, explains that future enablement
+would identify and label different speakers, renders a truthful empty list
+instead of prototype fake users, and links to sample recording. The add-sample
+page collects a user name, shows fixed朗读文本, and uses a page-local
+`expo-av` `Audio.Recording` instance to start/stop a local sample. There is no
+formal voiceprint API in the project; save only reports `待接入接口` and does not
+upload, register, identify, create meetings, run transcription, run AI
+analysis, or touch Worker/Prompt/RAG/Validator/schema/database code.
+
+Latest Worker title note: the formal Qwen3 + RAG call now returns internal
+`meeting_type`, `meeting_type_confidence`, `meeting_title_candidate`, and
+`title_basis` fields for title handling. Worker still makes no separate title
+model request and still only updates unchanged fallback titles. The deterministic
+title gate now requires a fixed meeting-type enum, confidence at least `0.70`,
+two valid title bases, and rejects generic/explanatory/JSON/Markdown/multiline
+titles plus task-like titles that combine time words and action words. Failure
+keeps `YYYY-MM-DD HH:mm 实时录音/文件导入` and does not affect six-dimension summary
+persistence. Version-number dots such as `V3.2` are allowed only inside the
+version token.
+
+Latest live title audit note: `services/worker/scripts/run_meeting_title_live_audit.py`
+ran a controlled 24-sample live Qwen3 + RAG title audit without database writes
+or separate title model calls. Final report:
+`data/debug/title_regression/20260730_title_live_phase2/title_live_audit_report.md`.
+Current baseline is 23 acceptable/accurate titles, 1 safe fallback, 0 local
+action-item title leaks, 0 missing meeting types, 0 missing or duplicate title
+bases, and all confidences in `0.90-1.00`. The only remaining fallback was a
+meeting-level project weekly title containing both `下周` and `确认`; it was
+left as safe fallback because it is a single rule-strictness case.
+
+Latest title regression audit note: `services/worker/scripts/run_meeting_title_regression_audit.py`
+uses existing real/debug/acceptance transcript files and deterministic title
+payloads to audit the title gate without database access or Qwen3 calls. The
+2026-07-30 report under `data/debug/title_regression/` covered 8 samples:
+4 accepted, 4 rejected, 4 safe fallbacks, and 0 local-issue leaks after adding
+the narrow role-plus-action rejection for titles such as `后端接口优化确认会`.
+
+Latest meeting-list agenda note: the compact home/history meeting card now
+reads `record.item` when extracting preview text from structured summary items.
+This fixes `meeting_agenda` rows returned as `{ item: "..." }` being hidden as
+empty. API summary fetching and backend payloads were not changed.
+
+Latest mobile realtime recording note: ending a recording now reads the local
+Expo recording URI before `stopAndUnloadAsync()` and no longer discards a valid
+recording only because the UI elapsed timer is still under one second. The home
+compact meeting list hides the `未生成摘要` status badge for unrecorded `pending`
+meetings.
+
+Latest mobile meeting-list note: the compact meeting card preview now includes
+`会议总结` before `会议议程`, `核心结论`, and `待办事项`. The history/all-meetings page
+uses the same compact card as the home list while retaining selection,
+pagination, refresh, and swipe-delete behavior.
+
+Latest compact card field note: completed meeting cards now support four
+preview dimensions, `会议总结`, `会议议程`, `核心结论`, and `待办事项`, using the
+existing summary fields. Dimensions without valid recognized text are omitted
+instead of showing `暂无`, so compact cards shrink with the available content.
+
+On 2026-07-29 realtime recording was refactored into a home-screen overlay.
+The home `实时录音` action still creates the fallback-titled meeting first, but it
+now keeps the user on the home route, expands the mounted recording overlay,
+and starts the real `expo-av` recorder there. The overlay supports `expanded`
+and `collapsed` display states; collapsed renders a mini recording bar above
+BottomNav, and both states share the same recording object, elapsed timer,
+pause/resume state, meeting id, metering-backed waveform, and stop/discard
+handlers. Dragging the top handle collapses without releasing recorder
+resources. The recording sheet now omits the language selector, right-side
+close button, central microphone prompt, transcript placeholder copy, and
+one-hour limit banner. The bottom player keeps only 10 soundprint bars, a
+smaller timer, pause/resume, and direct end controls. End no longer opens a
+second confirmation: it calls `stopAndUnloadAsync()`, shows
+`已进入AI结构化分析` for 500 ms, clears the overlay session, returns to home, and
+runs upload/process/analyze in the mobile background flow. The just-ended
+meeting is now also injected into the home/all meeting lists as `processing`,
+so the existing `处理中` loading badge appears immediately after the 500 ms
+return-home handoff. Mobile still does
+not show fake live transcripts. No backend, Worker, Prompt/RAG, Validator,
+schema, file import, meeting detail, knowledge, or todo behavior was
+intentionally changed.
+
+On 2026-07-29 meeting creation and title generation were optimized. The home
+Realtime Recording action now creates a meeting directly with local-time
+fallback title `YYYY-MM-DD HH:mm 实时录音`, disables repeat taps while creating,
+and enters `RecordingScreen` without `NewMeetingScreen`; the old route remains
+available for compatibility. Audio import now creates `YYYY-MM-DD HH:mm 文件导入`
+after file selection and reuses the existing `AIProcessingScreen`
+upload/process/analyze flow. Alembic revision `20260729_0018` adds
+`meetings.title_source` with `fallback`, `ai_generated`, and `user_edited`.
+`PATCH /meetings/{id}` can update titles and marks them `user_edited`; meeting
+detail exposes this through the existing more-menu modal. The Worker formal
+analysis schema includes `meeting_title`, supplied by the same Qwen3 + RAG
+call, then validates it in `services/worker/app/meeting_title.py` before
+`save_summary()` replaces only unchanged fallback titles. Invalid, generic, or
+empty title candidates are ignored and do not affect summary persistence,
+meeting status, or knowledge sync.
+
+Also on 2026-07-29 `RecordingScreen` was rebuilt from
+`docs/design/meetmind-app_meeting-recording.html` without adding a new recording
+pipeline. The home Realtime Recording action still creates the meeting first,
+then the recording page now starts the existing `expo-av` recorder
+automatically, displays the fallback title and local create time, shows a
+truthful post-meeting transcription prompt instead of fake live transcript
+rows, uses `pauseAsync()`/`startAsync()` for real pause/resume, uses
+`stopAndUnloadAsync()` once, returns directly to the home list after ending,
+and starts upload/process/analyze from the mobile background flow. It requires
+confirmation only before discarding. Abandoned or under-one-second
+automatic recordings call the existing meeting delete cleanup so empty
+meetings do not remain in the list. Waveform rendering uses `expo-av` metering
+when the platform reports it and falls back to a light status animation when
+metering is unavailable. File import still uses `AIProcessingScreen`, which
+displays the latest polled meeting title so successful AI title replacement can
+appear on the processing screen before opening details. The mobile client still does not include
+`@siteed/audio-studio` PCM streaming, so realtime ASR/speaker separation is not
+shown during recording even though backend realtime endpoints exist.
+
+On 2026-07-29 the Expo task detail page was updated for editable mobile task
+details with real task-detail persistence. The page now uses a compact
+reference-style layout: a top `当前任务` card contains the square checkbox,
+editable title, and editable description; below it are grouped `基本信息`,
+reminder-setting, and attachment sections. The detail checkbox uses
+`PATCH /tasks/{task_id}/status` with optimistic UI and rollback; completed
+tasks show a grey strikethrough title. The top-right edit icon was removed.
+Title, description, owner, due date, priority, reminder offset, and reminder
+channel now persist through `PATCH /tasks/{task_id}` and sync back to the
+current App-session Todo/search data. Source meeting remains read-only and is
+looked up with `getMeeting`; missing or deleted meetings show unavailable
+copy and are not clickable from task detail. Task attachments are selected
+with `expo-document-picker`, uploaded through
+`POST /tasks/{task_id}/attachments`, and opened through the task attachment
+download endpoint.
+
+On 2026-07-28 the Expo `我的待办` home was rebuilt from
+`docs/design/meetmind-app_todo.html` while staying on the existing `/tasks`
+API. `TodoScreen` now renders one `FlatList` with a real top bar, search
+state, real loaded-task statistics for open/completed/overdue, filters,
+pull-to-refresh, load-more pagination, deadline/overdue formatting,
+priority/status/owner tags, and source-meeting navigation into the existing
+meeting detail `actions` tab. Task status controls are intentionally
+read-only because no ordinary task update endpoint is exposed to this mobile
+surface; tapping the status icon shows that the current version does not
+support updating task status and does not mutate local completion state. The
+page keeps the existing `BottomNav` and does not touch backend, database,
+Worker, Prompt, RAG, Validator, or six-dimension schema behavior.
+The separate all/open/completed/overdue tab row was later removed, while the
+three statistic cards remain visible. Task status indicators now use square
+checkbox styling, and both the title and checkbox enter the same read-only
+status action.
+The Todo search button now opens an independent `TaskSearchScreen` overlay
+without bottom navigation. The page reuses `GET /tasks?q=...` through
+`listTasks`, uses explicit keyboard-search submission with stale-request guards,
+renders real task cards, opens source meetings on the existing detail `actions` tab, and
+stores only recent non-empty keywords in AsyncStorage with a 10-item cap. No
+backend search or history endpoint was added.
+Todo status updates are now backed by the formal
+`PATCH /tasks/{task_id}/status` API for `open` and `completed`. Todo cards and
+task-search result cards render only checkbox, title, deadline, and priority;
+checkbox and title presses perform optimistic real updates with per-task
+loading and failure rollback. Task search no longer sends requests while the
+user types; it requests results only after keyboard search submission, retry,
+load-more, or recent-search selection.
+
+On 2026-07-28 the Expo Knowledge Base home was rebuilt from
+`docs/design/meetmind-app_knowledge-base.html` inside the existing
+`KnowledgeBaseScreen`. It remains an API-only page and no longer renders the
+Knowledge Base content overview section. The page shows the `MeetMind AI` top
+bar, a disabled real-history state, a static React Native robot avatar, the
+three RC1 quick questions, structured links to knowledge search, key
+decisions, and issue/risk lists, and a fixed bottom input bar above the
+existing `BottomNav`. Because the overview section was removed, the home does
+not call `GET /knowledge/overview`, `GET /knowledge/meetings?limit=1`, or
+`GET /tasks` for card data. Question submission and quick-question execution
+do not call a model or generate mock answers; they show that Knowledge Base
+Q&A is not open in the current version. The voice button is disabled because
+no knowledge voice-input contract exists. The plus button opens the existing
+audio import route. No backend, database, Worker, RAG, Prompt, Validator,
+six-dimension schema, model call, document upload/index API, or chat-history
+storage behavior was changed.
+
+On 2026-07-28 the Expo meeting detail Agent tools tab was rebuilt from
+`docs/design/meeting-agent.html` inside the existing `MeetingDetailScreen`.
+It reuses the same detail top navigation, inline `expo-av` player, and
+three-tab bar as the transcript and AI summary tabs, so tab switching does not
+create a second player. The tab now renders four tool cards: email push,
+Feishu tasks, mind map, and Knowledge Base. Only Knowledge Base is connected
+to a real existing capability: completed meetings with a formal summary can
+call `POST /meetings/{id}/knowledge/reindex`, then enter the existing
+Knowledge Base route. Email, Feishu, and mind map remain explicitly disabled
+because the project has no complete SMTP/Gmail, Feishu Open Platform, or
+formal mind-map generation/preview contract. The generation-record section
+shows `暂无工具使用记录` because no persisted execution-log endpoint exists for
+these four tools. This work did not modify backend services, database schema,
+Worker, Prompt, RAG, Validator, six-dimension schema, OAuth, SMTP, Feishu, or
+model calls.
+
 On 2026-07-28 the Expo meeting detail AI summary tab was rebuilt from
 `docs/design/meeting-minutes.html`. It still lives inside
 `MeetingDetailScreen`, reuses the detail top navigation, inline `expo-av`
@@ -547,3 +768,151 @@ Do not continue broad refactoring immediately. First stabilize:
 7. Run `.\scripts\check-services.ps1` with local services available.
 8. Continue embedding model offline/cache setup, shared API/Worker model
    strategy, live benchmark gate, and E2E demo script.
+
+## 2026-07-28 Todo Mobile Runtime Note
+
+The Todo home no longer has inline search state; its search button should only
+open the independent task-search route. The task-search page should not call
+`GET /tasks?q=...` from `onChangeText`; search requests are submitted only by
+the IME keyboard search action, retry, load-more, or recent-search selection.
+Todo completion uses a 300 ms visual transition: after tapping the checkbox or
+title, the item first shows a checked square checkbox and grey strikethrough
+title, then clears the transition after the real API succeeds without
+automatically switching the top filter to completed.
+
+If mobile checkbox completion returns 404 after code changes, first verify the
+running API route table. In this session the local 8002 listener was still
+serving the old OpenAPI with only `/tasks`; restarting
+`services/api/start-api-local.ps1` restored `/tasks/{task_id}/status`.
+
+## 2026-07-28 Task Detail Runtime Note
+
+Todo and task-search task cards now open `TaskDetailScreen` as a full-screen
+overlay instead of navigating directly to meeting detail. The overlay keeps the
+underlying Todo or search screen mounted so filters, search text, results, and
+scroll state are preserved after back. The detail page has no bottom
+navigation, reads the task object supplied by the entry card, and attempts a
+best-effort refresh through `GET /tasks` with `meeting_id` and the task title
+before matching by id. There is still no dedicated `GET /tasks/{id}` endpoint.
+
+Task detail status now uses the formal `PATCH /tasks/{task_id}/status`
+endpoint from a square checkbox. Inline title, description, owner, deadline,
+priority, and reminder controls persist through `PATCH /tasks/{task_id}`.
+Task attachments persist through `POST /tasks/{task_id}/attachments` and open
+through `GET /tasks/{task_id}/attachments/{attachment_id}`. Title/status/edit
+changes are reflected in the current App-session Todo/search data through
+`taskOverrides`. Missing task description, owner, deadline, priority,
+evidence, source meeting, and attachments degrade to explicit empty copy and
+do not use prototype static data. Source meeting is displayed as read-only in
+task detail and no longer navigates to meeting detail from that row.
+
+## 2026-07-30 Home Meeting List Date Sections
+
+The mobile home and all-meetings lists now use `SectionList` sections generated
+from `apps/mobile/src/utils/meetingDateSections.ts`. Meetings group and sort by
+`start_at`, falling back to `created_at`; local date fields determine natural
+days and 今天/昨天 labels. Invalid or missing dates are isolated under
+`时间未知`. A midnight timer refreshes section labels after local 00:00, and the
+mini recording bar path adds extra bottom padding so the final section/card can
+scroll above the overlay.
+
+Verification run: `npm run test:meeting-date-sections`, `node
+apps/mobile/scripts/test-meeting-history-ui.js`, `npm run typecheck`, and
+`.\scripts\test-all.ps1` all passed on 2026-07-30.
+
+## 2026-07-30 Bottom Navigation Position
+
+`apps/mobile/src/components/BottomNav.tsx` now pins the tab bar with
+`position: 'absolute'`, `bottom: 0`, `left: 0`, and `right: 0`, and removes the
+previous `paddingBottom: 12` visual gap. `apps/mobile/scripts/test-bottom-nav-ui.js`
+checks this layout and is included in `.\scripts\test-all.ps1`.
+
+Verification run: `npm run test:bottom-nav-ui`, `npm run typecheck`, and
+`.\scripts\test-all.ps1` all passed on 2026-07-30.
+
+Follow-up adjustment: the pinned bottom tab bar was raised from `minHeight: 66`
+to `minHeight: 80`, each tab item from `minHeight: 54` to `minHeight: 66`, and
+the icon wrapper now uses `transform: [{ translateY: -5 }]` so icons sit higher
+inside the taller bar. The same checks passed again.
+
+Second follow-up adjustment: the tab bar was raised again by about 15% from
+`minHeight: 80` to `minHeight: 92`, tab items from `minHeight: 66` to
+`minHeight: 76`, and the transform moved from icon-only to the whole tab item
+with `transform: [{ translateY: -6 }]` so icons and labels move upward
+together. The same checks passed again.
+
+Third follow-up adjustment: the tab bar was raised again by about 15% from
+`minHeight: 92` to `minHeight: 106`, tab items from `minHeight: 76` to
+`minHeight: 87`, and the whole tab item offset increased to
+`transform: [{ translateY: -10 }]`. The same checks passed again.
+
+Fourth follow-up adjustment: the tab bar was reduced by about 5% from
+`minHeight: 106` to `minHeight: 101`, tab items from `minHeight: 87` to
+`minHeight: 83`, and the whole tab item offset was softened to
+`transform: [{ translateY: -8 }]`. The same checks passed again.
+
+## 2026-07-30 Realtime Recording Mini Bar Overlay
+
+The collapsed realtime recording bar in
+`apps/mobile/src/screens/RecordingScreen.tsx` now renders as a bottom overlay
+instead of a smaller floating pill above BottomNav. Its `miniBar` style uses
+`bottom: 0`, `left: 0`, `right: 0`, `minHeight: 140`, `zIndex: 95`, and
+`elevation: 24`, so it spans the screen width and visually covers the pinned
+bottom tab navigation while recording is collapsed. The nested `miniPanel`
+owns the top radius and content padding.
+
+Follow-up adjustment: the collapsed bar now has a centered horizontal handle
+at the top. `miniPanResponder.panHandlers` is attached to the whole `miniBar`,
+so the entire collapsed bottom recording module can be dragged upward to call
+the existing `onExpand` callback and restore the expanded recorder in the same
+mounted `RecordingScreen`; no route transition is involved. The handle is only
+a visual cue. The collapsed content is split into a centered `miniContentRow`,
+so the waveform/timer block aligns vertically with the play/pause and stop
+controls. The elapsed timer also has a JS wall-clock interval fallback while
+`state === 'recording'`, so it keeps advancing even if Expo's native recording
+status callback does not fire reliably in collapsed mode.
+
+Second follow-up adjustment: the collapsed bar drag gesture now waits for
+intentional vertical movement before taking responder ownership, applies
+resisted upward/downward movement, and uses a spring with `tension: 170` and
+`friction: 20` to return naturally when the drag does not expand. The module
+also gets a subtle `miniScale` response while dragging. The collapsed
+waveform, timer, play/pause, and stop controls were enlarged by about 25%:
+compact waveform is `56 x 22`, timer font is `19`, and action controls use
+`scale: 0.95` instead of the previous smaller `0.76`.
+
+Third follow-up adjustment: dragging no longer moves the fixed bottom cover
+itself. `miniBar` remains fixed at `bottom: 0` with a white background and
+`minHeight: 164` to keep the pinned BottomNav hidden, while a nested
+`miniPanel` receives the `miniDragY` and `miniScale` transform. This prevents
+the bottom tab navigation from appearing during upward drag. The collapsed
+controls were enlarged by another 25%: compact waveform is now `70 x 28`,
+compact waveform bars use `Math.max(10, baseHeight * 0.72)`, timer font is
+`24`, and action controls use `scale: 1.19`.
+
+Fourth follow-up adjustment: after reviewing the visual weight, the collapsed
+bar and controls were reduced by about 15% while keeping the fixed-cover
+structure. Current compact values are: `miniBar`/`miniPanel` `minHeight: 140`,
+compact waveform `60 x 24`, compact waveform bars
+`Math.max(9, baseHeight * 0.61)`, timer font `20`, and action controls
+`scale: 1.01`.
+
+Verification run: `node apps/mobile/scripts/test-recording-upload-ui.js`,
+`npm run typecheck`, and `.\scripts\test-all.ps1` passed on 2026-07-30.
+
+## 2026-07-30 Profile And Center Recording Entry
+
+`apps/mobile/src/screens/ProfileScreen.tsx` now matches the supplied `我的`
+prototype with a centered title, top settings button, retained user card, and
+the menu entries `我的记忆`, `声纹管理`, `推送配置`, `帮助与反馈`, and
+`关于 MeetMind AI`. Only existing settings, help/feedback, and about routes are
+wired. Memory, voiceprint, and push configuration show an unsupported-version
+prompt instead of fake data.
+
+`apps/mobile/src/components/BottomNav.tsx` now uses the fixed five-item layout
+`首页 | 知识库 | 麦克风 | 待办 | 我的`. The center microphone is a raised blue
+button. In `apps/mobile/App.tsx`, clicking it reuses the existing realtime
+recording entry: if a recording session exists, it expands the mounted
+`RecordingScreen`; otherwise it calls the existing `createRecordingMeeting()`.
+No new `RecordingScreen`, recording object, recorder state store, backend,
+Worker, Prompt, RAG, Validator, schema, or database change was introduced.

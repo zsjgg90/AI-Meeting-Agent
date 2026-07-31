@@ -1,0 +1,150 @@
+{
+  "overview": "会议围绕下半年增长策略展开讨论，重点分析了市场投入与成本控制的平衡问题。各方就是否减少市场投入可能影响增长速度存在分歧，最终达成先评估不同方案收益和成本的共识。",
+  "meeting_title": "",
+  "meeting_type": "requirement_review",
+  "meeting_type_confidence": 0.85,
+  "meeting_title_candidate": "下半年增长策略评估会议",
+  "title_basis": [
+    "会议讨论了下半年增长策略的制定与评估",
+    "核心议题包含市场投入、成本控制与方案评估"
+  ],
+  "agenda": [
+    {
+      "item": "讨论下半年增长策略方案",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "评估市场投入与成本控制的平衡",
+      "order": 2,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确定方案评估标准与后续步骤",
+      "order": 3,
+      "source_segment_ids": []
+    }
+  ],
+  "topics": [],
+  "speaker_summaries": [],
+  "decisions": [
+    {
+      "decision": "先评估不同方案收益和成本，再确定最终方向",
+      "reason": "",
+      "source": "先评估不同方案收益和成本，再确定最终方向。",
+      "conclusion": "先评估不同方案收益和成本，再确定最终方向",
+      "source_text": "先评估不同方案收益和成本，再确定最终方向。",
+      "confidence": 0.95
+    }
+  ],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "评估不同增长方案的收益和成本",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "先评估不同方案收益和成本，再确定最终方向。",
+      "source_segment_id": null,
+      "confidence": 0.8
+    }
+  ],
+  "risks": [
+    {
+      "risk": "减少市场投入导致增长速度下降",
+      "impact": "可能影响全年增长目标达成",
+      "mitigation": "",
+      "focus_area": "市场投入策略评估",
+      "source_text": "如果减少市场投入，增长速度可能受到影响。",
+      "confidence": 0.8
+    }
+  ],
+  "open_questions": [
+    {
+      "question": "市场投入减少与增长速度的平衡方案",
+      "owner": "",
+      "source": "speaker_02（10.0-18.0）：如果减少市场投入，增长速度可能受到影响。",
+      "issue": "市场投入减少与增长速度的平衡方案",
+      "reason": "未明确具体评估标准和优先级",
+      "blocker": "",
+      "source_text": "speaker_02（10.0-18.0）：如果减少市场投入，增长速度可能受到影响。",
+      "confidence": 0.75
+    }
+  ],
+  "next_steps": [
+    {
+      "item": "评估不同增长方案的收益和成本",
+      "owner": "",
+      "time": "",
+      "note": "先评估不同方案收益和成本，再确定最终方向。"
+    }
+  ],
+  "meeting_agenda": [
+    {
+      "item": "讨论下半年增长策略方案",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "评估市场投入与成本控制的平衡",
+      "order": 2,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确定方案评估标准与后续步骤",
+      "order": 3,
+      "source_segment_ids": []
+    }
+  ],
+  "meeting_summary": "会议围绕下半年增长策略展开讨论，重点分析了市场投入与成本控制的平衡问题。各方就是否减少市场投入可能影响增长速度存在分歧，最终达成先评估不同方案收益和成本的共识。",
+  "key_conclusions": [
+    {
+      "conclusion": "先评估不同方案收益和成本，再确定最终方向",
+      "source_text": "先评估不同方案收益和成本，再确定最终方向。",
+      "confidence": 0.95
+    }
+  ],
+  "unresolved_issues": [
+    {
+      "issue": "市场投入减少与增长速度的平衡方案",
+      "reason": "未明确具体评估标准和优先级",
+      "blocker": "",
+      "source_text": "speaker_02（10.0-18.0）：如果减少市场投入，增长速度可能受到影响。",
+      "confidence": 0.75
+    }
+  ],
+  "risks_and_focus": [
+    {
+      "risk": "减少市场投入导致增长速度下降",
+      "impact": "可能影响全年增长目标达成",
+      "focus_area": "市场投入策略评估",
+      "mitigation": "",
+      "source_text": "如果减少市场投入，增长速度可能受到影响。",
+      "confidence": 0.8
+    }
+  ],
+  "model_name": "qwen3:14b+rag",
+  "confidence_score": 0.825,
+  "metadata": {
+    "schema_version": "meeting-analysis-v1",
+    "model_name": "qwen3:14b+rag",
+    "prompt_version": "meeting-analyst-v1",
+    "rag_chunk_ids": [
+      "v4_boundary_rule_001",
+      "v4_boundary_rule_002",
+      "v4_boundary_rule_003",
+      "v4_definition_001",
+      "boundary_rule_012",
+      "v4_definition_002",
+      "boundary_rule_001",
+      "definition_002"
+    ],
+    "rag_dataset_version": "meeting_analyst_rag_v2_dedup",
+    "rag_chunk_schema_version": "rag-chunk-v1",
+    "rag_collection_name": "meeting_analyst_rules_v2_dedup_125",
+    "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+    "result_source": "legacy_qwen_rag",
+    "confidence_score": 0.825,
+    "generated_at": "2026-07-31T16:25:14.335336+00:00"
+  }
+}

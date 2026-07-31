@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>搜索任务 - MeetMind AI</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .iphone-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background-color: #F5F7FA;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px rgba(0,0,0,0.05);
+        }
+
+        .scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 100px;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: transparent;
+        }
+
+        .nav-header {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding: 10px 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 50;
+        }
+
+        .search-box {
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            height: 52px;
+            margin: 16px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background: white;
+            border-radius: 100px;
+            font-size: 13px;
+            color: #64748B;
+            border: 1px solid #F1F5F9;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .tag:active {
+            background: #F1F5F9;
+        }
+    </style>
+</head>
+<body class="" style="opacity: 1;">
+<div class="iphone-container">
+<!-- 状态栏 -->
+<div class="status-bar">
+<span>19:07</span>
+<div class="flex items-center gap-1.5">
+<iconify-icon icon="ion:cellular"></iconify-icon>
+<iconify-icon icon="ion:wifi"></iconify-icon>
+<div class="flex items-center text-[#F59E0B]">
+<span class="text-[10px] mr-0.5">66%</span>
+<iconify-icon class="text-lg" icon="ion:battery-charging"></iconify-icon>
+</div>
+</div>
+</div>
+<!-- 导航栏 -->
+<div class="nav-header">
+<a class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/todo.html?render_html=true">
+<iconify-icon class="text-2xl text-gray-900" icon="lucide:arrow-left"></iconify-icon>
+</a>
+<h1 class="text-lg font-semibold text-gray-900">搜索任务</h1>
+<div class="w-10"></div>
+</div>
+<!-- 可滚动内容区 -->
+<div class="scroll-container">
+<!-- 搜索输入区 -->
+<div class="search-box">
+<iconify-icon class="text-xl text-gray-400 mr-3" icon="lucide:search"></iconify-icon>
+<input autofocus="" class="flex-1 bg-transparent border-none outline-none text-[15px] text-gray-900 placeholder-gray-400" id="searchInput" placeholder="搜索任务标题、会议或负责人..." type="text"/>
+<button class="w-6 h-6 flex items-center justify-center rounded-full bg-blue-50 text-[#2B6CFF] ml-2" id="clearBtn">
+<iconify-icon class="text-sm" icon="lucide:x"></iconify-icon>
+</button>
+</div>
+<!-- 热门搜索 -->
+<div class="px-5 mb-8">
+<div class="flex flex-wrap gap-2">
+</div>
+</div>
+<!-- 最近搜索 -->
+<div class="px-5">
+<p class="text-[13px] text-gray-400 mb-4">最近搜索</p>
+<div class="space-y-1">
+<div class="flex items-center justify-between py-3 group">
+<div class="flex items-center gap-3">
+<iconify-icon class="text-lg text-gray-300" icon="lucide:history"></iconify-icon>
+<span class="text-[15px] text-gray-700">接口优化</span>
+</div>
+<button class="text-gray-300 hover:text-gray-500">
+<iconify-icon class="text-lg" icon="lucide:x"></iconify-icon>
+</button>
+</div>
+<div class="flex items-center justify-between py-3 group">
+<div class="flex items-center gap-3">
+<iconify-icon class="text-lg text-gray-300" icon="lucide:history"></iconify-icon>
+<span class="text-[15px] text-gray-700">PRD 更新</span>
+</div>
+<button class="text-gray-300 hover:text-gray-500">
+<iconify-icon class="text-lg" icon="lucide:x"></iconify-icon>
+</button>
+</div>
+</div>
+<div class="mt-8 flex justify-center">
+<button class="text-[13px] text-gray-400 hover:text-gray-600 transition-colors">清空搜索记录</button>
+</div>
+</div>
+</div>
+<!-- 底部导航栏 -->
+</div>
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearBtn');
+
+    clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+    });
+
+    // 热门搜索点击填充
+    document.querySelectorAll('.tag').forEach(tag => {
+        tag.onclick = function() {
+            searchInput.value = this.innerText;
+            searchInput.focus();
+        };
+    });
+</script>
+</body></html>

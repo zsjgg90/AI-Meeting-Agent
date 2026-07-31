@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://meetmind.local/schemas/evaluation-case-v1.json",
+  "title": "Meeting Analysis Evaluation Case",
+  "type": "object",
+  "required": ["transcript", "expected_result", "actual_result", "evaluation_metadata"],
+  "additionalProperties": false,
+  "properties": {
+    "transcript": {
+      "description": "Meeting transcript used as evidence source for offline evaluation.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/transcript_segment" }
+        }
+      ]
+    },
+    "expected_result": {
+      "$ref": "#/$defs/meeting_analysis_result"
+    },
+    "actual_result": {
+      "$ref": "#/$defs/meeting_analysis_result"
+    },
+    "evaluation_metadata": {
+      "type": "object",
+      "required": ["case_id", "schema_version"],
+      "additionalProperties": true,
+      "properties": {
+        "case_id": { "type": "string" },
+        "schema_version": { "const": "evaluation-case-v1" },
+        "meeting_analysis_schema_version": { "const": "meeting-analysis-v1" },
+        "model": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "rag_version": { "type": "string" },
+        "created_at": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "transcript_segment": {
+      "type": "object",
+      "required": ["text"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "speaker_label": { "type": ["string", "null"] },
+        "speaker_name": { "type": ["string", "null"] },
+        "start_time": { "type": ["number", "null"] },
+        "end_time": { "type": ["number", "null"] },
+        "text": { "type": "string" }
+      }
+    },
+    "analysis_item": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "item": { "type": "string" },
+        "conclusion": { "type": "string" },
+        "task": { "type": "string" },
+        "issue": { "type": "string" },
+        "risk": { "type": "string" },
+        "source_text": { "type": "string" },
+        "source_segment_id": { "type": ["string", "null"] },
+        "source_segment_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "meeting_analysis_result": {
+      "type": "object",
+      "required": [
+        "meeting_agenda",
+        "meeting_summary",
+        "key_conclusions",
+        "action_items",
+        "unresolved_issues",
+        "risks_and_focus"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "meeting_title": { "type": "string" },
+        "meeting_type": { "type": "string" },
+        "meeting_type_confidence": { "type": "number" },
+        "meeting_agenda": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysis_item" }
+        },
+        "meeting_summary": { "type": "string" },
+        "key_conclusions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysis_item" }
+        },
+        "action_items": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysis_item" }
+        },
+        "unresolved_issues": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysis_item" }
+        },
+        "risks_and_focus": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysis_item" }
+        },
+        "topics": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "schema_version": { "const": "meeting-analysis-v1" },
+            "model_name": { "type": "string" },
+            "prompt_version": { "type": ["string", "null"] },
+            "rag_dataset_version": { "type": ["string", "null"] },
+            "rag_collection_name": { "type": ["string", "null"] },
+            "result_source": { "type": ["string", "null"] }
+          }
+        }
+      }
+    }
+  }
+}

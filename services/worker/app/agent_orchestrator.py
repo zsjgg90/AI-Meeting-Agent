@@ -21,7 +21,7 @@ from app.models import Meeting
 from app.observability import log_event, safe_error
 
 
-AGENT_SHADOW_TRACE_ROOT = Path(__file__).resolve().parents[3] / "data" / "debug" / "agent_shadow_trace"
+AGENT_SHADOW_TRACE_ROOT = Path(__file__).resolve().parents[1] / "data" / "debug" / "agent_shadow_trace"
 SIX_DIMENSION_FIELDS = (
     "meeting_agenda",
     "meeting_summary",

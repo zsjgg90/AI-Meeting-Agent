@@ -13,9 +13,10 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.config import get_settings
 from app.analysis_contract import build_summary_metadata
+from app.agent_proposal_generation import generate_action_item_proposals_for_meeting
 from app.database import SessionLocal, get_db
 from app.knowledge_sync_service import mark_meeting_knowledge_deleted, run_knowledge_sync_safely, sync_meeting_knowledge
-from app.models import AudioFile, Meeting, MeetingKnowledgeSync, MeetingSummary, TranscriptSegment, TranscriptionTask
+from app.models import AudioFile, Meeting, MeetingKnowledgeSync, MeetingOutput, MeetingSummary, TranscriptSegment, TranscriptionTask
 from app.models import SpeakerMapping
 from app.schemas import (
     AudioUploaded,
@@ -128,8 +129,11 @@ def remove_meeting_storage(meeting_id: str) -> None:
 
 @router.post("", response_model=MeetingCreated, status_code=201)
 def create_meeting(payload: MeetingCreate, db: Session = Depends(get_db)) -> MeetingCreated:
+    clean_title = payload.title.strip() or "Untitled meeting"
+    title_source = payload.title_source if payload.title_source in {"fallback", "user_edited", "ai_generated"} else "fallback"
     meeting = Meeting(
-        title=payload.title,
+        title=clean_title,
+        title_source=title_source,
         status="created",
         start_at=payload.start_at,
         end_at=payload.end_at,
@@ -138,7 +142,7 @@ def create_meeting(payload: MeetingCreate, db: Session = Depends(get_db)) -> Mee
     db.add(meeting)
     db.commit()
     db.refresh(meeting)
-    return MeetingCreated(id=meeting.id, title=meeting.title, status=meeting.status)
+    return MeetingCreated(id=meeting.id, title=meeting.title, title_source=meeting.title_source, status=meeting.status)
 
 
 @router.get("", response_model=list[MeetingListItem])
@@ -204,6 +208,12 @@ def update_meeting(meeting_id: str, payload: MeetingUpdate, db: Session = Depend
         raise HTTPException(status_code=404, detail="Meeting not found.")
 
     updates = payload.model_dump(exclude_unset=True)
+    if "title" in updates:
+        title = (updates["title"] or "").strip()
+        if not title:
+            raise HTTPException(status_code=400, detail={"reason": "meeting_title_required"})
+        meeting.title = title
+        meeting.title_source = "user_edited"
     if "start_at" in updates:
         meeting.start_at = updates["start_at"]
     if "end_at" in updates:
@@ -639,6 +649,7 @@ def get_summary(meeting_id: str, db: Session = Depends(get_db)) -> SummaryRead:
         )
 
     output = meeting.output
+    metadata = fallback_summary_metadata(output)
     return SummaryRead(
         meeting_id=meeting.id,
         status=meeting.status,
@@ -657,7 +668,17 @@ def get_summary(meeting_id: str, db: Session = Depends(get_db)) -> SummaryRead:
         key_conclusions=output.decisions if output else [],
         unresolved_issues=[],
         risks_and_focus=[],
-        metadata={},
+        metadata=metadata,
+    )
+
+
+def fallback_summary_metadata(output: MeetingOutput | None) -> dict:
+    return build_summary_metadata(
+        model_name="legacy-meeting-output+rag" if output else None,
+        confidence_score=None,
+        generated_at=output.created_at.isoformat() if output and output.created_at else "",
+        prompt_version="legacy-meeting-output" if output else None,
+        result_source="legacy_qwen_rag" if output and output.summary else "unknown",
     )
 
 
@@ -773,8 +794,6 @@ def run_meeting_analysis_task(task_id: str) -> None:
         _raise_for_worker_status(response, stage="summary")
 
         if settings.agent_proposal_auto_generation_enabled:
-            from app.agent_proposal_generation import generate_action_item_proposals_for_meeting
-
             generate_action_item_proposals_for_meeting(db, meeting.id, persist=True)
 
         run_knowledge_sync_safely(meeting.id, SessionLocal)

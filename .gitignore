@@ -40,6 +40,17 @@ hf_cache/
 # Generated diagnostics and meeting/private data
 data/debug/
 data/eval/*
+!data/eval/README.md
+!data/eval/meeting_cases/
+!data/eval/meeting_cases/.gitkeep
+!data/eval/schema/
+!data/eval/schema/**
+!data/eval/metrics/
+!data/eval/metrics/**
+!data/eval/reports/
+data/eval/reports/*
+!data/eval/reports/baseline_v1.0_RC1.md
+!data/eval/reports/.gitkeep
 !data/eval/agent_v1_baseline/
 data/eval/agent_v1_baseline/*
 !data/eval/agent_v1_baseline/README.md

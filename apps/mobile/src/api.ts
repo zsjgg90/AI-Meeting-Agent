@@ -1,8 +1,9 @@
-import { apiBaseUrl } from './config';
+import { apiBaseUrl, apiDebugInfo } from './config';
 
 export type Meeting = {
   id: string;
   title: string;
+  title_source?: 'fallback' | 'ai_generated' | 'user_edited' | string;
   status: string;
   start_at: string | null;
   end_at: string | null;
@@ -39,9 +40,12 @@ export type ActionItem = {
   task: string;
   owner: string | null;
   owner_name: string | null;
+  description?: string | null;
   due_date: string | null;
   deadline: string | null;
   priority: string | null;
+  reminder_offset_minutes?: number | null;
+  reminder_channel?: string | null;
   status: string;
   source: string | null;
   source_text: string | null;
@@ -54,6 +58,23 @@ export type ActionItem = {
 export type TaskListItem = ActionItem & {
   meeting_id: string;
   meeting_title: string;
+  content?: string | null;
+  details?: string | null;
+  assignee?: string | null;
+  responsible_person?: string | null;
+  attachments?: Array<{
+    id?: string;
+    filename?: string | null;
+    name?: string | null;
+    content_type?: string | null;
+    file_type?: string | null;
+    file_size_bytes?: number | null;
+    size?: number | null;
+    task_id?: string;
+    url?: string | null;
+    download_url?: string | null;
+    uploaded_at?: string;
+  }>;
 };
 
 export type TaskListResponse = {
@@ -71,6 +92,17 @@ export type KnowledgeOverview = {
   risk_count: number;
   all_count: number;
   sync_status: Record<string, number>;
+};
+
+export type KnowledgeSync = {
+  meeting_id: string;
+  status: string;
+  source_version: string;
+  item_count: number;
+  sync_error: string | null;
+  started_at: string | null;
+  completed_at: string | null;
+  updated_at: string;
 };
 
 export type KnowledgeContentType =
@@ -198,6 +230,7 @@ export type MeetingDetail = Meeting & {
 export type MeetingCreated = {
   id: string;
   title: string;
+  title_source?: 'fallback' | 'ai_generated' | 'user_edited' | string;
   status: string;
 };
 
@@ -344,8 +377,243 @@ export type AgentCommandExecutionResult = {
   writes_performed: boolean;
 };
 
+export type AgentReviewChange = {
+  field: string;
+  label: string;
+  before: string | null;
+  after: string | null;
+};
+
+export type AgentReviewEvidence = {
+  source_text: string;
+  speaker: string | null;
+  source_meeting_id: string | null;
+  source_meeting_title: string | null;
+  source_meeting_time: string | null;
+  source_segment_id: string | null;
+};
+
+export type AgentReviewProposalCard = {
+  id: string;
+  action_type: string;
+  action_label: string;
+  target_object_type: string;
+  target_object_id: string | null;
+  target_title: string;
+  source_meeting_title: string | null;
+  source_meeting_time: string | null;
+  risk_level: string;
+  risk_label: string;
+  status: string;
+  status_label: string;
+  changes: AgentReviewChange[];
+  evidence: AgentReviewEvidence | null;
+  created_at: string;
+  updated_at: string;
+  expires_at: string | null;
+};
+
+export type AgentReviewRecord = {
+  id: string;
+  proposal_id: string;
+  command_id: string | null;
+  action_type: string;
+  action_label: string;
+  target_object_type: string;
+  target_object_id: string | null;
+  target_title: string;
+  change_summary: string;
+  handled_at: string;
+  status: string;
+  status_label: string;
+  reason_preview: string | null;
+};
+
+export type AgentReviewOverview = {
+  pending_count: number;
+  pending_proposals: AgentReviewProposalCard[];
+  recent_records: AgentReviewRecord[];
+};
+
+export type AgentReviewRecordsResponse = {
+  items: AgentReviewRecord[];
+  total: number;
+  page: number;
+  page_size: number;
+  has_more: boolean;
+};
+
+export type AgentReviewAuditTimelineItem = {
+  id: string;
+  result: string;
+  result_label: string;
+  decision: string;
+  reviewer: string;
+  operation: string;
+  reasons: string[];
+  writes_performed: boolean;
+  created_at: string;
+};
+
+export type AgentReviewCommand = {
+  id: string;
+  proposal_id: string;
+  target_object_type: string;
+  target_object_id: string;
+  operation: string;
+  expected_version: string | null;
+  changes: Record<string, any>;
+  status: string;
+  created_at: string;
+};
+
+export type AgentReviewRecordDetail = {
+  id: string;
+  proposal: AgentReviewProposalCard;
+  confirmation: AgentConfirmation | null;
+  command: AgentReviewCommand | null;
+  before_after: AgentReviewChange[];
+  evidence: AgentReviewEvidence | null;
+  reviewer: string | null;
+  executor: string | null;
+  audit_timeline: AgentReviewAuditTimelineItem[];
+  reject_reason: string | null;
+  rollback_reason: string | null;
+  writes_performed: boolean;
+  object_version_before: string | null;
+  object_version_after: string | null;
+};
+
+export type AgentSession = {
+  token: string;
+  token_type: string;
+  expires_at: string;
+  user_id: string;
+  display_name: string;
+  tenant_id: string;
+  project_scope: string[];
+  permissions: string[];
+};
+
+export type AgentSessionInfo = Omit<AgentSession, 'token' | 'token_type' | 'expires_at'> & {
+  authentication_source: string;
+};
+
+export class ApiRequestError extends Error {
+  status: number;
+  body: string;
+
+  constructor(status: number, body: string, message: string) {
+    super(message);
+    this.name = 'ApiRequestError';
+    this.status = status;
+    this.body = body;
+  }
+}
+
+export class AgentStorageError extends Error {
+  code = 'storage_unavailable';
+
+  constructor(message = '本地登录存储不可用，请重启应用') {
+    super(message);
+    this.name = 'AgentStorageError';
+  }
+}
+
 const jsonHeaders = { 'Content-Type': 'application/json' };
 const DEFAULT_REQUEST_TIMEOUT_MS = 15000;
+const AGENT_SESSION_STORAGE_KEY = 'meetmind.agent.session.v1';
+let agentSession: AgentSession | null = null;
+let agentAuthToken: string | null = null;
+
+type AsyncStorageLike = {
+  getItem: (key: string) => Promise<string | null>;
+  setItem: (key: string, value: string) => Promise<void>;
+  removeItem: (key: string) => Promise<void>;
+};
+
+async function getAsyncStorage(): Promise<AsyncStorageLike> {
+  try {
+    const imported = await import('@react-native-async-storage/async-storage');
+    const storage = imported.default;
+    if (!storage?.getItem || !storage?.setItem || !storage?.removeItem) {
+      throw new AgentStorageError();
+    }
+    return storage;
+  } catch (error) {
+    if (error instanceof AgentStorageError) throw error;
+    throw new AgentStorageError();
+  }
+}
+
+export function isApiRequestError(error: unknown, status?: number): error is ApiRequestError {
+  return error instanceof ApiRequestError && (status === undefined || error.status === status);
+}
+
+export function isAgentStorageError(error: unknown): error is AgentStorageError {
+  return error instanceof AgentStorageError || (typeof error === 'object' && error !== null && (error as { code?: string }).code === 'storage_unavailable');
+}
+
+export async function loadStoredAgentSession(): Promise<AgentSession | null> {
+  try {
+    const storage = await getAsyncStorage();
+    const raw = await storage.getItem(AGENT_SESSION_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as AgentSession;
+    if (!parsed.token || !parsed.expires_at || new Date(parsed.expires_at).getTime() <= Date.now()) {
+      await clearAgentSession();
+      return null;
+    }
+    agentSession = parsed;
+    agentAuthToken = parsed.token;
+    return parsed;
+  } catch (error) {
+    if (isAgentStorageError(error)) throw error;
+    await clearAgentSession({ suppressStorageError: true });
+    return null;
+  }
+}
+
+export function useAgentSessionInMemory(session: AgentSession): void {
+  agentSession = session;
+  agentAuthToken = session.token;
+}
+
+export function clearAgentSessionInMemory(): void {
+  agentSession = null;
+  agentAuthToken = null;
+}
+
+export async function saveAgentSession(session: AgentSession): Promise<void> {
+  useAgentSessionInMemory(session);
+  try {
+    const storage = await getAsyncStorage();
+    await storage.setItem(AGENT_SESSION_STORAGE_KEY, JSON.stringify(session));
+  } catch (error) {
+    if (isAgentStorageError(error)) throw error;
+    throw new AgentStorageError();
+  }
+}
+
+export async function clearAgentSession(options?: { suppressStorageError?: boolean }): Promise<void> {
+  clearAgentSessionInMemory();
+  try {
+    const storage = await getAsyncStorage();
+    await storage.removeItem(AGENT_SESSION_STORAGE_KEY);
+  } catch {
+    if (!options?.suppressStorageError) {
+      throw new AgentStorageError();
+    }
+  }
+}
+
+export function getAgentAuthToken(): string | null {
+  return agentAuthToken;
+}
+
+export function getCachedAgentSession(): AgentSession | null {
+  return agentSession;
+}
 
 async function fetchWithTimeout(url: string, options?: RequestInit): Promise<Response> {
   const controller = typeof AbortController !== 'undefined' && !options?.signal ? new AbortController() : null;
@@ -356,10 +624,7 @@ async function fetchWithTimeout(url: string, options?: RequestInit): Promise<Res
       signal: options?.signal || controller?.signal,
     });
   } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
-      throw new Error('网络请求超时，请稍后重试');
-    }
-    throw error;
+    throw buildNetworkError(error, url);
   } finally {
     if (timer) clearTimeout(timer);
   }
@@ -368,35 +633,59 @@ async function fetchWithTimeout(url: string, options?: RequestInit): Promise<Res
 async function requestJson<T>(path: string, options?: RequestInit): Promise<T> {
   const controller = typeof AbortController !== 'undefined' && !options?.signal ? new AbortController() : null;
   const timer = controller ? setTimeout(() => controller.abort(), DEFAULT_REQUEST_TIMEOUT_MS) : null;
+  const headers = new Headers(options?.headers || undefined);
+  if (path.startsWith('/agent/') && agentAuthToken && !headers.has('Authorization')) {
+    headers.set('Authorization', `Bearer ${agentAuthToken}`);
+  }
+  const url = `${apiBaseUrl.replace(/\/+$/, '')}${path}`;
   try {
-    const response = await fetch(`${apiBaseUrl.replace(/\/+$/, '')}${path}`, {
+    const response = await fetch(url, {
       ...options,
+      headers,
       signal: options?.signal || controller?.signal,
     });
     if (!response.ok) {
       const body = await response.text();
-      throw new Error(friendlyApiError(response.status, body));
+      if (path.startsWith('/agent/') && response.status === 401) {
+        await clearAgentSession({ suppressStorageError: true });
+      }
+      throw new ApiRequestError(response.status, body, friendlyApiError(response.status, body));
     }
     return response.json() as Promise<T>;
   } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
-      throw new Error('网络请求超时，请稍后重试');
+    if (error instanceof ApiRequestError) {
+      throw error;
     }
-    throw error;
+    throw buildNetworkError(error, url);
   } finally {
     if (timer) clearTimeout(timer);
   }
 }
 
+function buildNetworkError(error: unknown, url: string): Error {
+  const isTimeout = error instanceof Error && error.name === 'AbortError';
+  const original = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+  const message = [
+    isTimeout ? '网络请求超时，请稍后重试' : 'Network request failed',
+    `url=${url}`,
+    `apiBaseUrl=${apiDebugInfo.apiBaseUrl}`,
+    `devHostUri=${apiDebugInfo.devHostUri || 'null'}`,
+    `devScriptUrl=${apiDebugInfo.devScriptUrl || 'null'}`,
+    `envApiBaseUrl=${apiDebugInfo.envApiBaseUrl || 'null'}`,
+    `error=${original}`,
+  ].join('\n');
+  return new Error(message);
+}
+
 function friendlyApiError(status: number, body: string): string {
   const text = body || '';
   if (status === 401) return '登录已失效，请重新登录后再试';
-  if (status === 403) return '没有权限访问这条记录';
+  if (status === 403) return '你没有权限处理这条建议';
   if (status === 404) return '记录不存在或已被删除';
   if (status === 409) {
     if (text.includes('version_conflict')) return '数据已更新，请刷新后再处理';
-    if (text.includes('confirmation_expired')) return '记录已过期';
-    if (text.includes('already')) return '记录已被其他人处理';
+    if (text.includes('confirmation_expired')) return '这条建议已过期';
+    if (text.includes('already')) return '这条建议已被其他人处理';
     return '提交冲突，请刷新后再试';
   }
   if (status >= 500) return '服务暂时不可用，请稍后重试';
@@ -426,6 +715,59 @@ export function listTasks(options?: {
     params.set('q', options.q.trim());
   }
   return requestJson<TaskListResponse>(`/tasks?${params.toString()}`);
+}
+
+export function updateTaskStatus(taskId: string, status: 'open' | 'completed'): Promise<TaskListItem> {
+  return requestJson<TaskListItem>(`/tasks/${encodeURIComponent(taskId)}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status }),
+  });
+}
+
+export function updateTask(
+  taskId: string,
+  payload: {
+    task?: string | null;
+    description?: string | null;
+    owner?: string | null;
+    due_date?: string | null;
+    priority?: 'high' | 'medium' | 'low' | null;
+    reminder_offset_minutes?: 60 | 180 | 300 | null;
+    reminder_channel?: 'sms' | null;
+  },
+): Promise<TaskListItem> {
+  return requestJson<TaskListItem>(`/tasks/${encodeURIComponent(taskId)}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function uploadTaskAttachment(
+  taskId: string,
+  file: { uri: string; name: string; type?: string | null },
+): Promise<NonNullable<TaskListItem['attachments']>[number]> {
+  const form = new FormData();
+  form.append('file', {
+    uri: file.uri,
+    name: file.name,
+    type: file.type || 'application/octet-stream',
+  } as any);
+
+  const response = await fetchWithTimeout(`${apiBaseUrl.replace(/\/+$/, '')}/tasks/${encodeURIComponent(taskId)}/attachments`, {
+    method: 'POST',
+    body: form,
+  });
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(friendlyApiError(response.status, body));
+  }
+  return response.json() as Promise<NonNullable<TaskListItem['attachments']>[number]>;
+}
+
+export function taskAttachmentUrl(taskId: string, attachmentId: string): string {
+  return `${apiBaseUrl.replace(/\/+$/, '')}/tasks/${encodeURIComponent(taskId)}/attachments/${encodeURIComponent(attachmentId)}`;
 }
 
 function knowledgeParams(options?: KnowledgeQueryOptions): string {
@@ -466,7 +808,7 @@ export function searchKnowledge(options?: KnowledgeQueryOptions): Promise<Knowle
 
 export function createMeeting(
   title: string,
-  options?: { start_at?: string; end_at?: string; location?: string },
+  options?: { start_at?: string; end_at?: string; location?: string; title_source?: 'fallback' | 'ai_generated' | 'user_edited' },
 ): Promise<MeetingCreated> {
   return requestJson<MeetingCreated>('/meetings', {
     method: 'POST',
@@ -485,6 +827,12 @@ export function getMeetingSummary(meetingId: string): Promise<MeetingSummary & {
 
 export function getMeetingTranscript(meetingId: string): Promise<MeetingTranscript> {
   return requestJson<MeetingTranscript>(`/meetings/${meetingId}/transcript`);
+}
+
+export function reindexMeetingKnowledge(meetingId: string): Promise<KnowledgeSync> {
+  return requestJson<KnowledgeSync>(`/meetings/${meetingId}/knowledge/reindex`, {
+    method: 'POST',
+  });
 }
 
 export async function deleteMeeting(meetingId: string): Promise<void> {
@@ -507,7 +855,7 @@ export function bulkDeleteMeetings(meetingIds: string[]): Promise<MeetingBulkDel
 
 export function updateMeeting(
   meetingId: string,
-  options: { start_at?: string; end_at?: string; location?: string | null },
+  options: { title?: string; start_at?: string; end_at?: string; location?: string | null },
 ): Promise<MeetingDetail> {
   return requestJson<MeetingDetail>(`/meetings/${meetingId}`, {
     method: 'PATCH',
@@ -643,6 +991,30 @@ export function submitFeedback(payload: FeedbackPayload): Promise<FeedbackCreate
   });
 }
 
+export async function loginAgentSession(displayName = '本地验收用户'): Promise<AgentSession> {
+  const session = await requestJson<AgentSession>('/agent/auth/login', {
+    method: 'POST',
+    headers: jsonHeaders,
+    body: JSON.stringify({ display_name: displayName }),
+  });
+  await saveAgentSession(session);
+  return session;
+}
+
+export function getAgentSessionInfo(): Promise<AgentSessionInfo> {
+  return requestJson<AgentSessionInfo>('/agent/auth/session');
+}
+
+export async function logoutAgentSession(): Promise<void> {
+  try {
+    await requestJson<{ status: string; revoked: boolean }>('/agent/auth/logout', {
+      method: 'POST',
+    });
+  } finally {
+    await clearAgentSession();
+  }
+}
+
 export function listAgentProposals(status: AgentProposalStatus = 'pending'): Promise<AgentActionProposal[]> {
   return requestJson<AgentActionProposal[]>(`/agent/action-proposals?status=${encodeURIComponent(status)}`);
 }
@@ -695,4 +1067,26 @@ export function rollbackExecuteAgentCommand(commandId: string, comment = ''): Pr
 
 export function listAgentCommandAudits(commandId: string): Promise<AgentAuditRecord[]> {
   return requestJson<AgentAuditRecord[]>(`/agent/commands/${encodeURIComponent(commandId)}/audits`);
+}
+
+export function getAgentReviewOverview(): Promise<AgentReviewOverview> {
+  return requestJson<AgentReviewOverview>('/agent/review/overview');
+}
+
+export function listAgentReviewRecords(options?: {
+  status?: string;
+  sort?: 'latest' | 'oldest';
+  page?: number;
+  page_size?: number;
+}): Promise<AgentReviewRecordsResponse> {
+  const params = new URLSearchParams();
+  params.set('status', options?.status || 'all');
+  params.set('sort', options?.sort || 'latest');
+  params.set('page', String(options?.page || 1));
+  params.set('page_size', String(options?.page_size || 20));
+  return requestJson<AgentReviewRecordsResponse>(`/agent/review/records?${params.toString()}`);
+}
+
+export function getAgentReviewRecord(recordId: string): Promise<AgentReviewRecordDetail> {
+  return requestJson<AgentReviewRecordDetail>(`/agent/review/records/${encodeURIComponent(recordId)}`);
 }

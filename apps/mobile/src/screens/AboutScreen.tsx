@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+﻿import { StyleSheet, Text, View } from 'react-native';
 
 export function AboutScreen() {
   return (
@@ -15,7 +15,7 @@ export function AboutScreen() {
       <View style={styles.card}>
         <Text style={styles.text}>MeetMind AI 帮助你记录会议、整理转写、生成结构化纪要和待办事项。</Text>
         <View style={styles.divider} />
-        <Text style={styles.version}>当前版本 v1.0.0</Text>
+        <Text style={styles.version}>当前版本 V1.0.0</Text>
       </View>
     </View>
   );
@@ -30,14 +30,14 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignItems: 'center',
-    backgroundColor: '#6c4dff',
+    backgroundColor: '#f7f8fc',
     borderRadius: 26,
     height: 88,
     justifyContent: 'center',
     marginBottom: 18,
-    shadowColor: '#6c4dff',
+    shadowColor: '#6b7280',
     shadowOffset: { width: 0, height: 14 },
-    shadowOpacity: 0.22,
+    shadowOpacity: 0.08,
     shadowRadius: 24,
     width: 88,
   },
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   bar: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#111827',
     borderRadius: 999,
     width: 4,
   },
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     height: 1,
   },
   version: {
-    color: '#9ca3af',
+    color: '#2B6CFF',
     fontSize: 12,
     fontWeight: '800',
     textAlign: 'center',

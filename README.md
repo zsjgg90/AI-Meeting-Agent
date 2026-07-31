@@ -430,6 +430,8 @@ npx expo start --host lan --port 8081
 ```powershell
 .\scripts\test-all.ps1
 .\scripts\check-services.ps1
+python -m unittest tests.test_evaluate_meeting_analysis
+python scripts\evaluate_meeting_analysis.py expected.json actual.json --transcript transcript.txt --output data\eval\reports\baseline_v1.0_RC1.md
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_meeting_pipeline_acceptance.py --limit 3 --ollama-timeout 60
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_real_production_analysis.py --meeting-id meeting_001 --ollama-timeout 600
 services\worker\.venv\Scripts\python.exe services\worker\scripts\run_agent_shadow_acceptance.py
@@ -557,6 +559,28 @@ analysis so a manually started Worker does not block on network model metadata
 requests. Summary analysis also commits speaker-name backfill before entering
 RAG/Qwen inference, so long model calls do not hold transcript row locks.
 
+## Evaluation System
+
+Phase 0 evaluation infrastructure lives under `data/eval/`:
+
+- `meeting_cases/`: sanitized offline case folders.
+- `schema/`: evaluation case schema compatible with `meeting-analysis-v1`.
+- `metrics/`: metric definitions for deterministic offline scoring.
+- `reports/`: generated Markdown reports, including `baseline_v1.0_RC1.md`.
+
+The offline evaluator is `scripts/evaluate_meeting_analysis.py`. It compares
+existing `expected.json` and `actual.json` files and can generate a baseline
+Markdown report:
+
+```powershell
+python scripts\evaluate_meeting_analysis.py expected.json actual.json --transcript transcript.txt --output data\eval\reports\baseline_v1.0_RC1.md
+```
+
+Supported Phase 0 metrics are Decision Precision, Task Recall, Risk Recall,
+Hallucination Rate, and Evidence Coverage. The evaluator is not wired into the
+production meeting-analysis flow and does not call Qwen3, Ollama, RAG, API,
+database, Worker, ASR, semantic pipeline, or Mobile.
+
 `WHISPER_MODEL_SIZE` 可改为 `medium` 以进一步提升准确率，但 CPU 转写会明显变慢。
 `TRANSCRIPT_PROVIDER=auto` 会优先使用豆包/火山引擎 ASR 新版控制台鉴权 `VOLCENGINE_ASR_API_KEY`；会后完整音频默认使用 `volc.seedasr.auc`，实时字幕分片默认尝试 `volc.seedasr.sauc.duration`，并通过 `VOLCENGINE_ENABLE_SPEAKER_INFO=true` 开启说话人聚类，通过 `VOLCENGINE_ENABLE_GENDER_DETECTION=true` 开启男女音色识别。未配置豆包凭证时使用 OpenAI 高准确率转写；云端调用失败时自动回退到本地 faster-whisper。也可以设置为 `volcengine`、`openai` 或 `faster_whisper` 强制指定。
 
@@ -585,11 +609,15 @@ EXPO_PUBLIC_ENABLE_AI_ASSISTANT_UI=false
 EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ```
 
-移动端首页当前按 MeetMind AI RC1 原型展示品牌区、搜索入口、实时录音、导入音频、全部会议列表和固定底部导航。实时录音沿用创建会议、录音、上传和 AI 处理链路；导入音频会选择本地音频文件，创建会议后复用同一上传、处理和分析流程。
+移动端首页当前按 MeetMind AI RC1 原型展示品牌区、搜索入口、实时录音、导入音频、全部会议列表和固定底部导航。底部导航固定为 `首页 | 知识库 | 麦克风 | 待办 | 我的`，中心蓝色麦克风按钮复用同一个实时录音入口。实时录音会用用户本地时间自动创建 `YYYY-MM-DD HH:mm 实时录音` 默认标题的会议，并在首页内展开实时录音覆盖层启动同一个真实 `expo-av` 录音实例；向下拖动顶部短横线可收起为 BottomNav 上方迷你录音条，点击迷你条可重新展开。点击结束录音会直接停止并释放录音，显示 `已进入AI结构化分析` 强提示 500ms 后回到首页，随后在移动端后台复用现有上传、转写和 AI 结构化分析链路。导入音频会选择本地音频文件，创建会议后继续进入 AI 处理页复用同一上传、处理和分析流程。
+
+个人中心的 `声纹管理` 已提供 React Native 页面入口。该页面显示声纹识别未开放状态、真实空列表和录入样本入口；`添加声纹样本` 页面复用 `expo-av` 的 `Audio.Recording` 基础能力采集本地声音样本，但使用独立页面状态，不创建会议、不上传会议音频、不触发转写、AI 纪要或 Agent 分析。当前没有正式声纹注册 API，保存时只提示 `待接入接口`，不会伪造注册成功、身份匹配或示例用户列表。
+
+个人中心的 `推送配置` 已提供 React Native 页面入口。该页面定位为 AI 会议成果自动分发中心，展示飞书推送、邮箱推送和短信提醒三个渠道的配置入口；当前没有正式飞书、邮箱、短信、推送配置或推送历史 API，因此开关保持关闭且不可操作，只显示 `未配置`、`暂未开放` 和 `待接入`，不会伪造连接成功、发送成功或历史记录。
 
 ### 实时字幕真机调试
 
-当前实时字幕使用豆包流式会议字幕资源 `volc.seedasr.sauc.duration`，移动端通过原生录音流按 200ms 推送 16kHz、mono、PCM 16-bit 小包。该能力依赖 `@siteed/audio-studio` 原生模块，普通 Expo Go 无法加载，需要使用 Expo Development Build。
+后端保留豆包流式会议字幕资源 `volc.seedasr.sauc.duration` 和实时字幕 WebSocket。当前 Expo 移动端录音页只使用 `expo-av` 录制完整音频，未接入 `@siteed/audio-studio` PCM 推流，因此录音过程中不展示实时 ASR 或实时说话人分离结果；结束后会统一上传音频并生成转写和 AI 纪要。若后续重新启用移动端实时字幕，需要 Development Build，普通 Expo Go 无法加载原生 PCM 录音流模块。
 
 后端实时字幕 WebSocket：
 
@@ -597,9 +625,9 @@ EXPO_PUBLIC_ENABLE_KNOWLEDGE_BASE_UI=true
 ws://{API_HOST}/meetings/{meeting_id}/realtime-stream
 ```
 
-移动端流程：
+后端实时字幕流程：
 
-1. 点击开始录音后，APP 打开 WebSocket。
+1. 客户端打开 WebSocket。
 2. 每 200ms 推送一包 PCM 音频。
 3. API 桥接豆包流式 ASR，并开启 `enable_speaker_info=true`、`enable_gender_detection=true`。
 4. API 实时写入 `transcript_segments`，包含 `speaker_label` 和 `speaker_gender`。
@@ -730,11 +758,13 @@ curl http://localhost:8000/meetings/{meeting_id}/summary
 ## 端到端流程检查
 
 1. 在 APP 首页点击 `实时录音`。
-2. 输入会议名称并创建会议。
-3. 进入录音页，点击 `Start Recording`。
-4. 可点击 `Pause` / `Resume`，完成后点击 `End`。
-5. 录音结束后，APP 会上传音频并调用 `POST /meetings/{id}/process`。
-6. API 创建处理任务，并在后台调用 worker。
+2. APP 自动创建默认标题为 `YYYY-MM-DD HH:mm 实时录音` 的会议，不打开 `NewMeetingScreen`，也不跳转独立录音页。
+3. 首页内录音覆盖层自动开始真实录音；展开层和迷你录音条共享同一个录音实例、计时、暂停状态、meetingId 和 audioUri。
+4. 首页实时录音按钮和 BottomNav 中心麦克风按钮都复用同一个录音入口；已有录音会话时点击麦克风只展开当前 Overlay，不创建第二套录音状态。
+5. 向下拖动覆盖层顶部短横线可收起为 BottomNav 上方迷你录音条；点击迷你条非按钮区域可重新展开。
+6. 点击结束录音后，APP 停止并释放录音，显示 `已进入AI结构化分析` 500ms 后回到首页。
+7. APP 在移动端后台上传音频并调用 `POST /meetings/{id}/process`，会议列表 `处理中` 状态左侧显示 loading。
+8. API 创建处理任务，并在后台调用 worker。
    如果同一会议已有 `queued` 或 `running` 任务，API 会返回现有任务，避免重复排队。
 7. Worker 读取 `storage/meetings/{meeting_id}/audio/` 中最新上传的音频。
 8. Worker 使用 `faster-whisper` 写入 `transcript_segments`。
@@ -748,7 +778,8 @@ curl http://localhost:8000/meetings/{meeting_id}/summary
 ## MVP 限制
 
 - 不做实时入会或真实声纹注册。
-- 当前已支持录音页实时字幕，但需要 Development Build，不能使用普通 Expo Go。
+- 声纹管理移动端页面已可进入和录制本地样本，但正式声纹注册、声纹列表、身份匹配和自动说话人身份辅助仍待后端/API 合同接入。
+- 当前移动端录音页不展示实时字幕或示例转写；实时 ASR/说话人分离在会后完整音频处理链路中生成。
 - `Speaker 1 / Speaker 2 / Speaker 3` 来自豆包说话人聚类或后端兜底分离，不等于真实身份识别。
 - 未配置 `OPENAI_API_KEY` 时，后端仍可启动，但 `/process` 后任务会失败并记录错误。
 - RAG 目前只保存文本块，暂不做 embedding 和向量检索。

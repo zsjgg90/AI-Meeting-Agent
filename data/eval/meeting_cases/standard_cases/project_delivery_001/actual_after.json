@@ -1,0 +1,232 @@
+{
+  "overview": "会议围绕客户交付项目阶段的复盘展开，讨论了当前存在的非单点问题及时间风险。与会者就短期优化方案与长期能力建设达成阶段性共识，但对底层重构启动时机存在保留意见。同时强调规则边界确认的重要性，并指出指标改善与资源投入的关联性。",
+  "meeting_title": "",
+  "meeting_type": "project_retrospective",
+  "meeting_type_confidence": 0.95,
+  "meeting_title_candidate": "客户交付项目阶段复盘与后续安排确认会",
+  "title_basis": [
+    "会议原文提及'复盘客户交付项目阶段情况'",
+    "会议讨论了'短期方案和后续安排'"
+  ],
+  "agenda": [
+    {
+      "item": "复盘客户交付项目阶段情况",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "评估短期解决方案可行性",
+      "order": 2,
+      "source_segment_ids": []
+    },
+    {
+      "item": "讨论底层能力准备状态",
+      "order": 3,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确认规则边界以避免联调反复",
+      "order": 4,
+      "source_segment_ids": []
+    },
+    {
+      "item": "资源投入与指标改善的关联性",
+      "order": 5,
+      "source_segment_ids": []
+    }
+  ],
+  "topics": [],
+  "speaker_summaries": [],
+  "decisions": [
+    {
+      "decision": "底层重构是否启动的最终决定将延后至后续会议",
+      "reason": "",
+      "source": "本次会议暂时不做最终决定",
+      "conclusion": "底层重构是否启动的最终决定将延后至后续会议",
+      "source_text": "本次会议暂时不做最终决定",
+      "confidence": 0.9
+    },
+    {
+      "decision": "若指标持续未改善需重新评估资源投入",
+      "reason": "",
+      "source": "如果指标继续没有改善，需要重新评估资源投入",
+      "conclusion": "若指标持续未改善需重新评估资源投入",
+      "source_text": "如果指标继续没有改善，需要重新评估资源投入",
+      "confidence": 0.85
+    }
+  ],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "推进可快速上线的部分功能开发",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "这个方向先推进",
+      "source_segment_id": null,
+      "confidence": 0.75
+    },
+    {
+      "owner_name": null,
+      "task": "确认规则边界以避免联调反复",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "规则边界需要提前确认，否则联调可能反复",
+      "source_segment_id": null,
+      "confidence": 0.8
+    }
+  ],
+  "risks": [
+    {
+      "risk": "底层能力未准备就绪导致时间风险",
+      "impact": "完整方案实施可能延迟",
+      "mitigation": "",
+      "focus_area": "技术能力建设",
+      "source_text": "底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高",
+      "confidence": 0.85
+    },
+    {
+      "risk": "指标未改善导致资源投入调整",
+      "impact": "可能影响项目整体进度",
+      "mitigation": "",
+      "focus_area": "资源管理",
+      "source_text": "如果指标继续没有改善，需要重新评估资源投入",
+      "confidence": 0.8
+    }
+  ],
+  "open_questions": [
+    {
+      "question": "底层重构启动时机未明确",
+      "owner": "",
+      "source": "本次会议暂时不做最终决定",
+      "issue": "底层重构启动时机未明确",
+      "reason": "会议决定暂不做出最终决定",
+      "blocker": "",
+      "source_text": "本次会议暂时不做最终决定",
+      "confidence": 0.9
+    },
+    {
+      "question": "规则边界未达成具体确认",
+      "owner": "",
+      "source": "规则边界需要提前确认，否则联调可能反复",
+      "issue": "规则边界未达成具体确认",
+      "reason": "需进一步沟通明确",
+      "blocker": "",
+      "source_text": "规则边界需要提前确认，否则联调可能反复",
+      "confidence": 0.8
+    }
+  ],
+  "next_steps": [
+    {
+      "item": "推进可快速上线的部分功能开发",
+      "owner": "",
+      "time": "",
+      "note": "这个方向先推进"
+    },
+    {
+      "item": "确认规则边界以避免联调反复",
+      "owner": "",
+      "time": "",
+      "note": "规则边界需要提前确认，否则联调可能反复"
+    }
+  ],
+  "meeting_agenda": [
+    {
+      "item": "复盘客户交付项目阶段情况",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "评估短期解决方案可行性",
+      "order": 2,
+      "source_segment_ids": []
+    },
+    {
+      "item": "讨论底层能力准备状态",
+      "order": 3,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确认规则边界以避免联调反复",
+      "order": 4,
+      "source_segment_ids": []
+    },
+    {
+      "item": "资源投入与指标改善的关联性",
+      "order": 5,
+      "source_segment_ids": []
+    }
+  ],
+  "meeting_summary": "会议围绕客户交付项目阶段的复盘展开，讨论了当前存在的非单点问题及时间风险。与会者就短期优化方案与长期能力建设达成阶段性共识，但对底层重构启动时机存在保留意见。同时强调规则边界确认的重要性，并指出指标改善与资源投入的关联性。",
+  "key_conclusions": [
+    {
+      "conclusion": "底层重构是否启动的最终决定将延后至后续会议",
+      "source_text": "本次会议暂时不做最终决定",
+      "confidence": 0.9
+    },
+    {
+      "conclusion": "若指标持续未改善需重新评估资源投入",
+      "source_text": "如果指标继续没有改善，需要重新评估资源投入",
+      "confidence": 0.85
+    }
+  ],
+  "unresolved_issues": [
+    {
+      "issue": "底层重构启动时机未明确",
+      "reason": "会议决定暂不做出最终决定",
+      "blocker": "",
+      "source_text": "本次会议暂时不做最终决定",
+      "confidence": 0.9
+    },
+    {
+      "issue": "规则边界未达成具体确认",
+      "reason": "需进一步沟通明确",
+      "blocker": "",
+      "source_text": "规则边界需要提前确认，否则联调可能反复",
+      "confidence": 0.8
+    }
+  ],
+  "risks_and_focus": [
+    {
+      "risk": "底层能力未准备就绪导致时间风险",
+      "impact": "完整方案实施可能延迟",
+      "focus_area": "技术能力建设",
+      "mitigation": "",
+      "source_text": "底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高",
+      "confidence": 0.85
+    },
+    {
+      "risk": "指标未改善导致资源投入调整",
+      "impact": "可能影响项目整体进度",
+      "focus_area": "资源管理",
+      "mitigation": "",
+      "source_text": "如果指标继续没有改善，需要重新评估资源投入",
+      "confidence": 0.8
+    }
+  ],
+  "model_name": "qwen3:14b+rag",
+  "confidence_score": 0.831,
+  "metadata": {
+    "schema_version": "meeting-analysis-v1",
+    "model_name": "qwen3:14b+rag",
+    "prompt_version": "meeting-analyst-v1",
+    "rag_chunk_ids": [
+      "v4_boundary_rule_001",
+      "v4_boundary_rule_002",
+      "v4_boundary_rule_003",
+      "v4_definition_001",
+      "boundary_rule_012",
+      "v4_definition_002",
+      "boundary_rule_001",
+      "definition_002"
+    ],
+    "rag_dataset_version": "meeting_analyst_rag_v2_dedup",
+    "rag_chunk_schema_version": "rag-chunk-v1",
+    "rag_collection_name": "meeting_analyst_rules_v2_dedup_125",
+    "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+    "result_source": "legacy_qwen_rag",
+    "confidence_score": 0.831,
+    "generated_at": "2026-07-31T16:27:55.133406+00:00"
+  }
+}

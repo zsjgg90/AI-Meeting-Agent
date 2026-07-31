@@ -1,0 +1,42 @@
+[
+  {
+    "meeting_id": "ai_meeting_agent_001",
+    "title": "AI会议智能体方案评审会",
+    "participants": [
+      "产品经理",
+      "算法工程师",
+      "后端工程师"
+    ],
+    "scenario": "AI会议智能体能力、方案边界、实施计划与风险评审",
+    "dialogue": [
+      {
+        "segment_id": "ai_meeting_agent_001_seg_001",
+        "speaker": "speaker_01",
+        "speaker_role": "产品经理",
+        "timestamp": "00:00",
+        "text": "今天复盘AI会议分析Agent阶段效果，重点讨论总结质量和下一步优化方向。"
+      },
+      {
+        "segment_id": "ai_meeting_agent_001_seg_002",
+        "speaker": "speaker_02",
+        "speaker_role": "算法工程师",
+        "timestamp": "10:00",
+        "text": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。"
+      },
+      {
+        "segment_id": "ai_meeting_agent_001_seg_003",
+        "speaker": "speaker_03",
+        "speaker_role": "后端工程师",
+        "timestamp": "25:00",
+        "text": "数据链路可以支持优化，但需要先确定优先级。"
+      },
+      {
+        "segment_id": "ai_meeting_agent_001_seg_004",
+        "speaker": "speaker_01",
+        "speaker_role": "产品经理",
+        "timestamp": "40:00",
+        "text": "短期先优化分析流程，模型架构调整继续评估。"
+      }
+    ]
+  }
+]

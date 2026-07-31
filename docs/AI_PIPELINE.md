@@ -23,6 +23,15 @@ Formal Qwen3 + RAG results must carry `metadata.result_source=legacy_qwen_rag`.
 Manual Expo gold answers must carry `result_source=fixture`, and semantic
 shadow/debug outputs must carry `result_source=semantic_pipeline`.
 
+The same formal Qwen3 + RAG call also returns internal title fields:
+`meeting_type`, `meeting_type_confidence`, `meeting_title_candidate`, and
+`title_basis`. These fields do not change the six output dimensions. Worker
+only applies `meeting_title_candidate` to `meeting.title` when the current
+title is still the system fallback, the type confidence is at least `0.70`,
+there are at least two valid basis entries, and deterministic title validation
+passes. Title validation failure keeps the fallback title and must not block
+summary persistence or meeting completion.
+
 `MeetingAnalysisPostProcessor` is a deterministic boundary pass between schema
 normalization and the anti-hallucination Validator. It may filter, deduplicate,
 sort, clear unsupported fields, and enforce dimension boundaries, but it must

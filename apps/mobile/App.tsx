@@ -1,19 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Animated, PanResponder, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, BackHandler, Modal, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-import { deleteMeeting, KnowledgeItem, Meeting } from './src/api';
+import {
+  analyzeMeeting,
+  createMeeting,
+  deleteMeeting,
+  getMeeting,
+  getMeetingSummary,
+  getMeetingTranscript,
+  KnowledgeItem,
+  Meeting,
+  MeetingDetail,
+  MeetingSummary,
+  processMeeting,
+  TaskListItem,
+  updateMeeting,
+  uploadAudio,
+} from './src/api';
 import { AppHeader } from './src/components/AppHeader';
 import { BottomNav, BottomTab } from './src/components/BottomNav';
 import { featureFlags } from './src/config';
-import { AIAssistantScreen } from './src/screens/AIAssistantScreen';
+import { AgentRecordDetailScreen, AIAssistantScreen, AllAgentRecordsScreen } from './src/screens/AIAssistantScreen';
 import { AIProcessingScreen } from './src/screens/AIProcessingScreen';
 import { AboutScreen } from './src/screens/AboutScreen';
+import { AddVoiceprintSampleScreen } from './src/screens/AddVoiceprintSampleScreen';
 import { AudioPlayerScreen } from './src/screens/AudioPlayerScreen';
 import { EditProfileScreen } from './src/screens/EditProfileScreen';
 import { FaqScreen } from './src/screens/FaqScreen';
 import { FeedbackScreen } from './src/screens/FeedbackScreen';
 import { HelpFeedbackScreen } from './src/screens/HelpFeedbackScreen';
+import { ImportMeetingScreen } from './src/screens/ImportMeetingScreen';
 import { KnowledgeBaseScreen } from './src/screens/KnowledgeBaseScreen';
 import { KnowledgeDecisionListScreen } from './src/screens/KnowledgeDecisionListScreen';
 import { KnowledgeIssueRiskScreen } from './src/screens/KnowledgeIssueRiskScreen';
@@ -24,9 +41,14 @@ import { MeetingDetailScreen } from './src/screens/MeetingDetailScreen';
 import { MeetingListScreen } from './src/screens/MeetingListScreen';
 import { NewMeetingScreen } from './src/screens/NewMeetingScreen';
 import { ProfileScreen } from './src/screens/ProfileScreen';
+import { PushConfigScreen } from './src/screens/PushConfigScreen';
 import { RecordingScreen } from './src/screens/RecordingScreen';
 import { SettingsScreen } from './src/screens/SettingsScreen';
+import { TaskSearchScreen } from './src/screens/TaskSearchScreen';
+import { TaskDetailScreen } from './src/screens/TaskDetailScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
+import { VoiceprintManagementScreen } from './src/screens/VoiceprintManagementScreen';
+import { defaultMeetingTitle } from './src/utils/meetingTitle';
 
 type Route =
   | { name: 'home' }
@@ -38,8 +60,14 @@ type Route =
   | { name: 'knowledgeSearch'; query?: string }
   | { name: 'knowledgeSearchResults'; query: string }
   | { name: 'ai' }
+  | { name: 'aiRecords' }
+  | { name: 'aiRecordDetail'; recordId: string }
   | { name: 'todo' }
+  | { name: 'taskSearch' }
   | { name: 'me' }
+  | { name: 'voiceprintManagement' }
+  | { name: 'pushConfig' }
+  | { name: 'addVoiceprintSample' }
   | { name: 'editProfile' }
   | { name: 'settings' }
   | { name: 'helpFeedback' }
@@ -47,6 +75,7 @@ type Route =
   | { name: 'feedback' }
   | { name: 'about' }
   | { name: 'newMeeting' }
+  | { name: 'importMeeting' }
   | { name: 'recording'; meeting: Pick<Meeting, 'id' | 'title' | 'status'> }
   | { name: 'audioPlayer'; meetingId: string }
   | {
@@ -56,72 +85,110 @@ type Route =
       endedAt: string;
       realtimeTranscriptReady?: boolean;
     }
-  | { name: 'detail'; meetingId: string; initialTab?: 'summary' | 'transcript' | 'decisions' | 'questions' | 'actions' | 'risks'; sourceSegmentId?: string | null; startTime?: number | null; evidenceText?: string | null };
+  | { name: 'detail'; meetingId: string; initialTab?: 'summary' | 'transcript' | 'agent' | 'decisions' | 'questions' | 'actions' | 'risks'; sourceSegmentId?: string | null; startTime?: number | null; evidenceText?: string | null };
 
-const floatingWaveHeights = [12, 22, 32, 22, 12];
+const failedProcessingStatuses = new Set(['failed', 'transcription_failed', 'summary_failed']);
+type RecordingDisplayState = 'hidden' | 'expanded' | 'collapsed';
 
-function FloatingRecordingIcon() {
-  const waves = useRef(floatingWaveHeights.map(() => new Animated.Value(0))).current;
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-  useEffect(() => {
-    const animations = waves.map((wave, index) =>
-      Animated.loop(
-        Animated.sequence([
-          Animated.delay(index * 90),
-          Animated.timing(wave, {
-            toValue: 1,
-            duration: 360,
-            useNativeDriver: false,
-          }),
-          Animated.timing(wave, {
-            toValue: 0,
-            duration: 360,
-            useNativeDriver: false,
-          }),
-        ]),
-      ),
-    );
-    animations.forEach((animation) => animation.start());
-    return () => animations.forEach((animation) => animation.stop());
-  }, [waves]);
+function hasSummaryContent(summary: MeetingSummary | null | undefined): boolean {
+  return Boolean(summary?.meeting_summary?.trim() || summary?.overview?.trim() || (summary as any)?.summary?.trim());
+}
 
-  return (
-    <View style={styles.floatingIconWrap}>
-      <View style={styles.floatingWave}>
-        {waves.map((wave, index) => {
-          const baseHeight = floatingWaveHeights[index];
-          const height = wave.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseHeight * 0.62, baseHeight],
-          });
-          return <Animated.View key={index} style={[styles.floatingWaveBar, { height }]} />;
-        })}
-      </View>
-    </View>
-  );
+function isMeetingProcessingFailed(meeting: MeetingDetail | null): boolean {
+  return Boolean(meeting && failedProcessingStatuses.has(meeting.status));
+}
+
+async function waitForRecordingTranscript(meetingId: string): Promise<boolean> {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < 120000) {
+    await wait(3000);
+    const [transcript, meeting] = await Promise.all([getMeetingTranscript(meetingId), getMeeting(meetingId)]);
+    if (transcript.segments.length > 0 || meeting.transcript_segments.length > 0) return true;
+    if (isMeetingProcessingFailed(meeting)) return false;
+  }
+  return false;
+}
+
+async function waitForRecordingSummary(meetingId: string): Promise<void> {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < 600000) {
+    await wait(3000);
+    const [summary, meeting] = await Promise.all([getMeetingSummary(meetingId), getMeeting(meetingId)]);
+    if (hasSummaryContent(summary) || hasSummaryContent(meeting.summary) || meeting.status === 'completed') return;
+    if (isMeetingProcessingFailed(meeting)) return;
+  }
+}
+
+async function runRecordingProcessingInBackground(
+  meeting: Pick<Meeting, 'id' | 'title' | 'status'>,
+  recordingUri: string,
+  endedAt: string,
+): Promise<void> {
+  try {
+    await updateMeeting(meeting.id, { end_at: endedAt }).catch(() => undefined);
+    const currentMeeting = await getMeeting(meeting.id);
+    if (!currentMeeting.audio_files.length) {
+      await uploadAudio(meeting.id, recordingUri, endedAt);
+    }
+
+    const initialTranscript = await getMeetingTranscript(meeting.id);
+    let hasTranscriptSegments = initialTranscript.segments.length > 0 || currentMeeting.transcript_segments.length > 0;
+    if (!hasTranscriptSegments) {
+      await processMeeting(meeting.id);
+      hasTranscriptSegments = await waitForRecordingTranscript(meeting.id);
+    }
+    if (!hasTranscriptSegments) return;
+
+    const currentSummary = await getMeetingSummary(meeting.id).catch(() => null);
+    if (!hasSummaryContent(currentSummary)) {
+      await analyzeMeeting(meeting.id);
+      await waitForRecordingSummary(meeting.id);
+    }
+  } catch (error) {
+    Alert.alert('录音处理失败', error instanceof Error ? error.message : '请稍后在首页会议列表中重试处理。');
+  }
 }
 
 function bottomTabForRoute(route: Route): BottomTab | null {
   if (route.name === 'home') return 'home';
   if (['knowledge', 'knowledgeMeetings', 'knowledgeDecisions', 'knowledgeIssueRisks', 'knowledgeSearch', 'knowledgeSearchResults'].includes(route.name)) return 'knowledge';
-  if (featureFlags.enableAiAssistantUi && route.name === 'ai') return 'ai';
   if (route.name === 'todo') return 'todo';
-  if (route.name === 'me') return 'me';
+  if (['me', 'pushConfig'].includes(route.name)) return 'me';
   return null;
 }
 
 export default function App() {
   const [route, setRoute] = useState<Route>({ name: 'home' });
   const [recordingSession, setRecordingSession] = useState<{
-    meeting: Pick<Meeting, 'id' | 'title' | 'status'>;
+    meeting: Pick<Meeting, 'id' | 'title' | 'status' | 'title_source'>;
     started: boolean;
+    createdAt: string;
   } | null>(null);
+  const [recordingDisplayState, setRecordingDisplayState] = useState<RecordingDisplayState>('hidden');
+  const [recordingDiscardSignal, setRecordingDiscardSignal] = useState(0);
+  const [creatingRecordingMeeting, setCreatingRecordingMeeting] = useState(false);
+  const [recordingAnalysisNoticeVisible, setRecordingAnalysisNoticeVisible] = useState(false);
+  const [recordingProcessingMeeting, setRecordingProcessingMeeting] = useState<Meeting | null>(null);
+  const [meetingListRefreshKey, setMeetingListRefreshKey] = useState(0);
+  const [historyMeetingCount, setHistoryMeetingCount] = useState(0);
+  const [taskDetail, setTaskDetail] = useState<{ task: TaskListItem } | null>(null);
+  const [taskOverrides, setTaskOverrides] = useState<Record<string, Partial<TaskListItem>>>({});
   const recordingSessionRef = useRef<typeof recordingSession>(null);
+  const recordingAnalysisNoticeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const feedbackSubmitRef = useRef<null | (() => void)>(null);
-  const floatingPan = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
-  const floatingOffset = useRef({ x: 0, y: 0 });
-  const floatingMoved = useRef(false);
   recordingSessionRef.current = recordingSession;
+
+  useEffect(() => {
+    return () => {
+      if (recordingAnalysisNoticeTimerRef.current) {
+        clearTimeout(recordingAnalysisNoticeTimerRef.current);
+      }
+    };
+  }, []);
 
   const goHome = useCallback(() => setRoute({ name: 'home' }), []);
   const openDetail = useCallback((meetingId: string) => setRoute({ name: 'detail', meetingId }), []);
@@ -150,7 +217,7 @@ export default function App() {
   const openMeeting = useCallback((meetingId: string) => {
     const current = recordingSessionRef.current;
     if (current?.started && current.meeting.id === meetingId) {
-      setRoute({ name: 'recording', meeting: current.meeting });
+      setRecordingDisplayState('expanded');
       return;
     }
     setRoute({ name: 'detail', meetingId });
@@ -158,47 +225,23 @@ export default function App() {
   const openRecordingSession = useCallback(() => {
     const current = recordingSessionRef.current;
     if (current) {
-      setRoute({ name: 'recording', meeting: current.meeting });
+      setRecordingDisplayState('expanded');
     }
   }, []);
-  const floatingPanResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: (_, gesture) => Math.abs(gesture.dx) > 4 || Math.abs(gesture.dy) > 4,
-      onPanResponderGrant: () => {
-        floatingMoved.current = false;
-        floatingPan.setOffset(floatingOffset.current);
-        floatingPan.setValue({ x: 0, y: 0 });
-      },
-      onPanResponderMove: (event, gesture) => {
-        if (Math.abs(gesture.dx) > 4 || Math.abs(gesture.dy) > 4) {
-          floatingMoved.current = true;
-        }
-        Animated.event([null, { dx: floatingPan.x, dy: floatingPan.y }], { useNativeDriver: false })(event, gesture);
-      },
-      onPanResponderRelease: (_, gesture) => {
-        floatingPan.flattenOffset();
-        floatingOffset.current = {
-          x: floatingOffset.current.x + gesture.dx,
-          y: floatingOffset.current.y + gesture.dy,
-        };
-        if (!floatingMoved.current) {
-          openRecordingSession();
-        }
-      },
-    }),
-  ).current;
-
   const headerTitle =
-    route.name === 'newMeeting'
+    route.name === 'allMeetings'
+      ? `历史会议（${historyMeetingCount}）`
+      : route.name === 'newMeeting'
       ? '新建会议'
+      : route.name === 'importMeeting'
+        ? '导入音频'
       : route.name === 'recording'
         ? '会议录音'
         : route.name === 'processing'
           ? 'AI 处理'
           : route.name === 'audioPlayer'
             ? '会议录音'
-            : route.name === 'allMeetings'
+            : false
               ? '历史会议'
               : route.name === 'detail'
                 ? '会议纪要'
@@ -217,10 +260,8 @@ export default function App() {
                 : '';
   const showHeader = [
     'newMeeting',
-    'recording',
     'processing',
     'allMeetings',
-    'detail',
     'audioPlayer',
     'editProfile',
     'settings',
@@ -228,15 +269,34 @@ export default function App() {
     'faq',
     'feedback',
     'about',
+    'importMeeting',
   ].includes(route.name);
   const headerRightText = route.name === 'editProfile' ? '保存' : route.name === 'feedback' ? '提交' : undefined;
-  const activeTab = bottomTabForRoute(route);
-  const showFloatingRecording =
-    recordingSession?.started && route.name !== 'recording' && route.name !== 'processing';
+  const activeTab = taskDetail ? null : bottomTabForRoute(route);
+  const miniRecordingVisible =
+    recordingSession?.started && recordingDisplayState === 'collapsed' && route.name !== 'processing' && !taskDetail;
+
+  function mergeTaskOverride(task: TaskListItem): TaskListItem {
+    return { ...task, ...(taskOverrides[task.id] || {}) };
+  }
+
+  function handleOpenTask(task: TaskListItem) {
+    setTaskDetail({ task: mergeTaskOverride(task) });
+  }
+
+  function handleTaskDetailChange(task: TaskListItem) {
+    setTaskOverrides((current) => ({ ...current, [task.id]: { ...(current[task.id] || {}), ...task } }));
+    setTaskDetail((current) => (current?.task.id === task.id ? { task } : current));
+  }
 
   async function handleBack() {
-    if (['editProfile', 'settings', 'helpFeedback', 'about'].includes(route.name)) {
+    if (['editProfile', 'settings', 'helpFeedback', 'about', 'voiceprintManagement', 'pushConfig'].includes(route.name)) {
       setRoute({ name: 'me' });
+      return;
+    }
+
+    if (route.name === 'addVoiceprintSample') {
+      setRoute({ name: 'voiceprintManagement' });
       return;
     }
 
@@ -246,19 +306,16 @@ export default function App() {
     }
 
     if (route.name === 'recording' && recordingSession) {
-      if (recordingSession.started) {
-        setRoute({ name: 'home' });
-        return;
-      }
-
-      const meetingId = recordingSession.meeting.id;
-      setRecordingSession(null);
-      try {
-        await deleteMeeting(meetingId);
-      } catch {
-        // The draft meeting should not block navigation if cleanup fails.
-      }
-      setRoute({ name: 'home' });
+      Alert.alert('录音仍在进行', '返回首页不会停止录音。你也可以放弃本次录音。', [
+        { text: '继续录制', onPress: () => {
+          setRecordingDisplayState('collapsed');
+          setRoute({ name: 'home' });
+        } },
+        { text: '放弃录音', style: 'destructive', onPress: () => {
+          setRecordingDiscardSignal((current) => current + 1);
+          setRoute({ name: 'home' });
+        } },
+      ]);
       return;
     }
 
@@ -284,12 +341,78 @@ export default function App() {
   }
 
   function handleTabPress(tab: BottomTab) {
-    if (tab === 'home') setRoute({ name: 'home' });
-    if (tab === 'knowledge') setRoute({ name: 'knowledge' });
-    if (tab === 'ai' && featureFlags.enableAiAssistantUi) setRoute({ name: 'ai' });
-    if (tab === 'todo') setRoute({ name: 'todo' });
-    if (tab === 'me') setRoute({ name: 'me' });
+    if (tab === 'recording') {
+      if (recordingSessionRef.current) {
+        setRecordingDisplayState('expanded');
+        return;
+      }
+      createRecordingMeeting();
+      return;
+    }
+
+    const applyTab = () => {
+      if (tab === 'home') setRoute({ name: 'home' });
+      if (tab === 'knowledge') setRoute({ name: 'knowledge' });
+      if (tab === 'todo') setRoute({ name: 'todo' });
+      if (tab === 'me') setRoute({ name: 'me' });
+    };
+
+    if (recordingSessionRef.current?.started) {
+      Alert.alert('录音仍在进行', '切换页面不会停止录音。你也可以放弃本次录音。', [
+        { text: '继续录制', onPress: () => {
+          setRecordingDisplayState('collapsed');
+          applyTab();
+        } },
+        { text: '放弃录音', style: 'destructive', onPress: () => {
+          setRecordingDiscardSignal((current) => current + 1);
+          applyTab();
+        } },
+      ]);
+      return;
+    }
+
+    applyTab();
   }
+
+  async function createRecordingMeeting() {
+    if (creatingRecordingMeeting) return;
+    try {
+      setCreatingRecordingMeeting(true);
+      const createdAtDate = new Date();
+      const createdAt = createdAtDate.toISOString();
+      const meeting = await createMeeting(defaultMeetingTitle('recording', createdAtDate), {
+        start_at: createdAt,
+        title_source: 'fallback',
+      });
+      setRecordingSession({ meeting, started: false, createdAt });
+      setRecordingDisplayState('expanded');
+      setRoute({ name: 'home' });
+    } catch (error) {
+      Alert.alert('会议创建失败', error instanceof Error ? error.message : '请稍后重试。');
+    } finally {
+      setCreatingRecordingMeeting(false);
+    }
+  }
+
+  useEffect(() => {
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (recordingSessionRef.current) {
+        Alert.alert('录音仍在进行', '返回不会停止录音。你也可以放弃本次录音。', [
+          { text: '继续录制', onPress: () => setRecordingDisplayState('collapsed') },
+          { text: '放弃录音', style: 'destructive', onPress: () => setRecordingDiscardSignal((current) => current + 1) },
+        ]);
+        return true;
+      }
+
+      if (route.name !== 'home') {
+        handleBack();
+        return true;
+      }
+
+      return false;
+    });
+    return () => subscription.remove();
+  }, [route.name]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -308,7 +431,12 @@ export default function App() {
         <MeetingListScreen
           mode="home"
           activeRecordingMeetingId={recordingSession?.started ? recordingSession.meeting.id : null}
-          onCreateMeeting={() => setRoute({ name: 'newMeeting' })}
+          processingRecordingMeeting={recordingProcessingMeeting}
+          refreshKey={meetingListRefreshKey}
+          miniRecordingVisible={miniRecordingVisible}
+          creatingMeeting={creatingRecordingMeeting}
+          onCreateMeeting={createRecordingMeeting}
+          onImportFile={() => setRoute({ name: 'importMeeting' })}
           onOpenMeeting={openMeeting}
           onShowAll={() => setRoute({ name: 'allMeetings' })}
         />
@@ -318,17 +446,22 @@ export default function App() {
         <MeetingListScreen
           mode="all"
           activeRecordingMeetingId={recordingSession?.started ? recordingSession.meeting.id : null}
-          onCreateMeeting={() => setRoute({ name: 'newMeeting' })}
+          processingRecordingMeeting={recordingProcessingMeeting}
+          refreshKey={meetingListRefreshKey}
+          miniRecordingVisible={miniRecordingVisible}
+          creatingMeeting={creatingRecordingMeeting}
+          onCreateMeeting={createRecordingMeeting}
           onOpenMeeting={openMeeting}
+          onMeetingCountChange={setHistoryMeetingCount}
         />
       ) : null}
 
       {route.name === 'knowledge' && featureFlags.enableKnowledgeBaseUi ? (
         <KnowledgeBaseScreen
-          onOpenMeetings={() => setRoute({ name: 'knowledgeMeetings' })}
           onOpenDecisions={() => setRoute({ name: 'knowledgeDecisions' })}
           onOpenIssueRisks={() => setRoute({ name: 'knowledgeIssueRisks' })}
           onOpenSearch={(query) => setRoute({ name: 'knowledgeSearch', query })}
+          onOpenImportAudio={() => setRoute({ name: 'importMeeting' })}
         />
       ) : null}
       {route.name === 'knowledgeMeetings' ? <KnowledgeMeetingListScreen onBack={() => setRoute({ name: 'knowledge' })} onOpenMeeting={openMeeting} /> : null}
@@ -350,16 +483,57 @@ export default function App() {
         />
       ) : null}
 
-      {featureFlags.enableAiAssistantUi && route.name === 'ai' ? <AIAssistantScreen /> : null}
-      {route.name === 'todo' ? <TodoScreen /> : null}
+      {featureFlags.enableAiAssistantUi && route.name === 'ai' ? (
+        <AIAssistantScreen
+          onOpenRecords={() => setRoute({ name: 'aiRecords' })}
+          onOpenRecordDetail={(recordId) => setRoute({ name: 'aiRecordDetail', recordId })}
+        />
+      ) : null}
+      {featureFlags.enableAiAssistantUi && route.name === 'aiRecords' ? (
+        <AllAgentRecordsScreen
+          onBack={() => setRoute({ name: 'ai' })}
+          onOpenRecordDetail={(recordId) => setRoute({ name: 'aiRecordDetail', recordId })}
+        />
+      ) : null}
+      {featureFlags.enableAiAssistantUi && route.name === 'aiRecordDetail' ? (
+        <AgentRecordDetailScreen recordId={route.recordId} onBack={() => setRoute({ name: 'aiRecords' })} />
+      ) : null}
+      {route.name === 'todo' || route.name === 'taskSearch' ? (
+        <TodoScreen
+          onOpenSearch={() => setRoute({ name: 'taskSearch' })}
+          onOpenMeeting={(meetingId, initialTab) => setRoute({ name: 'detail', meetingId, initialTab })}
+          onOpenTask={handleOpenTask}
+          taskOverrides={taskOverrides}
+        />
+      ) : null}
+      {route.name === 'taskSearch' ? (
+        <View style={styles.overlayScreen}>
+          <TaskSearchScreen
+            onBack={() => setRoute({ name: 'todo' })}
+            onOpenMeeting={(meetingId, initialTab) => setRoute({ name: 'detail', meetingId, initialTab })}
+            onOpenTask={handleOpenTask}
+            taskOverrides={taskOverrides}
+          />
+        </View>
+      ) : null}
       {route.name === 'me' ? (
         <ProfileScreen
           onEditProfile={() => setRoute({ name: 'editProfile' })}
+          onVoiceprintManagement={() => setRoute({ name: 'voiceprintManagement' })}
+          onPushConfig={() => setRoute({ name: 'pushConfig' })}
           onHelpFeedback={() => setRoute({ name: 'helpFeedback' })}
           onAbout={() => setRoute({ name: 'about' })}
           onSettings={() => setRoute({ name: 'settings' })}
         />
       ) : null}
+      {route.name === 'voiceprintManagement' ? (
+        <VoiceprintManagementScreen
+          onBack={() => setRoute({ name: 'me' })}
+          onAddVoiceprint={() => setRoute({ name: 'addVoiceprintSample' })}
+        />
+      ) : null}
+      {route.name === 'addVoiceprintSample' ? <AddVoiceprintSampleScreen onBack={() => setRoute({ name: 'voiceprintManagement' })} /> : null}
+      {route.name === 'pushConfig' ? <PushConfigScreen onBack={() => setRoute({ name: 'me' })} /> : null}
       {route.name === 'editProfile' ? <EditProfileScreen /> : null}
       {route.name === 'settings' ? <SettingsScreen /> : null}
       {route.name === 'helpFeedback' ? (
@@ -374,8 +548,26 @@ export default function App() {
       {route.name === 'newMeeting' ? (
         <NewMeetingScreen
           onCreated={(meeting) => {
-            setRecordingSession({ meeting, started: false });
+            setRecordingSession({ meeting, started: false, createdAt: new Date().toISOString() });
+            setRecordingDisplayState('expanded');
             setRoute({ name: 'recording', meeting });
+          }}
+          onCancel={goHome}
+        />
+      ) : null}
+
+      {route.name === 'importMeeting' ? (
+        <ImportMeetingScreen
+          onImported={({ meeting, fileUri, endedAt }) => {
+            setRecordingSession(null);
+            setRecordingDisplayState('hidden');
+            setRoute({
+              name: 'processing',
+              meeting,
+              recordingUri: fileUri,
+              endedAt,
+              realtimeTranscriptReady: false,
+            });
           }}
           onCancel={goHome}
         />
@@ -384,23 +576,63 @@ export default function App() {
       {recordingSession ? (
         <RecordingScreen
           meeting={recordingSession.meeting}
-          minimized={route.name !== 'recording'}
+          createdAt={recordingSession.createdAt}
+          displayState={recordingDisplayState}
+          discardSignal={recordingDiscardSignal}
+          onCollapse={() => setRecordingDisplayState('collapsed')}
+          onExpand={openRecordingSession}
           onStarted={() =>
             setRecordingSession((current) => (current ? { ...current, started: true } : current))
           }
-          onProcessing={(recordingUri, endedAt, realtimeTranscriptReady) => {
-            const meeting = recordingSession.meeting;
+          onDiscard={() => {
+            const meetingId = recordingSession.meeting.id;
             setRecordingSession(null);
-            setRoute({
-              name: 'processing',
-              meeting,
-              recordingUri,
-              endedAt,
-              realtimeTranscriptReady,
+            setRecordingDisplayState('hidden');
+            deleteMeeting(meetingId).catch(() => undefined);
+            setRoute({ name: 'home' });
+          }}
+          onProcessing={(recordingUri, endedAt) => {
+            const meeting = recordingSession.meeting;
+            const processingMeeting: Meeting = {
+              id: meeting.id,
+              title: meeting.title,
+              title_source: meeting.title_source,
+              status: 'processing',
+              start_at: recordingSession.createdAt,
+              end_at: endedAt,
+              location: null,
+              created_at: recordingSession.createdAt,
+              updated_at: endedAt,
+            };
+            setRecordingProcessingMeeting(processingMeeting);
+            setMeetingListRefreshKey((current) => current + 1);
+            setRecordingAnalysisNoticeVisible(true);
+            runRecordingProcessingInBackground(meeting, recordingUri, endedAt).finally(() => {
+              setRecordingProcessingMeeting(null);
+              setMeetingListRefreshKey((current) => current + 1);
             });
+            if (recordingAnalysisNoticeTimerRef.current) {
+              clearTimeout(recordingAnalysisNoticeTimerRef.current);
+            }
+            recordingAnalysisNoticeTimerRef.current = setTimeout(() => {
+              setRecordingSession(null);
+              setRecordingAnalysisNoticeVisible(false);
+              setRoute({ name: 'home' });
+              recordingAnalysisNoticeTimerRef.current = null;
+            }, 500);
+            setRecordingDisplayState('hidden');
           }}
         />
       ) : null}
+
+      <Modal transparent visible={recordingAnalysisNoticeVisible} animationType="fade">
+        <View style={styles.recordingNoticeBackdrop}>
+          <View style={styles.recordingNoticeCard}>
+            <ActivityIndicator color="#ffffff" size="small" />
+            <Text style={styles.recordingNoticeText}>已进入AI结构化分析</Text>
+          </View>
+        </View>
+      </Modal>
 
       {route.name === 'processing' ? (
         <AIProcessingScreen
@@ -420,21 +652,27 @@ export default function App() {
           sourceSegmentId={route.sourceSegmentId}
           startTime={route.startTime}
           evidenceText={route.evidenceText}
+          onBack={handleBack}
           onRecord={(meeting) => setRoute({ name: 'recording', meeting })}
           onOpenAudioPlayer={(meetingId) => setRoute({ name: 'audioPlayer', meetingId })}
+          onOpenKnowledgeBase={() => setRoute({ name: 'knowledge' })}
         />
       ) : null}
 
       {route.name === 'audioPlayer' ? <AudioPlayerScreen meetingId={route.meetingId} /> : null}
 
-      {showFloatingRecording ? (
-        <Animated.View
-          {...floatingPanResponder.panHandlers}
-          style={[styles.floatingRecording, { transform: floatingPan.getTranslateTransform() }]}
-        >
-          <View style={styles.floatingDot} />
-          <FloatingRecordingIcon />
-        </Animated.View>
+      {taskDetail ? (
+        <View style={styles.taskDetailOverlay}>
+          <TaskDetailScreen
+            initialTask={taskDetail.task}
+            onBack={() => setTaskDetail(null)}
+            onTaskChange={handleTaskDetailChange}
+            onOpenMeeting={({ meetingId, initialTab, sourceSegmentId, evidenceText }) => {
+              setTaskDetail(null);
+              setRoute({ name: 'detail', meetingId, initialTab, sourceSegmentId, evidenceText });
+            }}
+          />
+        </View>
       ) : null}
 
       {activeTab ? <BottomNav active={activeTab} onTabPress={handleTabPress} /> : null}
@@ -447,46 +685,40 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f6f7fb',
   },
-  floatingRecording: {
+  overlayScreen: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#f5f7fa',
+    zIndex: 60,
+  },
+  taskDetailOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#f5f7fa',
+    zIndex: 80,
+  },
+  recordingNoticeBackdrop: {
     alignItems: 'center',
-    backgroundColor: '#6657ff',
-    borderRadius: 33,
-    bottom: 86,
-    elevation: 12,
-    height: 66,
+    backgroundColor: 'rgba(17, 24, 39, 0.42)',
+    flex: 1,
     justifyContent: 'center',
-    position: 'absolute',
-    right: 18,
-    shadowColor: '#6657ff',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 18,
-    width: 66,
-    zIndex: 30,
+    paddingHorizontal: 28,
   },
-  floatingDot: {
-    backgroundColor: '#ef4444',
-    borderColor: '#ffffff',
-    borderRadius: 6,
-    borderWidth: 2,
-    height: 12,
-    position: 'absolute',
-    right: 9,
-    top: 9,
-    width: 12,
-  },
-  floatingIconWrap: {
+  recordingNoticeCard: {
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  floatingWave: {
-    alignItems: 'center',
+    backgroundColor: '#111827',
+    borderRadius: 16,
+    elevation: 8,
     flexDirection: 'row',
-    gap: 3,
+    gap: 10,
+    minHeight: 56,
+    paddingHorizontal: 18,
+    shadowColor: '#111827',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.22,
+    shadowRadius: 18,
   },
-  floatingWaveBar: {
-    backgroundColor: 'rgba(255,255,255,0.48)',
-    borderRadius: 999,
-    width: 3,
+  recordingNoticeText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '900',
   },
 });

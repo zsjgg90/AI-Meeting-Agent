@@ -19,7 +19,7 @@ Use these values when API and Worker run directly on Windows:
 
 ```env
 DATABASE_URL=postgresql+psycopg://meeting_agent:meeting_agent@127.0.0.1:5432/meeting_agent
-STORAGE_DIR=D:\codex_work\浼氳澹扮汗璇嗗埆\storage
+STORAGE_DIR=D:\codex_work\会议声纹识别\storage
 WORKER_URL=http://127.0.0.1:8001
 WORKER_REQUEST_TIMEOUT_SECONDS=600
 OLLAMA_MODEL=qwen3:14b

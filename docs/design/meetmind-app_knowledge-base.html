@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html class="" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MeetMind AI - 知识库</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background-color: #ffffff;
+            border-radius: 40px;
+            border: 8px solid #1f2937;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .bubble-glow {
+            box-shadow: 0 4px 12px rgba(43, 108, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="" style="opacity: 1;">
+<div class="phone-container">
+<!-- 状态栏 -->
+<div class="flex justify-between items-center px-8 py-3 w-full text-black font-semibold text-sm">
+<span>16:56</span>
+<div class="flex items-center gap-1.5">
+<iconify-icon icon="solar:signal-list-bold" width="16"></iconify-icon>
+<iconify-icon icon="solar:treadmill-round-bold" width="16"></iconify-icon>
+<div class="flex items-center gap-0.5 border border-black/20 rounded-sm px-0.5 py-px text-[10px]">
+<span>51</span>
+</div>
+</div>
+</div>
+<!-- 标题栏 -->
+<div class="flex justify-between items-center px-5 py-2">
+<h1 class="text-xl font-bold text-gray-900">MeetMind AI</h1>
+<div class="flex items-center gap-3">
+<iconify-icon class="text-gray-800" icon="solar:history-linear" width="28"></iconify-icon>
+</div>
+</div>
+<!-- 主体内容滚动区 -->
+<div class="flex-1 overflow-y-auto hide-scrollbar px-6 pt-6 pb-24">
+<!-- 问候与交互区 -->
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="text-4xl font-bold text-gray-900">Hi</span>
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-50">
+<svg class="w-10 h-10" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<!-- 天线 -->
+<rect fill="#1e293b" height="6" rx="1" width="2" x="23" y="2"></rect>
+<circle cx="24" cy="2" fill="#2B6CFF" r="2.5"></circle>
+<!-- 耳机 -->
+<rect fill="white" height="12" rx="3" stroke="#e2e8f0" stroke-width="0.5" width="6" x="2" y="20"></rect>
+<circle cx="5" cy="26" fill="#2B6CFF" r="2"></circle>
+<rect fill="white" height="12" rx="3" stroke="#e2e8f0" stroke-width="0.5" width="6" x="40" y="20"></rect>
+<circle cx="43" cy="26" fill="#2B6CFF" r="2"></circle>
+<!-- 头部 (蛋形) -->
+<ellipse cx="24" cy="25" fill="white" rx="16" ry="14" stroke="#e2e8f0" stroke-width="0.5"></ellipse>
+<!-- 脸部屏幕 -->
+<ellipse cx="24" cy="26" fill="#0f172a" rx="11" ry="9"></ellipse>
+<!-- 微笑眼睛 -->
+<path d="M18 26 Q20 23 22 26" fill="none" stroke="#2B6CFF" stroke-linecap="round" stroke-width="2"></path>
+<path d="M26 26 Q28 23 30 26" fill="none" stroke="#2B6CFF" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<h2 class="text-2xl font-bold text-gray-900 leading-tight mb-4">会议达人，有什么吩咐？</h2>
+<p class="text-gray-400 text-sm leading-relaxed pr-4">
+                    我可以帮你总结要点、整理待办、提炼结论、生成会议材料，也可以继续追问会议相关细节
+                </p>
+</div>
+<!-- 快捷指令气泡 -->
+<div class="space-y-3 mb-10">
+<div class="bg-gray-50 p-3.5 rounded-2xl rounded-tl-none border border-gray-100 hover:bg-gray-100 transition-colors cursor-pointer">
+<span class="text-gray-800 text-[13px]">最近会议重点是什么？</span>
+</div>
+<div class="bg-gray-50 p-3.5 rounded-2xl rounded-tl-none border border-gray-100 hover:bg-gray-100 transition-colors cursor-pointer">
+<span class="text-gray-800 text-[13px]">帮我整理最近一周待办事项，并按负责人和优先级列出</span>
+</div>
+<div class="bg-gray-50 p-3.5 rounded-2xl rounded-tl-none border border-gray-100 hover:bg-gray-100 transition-colors cursor-pointer">
+<span class="text-gray-800 text-[13px]">总结最近所有文件的核心结论 and 趋势变化</span>
+</div>
+</div>
+<!-- 知识库内容区 -->
+<div class="space-y-4">
+<!-- 会议知识卡片 -->
+<!-- 待办知识卡片 -->
+<!-- 文件知识卡片 -->
+</div>
+</div>
+<!-- 底部输入区 -->
+<div class="absolute bottom-[80px] left-0 w-full px-5 py-3 bg-white/80 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<button class="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 active:bg-gray-100">
+<iconify-icon icon="solar:soundwave-linear" width="24"></iconify-icon>
+</button>
+<div class="flex-1 bg-gray-50 rounded-full px-5 py-2.5 text-sm text-gray-400 border border-gray-100">
+                    输入问题或按住说话
+                </div>
+<button class="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 active:bg-gray-100">
+<iconify-icon class="" icon="solar:add-circle-linear" width="24"></iconify-icon>
+</button>
+</div>
+</div>
+<!-- 底部导航栏 -->
+<div class="absolute bottom-0 left-0 w-full h-[80px] bg-white border-t border-gray-100 flex justify-around items-center px-4 pb-4">
+<div class="flex flex-col items-center gap-1 cursor-pointer">
+<iconify-icon class="text-[#2B6CFF]" icon="solar:home-2-bold" width="24"></iconify-icon>
+<span class="text-[10px] font-bold text-[#2B6CFF]">首页</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
+<iconify-icon icon="solar:library-linear" width="24"></iconify-icon>
+<span class="text-[10px]">知识库</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
+<iconify-icon icon="solar:notes-linear" width="24"></iconify-icon>
+<span class="text-[10px]">待办</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
+<iconify-icon icon="solar:user-circle-linear" width="24"></iconify-icon>
+<span class="text-[10px]">我的</span>
+</div>
+</div>
+</div>
+</body></html>

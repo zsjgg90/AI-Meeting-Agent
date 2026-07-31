@@ -122,14 +122,14 @@ const styles = StyleSheet.create({
   },
   numberBadge: {
     alignItems: 'center',
-    backgroundColor: '#f0edff',
+    backgroundColor: '#f7f8fc',
     borderRadius: 14,
     height: 28,
     justifyContent: 'center',
     width: 28,
   },
   numberText: {
-    color: '#6c4dff',
+    color: '#111827',
     fontSize: 12,
     fontWeight: '900',
   },

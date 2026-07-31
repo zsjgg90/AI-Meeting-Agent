@@ -1,0 +1,173 @@
+{
+  "overview": "会议围绕订单服务异常问题展开复盘，讨论了缓存策略异常的初步怀疑、安全攻击可能性的排除，以及长期监控机制的补充需求。各方确认需继续排查缓存策略问题，并补充监控机制以预防类似问题。",
+  "meeting_title": "",
+  "meeting_type": "project_retrospective",
+  "meeting_type_confidence": 0.85,
+  "meeting_title_candidate": "订单服务异常复盘与监控机制补充",
+  "title_basis": [
+    "会议议程中明确提及订单服务异常复盘",
+    "会议总结中包含监控机制补充的讨论"
+  ],
+  "agenda": [
+    {
+      "item": "排查缓存策略与安全攻击可能性",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "补充长期监控机制",
+      "order": 2,
+      "source_segment_ids": []
+    }
+  ],
+  "topics": [],
+  "speaker_summaries": [],
+  "decisions": [
+    {
+      "decision": "需继续排查缓存策略问题",
+      "reason": "",
+      "source": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "conclusion": "需继续排查缓存策略问题",
+      "source_text": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "confidence": 0.7
+    }
+  ],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "补充长期监控机制",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "长期监控机制需要补充。",
+      "source_segment_id": null,
+      "confidence": 0.6
+    }
+  ],
+  "risks": [
+    {
+      "risk": "安全攻击未排除",
+      "impact": "可能带来潜在安全风险",
+      "mitigation": "",
+      "focus_area": "安全排查",
+      "source_text": "目前没有证据证明是安全攻击，需要继续排查。",
+      "confidence": 0.7
+    },
+    {
+      "risk": "监控机制不足",
+      "impact": "可能影响问题及时发现",
+      "mitigation": "",
+      "focus_area": "监控机制补充",
+      "source_text": "长期监控机制需要补充。",
+      "confidence": 0.6
+    }
+  ],
+  "open_questions": [
+    {
+      "question": "缓存策略问题尚未确认",
+      "owner": "",
+      "source": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "issue": "缓存策略问题尚未确认",
+      "reason": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "blocker": "",
+      "source_text": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "confidence": 0.7
+    },
+    {
+      "question": "安全攻击证据不足",
+      "owner": "",
+      "source": "目前没有证据证明是安全攻击，需要继续排查。",
+      "issue": "安全攻击证据不足",
+      "reason": "目前没有证据证明是安全攻击，需要继续排查。",
+      "blocker": "",
+      "source_text": "目前没有证据证明是安全攻击，需要继续排查。",
+      "confidence": 0.7
+    }
+  ],
+  "next_steps": [
+    {
+      "item": "补充长期监控机制",
+      "owner": "",
+      "time": "",
+      "note": "长期监控机制需要补充。"
+    }
+  ],
+  "meeting_agenda": [
+    {
+      "item": "排查缓存策略与安全攻击可能性",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "补充长期监控机制",
+      "order": 2,
+      "source_segment_ids": []
+    }
+  ],
+  "meeting_summary": "会议围绕订单服务异常问题展开复盘，讨论了缓存策略异常的初步怀疑、安全攻击可能性的排除，以及长期监控机制的补充需求。各方确认需继续排查缓存策略问题，并补充监控机制以预防类似问题。",
+  "key_conclusions": [
+    {
+      "conclusion": "需继续排查缓存策略问题",
+      "source_text": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "confidence": 0.7
+    }
+  ],
+  "unresolved_issues": [
+    {
+      "issue": "缓存策略问题尚未确认",
+      "reason": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "blocker": "",
+      "source_text": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。",
+      "confidence": 0.7
+    },
+    {
+      "issue": "安全攻击证据不足",
+      "reason": "目前没有证据证明是安全攻击，需要继续排查。",
+      "blocker": "",
+      "source_text": "目前没有证据证明是安全攻击，需要继续排查。",
+      "confidence": 0.7
+    }
+  ],
+  "risks_and_focus": [
+    {
+      "risk": "安全攻击未排除",
+      "impact": "可能带来潜在安全风险",
+      "focus_area": "安全排查",
+      "mitigation": "",
+      "source_text": "目前没有证据证明是安全攻击，需要继续排查。",
+      "confidence": 0.7
+    },
+    {
+      "risk": "监控机制不足",
+      "impact": "可能影响问题及时发现",
+      "focus_area": "监控机制补充",
+      "mitigation": "",
+      "source_text": "长期监控机制需要补充。",
+      "confidence": 0.6
+    }
+  ],
+  "model_name": "qwen3:14b+rag",
+  "confidence_score": 0.667,
+  "metadata": {
+    "schema_version": "meeting-analysis-v1",
+    "model_name": "qwen3:14b+rag",
+    "prompt_version": "meeting-analyst-v1",
+    "rag_chunk_ids": [
+      "v4_boundary_rule_001",
+      "v4_boundary_rule_002",
+      "v4_boundary_rule_003",
+      "v4_definition_001",
+      "boundary_rule_012",
+      "v4_definition_002",
+      "boundary_rule_001",
+      "definition_002"
+    ],
+    "rag_dataset_version": "meeting_analyst_rag_v2_dedup",
+    "rag_chunk_schema_version": "rag-chunk-v1",
+    "rag_collection_name": "meeting_analyst_rules_v2_dedup_125",
+    "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+    "result_source": "legacy_qwen_rag",
+    "confidence_score": 0.667,
+    "generated_at": "2026-07-31T16:28:44.754988+00:00"
+  }
+}

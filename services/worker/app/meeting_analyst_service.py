@@ -193,8 +193,15 @@ class MeetingAnalystService:
             )
 
         print(
-            "[ANALYST] Step 5/5: normalizing, post-processing, and validating result"
+            "[ANALYST] Step 5/5: normalizing, post-processing, validating result, and keeping title candidate"
         )
+        title_fields = {
+            "meeting_title": str(parsed_result.get("meeting_title") or "").strip(),
+            "meeting_type": str(parsed_result.get("meeting_type") or "").strip(),
+            "meeting_type_confidence": parsed_result.get("meeting_type_confidence"),
+            "meeting_title_candidate": str(parsed_result.get("meeting_title_candidate") or "").strip(),
+            "title_basis": parsed_result.get("title_basis") if isinstance(parsed_result.get("title_basis"), list) else [],
+        }
 
         parsed_result["_metadata"] = {
             "prompt_id": prompt_spec.prompt_id,
@@ -232,6 +239,9 @@ class MeetingAnalystService:
                     transcript,
                 )
             )
+        for key, value in title_fields.items():
+            if value not in ("", [], None):
+                validated_result[key] = value
 
         validated_result["_metadata"] = {
             "prompt_id": prompt_spec.prompt_id,

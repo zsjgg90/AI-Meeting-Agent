@@ -186,8 +186,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   typeOptionActive: {
-    backgroundColor: '#f0edff',
-    borderColor: '#d9d2ff',
+    backgroundColor: '#eaf1ff',
+    borderColor: '#bcd3ff',
   },
   typeOptionText: {
     color: '#6b7280',
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   typeOptionTextActive: {
-    color: '#6c4dff',
+    color: '#2B6CFF',
   },
   textarea: {
     color: '#111827',
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     alignItems: 'center',
-    backgroundColor: '#6c4dff',
+    backgroundColor: '#2B6CFF',
     borderRadius: 16,
     minHeight: 50,
     justifyContent: 'center',

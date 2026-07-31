@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>会议详情 - MeetMind AI</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        body {
+            background-color: #e5e7eb;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .iphone-x {
+            width: 375px;
+            height: 812px;
+            background-color: #F5F7FA;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+            border: 8px solid #1a1a1a;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+<div class="iphone-x flex flex-col">
+<!-- 1. 状态栏 -->
+<div class="flex-none px-8 py-3 flex justify-between items-center bg-[#F5F7FA]">
+<span class="text-[14px] font-semibold">23:17</span>
+<div class="flex items-center space-x-1.5">
+<iconify-icon class="text-[14px]" icon="mingcute:signal-fill"></iconify-icon>
+<iconify-icon class="text-[14px]" icon="mingcute:wifi-fill"></iconify-icon>
+<div class="flex items-center bg-green-500 px-1 rounded-sm text-white">
+<span class="text-[10px] font-bold">80%</span>
+<iconify-icon class="text-[12px] ml-0.5" icon="mingcute:battery-fill"></iconify-icon>
+</div>
+</div>
+</div>
+<!-- 2. 标题与导航区 -->
+<div class="flex-none px-4 py-2 flex items-center justify-between bg-[#F5F7FA]">
+<a class="p-1" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/store/versions/meetmind-app.html/16/files/meetmind-app.html?render_html=true">
+<iconify-icon class="text-2xl text-gray-900" icon="mingcute:arrow-left-line"></iconify-icon>
+</a>
+<h2 class="text-[15px] font-bold text-gray-900 flex-1 text-center truncate px-2">团队会议：项目组-周进度同步</h2>
+<div class="flex items-center space-x-3">
+<iconify-icon class="text-2xl text-gray-900" icon="mingcute:share-2-line"></iconify-icon>
+<iconify-icon class="text-2xl text-gray-900" icon="mingcute:more-2-line"></iconify-icon>
+</div>
+</div>
+<!-- 可滚动内容区 -->
+<div class="flex-1 overflow-y-auto hide-scrollbar bg-white rounded-t-[32px] mt-2 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<!-- 3. 音频播放控制区 -->
+<div class="px-5 pt-4 pb-2"> <!-- 调整间距: pt-6 pb-4 -> pt-4 pb-2 -->
+<div class="bg-gray-50 rounded-2xl p-4 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[11px] text-gray-400">00:00</span>
+<div class="flex-1 mx-3 h-1 bg-gray-200 rounded-full relative overflow-hidden">
+<div class="absolute top-0 left-0 h-full w-[10%] bg-[#2B6CFF]"></div>
+</div>
+<span class="text-[11px] text-gray-400">04:36</span>
+</div>
+<div class="flex items-center justify-center space-x-6">
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 active:bg-gray-100 relative">
+<iconify-icon class="text-gray-600 text-lg" icon="mingcute:back-line"></iconify-icon>
+<span class="absolute text-[8px] font-bold text-gray-600">15</span>
+</button>
+<button class="w-12 h-12 bg-gray-900 text-white flex items-center justify-center rounded-full active:scale-95 transition-transform">
+<iconify-icon class="text-2xl ml-1" icon="mingcute:play-fill"></iconify-icon>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 active:bg-gray-100 relative">
+<iconify-icon class="text-gray-600 text-lg" icon="mingcute:forward-line"></iconify-icon>
+<span class="absolute text-[8px] font-bold text-gray-600">15</span>
+</button>
+<button class="absolute right-10 text-[12px] font-medium text-gray-600 flex items-center border border-gray-200 px-2 py-0.5 rounded-full">
+                            1x
+                            <iconify-icon class="ml-0.5" icon="mingcute:down-line"></iconify-icon>
+</button>
+</div>
+</div>
+</div>
+<!-- 4. 功能标签区 -->
+<div class="px-5">
+<!-- 主标签栏 -->
+<div class="flex border-b border-gray-100">
+<button class="flex-1 py-2 text-[15px] font-bold text-[#2B6CFF] border-b-2 border-[#2B6CFF] flex items-center justify-center"> <!-- 调整间距: py-3 -> py-2 -->
+<iconify-icon class="mr-1.5" icon="mingcute:translate-2-line"></iconify-icon>会议原文</button>
+<a class="flex-1 py-2 text-[15px] font-medium text-gray-400 flex items-center justify-center" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/store/versions/meetmind-app.html/16/files/meeting-minutes.html?render_html=true">AI纪要</a> <!-- 调整间距: py-3 -> py-2 -->
+<button class="flex-1 py-2 text-[15px] font-medium text-gray-400 flex items-center justify-center">Agen工具</button> <!-- 调整间距: py-3 -> py-2 -->
+</div>
+</div>
+<!-- 5. 章节速览区 -->
+<div class="px-5 mt-1 pb-4"> <!-- 调整间距: mt-2 pb-10 -> mt-1 pb-4 -->
+<div class="flex items-center mb-3"> <!-- 调整间距: mb-4 -> mb-3 -->
+<div class="w-1 h-4 bg-[#2B6CFF] rounded-full mr-2"></div>
+<h3 class="text-[16px] font-bold text-gray-900">会议速览</h3>
+</div>
+<div class="space-y-4"> <!-- 调整间距: space-y-6 -> space-y-4 -->
+<!-- 章节 1 -->
+<div class="flex items-start">
+<div class="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<span class="text-[#2B6CFF] font-medium text-[14px] mr-2 cursor-pointer">00:04</span>
+<span class="text-gray-900 text-[14px]">会议开场与议程说明</span>
+</div>
+<iconify-icon class="text-gray-400" icon="mingcute:down-line"></iconify-icon>
+</div>
+</div>
+<!-- 章节 2 -->
+<div class="flex items-start">
+<div class="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<span class="text-[#2B6CFF] font-medium text-[14px] mr-2 cursor-pointer">00:28</span>
+<span class="text-gray-900 text-[14px]">各岗位本周工作进度同步</span>
+</div>
+<iconify-icon class="text-gray-400" icon="mingcute:down-line"></iconify-icon>
+</div>
+</div>
+<!-- 章节 3 -->
+<div class="flex items-start">
+<div class="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<span class="text-[#2B6CFF] font-medium text-[14px] mr-2 cursor-pointer">02:57</span>
+<span class="text-gray-900 text-[14px]">本周情况梳理与工作安排</span>
+</div>
+<iconify-icon class="text-gray-400" icon="mingcute:down-line"></iconify-icon>
+</div>
+</div>
+<!-- 章节 4 -->
+<div class="flex items-start">
+<div class="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+<div class="flex-1 flex justify-between items-center">
+<div class="">
+<span class="text-[#2B6CFF] font-medium text-[14px] mr-2 cursor-pointer">03:49</span>
+<span class="text-gray-900 text-[14px]">阻塞问题与配合事项确认及会议结束</span>
+</div>
+<iconify-icon class="text-gray-400" icon="mingcute:down-line"></iconify-icon>
+</div>
+</div>
+</div>
+</div>
+<!-- 7. 导出文稿模块 (移动到此处) -->
+<div class="px-5 py-2 border-t border-gray-100 bg-gray-50/30">
+<h3 class="text-[14px] font-bold text-gray-900 mb-2 text-left">导出文稿</h3>
+<div class="flex justify-between items-center space-x-2">
+<button class="flex-1 border border-gray-200 rounded-lg py-1.5 text-[12px] text-gray-700 hover:border-[#2B6CFF] hover:text-[#2B6CFF] active:border-[#2B6CFF] active:text-[#2B6CFF] text-center transition-colors bg-white">MD</button>
+<button class="flex-1 border border-gray-200 rounded-lg py-1.5 text-[12px] text-gray-700 text-center bg-white">PDF</button>
+<button class="flex-1 border border-gray-200 rounded-lg py-1.5 text-[12px] text-gray-700 text-center bg-white">Docx</button>
+<button class="flex-1 border border-gray-200 rounded-lg py-1.5 text-[12px] text-gray-700 text-center bg-white">TXT</button>
+</div>
+</div>
+<!-- 6. 会议记录内容区 -->
+<div class="mt-2 border-t border-gray-100 pt-4"> <!-- 调整间距: mt-8 pt-6 -> mt-2 pt-4 -->
+<div class="flex items-center justify-between mb-3 px-5"> <!-- 调整间距: mb-6 -> mb-3 -->
+<div class="flex items-center">
+<div class="w-1 h-4 bg-[#2B6CFF] rounded-full mr-2"></div>
+<h3 class="text-[16px] font-bold text-gray-900">会议记录</h3>
+</div>
+</div>
+<div class="px-5 relative space-y-4 pb-4"> <!-- 调整间距: space-y-6 pb-6 -> space-y-4 pb-4 -->
+<!-- 时间轴连线 -->
+<div class="absolute left-[31px] top-4 bottom-4 w-px bg-gray-100"></div>
+<!-- 发言块 1 -->
+<div class="relative flex items-start">
+<div class="w-6 h-6 rounded-full bg-[#2B6CFF] flex items-center justify-center text-white text-[12px] font-bold z-10 mr-3 flex-shrink-0">1</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="text-[12px] text-[#2B6CFF] font-medium cursor-pointer">说话人1</span>
+<iconify-icon class="text-gray-400 text-[10px]" icon="mingcute:play-fill"></iconify-icon>
+<span class="text-[12px] text-[#2B6CFF] cursor-pointer">00:15</span>
+</div>
+<p class="text-[14px] text-gray-900 leading-[1.6]">本次会议主要分为三个部分，各岗位进度同步，现存问题对齐，下周工作安排与风险预警，没有特殊临时问题，不展开闲聊，我们直接开始。</p>
+</div>
+</div>
+<!-- 发言块 2 -->
+<div class="relative flex items-start">
+<div class="w-6 h-6 rounded-full bg-[#2B6CFF] flex items-center justify-center text-white text-[12px] font-bold z-10 mr-3 flex-shrink-0">1</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="text-[12px] text-[#2B6CFF] font-medium cursor-pointer">说话人1</span>
+<iconify-icon class="text-gray-400 text-[10px]" icon="mingcute:play-fill"></iconify-icon>
+<span class="text-[12px] text-[#2B6CFF] cursor-pointer">00:28</span>
+</div>
+<p class="text-[14px] text-gray-900 leading-[1.6]">首先由各岗位依次同步。</p>
+</div>
+</div>
+<!-- 发言块 3 -->
+<div class="relative flex items-start">
+<div class="w-6 h-6 rounded-full bg-[#F59E0B] flex items-center justify-center text-white text-[12px] font-bold z-10 mr-3 flex-shrink-0">2</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="text-[12px] text-[#2B6CFF] font-medium cursor-pointer">说话人2</span>
+<iconify-icon class="text-gray-400 text-[10px]" icon="mingcute:play-fill"></iconify-icon>
+<span class="text-[12px] text-[#2B6CFF] cursor-pointer">00:30</span>
+</div>
+<p class="text-[14px] text-gray-900 leading-[1.6]">本周工作进度。</p>
+</div>
+</div>
+<!-- 发言块 4 -->
+<div class="relative flex items-start">
+<div class="w-6 h-6 rounded-full bg-[#F59E0B] flex items-center justify-center text-white text-[12px] font-bold z-10 mr-3 flex-shrink-0">2</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="text-[12px] text-[#2B6CFF] font-medium cursor-pointer">说话人2</span>
+<iconify-icon class="text-gray-400 text-[10px]" icon="mingcute:play-fill"></iconify-icon>
+<span class="text-[12px] text-[#2B6CFF] cursor-pointer">00:31</span>
+</div>
+<p class="text-[14px] text-gray-900 leading-[1.6]">我这边本周主要完成了用户中心模块的功能开发，包括用户注册、登录、个人信息编辑等功能。目前正在进行接口联调，预计本周五前完成。</p>
+</div>
+</div>
+<!-- 发言块 5 -->
+<div class="relative flex items-start">
+<div class="w-6 h-6 rounded-full bg-[#F59E0B] flex items-center justify-center text-white text-[12px] font-bold z-10 mr-3 flex-shrink-0">3</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="text-[12px] text-[#2B6CFF] font-medium cursor-pointer">说话人3</span>
+<iconify-icon class="text-gray-400 text-[10px]" icon="mingcute:play-fill"></iconify-icon>
+<span class="text-[12px] text-[#2B6CFF] cursor-pointer">01:09</span>
+</div>
+<p class="text-[14px] text-gray-900 leading-[1.6]">这周我这边主要在做订单系统的重构，数据库表结构已经设计完成，API 接口文档也已经在写了，预计下周三能完成开发。</p>
+</div>
+</div>
+<!-- 发言块 6 -->
+<div class="relative flex items-start">
+<div class="w-6 h-6 rounded-full bg-[#10B981] flex items-center justify-center text-white text-[12px] font-bold z-10 mr-3 flex-shrink-0">4</div>
+<div class="flex-1">
+<div class="flex items-center space-x-2 mb-1">
+<span class="text-[12px] text-[#2B6CFF] font-medium cursor-pointer">说话人4</span>
+<iconify-icon class="text-gray-400 text-[10px]" icon="mingcute:play-fill"></iconify-icon>
+<span class="text-[12px] text-[#2B6CFF] cursor-pointer">01:28</span>
+</div>
+<p class="text-[14px] text-gray-900 leading-[1.6]">前端这边 H5 页面已经适配得差不多了，兼容性测试还在进行中，发现了一些 iOS 上的样式问题，正在修复中。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 底部固定区域 (包含操作按钮区和指令输入区) -->
+<div class="flex-none bg-white border-t border-gray-100 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+<!-- 6. 操作按钮区 -->
+<!-- 7. 指令输入区 -->
+<!-- 8. 底部安全区 -->
+<div class="safe-area-bottom">
+<div class="mx-auto my-2 w-32 h-1 bg-gray-200 rounded-full"></div>
+</div>
+</div>
+</div></body></html>

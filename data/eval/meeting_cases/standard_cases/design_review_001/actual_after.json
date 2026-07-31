@@ -1,0 +1,113 @@
+{
+  "overview": "会议围绕移动端首页改版方案展开，讨论了卡片式布局的可行性，提出需要数据验证，并强调组件规范同步的必要性。",
+  "meeting_title": "",
+  "meeting_type": "requirement_review",
+  "meeting_type_confidence": 0.85,
+  "meeting_title_candidate": "移动端首页改版方案讨论",
+  "title_basis": [
+    "会议原文提及移动端首页改版方案讨论",
+    "会议议程聚焦于改版方案的布局选择与验证"
+  ],
+  "agenda": [
+    {
+      "item": "讨论移动端首页改版方案",
+      "order": 1,
+      "source_segment_ids": []
+    }
+  ],
+  "topics": [],
+  "speaker_summaries": [],
+  "decisions": [],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "补充数据验证方案",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "source_segment_id": null,
+      "confidence": 0.6
+    },
+    {
+      "owner_name": null,
+      "task": "同步组件规范",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "如果确定方案，需要提前同步组件规范。",
+      "source_segment_id": null,
+      "confidence": 0.7
+    }
+  ],
+  "risks": [],
+  "open_questions": [
+    {
+      "question": "卡片式布局方案未通过数据验证",
+      "owner": "",
+      "source": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "issue": "卡片式布局方案未通过数据验证",
+      "reason": "需要进一步数据验证支持",
+      "blocker": "",
+      "source_text": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "confidence": 0.6
+    }
+  ],
+  "next_steps": [
+    {
+      "item": "补充数据验证方案",
+      "owner": "",
+      "time": "",
+      "note": "方向可以考虑，但需要结合数据验证，目前不能直接确认。"
+    },
+    {
+      "item": "同步组件规范",
+      "owner": "",
+      "time": "",
+      "note": "如果确定方案，需要提前同步组件规范。"
+    }
+  ],
+  "meeting_agenda": [
+    {
+      "item": "讨论移动端首页改版方案",
+      "order": 1,
+      "source_segment_ids": []
+    }
+  ],
+  "meeting_summary": "会议围绕移动端首页改版方案展开，讨论了卡片式布局的可行性，提出需要数据验证，并强调组件规范同步的必要性。",
+  "key_conclusions": [],
+  "unresolved_issues": [
+    {
+      "issue": "卡片式布局方案未通过数据验证",
+      "reason": "需要进一步数据验证支持",
+      "blocker": "",
+      "source_text": "方向可以考虑，但需要结合数据验证，目前不能直接确认。",
+      "confidence": 0.6
+    }
+  ],
+  "risks_and_focus": [],
+  "model_name": "qwen3:14b+rag",
+  "confidence_score": 0.633,
+  "metadata": {
+    "schema_version": "meeting-analysis-v1",
+    "model_name": "qwen3:14b+rag",
+    "prompt_version": "meeting-analyst-v1",
+    "rag_chunk_ids": [
+      "v4_boundary_rule_001",
+      "v4_boundary_rule_002",
+      "v4_boundary_rule_003",
+      "v4_definition_001",
+      "boundary_rule_012",
+      "v4_definition_002",
+      "boundary_rule_001",
+      "definition_002"
+    ],
+    "rag_dataset_version": "meeting_analyst_rag_v2_dedup",
+    "rag_chunk_schema_version": "rag-chunk-v1",
+    "rag_collection_name": "meeting_analyst_rules_v2_dedup_125",
+    "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+    "result_source": "legacy_qwen_rag",
+    "confidence_score": 0.633,
+    "generated_at": "2026-07-31T16:26:12.319892+00:00"
+  }
+}

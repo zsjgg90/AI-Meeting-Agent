@@ -95,7 +95,28 @@ class MeetingAnalysisMetadata(BaseModel):
     generated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
+MeetingType = Literal[
+    "project_weekly",
+    "progress_sync",
+    "requirement_review",
+    "solution_review",
+    "project_retrospective",
+    "risk_review",
+    "release_review",
+    "customer_communication",
+    "training",
+    "interview",
+    "one_on_one",
+    "other",
+]
+
+
 class MeetingAnalysisSchema(BaseModel):
+    meeting_title: str = ""
+    meeting_type: MeetingType | str = "other"
+    meeting_type_confidence: float = Field(default=0.0, ge=0, le=1)
+    meeting_title_candidate: str = ""
+    title_basis: list[str] = []
     meeting_agenda: list[MeetingAgendaItem] = []
     meeting_summary: str = ""
     key_conclusions: list[KeyConclusion] = []

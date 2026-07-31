@@ -1,0 +1,42 @@
+[
+  {
+    "meeting_id": "design_review_001",
+    "title": "产品设计评审会",
+    "participants": [
+      "设计负责人",
+      "产品负责人",
+      "前端负责人"
+    ],
+    "scenario": "产品设计方案、交互边界、修改意见与后续安排评审",
+    "dialogue": [
+      {
+        "segment_id": "design_review_001_seg_001",
+        "speaker": "speaker_01",
+        "speaker_role": "设计负责人",
+        "timestamp": "00:00",
+        "text": "今天讨论移动端首页改版方案。"
+      },
+      {
+        "segment_id": "design_review_001_seg_002",
+        "speaker": "speaker_01",
+        "speaker_role": "设计负责人",
+        "timestamp": "15:00",
+        "text": "我建议采用卡片式布局，可以提升信息展示效率。"
+      },
+      {
+        "segment_id": "design_review_001_seg_003",
+        "speaker": "speaker_02",
+        "speaker_role": "产品负责人",
+        "timestamp": "25:00",
+        "text": "方向可以考虑，但需要结合数据验证，目前不能直接确认。"
+      },
+      {
+        "segment_id": "design_review_001_seg_004",
+        "speaker": "speaker_03",
+        "speaker_role": "前端负责人",
+        "timestamp": "40:00",
+        "text": "如果确定方案，需要提前同步组件规范。"
+      }
+    ]
+  }
+]

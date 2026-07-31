@@ -9,7 +9,17 @@ from sentence_transformers import SentenceTransformer
 from app.config import get_settings
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+import os
+from pathlib import Path
+
+_CURRENT_FILE = Path(__file__).resolve()
+
+if os.getenv("MEETMIND_PROJECT_ROOT"):
+    PROJECT_ROOT = Path(os.environ["MEETMIND_PROJECT_ROOT"]).resolve()
+elif _CURRENT_FILE.as_posix().startswith("/app/"):
+    PROJECT_ROOT = Path("/app")
+else:
+    PROJECT_ROOT = _CURRENT_FILE.parents[3]
 DEFAULT_DB_DIR = PROJECT_ROOT / "data" / "vector_db"
 
 

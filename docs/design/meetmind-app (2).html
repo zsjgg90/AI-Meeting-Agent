@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MeetMind AI - 首页原型</title>
+<!-- Tailwind CSS (本地) -->
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<!-- Iconify 图标 (本地) -->
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        body {
+            background-color: #e5e7eb;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .iphone-x {
+            width: 375px;
+            height: 812px;
+            background-color: #F5F7FA;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+            border: 8px solid #1a1a1a;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .bg-gradient-ai {
+            background: linear-gradient(135deg, #E8F0FE 0%, #D4E4FF 100%);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+<div class="iphone-x flex flex-col">
+<!-- 1. 状态栏 -->
+<div class="flex-none px-8 py-3 flex justify-between items-center bg-[#F5F7FA]">
+<span class="text-[14px] font-semibold">19:43</span>
+<div class="flex items-center space-x-1.5">
+<iconify-icon class="text-[14px]" icon="mingcute:signal-fill"></iconify-icon>
+<iconify-icon class="text-[14px]" icon="mingcute:wifi-fill"></iconify-icon>
+<div class="flex items-center bg-[#FFD60A] px-1 rounded-sm">
+<span class="text-[10px] font-bold">42</span>
+<iconify-icon class="text-[12px] ml-0.5" icon="mingcute:battery-fill"></iconify-icon>
+</div>
+</div>
+</div>
+<!-- 可滚动内容区 -->
+<div class="flex-1 overflow-y-auto hide-scrollbar px-5 pb-24">
+<!-- 2. 应用标题区 -->
+<div class="flex justify-between items-center mt-4">
+<div class="flex items-center">
+<div class="w-11 h-11 bg-[#2B6CFF] rounded-full flex items-center justify-center shadow-lg shadow-blue-200">
+<iconify-icon class="text-white text-2xl" icon="ri:voiceprint-fill"></iconify-icon>
+</div>
+<div class="ml-3">
+<h1 class="text-lg font-bold text-gray-900 leading-tight">MeetMind AI</h1>
+<p class="text-[11px] text-gray-500">AI会议记录助手</p>
+</div>
+</div>
+<button class="w-9 h-9 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100">
+<iconify-icon class="text-gray-600 text-xl" icon="mingcute:search-line"></iconify-icon>
+</button>
+</div>
+<!-- 3. 核心行动区 -->
+<div class="grid grid-cols-2 gap-3 mt-6">
+<button class="bg-[#2B6CFF] h-[60px] rounded-2xl flex flex-col items-center justify-center text-white shadow-lg shadow-blue-100 active:scale-95 transition-transform">
+<div class="flex items-center mb-0.5">
+<iconify-icon class="text-xl mr-1.5" icon="mingcute:mic-fill"></iconify-icon>
+<span class="font-bold">实时录音</span>
+</div>
+<span class="text-[10px] opacity-80">点击开始记录会议</span>
+</button>
+<button class="bg-white border border-gray-100 h-[60px] rounded-2xl flex flex-col items-center justify-center relative active:scale-95 transition-transform">
+<div class="absolute top-1.5 right-1.5">
+<iconify-icon class="text-[#2B6CFF] text-base" icon="mingcute:add-circle-fill"></iconify-icon>
+</div>
+<div class="flex items-center mb-0.5">
+<iconify-icon class="text-[#2B6CFF] text-xl mr-1.5" icon="mingcute:file-import-line"></iconify-icon>
+<span class="font-bold text-[#2B6CFF]">导入文件</span>
+</div>
+<span class="text-[10px] text-gray-400">支持音视频上传</span>
+</button>
+</div>
+<!-- 6. 最近会议/文件列表 -->
+<div class="mt-7">
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-base font-bold text-gray-900">全部会议</h2>
+</div>
+<p class="text-[11px] text-gray-400 mb-3">07月27 周一</p>
+<div class="space-y-4">
+<!-- 会议卡片 1 -->
+<div class="bg-white p-5 rounded-2xl border border-gray-50 shadow-sm relative active:bg-gray-50 mb-2">
+<div class="absolute top-5 right-5 bg-green-50 text-green-600 text-[10px] px-2 py-0.5 rounded-full font-medium">已完成</div>
+<h4 class="font-bold text-gray-900 pr-16 leading-tight">产品需求评审会 - 智能总结模块</h4>
+<div class="mt-4 space-y-2">
+<div class="text-[12px] flex items-start">
+<span class="text-[#2B6CFF] font-bold flex-shrink-0">会议议程：</span>
+<span class="text-gray-900 ml-1">各岗位本周工作进度同步</span>
+</div>
+<div class="text-[12px] flex items-start">
+<span class="text-[#2B6CFF] font-bold flex-shrink-0">核心结论：</span>
+<span class="text-gray-900 ml-1">周四中午前完成代码提交和自测</span>
+</div>
+<div class="text-[12px] flex items-start">
+<span class="text-[#2B6CFF] font-bold flex-shrink-0">待办事项：</span>
+<span class="text-gray-900 ml-1">完成低版本浏览器兼容性适配</span>
+</div>
+</div>
+<div class="flex items-center mt-2 space-x-3">
+<div class="flex items-center text-gray-400 text-[11px]">
+<iconify-icon class="mr-1" icon="mingcute:time-line"></iconify-icon>
+<span>14:30 · 45分钟</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-50">
+<div class="flex items-center justify-between">
+<span class="text-[#2B6CFF] text-[12px] font-medium flex items-center">
+                                    AI摘要已生成
+                                    <iconify-icon class="ml-0.5" icon="mingcute:right-line"></iconify-icon>
+</span>
+<span class="bg-orange-50 text-orange-500 text-[10px] px-2 py-0.5 rounded-full">2项待办</span>
+</div>
+</div>
+</div>
+<!-- 会议卡片 2 -->
+<!-- 会议卡片 3 -->
+</div>
+</div>
+</div>
+<!-- 7. 底部导航栏 -->
+<div class="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg border-t border-gray-100 flex-none pb-5 pt-2">
+<div class="flex justify-around items-center px-6">
+<div class="flex flex-col items-center">
+<iconify-icon class="text-[24px] text-[#2B6CFF]" icon="mingcute:home-6-fill"></iconify-icon>
+<span class="text-[10px] mt-1 text-[#2B6CFF] font-medium">首页</span>
+</div>
+<div class="flex flex-col items-center text-gray-400">
+<iconify-icon class="text-[24px]" icon="mingcute:book-2-line"></iconify-icon>
+<span class="text-[10px] mt-1 font-medium">知识库</span>
+</div>
+<div class="flex flex-col items-center text-gray-400">
+<iconify-icon class="text-[24px]" icon="mingcute:checkbox-line"></iconify-icon>
+<span class="text-[10px] mt-1 font-medium">待办</span>
+</div>
+<div class="flex flex-col items-center text-gray-400">
+<iconify-icon class="text-[24px]" icon="mingcute:user-3-line"></iconify-icon>
+<span class="text-[10px] mt-1 font-medium">我的</span>
+</div>
+</div>
+<!-- iOS Home Indicator 模拟 -->
+<div class="mx-auto mt-4 w-32 h-1 bg-gray-200 rounded-full"></div>
+</div>
+</div>
+</body></html>

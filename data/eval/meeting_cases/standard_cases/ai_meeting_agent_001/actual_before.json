@@ -1,0 +1,241 @@
+{
+  "overview": "会议围绕AI会议分析Agent阶段效果展开复盘，发现存在任务遗漏问题，讨论了可能原因（模型问题/输入质量/检索上下文不足），确认需先确定数据链路优化优先级，短期将优化分析流程，模型架构调整需进一步评估。",
+  "meeting_title": "",
+  "meeting_type": "project_retrospective",
+  "meeting_type_confidence": 0.85,
+  "meeting_title_candidate": "AI会议分析Agent阶段复盘与优化方向",
+  "title_basis": [
+    "会议原文提及'复盘AI会议分析Agent阶段效果'",
+    "讨论内容包含'下一步优化方向'"
+  ],
+  "agenda": [
+    {
+      "item": "分析AI会议分析Agent阶段效果",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "定位任务遗漏原因",
+      "order": 2,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确定数据链路优化优先级",
+      "order": 3,
+      "source_segment_ids": []
+    },
+    {
+      "item": "制定短期优化方案",
+      "order": 4,
+      "source_segment_ids": []
+    }
+  ],
+  "topics": [],
+  "speaker_summaries": [],
+  "decisions": [
+    {
+      "decision": "短期优先优化分析流程",
+      "reason": "",
+      "source": "短期先优化分析流程，模型架构调整继续评估。",
+      "conclusion": "短期优先优化分析流程",
+      "source_text": "短期先优化分析流程，模型架构调整继续评估。",
+      "confidence": 0.95
+    }
+  ],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "确定任务遗漏原因",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。",
+      "source_segment_id": null,
+      "confidence": 0.8
+    },
+    {
+      "owner_name": null,
+      "task": "明确数据链路优化优先级",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "数据链路可以支持优化，但需要先确定优先级。",
+      "source_segment_id": null,
+      "confidence": 0.75
+    },
+    {
+      "owner_name": null,
+      "task": "调整分析流程",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "短期先优化分析流程，模型架构调整继续评估。",
+      "source_segment_id": null,
+      "confidence": 0.9
+    },
+    {
+      "owner_name": null,
+      "task": "评估模型架构调整",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "短期先优化分析流程，模型架构调整继续评估。",
+      "source_segment_id": null,
+      "confidence": 0.85
+    }
+  ],
+  "risks": [
+    {
+      "risk": "任务遗漏影响分析质量",
+      "impact": "可能导致关键信息未被处理",
+      "mitigation": "",
+      "focus_area": "任务遗漏原因分析",
+      "source_text": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。",
+      "confidence": 0.8
+    },
+    {
+      "risk": "数据链路优化延迟",
+      "impact": "可能影响整体优化进度",
+      "mitigation": "",
+      "focus_area": "优先级决策",
+      "source_text": "数据链路可以支持优化，但需要先确定优先级。",
+      "confidence": 0.75
+    }
+  ],
+  "open_questions": [
+    {
+      "question": "任务遗漏具体原因未明确",
+      "owner": "",
+      "source": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。",
+      "issue": "任务遗漏具体原因未明确",
+      "reason": "尚未确定是模型问题、输入质量问题，还是检索上下文不足",
+      "blocker": "",
+      "source_text": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。",
+      "confidence": 0.8
+    },
+    {
+      "question": "数据链路优化优先级未明确",
+      "owner": "",
+      "source": "数据链路可以支持优化，但需要先确定优先级。",
+      "issue": "数据链路优化优先级未明确",
+      "reason": "需要先确定优先级",
+      "blocker": "",
+      "source_text": "数据链路可以支持优化，但需要先确定优先级。",
+      "confidence": 0.75
+    }
+  ],
+  "next_steps": [
+    {
+      "item": "确定任务遗漏原因",
+      "owner": "",
+      "time": "",
+      "note": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。"
+    },
+    {
+      "item": "明确数据链路优化优先级",
+      "owner": "",
+      "time": "",
+      "note": "数据链路可以支持优化，但需要先确定优先级。"
+    },
+    {
+      "item": "调整分析流程",
+      "owner": "",
+      "time": "",
+      "note": "短期先优化分析流程，模型架构调整继续评估。"
+    },
+    {
+      "item": "评估模型架构调整",
+      "owner": "",
+      "time": "",
+      "note": "短期先优化分析流程，模型架构调整继续评估。"
+    }
+  ],
+  "meeting_agenda": [
+    {
+      "item": "分析AI会议分析Agent阶段效果",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "定位任务遗漏原因",
+      "order": 2,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确定数据链路优化优先级",
+      "order": 3,
+      "source_segment_ids": []
+    },
+    {
+      "item": "制定短期优化方案",
+      "order": 4,
+      "source_segment_ids": []
+    }
+  ],
+  "meeting_summary": "会议围绕AI会议分析Agent阶段效果展开复盘，发现存在任务遗漏问题，讨论了可能原因（模型问题/输入质量/检索上下文不足），确认需先确定数据链路优化优先级，短期将优化分析流程，模型架构调整需进一步评估。",
+  "key_conclusions": [
+    {
+      "conclusion": "短期优先优化分析流程",
+      "source_text": "短期先优化分析流程，模型架构调整继续评估。",
+      "confidence": 0.95
+    }
+  ],
+  "unresolved_issues": [
+    {
+      "issue": "任务遗漏具体原因未明确",
+      "reason": "尚未确定是模型问题、输入质量问题，还是检索上下文不足",
+      "blocker": "",
+      "source_text": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。",
+      "confidence": 0.8
+    },
+    {
+      "issue": "数据链路优化优先级未明确",
+      "reason": "需要先确定优先级",
+      "blocker": "",
+      "source_text": "数据链路可以支持优化，但需要先确定优先级。",
+      "confidence": 0.75
+    }
+  ],
+  "risks_and_focus": [
+    {
+      "risk": "任务遗漏影响分析质量",
+      "impact": "可能导致关键信息未被处理",
+      "focus_area": "任务遗漏原因分析",
+      "mitigation": "",
+      "source_text": "最近发现部分会议存在任务遗漏，但还不能确定是模型问题、输入质量问题，还是检索上下文不足。",
+      "confidence": 0.8
+    },
+    {
+      "risk": "数据链路优化延迟",
+      "impact": "可能影响整体优化进度",
+      "focus_area": "优先级决策",
+      "mitigation": "",
+      "source_text": "数据链路可以支持优化，但需要先确定优先级。",
+      "confidence": 0.75
+    }
+  ],
+  "model_name": "qwen3:14b+rag",
+  "confidence_score": 0.817,
+  "metadata": {
+    "schema_version": "meeting-analysis-v1",
+    "model_name": "qwen3:14b+rag",
+    "prompt_version": "meeting-analyst-v1",
+    "rag_chunk_ids": [
+      "v4_boundary_rule_049",
+      "v4_boundary_rule_037",
+      "v4_boundary_rule_013",
+      "v4_boundary_rule_025",
+      "v4_boundary_rule_050",
+      "v4_boundary_rule_001",
+      "v4_boundary_rule_038",
+      "v4_boundary_rule_014"
+    ],
+    "rag_dataset_version": "meeting_analyst_rag_v1",
+    "rag_chunk_schema_version": "rag-chunk-v1",
+    "rag_collection_name": "meeting_analyst_rules",
+    "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+    "result_source": "legacy_qwen_rag",
+    "confidence_score": 0.817,
+    "generated_at": "2026-07-31T10:55:49.471150+00:00"
+  }
+}

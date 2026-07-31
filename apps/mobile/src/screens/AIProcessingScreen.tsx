@@ -329,6 +329,7 @@ export function AIProcessingScreen({
   const progress = Math.round((stages.reduce((sum, stage) => sum + statusRank(stage.status), 0) / stages.length) * 100);
   const finished = stages.every((stage) => stage.status === 'completed');
   const failed = stages.some((stage) => stage.status === 'failed');
+  const displayedTitle = meetingDetail?.title || meeting.title;
   const errorDetail = taskError
     ? `错误阶段：${taskError.error_stage || '未知'}\n错误代码：${taskError.error_code || 'unknown'}\n错误说明：${safeErrorMessage(taskError)}`
     : error || '暂无更多错误详情。';
@@ -337,7 +338,7 @@ export function AIProcessingScreen({
     <View style={styles.container}>
       <View style={styles.titleBlock}>
         <Text numberOfLines={1} style={styles.meetingTitle}>
-          {meeting.title}
+          {displayedTitle}
         </Text>
         <Text style={styles.people}>{failed ? 'AI 分析失败' : finished ? 'AI 分析完成' : 'AI 分析中'}</Text>
       </View>

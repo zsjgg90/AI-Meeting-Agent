@@ -2,11 +2,68 @@
 
 ## Active Priority
 
-1. Keep the default mobile bottom navigation on Knowledge Base instead of AI
-   Assistant. The Knowledge Base MVP now uses API-side PostgreSQL knowledge
+Phase 0 Evaluation System is now a standalone offline framework under
+`data/eval/` plus `scripts/evaluate_meeting_analysis.py`. It defines
+evaluation case schema, metric notes, baseline report generation, and mock-data
+unit tests for Decision Precision, Task Recall, Risk Recall, Hallucination
+Rate, and Evidence Coverage. It must remain outside the production meeting
+analysis chain and must not call Qwen3/Ollama/RAG/API/DB/Worker/ASR/Semantic
+Pipeline/Mobile.
+
+Current realtime recording rule: home `实时录音` creates the fallback-titled
+meeting, starts the shared `expo-av` recorder inside a home overlay, supports
+expanded/collapsed UI without releasing or recreating recording state, and
+directly stops on end, shows `已进入AI结构化分析` for 500 ms, returns home, and
+runs upload/process/analyze in the mobile background flow. The BottomNav center
+`麦克风` button is only another entry into this same flow; it must not create a
+second `RecordingScreen`, recorder object, or recording state store.
+
+0. Keep the optimized RC1 meeting creation/title flow stable. Realtime
+   recording creates a fallback-titled meeting with local
+   `YYYY-MM-DD HH:mm 实时录音`, enters `RecordingScreen` directly, starts real
+   `expo-av` recording automatically, ends directly back to the home list,
+   runs upload/process/analyze in the mobile background flow, requires
+   confirmation only before discarding, and cleans up abandoned/too-short automatic meetings. Audio
+   import creates `YYYY-MM-DD HH:mm 文件导入` after file selection and reuses the
+   existing upload/process/analyze path. Successful formal analysis may replace
+   only unchanged fallback titles with a validated AI-generated Chinese title.
+   Title updates now require same-call internal `meeting_type`,
+   `meeting_type_confidence >= 0.70`, `meeting_title_candidate`, and at least
+   two valid `title_basis` entries; generic, explanatory, JSON/Markdown, and
+   time-plus-action task titles must be rejected. Narrow role-plus-action
+   candidates such as `后端接口优化确认会` are also rejected as single-position
+   task titles. Version-number dots such as `V3.2` are allowed only inside the
+   version token. The 24-sample live Qwen3 title audit under
+   `data/debug/title_regression/20260730_title_live_phase2/` is the current
+   title-quality baseline: 23 acceptable/accurate titles, 1 safe fallback, 0
+   local action-item title leaks, 0 missing meeting types, and 0 missing or
+   duplicate title bases;
+   `user_edited` titles must not be overwritten by re-analysis, refresh,
+   export, or knowledge reindex.
+1. Keep the default mobile bottom navigation as
+   `首页 | 知识库 | 麦克风 | 待办 | 我的`. The center `麦克风`
+   button reuses `App.tsx` realtime recording meeting creation and overlay
+   expansion. The Knowledge Base MVP now uses API-side PostgreSQL knowledge
    items generated from completed meeting summaries, action items, and
-   transcript segments. Do not wire RAG question answering or AI assistant
-   entry points into the Knowledge Base until a later explicit task.
+   transcript segments. The RC1 Knowledge Base home now exposes quick question
+   input, existing knowledge search/decision/issue-risk entries, disabled
+   history and voice states, and the existing audio import entry without fake
+   answers or document-upload claims. The Knowledge Base content overview
+   section is intentionally removed from the home. Do not wire RAG question
+   answering or AI assistant entry points into the Knowledge Base until a
+   later explicit task.
+   Profile `声纹管理` now opens a React Native voiceprint management page and
+   add-sample page. They must remain truthful until a formal voiceprint API is
+   designed: show unavailable/empty states, use only page-local voice-sample
+   `Audio.Recording`, and do not create fake registered users, identity matches,
+   backend endpoints, Worker logic, Prompt/RAG/Validator changes, or database
+   fields.
+   Profile `推送配置` now opens a React Native push configuration page for
+   Feishu, email, and SMS channels. It must remain truthful until formal push
+   integrations are designed: switches stay disabled/off, status copy stays
+   `未配置`/`暂未开放`/`待接入`, and the mobile app must not add OAuth, SMTP, SMS
+   services, push history, backend endpoints, database fields, Worker logic,
+   Prompt/RAG/Validator changes, or fake delivery success.
 2. Keep Agent review auth fail-closed and hidden by default. Expo Agent review
    pages and local Agent login remain available only when the UI/config is
    explicitly re-enabled.
@@ -21,9 +78,14 @@
    recovered on service restart.
 5. Keep the MeetMind AI RC1 home screen on the current API-only mobile flow:
    brand/search header, real-time recording, audio import, full-page `全部会议`
-   list, and fixed bottom navigation. Audio import must continue to reuse the
-   existing create-meeting plus `AIProcessingScreen` upload/process/analyze
-   path without backend, database, Prompt, RAG, Worker, or schema changes.
+   list grouped by local natural day, and fixed bottom navigation. Meeting list
+   grouping uses `start_at` with `created_at` fallback, keeps invalid times in
+   `时间未知`, and must continue to leave enough bottom padding for the mini
+   recording bar. The full history page title shows the loaded count as
+   `历史会议（n）`; do not restore a separate `共 n 场会议` subtitle above the date
+   sections. Audio import must continue to reuse the existing
+   create-meeting plus `AIProcessingScreen` upload/process/analyze path without
+   backend, database, Prompt, RAG, Worker, or schema changes.
 6. Keep the rebuilt meeting detail transcript page on existing API-only data:
    `audio_files`, `transcript_segments`, `speaker_mappings`, and transcript
    exports. The detail page may refine React Native UI, player ergonomics, and
@@ -36,12 +98,31 @@
    the existing `/exports/summary.{format}` backend export path, and display
    action item status as read-only until a formal update contract is exposed
    to this surface.
-8. Keep the hidden Expo AI assistant review UI on top of existing Agent
+8. Keep the rebuilt meeting detail Agent tools tab on existing real
+   capabilities only. The Knowledge Base card may use the current
+   `/meetings/{id}/knowledge/reindex` API and existing Knowledge route; email,
+   Feishu, and mind map cards must remain disabled until formal integrations
+   or deterministic generation contracts exist. Do not show fake generation
+   records when no persisted tool execution log endpoint exists.
+9. Keep the rebuilt Expo Todo home on the `/tasks` API. It may show real
+   loaded-task statistics, pagination, pull-to-refresh, priority, deadline,
+   and real checkbox updates through `PATCH /tasks/{task_id}/status`. The
+   independent task search page must continue to reuse `GET /tasks?q=...` and
+   local AsyncStorage keyword history only; do not add a backend
+   search-history or separate task-search endpoint. Task cards from Todo and
+   task search should open the independent mobile task detail overlay first,
+   preserving the underlying list/search state. The detail page uses
+   task-list data plus best-effort `/tasks` refresh and source meeting lookup.
+   Title, description, owner, due date, priority, and reminder settings now
+   persist through `PATCH /tasks/{task_id}`. Task attachments persist through
+   `POST /tasks/{task_id}/attachments` and are opened through the attachment
+   download endpoint.
+10. Keep the hidden Expo AI assistant review UI on top of existing Agent
    proposal/confirmation/command/audit data without expanding real-write scope.
-9. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
+11. Archive Agent v1.0 Phase 15 final acceptance and prepare internal controlled
    grey only under the approved Phase 13/14 scope.
-10. Keep formal Qwen3 + RAG meeting analysis stable.
-11. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
+12. Keep formal Qwen3 + RAG meeting analysis stable.
+13. Keep Expo Go flow stable: create meeting -> record -> upload -> process -> analyze -> display.
    Recording upload now has timeout-bounded mobile requests, Chinese upload
    errors, Expo `audio/x-m4a` API regression coverage, and a local HTTP upload
    smoke check. History meeting loading remains bounded with `limit`/`offset`
@@ -49,11 +130,11 @@
    End-to-end summary failure recovery now requires project-venv API/Worker
    port ownership, structured Worker error persistence, and retry-only mobile
    re-analysis from existing audio/transcript.
-12. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
+14. Follow the seven-phase maintainability plan in `docs/PHASE_PLAN.md` for RC
    maintenance issues that remain relevant.
-13. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
+15. Use `data/debug/semantic_pipeline_trace/<meeting_id>/comparison.md` to locate
    semantic quality errors before considering formal semantic output again.
-14. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
+16. Use `data/debug/chain_audit/<meeting_id>/chain_audit.md` before debugging an
    Expo-visible summary, especially when the meeting metadata indicates a
    manual fixture such as `fixture-gold-standard`.
 

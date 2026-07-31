@@ -97,6 +97,22 @@ class MeetingUploadApiTest(unittest.TestCase):
         finally:
             db.close()
 
+    def test_meeting_create_and_manual_title_update_tracks_title_source(self) -> None:
+        response = self.client.post(
+            "/meetings",
+            json={"title": "2026-07-29 15:30 实时录音", "title_source": "fallback"},
+        )
+        self.assertEqual(response.status_code, 201, response.text)
+        meeting = response.json()
+        self.assertEqual(meeting["title_source"], "fallback")
+
+        update = self.client.patch(f"/meetings/{meeting['id']}", json={"title": "智能总结模块需求评审"})
+
+        self.assertEqual(update.status_code, 200, update.text)
+        body = update.json()
+        self.assertEqual(body["title"], "智能总结模块需求评审")
+        self.assertEqual(body["title_source"], "user_edited")
+
     def test_processing_task_saves_structured_worker_error(self) -> None:
         db = self.SessionLocal()
         try:
@@ -155,6 +171,71 @@ class MeetingUploadApiTest(unittest.TestCase):
                 start_time=0,
                 end_time=1,
                 text="大家确认后端接口需要优化。",
+                speaker_label="speaker_1",
+            )
+            db.add_all([meeting, task, segment])
+            db.commit()
+        finally:
+            db.close()
+
+    def test_analysis_task_keeps_user_edited_title_after_worker_success(self) -> None:
+        db = self.SessionLocal()
+        try:
+            meeting = Meeting(
+                id="meeting-user-title",
+                title="用户手动标题",
+                title_source="user_edited",
+                status="summarizing",
+            )
+            task = TranscriptionTask(id="task-user-title", meeting_id=meeting.id, status="queued")
+            segment = TranscriptSegment(
+                id="segment-user-title",
+                meeting_id=meeting.id,
+                audio_file_id=None,
+                segment_index=0,
+                start_time=0,
+                end_time=1,
+                text="讨论智能总结模块需求评审。",
+                speaker_label="speaker_1",
+            )
+            db.add_all([meeting, task, segment])
+            db.commit()
+        finally:
+            db.close()
+
+        response = httpx.Response(
+            200,
+            json={"summary_id": "summary-user-title"},
+            request=httpx.Request("POST", "http://worker/meetings/meeting-user-title/analyze"),
+        )
+
+        with patch("app.routers.meetings.SessionLocal", self.SessionLocal), patch("app.routers.meetings.httpx.post", return_value=response):
+            run_meeting_analysis_task("task-user-title")
+
+        db = self.SessionLocal()
+        try:
+            stored_task = db.get(TranscriptionTask, "task-user-title")
+            stored_meeting = db.get(Meeting, "meeting-user-title")
+            self.assertEqual(stored_task.status, "completed")
+            self.assertEqual(stored_meeting.status, "completed")
+            self.assertEqual(stored_meeting.title, "用户手动标题")
+            self.assertEqual(stored_meeting.title_source, "user_edited")
+        finally:
+            db.close()
+
+        db = self.SessionLocal()
+        try:
+            meeting_id = "meeting-analysis-error"
+            meeting = Meeting(id=meeting_id, title="analysis error", status="summarizing")
+            task = TranscriptionTask(id="task-analysis-error", meeting_id=meeting.id, status="queued")
+            segment = TranscriptSegment(
+                id="segment-analysis-error",
+                meeting_id=meeting_id,
+                audio_file_id=None,
+                segment_index=0,
+                start_time=0,
+                end_time=1,
+                text="讨论接口优化。",
                 speaker_label="speaker_1",
             )
             db.add_all([meeting, task, segment])

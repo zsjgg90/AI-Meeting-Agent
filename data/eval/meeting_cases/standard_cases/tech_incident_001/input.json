@@ -1,0 +1,42 @@
+[
+  {
+    "meeting_id": "tech_incident_001",
+    "title": "技术故障复盘会议",
+    "participants": [
+      "运维负责人",
+      "后端负责人",
+      "安全负责人"
+    ],
+    "scenario": "技术故障原因、处置方案、遗留问题与风险复盘",
+    "dialogue": [
+      {
+        "segment_id": "tech_incident_001_seg_001",
+        "speaker": "speaker_01",
+        "speaker_role": "运维负责人",
+        "timestamp": "00:00",
+        "text": "今天复盘订单服务异常问题。"
+      },
+      {
+        "segment_id": "tech_incident_001_seg_002",
+        "speaker": "speaker_02",
+        "speaker_role": "后端负责人",
+        "timestamp": "10:00",
+        "text": "目前初步怀疑缓存策略可能存在问题，但还没有最终确认。"
+      },
+      {
+        "segment_id": "tech_incident_001_seg_003",
+        "speaker": "speaker_03",
+        "speaker_role": "安全负责人",
+        "timestamp": "20:00",
+        "text": "目前没有证据证明是安全攻击，需要继续排查。"
+      },
+      {
+        "segment_id": "tech_incident_001_seg_004",
+        "speaker": "speaker_01",
+        "speaker_role": "运维负责人",
+        "timestamp": "40:00",
+        "text": "长期监控机制需要补充。"
+      }
+    ]
+  }
+]

@@ -85,9 +85,14 @@ It is not yet wired into the formal Analyze API.
 
 - Unified local checks: `scripts/test-all.ps1`
 - Local dependency diagnostics: `scripts/check-services.ps1`
+- Offline meeting-analysis evaluation: `scripts/evaluate_meeting_analysis.py`
+  with schema/metric/report assets under `data/eval/`.
 - API and Worker expose `/health` and `/ready`.
 - Worker analysis logs use structured JSON events with redacted prompt,
   transcript, RAG context, and raw model output.
 - Default tests use fake model/RAG adapters and do not require Ollama, Qwen3,
   Chroma, PostgreSQL, or real audio services.
+- Phase 0 evaluation compares existing `expected.json` and `actual.json` files
+  only; it is not connected to API, Worker, DB, Mobile, Prompt, RAG, Qwen3, ASR,
+  or the semantic pipeline.
 - Details: `docs/OBSERVABILITY.md`

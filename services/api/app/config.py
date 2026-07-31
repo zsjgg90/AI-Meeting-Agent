@@ -54,6 +54,10 @@ class Settings(BaseSettings):
     agent_circuit_version_conflict_rate: float = 0.0
     agent_circuit_rollback_failures: int = 0
     agent_circuit_recovered_after: str = ""
+    agent_local_auth_enabled: bool = False
+    agent_local_auth_tenant_id: str = "default-tenant"
+    agent_local_auth_project_id: str = "default-project"
+    agent_local_auth_token_ttl_hours: int = 24
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

@@ -31,16 +31,62 @@ http://{LAN_IP}:8002
 - `PUT /meetings/{meeting_id}/speakers/{speaker_label}`
 - `POST /meetings/{meeting_id}/knowledge/reindex`
 
+`GET /meetings` is bounded by pagination parameters so Expo history screens do
+not need to load the full meeting table in one request:
+
+- `limit`: default 50, minimum 1, maximum 100
+- `offset`: default 0, minimum 0
+
 ## Task Endpoints
 
 - `GET /tasks`
+- `PATCH /tasks/{task_id}`
+- `PATCH /tasks/{task_id}/status`
+- `POST /tasks/{task_id}/attachments`
+- `GET /tasks/{task_id}/attachments/{attachment_id}`
 
 Supports:
 
 - `limit`, max 15
 - `offset`
 - `meeting_id`
-- `q`
+- `q`: fuzzy keyword search over task title, source text, owner, owner name,
+  priority, status, and source meeting title. The API splits mixed Chinese/
+  English keywords on common separators and expands common Chinese task status
+  and priority labels such as `已完成` and `高优先级` to their stored enum values.
+
+- `PATCH /tasks/{task_id}/status`
+
+  Updates an action-item task status for the mobile Todo surface. Request body:
+
+  - `status`: currently accepts `open` or `completed`
+
+  Returns the updated task item with its source meeting title.
+
+- `PATCH /tasks/{task_id}`
+
+  Updates editable task-detail fields backed by `action_items`:
+
+  - `task`: non-empty title
+  - `description`: optional detail text, visible only on the task detail page
+  - `owner`: optional assignee override
+  - `due_date`: optional due date/time string
+  - `priority`: `high`, `medium`, `low`, or null
+  - `reminder_offset_minutes`: `60`, `180`, `300`, or null
+  - `reminder_channel`: currently `sms` or null
+
+  The API returns the same `TaskListItem` read model used by `GET /tasks`,
+  including source meeting title and task attachments.
+
+- `POST /tasks/{task_id}/attachments`
+
+  Uploads a task attachment to server storage under the task. Supported file
+  extensions are `doc`, `docx`, `jpg`, `jpeg`, `png`, `webp`, `pdf`, `md`, and
+  `txt`. The response includes filename, content type, size, and download URL.
+
+- `GET /tasks/{task_id}/attachments/{attachment_id}`
+
+  Downloads or opens a persisted task attachment file.
 
 ## Knowledge Endpoints
 
@@ -108,6 +154,49 @@ same idempotent sync path and returns the `meeting_knowledge_syncs` row.
 ## Feedback Endpoints
 
 - `POST /feedback`
+
+## Agent Review Endpoints
+
+Expo uses the Agent review APIs through the API service only. Identity,
+tenant, project, object scope, and permissions come from the Bearer token on
+the server side; clients must not submit reviewer identity, permissions,
+tenant, project, expected versions, command changes, or idempotency keys.
+
+- `GET /agent/action-proposals`
+- `GET /agent/action-proposals/{proposal_id}`
+- `POST /agent/action-proposals/{proposal_id}/approve`
+- `POST /agent/action-proposals/{proposal_id}/reject`
+- `GET /agent/review/overview`
+- `GET /agent/review/records`
+- `GET /agent/review/records/{record_id}`
+- `GET /agent/commands`
+- `GET /agent/commands/{command_id}`
+- `GET /agent/commands/{command_id}/audits`
+
+`GET /agent/review/overview` returns a product-facing DTO for the AI assistant
+home screen:
+
+```json
+{
+  "pending_count": 3,
+  "pending_proposals": [],
+  "recent_records": []
+}
+```
+
+`GET /agent/review/records` supports:
+
+- `status`: `all`, `pending_effective`, `succeeded`, `rejected`, `rolled_back`, or `expired`
+- `sort`: `latest` or `oldest`
+- `page`
+- `page_size`
+
+The review DTOs redact sensitive metadata keys and expose display-ready
+labels, before/after summaries, source meeting context, evidence snippets,
+reviewer/executor names, command status, write flag, object version changes,
+and audit timeline entries. The aggregation is read-only. Approval may create a
+ready command through the existing confirmation API, but it does not directly
+modify formal business data.
 
 ## Worker Endpoints
 

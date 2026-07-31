@@ -29,7 +29,7 @@ from app.topic_event_schema import TopicEventGroup
 SEMANTIC_PIPELINE_MODEL_NAME = "semantic-events+rules"
 SEMANTIC_PIPELINE_PROMPT_VERSION = "semantic-event-pipeline-v1"
 SEMANTIC_LLM_MAX_UTTERANCES = 8
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SEMANTIC_TRACE_ROOT = PROJECT_ROOT / "data" / "debug" / "semantic_pipeline_trace"
 
 

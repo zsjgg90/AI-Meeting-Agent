@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>添加声纹样本 - MeetMind</title>
+<!-- Tailwind CSS -->
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<!-- Iconify 图标 -->
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        body {
+            font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background-color: #F5F7FA;
+            border-radius: 40px;
+            border: 8px solid #000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 隐藏滚动条 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .mic-btn-shadow {
+            box-shadow: 0 10px 20px -5px rgba(43, 108, 255, 0.3);
+        }
+    </style>
+<style id="AlibabaPuHui">
+      @font-face {
+        font-family: 'AlibabaPuHui';
+        src: url('https://modao.cc/ai/static/fonts/AlibabaPuHui_Light.woff2');
+        font-weight: 300;
+        font-style: normal;
+      }
+    
+
+      @font-face {
+        font-family: 'AlibabaPuHui';
+        src: url('https://modao.cc/ai/static/fonts/AlibabaPuHui_Regular.woff2');
+        font-weight: 400;
+        font-style: normal;
+      }
+    
+
+      @font-face {
+        font-family: 'AlibabaPuHui';
+        src: url('https://modao.cc/ai/static/fonts/AlibabaPuHui_Medium.woff2');
+        font-weight: 500;
+        font-style: normal;
+      }
+    
+
+      @font-face {
+        font-family: 'AlibabaPuHui';
+        src: url('https://modao.cc/ai/static/fonts/AlibabaPuHui_Bold.woff2');
+        font-weight: 700;
+        font-style: normal;
+      }
+    
+
+      @font-face {
+        font-family: 'AlibabaPuHui';
+        src: url('https://modao.cc/ai/static/fonts/AlibabaPuHui_Black.woff2');
+        font-weight: 900;
+        font-style: normal;
+      }
+    </style>
+</head>
+<body class="">
+<div class="phone-container">
+<!-- 状态栏 -->
+<div class="flex justify-between items-center px-8 pt-4 pb-2 text-[14px] font-semibold text-black shrink-0">
+<div>01:38</div>
+<div class="flex items-center gap-1.5">
+<iconify-icon icon="lucide:signal" width="16"></iconify-icon>
+<iconify-icon icon="lucide:wifi" width="16"></iconify-icon>
+<div class="flex items-center gap-0.5 border border-black/20 rounded-[4px] px-0.5 py-0.25">
+<div class="w-4 h-2 bg-black rounded-[1px]"></div>
+</div>
+<span class="text-[11px] ml-[-2px]">59</span>
+</div>
+</div>
+<!-- 页面头部 -->
+<div class="flex items-center px-6 py-4 shrink-0 bg-[#F5F7FA]">
+<a class="flex items-center justify-center w-8 h-8 -ml-2" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/voiceprint.html?render_html=true">
+<iconify-icon class="text-black" icon="lucide:chevron-left" width="24"></iconify-icon>
+</a>
+<h1 class="flex-1 text-center text-[18px] font-bold text-black">添加声纹样本</h1>
+<a class="flex items-center justify-center w-8 h-8 -mr-2" href="https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/voiceprint.html?render_html=true">
+<iconify-icon class="text-black" icon="lucide:check" width="24"></iconify-icon>
+</a>
+</div>
+<!-- 内容区域 -->
+<div class="flex-1 min-h-0 overflow-y-auto no-scrollbar px-5">
+<!-- 说话人信息区 -->
+<div class="bg-white rounded-2xl shadow-sm p-4 mt-2">
+<label class="text-[13px] text-gray-400 block mb-1" style="font-family: AlibabaPuHui; font-weight: 700; color: rgb(64, 64, 64);">用户姓名</label>
+<input class="w-full py-2 border-b border-gray-100 focus:outline-none focus:border-[#2B6CFF] text-[16px] font-bold text-black" placeholder="请输入用户姓名" style="font-size: 12px; font-family: AlibabaPuHui; font-weight: 400;" type="text" value=""/>
+</div>
+<!-- 录音引导区 -->
+<div class="bg-white rounded-2xl shadow-sm p-6 mt-4 flex flex-col items-center">
+<h2 class="text-[20px] font-bold text-black mb-2">按住录制，并朗读</h2>
+<p class="text-[14px] text-gray-400 mb-8">保持自然语速，完整朗读下方内容</p>
+<div class="w-full bg-[#F8FAFF] rounded-xl p-6 mb-6">
+<p class="text-[16px] text-black leading-relaxed text-justify">
+                    早上开会时，我会先听取大家的意见，然后再发表看法。有时候我说话比较快，有时候会放慢语速，强调重点内容。
+                </p>
+</div>
+</div>
+<!-- 录音控制区 -->
+<div class="flex flex-col items-center mt-12 pb-10">
+<button class="w-[72px] h-[72px] bg-[#2B6CFF] rounded-full flex items-center justify-center mic-btn-shadow active:scale-95 transition-transform">
+<iconify-icon class="text-white text-3xl" icon="lucide:mic"></iconify-icon>
+</button>
+<span class="mt-3 text-[13px] text-gray-400">按住开始录音</span>
+</div>
+</div>
+<!-- 底部导航栏 -->
+</div>
+</body></html>

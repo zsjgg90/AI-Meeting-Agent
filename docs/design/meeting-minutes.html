@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MeetMind AI - 关键纪要</title>
+<!-- Tailwind CSS -->
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<!-- Iconify -->
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        @font-face {
+            font-family: 'PingFang SC';
+            src: local('PingFang SC');
+        }
+        body {
+            font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f3f4f6;
+        }
+        .iphone-x {
+            width: 375px;
+            height: 812px;
+            background: #F5F7FA;
+            border-radius: 40px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .active-tab-indicator {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #2B6CFF;
+        }
+        .shadow-card {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+<!-- 手机外壳容器 -->
+<div class="iphone-x border-[8px] border-white">
+<!-- 1. 状态栏 -->
+<div class="flex-none px-6 pt-3 pb-2 flex justify-between items-center bg-white z-10">
+<span class="text-[14px] font-bold">00:11</span>
+<div class="flex items-center space-x-1.5">
+<iconify-icon class="text-[16px]" icon="mingcute:signal-fill"></iconify-icon>
+<iconify-icon class="text-[16px]" icon="mingcute:wifi-line"></iconify-icon>
+<div class="relative w-6 h-3 border border-black/20 rounded-[2px] flex items-center px-[1px]">
+<div class="bg-[#34C759] h-[8px] w-[90%] rounded-[1px]"></div>
+<div class="absolute -right-[3px] w-[2px] h-[4px] bg-black/20 rounded-r-sm"></div>
+<span class="absolute inset-0 flex items-center justify-center text-[7px] font-bold scale-90">97%</span>
+</div>
+</div>
+</div>
+<!-- 2. 导航栏 -->
+<div class="flex-none px-4 py-2 flex items-center justify-between bg-white border-b border-gray-50 z-10">
+<button class="p-1">
+<iconify-icon class="text-[24px] text-gray-800" icon="mingcute:arrow-left-line"></iconify-icon>
+</button>
+<h1 class="text-[16px] font-semibold text-gray-900 truncate max-w-[200px]">团队会议：项目组-周进度同步</h1>
+<div class="flex items-center space-x-3">
+<button class="p-1">
+<iconify-icon class="text-[22px] text-gray-800" icon="mingcute:share-2-line"></iconify-icon>
+</button>
+<button class="p-1">
+<iconify-icon class="text-[22px] text-gray-800" icon="mingcute:more-2-line"></iconify-icon>
+</button>
+</div>
+</div>
+<!-- 中间可滚动区域 -->
+<div class="flex-1 overflow-y-auto hide-scrollbar">
+<!-- 3. 音频控制卡片 -->
+<div class="mx-4 mt-4 bg-white rounded-2xl p-4 shadow-card">
+<div class="flex items-center justify-between text-[12px] text-gray-400 mb-2">
+<span>00:00</span>
+<span>04:36</span>
+</div>
+<!-- 进度条 -->
+<div class="relative w-full h-1.5 bg-gray-100 rounded-full mb-6">
+<div class="absolute top-0 left-0 h-full w-[2px] bg-[#2B6CFF] rounded-full"></div>
+<div class="absolute top-1/2 left-[2px] -translate-y-1/2 w-3 h-3 bg-white border-2 border-[#2B6CFF] rounded-full shadow-sm"></div>
+</div>
+<!-- 控制按钮 -->
+<div class="flex items-center justify-center space-x-10">
+<button class="flex flex-col items-center">
+<iconify-icon class="text-[28px] text-gray-800" icon="mingcute:back-15s-line"></iconify-icon>
+<span class="text-[10px] text-gray-400 mt-0.5">15</span>
+</button>
+<button class="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center text-white shadow-lg">
+<iconify-icon class="text-[24px] ml-1" icon="mingcute:play-fill"></iconify-icon>
+</button>
+<button class="flex flex-col items-center">
+<iconify-icon class="text-[28px] text-gray-800" icon="mingcute:forward-15s-line"></iconify-icon>
+<span class="text-[10px] text-gray-400 mt-0.5">15</span>
+</button>
+<button class="absolute right-8 text-[12px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded flex items-center">
+                        1x <iconify-icon class="ml-0.5" icon="mingcute:down-fill"></iconify-icon>
+</button>
+</div>
+</div>
+<!-- 4. 主标签栏 -->
+<div class="px-4 mt-4">
+<div class="bg-gray-200/50 p-1 rounded-xl flex">
+<button class="flex-1 py-2 text-[14px] text-gray-500 font-medium">会议原文</button>
+<button class="flex-1 py-2 text-[14px] bg-white rounded-lg shadow-sm text-[#2B6CFF] font-bold flex items-center justify-center">
+<iconify-icon class="mr-1.5 text-[16px]" icon="mingcute:star-fill"></iconify-icon>AI纪要
+                    </button>
+<button class="flex-1 py-2 text-[14px] text-gray-500 font-medium">Agent工具</button>
+</div>
+</div>
+<!-- 5. 子分类标签栏 -->
+<!-- 6. 会议核心信息内容区 -->
+<div class="mt-2 mb-24 px-4 space-y-4">
+<!-- 头部卡片 -->
+<div class="bg-white rounded-2xl p-4 shadow-card">
+<h2 class="text-[18px] font-bold text-gray-900 mb-2">团队会议：项目组-周进度同步</h2>
+<div class="flex items-center justify-between text-[12px] text-gray-400">
+<div class="flex items-center">
+<iconify-icon class="mr-1 text-[14px]" icon="mingcute:calendar-line"></iconify-icon>
+                            07月27 周一 17:06:38
+                        </div>
+<div class="flex items-center" style="opacity: 1;">
+<iconify-icon class="mr-1 text-[14px]" icon="mingcute:time-line"></iconify-icon>
+                            04:36
+                        </div>
+</div>
+<!-- 导出文稿 -->
+<div class="mt-4 pt-3 border-t border-gray-100">
+<div class="text-[13px] text-gray-500 text-center mb-2.5" style="text-align: start;">导出AI文稿</div>
+<div class="flex justify-between space-x-2">
+<button class="flex-1 py-1.5 border border-gray-200 rounded-lg text-[12px] text-gray-700 text-center bg-white hover:border-[#2B6CFF] hover:text-[#2B6CFF]">MD</button>
+<button class="flex-1 py-1.5 border border-gray-200 rounded-lg text-[12px] text-gray-700 text-center bg-white">PDF</button>
+<button class="flex-1 py-1.5 border border-gray-200 rounded-lg text-[12px] text-gray-700 text-center bg-white">DOCX</button>
+<button class="flex-1 py-1.5 border border-gray-200 rounded-lg text-[12px] text-gray-700 text-center bg-white">TXT</button>
+</div>
+</div>
+<!-- 文档缩略图 -->
+</div>
+<!-- 基本信息模块 -->
+<div class="bg-white rounded-2xl p-4 shadow-card space-y-2.5 text-[12px]">
+<h3 class="text-[17px] font-bold text-gray-900 mb-1">基本信息</h3>
+<div class="flex items-center whitespace-nowrap overflow-hidden">
+<span class="text-gray-900 font-bold flex-none">• 主题：</span>
+<span class="text-gray-700 truncate ml-0.5">项目周进度同步与问题梳理会议</span>
+</div>
+<div class="flex items-center whitespace-nowrap overflow-hidden">
+<span class="text-gray-900 font-bold flex-none">• 时间：</span>
+<span class="text-gray-700 truncate ml-0.5">2026-07-27 17:06:38</span>
+</div>
+<div class="flex items-center whitespace-nowrap overflow-hidden">
+<span class="text-gray-900 font-bold flex-none">• 地点：</span>
+<span class="text-gray-700 truncate ml-0.5">线上会议 - 腾讯会议</span>
+</div>
+<div class="flex items-center whitespace-nowrap overflow-hidden">
+<span class="text-gray-900 font-bold flex-none">• 参会人：</span>
+<span class="text-gray-700 truncate ml-0.5">说话人1、说话人2、说话人3、说话人4、说话人5</span>
+</div>
+</div>
+<!-- 纪要详情模块 -->
+<div class="space-y-4">
+<!-- 新模块1：会议总结 -->
+<div class="bg-white rounded-2xl p-5 shadow-card">
+<div class="flex items-center justify-between mb-3">
+<span class="text-[17px] font-bold text-gray-900">会议总结</span>
+</div>
+<div class="text-[12px] mb-3">
+<span class="text-gray-400">纪要来源</span>
+<span class="text-gray-600 ml-1">AI生成纪要</span>
+</div>
+<p class="text-[14px] text-gray-700 leading-relaxed mb-4">
+				会议同步了各岗位本周工作进度，确认后端接口优化需优先处理以保障联调测试，强调周四版本预打包前的代码提交截止要求，并确认本期迭代需求已锁定无变更。
+			</p>
+<div class="flex space-x-3 mb-5">
+</div>
+</div>
+<!-- 新模块2：会议议程 -->
+<div class="bg-white rounded-2xl p-5 shadow-card">
+<h4 class="text-[16px] font-bold text-gray-900 mb-3">会议议程</h4>
+<div class="space-y-2.5">
+<div class="flex text-[14px] text-gray-700">
+<span class="text-[#2B6CFF] font-bold mr-2" style="color: rgb(0, 0, 0);">1.</span>
+<span>各岗位本周工作进度同步</span>
+</div>
+<div class="flex text-[14px] text-gray-700">
+<span class="text-[#2B6CFF] font-bold mr-2" style="color: rgb(10, 10, 10);">2.</span>
+<span>现存问题对齐与讨论</span>
+</div>
+<div class="flex text-[14px] text-gray-700">
+<span class="text-[#2B6CFF] font-bold mr-2" style="color: rgb(0, 0, 0);">3.</span>
+<span>下周工作安排与风险预警</span>
+</div>
+</div>
+</div>
+<!-- 新模块3：核心结论 -->
+<div class="bg-white rounded-2xl p-5 shadow-card">
+<h4 class="text-[16px] font-bold text-gray-900 mb-3">核心结论</h4>
+<ul class="text-[14px] text-gray-700 space-y-2.5">
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>周四中午前完成代码提交和自测</span>
+</li>
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>下周三前完成订单系统重构开发</span>
+</li>
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>周五前修复 iOS 兼容性问题</span>
+</li>
+</ul>
+</div>
+<!-- 新模块4：遗留问题 -->
+<div class="bg-white rounded-2xl p-5 shadow-card">
+<h4 class="text-[16px] font-bold text-gray-900 mb-3">遗留问题</h4>
+<ul class="text-[14px] text-gray-700 space-y-2.5">
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>数据库索引优化方案待确认</span>
+</li>
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>跨系统接口联调时长需对齐</span>
+</li>
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>部分 UI 组件在低版本系统上存在兼容隐患</span>
+</li>
+</ul>
+</div>
+<!-- 新模块5：风险与关注点 -->
+<div class="bg-white rounded-2xl p-5 shadow-card">
+<h4 class="text-[16px] font-bold text-gray-900 mb-3">风险与关注点</h4>
+<ul class="text-[14px] text-gray-700 space-y-2.5">
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>版本预打包前需确保所有分支代码合并完毕</span>
+</li>
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>后端接口变更可能影响前端联调进度</span>
+</li>
+<li class="flex items-start">
+<span class="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 mr-2.5 flex-none"></span>
+<span>第三方依赖库版本升级需评估兼容性</span>
+</li>
+</ul>
+</div>
+<!-- 新模块6：待办与后续安排 -->
+<div class="bg-white rounded-2xl p-5 shadow-card">
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-[16px] font-bold text-gray-900">待办与后续安排</h4>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between group">
+<div class="flex items-center">
+<button class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center" onclick="this.classList.toggle('bg-[#2B6CFF]'); this.classList.toggle('border-[#2B6CFF]'); this.innerHTML = this.innerHTML === '' ? '&lt;iconify-icon icon=\'mingcute:check-line\' class=\'text-white text-[12px]\'&gt;&lt;/iconify-icon&gt;' : ''"></button>
+<span class="text-[14px] text-gray-700">完成低版本浏览器兼容性适配</span>
+</div>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center">
+<button class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center" onclick="this.classList.toggle('bg-[#2B6CFF]'); this.classList.toggle('border-[#2B6CFF]'); this.innerHTML = this.innerHTML === '' ? '&lt;iconify-icon icon=\'mingcute:check-line\' class=\'text-white text-[12px]\'&gt;&lt;/iconify-icon&gt;' : ''"></button>
+<span class="text-[14px] text-gray-700">更新 API 接口文档</span>
+</div>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center">
+<button class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center" onclick="this.classList.toggle('bg-[#2B6CFF]'); this.classList.toggle('border-[#2B6CFF]'); this.innerHTML = this.innerHTML === '' ? '&lt;iconify-icon icon=\'mingcute:check-line\' class=\'text-white text-[12px]\'&gt;&lt;/iconify-icon&gt;' : ''"></button>
+<span class="text-[14px] text-gray-700">准备下周工作安排汇报材料</span>
+</div>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center">
+<button class="w-5 h-5 border-2 border-gray-300 rounded mr-3 flex items-center justify-center" onclick="this.classList.toggle('bg-[#2B6CFF]'); this.classList.toggle('border-[#2B6CFF]'); this.innerHTML = this.innerHTML === '' ? '&lt;iconify-icon icon=\'mingcute:check-line\' class=\'text-white text-[12px]\'&gt;&lt;/iconify-icon&gt;' : ''"></button>
+<span class="text-[14px] text-gray-700">周四前完成代码提交和自测</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 7. 底部指令输入区 -->
+</div>
+<script>
+        // 模拟页面切换或播放状态
+        const playBtn = document.querySelector('.iphone-x button.w-12.h-12');
+        let isPlaying = false;
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playBtn.innerHTML = isPlaying 
+                ? '<iconify-icon icon="mingcute:pause-fill" class="text-[24px]"></iconify-icon>'
+                : '<iconify-icon icon="mingcute:play-fill" class="text-[24px] ml-1"></iconify-icon>';
+        });
+    </script>
+</body></html>

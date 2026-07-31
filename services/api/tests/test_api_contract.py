@@ -1,9 +1,12 @@
 import unittest
+from datetime import datetime, timezone
 
 from fastapi.testclient import TestClient
 
 from app.main import create_app
 from app.analysis_contract import ANALYSIS_SCHEMA_VERSION, build_summary_metadata
+from app.models import MeetingOutput
+from app.routers.meetings import fallback_summary_metadata
 
 
 class ApiContractTest(unittest.TestCase):
@@ -48,10 +51,20 @@ class ApiContractTest(unittest.TestCase):
             with self.subTest(path=path, method=method):
                 self.assert_route_exists(path, method)
 
+    def test_meeting_list_supports_bounded_pagination_params(self) -> None:
+        parameters = self.openapi["paths"]["/meetings"]["get"].get("parameters", [])
+        names = {item["name"] for item in parameters}
+
+        self.assertIn("limit", names)
+        self.assertIn("offset", names)
+
     def test_task_and_feedback_routes_are_registered(self) -> None:
         self.assert_route_exists("/tasks", "get")
+        self.assert_route_exists("/tasks/{task_id}", "patch")
+        self.assert_route_exists("/tasks/{task_id}/status", "patch")
+        self.assert_route_exists("/tasks/{task_id}/attachments", "post")
+        self.assert_route_exists("/tasks/{task_id}/attachments/{attachment_id}", "get")
         self.assert_route_exists("/feedback", "post")
-
 
     def test_knowledge_routes_are_registered(self) -> None:
         routes = [
@@ -127,6 +140,25 @@ class ApiContractTest(unittest.TestCase):
         )
 
         self.assertEqual(metadata["result_source"], "fixture")
+
+    def test_legacy_output_summary_fallback_has_display_metadata(self) -> None:
+        output = MeetingOutput(
+            id="legacy-output-1",
+            meeting_id="meeting-legacy-output-1",
+            raw_transcript="raw",
+            speaker_segments=[],
+            summary="legacy summary",
+            action_items=[],
+            decisions=[],
+            created_at=datetime(2026, 7, 23, 1, 40, tzinfo=timezone.utc),
+        )
+
+        metadata = fallback_summary_metadata(output)
+
+        self.assertEqual(metadata["schema_version"], ANALYSIS_SCHEMA_VERSION)
+        self.assertEqual(metadata["result_source"], "legacy_qwen_rag")
+        self.assertEqual(metadata["prompt_version"], "legacy-meeting-output")
+        self.assertEqual(metadata["generated_at"], "2026-07-23T01:40:00+00:00")
 
     def test_task_list_contract_exposes_pagination(self) -> None:
         schemas = self.openapi["components"]["schemas"]

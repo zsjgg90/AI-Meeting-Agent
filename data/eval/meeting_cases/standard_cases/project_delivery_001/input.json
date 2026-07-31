@@ -1,0 +1,57 @@
+[
+  {
+    "meeting_id": "project_delivery_001",
+    "title": "客户交付项目阶段复盘会",
+    "participants": [
+      "项目经理",
+      "后端负责人",
+      "客户成功",
+      "实施顾问"
+    ],
+    "scenario": "客户交付项目阶段复盘，确认当前问题、短期方案、未决事项与后续风险",
+    "dialogue": [
+      {
+        "segment_id": "project_delivery_001_seg_001",
+        "speaker": "speaker_01",
+        "speaker_role": "项目经理",
+        "timestamp": "00:00",
+        "text": "今天复盘客户交付项目阶段情况，重点确认当前问题、短期方案和后续安排。"
+      },
+      {
+        "segment_id": "project_delivery_001_seg_002",
+        "speaker": "speaker_02",
+        "speaker_role": "后端负责人",
+        "timestamp": "05:00",
+        "text": "目前看不是单点问题。短期可以优化流程和页面说明，但是底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高。"
+      },
+      {
+        "segment_id": "project_delivery_001_seg_003",
+        "speaker": "speaker_03",
+        "speaker_role": "客户成功",
+        "timestamp": "12:00",
+        "text": "我建议先做可以快速上线的部分，长期能力建设放到后续阶段。"
+      },
+      {
+        "segment_id": "project_delivery_001_seg_004",
+        "speaker": "speaker_01",
+        "speaker_role": "项目经理",
+        "timestamp": "20:00",
+        "text": "这个方向先推进，但是底层重构是否启动，本次会议暂时不做最终决定。"
+      },
+      {
+        "segment_id": "project_delivery_001_seg_005",
+        "speaker": "speaker_04",
+        "speaker_role": "实施顾问",
+        "timestamp": "30:00",
+        "text": "第一版改动可以配合，不过规则边界需要提前确认，否则联调可能反复。"
+      },
+      {
+        "segment_id": "project_delivery_001_seg_006",
+        "speaker": "speaker_01",
+        "speaker_role": "项目经理",
+        "timestamp": "40:00",
+        "text": "如果指标继续没有改善，需要重新评估资源投入。"
+      }
+    ]
+  }
+]

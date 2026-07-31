@@ -1,6 +1,6 @@
 # Prompt And RAG Versioning
 
-Last updated: 2026-07-15
+Last updated: 2026-07-30
 
 ## Formal Prompt
 
@@ -28,6 +28,10 @@ explicit quality rules for:
 - proposal-vs-decision, open-issue-vs-action, and progress-vs-conclusion
   boundaries;
 - cross-dimension de-duplication while allowing formal decision/action pairs.
+- internal title fields `meeting_type`, `meeting_type_confidence`,
+  `meeting_title_candidate`, and `title_basis`, using the complete transcript,
+  `meeting_agenda`, and `meeting_summary` before `key_conclusions`, and not
+  using `action_items` as the primary title basis.
 
 Prompt-only regression artifacts for `meeting_001` are stored under
 `data/debug/real_production_analysis/meeting_001/` as

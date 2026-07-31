@@ -523,6 +523,49 @@ AGENT_COMMAND_DRY_RUN_ONLY=true
 `AGENT_COMMAND_DRY_RUN_ONLY=true` keeps real writes unsupported even when dry
 run is explicitly enabled for tests or local diagnostics.
 
+## Agent Review Product UI Aggregation
+
+The productized AI assistant review screens use read-only aggregation endpoints
+for display and keep existing approval/rejection contracts for human decisions:
+
+- `GET /agent/review/overview`
+- `GET /agent/review/records`
+- `GET /agent/review/records/{record_id}`
+- `POST /agent/action-proposals/{proposal_id}/approve`
+- `POST /agent/action-proposals/{proposal_id}/reject`
+
+The aggregation reads existing tables only:
+
+```text
+Proposal -> Confirmation -> Command -> Audit -> Authoritative object -> Source meeting
+```
+
+The implementation joins or batch-loads from
+`agent_action_proposals`, `agent_proposal_confirmations`,
+`controlled_write_commands`, `agent_audit_records`, `action_items`,
+`requirements`, `risks`, and `meetings`. It does not add duplicate business
+tables, copy formal business data, or modify Requirement/Risk/ActionItem rows.
+List queries are paginated and scoped by the server-side Bearer-token
+principal's tenant/project before object-scope filtering. DTO responses contain
+display labels and sanitized evidence/metadata rather than raw database models.
+
+Frontend status labels are:
+
+- `pending` -> `待确认`
+- `approved` / `ready` -> `待生效`
+- `succeeded` -> `已生效`
+- `rejected` -> `已拒绝`
+- `rolled_back` -> `已撤销`
+- `expired` -> `已过期`
+- `conflict` -> `数据已更新`
+
+Risk labels are:
+
+- `low` -> `可安全修改`
+- `medium` -> `需要注意`
+- `high` -> `需要管理员确认`
+- `critical` -> `禁止普通用户处理`
+
 ## Agent Phase 10 Auth, Permission, And Rollback Safety
 
 MeetMind Agent v1.0 Phase 10 adds the pre-real-write safety layer while keeping

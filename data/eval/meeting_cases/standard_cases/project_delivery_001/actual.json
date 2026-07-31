@@ -1,0 +1,172 @@
+{
+  "overview": "会议围绕客户交付项目阶段问题展开，确认当前存在底层能力未就绪的系统性风险。讨论短期可推进流程优化和页面说明改进，但明确需分阶段实施。对底层重构启动达成暂缓共识，同时强调规则边界确认和指标监控的重要性。",
+  "meeting_title": "",
+  "meeting_type": "project_retrospective",
+  "meeting_type_confidence": 0.9,
+  "meeting_title_candidate": "客户交付项目阶段复盘与后续安排",
+  "title_basis": [
+    "会议议程包含客户交付项目阶段复盘",
+    "会议总结涉及短期方案和后续安排确认"
+  ],
+  "agenda": [
+    {
+      "item": "讨论短期优化方案",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确定后续工作安排",
+      "order": 2,
+      "source_segment_ids": []
+    }
+  ],
+  "topics": [],
+  "speaker_summaries": [],
+  "decisions": [
+    {
+      "decision": "底层重构启动决策暂不明确",
+      "reason": "",
+      "source": "这个方向先推进，但是底层重构是否启动，本次会议暂时不做最终决定。",
+      "conclusion": "底层重构启动决策暂不明确",
+      "source_text": "这个方向先推进，但是底层重构是否启动，本次会议暂时不做最终决定。",
+      "confidence": 0.8
+    }
+  ],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "确认规则边界并更新文档",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "第一版改动可以配合，不过规则边界需要提前确认，否则联调可能反复。",
+      "source_segment_id": null,
+      "confidence": 0.7
+    },
+    {
+      "owner_name": null,
+      "task": "监控指标改善情况",
+      "deadline": null,
+      "priority": "medium",
+      "status": "open",
+      "source_text": "如果指标继续没有改善，需要重新评估资源投入。",
+      "source_segment_id": null,
+      "confidence": 0.6
+    }
+  ],
+  "risks": [
+    {
+      "risk": "底层能力不足导致时间风险",
+      "impact": "完整方案可能延误",
+      "mitigation": "",
+      "focus_area": "技术能力建设",
+      "source_text": "目前看不是单点问题。短期可以优化流程和页面说明，但是底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高。",
+      "confidence": 0.8
+    },
+    {
+      "risk": "规则边界不明确导致联调反复",
+      "impact": "开发效率下降",
+      "mitigation": "",
+      "focus_area": "需求确认",
+      "source_text": "第一版改动可以配合，不过规则边界需要提前确认，否则联调可能反复。",
+      "confidence": 0.7
+    }
+  ],
+  "open_questions": [
+    {
+      "question": "底层能力未就绪导致完整方案时间风险",
+      "owner": "",
+      "source": "目前看不是单点问题。短期可以优化流程和页面说明，但是底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高。",
+      "issue": "底层能力未就绪导致完整方案时间风险",
+      "reason": "短期优化无法替代底层能力建设",
+      "blocker": "",
+      "source_text": "目前看不是单点问题。短期可以优化流程和页面说明，但是底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高。",
+      "confidence": 0.8
+    }
+  ],
+  "next_steps": [
+    {
+      "item": "确认规则边界并更新文档",
+      "owner": "",
+      "time": "",
+      "note": "第一版改动可以配合，不过规则边界需要提前确认，否则联调可能反复。"
+    },
+    {
+      "item": "监控指标改善情况",
+      "owner": "",
+      "time": "",
+      "note": "如果指标继续没有改善，需要重新评估资源投入。"
+    }
+  ],
+  "meeting_agenda": [
+    {
+      "item": "讨论短期优化方案",
+      "order": 1,
+      "source_segment_ids": []
+    },
+    {
+      "item": "确定后续工作安排",
+      "order": 2,
+      "source_segment_ids": []
+    }
+  ],
+  "meeting_summary": "会议围绕客户交付项目阶段问题展开，确认当前存在底层能力未就绪的系统性风险。讨论短期可推进流程优化和页面说明改进，但明确需分阶段实施。对底层重构启动达成暂缓共识，同时强调规则边界确认和指标监控的重要性。",
+  "key_conclusions": [
+    {
+      "conclusion": "底层重构启动决策暂不明确",
+      "source_text": "这个方向先推进，但是底层重构是否启动，本次会议暂时不做最终决定。",
+      "confidence": 0.8
+    }
+  ],
+  "unresolved_issues": [
+    {
+      "issue": "底层能力未就绪导致完整方案时间风险",
+      "reason": "短期优化无法替代底层能力建设",
+      "blocker": "",
+      "source_text": "目前看不是单点问题。短期可以优化流程和页面说明，但是底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高。",
+      "confidence": 0.8
+    }
+  ],
+  "risks_and_focus": [
+    {
+      "risk": "底层能力不足导致时间风险",
+      "impact": "完整方案可能延误",
+      "focus_area": "技术能力建设",
+      "mitigation": "",
+      "source_text": "目前看不是单点问题。短期可以优化流程和页面说明，但是底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高。",
+      "confidence": 0.8
+    },
+    {
+      "risk": "规则边界不明确导致联调反复",
+      "impact": "开发效率下降",
+      "focus_area": "需求确认",
+      "mitigation": "",
+      "source_text": "第一版改动可以配合，不过规则边界需要提前确认，否则联调可能反复。",
+      "confidence": 0.7
+    }
+  ],
+  "model_name": "qwen3:14b+rag",
+  "confidence_score": 0.733,
+  "metadata": {
+    "schema_version": "meeting-analysis-v1",
+    "model_name": "qwen3:14b+rag",
+    "prompt_version": "meeting-analyst-v1",
+    "rag_chunk_ids": [
+      "v4_boundary_rule_049",
+      "v4_boundary_rule_037",
+      "v4_boundary_rule_013",
+      "v4_boundary_rule_025",
+      "v4_boundary_rule_050",
+      "v4_boundary_rule_001",
+      "v4_boundary_rule_038",
+      "v4_boundary_rule_014"
+    ],
+    "rag_dataset_version": "meeting_analyst_rag_v1",
+    "rag_chunk_schema_version": "rag-chunk-v1",
+    "rag_collection_name": "meeting_analyst_rules",
+    "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+    "result_source": "legacy_qwen_rag",
+    "confidence_score": 0.733,
+    "generated_at": "2026-07-31T10:39:05.260039+00:00"
+  }
+}

@@ -209,11 +209,73 @@ deadline = 周五前
 这种情况下必须：
 deadline = null
 
+【内部标题生成规则】
+在同一次 JSON 中输出内部标题处理字段：meeting_type、meeting_type_confidence、meeting_title_candidate、title_basis。
+这些字段只用于系统更新会议标题，不改变六维字段含义。
+
+meeting_type 只能从以下枚举中选择：
+- project_weekly
+- progress_sync
+- requirement_review
+- solution_review
+- project_retrospective
+- risk_review
+- release_review
+- customer_communication
+- training
+- interview
+- one_on_one
+- other
+
+meeting_type_confidence 必须是 0 到 1 的数字。
+
+meeting_title_candidate 生成优先依据：
+1. 完整【会议原文】
+2. meeting_agenda
+3. meeting_summary
+4. key_conclusions 仅辅助参考
+
+action_items 不作为主要标题依据。
+
+meeting_title_candidate 必须：
+- 表示整场会议的上位主题
+- 优先使用“会议类型 + 整体议题”
+- 是中文名词短语
+- 6～20 个中文字符，最长不超过 24 个字符
+- 不输出解释、引号、Markdown 或 JSON
+- 不使用单条待办、截止时间、单个岗位事项或单一风险作为标题
+
+禁止标题示例：
+- 后端接口优化需在明天上午完成
+- 周四前完成代码提交
+- 会议
+- 周会
+- 项目会议
+- 工作会议
+- 会议总结
+- 本次会议主要讨论接口优化
+
+项目周会类标题示例：
+- 项目周进度同步会
+- 项目周例会：进度同步与版本排期
+
+title_basis 必须至少包含 2 条依据，每条依据说明标题来自会议整体主题、议程或总结，不得只引用单条待办。
+
 【RAG 知识规则】
 {{RAG_CONTEXT}}
 
 【输出 JSON Schema】
 {
+  "meeting_type": "project_weekly | progress_sync | requirement_review | solution_review | project_retrospective | risk_review | release_review | customer_communication | training | interview | one_on_one | other",
+
+  "meeting_type_confidence": 0.0,
+
+  "meeting_title_candidate": "string",
+
+  "title_basis": [
+    "string"
+  ],
+
   "meeting_agenda": [
     "string"
   ],

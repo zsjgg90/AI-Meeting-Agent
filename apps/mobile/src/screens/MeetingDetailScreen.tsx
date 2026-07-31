@@ -24,6 +24,7 @@ import {
   meetingExportUrl,
   MeetingDetail,
   MeetingSummary,
+  reindexMeetingKnowledge,
   TranscriptSegment,
   updateSpeakerMapping,
 } from '../api';
@@ -41,6 +42,7 @@ type Props = {
   onBack: () => void;
   onRecord: (meeting: Meeting) => void;
   onOpenAudioPlayer: (meetingId: string) => void;
+  onOpenKnowledgeBase: () => void;
 };
 
 type LegacyDetailTab = 'decisions' | 'questions' | 'actions' | 'risks';
@@ -296,6 +298,7 @@ export function MeetingDetailScreen({
   evidenceText,
   onBack,
   onRecord,
+  onOpenKnowledgeBase,
 }: Props) {
   const [meeting, setMeeting] = useState<MeetingDetail | null>(null);
   const [summaryOverride, setSummaryOverride] = useState<MeetingSummary | null>(null);
@@ -303,11 +306,12 @@ export function MeetingDetailScreen({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [audioState, setAudioState] = useState<AudioLoadState>('idle');
-  const [audioError, setAudioError] = useState<string | null>(null);
   const [, setSound] = useState<Audio.Sound | null>(null);
   const soundRef = useRef<Audio.Sound | null>(null);
+  const soundLoadingPromiseRef = useRef<Promise<Audio.Sound | null> | null>(null);
   const audioBusyRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const pendingPlayIntentRef = useRef(false);
   const [positionMillis, setPositionMillis] = useState(0);
   const [durationMillis, setDurationMillis] = useState(0);
   const [segmentPlaybackId, setSegmentPlaybackId] = useState<string | null>(null);
@@ -317,6 +321,8 @@ export function MeetingDetailScreen({
   const [editingSpeakerLabel, setEditingSpeakerLabel] = useState<string | null>(null);
   const [exportingSummaryFormat, setExportingSummaryFormat] = useState<ExportFormat | null>(null);
   const [exportingTranscriptFormat, setExportingTranscriptFormat] = useState<ExportFormat | null>(null);
+  const [runningAgentTool, setRunningAgentTool] = useState<string | null>(null);
+  const checkingAgentTools = false;
   const progressWidthRef = useRef(1);
   const listRef = useRef<FlatList<TranscriptSegment>>(null);
   const segmentPlaybackRef = useRef<{ id: string; endMillis: number } | null>(null);
@@ -385,15 +391,16 @@ export function MeetingDetailScreen({
   useEffect(() => {
     const activeSound = soundRef.current;
     soundRef.current = null;
+    soundLoadingPromiseRef.current = null;
     loadedAudioKeyRef.current = null;
     segmentPlaybackRef.current = null;
     audioBusyRef.current = false;
+    pendingPlayIntentRef.current = false;
     setSound(null);
     setIsPlaying(false);
     setPositionMillis(0);
     setDurationMillis(0);
     setSegmentPlaybackId(null);
-    setAudioError(null);
     setAudioState('idle');
     activeSound?.unloadAsync().catch(() => undefined);
   }, [meetingId]);
@@ -406,6 +413,7 @@ export function MeetingDetailScreen({
     return () => {
       soundRef.current?.unloadAsync().catch(() => undefined);
       soundRef.current = null;
+      soundLoadingPromiseRef.current = null;
       loadedAudioKeyRef.current = null;
     };
   }, []);
@@ -414,18 +422,38 @@ export function MeetingDetailScreen({
     if (loadedAudioKeyRef.current === null || loadedAudioKeyRef.current === selectedAudioKey) return;
     const activeSound = soundRef.current;
     soundRef.current = null;
+    soundLoadingPromiseRef.current = null;
     loadedAudioKeyRef.current = null;
     segmentPlaybackRef.current = null;
     audioBusyRef.current = false;
+    pendingPlayIntentRef.current = false;
     setSound(null);
     setIsPlaying(false);
     setPositionMillis(0);
     setDurationMillis(0);
     setSegmentPlaybackId(null);
-    setAudioError(null);
     setAudioState(selectedAudioKey ? 'idle' : 'missing');
     activeSound?.unloadAsync().catch(() => undefined);
   }, [selectedAudioKey]);
+
+  useEffect(() => {
+    if (!meeting || !selectedAudio || !selectedAudioKey) return;
+    if (soundRef.current && loadedAudioKeyRef.current === selectedAudioKey) return;
+    if (soundLoadingPromiseRef.current) return;
+
+    let cancelled = false;
+    ensureSound().catch(() => {
+      if (!cancelled) {
+        pendingPlayIntentRef.current = false;
+        setIsPlaying(false);
+        setAudioState('failed');
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [meeting, selectedAudio, selectedAudioKey]);
 
   useEffect(() => {
     if (!meeting || !['processing', 'transcribing', 'transcribed', 'summarizing'].includes(meeting.status)) {
@@ -495,12 +523,12 @@ export function MeetingDetailScreen({
 
   function updatePlaybackStatus(status: AVPlaybackStatus) {
     if (!status.isLoaded) {
+      pendingPlayIntentRef.current = false;
       setAudioState('failed');
-      setAudioError('音频加载失败，请确认录音文件仍然存在。');
       return;
     }
     setAudioState('ready');
-    setIsPlaying(status.isPlaying);
+    setIsPlaying(status.isPlaying || pendingPlayIntentRef.current);
     if (!isScrubbingRef.current) setPositionMillis(status.positionMillis);
     setDurationMillis(status.durationMillis || 0);
     const segmentPlayback = segmentPlaybackRef.current;
@@ -508,6 +536,7 @@ export function MeetingDetailScreen({
       soundRef.current?.pauseAsync().catch(() => undefined);
       soundRef.current?.setPositionAsync(segmentPlayback.endMillis).catch(() => undefined);
       segmentPlaybackRef.current = null;
+      pendingPlayIntentRef.current = false;
       setSegmentPlaybackId(null);
       setIsPlaying(false);
       setPositionMillis(segmentPlayback.endMillis);
@@ -515,6 +544,7 @@ export function MeetingDetailScreen({
     }
     if (status.didJustFinish) {
       segmentPlaybackRef.current = null;
+      pendingPlayIntentRef.current = false;
       setSegmentPlaybackId(null);
       setIsPlaying(false);
       setPositionMillis(status.durationMillis || status.positionMillis || 0);
@@ -524,38 +554,49 @@ export function MeetingDetailScreen({
   async function ensureSound(): Promise<Audio.Sound | null> {
     if (!meeting || !selectedAudio || !selectedAudioKey) {
       setAudioState('missing');
-      setAudioError('当前会议没有可播放的录音文件。');
       return null;
     }
     if (soundRef.current && loadedAudioKeyRef.current === selectedAudioKey) return soundRef.current;
-    if (soundRef.current) {
-      const staleSound = soundRef.current;
-      soundRef.current = null;
-      loadedAudioKeyRef.current = null;
-      segmentPlaybackRef.current = null;
-      setSound(null);
-      setIsPlaying(false);
-      setSegmentPlaybackId(null);
-      await staleSound.unloadAsync().catch(() => undefined);
+    if (soundLoadingPromiseRef.current) return soundLoadingPromiseRef.current;
+
+    const loadingPromise = (async () => {
+      if (soundRef.current) {
+        const staleSound = soundRef.current;
+        soundRef.current = null;
+        loadedAudioKeyRef.current = null;
+        segmentPlaybackRef.current = null;
+        setSound(null);
+        setIsPlaying(false);
+        setSegmentPlaybackId(null);
+        await staleSound.unloadAsync().catch(() => undefined);
+      }
+
+      setAudioState('loading');
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        playsInSilentModeIOS: true,
+        shouldDuckAndroid: true,
+        playThroughEarpieceAndroid: false,
+      });
+
+      const nextSound = new Audio.Sound();
+      nextSound.setOnPlaybackStatusUpdate(updatePlaybackStatus);
+      await nextSound.loadAsync({ uri: meetingAudioUrl(meeting.id, selectedAudio.id) }, { shouldPlay: false });
+      soundRef.current = nextSound;
+      loadedAudioKeyRef.current = selectedAudioKey;
+      setSound(nextSound);
+      updatePlaybackStatus(await nextSound.getStatusAsync());
+      return nextSound;
+    })();
+
+    soundLoadingPromiseRef.current = loadingPromise;
+    try {
+      return await loadingPromise;
+    } finally {
+      if (soundLoadingPromiseRef.current === loadingPromise) {
+        soundLoadingPromiseRef.current = null;
+      }
     }
-
-    setAudioState('loading');
-    setAudioError(null);
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      playThroughEarpieceAndroid: false,
-    });
-
-    const nextSound = new Audio.Sound();
-    nextSound.setOnPlaybackStatusUpdate(updatePlaybackStatus);
-    await nextSound.loadAsync({ uri: meetingAudioUrl(meeting.id, selectedAudio.id) }, { shouldPlay: false });
-    soundRef.current = nextSound;
-    loadedAudioKeyRef.current = selectedAudioKey;
-    setSound(nextSound);
-    updatePlaybackStatus(await nextSound.getStatusAsync());
-    return nextSound;
   }
 
   async function runAudioAction(action: (activeSound: Audio.Sound) => Promise<void>) {
@@ -567,28 +608,49 @@ export function MeetingDetailScreen({
       await action(activeSound);
       updatePlaybackStatus(await activeSound.getStatusAsync());
     } catch (nextError) {
+      pendingPlayIntentRef.current = false;
       setIsPlaying(false);
       setAudioState('failed');
-      setAudioError(nextError instanceof Error ? nextError.message : '音频加载失败，请确认录音文件仍然存在。');
     } finally {
       audioBusyRef.current = false;
     }
   }
 
   async function togglePlayback() {
+    if (audioState === 'missing') return;
+    if (audioBusyRef.current) {
+      if (pendingPlayIntentRef.current) {
+        pendingPlayIntentRef.current = false;
+        setIsPlaying(false);
+      }
+      return;
+    }
+    const expectsPlay = !isPlaying;
+    if (expectsPlay) {
+      pendingPlayIntentRef.current = true;
+      setIsPlaying(true);
+    }
     await runAudioAction(async (activeSound) => {
       const status = await activeSound.getStatusAsync();
-      if (!status.isLoaded) return;
+      if (!status.isLoaded) {
+        pendingPlayIntentRef.current = false;
+        setIsPlaying(false);
+        return;
+      }
       if (status.isPlaying) {
+        pendingPlayIntentRef.current = false;
+        setIsPlaying(false);
         await activeSound.pauseAsync();
         segmentPlaybackRef.current = null;
         setSegmentPlaybackId(null);
       } else {
+        if (expectsPlay && !pendingPlayIntentRef.current) return;
         segmentPlaybackRef.current = null;
         setSegmentPlaybackId(null);
         const nextPosition = status.didJustFinish || (status.durationMillis && status.positionMillis >= status.durationMillis) ? 0 : status.positionMillis;
         await activeSound.setPositionAsync(nextPosition);
         await activeSound.playAsync();
+        pendingPlayIntentRef.current = false;
       }
     });
   }
@@ -751,14 +813,6 @@ export function MeetingDetailScreen({
 
   function renderAudioPlayer() {
     const durationText = durationMillis ? formatTimestamp(durationMillis / 1000) : formatTimestamp(meeting ? meetingDurationSeconds(meeting) : null);
-    const audioHint =
-      audioState === 'loading'
-        ? '音频加载中...'
-        : audioState === 'missing'
-          ? '当前会议没有录音文件'
-          : audioState === 'failed'
-            ? audioError || '音频加载失败'
-            : null;
 
     return (
       <View style={styles.playerCard}>
@@ -776,17 +830,12 @@ export function MeetingDetailScreen({
           </View>
           <Text style={styles.timeTextMuted}>{durationText}</Text>
         </View>
-        {audioHint ? <Text style={styles.audioHint}>{audioHint}</Text> : null}
         <View style={styles.controlsRow}>
           <Pressable disabled={audioState === 'missing'} onPress={() => seekBy(-15000)} style={styles.skipButton}>
             <Text style={styles.skipButtonText}>-15</Text>
           </Pressable>
-          <Pressable disabled={audioState === 'missing' || audioState === 'loading'} onPress={togglePlayback} style={styles.playButton}>
-            {audioState === 'loading' ? (
-              <ActivityIndicator color="#ffffff" size="small" />
-            ) : (
-              <LucideIcon name={isMainPlaybackActive ? 'pause' : 'play'} color="#ffffff" size={24} strokeWidth={2.6} />
-            )}
+          <Pressable disabled={audioState === 'missing'} onPress={togglePlayback} style={styles.playButton}>
+            <LucideIcon name={isMainPlaybackActive ? 'pause' : 'play'} color="#ffffff" size={24} strokeWidth={2.6} />
           </Pressable>
           <Pressable disabled={audioState === 'missing'} onPress={() => seekBy(15000)} style={styles.skipButton}>
             <Text style={styles.skipButtonText}>+15</Text>
@@ -1097,15 +1146,97 @@ export function MeetingDetailScreen({
     );
   }
 
-  function renderAgentTab() {
+  const unavailableAgentTools = [
+    {
+      id: 'email',
+      title: '邮箱推送',
+      description: 'AI会议报告推送邮箱',
+      disabledReason: '当前版本暂未接入邮箱推送',
+      icon: 'mail' as const,
+    },
+    {
+      id: 'feishu',
+      title: '飞书任务',
+      description: '待办任务推送到飞书',
+      disabledReason: '当前版本尚未接入飞书任务',
+      icon: 'git-branch' as const,
+    },
+    {
+      id: 'mindmap',
+      title: '思维导图',
+      description: '从纪要生成会议脑图',
+      disabledReason: '当前版本暂未接入正式思维导图生成',
+      icon: 'clock-3' as const,
+    },
+  ];
+
+  async function runKnowledgeTool() {
+    if (checkingAgentTools || runningAgentTool || !meeting) return;
+    try {
+      setRunningAgentTool('knowledge');
+      const sync = await reindexMeetingKnowledge(meetingId);
+      const message = sync.status === 'completed' ? `已同步 ${sync.item_count} 条会议知识。` : '知识库同步已提交，请稍后查看。';
+      Alert.alert('知识库', message, [{ text: '进入知识库', onPress: onOpenKnowledgeBase }, { text: '留在当前页' }]);
+    } catch (nextError) {
+      const message = nextError instanceof Error ? nextError.message : '知识库同步失败，请稍后重试。';
+      Alert.alert('知识库同步失败', message);
+    } finally {
+      setRunningAgentTool(null);
+    }
+  }
+
+  function renderAgentToolsTab() {
     return (
       <View style={styles.summaryContainer}>
         <View style={styles.summaryHero}>
           <Text style={styles.summaryHeroTitle}>Agent工具</Text>
-          <Text style={styles.summaryLead}>功能开发中。本阶段不新增 Agent 能力，也不修改现有 Agent 数据逻辑。</Text>
+          <Text style={styles.summaryLead}>基于现有会议结果提供可用工具入口，未接入的能力保持关闭。</Text>
+        </View>
+        <View style={styles.agentToolGrid}>
+          {unavailableAgentTools.map((tool) => (
+            <Pressable
+              key={tool.id}
+              onPress={() => Alert.alert(tool.title, tool.disabledReason)}
+              style={[styles.agentToolCard, styles.agentToolCardDisabled]}
+            >
+              <View style={styles.agentToolIcon}>
+                <LucideIcon name={tool.icon} color="#64748B" size={22} strokeWidth={2.2} />
+              </View>
+              <View style={styles.agentToolText}>
+                <Text style={styles.agentToolTitle}>{tool.title}</Text>
+                <Text style={styles.agentToolSub}>{tool.description}</Text>
+                <Text style={styles.agentToolStatus}>{tool.disabledReason}</Text>
+              </View>
+            </Pressable>
+          ))}
+          <Pressable
+            disabled={checkingAgentTools || Boolean(runningAgentTool)}
+            onPress={runKnowledgeTool}
+            style={[styles.agentToolCard, checkingAgentTools || runningAgentTool ? styles.agentToolCardDisabled : null]}
+          >
+            <View style={[styles.agentToolIcon, styles.agentToolIconActive]}>
+              <LucideIcon name="book-open" color="#2B6CFF" size={22} strokeWidth={2.2} />
+            </View>
+            <View style={styles.agentToolText}>
+              <Text style={styles.agentToolTitle}>知识库</Text>
+              <Text style={styles.agentToolSub}>同步本会议到知识库</Text>
+              <Text style={styles.agentToolStatus}>{runningAgentTool === 'knowledge' ? '同步中' : '可用'}</Text>
+            </View>
+          </Pressable>
+        </View>
+        <View style={styles.agentEmptyRecord}>
+          <Text style={styles.agentEmptyTitle}>暂无工具使用记录</Text>
+          <Text style={styles.agentEmptyText}>当前项目尚未提供邮箱、飞书、思维导图或知识库工具执行记录接口。</Text>
+        </View>
+        <View style={styles.agentMoreBox}>
+          <Text style={styles.agentMoreText}>更多功能即将上线</Text>
         </View>
       </View>
     );
+  }
+
+  function renderAgentTab() {
+    return renderAgentToolsTab();
   }
 
   function renderHeader() {
@@ -1154,7 +1285,7 @@ export function MeetingDetailScreen({
             </>
           ) : null}
           {activeTab === 'summary' ? renderSummaryTab() : null}
-          {activeTab === 'agent' ? renderAgentTab() : null}
+          {activeTab === 'agent' ? renderAgentToolsTab() : null}
         </View>
       </View>
     );
@@ -1185,7 +1316,7 @@ export function MeetingDetailScreen({
               onPress={() => toggleSegmentPlayback(item)}
               style={[styles.segmentPlayButton, segmentPlaybackId === item.id && isPlaying ? styles.segmentPlayButtonActive : null]}
             >
-              <LucideIcon name={segmentPlaybackId === item.id && isPlaying ? 'pause' : 'play'} color="#ffffff" size={13} strokeWidth={2.7} />
+              <LucideIcon name={segmentPlaybackId === item.id && isPlaying ? 'pause' : 'play'} color="#111827" size={12} strokeWidth={2.6} />
             </Pressable>
           </View>
           <Text style={styles.paragraph}>{replaceSpeakerLabels(item.text)}</Text>
@@ -1384,13 +1515,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -5,
     width: 16,
-  },
-  audioHint: {
-    color: '#64748B',
-    fontSize: 12,
-    fontWeight: '700',
-    marginTop: 10,
-    textAlign: 'center',
   },
   controlsRow: {
     alignItems: 'center',
@@ -1602,16 +1726,14 @@ const styles = StyleSheet.create({
   },
   segmentPlayButton: {
     alignItems: 'center',
-    backgroundColor: '#111827',
-    borderColor: '#111827',
-    borderRadius: 14,
-    borderWidth: 1,
-    height: 28,
+    backgroundColor: 'transparent',
+    borderRadius: 8,
+    height: 18,
     justifyContent: 'center',
-    width: 28,
+    width: 18,
   },
   segmentPlayButtonActive: {
-    backgroundColor: '#111827',
+    backgroundColor: '#EEF2FF',
   },
   paragraph: {
     color: '#1F2937',
@@ -1627,6 +1749,87 @@ const styles = StyleSheet.create({
   summaryContainer: {
     gap: 14,
     paddingTop: 14,
+  },
+  agentToolGrid: {
+    gap: 12,
+  },
+  agentToolCard: {
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderColor: '#e5e7eb',
+    borderRadius: 18,
+    borderWidth: 1,
+    flexDirection: 'row',
+    gap: 12,
+    minHeight: 86,
+    padding: 14,
+  },
+  agentToolCardDisabled: {
+    opacity: 0.72,
+  },
+  agentToolIcon: {
+    alignItems: 'center',
+    backgroundColor: '#f1f5f9',
+    borderRadius: 22,
+    height: 44,
+    justifyContent: 'center',
+    width: 44,
+  },
+  agentToolIconActive: {
+    backgroundColor: '#e8f0fe',
+  },
+  agentToolText: {
+    flex: 1,
+    gap: 4,
+  },
+  agentToolTitle: {
+    color: '#111827',
+    fontSize: 15,
+    fontWeight: '900',
+  },
+  agentToolSub: {
+    color: '#64748B',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  agentToolStatus: {
+    color: '#94A3B8',
+    fontSize: 11,
+    fontWeight: '800',
+  },
+  agentEmptyRecord: {
+    backgroundColor: '#f8fafc',
+    borderColor: '#e5e7eb',
+    borderRadius: 16,
+    borderWidth: 1,
+    marginTop: 14,
+    padding: 16,
+  },
+  agentEmptyTitle: {
+    color: '#111827',
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  agentEmptyText: {
+    color: '#64748B',
+    fontSize: 12,
+    fontWeight: '700',
+    lineHeight: 18,
+    marginTop: 6,
+  },
+  agentMoreBox: {
+    alignItems: 'center',
+    borderColor: '#cbd5e1',
+    borderRadius: 16,
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    marginTop: 12,
+    padding: 16,
+  },
+  agentMoreText: {
+    color: '#64748B',
+    fontSize: 13,
+    fontWeight: '900',
   },
   summaryCoverCard: {
     backgroundColor: '#ffffff',

@@ -4,10 +4,10 @@ import {
   ActivityIndicator,
   Alert,
   Animated,
-  FlatList,
   PanResponder,
   Pressable,
   RefreshControl,
+  SectionList,
   StyleSheet,
   Text,
   View,
@@ -15,13 +15,20 @@ import {
 
 import { bulkDeleteMeetings, deleteMeeting, getMeetingSummary, listMeetings, Meeting, MeetingSummary } from '../api';
 import { LucideIcon } from '../components/LucideIcon';
+import { groupMeetingsByDate } from '../utils/meetingDateSections';
 
 type Props = {
   mode?: 'home' | 'all';
   activeRecordingMeetingId?: string | null;
+  processingRecordingMeeting?: Meeting | null;
+  refreshKey?: number;
+  miniRecordingVisible?: boolean;
+  creatingMeeting?: boolean;
   onCreateMeeting: () => void;
+  onImportFile?: () => void;
   onOpenMeeting: (meetingId: string) => void;
   onShowAll?: () => void;
+  onMeetingCountChange?: (count: number) => void;
 };
 
 type DisplayStatus = 'recording' | 'analyzing' | 'uploaded' | 'completed' | 'pending' | 'failed';
@@ -30,18 +37,6 @@ type SummaryByMeeting = Record<string, MeetingSummary | null>;
 const HOME_MEETING_LIMIT = 10;
 const HISTORY_PAGE_SIZE = 30;
 
-type HomeStats = {
-  weeklyMeetings: number;
-  weeklyHours: string;
-  meetingTrend: string;
-  hourTrend: string;
-  actionCount: number;
-  unresolvedCount: number;
-  highPriorityActionCount: number;
-  riskCount: number;
-  staleUnresolvedCount: number;
-};
-
 const statusText: Record<DisplayStatus, string> = {
   recording: '录音中',
   analyzing: '分析中',
@@ -49,6 +44,15 @@ const statusText: Record<DisplayStatus, string> = {
   completed: '已完成',
   pending: '待录音',
   failed: '失败',
+};
+
+const statusDisplayText: Record<DisplayStatus, string> = {
+  recording: '处理中',
+  analyzing: '处理中',
+  uploaded: '未生成摘要',
+  completed: '已完成',
+  pending: '未生成摘要',
+  failed: '分析失败',
 };
 
 function normalizeStatus(status: string): DisplayStatus {
@@ -70,8 +74,7 @@ function twoDigits(value: number): string {
   return String(value).padStart(2, '0');
 }
 
-function formatRecentMeetingTime(value: string): string {
-  const date = parsedDate(value);
+function formatRecentMeetingDate(date: Date | null): string {
   if (!date) return '';
   const now = new Date();
   const today = new Date(now);
@@ -91,23 +94,6 @@ function parsedDate(value: string | null | undefined): Date | null {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function weekRange(offsetWeeks = 0): { start: Date; end: Date } {
-  const start = new Date();
-  const day = start.getDay() || 7;
-  start.setHours(0, 0, 0, 0);
-  start.setDate(start.getDate() - day + 1 + offsetWeeks * 7);
-  const end = new Date(start);
-  end.setDate(start.getDate() + 7);
-  return { start, end };
-}
-
-function isInWeek(value: string | null | undefined, offsetWeeks = 0): boolean {
-  const date = parsedDate(value);
-  if (!date) return false;
-  const { start, end } = weekRange(offsetWeeks);
-  return date >= start && date < end;
-}
-
 function meetingDurationSeconds(meeting: Meeting): number {
   const end = parsedDate(meeting.end_at);
   const start = parsedDate(meeting.start_at) || parsedDate(meeting.created_at);
@@ -125,13 +111,6 @@ function formatDuration(seconds: number): string {
   if (minutes && rest) return `${minutes}分${rest}秒`;
   if (minutes) return `${minutes}分`;
   return `${rest}秒`;
-}
-
-function formatHours(seconds: number): string {
-  if (seconds <= 0) return '0';
-  const hours = seconds / 3600;
-  if (hours < 0.1) return '<0.1';
-  return Number.isInteger(hours) ? String(hours) : hours.toFixed(1);
 }
 
 function meetingDurationText(meeting: Meeting, status: DisplayStatus): string {
@@ -162,17 +141,50 @@ function itemCount(value: unknown): number {
   return Array.isArray(value) ? value.length : 0;
 }
 
-function isHighPriority(value: { priority?: string | null }): boolean {
-  return value.priority === 'high' || value.priority === '高' || value.priority === '高优先级';
+function textFromSummaryItem(item: unknown): string {
+  if (typeof item === 'string') return item.trim();
+  if (!item || typeof item !== 'object') return '';
+  const record = item as Record<string, unknown>;
+  const candidates = [
+    record.item,
+    record.title,
+    record.summary,
+    record.content,
+    record.topic,
+    record.text,
+    record.conclusion,
+    record.decision,
+    record.task,
+    record.issue,
+    record.risk,
+    record.source_text,
+  ];
+  for (const candidate of candidates) {
+    if (typeof candidate === 'string' && candidate.trim()) return candidate.trim();
+  }
+  return '';
 }
 
-function formatTrend(current: number, previous: number): string {
-  if (current <= 0 && previous <= 0) return '较上周 0%';
-  if (previous <= 0) return '较上周 ↑100%';
-  const rate = Math.round(((current - previous) / previous) * 100);
-  if (rate > 0) return `较上周 ↑${rate}%`;
-  if (rate < 0) return `较上周 ↓${Math.abs(rate)}%`;
-  return '较上周 0%';
+function firstSummaryText(primary: unknown, legacy?: unknown): string {
+  const primaryItems = Array.isArray(primary) ? primary : [];
+  const legacyItems = Array.isArray(legacy) ? legacy : [];
+  for (const item of [...primaryItems, ...legacyItems]) {
+    const text = textFromSummaryItem(item);
+    if (text) return text;
+  }
+  return '';
+}
+
+function summaryPreviewText(summary: MeetingSummary | null | undefined): string {
+  const candidates = [summary?.meeting_summary, summary?.overview];
+  for (const candidate of candidates) {
+    if (typeof candidate === 'string' && candidate.trim()) return candidate.trim();
+  }
+  return '';
+}
+
+function isHighPriority(value: { priority?: string | null }): boolean {
+  return value.priority === 'high' || value.priority === '高' || value.priority === '高优先级';
 }
 
 function participantCount(summary: MeetingSummary | null | undefined): number {
@@ -185,49 +197,23 @@ function participantCount(summary: MeetingSummary | null | undefined): number {
   return 0;
 }
 
-function buildHomeStats(meetings: Meeting[], summaries: SummaryByMeeting): HomeStats {
-  const weeklyMeetings = meetings.filter((meeting) => isInWeek(meeting.created_at, 0));
-  const previousMeetings = meetings.filter((meeting) => isInWeek(meeting.created_at, -1));
-  const weeklySeconds = weeklyMeetings.reduce((total, meeting) => total + meetingDurationSeconds(meeting), 0);
-  const previousSeconds = previousMeetings.reduce((total, meeting) => total + meetingDurationSeconds(meeting), 0);
-  let actionCount = 0;
-  let unresolvedCount = 0;
-  let highPriorityActionCount = 0;
-  let riskCount = 0;
-  let staleUnresolvedCount = 0;
-  const sevenDaysAgo = Date.now() - 7 * 86400000;
+function aiSummaryText(status: DisplayStatus, summary: MeetingSummary | null | undefined): string {
+  if (status === 'completed') return summary ? 'AI摘要已生成' : 'AI摘要待同步';
+  if (status === 'analyzing') return 'AI摘要生成中';
+  if (status === 'uploaded') return 'AI摘要待生成';
+  if (status === 'failed') return 'AI摘要生成失败';
+  if (status === 'recording') return '录音完成后生成摘要';
+  return '开始录音后生成摘要';
+}
 
-  for (const meeting of weeklyMeetings) {
-    const summary = summaries[meeting.id];
-    const actions = Array.isArray(summary?.action_items) ? summary.action_items : [];
-    const unresolved = Array.isArray(summary?.unresolved_issues) ? summary.unresolved_issues : [];
-    const risks = Array.isArray(summary?.risks_and_focus) ? summary.risks_and_focus : [];
-
-    actionCount += actions.length;
-    highPriorityActionCount += actions.filter(isHighPriority).length;
-    unresolvedCount += unresolved.length;
-    riskCount += risks.length;
-  }
-
-  for (const meeting of meetings) {
-    const summary = summaries[meeting.id];
-    const unresolved = Array.isArray(summary?.unresolved_issues) ? summary.unresolved_issues : [];
-    if (unresolved.length && (parsedDate(meeting.created_at)?.getTime() || Date.now()) < sevenDaysAgo) {
-      staleUnresolvedCount += unresolved.length;
-    }
-  }
-
-  return {
-    weeklyMeetings: weeklyMeetings.length,
-    weeklyHours: formatHours(weeklySeconds),
-    meetingTrend: formatTrend(weeklyMeetings.length, previousMeetings.length),
-    hourTrend: formatTrend(weeklySeconds, previousSeconds),
-    actionCount,
-    unresolvedCount,
-    highPriorityActionCount,
-    riskCount,
-    staleUnresolvedCount,
-  };
+function StatusBadge({ status, label }: { status: DisplayStatus; label: string }) {
+  const processing = status === 'analyzing' || status === 'recording';
+  return (
+    <View style={[styles.statusBadge, styles[`${status}Badge`]]}>
+      {processing ? <ActivityIndicator color="#6657ff" size="small" style={styles.statusSpinner} /> : null}
+      <Text style={[styles.statusText, styles[`${status}Text`]]}>{label}</Text>
+    </View>
+  );
 }
 
 function MeetingCard({
@@ -238,6 +224,8 @@ function MeetingCard({
   onToggleSelect,
   summary,
   isActiveRecording = false,
+  compactHome = false,
+  flushBottom = false,
 }: {
   item: Meeting;
   onPress: () => void;
@@ -246,6 +234,8 @@ function MeetingCard({
   onToggleSelect?: () => void;
   summary?: MeetingSummary | null;
   isActiveRecording?: boolean;
+  compactHome?: boolean;
+  flushBottom?: boolean;
 }) {
   const status = isActiveRecording ? 'recording' : normalizeStatus(item.status);
   const duration = meetingDurationText(item, status);
@@ -255,9 +245,21 @@ function MeetingCard({
   const highPriority = Array.isArray(summary?.action_items) ? summary.action_items.filter(isHighPriority).length : 0;
   const people = participantCount(summary);
   const remainingAnalysisTime = analysisRemainingText(item);
-  const metaParts = [formatRecentMeetingTime(item.created_at), duration];
+  const metaParts = [formatRecentMeetingDate(parsedDate(item.start_at) || parsedDate(item.created_at)), duration];
   if (people > 0) metaParts.push(`${people}人`);
   const title = item.title?.trim() && item.title.trim().length >= 2 ? item.title.trim() : '未命名会议';
+  const summaryText = aiSummaryText(status, summary);
+  const meetingSummaryPreview = summaryPreviewText(summary);
+  const agendaPreview = firstSummaryText(summary?.meeting_agenda, summary?.agenda);
+  const conclusionPreview = firstSummaryText(summary?.key_conclusions, summary?.decisions);
+  const actionPreview = firstSummaryText(summary?.action_items, summary?.next_steps);
+  const previewRows = [
+    { label: '会议总结：', text: meetingSummaryPreview },
+    { label: '会议议程：', text: agendaPreview },
+    { label: '核心结论：', text: conclusionPreview },
+    { label: '待办事项：', text: actionPreview },
+  ].filter((row) => row.text.trim().length > 0);
+  const hasCompletedPreview = status === 'completed' && previewRows.length > 0;
   const statsRow = (
     <View style={styles.cardStatsRow}>
       <View style={styles.cardStatItem}>
@@ -274,6 +276,67 @@ function MeetingCard({
     </View>
   );
 
+  if (compactHome) {
+    const showHomeStatusBadge = status !== 'pending';
+    return (
+      <Pressable onPress={onPress} style={[styles.homeMeetingCard, flushBottom ? styles.cardFlushBottom : null]}>
+        <View style={styles.homeMeetingTop}>
+          {selectable ? (
+            <Pressable onPress={onToggleSelect} hitSlop={8} style={[styles.selectBox, selected ? styles.selectBoxActive : null]}>
+              <Text style={[styles.selectCheck, selected ? styles.selectCheckActive : null]}>✓</Text>
+            </Pressable>
+          ) : null}
+          <Text numberOfLines={2} style={styles.homeMeetingTitle}>
+            {title}
+          </Text>
+          {showHomeStatusBadge ? <StatusBadge status={status} label={statusDisplayText[status]} /> : null}
+        </View>
+        <View style={styles.homeMeetingMetaRow}>
+          <LucideIcon name="clock-3" color="#8b95a7" size={14} strokeWidth={2.2} />
+          <Text numberOfLines={1} style={styles.homeMeetingMeta}>{metaParts.filter(Boolean).join(' · ')}</Text>
+        </View>
+        {hasCompletedPreview ? (
+          <View style={styles.homePreviewBlock}>
+            {previewRows.map((row) => (
+              <View key={row.label} style={styles.previewRow}>
+                <Text style={styles.previewLabel}>{row.label}</Text>
+                <Text numberOfLines={1} style={styles.previewText}>{row.text}</Text>
+              </View>
+            ))}
+          </View>
+        ) : status === 'analyzing' || status === 'recording' ? (
+          <View style={styles.homeAnalyzingBlock}>
+            <Text style={styles.analysisHint}>AI 正在分析会议内容</Text>
+            <Text style={styles.stageHint}>提取结论 · 生成待办 · 识别风险 · 预计还需 {remainingAnalysisTime}</Text>
+          </View>
+        ) : status === 'failed' ? (
+          <View style={styles.homeFailedBlock}>
+            <Text style={styles.failedHint}>分析失败，可进入会议详情查看或稍后重试。</Text>
+          </View>
+        ) : status === 'uploaded' || status === 'pending' ? (
+          <Text style={styles.homePendingHint}>暂无 AI 摘要，完成录音或上传后可生成。</Text>
+        ) : null}
+        <View style={styles.homeMeetingFooter}>
+          <View style={styles.summaryState}>
+            <LucideIcon name="sparkles" color={status === 'failed' ? '#ef4444' : '#2B6CFF'} size={15} strokeWidth={2.2} />
+            <Text
+              numberOfLines={1}
+              style={[styles.summaryStateText, status === 'failed' ? styles.summaryStateTextFailed : null]}
+            >
+              {summaryText}
+            </Text>
+            <LucideIcon name="chevron-right" color={status === 'failed' ? '#ef4444' : '#2B6CFF'} size={15} strokeWidth={2.2} />
+          </View>
+          {status === 'completed' && actions > 0 ? (
+            <View style={[styles.actionCountBadge, styles.actionCountBadgeActive]}>
+              <Text style={[styles.actionCountText, styles.actionCountTextActive]}>{actions}项待办</Text>
+            </View>
+          ) : null}
+        </View>
+      </Pressable>
+    );
+  }
+
   return (
     <Pressable onPress={onPress} style={styles.card}>
       {selectable ? (
@@ -287,9 +350,7 @@ function MeetingCard({
             {title}
           </Text>
           <View style={styles.cardRight}>
-            <View style={[styles.statusBadge, styles[`${status}Badge`]]}>
-              <Text style={[styles.statusText, styles[`${status}Text`]]}>{statusText[status]}</Text>
-            </View>
+            <StatusBadge status={status} label={statusText[status]} />
             <LucideIcon name="chevron-right" color="#9ca3af" size={19} strokeWidth={2.2} />
           </View>
         </View>
@@ -360,61 +421,18 @@ function SwipeableMeetingCard({ children, onDelete }: { children: ReactNode; onD
   );
 }
 
-function InsightMetric({
-  value,
-  unit,
-  label,
-  tone,
-  detail,
-  pill,
-}: {
-  value: string | number;
-  unit?: string;
-  label: string;
-  tone: 'purple' | 'blue' | 'green' | 'orange';
-  detail?: string;
-  pill?: string;
-}) {
-  return (
-    <View style={[styles.metricTile, styles[`${tone}Metric`]]}>
-      <View style={styles.metricValueRow}>
-        <Text style={styles.metricValue}>{value}</Text>
-        {unit ? <Text style={styles.metricUnit}>{unit}</Text> : null}
-      </View>
-      <Text style={styles.metricLabel}>{label}</Text>
-      {pill ? (
-        <View style={[styles.metricPill, styles[`${tone}MetricPill`]]}>
-          <Text style={[styles.metricPillText, styles[`${tone}MetricPillText`]]}>{pill}</Text>
-        </View>
-      ) : (
-        <Text style={[styles.metricDetail, tone === 'green' ? styles.positiveDetail : null]}>{detail}</Text>
-      )}
-    </View>
-  );
-}
-
-function InsightCard({ stats }: { stats: HomeStats }) {
-  return (
-    <View style={styles.dashboardCard}>
-      <View style={styles.cardSectionHeader}>
-        <Text style={styles.dashboardTitle}>本周会议洞察</Text>
-      </View>
-      <View style={styles.metricsGrid}>
-        <InsightMetric value={stats.weeklyMeetings} unit="场" label="会议总数" detail={stats.meetingTrend} tone="purple" />
-        <InsightMetric value={stats.weeklyHours} unit="h" label="会议时长" detail={stats.hourTrend} tone="blue" />
-        <InsightMetric value={stats.actionCount} unit="项" label="待办事项" pill={`${stats.highPriorityActionCount} 项高优先级`} tone="green" />
-        <InsightMetric value={stats.unresolvedCount} unit="项" label="遗留问题" pill={`${stats.staleUnresolvedCount} 项超 7 天`} tone="orange" />
-      </View>
-    </View>
-  );
-}
-
 export function MeetingListScreen({
   mode = 'home',
   activeRecordingMeetingId,
+  processingRecordingMeeting,
+  refreshKey = 0,
+  miniRecordingVisible = false,
+  creatingMeeting = false,
   onCreateMeeting,
+  onImportFile,
   onOpenMeeting,
   onShowAll,
+  onMeetingCountChange,
 }: Props) {
   const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [loading, setLoading] = useState(true);
@@ -425,6 +443,7 @@ export function MeetingListScreen({
   const [summaryByMeeting, setSummaryByMeeting] = useState<SummaryByMeeting>({});
   const [hasMoreMeetings, setHasMoreMeetings] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [sectionClock, setSectionClock] = useState(() => new Date());
 
   const loadMeetings = useCallback(async (append = false, offset = 0) => {
     try {
@@ -451,7 +470,20 @@ export function MeetingListScreen({
     setHasMoreMeetings(false);
     setSelectedIds([]);
     loadMeetings(false);
-  }, [loadMeetings]);
+  }, [loadMeetings, refreshKey]);
+
+  useEffect(() => {
+    if (mode === 'all') {
+      onMeetingCountChange?.(meetings.length);
+    }
+  }, [meetings.length, mode, onMeetingCountChange]);
+
+  useEffect(() => {
+    const now = new Date();
+    const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 1);
+    const timer = setTimeout(() => setSectionClock(new Date()), Math.max(1000, nextMidnight.getTime() - now.getTime()));
+    return () => clearTimeout(timer);
+  }, [sectionClock]);
 
   function refresh() {
     setRefreshing(true);
@@ -473,17 +505,35 @@ export function MeetingListScreen({
     onOpenMeeting(meeting.id);
   }
 
-  const visibleMeetings = useMemo(() => (mode === 'home' ? meetings.slice(0, HOME_MEETING_LIMIT) : meetings), [meetings, mode]);
-  const homeStats = useMemo(() => buildHomeStats(meetings, summaryByMeeting), [meetings, summaryByMeeting]);
-
+  const visibleMeetings = useMemo(() => {
+    const mergedMeetings = processingRecordingMeeting
+      ? meetings.map((meeting) =>
+          meeting.id === processingRecordingMeeting.id ? { ...meeting, ...processingRecordingMeeting, status: 'processing' } : meeting,
+        )
+      : meetings;
+    const hasProcessingMeeting =
+      Boolean(processingRecordingMeeting) && mergedMeetings.some((meeting) => meeting.id === processingRecordingMeeting?.id);
+    const nextMeetings =
+      processingRecordingMeeting && !hasProcessingMeeting
+        ? [{ ...processingRecordingMeeting, status: 'processing' }, ...mergedMeetings]
+        : mergedMeetings;
+    return mode === 'home' ? nextMeetings.slice(0, HOME_MEETING_LIMIT) : nextMeetings;
+  }, [meetings, mode, processingRecordingMeeting]);
+  const meetingSections = useMemo(() => groupMeetingsByDate(visibleMeetings, sectionClock), [sectionClock, visibleMeetings]);
   useEffect(() => {
-    if (mode !== 'home' || meetings.length === 0) {
-      setSummaryByMeeting({});
+    if (visibleMeetings.length === 0) {
       return;
     }
 
     let cancelled = false;
-    const meetingsForStats = meetings.filter((meeting) => normalizeStatus(meeting.status) === 'completed').slice(0, 8);
+    const meetingsForStats = visibleMeetings
+      .filter((meeting) => normalizeStatus(meeting.status) === 'completed')
+      .slice(0, mode === 'home' ? HOME_MEETING_LIMIT : HISTORY_PAGE_SIZE)
+      .filter((meeting) => !(meeting.id in summaryByMeeting));
+
+    if (meetingsForStats.length === 0) {
+      return;
+    }
 
     async function loadSummaries() {
       const results = await Promise.allSettled(
@@ -492,22 +542,38 @@ export function MeetingListScreen({
       if (cancelled) return;
 
       const next: SummaryByMeeting = {};
-      for (const result of results) {
+      results.forEach((result, index) => {
         if (result.status === 'fulfilled') {
           next[result.value[0]] = result.value[1];
+        } else {
+          next[meetingsForStats[index].id] = null;
         }
-      }
-      setSummaryByMeeting(next);
+      });
+      setSummaryByMeeting((current) => ({ ...current, ...next }));
     }
 
     loadSummaries().catch(() => {
-      if (!cancelled) setSummaryByMeeting({});
+      if (!cancelled) {
+        const failed: SummaryByMeeting = {};
+        meetingsForStats.forEach((meeting) => {
+          failed[meeting.id] = null;
+        });
+        setSummaryByMeeting((current) => ({ ...current, ...failed }));
+      }
     });
 
     return () => {
       cancelled = true;
     };
-  }, [meetings, mode]);
+  }, [mode, summaryByMeeting, visibleMeetings]);
+
+  function handleImportFile() {
+    if (onImportFile) {
+      onImportFile();
+      return;
+    }
+    Alert.alert('提示', '文件导入功能暂不可用');
+  }
 
   function toggleSelected(meetingId: string) {
     setSelectedIds((current) =>
@@ -569,9 +635,9 @@ export function MeetingListScreen({
 
   if (mode === 'all') {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, styles.historyContainer]}>
         <View style={styles.historyHeader}>
-          <Text style={styles.historySub}>共 {meetings.length} 场会议</Text>
+          <View />
           <Pressable
             onPress={() => {
               setSelecting((value) => !value);
@@ -594,14 +660,15 @@ export function MeetingListScreen({
         ) : null}
         {loading ? <ActivityIndicator color="#6657ff" /> : null}
         {error ? <Text style={styles.error}>{error}</Text> : null}
-        <FlatList
-          data={visibleMeetings}
+        <SectionList
+          sections={meetingSections}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.recentListContent}
+          contentContainerStyle={[styles.historyListContent, miniRecordingVisible ? styles.recentListContentWithMiniRecording : null]}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refresh} tintColor="#6657ff" />}
           ListEmptyComponent={!loading ? <Text style={styles.empty}>暂无历史会议。</Text> : null}
           onEndReached={loadMoreMeetings}
           onEndReachedThreshold={0.3}
+          renderSectionHeader={({ section }) => <Text style={[styles.meetingDateHeader, styles.historyDateHeader]}>{section.title}</Text>}
           ListFooterComponent={
             hasMoreMeetings ? (
               <Pressable onPress={loadMoreMeetings} disabled={loadingMore} style={styles.loadMoreButton}>
@@ -613,10 +680,13 @@ export function MeetingListScreen({
             const card = (
               <MeetingCard
                 item={item}
+                summary={summaryByMeeting[item.id]}
                 selectable={selecting}
                 selected={selectedIds.includes(item.id)}
                 onToggleSelect={() => toggleSelected(item.id)}
                 isActiveRecording={item.id === activeRecordingMeetingId}
+                compactHome={true}
+                flushBottom={!selecting}
                 onPress={() => (selecting ? toggleSelected(item.id) : handleOpenMeeting(item))}
               />
             );
@@ -630,70 +700,72 @@ export function MeetingListScreen({
   }
 
   return (
-    <FlatList
+    <SectionList
       style={styles.container}
-      data={visibleMeetings}
+      sections={meetingSections}
       keyExtractor={(item) => item.id}
-      contentContainerStyle={styles.homeListContent}
+      contentContainerStyle={[styles.homeListContent, miniRecordingVisible ? styles.homeListContentWithMiniRecording : null]}
       showsVerticalScrollIndicator={false}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refresh} tintColor="#6657ff" />}
       ListHeaderComponent={
         <>
-      <View style={styles.brandRow}>
-        <View style={styles.logo}>
-          <View style={styles.logoWave}>
-            {[12, 22, 30, 22, 12].map((height, index) => (
-              <View key={index} style={[styles.logoBar, { height }]} />
-            ))}
-          </View>
-        </View>
-        <View style={styles.brandText}>
-          <Text style={styles.brandTitle}>MeetMind AI</Text>
-          <Text style={styles.brandSub}>AI会议记录助手</Text>
-        </View>
-      </View>
-
-      <View style={styles.heroCard}>
-        <View style={styles.heroContent}>
-          <View style={styles.heroCopy}>
-            <View style={styles.heroTop}>
-              <View style={styles.heroIcon}>
-                <LucideIcon name="video" color="#ffffff" size={28} strokeWidth={2.2} />
+          <View style={styles.brandRow}>
+            <View style={styles.brandLeft}>
+              <View style={styles.logo}>
+                <View style={styles.logoWave}>
+                  {[12, 22, 30, 22, 12].map((height, index) => (
+                    <View key={index} style={[styles.logoBar, { height }]} />
+                  ))}
+                </View>
               </View>
-              <View style={styles.heroTextBlock}>
-                <Text numberOfLines={1} style={styles.heroTitle}>开始你的智能会议</Text>
-                <Text numberOfLines={1} style={styles.heroSub}>让AI帮你记录、整理和总结</Text>
+              <View style={styles.brandText}>
+                <Text style={styles.brandTitle}>MeetMind AI</Text>
+                <Text style={styles.brandSub}>AI会议记录助手</Text>
               </View>
             </View>
+            <Pressable onPress={onShowAll} style={styles.searchButton}>
+              <LucideIcon name="search" color="#4b5563" size={20} strokeWidth={2.2} />
+            </Pressable>
           </View>
-          <Pressable onPress={onCreateMeeting} style={styles.createButton}>
-            <Text style={styles.createText}>＋ 开始会议</Text>
-          </Pressable>
-        </View>
-      </View>
 
-      <InsightCard stats={homeStats} />
+          <View style={styles.actionGrid}>
+            <Pressable disabled={creatingMeeting} onPress={onCreateMeeting} style={[styles.actionCard, styles.recordActionCard, creatingMeeting ? styles.actionCardDisabled : null]}>
+              <View style={styles.actionTitleRow}>
+                {creatingMeeting ? <ActivityIndicator color="#ffffff" size="small" /> : <LucideIcon name="mic" color="#ffffff" size={21} strokeWidth={2.3} />}
+                <Text style={styles.recordActionTitle}>{creatingMeeting ? '创建中' : '实时录音'}</Text>
+              </View>
+              <Text style={styles.recordActionSub}>点击开始记录会议</Text>
+            </Pressable>
+            <Pressable onPress={handleImportFile} style={[styles.actionCard, styles.importActionCard]}>
+              <View style={styles.actionTitleRow}>
+                <LucideIcon name="file-text" color="#2B6CFF" size={21} strokeWidth={2.3} />
+                <Text style={styles.importActionTitle}>导入音频</Text>
+              </View>
+              <Text style={styles.importActionSub}>支持音频上传</Text>
+            </Pressable>
+          </View>
 
-      <View style={styles.recentCard}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>最近会议</Text>
-          <Pressable onPress={onShowAll}>
-            <Text style={styles.allText}>全部 ›</Text>
-          </Pressable>
-        </View>
+          <View style={styles.recentHeader}>
+            <View>
+              <Text style={styles.sectionTitle}>全部会议</Text>
+            </View>
+            <Pressable onPress={onShowAll}>
+              <Text style={styles.allText}>更多</Text>
+            </Pressable>
+          </View>
 
-        {loading ? <ActivityIndicator color="#6657ff" /> : null}
-        {error ? <Text style={styles.error}>{error}</Text> : null}
-
-      </View>
+          {loading ? <ActivityIndicator color="#6657ff" /> : null}
+          {error ? <Text style={styles.error}>{error}</Text> : null}
         </>
       }
       ListEmptyComponent={!loading ? <Text style={styles.empty}>暂无会议，点击上方按钮开始记录。</Text> : null}
+      renderSectionHeader={({ section }) => <Text style={styles.meetingDateHeader}>{section.title}</Text>}
       renderItem={({ item }) => (
         <MeetingCard
           item={item}
           summary={summaryByMeeting[item.id]}
           isActiveRecording={item.id === activeRecordingMeetingId}
+          compactHome={true}
           onPress={() => handleOpenMeeting(item)}
         />
       )}
@@ -707,26 +779,39 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 12,
   },
+  historyContainer: {
+    paddingTop: 0,
+  },
   homeListContent: {
-    paddingBottom: 120,
+    paddingBottom: 132,
+  },
+  homeListContentWithMiniRecording: {
+    paddingBottom: 220,
   },
   brandRow: {
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 22,
+    marginTop: 6,
+  },
+  brandLeft: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
     gap: 12,
-    marginBottom: 16,
   },
   logo: {
     alignItems: 'center',
-    backgroundColor: '#6657ff',
-    borderRadius: 14,
-    height: 48,
+    backgroundColor: '#2B6CFF',
+    borderRadius: 22,
+    height: 44,
     justifyContent: 'center',
-    shadowColor: '#6657ff',
+    shadowColor: '#2B6CFF',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.22,
     shadowRadius: 18,
-    width: 48,
+    width: 44,
     elevation: 5,
   },
   logoText: {
@@ -750,7 +835,7 @@ const styles = StyleSheet.create({
   },
   brandTitle: {
     color: '#111827',
-    fontSize: 24,
+    fontSize: 19,
     fontWeight: '900',
   },
   brandSub: {
@@ -758,6 +843,77 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '700',
     textAlign: 'left',
+  },
+  searchButton: {
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderColor: '#eef0f6',
+    borderRadius: 18,
+    borderWidth: 1,
+    height: 38,
+    justifyContent: 'center',
+    shadowColor: '#6b7280',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    width: 38,
+    elevation: 2,
+  },
+  actionGrid: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 14,
+  },
+  actionCard: {
+    alignItems: 'center',
+    borderRadius: 18,
+    flex: 1,
+    height: 66,
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  actionCardDisabled: {
+    opacity: 0.72,
+  },
+  recordActionCard: {
+    backgroundColor: '#2B6CFF',
+    shadowColor: '#2B6CFF',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.18,
+    shadowRadius: 18,
+    elevation: 4,
+  },
+  importActionCard: {
+    backgroundColor: '#ffffff',
+    borderColor: '#eef0f6',
+    borderWidth: 1,
+    position: 'relative',
+  },
+  actionTitleRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 6,
+    marginBottom: 3,
+  },
+  recordActionTitle: {
+    color: '#ffffff',
+    fontSize: 15,
+    fontWeight: '900',
+  },
+  recordActionSub: {
+    color: 'rgba(255,255,255,0.78)',
+    fontSize: 10.5,
+    fontWeight: '800',
+  },
+  importActionTitle: {
+    color: '#2B6CFF',
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  importActionSub: {
+    color: '#9ca3af',
+    fontSize: 10.5,
+    fontWeight: '800',
   },
   heroCard: {
     backgroundColor: '#6657ff',
@@ -831,29 +987,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '900',
   },
-  dashboardCard: {
-    backgroundColor: '#ffffff',
-    borderColor: '#eef0f6',
-    borderRadius: 20,
-    borderWidth: 1,
+  insightSection: {
     marginBottom: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    shadowColor: '#6b7280',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.08,
-    shadowRadius: 22,
-    elevation: 4,
-  },
-  cardSectionHeader: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
+    marginTop: 1,
   },
   dashboardTitle: {
     color: '#111827',
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '900',
   },
   moreInsightText: {
@@ -863,14 +1003,23 @@ const styles = StyleSheet.create({
   },
   metricsGrid: {
     flexDirection: 'row',
-    gap: 8,
+    flexWrap: 'wrap',
+    gap: 12,
   },
   metricTile: {
+    backgroundColor: '#ffffff',
+    borderColor: '#f2f3f7',
+    borderWidth: 1,
     borderRadius: 14,
-    flex: 1,
-    minHeight: 92,
-    paddingHorizontal: 9,
-    paddingVertical: 11,
+    minHeight: 98,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    shadowColor: '#6b7280',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.06,
+    shadowRadius: 16,
+    width: '48%',
+    elevation: 2,
   },
   purpleMetric: {
     backgroundColor: '#f4f2ff',
@@ -955,15 +1104,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 6,
+    marginBottom: 12,
   },
-  recentCard: {
-    marginBottom: 4,
-    marginTop: 4,
-    paddingHorizontal: 16,
+  recentHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    marginTop: 2,
   },
   recentListContent: {
     paddingBottom: 8,
+  },
+  historyListContent: {
+    paddingBottom: 8,
+    paddingTop: 0,
+  },
+  recentListContentWithMiniRecording: {
+    paddingBottom: 160,
+  },
+  meetingDateHeader: {
+    color: '#9ca3af',
+    fontSize: 12,
+    fontWeight: '900',
+    marginBottom: 8,
+    marginTop: 5,
+  },
+  historyDateHeader: {
+    marginBottom: 6,
+    marginTop: 0,
   },
   sectionTitle: {
     color: '#111827',
@@ -979,12 +1148,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 18,
-  },
-  historySub: {
-    color: '#8b95a7',
-    fontSize: 13,
-    fontWeight: '800',
+    marginBottom: 6,
   },
   selectToggle: {
     backgroundColor: '#ffffff',
@@ -995,7 +1159,7 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
   },
   selectToggleText: {
-    color: '#6657ff',
+    color: '#111827',
     fontSize: 13,
     fontWeight: '900',
   },
@@ -1019,7 +1183,7 @@ const styles = StyleSheet.create({
     borderColor: '#fecaca',
   },
   batchText: {
-    color: '#6657ff',
+    color: '#111827',
     fontSize: 13,
     fontWeight: '900',
   },
@@ -1041,7 +1205,139 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
   },
+  homeMeetingCard: {
+    backgroundColor: '#ffffff',
+    borderColor: '#f2f3f7',
+    borderRadius: 18,
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 15,
+    shadowColor: '#6b7280',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.06,
+    shadowRadius: 16,
+    elevation: 2,
+  },
+  homeMeetingTop: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'space-between',
+  },
+  homeMeetingTitle: {
+    color: '#111827',
+    flex: 1,
+    fontSize: 15.5,
+    fontWeight: '900',
+    lineHeight: 21,
+  },
+  homeMeetingMetaRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 5,
+    marginTop: 8,
+  },
+  homeMeetingMeta: {
+    color: '#8b95a7',
+    flex: 1,
+    fontSize: 11.5,
+    fontWeight: '800',
+    lineHeight: 16,
+  },
+  homeAnalyzingBlock: {
+    backgroundColor: '#f3f0ff',
+    borderRadius: 12,
+    gap: 3,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+  homePreviewBlock: {
+    gap: 6,
+    marginTop: 10,
+  },
+  previewRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  previewLabel: {
+    color: '#111827',
+    flexShrink: 0,
+    fontSize: 12,
+    fontWeight: '900',
+    lineHeight: 18,
+  },
+  previewText: {
+    color: '#111827',
+    flex: 1,
+    fontSize: 12,
+    fontWeight: '700',
+    lineHeight: 18,
+  },
+  homeFailedBlock: {
+    backgroundColor: '#fff1f2',
+    borderRadius: 12,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+  failedHint: {
+    color: '#ef4444',
+    fontSize: 11.5,
+    fontWeight: '800',
+    lineHeight: 17,
+  },
+  homePendingHint: {
+    color: '#8b95a7',
+    fontSize: 11.5,
+    fontWeight: '800',
+    lineHeight: 17,
+    marginTop: 10,
+  },
+  homeMeetingFooter: {
+    alignItems: 'center',
+    borderTopColor: '#f1f2f6',
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 12,
+    paddingTop: 12,
+  },
+  summaryState: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    gap: 4,
+  },
+  summaryStateText: {
+    color: '#2B6CFF',
+    flexShrink: 1,
+    fontSize: 12,
+    fontWeight: '900',
+  },
+  summaryStateTextFailed: {
+    color: '#ef4444',
+  },
+  actionCountBadge: {
+    backgroundColor: '#f3f4f6',
+    borderRadius: 999,
+    paddingHorizontal: 9,
+    paddingVertical: 5,
+  },
+  actionCountBadgeActive: {
+    backgroundColor: '#fff4e8',
+  },
+  actionCountText: {
+    color: '#8b95a7',
+    fontSize: 10.5,
+    fontWeight: '900',
+  },
+  actionCountTextActive: {
+    color: '#f97316',
+  },
   swipeRow: {
+    marginBottom: 12,
     overflow: 'hidden',
     position: 'relative',
   },
@@ -1049,7 +1345,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ef4444',
     borderRadius: 18,
-    bottom: 8,
+    bottom: 0,
     justifyContent: 'center',
     position: 'absolute',
     right: 0,
@@ -1183,10 +1479,21 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
   statusBadge: {
+    alignItems: 'center',
     borderRadius: 999,
+    flexDirection: 'row',
+    gap: 4,
     marginTop: 1,
     paddingHorizontal: 9,
     paddingVertical: 5,
+  },
+  cardFlushBottom: {
+    marginBottom: 0,
+  },
+  statusSpinner: {
+    height: 11,
+    transform: [{ scale: 0.68 }],
+    width: 11,
   },
   statusText: {
     fontSize: 11,

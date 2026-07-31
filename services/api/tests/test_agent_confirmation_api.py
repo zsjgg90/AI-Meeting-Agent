@@ -6,13 +6,15 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, select
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.compiler import compiles
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from app.authoritative_state import DatabaseAuthoritativeStateProvider
 from app.action_item_scope_backfill import backfill_action_item_scopes, rollback_action_item_scope_backfill
 from app.agent_command_executor import dry_run_command, execute_command_in_transaction, rehearse_command_transaction, rollback_command_in_transaction
 from app.agent_confirmation_service import approve_proposal, recover_duplicate_after_integrity_error
+from app.agent_proposal_generation import generate_action_item_proposals_for_meeting
+from app.agent_auth_service import create_local_agent_session
 from app.agent_security import AgentPrincipal, get_agent_principal, hash_agent_token
 from app.agent_write_control import AgentActionProposal, AgentProposalConfirmation, build_idempotency_key
 from app.config import Settings
@@ -31,6 +33,7 @@ from app.models import (
     MeetingSummary,
     Requirement,
     Risk,
+    TranscriptSegment,
 )
 
 
@@ -220,7 +223,7 @@ class AgentConfirmationApiTest(unittest.TestCase):
                 user_id=user.id,
                 token_hash=hash_agent_token(token),
                 authentication_source="phase11_test_bearer",
-                expires_at=expires_at or datetime(2026, 7, 30, 12, 0, tzinfo=timezone.utc),
+                expires_at=expires_at or datetime.now(timezone.utc) + timedelta(days=1),
                 revoked_at=revoked_at,
             )
             db.merge(user)
@@ -387,6 +390,95 @@ class AgentConfirmationApiTest(unittest.TestCase):
         self.assertEqual(body["proposal"]["status"], "rejected")
         self.assertIsNone(body["command"])
         self.assertEqual(body["audit"]["reasons"], ["human_rejected"])
+
+    def test_review_overview_returns_pending_and_recent_records_without_sensitive_metadata(self) -> None:
+        self.create_action_proposal(evidence=[{
+            "source_type": "transcript",
+            "source_meeting_id": "meeting-agent-phase8",
+            "source_text": "Bob takes over the export permission configuration.",
+            "speaker": "Bob",
+            "token": "secret-token",
+        }])
+        self.create_action_proposal(proposal_id="proposal-rejected", title="Reject update")
+        rejected = self.client.post("/agent/action-proposals/proposal-rejected/reject", json={"comment": "not enough evidence"})
+
+        response = self.client.get("/agent/review/overview")
+
+        self.assertEqual(rejected.status_code, 200, rejected.text)
+        self.assertEqual(response.status_code, 200, response.text)
+        body = response.json()
+        self.assertEqual(body["pending_count"], 1)
+        self.assertEqual(len(body["pending_proposals"]), 1)
+        self.assertEqual(body["pending_proposals"][0]["risk_label"], "需要注意")
+        self.assertEqual(body["pending_proposals"][0]["changes"][0]["label"], "负责人")
+        self.assertEqual(body["pending_proposals"][0]["evidence"]["speaker"], "Bob")
+        self.assertNotIn("secret-token", response.text)
+        self.assertEqual(len(body["recent_records"]), 1)
+        self.assertEqual(body["recent_records"][0]["status_label"], "已拒绝")
+
+    def test_review_records_support_pagination_status_filter_and_sort(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post("/agent/action-proposals/proposal-action-1/approve", json={"comment": "approved"})
+        self.assertEqual(approved.status_code, 200, approved.text)
+        self.create_action_proposal(proposal_id="proposal-rejected", title="Reject update")
+        self.client.post("/agent/action-proposals/proposal-rejected/reject", json={"comment": "no"})
+        self.create_action_proposal(proposal_id="proposal-expired", title="Expired update")
+        db = self.SessionLocal()
+        try:
+            expired = db.get(AgentActionProposalRecord, "proposal-expired")
+            expired.status = "expired"
+            db.commit()
+        finally:
+            db.close()
+
+        first_page = self.client.get("/agent/review/records", params={"status": "all", "sort": "oldest", "page": 1, "page_size": 2})
+        rejected = self.client.get("/agent/review/records", params={"status": "rejected", "page": 1, "page_size": 10})
+        pending_effective = self.client.get("/agent/review/records", params={"status": "pending_effective"})
+
+        self.assertEqual(first_page.status_code, 200, first_page.text)
+        self.assertEqual(first_page.json()["total"], 3)
+        self.assertEqual(len(first_page.json()["items"]), 2)
+        self.assertTrue(first_page.json()["has_more"])
+        self.assertEqual(rejected.status_code, 200, rejected.text)
+        self.assertEqual(rejected.json()["total"], 1)
+        self.assertEqual(rejected.json()["items"][0]["status_label"], "已拒绝")
+        self.assertEqual(pending_effective.status_code, 200, pending_effective.text)
+        self.assertEqual(pending_effective.json()["items"][0]["status_label"], "待生效")
+
+    def test_review_record_detail_returns_confirmation_command_audit_and_write_scope(self) -> None:
+        self.create_action_proposal()
+        approved = self.client.post("/agent/action-proposals/proposal-action-1/approve", json={"comment": "approved"})
+        self.assertEqual(approved.status_code, 200, approved.text)
+
+        response = self.client.get("/agent/review/records/proposal-action-1")
+
+        self.assertEqual(response.status_code, 200, response.text)
+        body = response.json()
+        self.assertEqual(body["proposal"]["id"], "proposal-action-1")
+        self.assertEqual(body["confirmation"]["decision"], "approved")
+        self.assertEqual(body["command"]["status"], "ready")
+        self.assertNotIn("idempotency_key", body["command"])
+        self.assertNotIn("audit_context", body["command"])
+        self.assertEqual(body["before_after"][0]["before"], "Alice")
+        self.assertEqual(body["before_after"][0]["after"], "Bob")
+        self.assertFalse(body["writes_performed"])
+        self.assertEqual(body["object_version_before"], "1")
+
+    def test_review_records_apply_tenant_project_scope_and_auth_fail_closed(self) -> None:
+        self.create_action_proposal()
+        headers = self.use_production_token_auth()
+        authorized = self.client.get("/agent/review/overview", headers=headers)
+        self.set_principal(project_ids=("other-project",))
+        forbidden_detail = self.client.get("/agent/review/records/proposal-action-1")
+        filtered = self.client.get("/agent/review/overview")
+        self.app.dependency_overrides.pop(get_agent_principal, None)
+        unauthorized = self.client.get("/agent/review/overview")
+
+        self.assertEqual(authorized.status_code, 200, authorized.text)
+        self.assertEqual(forbidden_detail.status_code, 403)
+        self.assertEqual(filtered.status_code, 200, filtered.text)
+        self.assertEqual(filtered.json()["pending_count"], 0)
+        self.assertEqual(unauthorized.status_code, 401)
 
     def test_unauthorized_confirmation_is_rejected(self) -> None:
         self.create_action_proposal()
@@ -709,6 +801,9 @@ class AgentConfirmationApiTest(unittest.TestCase):
         self.assertIn("/meetings/{meeting_id}/summary", openapi["paths"])
         self.assertIn("/agent/action-proposals", openapi["paths"])
         self.assertIn("/agent/action-proposals/{proposal_id}/approve", openapi["paths"])
+        self.assertIn("/agent/review/overview", openapi["paths"])
+        self.assertIn("/agent/review/records", openapi["paths"])
+        self.assertIn("/agent/review/records/{record_id}", openapi["paths"])
 
     def test_no_model_network_or_chroma_dependency_is_used(self) -> None:
         self.create_action_proposal()
@@ -1688,6 +1783,210 @@ class AgentConfirmationApiTest(unittest.TestCase):
             self.assertEqual(item.owner, "Alice")
         finally:
             db.close()
+
+    def test_local_agent_login_creates_session_and_authorizes_review_overview(self) -> None:
+        self.app.dependency_overrides.pop(get_agent_principal, None)
+        with patch(
+            "app.agent_auth_service.get_settings",
+            return_value=Settings(
+                agent_local_auth_enabled=True,
+                agent_local_auth_tenant_id="tenant-1",
+                agent_local_auth_project_id="project-1",
+                agent_local_auth_token_ttl_hours=2,
+            ),
+        ):
+            response = self.client.post("/agent/auth/login", json={"display_name": "Local Reviewer"})
+
+        self.assertEqual(response.status_code, 200, response.text)
+        body = response.json()
+        self.assertTrue(body["token"])
+        self.assertEqual(body["tenant_id"], "tenant-1")
+        self.assertEqual(body["project_scope"], ["project-1"])
+        self.assertIn("proposal_review", body["permissions"])
+
+        overview = self.client.get("/agent/review/overview", headers={"Authorization": f"Bearer {body['token']}"})
+        self.assertEqual(overview.status_code, 200, overview.text)
+
+        logout = self.client.post("/agent/auth/logout", headers={"Authorization": f"Bearer {body['token']}"})
+        self.assertEqual(logout.status_code, 200, logout.text)
+        expired = self.client.get("/agent/review/overview", headers={"Authorization": f"Bearer {body['token']}"})
+        self.assertEqual(expired.status_code, 401, expired.text)
+
+    def test_local_agent_login_is_fail_closed_by_default(self) -> None:
+        self.app.dependency_overrides.pop(get_agent_principal, None)
+        response = self.client.post("/agent/auth/login", json={"display_name": "Local Reviewer"})
+        self.assertEqual(response.status_code, 403, response.text)
+
+    def test_real_meeting_owner_change_generates_idempotent_proposal(self) -> None:
+        db = self.SessionLocal()
+        try:
+            self._seed_real_meeting_change(db)
+            first = generate_action_item_proposals_for_meeting(db, "real-meeting-new", persist=True)
+            second = generate_action_item_proposals_for_meeting(db, "real-meeting-new", persist=True)
+            generated = [item for item in first if item.generated]
+            duplicate = [item for item in second if item.skip_reason == "duplicate_proposal"]
+            proposal = db.get(AgentActionProposalRecord, generated[0].proposal_id)
+
+            self.assertEqual(len(generated), 1)
+            self.assertEqual(len(duplicate), 1)
+            self.assertEqual(proposal.target_object_type, "AgentActionItem")
+            self.assertEqual(proposal.target_object_id, "historical-action-owner")
+            self.assertEqual(proposal.status, "pending")
+            self.assertEqual(proposal.proposed_changes["owner"], {"from": "前端", "to": "后端"})
+            self.assertEqual(proposal.metadata_["source_meeting_id"], "real-meeting-new")
+            self.assertIn("后端", proposal.evidence[0]["source_text"])
+        finally:
+            db.close()
+
+    def test_real_meeting_new_or_unchanged_or_unsupported_items_do_not_generate_proposals(self) -> None:
+        db = self.SessionLocal()
+        try:
+            self._seed_real_meeting_change(db, include_changed_item=False)
+            unchanged = ActionItem(
+                id="real-action-unchanged",
+                tenant_id="tenant-1",
+                project_id="project-1",
+                meeting_id="real-meeting-new",
+                summary_id="real-summary-new",
+                task="接口联调联系人",
+                owner="前端",
+                due_date="周三",
+                priority="medium",
+                status="open",
+                source_text="接口联调联系人仍由前端负责，周三完成。",
+            )
+            new_item = ActionItem(
+                id="real-action-new",
+                tenant_id="tenant-1",
+                project_id="project-1",
+                meeting_id="real-meeting-new",
+                summary_id="real-summary-new",
+                task="全新验收清单整理",
+                owner="后端",
+                due_date="周五",
+                priority="medium",
+                status="open",
+                source_text="全新验收清单由后端周五整理。",
+            )
+            insufficient = ActionItem(
+                id="real-action-insufficient",
+                tenant_id="tenant-1",
+                project_id="project-1",
+                meeting_id="real-meeting-new",
+                summary_id="real-summary-new",
+                task="接口响应优化",
+                owner="后端",
+                due_date="周五",
+                priority="medium",
+                status="open",
+                source_text="接口响应优化需要继续跟进。",
+            )
+            historical_insufficient = ActionItem(
+                id="historical-action-insufficient",
+                tenant_id="tenant-1",
+                project_id="project-1",
+                meeting_id="real-meeting-old",
+                summary_id="real-summary-old",
+                task="接口响应优化",
+                owner="前端",
+                due_date="周三",
+                priority="medium",
+                status="open",
+                source_text="接口响应优化由前端周三完成。",
+            )
+            db.add_all([unchanged, new_item, insufficient, historical_insufficient])
+            db.commit()
+
+            diagnostics = generate_action_item_proposals_for_meeting(db, "real-meeting-new", persist=True)
+            reasons = {item.action_item_id: item.skip_reason for item in diagnostics}
+            self.assertEqual(reasons["real-action-unchanged"], "no_field_change")
+            self.assertEqual(reasons["real-action-new"], "no_historical_match")
+            self.assertEqual(reasons["real-action-insufficient"], "insufficient_evidence")
+            self.assertFalse(any(item.generated for item in diagnostics))
+        finally:
+            db.close()
+
+    def _seed_real_meeting_change(self, db: Session, *, include_changed_item: bool = True) -> None:
+        old_meeting = Meeting(id="real-meeting-old", title="真实历史会", status="completed")
+        old_summary = MeetingSummary(
+            id="real-summary-old",
+            meeting_id=old_meeting.id,
+            overview="old",
+            agenda=[],
+            topics=[],
+            speaker_summaries=[],
+            decisions=[],
+            risks=[],
+            open_questions=[],
+            next_steps=[],
+            meeting_agenda=[],
+            meeting_summary="old",
+            key_conclusions=[],
+            unresolved_issues=[],
+            risks_and_focus=[],
+        )
+        historical = ActionItem(
+            id="historical-action-owner",
+            tenant_id="tenant-1",
+            project_id="project-1",
+            meeting_id=old_meeting.id,
+            summary_id=old_summary.id,
+            task="接口联调联系人",
+            owner="前端",
+            due_date="周三",
+            priority="medium",
+            status="open",
+            source_text="接口联调联系人由前端负责，周三完成。",
+            version=3,
+        )
+        new_meeting = Meeting(id="real-meeting-new", title="真实变更会", status="completed")
+        new_summary = MeetingSummary(
+            id="real-summary-new",
+            meeting_id=new_meeting.id,
+            overview="new",
+            agenda=[],
+            topics=[],
+            speaker_summaries=[],
+            decisions=[],
+            risks=[],
+            open_questions=[],
+            next_steps=[],
+            meeting_agenda=[],
+            meeting_summary="new",
+            key_conclusions=[],
+            unresolved_issues=[],
+            risks_and_focus=[],
+        )
+        segment = TranscriptSegment(
+            id="real-segment-owner",
+            meeting_id=new_meeting.id,
+            audio_file_id=None,
+            segment_index=1,
+            start_time=1.0,
+            end_time=5.0,
+            text="接口联调联系人确认改为后端负责，截止时间仍是周三。",
+            speaker_label="speaker_1",
+            speaker_name="张三",
+        )
+        rows = [old_meeting, old_summary, historical, new_meeting, new_summary, segment]
+        if include_changed_item:
+            rows.append(
+                ActionItem(
+                    id="real-action-owner",
+                    tenant_id="tenant-1",
+                    project_id="project-1",
+                    meeting_id=new_meeting.id,
+                    summary_id=new_summary.id,
+                    task="接口联调联系人",
+                    owner="后端",
+                    due_date="周三",
+                    priority="medium",
+                    status="open",
+                    source_text="接口联调联系人确认改为后端负责，截止时间仍是周三。",
+                )
+            )
+        db.add_all(rows)
+        db.commit()
 
     def assert_no_approved_confirmation(self) -> None:
         db = self.SessionLocal()

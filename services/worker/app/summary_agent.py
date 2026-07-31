@@ -26,6 +26,7 @@ from app.meeting_analysis_schema import (
     TopicChunk,
     UnresolvedIssue,
 )
+from app.meeting_title import maybe_apply_ai_title
 from app.models import ActionItem, Meeting, MeetingSummary, TranscriptSegment
 from app.secrets import resolve_openai_api_key
 
@@ -1058,6 +1059,11 @@ def analyze_segments_with_retry(segments: list[TranscriptSegment]) -> tuple[Meet
 def analysis_to_legacy_payload(analysis: MeetingAnalysisSchema) -> dict[str, Any]:
     return {
         "overview": analysis.meeting_summary,
+        "meeting_title": analysis.meeting_title,
+        "meeting_type": analysis.meeting_type,
+        "meeting_type_confidence": analysis.meeting_type_confidence,
+        "meeting_title_candidate": analysis.meeting_title_candidate,
+        "title_basis": analysis.title_basis,
         "agenda": [item.model_dump() for item in analysis.meeting_agenda],
         "topics": [item.model_dump() for item in analysis.topics],
         "speaker_summaries": [],
@@ -1108,6 +1114,7 @@ def save_summary(db: Session, meeting: Meeting, payload: dict[str, Any]) -> Meet
     db.flush()
 
     metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
+    maybe_apply_ai_title(meeting, payload)
 
     summary = MeetingSummary(
         meeting_id=meeting.id,
@@ -1225,6 +1232,11 @@ def qwen_rag_result_to_payload(result: dict[str, Any]) -> dict[str, Any]:
 
     return {
         "overview": meeting_summary,
+        "meeting_title": str(result.get("meeting_title") or "").strip(),
+        "meeting_type": str(result.get("meeting_type") or "").strip(),
+        "meeting_type_confidence": result.get("meeting_type_confidence"),
+        "meeting_title_candidate": str(result.get("meeting_title_candidate") or "").strip(),
+        "title_basis": result.get("title_basis") if isinstance(result.get("title_basis"), list) else [],
         "agenda": meeting_agenda,
         "topics": [],
         "speaker_summaries": [],

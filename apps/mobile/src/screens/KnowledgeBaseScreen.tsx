@@ -1,168 +1,219 @@
-import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, RefreshControl, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
+import {
+  Alert,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
-import { getKnowledgeOverview, KnowledgeOverview } from '../api';
-import { KnowledgeErrorState } from '../components/KnowledgeErrorState';
-import { LucideIcon, LucideIconName } from '../components/LucideIcon';
+import { LucideIcon } from '../components/LucideIcon';
 
 type Props = {
-  onOpenMeetings: () => void;
   onOpenDecisions: () => void;
   onOpenIssueRisks: () => void;
   onOpenSearch: (query?: string) => void;
+  onOpenImportAudio: () => void;
 };
 
-type OverviewCountKey = 'meeting_count' | 'decision_count' | 'unresolved_issue_count' | 'risk_count' | 'all_count';
-
-const entries: Array<{
-  key: string;
-  title: string;
-  subtitle: string;
-  icon: LucideIconName;
-  color: string;
-  bg: string;
-  countKey?: OverviewCountKey;
-}> = [
-  { key: 'meetings', title: '会议记录', subtitle: '查看所有会议沉淀', icon: 'file-text', color: '#6657ff', bg: '#f0efff', countKey: 'meeting_count' },
-  { key: 'decisions', title: '关键决策', subtitle: '查看团队重要决策', icon: 'circle-check-big', color: '#6657ff', bg: '#f0efff', countKey: 'decision_count' },
-  { key: 'issues', title: '问题与风险', subtitle: '查看问题与风险', icon: 'triangle-alert', color: '#f97316', bg: '#fff7ed' },
-  { key: 'all', title: '全部知识', subtitle: '搜索全部知识内容', icon: 'search', color: '#6657ff', bg: '#f0efff', countKey: 'all_count' },
+const quickQuestions = [
+  '最近会议重点是什么？',
+  '帮我整理最近一周待办事项，并按负责人和优先级列出',
+  '总结最近所有文件的核心结论和趋势变化',
 ];
 
-export function KnowledgeBaseScreen({ onOpenMeetings, onOpenDecisions, onOpenIssueRisks, onOpenSearch }: Props) {
-  const [overview, setOverview] = useState<KnowledgeOverview | null>(null);
+export function KnowledgeBaseScreen({ onOpenDecisions, onOpenIssueRisks, onOpenSearch, onOpenImportAudio }: Props) {
   const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitNotice, setSubmitNotice] = useState<string | null>(null);
 
-  const load = useCallback(async (refresh = false) => {
-    try {
-      refresh ? setRefreshing(true) : setLoading(true);
-      setError(null);
-      setOverview(await getKnowledgeOverview());
-    } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '知识库加载失败');
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    load();
-  }, [load]);
-
-  function openEntry(key: string) {
-    if (key === 'meetings') onOpenMeetings();
-    if (key === 'decisions') onOpenDecisions();
-    if (key === 'issues') onOpenIssueRisks();
-    if (key === 'all') onOpenSearch();
+  function fillQuestion(question: string) {
+    if (submitting) return;
+    setQuery(question);
+    setSubmitNotice('已填入快捷问题。当前版本暂未开放知识库问答，可使用知识搜索查看相关会议证据。');
   }
 
-  function entryCount(entry: (typeof entries)[number]) {
-    if (!overview) return 0;
-    if (entry.key === 'issues') return `${overview.unresolved_issue_count} / ${overview.risk_count}`;
-    return entry.countKey ? overview[entry.countKey] : 0;
+  function submitQuestion() {
+    const clean = query.trim();
+    if (!clean || submitting) return;
+    setSubmitting(true);
+    setSubmitNotice('当前版本暂未开放知识库问答。已为你保留问题，可进入知识搜索查看真实会议知识条目。');
+    setTimeout(() => setSubmitting(false), 250);
   }
 
-  return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => load(true)} tintColor="#6657ff" />}
-    >
-      <View style={styles.header}>
-        <Text style={styles.title}>知识库</Text>
-        <Text style={styles.subtitle}>沉淀会议知识，连接团队智慧</Text>
-      </View>
+  function openHistory() {
+    Alert.alert('暂未开放', '当前版本没有真实问答历史或持久化搜索历史。');
+  }
 
-      {loading ? <ActivityIndicator color="#6657ff" /> : null}
-      {error && !loading ? <KnowledgeErrorState message={error} onRetry={() => load()} /> : null}
+  function openVoiceInput() {
+    Alert.alert('暂未开放', '当前版本没有知识库语音问答输入，会议录音链路不会直接接入此输入框。');
+  }
 
-      {!error ? (
-        <View style={styles.entryGrid}>
-          {entries.map((entry) => (
-            <Pressable key={entry.key} onPress={() => openEntry(entry.key)} style={styles.entryCard}>
-              <View style={[styles.entryIcon, { backgroundColor: entry.bg }]}>
-                <LucideIcon name={entry.icon} color={entry.color} size={24} strokeWidth={2.3} />
+  function renderHeader() {
+    return (
+      <View style={styles.headerContent}>
+        <View style={styles.topBar}>
+          <Text style={styles.brand}>MeetMind AI</Text>
+          <Pressable onPress={openHistory} style={styles.historyButton}>
+            <LucideIcon name="clock-3" color="#9ca3af" size={20} strokeWidth={2.2} />
+            <Text style={styles.historyText}>暂未开放</Text>
+          </Pressable>
+        </View>
+
+        <View style={styles.hero}>
+          <View style={styles.heroTitleRow}>
+            <Text style={styles.hi}>Hi</Text>
+            <View style={styles.botAvatar}>
+              <View style={styles.botAntenna} />
+              <View style={styles.botHead}>
+                <View style={styles.botFace}>
+                  <View style={styles.botEye} />
+                  <View style={styles.botEye} />
+                </View>
               </View>
-              <View style={styles.entryText}>
-                <Text style={styles.entryTitle}>{entry.title}</Text>
-                <Text style={styles.entrySub}>{entry.subtitle}</Text>
-              </View>
-              <Text style={[styles.entryCount, { color: entry.color }]}>{entryCount(entry)}</Text>
+            </View>
+          </View>
+          <Text style={styles.heroTitle}>会议达人，有什么吩咐？</Text>
+          <Text style={styles.heroText}>我可以帮你总结要点、整理待办、提炼结论、生成会议材料，也可以继续追问会议相关细节。</Text>
+        </View>
+
+        <View style={styles.quickSection}>
+          {quickQuestions.map((question) => (
+            <Pressable disabled={submitting} key={question} onPress={() => fillQuestion(question)} style={[styles.quickBubble, submitting ? styles.disabled : null]}>
+              <Text style={styles.quickText}>{question}</Text>
             </Pressable>
           ))}
         </View>
-      ) : null}
 
-      <View style={styles.searchPanel}>
-        <Text style={styles.searchTitle}>知识搜索</Text>
-        <View style={styles.searchBox}>
-          <LucideIcon name="search" color="#8b95a7" size={20} strokeWidth={2.2} />
-          <TextInput
-            value={query}
-            onChangeText={setQuery}
-            onSubmitEditing={() => onOpenSearch(query)}
-            placeholder="搜索会议、决策、问题、风险..."
-            placeholderTextColor="#9ca3af"
-            returnKeyType="search"
-            style={styles.searchInput}
-          />
-          <Pressable onPress={() => onOpenSearch(query)} style={styles.searchButton}>
-            <Text style={styles.searchButtonText}>搜索</Text>
+        <View style={styles.linkRow}>
+          <Pressable onPress={() => onOpenSearch(query)} style={styles.linkButton}>
+            <LucideIcon name="search" color="#2B6CFF" size={16} strokeWidth={2.2} />
+            <Text style={styles.linkText}>搜索知识</Text>
+          </Pressable>
+          <Pressable onPress={onOpenDecisions} style={styles.linkButton}>
+            <LucideIcon name="circle-check-big" color="#2B6CFF" size={16} strokeWidth={2.2} />
+            <Text style={styles.linkText}>关键决策</Text>
+          </Pressable>
+          <Pressable onPress={onOpenIssueRisks} style={styles.linkButton}>
+            <LucideIcon name="triangle-alert" color="#f97316" size={16} strokeWidth={2.2} />
+            <Text style={[styles.linkText, styles.warnLinkText]}>问题风险</Text>
           </Pressable>
         </View>
+
       </View>
-    </ScrollView>
+    );
+  }
+
+  return (
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
+      <FlatList
+        data={[]}
+        ListHeaderComponent={renderHeader}
+        contentContainerStyle={styles.content}
+        renderItem={null}
+      />
+
+      <View style={styles.inputPanel}>
+        {submitNotice ? <Text style={styles.notice}>{submitNotice}</Text> : null}
+        <View style={styles.inputRow}>
+          <Pressable onPress={openVoiceInput} style={styles.roundButton}>
+            <LucideIcon name="mic" color="#9ca3af" size={21} strokeWidth={2.2} />
+          </Pressable>
+          <TextInput
+            value={query}
+            onChangeText={(value) => {
+              setQuery(value);
+              if (submitNotice) setSubmitNotice(null);
+            }}
+            onSubmitEditing={submitQuestion}
+            placeholder="输入会议或知识库相关问题"
+            placeholderTextColor="#9ca3af"
+            multiline
+            returnKeyType="send"
+            style={styles.input}
+          />
+          {query.trim() ? (
+            <Pressable disabled={submitting} onPress={submitQuestion} style={[styles.sendButton, submitting ? styles.disabled : null]}>
+              <LucideIcon name="chevron-right" color="#ffffff" size={21} strokeWidth={2.6} />
+            </Pressable>
+          ) : (
+            <Pressable onPress={onOpenImportAudio} style={styles.roundButton}>
+              <LucideIcon name="image-plus" color="#6b7280" size={21} strokeWidth={2.2} />
+            </Pressable>
+          )}
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f7f8fc' },
-  content: { gap: 18, padding: 18, paddingBottom: 100 },
-  header: { gap: 8, paddingTop: 10 },
-  title: { color: '#111827', fontSize: 32, fontWeight: '900', letterSpacing: 0 },
-  subtitle: { color: '#667085', fontSize: 14, fontWeight: '700', lineHeight: 21 },
-  entryGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  entryCard: {
-    backgroundColor: '#ffffff',
-    borderColor: '#edf0f7',
-    borderRadius: 18,
-    borderWidth: 1,
-    gap: 12,
-    minHeight: 148,
-    padding: 14,
-    width: '48%',
-  },
-  entryIcon: { alignItems: 'center', borderRadius: 14, height: 42, justifyContent: 'center', width: 42 },
-  entryText: { flex: 1, gap: 5 },
-  entryTitle: { color: '#111827', fontSize: 15, fontWeight: '900' },
-  entrySub: { color: '#8b95a7', fontSize: 12, fontWeight: '700', lineHeight: 18 },
-  entryCount: { fontSize: 13, fontWeight: '900' },
-  searchPanel: {
-    backgroundColor: '#ffffff',
-    borderColor: '#edf0f7',
-    borderRadius: 20,
-    borderWidth: 1,
-    gap: 12,
-    marginTop: 8,
-    padding: 16,
-  },
-  searchTitle: { color: '#111827', fontSize: 17, fontWeight: '900' },
-  searchBox: {
+  container: { backgroundColor: '#f6f7fb', flex: 1 },
+  content: { gap: 12, paddingBottom: 136, paddingHorizontal: 20, paddingTop: 10 },
+  headerContent: { gap: 22 },
+  topBar: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
+  brand: { color: '#111827', fontSize: 21, fontWeight: '900', letterSpacing: 0 },
+  historyButton: {
     alignItems: 'center',
-    backgroundColor: '#f8f9ff',
-    borderColor: '#6657ff',
-    borderRadius: 18,
+    borderColor: '#edf0f7',
+    borderRadius: 999,
     borderWidth: 1,
     flexDirection: 'row',
-    gap: 8,
-    minHeight: 54,
-    paddingHorizontal: 13,
+    gap: 5,
+    minHeight: 38,
+    paddingHorizontal: 10,
   },
-  searchInput: { color: '#111827', flex: 1, fontSize: 14, minHeight: 48 },
-  searchButton: { backgroundColor: '#6657ff', borderRadius: 12, paddingHorizontal: 13, paddingVertical: 9 },
-  searchButtonText: { color: '#ffffff', fontSize: 12, fontWeight: '900' },
+  historyText: { color: '#9ca3af', fontSize: 11, fontWeight: '800' },
+  hero: { gap: 8, paddingTop: 8 },
+  heroTitleRow: { alignItems: 'center', flexDirection: 'row', gap: 13 },
+  hi: { color: '#111827', fontSize: 42, fontWeight: '900', letterSpacing: 0, lineHeight: 50 },
+  botAvatar: { alignItems: 'center', backgroundColor: '#e8f0fe', borderRadius: 25, height: 50, justifyContent: 'center', width: 50 },
+  botAntenna: { backgroundColor: '#2B6CFF', borderRadius: 2, height: 8, position: 'absolute', top: 5, width: 3 },
+  botHead: { alignItems: 'center', backgroundColor: '#ffffff', borderColor: '#d9e2f1', borderRadius: 17, borderWidth: 1, height: 31, justifyContent: 'center', marginTop: 7, width: 36 },
+  botFace: { alignItems: 'center', backgroundColor: '#111827', borderRadius: 12, flexDirection: 'row', gap: 6, height: 19, justifyContent: 'center', width: 26 },
+  botEye: { backgroundColor: '#2B6CFF', borderRadius: 4, height: 5, width: 5 },
+  heroTitle: { color: '#111827', fontSize: 24, fontWeight: '900', letterSpacing: 0, lineHeight: 31 },
+  heroText: { color: '#8b95a7', fontSize: 14, fontWeight: '700', lineHeight: 22, paddingRight: 10 },
+  quickSection: { gap: 11 },
+  quickBubble: { alignSelf: 'flex-start', backgroundColor: '#ffffff', borderColor: '#eef0f6', borderRadius: 18, borderTopLeftRadius: 4, borderWidth: 1, maxWidth: '100%', paddingHorizontal: 14, paddingVertical: 12 },
+  quickText: { color: '#273142', fontSize: 13, fontWeight: '800', lineHeight: 19 },
+  linkRow: { flexDirection: 'row', gap: 8 },
+  linkButton: { alignItems: 'center', backgroundColor: '#ffffff', borderColor: '#edf0f7', borderRadius: 14, borderWidth: 1, flex: 1, flexDirection: 'row', gap: 5, justifyContent: 'center', minHeight: 42, paddingHorizontal: 8 },
+  linkText: { color: '#2B6CFF', fontSize: 12, fontWeight: '900' },
+  warnLinkText: { color: '#f97316' },
+  inputPanel: {
+    backgroundColor: 'rgba(255,255,255,0.98)',
+    borderTopColor: '#eef0f6',
+    borderTopWidth: 1,
+    bottom: 0,
+    gap: 8,
+    left: 0,
+    paddingHorizontal: 14,
+    paddingTop: 10,
+    paddingBottom: 12,
+    position: 'absolute',
+    right: 0,
+  },
+  notice: { color: '#2B6CFF', fontSize: 12, fontWeight: '800', lineHeight: 17, paddingHorizontal: 5 },
+  inputRow: { alignItems: 'flex-end', flexDirection: 'row', gap: 9 },
+  roundButton: { alignItems: 'center', backgroundColor: '#ffffff', borderColor: '#e5e7eb', borderRadius: 22, borderWidth: 1, height: 44, justifyContent: 'center', width: 44 },
+  input: {
+    backgroundColor: '#f7f8fc',
+    borderColor: '#edf0f7',
+    borderRadius: 22,
+    borderWidth: 1,
+    color: '#111827',
+    flex: 1,
+    fontSize: 14,
+    maxHeight: 92,
+    minHeight: 44,
+    paddingHorizontal: 15,
+    paddingVertical: 11,
+  },
+  sendButton: { alignItems: 'center', backgroundColor: '#2B6CFF', borderRadius: 22, height: 44, justifyContent: 'center', width: 44 },
+  disabled: { opacity: 0.56 },
 });

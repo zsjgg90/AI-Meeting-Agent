@@ -7,24 +7,26 @@ type Props = {
   onBack: () => void;
   rightText?: string;
   onRightPress?: () => void;
+  accentColor?: string;
 };
 
-export function AppHeader({ title, canGoBack, onBack, rightText, onRightPress }: Props) {
+export function AppHeader({ title, canGoBack, onBack, rightText, onRightPress, accentColor }: Props) {
+  const nextAccentColor = accentColor || '#111827';
   return (
     <View style={styles.header}>
       {canGoBack ? (
         <Pressable onPress={onBack} style={styles.backButton}>
-          <LucideIcon name="chevron-left" color="#111827" size={22} strokeWidth={2.2} />
+          <LucideIcon name="chevron-left" color={nextAccentColor} size={22} strokeWidth={2.2} />
         </Pressable>
       ) : (
         <View style={styles.backButtonPlaceholder} />
       )}
       <View style={styles.titleWrap}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, accentColor ? { color: accentColor } : null]}>{title}</Text>
       </View>
       {rightText ? (
         <Pressable onPress={onRightPress} style={styles.rightButton}>
-          <Text style={styles.rightText}>{rightText}</Text>
+          <Text style={[styles.rightText, accentColor ? { color: accentColor } : null]}>{rightText}</Text>
         </Pressable>
       ) : (
         <View style={styles.backButtonPlaceholder} />
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     minWidth: 40,
   },
   rightText: {
-    color: '#6c4dff',
+    color: '#2B6CFF',
     fontSize: 14,
     fontWeight: '900',
   },

@@ -6,12 +6,14 @@ from pydantic import BaseModel, ConfigDict, Field, computed_field
 
 class MeetingCreate(BaseModel):
     title: str = Field(default="Untitled meeting", max_length=255)
+    title_source: str | None = Field(default=None, max_length=32)
     start_at: datetime | None = None
     end_at: datetime | None = None
     location: str | None = Field(default=None, max_length=255)
 
 
 class MeetingUpdate(BaseModel):
+    title: str | None = Field(default=None, max_length=255)
     start_at: datetime | None = None
     end_at: datetime | None = None
     location: str | None = Field(default=None, max_length=255)
@@ -118,6 +120,17 @@ class ActionItemRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class TaskAttachmentRead(BaseModel):
+    id: str
+    task_id: str
+    filename: str
+    content_type: str | None = None
+    file_size_bytes: int
+    download_url: str
+    url: str
+    uploaded_at: datetime
+
+
 class TaskListItem(BaseModel):
     id: str
     meeting_id: str
@@ -125,14 +138,18 @@ class TaskListItem(BaseModel):
     task: str
     owner: str | None = None
     owner_name: str | None = None
+    description: str | None = None
     due_date: str | None = None
     deadline: str | None = None
     priority: str | None = None
+    reminder_offset_minutes: int | None = None
+    reminder_channel: str | None = None
     status: str
     source: str | None = None
     source_text: str | None = None
     source_segment_id: str | None = None
     confidence: float | None = None
+    attachments: list[TaskAttachmentRead] = []
     created_at: datetime
     updated_at: datetime
 
@@ -143,6 +160,22 @@ class TaskListRead(BaseModel):
     limit: int
     offset: int
     has_more: bool
+
+
+class TaskStatusUpdate(BaseModel):
+    status: str
+
+
+class TaskUpdate(BaseModel):
+    task: str | None = Field(default=None, max_length=1000)
+    description: str | None = Field(default=None, max_length=5000)
+    owner: str | None = Field(default=None, max_length=255)
+    due_date: str | None = Field(default=None, max_length=64)
+    priority: str | None = Field(default=None, max_length=32)
+    reminder_offset_minutes: int | None = None
+    reminder_channel: str | None = Field(default=None, max_length=32)
+
+
 
 
 class KnowledgeOverviewRead(BaseModel):
@@ -270,6 +303,7 @@ class MeetingChunkRead(BaseModel):
 class MeetingRead(BaseModel):
     id: str
     title: str
+    title_source: str = "fallback"
     status: str
     start_at: datetime | None = None
     end_at: datetime | None = None
@@ -291,6 +325,7 @@ class MeetingRead(BaseModel):
 class MeetingListItem(BaseModel):
     id: str
     title: str
+    title_source: str = "fallback"
     status: str
     start_at: datetime | None = None
     end_at: datetime | None = None
@@ -304,6 +339,7 @@ class MeetingListItem(BaseModel):
 class MeetingCreated(BaseModel):
     id: str
     title: str
+    title_source: str = "fallback"
     status: str
 
 
@@ -392,6 +428,54 @@ class AgentActionProposalRead(BaseModel):
     updated_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class AgentLoginRequest(BaseModel):
+    display_name: str | None = Field(default=None, max_length=255)
+
+
+class AgentLoginRead(BaseModel):
+    token: str
+    token_type: str = "bearer"
+    expires_at: datetime
+    user_id: str
+    display_name: str
+    tenant_id: str
+    project_scope: list[str]
+    permissions: list[str]
+
+
+class AgentSessionRead(BaseModel):
+    user_id: str
+    display_name: str
+    tenant_id: str
+    project_scope: list[str]
+    permissions: list[str]
+    authentication_source: str
+
+
+class AgentLogoutRead(BaseModel):
+    status: str
+    revoked: bool = False
+
+
+class AgentProposalGenerationDiagnosticRead(BaseModel):
+    action_item_id: str
+    task: str
+    matched_object_id: str | None = None
+    match_reason: str = ""
+    confidence: float = 0.0
+    field_changes: dict[str, Any] = Field(default_factory=dict)
+    evidence: list[dict[str, Any]] = Field(default_factory=list)
+    generated: bool = False
+    proposal_id: str | None = None
+    skip_reason: str | None = None
+
+
+class AgentProposalGenerationResponse(BaseModel):
+    meeting_id: str
+    diagnostics: list[AgentProposalGenerationDiagnosticRead]
+    generated_count: int
 
 
 class AgentProposalConfirmationRequest(BaseModel):
@@ -547,3 +631,110 @@ class AgentPreflightRead(BaseModel):
     can_enter_grey: bool
     hard_failures: list[str] = Field(default_factory=list)
     checks: dict[str, dict[str, Any]]
+
+
+class AgentReviewChangeRead(BaseModel):
+    field: str
+    label: str
+    before: str | None = None
+    after: str | None = None
+
+
+class AgentReviewEvidenceRead(BaseModel):
+    source_text: str
+    speaker: str | None = None
+    source_meeting_id: str | None = None
+    source_meeting_title: str | None = None
+    source_meeting_time: datetime | None = None
+    source_segment_id: str | None = None
+
+
+class AgentReviewProposalCardRead(BaseModel):
+    id: str
+    action_type: str
+    action_label: str
+    target_object_type: str
+    target_object_id: str | None = None
+    target_title: str
+    source_meeting_title: str | None = None
+    source_meeting_time: datetime | None = None
+    risk_level: str
+    risk_label: str
+    status: str
+    status_label: str
+    changes: list[AgentReviewChangeRead]
+    evidence: AgentReviewEvidenceRead | None = None
+    created_at: datetime
+    updated_at: datetime
+    expires_at: datetime | None = None
+
+
+class AgentReviewRecordRead(BaseModel):
+    id: str
+    proposal_id: str
+    command_id: str | None = None
+    action_type: str
+    action_label: str
+    target_object_type: str
+    target_object_id: str | None = None
+    target_title: str
+    change_summary: str
+    handled_at: datetime
+    status: str
+    status_label: str
+    reason_preview: str | None = None
+
+
+class AgentReviewOverviewRead(BaseModel):
+    pending_count: int
+    pending_proposals: list[AgentReviewProposalCardRead]
+    recent_records: list[AgentReviewRecordRead]
+
+
+class AgentReviewRecordsRead(BaseModel):
+    items: list[AgentReviewRecordRead]
+    total: int
+    page: int
+    page_size: int
+    has_more: bool
+
+
+class AgentReviewAuditTimelineItemRead(BaseModel):
+    id: str
+    result: str
+    result_label: str
+    decision: str
+    reviewer: str
+    operation: str
+    reasons: list[str] = Field(default_factory=list)
+    writes_performed: bool = False
+    created_at: datetime
+
+
+class AgentReviewCommandRead(BaseModel):
+    id: str
+    proposal_id: str
+    target_object_type: str
+    target_object_id: str
+    operation: str
+    expected_version: str | None = None
+    changes: dict[str, Any]
+    status: str
+    created_at: datetime
+
+
+class AgentReviewRecordDetailRead(BaseModel):
+    id: str
+    proposal: AgentReviewProposalCardRead
+    confirmation: AgentProposalConfirmationRead | None = None
+    command: AgentReviewCommandRead | None = None
+    before_after: list[AgentReviewChangeRead]
+    evidence: AgentReviewEvidenceRead | None = None
+    reviewer: str | None = None
+    executor: str | None = None
+    audit_timeline: list[AgentReviewAuditTimelineItemRead]
+    reject_reason: str | None = None
+    rollback_reason: str | None = None
+    writes_performed: bool = False
+    object_version_before: str | None = None
+    object_version_after: str | None = None

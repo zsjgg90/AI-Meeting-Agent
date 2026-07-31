@@ -21,6 +21,7 @@ class Meeting(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
     title: Mapped[str] = mapped_column(String(255))
+    title_source: Mapped[str] = mapped_column(String(32), default="fallback", index=True)
     status: Mapped[str] = mapped_column(String(32), default="created", index=True)
     start_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     end_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -145,9 +146,12 @@ class ActionItem(Base):
     task: Mapped[str] = mapped_column(Text)
     owner: Mapped[str | None] = mapped_column(String(255), nullable=True)
     owner_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
     due_date: Mapped[str | None] = mapped_column(String(64), nullable=True)
     deadline: Mapped[str | None] = mapped_column(String(64), nullable=True)
     priority: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    reminder_offset_minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    reminder_channel: Mapped[str | None] = mapped_column(String(32), nullable=True)
     status: Mapped[str] = mapped_column(String(32), default="open")
     version: Mapped[int] = mapped_column(Integer, default=1)
     source: Mapped[str | None] = mapped_column(Text, nullable=True)
@@ -159,6 +163,21 @@ class ActionItem(Base):
 
     meeting: Mapped[Meeting] = relationship(back_populates="action_items")
     summary: Mapped[MeetingSummary | None] = relationship(back_populates="action_items")
+    attachments: Mapped[list["TaskAttachment"]] = relationship(back_populates="task", cascade="all, delete-orphan")
+
+
+class TaskAttachment(Base):
+    __tablename__ = "task_attachments"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    task_id: Mapped[str] = mapped_column(ForeignKey("action_items.id"), index=True)
+    filename: Mapped[str] = mapped_column(String(255))
+    content_type: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    path: Mapped[str] = mapped_column(Text)
+    file_size_bytes: Mapped[int] = mapped_column(BigInteger)
+    uploaded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+    task: Mapped[ActionItem] = relationship(back_populates="attachments")
 
 
 class MeetingKnowledgeItem(Base):

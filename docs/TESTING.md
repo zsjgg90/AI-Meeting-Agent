@@ -15,7 +15,9 @@ Default checks:
 3. Run API contract tests.
 4. Run Worker unit tests.
 5. Run Mobile TypeScript typecheck.
-6. Run the mobile Knowledge Base static UI check.
+6. Run mobile static UI checks, including Knowledge Base entry, Agent review,
+   meeting detail, history, recording upload, and AI processing checks.
+7. Run offline Evaluation System unit tests.
 
 Optional health checks against already-running local services:
 
@@ -53,9 +55,25 @@ npm run typecheck
 npm run test:numbered-list
 npm run test:knowledge-base-ui
 npm run test:agent-review-ui
-node apps/mobile/scripts/test-meeting-history-ui.js
-node apps/mobile/scripts/test-recording-upload-ui.js
+npm run test:meeting-detail-ui
+npm run test:meeting-history-ui
+npm run test:recording-upload-ui
 ```
+
+Agent review auth/proposal checks:
+
+```powershell
+cd services\api
+.\.venv\Scripts\python.exe -m unittest tests.test_agent_confirmation_api tests.test_api_contract
+.\.venv\Scripts\python.exe scripts\run_agent_review_postgres_acceptance.py
+.\.venv\Scripts\python.exe scripts\run_agent_phase15_final_acceptance.py
+```
+
+These checks cover local Agent session creation, 401/403 review access,
+evidence-bound real-meeting ActionItem proposal generation, idempotency,
+confirmation, controlled execute, duplicate execute, audit, rollback, and
+Requirement/Risk/Summary isolation. Real execution remains disabled by default
+and is enabled only by the controlled acceptance environment.
 
 ## Existing Worker Tests
 
@@ -131,6 +149,8 @@ Redis and Expo Metro are reported as optional local development checks.
 ## Existing Evaluation Scripts
 
 ```powershell
+python -m unittest tests.test_evaluate_meeting_analysis
+python scripts\evaluate_meeting_analysis.py expected.json actual.json --transcript transcript.txt --output data\eval\reports\baseline_v1.0_RC1.md
 python services/worker/scripts/run_eval_meeting_analyst.py
 python services/worker/scripts/run_semantic_event_boundary_eval.py
 python services/worker/scripts/test_semantic_event_extractor.py
@@ -142,6 +162,19 @@ python services/worker/scripts/run_meeting_pipeline_acceptance.py --limit 3 --ol
 python services/worker/scripts/run_real_production_analysis.py --meeting-id meeting_001 --ollama-timeout 600
 python services/worker/scripts/run_prompt_stability_eval.py --meeting-limit 4 --meeting-indices 1,2,3,4 --runs-per-meeting 2 --ollama-timeout 180
 ```
+
+`scripts/evaluate_meeting_analysis.py` is the Phase 0 offline evaluation
+framework. It reads already-produced `expected.json` and `actual.json` files,
+optionally reads a transcript evidence file, computes Decision Precision, Task
+Recall, Risk Recall, Hallucination Rate, and Evidence Coverage, and writes a
+Markdown report such as `data/eval/reports/baseline_v1.0_RC1.md`. The unit test
+`tests.test_evaluate_meeting_analysis` uses mock data only and does not call
+real Qwen3, Ollama, Chroma, PostgreSQL, API, Worker, ASR, semantic pipeline, or
+Expo.
+
+Evaluation schemas and metric notes live under `data/eval/schema/` and
+`data/eval/metrics/`. They are compatible with `meeting-analysis-v1` outputs
+but do not modify the production Worker schema.
 
 `test_topic_event_aggregator.py` uses hand-built `SemanticEvent` objects and
 does not call Qwen3, Ollama, Chroma, PostgreSQL, API, or Expo.
@@ -259,32 +292,47 @@ failure rollback, repeated execution idempotency, rollback success, rollback
 version-conflict rejection, duplicate rollback idempotency, tenant/project
 scope denial, and unchanged Requirement/Risk formal rows.
 
-`node apps/mobile/scripts/test-meeting-history-ui.js` performs a lightweight
-static check of the Expo meeting history loading path. It verifies bounded
-home/history meeting list requests, `limit`/`offset` usage, load-more controls,
-and mobile request timeout handling so one slow meeting-list or summary request
-cannot keep the history page loading indefinitely.
+`npm run test:agent-review-ui` performs a lightweight static check of the Expo
+AI assistant review UI. It verifies the productized home page, pending proposal
+cards, approve/reject second-confirmation text, recent records, all-records
+filter/sort/load-more controls, detail sections, audit timeline, write flag,
+object version display, Chinese error copy, and Agent review API helpers. It
+also checks that mobile request bodies do not submit `expected_object_version`,
+`idempotency_key`, Agent command changes, permissions, tenant/project scope, or
+reviewer identity. It also checks that Expo no longer sends `X-Agent-Reviewer`
+or `X-Agent-Permissions` headers; Agent identity and permissions must come from
+the API server-side auth adapter. The product UI must not expose internal
+dry-run, execute, rollback, pilot write result, or rollback preview controls.
 
-`node apps/mobile/scripts/test-recording-upload-ui.js` performs a lightweight
-static check of the Expo recording upload path. It verifies upload timeout
-handling, Expo `audio/x-m4a` metadata, Chinese upload error messages, and the
-record-upload-process-analyze call sequence.
+`npm run test:meeting-detail-ui` performs a lightweight static check of the
+Expo meeting detail summary card. It verifies that legacy summary fallback
+content does not display raw `result_source=...` technical metadata and that a
+meeting with available summary content does not show the summary card as
+failed only because the meeting row has stale `failed` or `summary_failed`
+status.
 
 `node apps/mobile/scripts/test-ai-processing-ui.js` performs a lightweight
 static check of the Expo AI processing screen. It verifies real task-driven
 step states, structured failure-stage display, safe Chinese error text, retry
 analysis without re-uploading audio, and non-technical error details.
 
-`npm run test:agent-review-ui` performs a lightweight static check of the Expo
-Agent Review workbench. It verifies the presence of proposal list/detail,
-approve/reject second-confirmation text, `conflict`/`expired`/`duplicate`
-status handling, dry-run action, audit records, rollback preview, writes
-performed display, and Agent API helpers. It also checks that mobile request
-bodies do not submit `expected_object_version` or `idempotency_key`. It also
-checks that mobile request bodies do not submit Agent command changes or
-permissions. It also checks that Expo no longer sends `X-Agent-Reviewer` or
-`X-Agent-Permissions` headers; Agent identity and permissions must come from
-the API server-side auth adapter.
+`npm run test:meeting-history-ui` performs a lightweight static check of the
+Expo meeting history loading path. It verifies bounded home/history meeting
+list requests, `limit`/`offset` usage, load-more controls, and mobile request
+timeout handling so one slow meeting-list or summary request cannot keep the
+history page loading indefinitely.
+
+`services/api/scripts/run_agent_review_postgres_acceptance.py` validates the
+Agent review aggregation PostgreSQL path that SQLite unit tests cannot fully
+prove. It seeds synthetic `agent_review_pg_` data, calls the real API routes
+with a Bearer token, checks overview, all-records pagination, rejected and
+pending-effective filters, detail DTO redaction, tenant/project isolation,
+unauthenticated 401 behavior, and unchanged formal `action_items` rows. Run it
+only against a disposable or explicitly safe PostgreSQL database:
+
+```powershell
+services\api\.venv\Scripts\python.exe services\api\scripts\run_agent_review_postgres_acceptance.py
+```
 
 `services/api/scripts/run_agent_phase8_postgres_checks.py` validates the Phase
 8 PostgreSQL path that SQLite cannot prove. It checks that Alembic has one

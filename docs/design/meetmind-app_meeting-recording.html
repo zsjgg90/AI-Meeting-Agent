@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>实时录音 - MeetMind AI</title>
+<!-- Tailwind CSS -->
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<!-- Iconify -->
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-h-screen;
+        }
+
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background-color: #F5F7FA;
+            margin: 20px auto;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 8px solid #1a1a1a;
+        }
+
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .recording-wave {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 24px;
+        }
+
+        .wave-bar {
+            width: 2px;
+            background-color: #2B6CFF;
+            border-radius: 1px;
+            animation: wave 1.2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 4px; }
+            50% { height: 20px; }
+        }
+
+        .breathing-text {
+            animation: breath 2s ease-in-out infinite;
+        }
+
+        @keyframes breath {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="is-mb-ai-setting">
+<div class="phone-container">
+<!-- 状态栏 -->
+<div class="flex justify-between items-center px-8 pt-4 pb-2 text-xs font-semibold">
+<span>18:40</span>
+<div class="flex items-center gap-1.5">
+<iconify-icon class="text-sm" icon="lucide:signal"></iconify-icon>
+<iconify-icon class="text-sm" icon="lucide:wifi"></iconify-icon>
+<div class="flex items-center gap-0.5 border border-gray-300 rounded-sm px-0.5 py-0.25 scale-90">
+<div class="w-4 h-2 bg-yellow-400 rounded-sm"></div>
+<span class="text-[8px] leading-none">22%</span>
+</div>
+</div>
+</div>
+<!-- 顶部导航 -->
+<div class="flex justify-between items-center px-4 py-2">
+<button class="p-2 hover:bg-gray-100 rounded-full transition-colors" onclick="window.location.href='https://modao.cc/agent-py/workspace/6a6744aaf8f228217e57242f/meetmind-app.html/meetmind-app.html?render_html=true'">
+<iconify-icon class="text-2xl text-gray-600" icon="lucide:chevron-down"></iconify-icon>
+</button>
+<div class="text-sm font-medium text-gray-500">正在录音...</div>
+<div class="w-10"></div> <!-- 占位平衡 -->
+</div>
+<!-- 主体内容区 -->
+<div class="flex-1 overflow-y-auto scroll-hide flex flex-col py-3 px-0">
+<!-- 修改1：上部卡片（标题+时间+转写） -->
+<div class="mx-4 mb-3 bg-white rounded-2xl p-5 shadow-sm transition-transform cursor-grab active:cursor-grabbing h-[568px] flex flex-col" id="upper-card">
+<!-- 拖动手柄指示器 -->
+<div class="flex justify-center pt-0 pb-3">
+<div class="w-10 h-1 bg-gray-200 rounded-full"></div>
+</div>
+<!-- 标题 -->
+<h1 class="text-lg font-bold text-gray-900">2026-7-28 22:59 实时录音</h1>
+<!-- 时间 -->
+<div class="flex items-center gap-1.5 text-gray-400 text-sm mt-1 mb-4">
+<iconify-icon class="text-sm" icon="lucide:calendar"></iconify-icon>
+<span>2026-07-28 18:40</span>
+</div>
+<!-- 转写文字 -->
+<div class="text-sm leading-relaxed space-y-4 flex-1 overflow-y-auto scroll-hide">
+<div class="flex items-start gap-2">
+<div>
+<span class="text-[11px] font-semibold text-blue-600">说话人1</span>
+<span class="text-[10px] text-gray-400 ml-2">00:04</span>
+<p class="text-gray-700 text-sm mt-0.5">那我们先从后端接口优化的进度开始同步。目前数据库慢查询已经定位到三个关键索引需要重建，预计本周四前可以完成优化工作。</p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<div>
+<span class="text-[11px] font-semibold text-orange-500">说话人2</span>
+<span class="text-[10px] text-gray-400 ml-2">00:28</span>
+<p class="text-gray-700 text-sm mt-0.5">前端这边也在同步调整接口调用的超时机制，目前设定的默认值是5秒，在高并发场景下可能会触发较多报错，建议根据业务场景进行分级处理。</p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<div>
+<span class="text-[11px] font-semibold text-green-600">说话人3</span>
+<span class="text-[10px] text-gray-400 ml-2">01:15</span>
+<p class="text-gray-700 text-sm mt-0.5">移动端适配的问题，我们这边已经完成了70%的页面重构，还剩几个核心页面需要兼容处理，预计下周二可以全部交付。</p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<div>
+<span class="text-[11px] font-semibold text-purple-600">说话人4</span>
+<span class="text-[10px] text-gray-400 ml-2">01:42</span>
+<p class="text-gray-700 text-sm mt-0.5">好的，我这边会同步更新测试用例，确保接口优化和移动端适配工作都能覆盖到，周四前输出完整的测试报告。</p>
+</div>
+</div>
+<div class="flex items-start gap-2 breathing-text">
+<div>
+<span class="text-[11px] font-semibold text-blue-600">说话人1</span>
+<span class="text-[10px] text-gray-400 ml-2">02:08</span>
+<p class="text-gray-900 text-sm mt-0.5">好的，那关于移动端适配的问题，小赵你那边目前的进度如何？</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 修改2：下部卡片（计时器+声纹+按钮） -->
+<div class="mx-4 mb-2 bg-white rounded-2xl px-5 py-6 shadow-sm flex items-center justify-between">
+<!-- 左边：计时器 + 声纹 -->
+<div class="flex items-center gap-3">
+<div class="text-2xl font-bold tracking-tight text-gray-900" id="timer">03:10</div>
+<div class="recording-wave">
+<div class="wave-bar" style="animation-delay: 0.1s; height: 12px;"></div>
+<div class="wave-bar" style="animation-delay: 0.3s; height: 18px;"></div>
+<div class="wave-bar" style="animation-delay: 0.2s; height: 8px;"></div>
+<div class="wave-bar" style="animation-delay: 0.4s; height: 14px;"></div>
+<div class="wave-bar" style="animation-delay: 0.1s; height: 10px;"></div>
+<div class="wave-bar" style="animation-delay: 0.5s; height: 20px;"></div>
+<div class="wave-bar" style="animation-delay: 0.2s; height: 12px;"></div>
+<div class="wave-bar" style="animation-delay: 0.3s; height: 6px;"></div>
+<div class="wave-bar" style="animation-delay: 0.1s; height: 16px;"></div>
+<div class="wave-bar" style="animation-delay: 0.4s; height: 10px;"></div>
+</div>
+</div>
+<!-- 右边：控制按钮区 -->
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-md shadow-blue-100 active:scale-95 transition-transform" id="pause-btn" onclick="togglePause()">
+<iconify-icon class="text-xl" icon="lucide:pause" id="pause-icon"></iconify-icon>
+</button>
+<button class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-800 active:scale-95 transition-transform" onclick="showEndModal()">
+<svg class="text-lg" height="18" viewbox="0 0 32 32" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M16.32 0c-9.152-0.16-16.352 7.232-16.32 16-0.032 8.672 6.976 15.904 15.808 16 8.96 0.096 16.192-7.136 16.192-16 0-8.736-7.008-15.84-15.68-16zM20.832 23.264h-9.664c-0.001 0-0.001 0-0.002 0-1.342 0-2.43-1.088-2.43-2.43 0-0.001 0-0.001 0-0.002v0-9.664c0-0.001 0-0.001 0-0.002 0-1.342 1.088-2.43 2.43-2.43 0.001 0 0.001 0 0.002 0h9.664c0.001 0 0.001 0 0.002 0 1.342 0 2.43 1.088 2.43 2.43 0 0.001 0 0.001 0 0.002v-0 9.664c0 0.001 0 0.001 0 0.002 0 1.342-1.088 2.43-2.43 2.43-0.001 0-0.001 0-0.002 0h0z" fill="currentColor" stroke="none"></path></svg>
+</button>
+</div>
+<!-- 提示条 -->
+</div>
+</div>
+<!-- 底部导航栏 -->
+<!-- 确认结束模态框 -->
+<div class="absolute inset-0 z-50 flex items-center justify-center px-8 modal-backdrop hidden" id="end-modal">
+<div class="bg-white w-full rounded-3xl p-6 shadow-2xl scale-in transform transition-transform">
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-4">
+<iconify-icon class="text-3xl" icon="lucide:alert-circle"></iconify-icon>
+</div>
+<h3 class="text-lg font-bold text-gray-900">结束本次录制？</h3>
+<p class="text-sm text-gray-500 mt-2">结束后系统将自动生成 AI 会议纪要，你可以在历史记录中查看。</p>
+<div class="flex flex-col w-full gap-3 mt-8">
+<button class="w-full bg-black text-white py-3 rounded-xl font-semibold hover:bg-gray-800 active:scale-[0.98] transition-all" onclick="confirmEnd()">
+                            确认结束
+                        </button>
+<button class="w-full bg-gray-100 text-gray-600 py-3 rounded-xl font-semibold hover:bg-gray-200 active:scale-[0.98] transition-all" onclick="hideEndModal()">
+                            继续录制
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        let isPaused = false;
+        const pauseBtn = document.getElementById('pause-btn');
+        const pauseIcon = document.getElementById('pause-icon');
+        const endModal = document.getElementById('end-modal');
+        const waveBars = document.querySelectorAll('.wave-bar');
+        const timerText = document.getElementById('timer');
+
+        function togglePause() {
+            isPaused = !isPaused;
+            if (isPaused) {
+                pauseIcon.setAttribute('icon', 'lucide:play');
+                pauseBtn.classList.replace('bg-blue-600', 'bg-orange-500');
+                pauseBtn.classList.replace('shadow-blue-100', 'shadow-orange-100');
+                // 停止波形动画
+                waveBars.forEach(bar => bar.style.animationPlayState = 'paused');
+            } else {
+                pauseIcon.setAttribute('icon', 'lucide:pause');
+                pauseBtn.classList.replace('bg-orange-500', 'bg-blue-600');
+                pauseBtn.classList.replace('shadow-orange-100', 'shadow-blue-100');
+                // 恢复波形动画
+                waveBars.forEach(bar => bar.style.animationPlayState = 'running');
+            }
+        }
+
+        function showEndModal() {
+            endModal.classList.remove('hidden');
+        }
+
+        function hideEndModal() {
+            endModal.classList.add('hidden');
+        }
+
+        function confirmEnd() {
+            window.location.href = 'meeting-transcript-end.html';
+        }
+
+        // 模拟时间增加
+        let seconds = 83; // 01:23
+        setInterval(() => {
+            if (!isPaused) {
+                seconds++;
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                timerText.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+
+        // 修改3：添加上部卡片下拉返回功能
+        const upperCard = document.getElementById('upper-card');
+        let startY = 0;
+        let currentY = 0;
+        let isDragging = false;
+
+        if (upperCard) {
+            upperCard.addEventListener('touchstart', function(e) {
+                startY = e.touches[0].clientY;
+                isDragging = true;
+                this.style.transition = 'none';
+            }, { passive: true });
+
+            upperCard.addEventListener('touchmove', function(e) {
+                if (!isDragging) return;
+                currentY = e.touches[0].clientY;
+                const diff = currentY - startY;
+                if (diff > 0) {
+                    this.style.transform = `translateY(${diff * 0.5}px)`;
+                }
+            }, { passive: true });
+
+            upperCard.addEventListener('touchend', function(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                const diff = currentY - startY;
+                if (diff > 100) {
+                    window.location.href = 'meetmind-app.html';
+                } else {
+                    this.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                    this.style.transform = 'translateY(0)';
+                }
+                startY = 0;
+                currentY = 0;
+            }, { passive: true });
+        }
+    </script>
+</body></html>

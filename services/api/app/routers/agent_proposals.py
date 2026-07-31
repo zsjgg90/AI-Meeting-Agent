@@ -10,6 +10,7 @@ from app.agent_confirmation_service import (
     get_proposal_or_404,
     reject_proposal,
 )
+from app.agent_proposal_generation import generate_action_item_proposals_for_meeting
 from app.agent_security import (
     AgentPrincipal,
     get_agent_principal,
@@ -23,6 +24,7 @@ from app.models import AgentAuditRecord, ControlledWriteCommandRecord, AgentActi
 from app.schemas import (
     AgentActionProposalCreate,
     AgentActionProposalRead,
+    AgentProposalGenerationResponse,
     AgentProposalConfirmationRequest,
     AgentProposalDecisionRead,
 )
@@ -79,6 +81,30 @@ def list_action_proposals(
         ):
             visible.append(row)
     return visible
+
+
+@router.post("/generate/meetings/{meeting_id}", response_model=AgentProposalGenerationResponse)
+def generate_action_proposals_for_meeting(
+    meeting_id: str,
+    principal: AgentPrincipal = Depends(get_agent_principal),
+    db: Session = Depends(get_db),
+) -> AgentProposalGenerationResponse:
+    require_agent_permission(
+        principal,
+        "proposal_review",
+        tenant_id=principal.tenant_id,
+        project_id=principal.project_scope[0] if principal.project_scope else None,
+        object_type="AgentActionItem",
+        object_id=meeting_id,
+        risk_level="medium",
+        operation="update",
+    )
+    diagnostics = generate_action_item_proposals_for_meeting(db, meeting_id, principal=principal, persist=True)
+    return AgentProposalGenerationResponse(
+        meeting_id=meeting_id,
+        diagnostics=[item.to_read_model() for item in diagnostics],
+        generated_count=sum(1 for item in diagnostics if item.generated),
+    )
 
 
 @router.get("/{proposal_id}", response_model=AgentActionProposalRead)

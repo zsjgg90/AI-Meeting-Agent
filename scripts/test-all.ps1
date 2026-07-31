@@ -78,6 +78,7 @@ if (-not $SkipApiTests) {
         services.api.tests.test_agent_config `
         services.api.tests.test_agent_confirmation_api `
         services.api.tests.test_knowledge_api `
+        services.api.tests.test_tasks_api `
         services.api.tests.test_meeting_upload_api `
         services.api.tests.test_meeting_summary_exports }
 }
@@ -105,13 +106,24 @@ if (-not $SkipWorkerTests) {
         services.worker.tests.test_volcengine_speaker_diarization }
 }
 
+Write-Step 'Evaluation unit tests'
+Invoke-Checked { & $WorkerPython -m unittest tests.test_evaluate_meeting_analysis }
+
 if (-not $SkipMobile) {
     Write-Step 'Mobile TypeScript typecheck'
     Assert-File -Path (Join-Path $MobileDir 'package.json') -Message 'Mobile app is not ready.'
     Push-Location $MobileDir
     try {
         Invoke-Checked { npm run typecheck }
+        Invoke-Checked { npm run test:profile-ui }
+        Invoke-Checked { npm run test:push-config-ui }
+        Invoke-Checked { npm run test:bottom-nav-ui }
+        Invoke-Checked { npm run test:meeting-date-sections }
         Invoke-Checked { npm run test:knowledge-base-ui }
+        Invoke-Checked { npm run test:todo-ui }
+        Invoke-Checked { npm run test:task-search-ui }
+        Invoke-Checked { npm run test:task-detail-ui }
+        Invoke-Checked { npm run test:meeting-agent-tools-ui }
         Invoke-Checked { npm run test:agent-review-ui }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-ai-processing-ui.js') }
         Invoke-Checked { node (Join-Path $ProjectRoot 'apps\mobile\scripts\test-meeting-detail-ui.js') }
