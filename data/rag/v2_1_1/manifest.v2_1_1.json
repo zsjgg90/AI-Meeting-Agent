@@ -1,0 +1,58 @@
+{
+  "dataset_version": "meeting_analyst_rag_v2_1_1",
+  "chunk_schema_version": "rag-chunk-v2.1.1",
+  "collection_name": "meeting_analyst_rules_v2_1_1",
+  "embedding_model": "BAAI/bge-small-zh-v1.5",
+  "expected_chunk_count": 88,
+  "layer_counts": {
+    "POLICY_FIXED": 24,
+    "RAG_DYNAMIC": 32,
+    "RAG_SCENARIO": 32
+  },
+  "source_dataset": "meeting_analyst_rag_v2_1",
+  "added_chunk_ids": [
+    "technical_incident_boundary_001",
+    "technical_incident_boundary_002"
+  ],
+  "retrieval_strategy": {
+    "global_fixed": 1,
+    "policy_selected": 2,
+    "dynamic": 3,
+    "scenario": 2,
+    "total": 8
+  },
+  "files": {
+    "policy/policy_fixed_24.jsonl": {
+      "sha256": "5ba6092685b4cba4ab8f17b5c83d80df95f021e52317268cfd9d1ca3e49bf2f5",
+      "size_bytes": 15388
+    },
+    "dynamic/rag_dynamic_32.jsonl": {
+      "sha256": "ead19dd3ee57320c36d37419111b42189291dc039bb498536d7e744702297e8c",
+      "size_bytes": 20036
+    },
+    "scenarios/rag_scenario_32.jsonl": {
+      "sha256": "51bb6f6d1da5383eafede38800dc5cbc0f2586215205bdd7289b0dfa13fbe298",
+      "size_bytes": 20782
+    },
+    "meeting_analyst_rag_v2_1_1_88.jsonl": {
+      "sha256": "946bcaa66d81cbf64c4502f6dfb1c92e3ba0c9b8cdb8d9d431d5b081ca8d9eb9",
+      "size_bytes": 56206
+    },
+    "aliases/alias_trigger_13.json": {
+      "sha256": "3535c03592e4bb0d24ae6886a1d3446ec52693d2124b685364a99257986c97d9",
+      "size_bytes": 4180
+    },
+    "memory/memory_rules_2.jsonl": {
+      "sha256": "37068340d29a98421cd99cf9ffaabcb304f1315cc8d248db05cf0baab8f9b580",
+      "size_bytes": 1053
+    },
+    "domain_extensions/domain_extension_4.json": {
+      "sha256": "57fb0bd8a9c3b0ca518592c9d0096a3c979460f16f4e2bcb99fbb4614eea1b1f",
+      "size_bytes": 1402
+    },
+    "merge_map_20.json": {
+      "sha256": "d493a97e5e1bb7be068044abc0f75b083a52e15cbb775d3fe3325d47e914047a",
+      "size_bytes": 9811
+    }
+  }
+}

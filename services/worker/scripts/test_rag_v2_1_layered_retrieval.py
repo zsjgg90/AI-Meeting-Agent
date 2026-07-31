@@ -11,7 +11,7 @@ from sentence_transformers import SentenceTransformer
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DB_DIR = PROJECT_ROOT / "data" / "vector_db"
 
-COLLECTION_NAME = "meeting_analyst_rules_v2_1"
+COLLECTION_NAME = "meeting_analyst_rules_v2_1_1"
 EMBEDDING_MODEL = "BAAI/bge-small-zh-v1.5"
 
 # 所有会议都必须注入的全局证据规则。
@@ -33,7 +33,6 @@ EXPECTED_SCENARIO = 2
 # 86 是正式 v2.1 基线。
 # 88 是加入两条 technical_incident 候选规则后的实验状态。
 ALLOWED_COLLECTION_COUNTS = {
-    86,
     88,
 }
 
