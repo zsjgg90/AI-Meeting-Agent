@@ -249,6 +249,38 @@ def normalize_meeting_analysis_result(
             rag_chunk_schema_version=_text(raw_metadata.get("rag_chunk_schema_version")) or None,
             rag_collection_name=_text(raw_metadata.get("rag_collection_name")) or None,
             rag_embedding_model=_text(raw_metadata.get("rag_embedding_model")) or None,
+            rag_retrieval_strategy=_text(
+                raw_metadata.get(
+                    "rag_retrieval_strategy"
+                )
+            ) or None,
+            rag_retrieval_buckets=(
+                raw_metadata.get(
+                    "rag_retrieval_buckets"
+                )
+                if isinstance(
+                    raw_metadata.get(
+                        "rag_retrieval_buckets"
+                    ),
+                    dict,
+                )
+                else {}
+            ),
+            rag_routed_meeting_type=_text(
+                raw_metadata.get(
+                    "rag_routed_meeting_type"
+                )
+            ) or None,
+            rag_routed_scenario=_text(
+                raw_metadata.get(
+                    "rag_routed_scenario"
+                )
+            ) or None,
+            rag_fallback_reason=_text(
+                raw_metadata.get(
+                    "rag_fallback_reason"
+                )
+            ) or None,
             result_source=_text(raw_metadata.get("result_source")) or None,
             confidence_score=0.0,
         ),

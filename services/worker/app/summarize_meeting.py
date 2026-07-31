@@ -6,7 +6,6 @@ from sqlalchemy import select
 from app.config import get_settings
 from app.database import SessionLocal
 from app.models import ActionItem
-from app.rag_retriever import COLLECTION_NAME
 from app.summary_agent import SummaryAgentError, summarize_meeting
 
 
@@ -56,7 +55,7 @@ def main() -> None:
                         "model_name": summary.model_name,
                         "temperature": settings.ollama_temperature,
                         "rag_enabled": bool(summary.model_name and "+rag" in summary.model_name),
-                        "rag_collection": COLLECTION_NAME,
+                        "rag_collection": settings.rag_collection_name,
                         "confidence_score": summary.confidence_score,
                         "generated_at": summary.updated_at.isoformat(),
                     },

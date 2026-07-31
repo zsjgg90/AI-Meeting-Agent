@@ -135,6 +135,7 @@ class MeetingAnalystService:
                 self.retriever.build_context_payload(
                     query=RAG_QUERY,
                     top_k=resolved_top_k,
+                    transcript=transcript,
                 )
             )
         log_event(
@@ -142,6 +143,11 @@ class MeetingAnalystService:
             rag_chunk_count=len(rag_context.chunk_ids),
             rag_context_chars=len(rag_context.text),
             rag_chunk_ids=rag_context.chunk_ids,
+            rag_retrieval_strategy=rag_context.retrieval_strategy,
+            rag_retrieval_buckets=rag_context.retrieval_buckets,
+            rag_routed_meeting_type=rag_context.routed_meeting_type,
+            rag_routed_scenario=rag_context.routed_scenario,
+            rag_fallback_reason=rag_context.fallback_reason,
         )
 
         print(
@@ -212,6 +218,11 @@ class MeetingAnalystService:
             "rag_chunk_schema_version": rag_context.chunk_schema_version,
             "rag_collection_name": rag_context.collection_name,
             "rag_embedding_model": rag_context.embedding_model,
+            "rag_retrieval_strategy": rag_context.retrieval_strategy,
+            "rag_retrieval_buckets": rag_context.retrieval_buckets,
+            "rag_routed_meeting_type": rag_context.routed_meeting_type,
+            "rag_routed_scenario": rag_context.routed_scenario,
+            "rag_fallback_reason": rag_context.fallback_reason,
             "result_source": "legacy_qwen_rag",
         }
 
@@ -252,6 +263,11 @@ class MeetingAnalystService:
             "rag_chunk_schema_version": rag_context.chunk_schema_version,
             "rag_collection_name": rag_context.collection_name,
             "rag_embedding_model": rag_context.embedding_model,
+            "rag_retrieval_strategy": rag_context.retrieval_strategy,
+            "rag_retrieval_buckets": rag_context.retrieval_buckets,
+            "rag_routed_meeting_type": rag_context.routed_meeting_type,
+            "rag_routed_scenario": rag_context.routed_scenario,
+            "rag_fallback_reason": rag_context.fallback_reason,
             "ollama_temperature": self.llm_client.temperature,
             "ollama_top_p": self.llm_client.top_p,
             "ollama_seed": self.llm_client.seed,
@@ -274,6 +290,11 @@ class MeetingAnalystService:
             rag_dataset_version=rag_context.dataset_version,
             rag_collection_name=rag_context.collection_name,
             rag_embedding_model=rag_context.embedding_model,
+            rag_retrieval_strategy=rag_context.retrieval_strategy,
+            rag_retrieval_buckets=rag_context.retrieval_buckets,
+            rag_routed_meeting_type=rag_context.routed_meeting_type,
+            rag_routed_scenario=rag_context.routed_scenario,
+            rag_fallback_reason=rag_context.fallback_reason,
             ollama_temperature=self.llm_client.temperature,
             ollama_top_p=self.llm_client.top_p,
             ollama_seed=self.llm_client.seed,

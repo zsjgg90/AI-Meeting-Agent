@@ -10,7 +10,13 @@ from app.rag_retriever import RagContext
 
 
 class FakeRetriever:
-    def build_context_payload(self, query: str, top_k: int | None = None) -> RagContext:
+    def build_context_payload(
+        self,
+        query: str,
+        top_k: int | None = None,
+        *,
+        transcript: str | None = None,
+    ) -> RagContext:
         return RagContext(
             text="规则：只从原文提取结论、待办、问题和风险。",
             chunks=[

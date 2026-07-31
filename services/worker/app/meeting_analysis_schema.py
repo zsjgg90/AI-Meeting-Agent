@@ -29,7 +29,11 @@ class CleanTranscriptSegment(BaseModel):
 class SemanticSegment(BaseModel):
     source_segment_id: str
     semantic_label: SemanticLabel
-    confidence: float = Field(default=0.5, ge=0, le=1)
+    confidence: float = Field(
+        default=0.5,
+        ge=0,
+        le=1,
+    )
 
 
 class TopicChunk(BaseModel):
@@ -50,18 +54,34 @@ class MeetingAgendaItem(BaseModel):
 class KeyConclusion(BaseModel):
     conclusion: str
     source_text: str
-    confidence: float = Field(default=0.7, ge=0, le=1)
+    confidence: float = Field(
+        default=0.7,
+        ge=0,
+        le=1,
+    )
 
 
 class MeetingActionItem(BaseModel):
     owner_name: str | None = None
     task: str
     deadline: str | None = None
-    priority: Literal["low", "medium", "high"] = "medium"
-    status: Literal["open", "in_progress", "done"] = "open"
+    priority: Literal[
+        "low",
+        "medium",
+        "high",
+    ] = "medium"
+    status: Literal[
+        "open",
+        "in_progress",
+        "done",
+    ] = "open"
     source_text: str
     source_segment_id: str | None = None
-    confidence: float = Field(default=0.7, ge=0, le=1)
+    confidence: float = Field(
+        default=0.7,
+        ge=0,
+        le=1,
+    )
 
 
 class UnresolvedIssue(BaseModel):
@@ -69,7 +89,11 @@ class UnresolvedIssue(BaseModel):
     reason: str = ""
     blocker: str = ""
     source_text: str
-    confidence: float = Field(default=0.7, ge=0, le=1)
+    confidence: float = Field(
+        default=0.7,
+        ge=0,
+        le=1,
+    )
 
 
 class RiskAndFocus(BaseModel):
@@ -78,21 +102,46 @@ class RiskAndFocus(BaseModel):
     focus_area: str = ""
     mitigation: str = ""
     source_text: str
-    confidence: float = Field(default=0.7, ge=0, le=1)
+    confidence: float = Field(
+        default=0.7,
+        ge=0,
+        le=1,
+    )
 
 
 class MeetingAnalysisMetadata(BaseModel):
     schema_version: str = "meeting-analysis-v1"
     model_name: str = ""
     prompt_version: str | None = None
+
     rag_chunk_ids: list[str] = []
     rag_dataset_version: str | None = None
     rag_chunk_schema_version: str | None = None
     rag_collection_name: str | None = None
     rag_embedding_model: str | None = None
+
+    rag_retrieval_strategy: str | None = None
+    rag_retrieval_buckets: dict[
+        str,
+        list[str],
+    ] = {}
+    rag_routed_meeting_type: str | None = None
+    rag_routed_scenario: str | None = None
+    rag_fallback_reason: str | None = None
+
     result_source: str | None = None
-    confidence_score: float = Field(default=0.0, ge=0, le=1)
-    generated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+    confidence_score: float = Field(
+        default=0.0,
+        ge=0,
+        le=1,
+    )
+
+    generated_at: str = Field(
+        default_factory=lambda: datetime.now(
+            timezone.utc
+        ).isoformat()
+    )
 
 
 MeetingType = Literal[
@@ -114,14 +163,42 @@ MeetingType = Literal[
 class MeetingAnalysisSchema(BaseModel):
     meeting_title: str = ""
     meeting_type: MeetingType | str = "other"
-    meeting_type_confidence: float = Field(default=0.0, ge=0, le=1)
+
+    meeting_type_confidence: float = Field(
+        default=0.0,
+        ge=0,
+        le=1,
+    )
+
     meeting_title_candidate: str = ""
     title_basis: list[str] = []
-    meeting_agenda: list[MeetingAgendaItem] = []
+
+    meeting_agenda: list[
+        MeetingAgendaItem
+    ] = []
+
     meeting_summary: str = ""
-    key_conclusions: list[KeyConclusion] = []
-    action_items: list[MeetingActionItem] = []
-    unresolved_issues: list[UnresolvedIssue] = []
-    risks_and_focus: list[RiskAndFocus] = []
-    topics: list[TopicChunk] = []
-    metadata: MeetingAnalysisMetadata = Field(default_factory=MeetingAnalysisMetadata)
+
+    key_conclusions: list[
+        KeyConclusion
+    ] = []
+
+    action_items: list[
+        MeetingActionItem
+    ] = []
+
+    unresolved_issues: list[
+        UnresolvedIssue
+    ] = []
+
+    risks_and_focus: list[
+        RiskAndFocus
+    ] = []
+
+    topics: list[
+        TopicChunk
+    ] = []
+
+    metadata: MeetingAnalysisMetadata = Field(
+        default_factory=MeetingAnalysisMetadata
+    )

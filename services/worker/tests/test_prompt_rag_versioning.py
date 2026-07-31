@@ -91,6 +91,14 @@ class PromptRagVersioningTest(unittest.TestCase):
                     "rag_chunk_schema_version": "rag-chunk-v1",
                     "rag_collection_name": "meeting_analyst_rules",
                     "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+                    "rag_retrieval_strategy": "layered_1_2_3_2",
+                    "rag_retrieval_buckets": {
+                        "GLOBAL_FIXED": ["boundary_rule_012"],
+                        "POLICY_SELECTED": ["boundary_rule_008"],
+                    },
+                    "rag_routed_meeting_type": "requirement_review",
+                    "rag_routed_scenario": "requirement_review",
+                    "rag_fallback_reason": None,
                 },
             },
             model_name="qwen3:14b+rag",
@@ -101,6 +109,27 @@ class PromptRagVersioningTest(unittest.TestCase):
         self.assertEqual(analysis.metadata.rag_dataset_version, "meeting_analyst_rag_v1")
         self.assertEqual(analysis.metadata.rag_chunk_schema_version, "rag-chunk-v1")
         self.assertEqual(analysis.metadata.rag_collection_name, "meeting_analyst_rules")
+        self.assertEqual(
+            analysis.metadata.rag_retrieval_strategy,
+            "layered_1_2_3_2",
+        )
+        self.assertEqual(
+            analysis.metadata.rag_retrieval_buckets[
+                "GLOBAL_FIXED"
+            ],
+            ["boundary_rule_012"],
+        )
+        self.assertEqual(
+            analysis.metadata.rag_routed_meeting_type,
+            "requirement_review",
+        )
+        self.assertEqual(
+            analysis.metadata.rag_routed_scenario,
+            "requirement_review",
+        )
+        self.assertIsNone(
+            analysis.metadata.rag_fallback_reason
+        )
 
 
 if __name__ == "__main__":
