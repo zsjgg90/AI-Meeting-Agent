@@ -1,0 +1,142 @@
+[
+  {
+    "source_id": "v4_definition_001",
+    "title": "定义：会议议程定义-1",
+    "merge_target": "definition_001",
+    "absorbed_content": "会议议程是会议讨论主题、推进顺序和沟通框架的抽象。它只描述会议将讨论或实际依次讨论的主题，不承载结论、待办、风险和遗留问题。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_definition_002",
+    "title": "定义：会议总结定义-1",
+    "merge_target": "definition_002",
+    "absorbed_content": "会议总结是对整场会议背景、讨论过程、关键分歧、取舍过程和整体结果的归纳，不是原文拼接，也不是结论和待办清单的重复。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_definition_003",
+    "title": "定义：核心结论定义-1",
+    "merge_target": "definition_003",
+    "absorbed_content": "核心结论是会议中已经明确确认、接受、敲定或形成共识的决定。建议、猜测、单方观点和未回应的提议不能进入核心结论。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_definition_004",
+    "title": "定义：待办与后续安排定义-1",
+    "merge_target": "definition_004",
+    "absorbed_content": "待办与后续安排是会后需要执行、推进或闭环的具体动作。没有明确负责人或截止时间时字段可以为空，但动作本身必须明确。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_definition_005",
+    "title": "定义：遗留问题定义-1",
+    "merge_target": "definition_005",
+    "absorbed_content": "遗留问题是当前已经存在但尚未解决、尚未敲定、缺少条件、缺少机制或暂时搁置的事项。不能因为值得处理就自动生成待办。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_definition_006",
+    "title": "定义：风险与关注点定义-1",
+    "merge_target": "definition_006",
+    "absorbed_content": "风险与关注点是未来可能发生的不利事件及其影响，通常具有条件、触发因素和影响结果。当前事实问题优先归入遗留问题。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_001",
+    "title": "边界：会议议程与会议总结边界-1",
+    "merge_target": "boundary_rule_001",
+    "absorbed_content": "会议议程回答讨论什么和按什么顺序推进；会议总结回答实际讨论了什么、有哪些分歧、取舍和整体结果。不能把结论和风险写成议程。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_002",
+    "title": "边界：会议总结与核心结论边界-1",
+    "merge_target": "boundary_rule_002",
+    "absorbed_content": "会议总结覆盖过程全貌，核心结论只保留已确认的决定。总结可以提到讨论和取舍，结论必须有确认信号支撑。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_003",
+    "title": "边界：建议与核心结论边界-1",
+    "merge_target": "boundary_rule_008",
+    "absorbed_content": "建议、提议、假设、备选方案只有在会议中被明确接受、确认或敲定后，才能成为核心结论。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_004",
+    "title": "边界：核心结论与待办边界-1",
+    "merge_target": "boundary_rule_003",
+    "absorbed_content": "方向性决定、规则性共识属于核心结论；具体执行动作属于待办。不能把同一句规则性共识原样放入待办。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_005",
+    "title": "边界：待办与遗留问题边界-1",
+    "merge_target": "boundary_rule_004",
+    "absorbed_content": "有明确动作、承诺或任务指向的是待办；仅说明机制缺失、方案未定、条件不足的是遗留问题。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_006",
+    "title": "边界：遗留问题与风险边界-1",
+    "merge_target": "boundary_rule_005",
+    "absorbed_content": "已存在且未解决的是遗留问题；未来可能发生并带来损失的是风险。两者可关联，但不能混为一项。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_007",
+    "title": "边界：风险与待办边界-1",
+    "merge_target": "boundary_rule_006",
+    "absorbed_content": "风险描述未来不利事件和影响；待办描述具体执行动作。‘可能导致亏损’是风险，‘调整预算’只有被明确决定执行时才是待办。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_009",
+    "title": "边界：说话人与负责人边界-1",
+    "merge_target": "boundary_speaker_owner_001",
+    "absorbed_content": "提出任务、要求任务或描述任务的人不一定是负责人。负责人应依据任务指向、承诺和接受信号识别。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_boundary_rule_011",
+    "title": "边界：长期问题与短期待办边界-1",
+    "merge_target": "boundary_issue_not_action_001",
+    "absorbed_content": "长期搁置、后续规划、暂未敲定通常属于遗留问题，不能自动生成短期待办。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_reasoning_pattern_001",
+    "title": "推理：承诺识别-1",
+    "merge_target": "v4_owner_resolution_001",
+    "absorbed_content": "出现‘我来、我负责、没问题我同步、我今天补充’时，可识别说话人承担动作，但仍需保留原文证据。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_reasoning_pattern_002",
+    "title": "推理：任务指向识别-1",
+    "merge_target": "v4_owner_resolution_002",
+    "absorbed_content": "出现‘你负责、运营侧需要、请研发完成、由测试跟进’时，负责人是被指向对象，不是说话人。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_reasoning_pattern_006",
+    "title": "推理：时间绑定链-1",
+    "merge_target": "v4_deadline_rule_001",
+    "absorbed_content": "时间表达必须与具体任务在同一语义单元或明确指代链中绑定，才能写入该任务 deadline。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_reasoning_pattern_009",
+    "title": "推理：风险应对分离-1",
+    "merge_target": "v4_boundary_rule_012",
+    "absorbed_content": "风险描述和应对措施分开。‘若转化不升将亏损’是风险，‘缩减预算’若被明确决定执行才是待办。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  },
+  {
+    "source_id": "v4_reasoning_pattern_010",
+    "title": "推理：证据优先-1",
+    "merge_target": "boundary_rule_012",
+    "absorbed_content": "负责人、时间、结论和风险均不得靠常识补全。不确定字段使用 null 或标记复核。",
+    "reason": "与目标规则属于相同知识角色并承担近乎相同的判断功能；其有效限制句应吸收到目标规则，不再保留独立向量。"
+  }
+]

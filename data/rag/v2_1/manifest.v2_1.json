@@ -1,0 +1,64 @@
+{
+  "dataset_name": "MeetMind RAG v2.1",
+  "dataset_version": "meeting_analyst_rag_v2_1",
+  "chunk_schema_version": "rag-chunk-v2.1",
+  "expert_review_version": "final-expert-v5",
+  "generated_at": "2026-07-31T17:49:04.399371+00:00",
+  "source_review_file": "data/eval/rag_audit/rag_v2_1/base_125_review_final_expert_v5.xlsx",
+  "counts": {
+    "policy_fixed": 24,
+    "rag_dynamic": 32,
+    "rag_scenario": 30,
+    "independent_rag_rules": 86,
+    "merge_map": 20,
+    "alias_trigger": 13,
+    "memory_rules": 2,
+    "domain_extensions": 4
+  },
+  "files": {
+    "data/rag/v2_1/policy/policy_fixed_24.jsonl": {
+      "sha256": "d2b4b58e6836e1a26aa30d10089ea07777c979762700d344d2e764cc68995a81",
+      "size_bytes": 15940
+    },
+    "data/rag/v2_1/dynamic/rag_dynamic_32.jsonl": {
+      "sha256": "75d5942dd219c3e23dfbab3171e2f8b74aa11938f7ed2197e21f86eef62b61ba",
+      "size_bytes": 20772
+    },
+    "data/rag/v2_1/scenarios/rag_scenario_30.jsonl": {
+      "sha256": "501f5101ead4f3a9bfc0aa53c62941b457adde4a3270b1393dc682a3c4507d39",
+      "size_bytes": 19794
+    },
+    "data/rag/v2_1/meeting_analyst_rag_v2_1_86.jsonl": {
+      "sha256": "7553a41dff149d9b459fa91b029eabf2d094ac96b14f9c38d9d2d3a67679679f",
+      "size_bytes": 56506
+    },
+    "data/rag/v2_1/aliases/alias_trigger_13.json": {
+      "sha256": "3535c03592e4bb0d24ae6886a1d3446ec52693d2124b685364a99257986c97d9",
+      "size_bytes": 4180
+    },
+    "data/rag/v2_1/memory/memory_rules_2.jsonl": {
+      "sha256": "37068340d29a98421cd99cf9ffaabcb304f1315cc8d248db05cf0baab8f9b580",
+      "size_bytes": 1053
+    },
+    "data/rag/v2_1/domain_extensions/domain_extension_4.json": {
+      "sha256": "57fb0bd8a9c3b0ca518592c9d0096a3c979460f16f4e2bcb99fbb4614eea1b1f",
+      "size_bytes": 1402
+    },
+    "data/rag/v2_1/merge_map_20.json": {
+      "sha256": "d493a97e5e1bb7be068044abc0f75b083a52e15cbb775d3fe3325d47e914047a",
+      "size_bytes": 9811
+    }
+  },
+  "collection_recommendation": {
+    "collection_name": "meeting_analyst_rules_v2_1",
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "import_file": "data/rag/v2_1/meeting_analyst_rag_v2_1_86.jsonl"
+  },
+  "retrieval_design": {
+    "policy_fixed": "固定选择，不依赖纯向量 Top-K",
+    "rag_dynamic": "根据会议正文动态召回",
+    "rag_scenario": "根据 meeting_type 和正文召回",
+    "alias_trigger": "用于查询扩展，不导入向量库",
+    "memory_rules": "进入 Agent Memory 独立链路"
+  }
+}

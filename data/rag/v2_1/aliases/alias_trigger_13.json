@@ -1,0 +1,93 @@
+[
+  {
+    "source_id": "v4_reasoning_pattern_004",
+    "title": "推理：现状问题链-1",
+    "content": "按‘当前缺失、尚未建立、还没敲定、暂时无法’识别遗留问题。",
+    "scope": "trigger",
+    "reason": "这是确认/现状触发词模式，更适合确定性查询扩展和候选识别，不应作为向量规则竞争 Top-K。"
+  },
+  {
+    "source_id": "v4_reasoning_pattern_005",
+    "title": "推理：共识确认链-1",
+    "content": "提议后只有出现‘同意、确认、就这么定、按方案执行、今天定死方案’等信号才升级为结论。",
+    "scope": "trigger",
+    "reason": "这是确认/现状触发词模式，更适合确定性查询扩展和候选识别，不应作为向量规则竞争 Top-K。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_002",
+    "title": "同义词：待办-1",
+    "content": "行动项、任务、后续动作、执行事项、跟进项",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_003",
+    "title": "同义词：核心结论-1",
+    "content": "决定、共识、定案、敲定方案、确认结果",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_004",
+    "title": "同义词：遗留问题-1",
+    "content": "未决事项、现存缺口、当前卡点、机制缺失、尚未解决",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_005",
+    "title": "同义词：风险-1",
+    "content": "隐患、潜在问题、可能导致、存在概率、未来不利事件",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_006",
+    "title": "同义词：负责人-1",
+    "content": "owner、责任人、执行方、牵头人、承接角色",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_007",
+    "title": "同义词：截止时间-1",
+    "content": "deadline、完成时间、最晚日期、交付节点、时间要求",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_008",
+    "title": "同义词：上线-1",
+    "content": "发布、投产、正式启用、切生产、发布版本",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_009",
+    "title": "同义词：复盘-1",
+    "content": "回顾、数据复核、效果评估、阶段总结",
+    "scope": "general",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_012",
+    "title": "同义词：预算缩减-1",
+    "content": "降预算、收缩投放、减少广告花费",
+    "scope": "scenario",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_013",
+    "title": "同义词：数据迁移-1",
+    "content": "历史数据适配、旧数据兼容、存量数据迁移",
+    "scope": "scenario",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  },
+  {
+    "source_id": "v4_synonym_mapping_014",
+    "title": "同义词：需求冻结-1",
+    "content": "锁定需求、不接受临时变更、版本范围固定",
+    "scope": "scenario",
+    "reason": "同义词用于查询扩展、标准化和场景识别，不应作为独立 RAG 文本。"
+  }
+]
