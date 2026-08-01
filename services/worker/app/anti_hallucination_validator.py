@@ -988,13 +988,35 @@ def has_unresolved_signal(text: object) -> bool:
     signals = [
         "暂时不做最终决定",
         "暂不做最终决定",
+        "暂不决定",
+        "暂不确认",
         "不做最终决定",
         "尚未确定",
         "未确定",
         "未明确",
+        "不能确认",
+        "没有最终决定",
         "是否启动",
         "待确认",
         "待定",
+    ]
+    return any(normalize_text(signal) in norm for signal in signals)
+
+
+def has_non_final_decision_signal(text: object) -> bool:
+    norm = normalize_text(text)
+    signals = [
+        "再确定最终方向",
+        "后续确定",
+        "继续评估",
+        "暂不确认",
+        "暂不决定",
+        "初步怀疑",
+        "还没有最终确认",
+        "不能直接确认",
+        "待进一步评估",
+        "暂时不做最终决定",
+        "暂不做最终决定",
     ]
     return any(normalize_text(signal) in norm for signal in signals)
 
@@ -1007,6 +1029,97 @@ def is_conditional_followup_only(text: object) -> bool:
     return conditional and followup and not confirmed
 
 
+def has_explicit_action_requirement(text: object) -> bool:
+    norm = normalize_text(text)
+    patterns = [
+        "需要同步",
+        "需要补充",
+        "需要更新",
+        "需要提交",
+        "需要排查",
+        "需要验证",
+        "需要评估",
+        "继续评估",
+        "继续排查",
+        "先评估",
+    ]
+    return any(normalize_text(pattern) in norm for pattern in patterns)
+
+
+def action_task_from_boundary_text(text: object) -> str:
+    norm = normalize_text(text)
+    if "先评估不同方案收益和成本" in norm:
+        return "评估不同方案收益和成本"
+    if "继续评估模型架构调整" in norm:
+        return "继续评估模型架构调整"
+    if "需要继续排查" in norm or "继续排查" in norm:
+        return "继续排查事故原因"
+    if "需要同步组件规范" in norm:
+        return "同步组件规范"
+    if "需要补充" in norm:
+        return "补充相关事项"
+    if "需要更新" in norm:
+        return "更新相关事项"
+    if "需要提交" in norm:
+        return "提交相关事项"
+    if "需要验证" in norm:
+        return "验证相关事项"
+    if "需要评估" in norm or "继续评估" in norm:
+        return "评估相关事项"
+    return str(text or "").strip()
+
+
+def add_boundary_action_item(result: dict, source_text: str, audit: list[dict] | None = None) -> None:
+    task = action_task_from_boundary_text(source_text)
+    if not task:
+        return
+    actions = result.setdefault("action_items", [])
+    if has_item(actions, "task", task):
+        return
+    item = {
+        "owner_name": None,
+        "owner": None,
+        "task": task,
+        "deadline": None,
+        "due_date": None,
+        "priority": None,
+        "source_text": source_text,
+        "confidence": 0.75,
+        "repaired_by_validator": True,
+        "repair_reason": "non_final_decision_reclassified_to_action",
+    }
+    actions.append(item)
+    add_audit(audit, "action_items", "add", "non_final_decision_reclassified_to_action", None, item)
+
+
+def add_boundary_unresolved_issue(result: dict, source_text: str, audit: list[dict] | None = None) -> None:
+    issue = "事项尚未最终确认"
+    source_norm = normalize_text(source_text)
+    if "最终方向" in source_norm:
+        issue = "最终方向尚未确定"
+    elif "根因" in source_norm or "原因" in source_norm or "初步怀疑" in source_norm:
+        issue = "相关原因尚未最终确认"
+    elif "不能直接确认" in source_norm:
+        issue = "相关方案尚未确认"
+    issues = result.setdefault("unresolved_issues", [])
+    source_norm = normalize_text(source_text)
+    if any(source_norm and source_norm == normalize_text(item.get("source_text", "")) for item in issues if isinstance(item, dict)):
+        return
+    if has_item(issues, "issue", issue):
+        return
+    item = {
+        "issue": issue,
+        "reason": "",
+        "blocker": None,
+        "source_text": source_text,
+        "confidence": 0.75,
+        "repaired_by_validator": True,
+        "repair_reason": "non_final_decision_reclassified_to_unresolved",
+    }
+    issues.append(item)
+    add_audit(audit, "unresolved_issues", "add", "non_final_decision_reclassified_to_unresolved", None, item)
+
+
 def filter_core_conclusions(result: dict, audit: list[dict] | None = None) -> dict:
     kept = []
     for item in result.get("key_conclusions", []):
@@ -1014,6 +1127,14 @@ def filter_core_conclusions(result: dict, audit: list[dict] | None = None) -> di
             continue
         combined = item.get("conclusion", "") + item.get("source_text", "")
         conclusion = item.get("conclusion", "")
+        if has_non_final_decision_signal(combined):
+            source_text = item.get("source_text") or conclusion
+            if has_unresolved_signal(combined):
+                add_boundary_unresolved_issue(result, source_text, audit)
+            elif has_explicit_action_requirement(combined):
+                add_boundary_action_item(result, source_text, audit)
+            add_audit(audit, "key_conclusions", "remove", "non_final_decision_not_core_conclusion", item)
+            continue
         if has_unresolved_signal(combined):
             add_audit(audit, "key_conclusions", "remove", "unresolved_issue_not_core_conclusion", item)
             continue
@@ -1089,6 +1210,9 @@ def has_explicit_risk_source(source_text: object) -> bool:
     norm = normalize_text(source_text)
     explicit_signals = [
         "风险",
+        "可能影响",
+        "可能导致",
+        "受到影响",
         "延期",
         "延迟",
         "卡住",
@@ -1097,9 +1221,31 @@ def has_explicit_risk_source(source_text: object) -> bool:
         "异常",
         "错乱",
         "反复",
+        "否则",
+        "返工",
+        "投诉",
+        "失败",
         "回归量偏大",
     ]
-    return any(normalize_text(signal) in norm for signal in explicit_signals)
+    if any(normalize_text(signal) in norm for signal in explicit_signals):
+        return True
+    return "如果" in norm and ("可能" in norm or "导致" in norm)
+
+
+def conservative_risk_text(risk_text: object, source_text: object) -> str:
+    risk = str(risk_text or "").strip()
+    source = str(source_text or "").strip()
+    source_norm = normalize_text(source)
+    risk_norm = normalize_text(risk)
+
+    if "可能影响" in source_norm:
+        if "一定" in risk_norm or "必然" in risk_norm or ("导致" in risk_norm and "可能导致" not in risk_norm):
+            return source
+    if "可能导致" in source_norm and ("一定" in risk_norm or "必然" in risk_norm):
+        return source
+    if "受到影响" in source_norm and ("下降" in risk_norm or "失败" in risk_norm) and "可能" not in risk_norm:
+        return source
+    return risk
 
 
 def filter_inferred_risks(result: dict, audit: list[dict] | None = None) -> dict:
@@ -1116,6 +1262,12 @@ def filter_inferred_risks(result: dict, audit: list[dict] | None = None) -> dict
             item["risk"] = "方案延期可能影响交付节奏"
             item["repair_reason"] = "time_risk_wording_aligned_to_source"
             add_audit(audit, "risks_and_focus", "modify", "time_risk_wording_aligned_to_source", before, item)
+        conservative = conservative_risk_text(item.get("risk", ""), source_text)
+        if conservative != item.get("risk", ""):
+            before = deepcopy(item)
+            item["risk"] = conservative
+            item["repair_reason"] = "risk_wording_clamped_to_source_uncertainty"
+            add_audit(audit, "risks_and_focus", "modify", "risk_wording_clamped_to_source_uncertainty", before, item)
         kept.append(item)
     result["risks_and_focus"] = kept
     return result
@@ -1169,8 +1321,9 @@ def clear_action_fields_without_source_evidence(result: dict, audit: list[dict] 
 
 def filter_unassigned_or_suggested_action_items(result: dict, audit: list[dict] | None = None) -> dict:
     commitment_terms = ["我会", "我来", "我负责", "我这边", "我们负责", "由", "交给"]
-    assignment_terms = ["负责", "完成", "提交", "输出", "编写", "更新", "同步", "整理"]
-    weak_source_terms = ["建议", "可以", "需要", "可能", "否则"]
+    assignment_terms = ["负责", "完成", "提交", "输出", "编写", "更新", "同步", "整理", "补充", "验证", "排查", "跟进", "安排"]
+    weak_source_terms = ["建议", "可以", "可能", "否则", "不确定", "讨论"]
+    action_requirement_terms = ["需要补充", "需要同步", "需要更新", "需要验证", "需要排查", "后续安排", "下一步完成"]
 
     kept = []
     for item in result.get("action_items", []):
@@ -1182,10 +1335,14 @@ def filter_unassigned_or_suggested_action_items(result: dict, audit: list[dict] 
         has_commitment = any(normalize_text(term) in source_norm for term in commitment_terms)
         has_assignment = bool(owner) or any(normalize_text(term) in source_norm for term in assignment_terms)
         weak_source = any(normalize_text(term) in source_norm for term in weak_source_terms)
+        has_action_requirement = any(normalize_text(term) in source_norm for term in action_requirement_terms)
         direction_only = "方向先推进" in source_norm and not has_commitment
 
         if direction_only or (weak_source and not has_commitment and not has_assignment):
             add_audit(audit, "action_items", "remove", "suggestion_or_direction_without_assignment", item)
+            continue
+        if "需要" in source_norm and not (has_action_requirement or has_assignment or has_commitment):
+            add_audit(audit, "action_items", "remove", "need_statement_without_explicit_action", item)
             continue
         if "功能开发" in task_norm and "功能开发" not in source_norm:
             add_audit(audit, "action_items", "remove", "task_claim_not_supported_by_action_source", item)
@@ -1198,6 +1355,15 @@ def filter_unassigned_or_suggested_action_items(result: dict, audit: list[dict] 
 
 def filter_weak_unresolved_issues(result: dict, audit: list[dict] | None = None) -> dict:
     kept = []
+    requirement_action_patterns = [
+        "需要同步",
+        "需要补充",
+        "需要更新",
+        "需要提交",
+        "需要排查",
+        "需要验证",
+        "需要评估",
+    ]
     for item in result.get("unresolved_issues", []):
         if not isinstance(item, dict):
             continue
@@ -1209,6 +1375,9 @@ def filter_weak_unresolved_issues(result: dict, audit: list[dict] | None = None)
         combined_norm = normalize_text(combined)
         if has_unresolved_signal(combined):
             kept.append(item)
+            continue
+        if any(normalize_text(pattern) in combined_norm for pattern in requirement_action_patterns):
+            add_audit(audit, "unresolved_issues", "remove", "requirement_action_not_unresolved_issue", item)
             continue
         if "需要提前确认" in combined_norm and "否则" in combined_norm:
             add_audit(audit, "unresolved_issues", "remove", "requirement_or_risk_not_unresolved_issue", item)

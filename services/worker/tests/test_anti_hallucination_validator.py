@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.anti_hallucination_validator import clear_action_fields_without_source_evidence, validate_meeting_analysis
+from app.meeting_analysis_pipeline import _rule_intent
 
 
 TRANSCRIPT = "\n".join(
@@ -280,6 +281,154 @@ class AntiHallucinationValidatorTest(unittest.TestCase):
             [item["risk"] for item in result["risks_and_focus"]],
             ["方案延期可能影响交付节奏"],
         )
+
+    def test_non_final_decision_text_cannot_enter_key_conclusions(self) -> None:
+        transcript = "项目经理：底层重构是否启动，本次会议暂时不做最终决定。"
+        raw = {
+            "key_conclusions": [
+                {
+                    "conclusion": "底层重构暂时不做最终决定",
+                    "source_text": "本次会议暂时不做最终决定",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(result["key_conclusions"], [])
+
+    def test_conditional_risk_source_is_kept_and_clamped(self) -> None:
+        transcript = "项目经理：如果指标继续下降，可能影响交付。"
+        raw = {
+            "risks_and_focus": [
+                {
+                    "risk": "指标下降一定导致交付失败",
+                    "source_text": "如果指标继续下降，可能影响交付",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(len(result["risks_and_focus"]), 1)
+        self.assertEqual(result["risks_and_focus"][0]["risk"], "如果指标继续下降，可能影响交付")
+
+    def test_requirement_action_cannot_enter_unresolved_issues(self) -> None:
+        transcript = "前端负责人：如果确定方案，需要同步组件规范。"
+        raw = {
+            "unresolved_issues": [
+                {
+                    "issue": "组件规范需要同步",
+                    "source_text": "需要同步组件规范",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(result["unresolved_issues"], [])
+
+    def test_plain_proposal_cannot_enter_key_conclusions(self) -> None:
+        transcript = "产品经理：建议先优化流程。"
+        raw = {
+            "key_conclusions": [
+                {
+                    "conclusion": "建议先优化流程",
+                    "source_text": "建议先优化流程",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(result["key_conclusions"], [])
+
+    def test_strong_decision_can_enter_key_conclusions(self) -> None:
+        transcript = "产品经理：确定采用方案A。"
+        raw = {
+            "key_conclusions": [
+                {
+                    "conclusion": "确定采用方案A",
+                    "source_text": "确定采用方案A",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual([item["conclusion"] for item in result["key_conclusions"]], ["确定采用方案A"])
+
+    def test_explicit_need_verify_can_enter_action_items(self) -> None:
+        transcript = "设计负责人：需要验证新版交互数据。"
+        raw = {
+            "action_items": [
+                {
+                    "task": "验证新版交互数据",
+                    "owner_name": "产品经理",
+                    "deadline": "本周",
+                    "source_text": "需要验证新版交互数据",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual([item["task"] for item in result["action_items"]], ["验证新版交互数据"])
+        self.assertIsNone(result["action_items"][0]["owner_name"])
+        self.assertIsNone(result["action_items"][0]["deadline"])
+
+    def test_explicit_need_sync_can_enter_action_items(self) -> None:
+        transcript = "前端负责人：需要同步组件规范。"
+        raw = {
+            "action_items": [
+                {
+                    "task": "同步组件规范",
+                    "owner_name": None,
+                    "deadline": None,
+                    "source_text": "需要同步组件规范",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual([item["task"] for item in result["action_items"]], ["同步组件规范"])
+
+    def test_suggestion_optimize_cannot_enter_action_items(self) -> None:
+        transcript = "产品经理：建议优化流程。"
+        raw = {
+            "action_items": [
+                {
+                    "task": "优化流程",
+                    "source_text": "建议优化流程",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(result["action_items"], [])
+
+    def test_can_consider_cannot_enter_action_items(self) -> None:
+        transcript = "产品经理：可以考虑优化流程。"
+        raw = {
+            "action_items": [
+                {
+                    "task": "优化流程",
+                    "source_text": "可以考虑优化流程",
+                }
+            ]
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(result["action_items"], [])
+
+    def test_fast_path_action_boundary(self) -> None:
+        self.assertEqual(_rule_intent("需要验证新版交互数据", 1), "task_assignment")
+        self.assertEqual(_rule_intent("需要同步组件规范", 1), "task_assignment")
+        self.assertEqual(_rule_intent("建议优化流程", 1), "proposal")
+        self.assertEqual(_rule_intent("可以考虑优化流程", 1), "proposal")
 
 
 if __name__ == "__main__":

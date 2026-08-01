@@ -2,6 +2,16 @@
 
 ## 2026-08-01
 
+- Completed Stage7.3.x Action Extraction Calibration. Explicit
+  evidence-grounded requirement actions such as `需要验证`, `需要同步`,
+  `需要更新`, `需要排查`, `后续安排`, and `下一步完成` can now remain as
+  action items, while `建议`, `可以考虑`, `可能`, `不确定`, and `讨论`
+  remain blocked from action extraction. Re-generated Stage7 Golden Regression
+  actual outputs under
+  `data/eval/reports/stage7_golden_regression/latest_runs_stage7_3_x/`.
+  Latest metrics: Decision Precision `0.8000`, Task Recall `0.5000`, Risk
+  Recall `0.8000`, Hallucination Rate `0.0000`, Evidence Coverage `1.0000`.
+
 - Completed Stage7 Golden Regression optimization for
   `project_delivery_001`. The Worker anti-hallucination validator now removes
   unresolved or conditional follow-up statements from `key_conclusions`,

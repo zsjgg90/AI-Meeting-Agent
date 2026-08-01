@@ -136,18 +136,85 @@ def _contains_any(text: str, keywords: Iterable[str]) -> bool:
     return any(keyword in text for keyword in keywords)
 
 
+def _has_conditional_risk_signal(text: str) -> bool:
+    return (
+        _contains_any(text, {"可能影响", "可能导致", "受到影响", "返工", "失败", "投诉"})
+        or ("如果" in text and _contains_any(text, {"可能", "导致", "影响"}))
+        or "否则" in text
+    )
+
+
+def _has_non_final_decision_signal(text: str) -> bool:
+    return _contains_any(
+        text,
+        {
+            "再确定",
+            "后续确定",
+            "继续评估",
+            "暂未确定",
+            "尚未确认",
+            "待确认",
+            "后续评估",
+            "暂不确认",
+            "暂不决定",
+            "初步怀疑",
+            "还没有最终确认",
+            "不能直接确认",
+        },
+    )
+
+
+def _has_strong_decision_signal(text: str) -> bool:
+    return _contains_any(
+        text,
+        {
+            "确定方案",
+            "确认采用",
+            "决定执行",
+            "达成一致",
+            "同意",
+            "采纳",
+            "锁定",
+            "禁止",
+            "不再",
+            "必须",
+            "砍掉",
+            "统一",
+        },
+    )
+
+
+def _has_action_requirement_signal(text: str) -> bool:
+    if _contains_any(text, {"建议", "可以考虑", "可能", "不确定", "讨论"}):
+        return False
+    return _contains_any(
+        text,
+        {
+            "需要补充",
+            "需要同步",
+            "需要更新",
+            "需要验证",
+            "需要排查",
+            "后续安排",
+            "下一步完成",
+        },
+    )
+
+
 def _rule_intent(text: str, index: int) -> str:
     if _contains_any(text, {"无问题", "无疑问", "没有其他问题"}):
         return "non_event"
     if index == 0 or _contains_any(text, {"议程", "目标", "今天我们", "首先", "本次会议"}):
         return "agenda_statement"
-    if _contains_any(text, {"疑问", "没有明确", "未明确", "需要补充", "缺失", "遗漏", "有没有"}):
-        return "open_issue"
-    if _contains_any(text, {"决定", "确认", "同意", "明确", "采纳", "锁定", "禁止", "不再", "必须", "砍掉", "统一"}):
-        return "decision"
-    if _contains_any(text, {"风险", "隐患", "压力", "超时", "回滚", "故障", "高风险", "压缩", "偏紧"}):
+    if _has_conditional_risk_signal(text) or _contains_any(text, {"风险", "隐患", "压力", "超时", "回滚", "故障", "高风险", "压缩", "偏紧"}):
         return "risk_warning"
-    if _contains_any(text, {"我会", "负责", "启动", "更新", "补充", "同步", "推进", "落地", "编写"}):
+    if _has_non_final_decision_signal(text) or _contains_any(text, {"疑问", "没有明确", "未明确", "缺失", "遗漏", "有没有"}):
+        return "open_issue"
+    if _has_strong_decision_signal(text):
+        return "decision"
+    if _contains_any(text, {"建议", "可以考虑"}):
+        return "proposal"
+    if _has_action_requirement_signal(text) or _contains_any(text, {"我会", "负责", "启动", "更新", "补充", "同步", "推进", "落地", "编写", "需要提交"}):
         return "task_assignment"
     if _contains_any(text, {"建议", "可以考虑", "希望", "最好"}):
         return "proposal"

@@ -28,7 +28,6 @@ CONFIRMATION_PATTERNS = [
     "同意",
     "确认",
     "决定",
-    "确定",
     "采纳",
     "就这么定",
     "按此执行",
@@ -36,6 +35,23 @@ CONFIRMATION_PATTERNS = [
     "统一按照",
     "最终决定",
     "敲定",
+    "确定方案",
+    "确认采用",
+    "决定执行",
+    "达成一致",
+]
+
+NON_FINAL_DECISION_PATTERNS = [
+    "再确定",
+    "后续确定",
+    "继续评估",
+    "暂未确定",
+    "暂不确认",
+    "暂不决定",
+    "初步怀疑",
+    "还没有最终确认",
+    "不能直接确认",
+    "待进一步评估",
 ]
 
 REJECTION_PATTERNS = [
@@ -100,7 +116,13 @@ ASSIGNMENT_PATTERNS = [
     "需要补充",
     "需要更新",
     "需要提交",
+    "需要同步",
+    "需要排查",
+    "需要验证",
+    "需要评估",
     "需要跟进",
+    "后续安排",
+    "下一步完成",
     "需在",
 ]
 
@@ -170,14 +192,15 @@ QUESTION_PATTERN = re.compile(
 
 OPEN_ISSUE_PATTERN = re.compile(
     r"(尚未|还没|没有明确|未明确|待确认|等待确认|仍需确认|"
+    r"暂未确定|尚未确认|没有最终决定|不能确认|"
     r"暂时无法|无法现场|规则缺失|方案缺失|尚不清楚|"
     r"未解决|仍未解决|存在问题|缺少|遗漏|不确定)"
 )
 
 RISK_PATTERN = re.compile(
-    r"(风险|隐患|可能导致|可能影响|会导致|容易导致|"
+    r"(风险|隐患|可能导致|可能影响|受到影响|会导致|容易导致|"
     r"一旦.+?(会|可能)|如果.+?(会|可能|导致|影响)|"
-    r"否则|资损|数据丢失|返工|延期|故障|投诉|"
+    r"否则|资损|数据丢失|返工|延期|故障|投诉|失败|"
     r"不稳定|超时|失败|异常)"
 )
 
@@ -197,9 +220,10 @@ ASSIGNMENT_PATTERN = re.compile(
     r"("
     r"由.{1,15}?(负责|完成|跟进|处理|提交|更新|补充|启动)|"
     r".{1,12}?(需要|需在|必须在|应当在).{0,30}?"
-    r"(完成|补充|更新|提交|处理|跟进|启动|编写|修复|确认)|"
+    r"(完成|补充|更新|提交|处理|跟进|启动|编写|修复|确认|同步|排查|验证|评估|安排)|"
+    r"(后续安排|下一步完成).{0,30}?|"
     r".{1,12}?(负责|承担).{0,30}?"
-    r"(完成|补充|更新|提交|处理|跟进|启动|编写|修复|确认)"
+    r"(完成|补充|更新|提交|处理|跟进|启动|编写|修复|确认|同步|排查|验证|评估|安排)"
     r")"
 )
 
@@ -237,6 +261,14 @@ class ValidationSummary:
 
 def _contains_any(text: str, patterns: Iterable[str]) -> bool:
     return any(pattern in text for pattern in patterns)
+
+
+def _has_non_final_decision_signal(text: str) -> bool:
+    return _contains_any(text, NON_FINAL_DECISION_PATTERNS)
+
+
+def _has_action_requirement_signal(text: str) -> bool:
+    return bool(ASSIGNMENT_PATTERN.search(text))
 
 
 def _normalize_flow_text(text: str) -> str:
@@ -369,6 +401,21 @@ def _validate_proposal_and_decision(
         source_text,
         CONFIRMED_REJECTION_PATTERNS,
     )
+
+    if event.primary_intent == "decision" and _has_non_final_decision_signal(source_text):
+        if _has_action_requirement_signal(source_text):
+            event.primary_intent = "task_assignment"
+            _set_event_type(event, "action")
+            event.attributes.status = "pending"
+            _append_secondary_intent(event, "requirement")
+            summary.add("non_final_decision_reclassified_to_task_assignment")
+        else:
+            event.primary_intent = "open_issue"
+            _set_event_type(event, "state")
+            event.attributes.status = "blocked"
+            summary.add("non_final_decision_reclassified_to_open_issue")
+        event.needs_review = True
+        return
 
     # 有建议语气、没有确认语气，不允许成为正式决策。
     if (

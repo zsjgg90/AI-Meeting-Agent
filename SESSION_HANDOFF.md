@@ -2,6 +2,17 @@
 
 ## Current State
 
+Latest Stage7.3.x Action Extraction Calibration is complete. Explicit
+evidence-grounded requirement actions such as `需要验证`, `需要同步`,
+`需要更新`, `需要排查`, `后续安排`, and `下一步完成` can remain in
+`action_items`; suggestion, consideration, uncertainty, and discussion-only
+statements remain blocked. New actual outputs were generated under
+`data/eval/reports/stage7_golden_regression/latest_runs_stage7_3_x/`.
+Latest metrics are `decision_precision=0.8000`, `task_recall=0.5000`,
+`risk_recall=0.8000`, `hallucination_rate=0.0000`, and
+`evidence_coverage=1.0000`. Stage7.4 RC1 Freeze is conditional because Task
+Recall improved but remains the main limitation.
+
 Latest Stage7 Golden Regression note: `project_delivery_001` now exercises the
 Worker anti-hallucination validator boundary for proposal-vs-decision,
 unresolved-vs-decision, suggestion-vs-action, explicit-risk evidence, and
