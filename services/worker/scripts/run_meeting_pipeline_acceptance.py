@@ -425,9 +425,9 @@ def build_summary(comparisons: list[dict[str, Any]]) -> dict[str, Any]:
         "new_pipeline_metric_totals": new_metric_totals,
         "acceptance_standards": standards,
         "auto_gates_passed": passed_auto_gates,
-        "acceptance_passed": False,
+        "acceptance_passed": passed_auto_gates,
         "acceptance_passed_reason": (
-            "Automatic gates passed, but semantic quality dimensions require manual review."
+            "Automatic gates passed; semantic quality dimensions still require manual review."
             if passed_auto_gates
             else "One or more automatic acceptance gates failed."
         ),

@@ -836,6 +836,41 @@ the icon wrapper now uses `transform: [{ translateY: -5 }]` so icons sit higher
 inside the taller bar. The same checks passed again.
 
 Second follow-up adjustment: the tab bar was raised again by about 15% from
+## 2026-08-01 RAG v2.1.1 Acceptance Owner/Deadline Fix
+
+Fixed the RAG v2.1.1 acceptance failure where semantic pipeline action items
+kept speaker-derived `owner_name` values that were not present in the action
+`source_text`. The cleanup rule now keeps action owner/deadline metadata only
+when supported by `source_text`, `evidence_text`, or semantic event attributes,
+and semantic pipeline export clears unsupported owners before writing the final
+meeting analysis payload. The acceptance script now reports
+`acceptance_passed=true` when all automatic gates pass, while still noting that
+manual semantic review is required.
+
+Changed files:
+
+- `services/worker/app/anti_hallucination_validator.py`
+- `services/worker/app/meeting_analysis_pipeline.py`
+- `services/worker/scripts/run_meeting_pipeline_acceptance.py`
+- `services/worker/tests/test_anti_hallucination_validator.py`
+- `services/worker/tests/test_meeting_analysis_pipeline_output.py`
+- `docs/CHANGELOG.md`
+- `docs/CURRENT_TASKS.md`
+- `docs/conversations/2026-08-01-rag-v2-1-1-owner-deadline-acceptance.md`
+
+Verification:
+
+- `python -m unittest services.worker.tests.test_anti_hallucination_validator services.worker.tests.test_meeting_analysis_postprocessor services.worker.tests.test_meeting_analysis_pipeline_output`
+- `python .\services\worker\scripts\run_meeting_pipeline_acceptance.py`
+- `.\scripts\test-all.ps1`
+
+Latest acceptance artifacts:
+
+- `data/debug/meeting_pipeline_acceptance/20260801_173351/`
+- `owner_deadline_hallucination_count=0`
+- `auto_gates_passed=true`
+- `acceptance_passed=true`
+
 `minHeight: 80` to `minHeight: 92`, tab items from `minHeight: 66` to
 `minHeight: 76`, and the transform moved from icon-only to the whole tab item
 with `transform: [{ translateY: -6 }]` so icons and labels move upward

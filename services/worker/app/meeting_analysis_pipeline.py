@@ -92,6 +92,12 @@ def _source_text(item: AgendaItem | SummaryItem | DecisionItem | ActionItem | Op
     return "\n".join(item.source_texts)
 
 
+def _source_supported_value(value: str | None, source_text: str) -> str | None:
+    if not value:
+        return None
+    return value if _text(value).lower() in _text(source_text).lower() else None
+
+
 def _first_segment_id(item: AgendaItem | SummaryItem | DecisionItem | ActionItem | OpenIssueItem | RiskItem) -> str | None:
     for event_id in item.source_event_ids:
         if event_id:
@@ -247,19 +253,21 @@ def six_dimension_result_to_analysis_dict(result: SixDimensionResult) -> dict[st
         }
         for item in result.key_conclusions
     ]
-    action_items = [
-        {
-            "task": item.content,
-            "owner_name": item.owner,
-            "deadline": item.deadline,
-            "priority": _priority(item.priority),
-            "status": _status_for_action(item.status),
-            "source_text": _source_text(item),
-            "source_segment_id": _first_segment_id(item),
-            "confidence": item.confidence,
-        }
-        for item in result.action_items
-    ]
+    action_items = []
+    for item in result.action_items:
+        source_text = _source_text(item)
+        action_items.append(
+            {
+                "task": item.content,
+                "owner_name": _source_supported_value(item.owner, source_text),
+                "deadline": _source_supported_value(item.deadline, source_text),
+                "priority": _priority(item.priority),
+                "status": _status_for_action(item.status),
+                "source_text": source_text,
+                "source_segment_id": _first_segment_id(item),
+                "confidence": item.confidence,
+            }
+        )
     unresolved_issues = [
         {
             "issue": item.content,

@@ -1044,7 +1044,7 @@ def clear_action_fields_without_source_evidence(result: dict, audit: list[dict] 
         source = item.get("source_text", "")
         source_norm = normalize_text(source)
         owner = item.get("owner_name") or item.get("owner")
-        if owner:
+        if owner and (normalize_text(owner) in source_norm or not action_metadata_has_evidence(item, owner, "owner")):
             owner_norm = normalize_text(owner)
             has_owner = owner_norm in source_norm
             has_commitment = any(normalize_text(term) in source_norm for term in commitment_terms)
@@ -1059,7 +1059,7 @@ def clear_action_fields_without_source_evidence(result: dict, audit: list[dict] 
                 add_audit(audit, "action_items", "modify", "owner_without_source_evidence", before, item)
 
         deadline = item.get("deadline") or item.get("due_date")
-        if deadline and normalize_text(deadline) not in source_norm:
+        if deadline and not action_metadata_has_evidence(item, deadline, "deadline"):
             before = deepcopy(item)
             item["deadline"] = None
             item["due_date"] = None
@@ -1076,6 +1076,50 @@ def clear_action_fields_without_source_evidence(result: dict, audit: list[dict] 
             add_audit(audit, "action_items", "modify", "priority_without_source_evidence", before, item)
 
     return result
+
+
+def action_metadata_has_evidence(item: dict, value: object, field_name: str) -> bool:
+    value_norm = normalize_text(value)
+    if not value_norm:
+        return False
+
+    evidence_values: list[object] = [
+        item.get("source_text"),
+        item.get("evidence_text"),
+    ]
+    for key in ("source_texts", "evidence_texts"):
+        values = item.get(key)
+        if isinstance(values, list):
+            evidence_values.extend(values)
+
+    for key in ("semantic_event", "source_event", "event"):
+        event = item.get(key)
+        if isinstance(event, dict):
+            evidence_values.extend(_semantic_event_evidence_values(event, field_name))
+
+    events = item.get("semantic_events") or item.get("source_events") or item.get("events")
+    if isinstance(events, list):
+        for event in events:
+            if isinstance(event, dict):
+                evidence_values.extend(_semantic_event_evidence_values(event, field_name))
+
+    return any(value_norm in normalize_text(candidate) for candidate in evidence_values)
+
+
+def _semantic_event_evidence_values(event: dict, field_name: str) -> list[object]:
+    evidence = event.get("evidence") if isinstance(event.get("evidence"), dict) else {}
+    attributes = event.get("attributes") if isinstance(event.get("attributes"), dict) else {}
+    values: list[object] = [
+        event.get("source_text"),
+        event.get("normalized_text"),
+        evidence.get("source_text"),
+        evidence.get("quote"),
+    ]
+    if field_name == "owner":
+        values.append(attributes.get("owner"))
+    elif field_name == "deadline":
+        values.append(attributes.get("deadline"))
+    return values
 
 
 def cross_dimension_text(field: str, item: object) -> str:

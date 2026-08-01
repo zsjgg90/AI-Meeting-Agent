@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-01
+
+- Fixed the RAG v2.1.1 meeting pipeline acceptance owner/deadline hallucination
+  gate. Worker action metadata cleanup now preserves `owner`/`owner_name` and
+  `deadline`/`due_date` only when supported by action `source_text`,
+  `evidence_text`, or semantic event attributes, and clears unsupported
+  metadata before persistence/export. Semantic pipeline action export now also
+  drops speaker-derived `owner_name` values when the current action
+  `source_text` does not contain that owner evidence. The acceptance report now
+  sets `acceptance_passed=true` when all automatic gates pass while retaining
+  the manual semantic review note.
+
 ## 2026-07-31
 
 - Added Phase 0 Evaluation System infrastructure under `data/eval/`, including

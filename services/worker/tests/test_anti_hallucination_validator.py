@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app.anti_hallucination_validator import validate_meeting_analysis
+from app.anti_hallucination_validator import clear_action_fields_without_source_evidence, validate_meeting_analysis
 
 
 TRANSCRIPT = "\n".join(
@@ -122,6 +122,50 @@ class AntiHallucinationValidatorTest(unittest.TestCase):
         self.assertIsNone(item["owner_name"])
         self.assertIsNone(item["deadline"])
         self.assertIsNone(item["priority"])
+
+    def test_owner_deadline_can_use_evidence_text_or_semantic_attributes(self) -> None:
+        raw = {
+            "action_items": [
+                {
+                    "owner_name": "Alice",
+                    "deadline": "Friday",
+                    "source_text": "ship payment flow",
+                    "evidence_text": "Alice will ship payment flow on Friday",
+                    "priority": None,
+                },
+                {
+                    "owner_name": "Bob",
+                    "deadline": "Monday",
+                    "source_text": "prepare rollout checklist",
+                    "semantic_event": {
+                        "attributes": {
+                            "owner": "Bob",
+                            "deadline": "Monday",
+                        },
+                        "evidence": {
+                            "source_text": "prepare rollout checklist",
+                        },
+                    },
+                    "priority": None,
+                },
+                {
+                    "owner_name": "Carol",
+                    "deadline": "Tuesday",
+                    "source_text": "prepare release note",
+                    "priority": None,
+                },
+            ]
+        }
+
+        result = clear_action_fields_without_source_evidence(raw)
+        items = result["action_items"]
+
+        self.assertEqual(items[0]["owner_name"], "Alice")
+        self.assertEqual(items[0]["deadline"], "Friday")
+        self.assertEqual(items[1]["owner_name"], "Bob")
+        self.assertEqual(items[1]["deadline"], "Monday")
+        self.assertIsNone(items[2]["owner_name"])
+        self.assertIsNone(items[2]["deadline"])
 
     def test_proposal_cannot_enter_core_conclusions(self) -> None:
         raw = {

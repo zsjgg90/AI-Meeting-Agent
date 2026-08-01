@@ -2,6 +2,15 @@
 
 ## Active Priority
 
+RAG v2.1.1 meeting pipeline acceptance owner/deadline hallucination has been
+fixed for RC1. Action item `owner`/`owner_name` and `deadline`/`due_date` must
+remain evidence-bound to the current action `source_text`, `evidence_text`, or
+semantic event attributes; unsupported speaker-derived owners are cleared in
+the final semantic pipeline export. The latest verified acceptance run is under
+`data/debug/meeting_pipeline_acceptance/20260801_173351/` with
+`owner_deadline_hallucination_count=0`, `auto_gates_passed=true`, and
+`acceptance_passed=true`.
+
 Phase 0 Evaluation System is now a standalone offline framework under
 `data/eval/` plus `scripts/evaluate_meeting_analysis.py`. It defines
 evaluation case schema, metric notes, baseline report generation, and mock-data
