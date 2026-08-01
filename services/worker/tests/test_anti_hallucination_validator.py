@@ -181,6 +181,106 @@ class AntiHallucinationValidatorTest(unittest.TestCase):
 
         self.assertEqual(result["key_conclusions"], [])
 
+    def test_unresolved_cannot_enter_core_conclusions(self) -> None:
+        transcript = "项目经理：这个方向先推进，但是底层重构是否启动，本次会议暂时不做最终决定。"
+        raw = {
+            "key_conclusions": [
+                {
+                    "conclusion": "底层重构是否启动的最终决定将延后至后续会议",
+                    "source_text": "本次会议暂时不做最终决定",
+                }
+            ],
+            "unresolved_issues": [
+                {
+                    "issue": "底层重构启动时机未明确",
+                    "source_text": "本次会议暂时不做最终决定",
+                }
+            ],
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(result["key_conclusions"], [])
+        self.assertEqual(result["unresolved_issues"][0]["issue"], "底层重构启动时机未明确")
+
+    def test_project_delivery_001_boundaries_are_filtered(self) -> None:
+        transcript = "\n".join(
+            [
+                "项目经理：今天复盘客户交付项目阶段情况，重点确认当前问题、短期方案和后续安排。",
+                "后端负责人：目前看不是单点问题。短期可以优化流程和页面说明，但是底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高。",
+                "客户成功：我建议先做可以快速上线的部分，长期能力建设放到后续阶段。",
+                "项目经理：这个方向先推进，但是底层重构是否启动，本次会议暂时不做最终决定。",
+                "实施顾问：第一版改动可以配合，不过规则边界需要提前确认，否则联调可能反复。",
+                "项目经理：如果指标继续没有改善，需要重新评估资源投入。",
+            ]
+        )
+        raw = {
+            "key_conclusions": [
+                {
+                    "conclusion": "底层重构是否启动的最终决定将延后至后续会议",
+                    "source_text": "本次会议暂时不做最终决定",
+                },
+                {
+                    "conclusion": "若指标持续未改善需重新评估资源投入",
+                    "source_text": "如果指标继续没有改善，需要重新评估资源投入",
+                },
+            ],
+            "action_items": [
+                {
+                    "owner_name": None,
+                    "task": "推进可快速上线的部分功能开发",
+                    "deadline": None,
+                    "priority": "medium",
+                    "source_text": "这个方向先推进",
+                },
+                {
+                    "owner_name": None,
+                    "task": "确认规则边界以避免联调反复",
+                    "deadline": None,
+                    "priority": "medium",
+                    "source_text": "规则边界需要提前确认，否则联调可能反复",
+                },
+            ],
+            "unresolved_issues": [
+                {
+                    "issue": "底层重构启动时机未明确",
+                    "source_text": "本次会议暂时不做最终决定",
+                },
+                {
+                    "issue": "规则边界未达成具体确认",
+                    "source_text": "规则边界需要提前确认，否则联调可能反复",
+                },
+            ],
+            "risks_and_focus": [
+                {
+                    "risk": "底层能力未准备就绪导致时间风险",
+                    "impact": "完整方案实施可能延迟",
+                    "source_text": "底层能力还没有完全准备好，如果直接做完整方案，时间风险比较高",
+                },
+                {
+                    "risk": "指标未改善导致资源投入调整",
+                    "impact": "可能影响项目整体进度",
+                    "source_text": "如果指标继续没有改善，需要重新评估资源投入",
+                },
+            ],
+        }
+
+        result = validate_meeting_analysis(raw, transcript)
+
+        self.assertEqual(
+            [item["conclusion"] for item in result["key_conclusions"]],
+            ["优先执行当前可落地方案"],
+        )
+        self.assertEqual(result["action_items"], [])
+        self.assertEqual(
+            [item["issue"] for item in result["unresolved_issues"]],
+            ["底层重构启动时机未明确"],
+        )
+        self.assertEqual(
+            [item["risk"] for item in result["risks_and_focus"]],
+            ["方案延期可能影响交付节奏"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

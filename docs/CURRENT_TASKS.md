@@ -2,6 +2,14 @@
 
 ## Active Priority
 
+Stage7 Golden Regression for `project_delivery_001` has been optimized at the
+validator boundary. Current status: decision and risk regressions are fixed,
+evidence coverage remains complete, and unsupported action-task recall is left
+unforced because `整理数据和反馈样本` / `待确认` have no transcript evidence. Latest
+report: `data/eval/reports/stage7_project_delivery_report.json` with
+`decision_precision=1.0`, `task_recall=0.0`, `risk_recall=1.0`,
+`hallucination_rate=0.0`, and `evidence_coverage=1.0`.
+
 RAG v2.1.1 meeting pipeline acceptance owner/deadline hallucination has been
 fixed for RC1. Action item `owner`/`owner_name` and `deadline`/`due_date` must
 remain evidence-bound to the current action `source_text`, `evidence_text`, or

@@ -2,6 +2,19 @@
 
 ## Current State
 
+Latest Stage7 Golden Regression note: `project_delivery_001` now exercises the
+Worker anti-hallucination validator boundary for proposal-vs-decision,
+unresolved-vs-decision, suggestion-vs-action, explicit-risk evidence, and
+source alignment. The validator removes unresolved/conditional statements from
+`key_conclusions`, removes direction-only or weak suggestion action items,
+filters inferred risks without explicit risk wording in `source_text`, and
+keeps true undecided matters in `unresolved_issues`. The latest report is
+`data/eval/reports/stage7_project_delivery_report.json`:
+`decision_precision=1.0`, `task_recall=0.0`, `risk_recall=1.0`,
+`hallucination_rate=0.0`, `evidence_coverage=1.0`. Task recall remains 0.0
+because the expected task `整理数据和反馈样本` and deadline `待确认` are not supported
+by `data/eval/golden_cases/project_delivery_001/transcript.txt`.
+
 Latest evaluation note: Phase 0 Evaluation System now exists as an offline-only
 framework under `data/eval/` with schema, metric notes, report location, and
 `scripts/evaluate_meeting_analysis.py`. It compares existing `expected.json`

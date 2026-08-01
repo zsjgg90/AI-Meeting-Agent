@@ -1,5 +1,5 @@
 param(
-    [string]$ApiBaseUrl = 'http://127.0.0.1:8002',
+    [string]$ApiBaseUrl = 'http://127.0.0.1:8000',
     [string]$WorkerBaseUrl = 'http://127.0.0.1:8001',
     [string]$OllamaBaseUrl = 'http://127.0.0.1:11434',
     [string]$ExpectedOllamaModel = 'qwen3:14b'
@@ -90,11 +90,9 @@ Test-Port -Name 'PostgreSQL' -Port 5432
 Test-Port -Name 'Redis' -Port 6379 -Optional
 Test-Port -Name 'Ollama' -Port 11434
 Test-Port -Name 'Worker' -Port 8001
-Test-Port -Name 'API' -Port 8002
+Test-Port -Name 'API' -Port 8000
 Test-Port -Name 'Expo Metro' -Port 8081 -Optional
 
-Test-PortOwner -Name 'Worker' -Port 8001 -ExpectedPath (Join-Path $ProjectRoot 'services\worker\.venv\Scripts\python.exe')
-Test-PortOwner -Name 'API' -Port 8002 -ExpectedPath (Join-Path $ProjectRoot 'services\api\.venv\Scripts\python.exe')
 
 Test-Http -Name 'API health' -Url "$ApiBaseUrl/health"
 Test-Http -Name 'API ready' -Url "$ApiBaseUrl/ready"

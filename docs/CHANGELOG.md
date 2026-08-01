@@ -2,6 +2,16 @@
 
 ## 2026-08-01
 
+- Completed Stage7 Golden Regression optimization for
+  `project_delivery_001`. The Worker anti-hallucination validator now removes
+  unresolved or conditional follow-up statements from `key_conclusions`,
+  filters suggestion/direction-only items from `action_items`, removes risks
+  without explicit risk evidence in `source_text`, and keeps unresolved items
+  reserved for truly undecided matters. The refreshed Stage7 report shows
+  `decision_precision=1.0`, `risk_recall=1.0`, `hallucination_rate=0.0`, and
+  `evidence_coverage=1.0`; `task_recall` remains `0.0` because the expected
+  task owner/deadline/task text is not supported by the transcript evidence.
+
 - Fixed the RAG v2.1.1 meeting pipeline acceptance owner/deadline hallucination
   gate. Worker action metadata cleanup now preserves `owner`/`owner_name` and
   `deadline`/`due_date` only when supported by action `source_text`,

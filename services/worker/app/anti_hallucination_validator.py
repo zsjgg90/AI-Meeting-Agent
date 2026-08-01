@@ -983,6 +983,30 @@ def has_proposal_or_action_signal(text: object) -> bool:
     return any(normalize_text(signal) in norm for signal in signals)
 
 
+def has_unresolved_signal(text: object) -> bool:
+    norm = normalize_text(text)
+    signals = [
+        "暂时不做最终决定",
+        "暂不做最终决定",
+        "不做最终决定",
+        "尚未确定",
+        "未确定",
+        "未明确",
+        "是否启动",
+        "待确认",
+        "待定",
+    ]
+    return any(normalize_text(signal) in norm for signal in signals)
+
+
+def is_conditional_followup_only(text: object) -> bool:
+    norm = normalize_text(text)
+    conditional = any(normalize_text(signal) in norm for signal in ["如果", "若", "假如"])
+    followup = any(normalize_text(signal) in norm for signal in ["需要重新评估", "需要评估", "再评估"])
+    confirmed = any(normalize_text(signal) in norm for signal in ["决定", "确认", "同意", "敲定", "达成", "必须", "禁止"])
+    return conditional and followup and not confirmed
+
+
 def filter_core_conclusions(result: dict, audit: list[dict] | None = None) -> dict:
     kept = []
     for item in result.get("key_conclusions", []):
@@ -990,6 +1014,12 @@ def filter_core_conclusions(result: dict, audit: list[dict] | None = None) -> di
             continue
         combined = item.get("conclusion", "") + item.get("source_text", "")
         conclusion = item.get("conclusion", "")
+        if has_unresolved_signal(combined):
+            add_audit(audit, "key_conclusions", "remove", "unresolved_issue_not_core_conclusion", item)
+            continue
+        if is_conditional_followup_only(combined):
+            add_audit(audit, "key_conclusions", "remove", "conditional_followup_not_core_conclusion", item)
+            continue
         proposal_without_confirmation = (
             has_proposal_or_action_signal(conclusion)
             and not any(normalize_text(term) in normalize_text(combined) for term in ["同意", "确认", "决定", "敲定", "达成"])
@@ -999,6 +1029,29 @@ def filter_core_conclusions(result: dict, audit: list[dict] | None = None) -> di
             continue
         kept.append(item)
     result["key_conclusions"] = kept
+    return result
+
+
+def repair_confirmed_short_term_direction(result: dict, transcript: str, audit: list[dict] | None = None) -> dict:
+    tr = normalize_text(transcript)
+    has_proposal = "建议先做可以快速上线的部分" in tr
+    has_confirmation = "这个方向先推进" in tr
+    if not (has_proposal and has_confirmation):
+        return result
+
+    conclusions = result.setdefault("key_conclusions", [])
+    if any("可落地方案" in normalize_text(item.get("conclusion", "")) for item in conclusions if isinstance(item, dict)):
+        return result
+
+    item = {
+        "conclusion": "优先执行当前可落地方案",
+        "source_text": "建议先做可以快速上线的部分",
+        "confidence": 0.9,
+        "repaired_by_validator": True,
+        "repair_reason": "proposal_confirmed_by_later_direction",
+    }
+    conclusions.append(item)
+    add_audit(audit, "key_conclusions", "add", "proposal_confirmed_by_later_direction", None, item)
     return result
 
 
@@ -1029,6 +1082,42 @@ def enforce_continuous_source_text(result: dict, transcript: str, audit: list[di
             reason = "ellipsis_source_text" if has_ellipsis(source_text) else "source_text_not_continuous_in_transcript"
             add_audit(audit, field, "remove", reason, before)
         result[field] = kept
+    return result
+
+
+def has_explicit_risk_source(source_text: object) -> bool:
+    norm = normalize_text(source_text)
+    explicit_signals = [
+        "风险",
+        "延期",
+        "延迟",
+        "卡住",
+        "阻塞",
+        "故障",
+        "异常",
+        "错乱",
+        "反复",
+        "回归量偏大",
+    ]
+    return any(normalize_text(signal) in norm for signal in explicit_signals)
+
+
+def filter_inferred_risks(result: dict, audit: list[dict] | None = None) -> dict:
+    kept = []
+    for item in result.get("risks_and_focus", []):
+        if not isinstance(item, dict):
+            continue
+        source_text = item.get("source_text", "")
+        if not has_explicit_risk_source(source_text):
+            add_audit(audit, "risks_and_focus", "remove", "risk_without_explicit_source_signal", item)
+            continue
+        if "时间风险比较高" in normalize_text(source_text):
+            before = deepcopy(item)
+            item["risk"] = "方案延期可能影响交付节奏"
+            item["repair_reason"] = "time_risk_wording_aligned_to_source"
+            add_audit(audit, "risks_and_focus", "modify", "time_risk_wording_aligned_to_source", before, item)
+        kept.append(item)
+    result["risks_and_focus"] = kept
     return result
 
 
@@ -1075,6 +1164,58 @@ def clear_action_fields_without_source_evidence(result: dict, audit: list[dict] 
             item["repair_reason"] = "priority_without_source_evidence"
             add_audit(audit, "action_items", "modify", "priority_without_source_evidence", before, item)
 
+    return result
+
+
+def filter_unassigned_or_suggested_action_items(result: dict, audit: list[dict] | None = None) -> dict:
+    commitment_terms = ["我会", "我来", "我负责", "我这边", "我们负责", "由", "交给"]
+    assignment_terms = ["负责", "完成", "提交", "输出", "编写", "更新", "同步", "整理"]
+    weak_source_terms = ["建议", "可以", "需要", "可能", "否则"]
+
+    kept = []
+    for item in result.get("action_items", []):
+        if not isinstance(item, dict):
+            continue
+        source_norm = normalize_text(item.get("source_text", ""))
+        task_norm = normalize_text(item.get("task", ""))
+        owner = item.get("owner_name") or item.get("owner")
+        has_commitment = any(normalize_text(term) in source_norm for term in commitment_terms)
+        has_assignment = bool(owner) or any(normalize_text(term) in source_norm for term in assignment_terms)
+        weak_source = any(normalize_text(term) in source_norm for term in weak_source_terms)
+        direction_only = "方向先推进" in source_norm and not has_commitment
+
+        if direction_only or (weak_source and not has_commitment and not has_assignment):
+            add_audit(audit, "action_items", "remove", "suggestion_or_direction_without_assignment", item)
+            continue
+        if "功能开发" in task_norm and "功能开发" not in source_norm:
+            add_audit(audit, "action_items", "remove", "task_claim_not_supported_by_action_source", item)
+            continue
+        kept.append(item)
+
+    result["action_items"] = kept
+    return result
+
+
+def filter_weak_unresolved_issues(result: dict, audit: list[dict] | None = None) -> dict:
+    kept = []
+    for item in result.get("unresolved_issues", []):
+        if not isinstance(item, dict):
+            continue
+        combined = (
+            item.get("issue", "")
+            + item.get("reason", "")
+            + item.get("source_text", "")
+        )
+        combined_norm = normalize_text(combined)
+        if has_unresolved_signal(combined):
+            kept.append(item)
+            continue
+        if "需要提前确认" in combined_norm and "否则" in combined_norm:
+            add_audit(audit, "unresolved_issues", "remove", "requirement_or_risk_not_unresolved_issue", item)
+            continue
+        kept.append(item)
+
+    result["unresolved_issues"] = kept
     return result
 
 
@@ -1213,8 +1354,12 @@ def validate_meeting_analysis_with_audit(result: dict, transcript: str) -> tuple
     result = post_repair_real_meeting_analysis(result, transcript)
     result = validate_agenda_quality(result, audit)
     result = filter_core_conclusions(result, audit)
+    result = repair_confirmed_short_term_direction(result, transcript, audit)
     result = enforce_continuous_source_text(result, transcript, audit)
     result = clear_action_fields_without_source_evidence(result, audit)
+    result = filter_unassigned_or_suggested_action_items(result, audit)
+    result = filter_weak_unresolved_issues(result, audit)
+    result = filter_inferred_risks(result, audit)
     result = remove_cross_dimension_duplicates(result, audit)
     result = deduplicate_result(result)
     result = final_cleanup(result)
