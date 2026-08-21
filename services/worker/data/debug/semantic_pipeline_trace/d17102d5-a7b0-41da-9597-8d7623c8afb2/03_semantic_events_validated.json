@@ -1,0 +1,290 @@
+{
+  "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+  "items": [
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "2cec2e78-aeae-572b-ae04-a310f3f01dda",
+      "topic_id": null,
+      "source_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+      "primary_intent": "agenda_statement",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "2cec2e78-aeae-572b-ae04-a310f3f01dda",
+        "utterance_id": "2649bc50-2bc6-490d-b0e1-e82fe705eddc",
+        "segment_id": "2649bc50-2bc6-490d-b0e1-e82fe705eddc",
+        "speaker": "产品经理",
+        "speaker_role": null,
+        "start_time": 0.0,
+        "end_time": 4.0,
+        "source_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+        "normalized_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+        "primary_intent": "agenda_statement",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "产品经理",
+        "action": "agenda_statement",
+        "object": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+        "entities": {
+          "persons": [
+            "产品经理"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "quote": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "d8c32650-6b42-52bb-8dd4-0779b903d3fc",
+      "topic_id": null,
+      "source_text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+      "primary_intent": "proposal",
+      "status": "proposed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "d8c32650-6b42-52bb-8dd4-0779b903d3fc",
+        "utterance_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+        "segment_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+        "speaker": "研发负责人",
+        "speaker_role": null,
+        "start_time": 10.0,
+        "end_time": 14.33,
+        "source_text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+        "normalized_text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+        "primary_intent": "proposal",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "研发负责人",
+        "action": "proposal",
+        "object": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+        "entities": {
+          "persons": [
+            "研发负责人"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "proposed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+          "quote": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "ece6d916-b543-5acf-99c9-4a66bc3583ca",
+      "topic_id": null,
+      "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "ece6d916-b543-5acf-99c9-4a66bc3583ca",
+        "utterance_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+        "segment_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+        "speaker": "前端",
+        "speaker_role": null,
+        "start_time": 20.0,
+        "end_time": 24.17,
+        "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "normalized_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "前端",
+        "action": "risk_warning",
+        "object": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "entities": {
+          "persons": [
+            "前端"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+          "quote": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "3f282b4e-ed13-579b-8d47-7ee8aa357c85",
+      "topic_id": null,
+      "source_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "3f282b4e-ed13-579b-8d47-7ee8aa357c85",
+        "utterance_id": "494cb832-e2c3-49c6-9c1c-426c6ecc583f",
+        "segment_id": "494cb832-e2c3-49c6-9c1c-426c6ecc583f",
+        "speaker": "测试",
+        "speaker_role": null,
+        "start_time": 30.0,
+        "end_time": 34.0,
+        "source_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+        "normalized_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "测试",
+        "action": "task_assignment",
+        "object": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+        "entities": {
+          "persons": [
+            "测试"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": "测试",
+          "deadline": null,
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+          "quote": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "e9597384-0771-550e-86e7-9086c896d147",
+      "topic_id": null,
+      "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+      "primary_intent": "open_issue",
+      "status": "blocked",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "e9597384-0771-550e-86e7-9086c896d147",
+        "utterance_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+        "segment_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+        "speaker": "产品经理",
+        "speaker_role": null,
+        "start_time": 40.0,
+        "end_time": 46.08,
+        "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+        "normalized_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+        "primary_intent": "open_issue",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "产品经理",
+        "action": "open_issue",
+        "object": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+        "entities": {
+          "persons": [
+            "产品经理"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "blocked",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+          "quote": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    }
+  ]
+}

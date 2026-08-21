@@ -1,0 +1,64 @@
+{
+  "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+  "items": [
+    {
+      "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+      "event_id": "cd7bbfee-655b-543d-b5a1-120ee8fa09cf",
+      "topic_id": "topic_1",
+      "source_text": "是不是更牛逼了？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_agenda",
+      "needs_review": false,
+      "item": {
+        "content": "是不是更牛逼了？",
+        "topic_id": "topic_1",
+        "source_event_ids": [
+          "cd7bbfee-655b-543d-b5a1-120ee8fa09cf"
+        ],
+        "source_texts": [
+          "是不是更牛逼了？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    }
+  ],
+  "analysis": {
+    "meeting_agenda": [
+      {
+        "item": "是不是更牛逼了？",
+        "order": 1,
+        "source_segment_ids": [
+          "cd7bbfee-655b-543d-b5a1-120ee8fa09cf"
+        ]
+      }
+    ],
+    "meeting_summary": "是不是更牛逼了？",
+    "key_conclusions": [],
+    "action_items": [],
+    "unresolved_issues": [],
+    "risks_and_focus": [],
+    "topics": [
+      {
+        "title": "是不是更牛逼了？",
+        "summary": "是不是更牛逼了？",
+        "start_time": 130.0,
+        "end_time": 930.0,
+        "related_segment_ids": [
+          "a26383b4-11c9-42a0-84f1-89904c163522"
+        ],
+        "speakers": [
+          "speaker_1"
+        ]
+      }
+    ],
+    "_metadata": {
+      "model_name": "semantic-events+rules",
+      "prompt_version": "semantic-event-pipeline-v1",
+      "rag_chunk_ids": [],
+      "result_source": "semantic_pipeline"
+    }
+  }
+}

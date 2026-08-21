@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-08-05T08:28:28.843161Z",
+  "source_snapshot_as_of": "2026-08-05T08:28:28.843161Z",
+  "current_meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+  "retrieved_at": "2026-08-05T08:28:28.843161Z",
+  "token_budget": 480,
+  "token_cost": 449,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:2ee43cfcb7b3",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.3378,
+      "evidence": [
+        {
+          "evidence_id": "ev:f4c0ee4491ec",
+          "source_type": "semantic_event",
+          "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+          "source_id": "11e90764-b871-4f46-b390-0686f1524d3c",
+          "segment_id": "11e90764-b871-4f46-b390-0686f1524d3c",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。"
+        }
+      ],
+      "token_cost": 153
+    },
+    {
+      "memory_id": "mem:responsibility:ea4618f6ca67",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "agenda_statement今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.3053,
+      "evidence": [
+        {
+          "evidence_id": "ev:4c2ff77bb38b",
+          "source_type": "semantic_event",
+          "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+          "source_id": "81ea062e-5874-44a0-a5a7-98c92dc7b540",
+          "segment_id": "81ea062e-5874-44a0-a5a7-98c92dc7b540",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。"
+        }
+      ],
+      "token_cost": 150
+    },
+    {
+      "memory_id": "mem:responsibility:5ffd47f6e7de",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "progress_update首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.3007,
+      "evidence": [
+        {
+          "evidence_id": "ev:00e27f991cc7",
+          "source_type": "semantic_event",
+          "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+          "source_id": "26cfc322-e627-4aad-ada9-a4f2a431b305",
+          "segment_id": "26cfc322-e627-4aad-ada9-a4f2a431b305",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。"
+        }
+      ],
+      "token_cost": 146
+    }
+  ]
+}

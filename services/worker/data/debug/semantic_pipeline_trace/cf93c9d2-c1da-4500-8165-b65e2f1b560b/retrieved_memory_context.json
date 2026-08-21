@@ -1,0 +1,100 @@
+{
+  "as_of": "2026-08-10T08:37:54.849252Z",
+  "source_snapshot_as_of": "2026-08-10T08:37:54.849252Z",
+  "current_meeting_id": "cf93c9d2-c1da-4500-8165-b65e2f1b560b",
+  "retrieved_at": "2026-08-10T08:37:54.849252Z",
+  "token_budget": 480,
+  "token_cost": 418,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:8ca1ba5f77ff",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment修复任务搜索结果闪动问题",
+        "owner": "前端",
+        "responsibility_type": "explicit_owner",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1592,
+      "evidence": [
+        {
+          "evidence_id": "ev:b3b8d7667e87",
+          "source_type": "semantic_event",
+          "meeting_id": "cf93c9d2-c1da-4500-8165-b65e2f1b560b",
+          "source_id": "dcbdd436-398c-4a8b-ba87-c96759ef6c42",
+          "segment_id": "dcbdd436-398c-4a8b-ba87-c96759ef6c42",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.78,
+          "source_text": "任务再过一下。\n前端，明天下午前修任务搜索结果闪动和 Android 后台恢复后录音计时不准。\n好。"
+        }
+      ],
+      "token_cost": 139
+    },
+    {
+      "memory_id": "mem:responsibility:6211044abec5",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment输出 Golden Dataset 基线报告并完成稳定性测试",
+        "owner": "AI",
+        "responsibility_type": "explicit_owner",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1591,
+      "evidence": [
+        {
+          "evidence_id": "ev:e8af04221812",
+          "source_type": "semantic_event",
+          "meeting_id": "cf93c9d2-c1da-4500-8165-b65e2f1b560b",
+          "source_id": "a343b062-d427-4ea9-8610-741efda769ad",
+          "segment_id": "a343b062-d427-4ea9-8610-741efda769ad",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.78,
+          "source_text": "嗯。\nAI，下周三前出 Golden Dataset 基线报告，再挑两个案例各跑三次稳定性测试。\n好。"
+        }
+      ],
+      "token_cost": 144
+    },
+    {
+      "memory_id": "mem:responsibility:0596d67d07bd",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment完成声纹噪声环境测试",
+        "owner": "测试",
+        "responsibility_type": "explicit_owner",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1565,
+      "evidence": [
+        {
+          "evidence_id": "ev:a7ad56557f11",
+          "source_type": "semantic_event",
+          "meeting_id": "cf93c9d2-c1da-4500-8165-b65e2f1b560b",
+          "source_id": "874e7ac4-626a-457a-a633-46ecd8451cdf",
+          "segment_id": "874e7ac4-626a-457a-a633-46ecd8451cdf",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.78,
+          "source_text": "可以。\n测试，周一回归这些问题，下周二前完成声纹噪声环境测试。\n嗯。"
+        }
+      ],
+      "token_cost": 135
+    }
+  ]
+}

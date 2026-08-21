@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+from uuid import UUID
 
 from app.meeting_analysis_schema import (
     KeyConclusion,
@@ -16,6 +17,21 @@ from app.meeting_analysis_schema import (
 
 ANALYSIS_SCHEMA_VERSION = "meeting-analysis-v1"
 DEFAULT_PROMPT_VERSION = "meeting-analyst-v1"
+EMPTY_ANALYSIS_ERROR_TYPE = "empty_analysis_result"
+OUTPUT_CONTRACT_ALIAS_MAP = {
+    "title_candidate": "meeting_title_candidate",
+    "agenda": "meeting_agenda",
+    "summary": "meeting_summary",
+    "risks_and_concerns": "risks_and_focus",
+}
+STRING_ITEM_CONTRACT_MAP = {
+    "key_conclusions": "conclusion",
+    "unresolved_issues": "issue",
+}
+CONTENT_ITEM_CONTRACT_MAP = {
+    "action_items": "task",
+    "risks_and_focus": "risk",
+}
 
 
 def _text(value: object) -> str:
@@ -30,12 +46,116 @@ def _confidence(value: object, default: float = 0.7) -> float:
     return max(0.0, min(1.0, number))
 
 
+def persistence_source_segment_id(value: object) -> str | None:
+    for part in str(value or "").split(","):
+        candidate = part.strip()
+        if not candidate:
+            continue
+        try:
+            UUID(candidate)
+        except ValueError:
+            continue
+        return candidate
+    return None
+
+
 def _list(value: object) -> list[Any]:
     return value if isinstance(value, list) else []
 
 
 def _dict_items(value: object) -> list[dict[str, Any]]:
     return [dict(item) for item in _list(value) if isinstance(item, dict)]
+
+
+def canonicalize_meeting_analysis_aliases(
+    raw_result: dict[str, Any],
+) -> dict[str, Any]:
+    canonical = dict(raw_result)
+    for alias, target in OUTPUT_CONTRACT_ALIAS_MAP.items():
+        if target not in canonical and alias in canonical:
+            canonical[target] = canonical[alias]
+        canonical.pop(alias, None)
+    return canonical
+
+
+def adapt_meeting_analysis_item_shapes(
+    raw_result: dict[str, Any],
+) -> dict[str, Any]:
+    adapted = dict(raw_result)
+    for field, target_key in STRING_ITEM_CONTRACT_MAP.items():
+        if field not in adapted:
+            continue
+        items: list[Any] = []
+        for item in _list(adapted.get(field)):
+            text = _text(item)
+            if isinstance(item, str) and text:
+                items.append({target_key: text, "source_text": text})
+            elif isinstance(item, dict):
+                shaped = dict(item)
+                if "source_text" not in shaped and "source" not in shaped and _text(shaped.get(target_key)):
+                    shaped["source_text"] = _text(shaped.get(target_key))
+                items.append(shaped)
+        adapted[field] = items
+
+    for field, target_key in CONTENT_ITEM_CONTRACT_MAP.items():
+        if field not in adapted:
+            continue
+        items = []
+        for item in _list(adapted.get(field)):
+            text = _text(item)
+            if isinstance(item, str) and text:
+                items.append({target_key: text, "source_text": text})
+                continue
+            if not isinstance(item, dict):
+                continue
+            shaped = dict(item)
+            if target_key not in shaped and _text(shaped.get("content")):
+                content = _text(shaped.get("content"))
+                shaped[target_key] = content
+                if "source_text" not in shaped:
+                    shaped["source_text"] = content
+            elif "source_text" not in shaped and "source" not in shaped and _text(shaped.get(target_key)):
+                shaped["source_text"] = _text(shaped.get(target_key))
+            items.append(shaped)
+        adapted[field] = items
+    return adapted
+
+
+class EmptyAnalysisResultError(ValueError):
+    def __init__(self, message: str = "empty_analysis_result: invalid_model_output_contract") -> None:
+        super().__init__(message)
+        self.error_type = EMPTY_ANALYSIS_ERROR_TYPE
+
+
+def _has_text(value: object) -> bool:
+    return bool(str(value or "").strip())
+
+
+def is_empty_analysis_result(value: object) -> bool:
+    if isinstance(value, MeetingAnalysisSchema):
+        return (
+            not _has_text(value.meeting_summary)
+            and not value.meeting_agenda
+            and not value.key_conclusions
+            and not value.action_items
+            and not value.unresolved_issues
+            and not value.risks_and_focus
+        )
+    if not isinstance(value, dict):
+        return True
+    return (
+        not _has_text(value.get("meeting_summary") or value.get("overview") or value.get("summary"))
+        and not _list(value.get("meeting_agenda") or value.get("agenda"))
+        and not _list(value.get("key_conclusions") or value.get("decisions"))
+        and not _list(value.get("action_items"))
+        and not _list(value.get("unresolved_issues") or value.get("open_questions"))
+        and not _list(value.get("risks_and_focus") or value.get("risks"))
+    )
+
+
+def ensure_non_empty_analysis_result(value: object) -> None:
+    if is_empty_analysis_result(value):
+        raise EmptyAnalysisResultError()
 
 
 MEETING_TYPE_VALUES = {
@@ -212,6 +332,9 @@ def normalize_meeting_analysis_result(
     Authoritative boundary from model/validator dict output to trusted business schema.
     The model output must pass through this function before persistence.
     """
+    raw_result = adapt_meeting_analysis_item_shapes(
+        canonicalize_meeting_analysis_aliases(raw_result)
+    )
 
     raw_metadata = raw_result.get("_metadata") if isinstance(raw_result.get("_metadata"), dict) else {}
     resolved_prompt_version = (
@@ -249,6 +372,22 @@ def normalize_meeting_analysis_result(
             rag_chunk_schema_version=_text(raw_metadata.get("rag_chunk_schema_version")) or None,
             rag_collection_name=_text(raw_metadata.get("rag_collection_name")) or None,
             rag_embedding_model=_text(raw_metadata.get("rag_embedding_model")) or None,
+            retrieved_chunk_ids=[
+                str(chunk_id)
+                for chunk_id in (
+                    raw_metadata.get("retrieved_chunk_ids")
+                    if isinstance(
+                        raw_metadata.get("retrieved_chunk_ids"),
+                        list,
+                    )
+                    else resolved_rag_chunk_ids
+                )
+            ],
+            retrieval_version=_text(raw_metadata.get("retrieval_version")) or None,
+            scenario_taxonomy_version=_text(
+                raw_metadata.get("scenario_taxonomy_version")
+            )
+            or None,
             rag_retrieval_strategy=_text(
                 raw_metadata.get(
                     "rag_retrieval_strategy"
@@ -299,6 +438,8 @@ def analysis_to_persistence_payload(analysis: MeetingAnalysisSchema) -> dict[str
     topics = [item.model_dump() for item in analysis.topics]
     conclusions = [item.model_dump() for item in analysis.key_conclusions]
     actions = [item.model_dump() for item in analysis.action_items]
+    for item in actions:
+        item["source_segment_id"] = persistence_source_segment_id(item.get("source_segment_id"))
     issues = [item.model_dump() for item in analysis.unresolved_issues]
     risks = [item.model_dump() for item in analysis.risks_and_focus]
 

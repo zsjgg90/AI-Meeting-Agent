@@ -1,0 +1,3103 @@
+{
+  "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+  "items": [
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "3c3a444b-5a41-5b79-957e-be6ddbbeabdf",
+      "topic_id": null,
+      "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+      "primary_intent": "agenda_statement",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "3c3a444b-5a41-5b79-957e-be6ddbbeabdf",
+        "utterance_id": "294164a0-0498-4654-a058-642165d57cdb",
+        "segment_id": "294164a0-0498-4654-a058-642165d57cdb",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 0.0,
+        "end_time": 4.0,
+        "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+        "normalized_text": "人都到了吧？ 赵敏，你声音正常吗？",
+        "primary_intent": "agenda_statement",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "agenda_statement",
+        "object": "人都到了吧？ 赵敏，你声音正常吗？",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+          "quote": "人都到了吧？ 赵敏，你声音正常吗？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "11484e93-a41e-556d-a163-2392621c68e9",
+      "topic_id": null,
+      "source_text": "可以，能听到。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "11484e93-a41e-556d-a163-2392621c68e9",
+        "utterance_id": "ba1ae6c4-3d81-4e35-84d8-60f729fffff3",
+        "segment_id": "ba1ae6c4-3d81-4e35-84d8-60f729fffff3",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 10.0,
+        "end_time": 14.0,
+        "source_text": "可以，能听到。",
+        "normalized_text": "可以，能听到。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "赵敏",
+        "action": "information",
+        "object": "可以，能听到。",
+        "entities": {
+          "persons": [
+            "赵敏"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "可以，能听到。",
+          "quote": "可以，能听到。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "81b92987-b22f-54c0-8d5a-94eea2f83c98",
+      "topic_id": null,
+      "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "81b92987-b22f-54c0-8d5a-94eea2f83c98",
+        "utterance_id": "4f412ba2-9c75-4a44-9637-8148af85c164",
+        "segment_id": "4f412ba2-9c75-4a44-9637-8148af85c164",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 20.0,
+        "end_time": 25.75,
+        "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+        "normalized_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [
+            "今天"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "quote": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "bc3999f8-ff20-58d3-97c1-35404a55a0af",
+      "topic_id": null,
+      "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "bc3999f8-ff20-58d3-97c1-35404a55a0af",
+        "utterance_id": "5f8b04fc-5fb3-40ad-90d4-b6e4a7034cd0",
+        "segment_id": "5f8b04fc-5fb3-40ad-90d4-b6e4a7034cd0",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 30.0,
+        "end_time": 38.5,
+        "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+        "normalized_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "李娜",
+        "action": "information",
+        "object": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是",
+        "entities": {
+          "persons": [
+            "李娜"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "quote": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "c0fb6b73-c766-5e68-8d04-fdcfab6e220d",
+      "topic_id": null,
+      "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+      "primary_intent": "progress_update",
+      "status": "completed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "c0fb6b73-c766-5e68-8d04-fdcfab6e220d",
+        "utterance_id": "66787c3a-fba3-4d03-bf30-df8fadf2e18e",
+        "segment_id": "66787c3a-fba3-4d03-bf30-df8fadf2e18e",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 40.0,
+        "end_time": 44.0,
+        "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+        "normalized_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+        "primary_intent": "progress_update",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "张伟",
+        "action": "progress_update",
+        "object": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "completed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "quote": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "4fee762e-e0e2-5330-941d-42b32e0417e9",
+      "topic_id": null,
+      "source_text": "对，看过。 但是现在感觉还是有。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "4fee762e-e0e2-5330-941d-42b32e0417e9",
+        "utterance_id": "5ca03074-836d-46ab-b20f-6812fe9f8ea2",
+        "segment_id": "5ca03074-836d-46ab-b20f-6812fe9f8ea2",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 50.0,
+        "end_time": 54.0,
+        "source_text": "对，看过。 但是现在感觉还是有。",
+        "normalized_text": "对，看过。 但是现在感觉还是有。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "李娜",
+        "action": "information",
+        "object": "对，看过。 但是现在感觉还是有。",
+        "entities": {
+          "persons": [
+            "李娜"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "对，看过。 但是现在感觉还是有。",
+          "quote": "对，看过。 但是现在感觉还是有。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "c7f02cc1-ae77-5768-a7c0-545bf1ad880c",
+      "topic_id": null,
+      "source_text": "“这个事情后面关注一下。”",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "c7f02cc1-ae77-5768-a7c0-545bf1ad880c",
+        "utterance_id": "20ddf249-6d2f-475e-9c04-c279bc5abc93",
+        "segment_id": "20ddf249-6d2f-475e-9c04-c279bc5abc93",
+        "speaker": "比如用户说",
+        "speaker_role": null,
+        "start_time": 60.0,
+        "end_time": 64.0,
+        "source_text": "“这个事情后面关注一下。”",
+        "normalized_text": "“这个事情后面关注一下。”",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "比如用户说",
+        "action": "information",
+        "object": "“这个事情后面关注一下。”",
+        "entities": {
+          "persons": [
+            "比如用户说"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "“这个事情后面关注一下。”",
+          "quote": "“这个事情后面关注一下。”",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "71636458-ee44-54ba-91ac-dfb4dce41497",
+      "topic_id": null,
+      "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "71636458-ee44-54ba-91ac-dfb4dce41497",
+        "utterance_id": "d29968b4-ea58-4f2e-9027-a5286552735d",
+        "segment_id": "d29968b4-ea58-4f2e-9027-a5286552735d",
+        "speaker": "模型有时候直接变成",
+        "speaker_role": null,
+        "start_time": 70.0,
+        "end_time": 74.0,
+        "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "normalized_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "模型有时候直接变成",
+        "action": "task_assignment",
+        "object": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "entities": {
+          "persons": [
+            "模型有时候直接变成"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": "模型有时候直接变成",
+          "deadline": null,
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "quote": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "434413f8-5bdd-5167-9fce-1916368e559b",
+      "topic_id": null,
+      "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "434413f8-5bdd-5167-9fce-1916368e559b",
+        "utterance_id": "293c5d85-50ba-448c-9fa4-235824470d33",
+        "segment_id": "293c5d85-50ba-448c-9fa4-235824470d33",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 80.0,
+        "end_time": 86.08,
+        "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+        "normalized_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "陈涛",
+        "action": "task_assignment",
+        "object": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": "陈涛",
+          "deadline": null,
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "quote": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "f65b9309-5207-56f2-8f95-23fab1b81ce9",
+      "topic_id": null,
+      "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "f65b9309-5207-56f2-8f95-23fab1b81ce9",
+        "utterance_id": "33253871-72eb-4c1d-ab54-463aa17a0352",
+        "segment_id": "33253871-72eb-4c1d-ab54-463aa17a0352",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 90.0,
+        "end_time": 94.0,
+        "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+        "normalized_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "王强",
+        "action": "information",
+        "object": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+        "entities": {
+          "persons": [
+            "王强"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "quote": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "32115b41-8997-5fb3-bb6c-116f4e0ff5f4",
+      "topic_id": null,
+      "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "32115b41-8997-5fb3-bb6c-116f4e0ff5f4",
+        "utterance_id": "e07a233d-5e73-45b0-a93f-9860556d1f2f",
+        "segment_id": "e07a233d-5e73-45b0-a93f-9860556d1f2f",
+        "speaker": "他们看到的就是",
+        "speaker_role": null,
+        "start_time": 100.0,
+        "end_time": 104.0,
+        "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+        "normalized_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "他们看到的就是",
+        "action": "information",
+        "object": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+        "entities": {
+          "persons": [
+            "他们看到的就是"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "quote": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "b9086ee9-6604-5b4d-ad30-56c8c8047c72",
+      "topic_id": null,
+      "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "b9086ee9-6604-5b4d-ad30-56c8c8047c72",
+        "utterance_id": "3e4e821b-71b5-4376-a32e-19ad6d08825a",
+        "segment_id": "3e4e821b-71b5-4376-a32e-19ad6d08825a",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 110.0,
+        "end_time": 115.67,
+        "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+        "normalized_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "陈涛",
+        "action": "risk_warning",
+        "object": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "quote": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "92923c35-2c8b-5694-932b-0a062e3e49c4",
+      "topic_id": null,
+      "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+      "primary_intent": "progress_update",
+      "status": "completed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "92923c35-2c8b-5694-932b-0a062e3e49c4",
+        "utterance_id": "4be5702b-4142-4cf7-8f09-e0e413d221ab",
+        "segment_id": "4be5702b-4142-4cf7-8f09-e0e413d221ab",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 120.0,
+        "end_time": 124.0,
+        "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+        "normalized_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+        "primary_intent": "progress_update",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "李娜",
+        "action": "progress_update",
+        "object": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+        "entities": {
+          "persons": [
+            "李娜"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "completed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "quote": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "cf7c229d-1e06-54da-b79c-0c181140fb4d",
+      "topic_id": null,
+      "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+      "primary_intent": "decision",
+      "status": "confirmed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "cf7c229d-1e06-54da-b79c-0c181140fb4d",
+        "utterance_id": "0eb473ea-9192-4f56-8277-7c06c9f9d641",
+        "segment_id": "0eb473ea-9192-4f56-8277-7c06c9f9d641",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 130.0,
+        "end_time": 134.0,
+        "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+        "normalized_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+        "primary_intent": "decision",
+        "secondary_intents": [],
+        "event_type": "decision",
+        "subject": "陈涛",
+        "action": "decision",
+        "object": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "confirmed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "quote": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "51c21aea-9e4b-58d3-867f-0eb98ac97e94",
+      "topic_id": null,
+      "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "51c21aea-9e4b-58d3-867f-0eb98ac97e94",
+        "utterance_id": "83a01a6c-6da4-4c43-9c23-bdbe89fbded8",
+        "segment_id": "83a01a6c-6da4-4c43-9c23-bdbe89fbded8",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 140.0,
+        "end_time": 144.0,
+        "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+        "normalized_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "quote": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "80d3341b-3c4f-58be-b3e6-dc54cde730c5",
+      "topic_id": null,
+      "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "80d3341b-3c4f-58be-b3e6-dc54cde730c5",
+        "utterance_id": "ed68dd9d-6a5b-4558-b83c-73b766927bc3",
+        "segment_id": "ed68dd9d-6a5b-4558-b83c-73b766927bc3",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 150.0,
+        "end_time": 154.0,
+        "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+        "normalized_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "赵敏",
+        "action": "information",
+        "object": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+        "entities": {
+          "persons": [
+            "赵敏"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "quote": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "895e7502-7488-5b73-a99a-8172a7985535",
+      "topic_id": null,
+      "source_text": "什么意思？",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "895e7502-7488-5b73-a99a-8172a7985535",
+        "utterance_id": "9036db23-3426-4e3a-a38e-267914adeee8",
+        "segment_id": "9036db23-3426-4e3a-a38e-267914adeee8",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 160.0,
+        "end_time": 164.0,
+        "source_text": "什么意思？",
+        "normalized_text": "什么意思？",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "什么意思？",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "什么意思？",
+          "quote": "什么意思？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "0faac010-3bbb-5858-888e-c37164e4767b",
+      "topic_id": null,
+      "source_text": "“我将在8月15日前完成接口开发。”",
+      "primary_intent": "progress_update",
+      "status": "completed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "0faac010-3bbb-5858-888e-c37164e4767b",
+        "utterance_id": "329a398e-d577-43c7-a815-17147f19e528",
+        "segment_id": "329a398e-d577-43c7-a815-17147f19e528",
+        "speaker": "比如真实会议里面不会说",
+        "speaker_role": null,
+        "start_time": 170.0,
+        "end_time": 174.0,
+        "source_text": "“我将在8月15日前完成接口开发。”",
+        "normalized_text": "“我将在8月15日前完成接口开发。”",
+        "primary_intent": "progress_update",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "比如真实会议里面不会说",
+        "action": "progress_update",
+        "object": "“我将在8月15日前完成接口开发。”",
+        "entities": {
+          "persons": [
+            "比如真实会议里面不会说"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "completed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "“我将在8月15日前完成接口开发。”",
+          "quote": "“我将在8月15日前完成接口开发。”",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "5af916a1-1f32-56b9-a121-4657cd4b8dcd",
+      "topic_id": null,
+      "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "5af916a1-1f32-56b9-a121-4657cd4b8dcd",
+        "utterance_id": "37266c4d-c48a-4330-a4a7-4e0847e9430c",
+        "segment_id": "37266c4d-c48a-4330-a4a7-4e0847e9430c",
+        "speaker": "更多是",
+        "speaker_role": null,
+        "start_time": 180.0,
+        "end_time": 184.0,
+        "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+        "normalized_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "更多是",
+        "action": "information",
+        "object": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+        "entities": {
+          "persons": [
+            "更多是"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "quote": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "d5837b33-26c5-551f-960f-434c1676ccd8",
+      "topic_id": null,
+      "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "d5837b33-26c5-551f-960f-434c1676ccd8",
+        "utterance_id": "f9c9e2ff-8937-4fcd-8259-e05d6f5ce540",
+        "segment_id": "f9c9e2ff-8937-4fcd-8259-e05d6f5ce540",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 190.0,
+        "end_time": 194.0,
+        "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+        "normalized_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "陈涛",
+        "action": "information",
+        "object": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "quote": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "41202067-90c9-5830-9ef1-6e19c3073284",
+      "topic_id": null,
+      "source_text": "还有一个。 之前测试发现一个情况。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "41202067-90c9-5830-9ef1-6e19c3073284",
+        "utterance_id": "f14fec9d-4383-48d6-b2b8-9d1c25342b9c",
+        "segment_id": "f14fec9d-4383-48d6-b2b8-9d1c25342b9c",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 200.0,
+        "end_time": 204.0,
+        "source_text": "还有一个。 之前测试发现一个情况。",
+        "normalized_text": "还有一个。 之前测试发现一个情况。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "赵敏",
+        "action": "information",
+        "object": "还有一个。 之前测试发现一个情况。",
+        "entities": {
+          "persons": [
+            "赵敏"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "还有一个。 之前测试发现一个情况。",
+          "quote": "还有一个。 之前测试发现一个情况。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "f5ba5038-ca86-5e52-974c-6a65765eb9af",
+      "topic_id": null,
+      "source_text": "“是不是可以考虑增加导出功能？”",
+      "primary_intent": "proposal",
+      "status": "proposed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "f5ba5038-ca86-5e52-974c-6a65765eb9af",
+        "utterance_id": "34cca908-17d0-4907-a97c-720b0548ca54",
+        "segment_id": "34cca908-17d0-4907-a97c-720b0548ca54",
+        "speaker": "产品说",
+        "speaker_role": null,
+        "start_time": 210.0,
+        "end_time": 214.0,
+        "source_text": "“是不是可以考虑增加导出功能？”",
+        "normalized_text": "“是不是可以考虑增加导出功能？”",
+        "primary_intent": "proposal",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "产品说",
+        "action": "proposal",
+        "object": "“是不是可以考虑增加导出功能？”",
+        "entities": {
+          "persons": [
+            "产品说"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "proposed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "“是不是可以考虑增加导出功能？”",
+          "quote": "“是不是可以考虑增加导出功能？”",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "c10c3be0-7117-5b0e-9c3e-dd4e07f0517f",
+      "topic_id": null,
+      "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "c10c3be0-7117-5b0e-9c3e-dd4e07f0517f",
+        "utterance_id": "f9492fd9-9cb2-4174-877c-6f0636e33085",
+        "segment_id": "f9492fd9-9cb2-4174-877c-6f0636e33085",
+        "speaker": "结果 AI 直接生成",
+        "speaker_role": null,
+        "start_time": 220.0,
+        "end_time": 224.0,
+        "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+        "normalized_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "结果 AI 直接生成",
+        "action": "information",
+        "object": "“增加PDF导出功能。” 但是会议根本没决定。",
+        "entities": {
+          "persons": [
+            "结果 AI 直接生成"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+          "quote": "“增加PDF导出功能。” 但是会议根本没决定。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "b7f38eb2-91cb-5666-b951-893e5d2f66a9",
+      "topic_id": null,
+      "source_text": "这个确实。 我们只是讨论方向。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "b7f38eb2-91cb-5666-b951-893e5d2f66a9",
+        "utterance_id": "d98952ca-44cb-42a3-bed7-5ce676eb414d",
+        "segment_id": "d98952ca-44cb-42a3-bed7-5ce676eb414d",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 230.0,
+        "end_time": 234.0,
+        "source_text": "这个确实。 我们只是讨论方向。",
+        "normalized_text": "这个确实。 我们只是讨论方向。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "李娜",
+        "action": "information",
+        "object": "这个确实。 我们只是讨论方向。",
+        "entities": {
+          "persons": [
+            "李娜"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个确实。 我们只是讨论方向。",
+          "quote": "这个确实。 我们只是讨论方向。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "45d57b11-e94a-5cd5-88b2-339041c36c65",
+      "topic_id": null,
+      "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "45d57b11-e94a-5cd5-88b2-339041c36c65",
+        "utterance_id": "46c45062-2f06-41d0-a628-791190bd9083",
+        "segment_id": "46c45062-2f06-41d0-a628-791190bd9083",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 240.0,
+        "end_time": 244.08,
+        "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+        "normalized_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [
+            "今天"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "quote": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "6ffcf7a2-3a6f-5065-91d5-d4788168b103",
+      "topic_id": null,
+      "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "6ffcf7a2-3a6f-5065-91d5-d4788168b103",
+        "utterance_id": "bd666855-2e9b-42a5-ad27-fe10e77f6b92",
+        "segment_id": "bd666855-2e9b-42a5-ad27-fe10e77f6b92",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 250.0,
+        "end_time": 254.0,
+        "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "normalized_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "王强",
+        "action": "task_assignment",
+        "object": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "entities": {
+          "persons": [
+            "王强"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": "王强",
+          "deadline": null,
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "quote": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "a90e7a3f-cdc8-521f-a496-21a3072af700",
+      "topic_id": null,
+      "source_text": "什么时候可以测试？",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "a90e7a3f-cdc8-521f-a496-21a3072af700",
+        "utterance_id": "b881357a-e2c0-401d-b8b3-e8bc8f046cef",
+        "segment_id": "b881357a-e2c0-401d-b8b3-e8bc8f046cef",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 260.0,
+        "end_time": 264.0,
+        "source_text": "什么时候可以测试？",
+        "normalized_text": "什么时候可以测试？",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "什么时候可以测试？",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "什么时候可以测试？",
+          "quote": "什么时候可以测试？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "41a76c41-600f-5c34-9066-ca9dc55b1e34",
+      "topic_id": null,
+      "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "41a76c41-600f-5c34-9066-ca9dc55b1e34",
+        "utterance_id": "b9b63db0-5a86-4666-94a4-8d2c1af11304",
+        "segment_id": "b9b63db0-5a86-4666-94a4-8d2c1af11304",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 270.0,
+        "end_time": 274.0,
+        "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+        "normalized_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "王强",
+        "action": "information",
+        "object": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+        "entities": {
+          "persons": [
+            "王强"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "quote": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "3f05a105-94d1-57ac-a87b-c0f29ab585ed",
+      "topic_id": null,
+      "source_text": "是接口问题？",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "3f05a105-94d1-57ac-a87b-c0f29ab585ed",
+        "utterance_id": "5f1a0c50-6191-4242-8fb1-11cbf41f5792",
+        "segment_id": "5f1a0c50-6191-4242-8fb1-11cbf41f5792",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 280.0,
+        "end_time": 284.0,
+        "source_text": "是接口问题？",
+        "normalized_text": "是接口问题？",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "陈涛",
+        "action": "information",
+        "object": "是接口问题？",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "是接口问题？",
+          "quote": "是接口问题？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "28b595ae-4ce6-5ea4-be70-7b061c4cd136",
+      "topic_id": null,
+      "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "28b595ae-4ce6-5ea4-be70-7b061c4cd136",
+        "utterance_id": "6dac9746-e325-44c0-8fd7-e53e3f8cbc01",
+        "segment_id": "6dac9746-e325-44c0-8fd7-e53e3f8cbc01",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 290.0,
+        "end_time": 294.0,
+        "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+        "normalized_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "王强",
+        "action": "risk_warning",
+        "object": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+        "entities": {
+          "persons": [
+            "王强"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "quote": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "48d89b03-bc8b-5091-8158-8604009677ce",
+      "topic_id": null,
+      "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+      "primary_intent": "decision",
+      "status": "confirmed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "48d89b03-bc8b-5091-8158-8604009677ce",
+        "utterance_id": "cbc39066-c678-4b35-84d9-54a25264d1b7",
+        "segment_id": "cbc39066-c678-4b35-84d9-54a25264d1b7",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 300.0,
+        "end_time": 304.0,
+        "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+        "normalized_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+        "primary_intent": "decision",
+        "secondary_intents": [],
+        "event_type": "decision",
+        "subject": "陈涛",
+        "action": "decision",
+        "object": "这个后面可以拆。 但是不是 V2.6 必须。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "confirmed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+          "quote": "这个后面可以拆。 但是不是 V2.6 必须。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "200cf384-ebc7-542b-8fb7-086ec357138a",
+      "topic_id": null,
+      "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "200cf384-ebc7-542b-8fb7-086ec357138a",
+        "utterance_id": "09b9c35f-d794-46a3-8583-8a018d738e5c",
+        "segment_id": "09b9c35f-d794-46a3-8583-8a018d738e5c",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 310.0,
+        "end_time": 314.0,
+        "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+        "normalized_text": "嗯，这个先作为优化项。 不要影响版本。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "嗯，这个先作为优化项。 不要影响版本。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+          "quote": "嗯，这个先作为优化项。 不要影响版本。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "43b7c4ad-092b-5f8f-9da8-9095e53d2f02",
+      "topic_id": null,
+      "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "43b7c4ad-092b-5f8f-9da8-9095e53d2f02",
+        "utterance_id": "955380a0-5357-47fb-b26f-390434acbb90",
+        "segment_id": "955380a0-5357-47fb-b26f-390434acbb90",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 320.0,
+        "end_time": 326.75,
+        "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+        "normalized_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "陈涛",
+        "action": "risk_warning",
+        "object": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "quote": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "ff9d7c46-d613-5880-8d86-e310d6e61319",
+      "topic_id": null,
+      "source_text": "这个会影响上线吗？",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "ff9d7c46-d613-5880-8d86-e310d6e61319",
+        "utterance_id": "f0a2e69e-8eda-41bb-9fbc-c106f1da971d",
+        "segment_id": "f0a2e69e-8eda-41bb-9fbc-c106f1da971d",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 330.0,
+        "end_time": 334.0,
+        "source_text": "这个会影响上线吗？",
+        "normalized_text": "这个会影响上线吗？",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "李娜",
+        "action": "information",
+        "object": "这个会影响上线吗？",
+        "entities": {
+          "persons": [
+            "李娜"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个会影响上线吗？",
+          "quote": "这个会影响上线吗？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "f2838d5f-6720-5caa-90cd-5ab8b21d0b14",
+      "topic_id": null,
+      "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+      "primary_intent": "progress_update",
+      "status": "completed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "f2838d5f-6720-5caa-90cd-5ab8b21d0b14",
+        "utterance_id": "091100c0-093b-4ba1-9857-8345a37e9d54",
+        "segment_id": "091100c0-093b-4ba1-9857-8345a37e9d54",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 340.0,
+        "end_time": 344.0,
+        "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+        "normalized_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+        "primary_intent": "progress_update",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "陈涛",
+        "action": "progress_update",
+        "object": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "completed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "quote": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "283cd448-932b-5e2e-9600-dd83cc72e0e9",
+      "topic_id": null,
+      "source_text": "好，这个放风险里面。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "283cd448-932b-5e2e-9600-dd83cc72e0e9",
+        "utterance_id": "ecbfe2ba-d3d6-4c89-9f99-97290e5b2cc3",
+        "segment_id": "ecbfe2ba-d3d6-4c89-9f99-97290e5b2cc3",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 350.0,
+        "end_time": 354.0,
+        "source_text": "好，这个放风险里面。",
+        "normalized_text": "好，这个放风险里面。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "张伟",
+        "action": "risk_warning",
+        "object": "好，这个放风险里面。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "好，这个放风险里面。",
+          "quote": "好，这个放风险里面。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "79f46347-ef55-531d-914e-4e08aaf32a6c",
+      "topic_id": null,
+      "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "79f46347-ef55-531d-914e-4e08aaf32a6c",
+        "utterance_id": "f922c481-b34a-4dbf-9aef-048e76c9899e",
+        "segment_id": "f922c481-b34a-4dbf-9aef-048e76c9899e",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 360.0,
+        "end_time": 364.0,
+        "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+        "normalized_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "李娜",
+        "action": "risk_warning",
+        "object": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+        "entities": {
+          "persons": [
+            "李娜"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "quote": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "5082fa13-dc89-582c-aeed-a293983a554e",
+      "topic_id": null,
+      "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "5082fa13-dc89-582c-aeed-a293983a554e",
+        "utterance_id": "3d881ff5-88d9-4a0f-98a5-2049d2109236",
+        "segment_id": "3d881ff5-88d9-4a0f-98a5-2049d2109236",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 370.0,
+        "end_time": 374.0,
+        "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+        "normalized_text": "这个也是风险。 先记录，不作为当前版本任务。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "张伟",
+        "action": "risk_warning",
+        "object": "这个也是风险。 先记录，不作为当前版本任务。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+          "quote": "这个也是风险。 先记录，不作为当前版本任务。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "8cab5c4b-0103-597f-a095-669c38d878ef",
+      "topic_id": null,
+      "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "8cab5c4b-0103-597f-a095-669c38d878ef",
+        "utterance_id": "ab3ba564-ffc1-4018-84b0-d22b91db3c1b",
+        "segment_id": "ab3ba564-ffc1-4018-84b0-d22b91db3c1b",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 380.0,
+        "end_time": 388.67,
+        "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+        "normalized_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "张伟",
+        "action": "risk_warning",
+        "object": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "quote": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "f9a6ab00-dcf2-5837-8169-da31e7a31077",
+      "topic_id": null,
+      "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "f9a6ab00-dcf2-5837-8169-da31e7a31077",
+        "utterance_id": "2bd88ac4-5920-4aef-9a09-35225706ce69",
+        "segment_id": "2bd88ac4-5920-4aef-9a09-35225706ce69",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 390.0,
+        "end_time": 394.0,
+        "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "normalized_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "张伟",
+        "action": "task_assignment",
+        "object": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": "张伟",
+          "deadline": null,
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "quote": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "e8fedd86-2d9d-5964-b92a-50eee9598b30",
+      "topic_id": null,
+      "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "e8fedd86-2d9d-5964-b92a-50eee9598b30",
+        "utterance_id": "4bf7e9af-e534-45fd-a44d-a94397d3dd39",
+        "segment_id": "4bf7e9af-e534-45fd-a44d-a94397d3dd39",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 400.0,
+        "end_time": 404.0,
+        "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+        "normalized_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "陈涛",
+        "action": "information",
+        "object": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [
+            "今天"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "quote": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "fece4fff-8076-5714-91a1-0ee1449429c7",
+      "topic_id": null,
+      "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "fece4fff-8076-5714-91a1-0ee1449429c7",
+        "utterance_id": "4bf7e9af-e534-45fd-a44d-a94397d3dd39",
+        "segment_id": "2bd88ac4-5920-4aef-9a09-35225706ce69,4bf7e9af-e534-45fd-a44d-a94397d3dd39,07465924-b58e-4b10-aca0-36b823ff3eba",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 400.0,
+        "end_time": 404.0,
+        "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+        "normalized_text": "输出 Golden Dataset 基线报告并完成稳定性测试",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "陈涛",
+        "action": "task_assignment",
+        "object": "输出 Golden Dataset 基线报告并完成稳定性测试",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [
+            "Golden Dataset"
+          ],
+          "dates": [
+            "今天"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+          "quote": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+          "evidence_type": "contextual"
+        },
+        "confidence": {
+          "intent": 0.78,
+          "entity": 0.7,
+          "overall": 0.78
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "39b42ea1-ea5d-5ab5-9c0e-1d75386b52a8",
+      "topic_id": null,
+      "source_text": "什么时候给结果？",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "39b42ea1-ea5d-5ab5-9c0e-1d75386b52a8",
+        "utterance_id": "07465924-b58e-4b10-aca0-36b823ff3eba",
+        "segment_id": "07465924-b58e-4b10-aca0-36b823ff3eba",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 410.0,
+        "end_time": 414.0,
+        "source_text": "什么时候给结果？",
+        "normalized_text": "什么时候给结果？",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "什么时候给结果？",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "什么时候给结果？",
+          "quote": "什么时候给结果？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "af2083e1-c4b5-578a-bef4-8f5568848fe6",
+      "topic_id": null,
+      "source_text": "明天下午之前。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "af2083e1-c4b5-578a-bef4-8f5568848fe6",
+        "utterance_id": "70c9ee0a-23da-45d0-bf01-d31d651f5979",
+        "segment_id": "70c9ee0a-23da-45d0-bf01-d31d651f5979",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 420.0,
+        "end_time": 424.0,
+        "source_text": "明天下午之前。",
+        "normalized_text": "明天下午之前。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "陈涛",
+        "action": "information",
+        "object": "明天下午之前。",
+        "entities": {
+          "persons": [
+            "陈涛"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "明天下午之前。",
+          "quote": "明天下午之前。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "047c790b-e78f-5cf2-8a2e-b6f75dbe0a89",
+      "topic_id": null,
+      "source_text": "赵敏，你补充真实会议测试样本。",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "047c790b-e78f-5cf2-8a2e-b6f75dbe0a89",
+        "utterance_id": "0a07115e-d112-4901-be3f-689a5d0048b2",
+        "segment_id": "0a07115e-d112-4901-be3f-689a5d0048b2",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 430.0,
+        "end_time": 434.0,
+        "source_text": "赵敏，你补充真实会议测试样本。",
+        "normalized_text": "赵敏，你补充真实会议测试样本。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "张伟",
+        "action": "task_assignment",
+        "object": "赵敏，你补充真实会议测试样本。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": "张伟",
+          "deadline": null,
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "赵敏，你补充真实会议测试样本。",
+          "quote": "赵敏，你补充真实会议测试样本。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "985dc680-60bc-5c1f-a7d6-5e67035dbdc0",
+      "topic_id": null,
+      "source_text": "明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "985dc680-60bc-5c1f-a7d6-5e67035dbdc0",
+        "utterance_id": "0a07115e-d112-4901-be3f-689a5d0048b2",
+        "segment_id": "70c9ee0a-23da-45d0-bf01-d31d651f5979,0a07115e-d112-4901-be3f-689a5d0048b2,0ac44e40-7192-4da9-b579-8ff861208454",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 430.0,
+        "end_time": 434.0,
+        "source_text": "明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+        "normalized_text": "赵敏，你补充真实会议测试样本。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "张伟",
+        "action": "task_assignment",
+        "object": "赵敏，你补充真实会议测试样本。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [
+            "会议"
+          ],
+          "dates": [
+            "明天下午"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "明天下午",
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "quote": "明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "evidence_type": "contextual"
+        },
+        "confidence": {
+          "intent": 0.78,
+          "entity": 0.7,
+          "overall": 0.78
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "ccd4165f-946e-522d-8970-e50ef73416be",
+      "topic_id": null,
+      "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "ccd4165f-946e-522d-8970-e50ef73416be",
+        "utterance_id": "0ac44e40-7192-4da9-b579-8ff861208454",
+        "segment_id": "0ac44e40-7192-4da9-b579-8ff861208454",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 440.0,
+        "end_time": 444.0,
+        "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+        "normalized_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "赵敏",
+        "action": "information",
+        "object": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+        "entities": {
+          "persons": [
+            "赵敏"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [
+            "今天"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "quote": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "48898f7f-76d8-50c9-8c03-d1031897437a",
+      "topic_id": null,
+      "source_text": "明天吧。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "48898f7f-76d8-50c9-8c03-d1031897437a",
+        "utterance_id": "7bea8762-15c5-4c77-b8ee-715cd1714b52",
+        "segment_id": "7bea8762-15c5-4c77-b8ee-715cd1714b52",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 450.0,
+        "end_time": 454.0,
+        "source_text": "明天吧。",
+        "normalized_text": "明天吧。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "明天吧。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "明天吧。",
+          "quote": "明天吧。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "ea3b4ef4-76a3-501d-8603-df6e164a7101",
+      "topic_id": null,
+      "source_text": "好的。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "ea3b4ef4-76a3-501d-8603-df6e164a7101",
+        "utterance_id": "6f1a25f7-061b-4cd3-8eeb-08a3c43476f6",
+        "segment_id": "6f1a25f7-061b-4cd3-8eeb-08a3c43476f6",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 460.0,
+        "end_time": 464.0,
+        "source_text": "好的。",
+        "normalized_text": "好的。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "赵敏",
+        "action": "information",
+        "object": "好的。",
+        "entities": {
+          "persons": [
+            "赵敏"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "好的。",
+          "quote": "好的。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "cd576d6b-1ff0-5f61-b569-4c957e3aa0d8",
+      "topic_id": null,
+      "source_text": "王强，下午安排录音流程测试。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "cd576d6b-1ff0-5f61-b569-4c957e3aa0d8",
+        "utterance_id": "4f56d733-eba7-4f1a-9b60-f8538600b8df",
+        "segment_id": "4f56d733-eba7-4f1a-9b60-f8538600b8df",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 470.0,
+        "end_time": 474.0,
+        "source_text": "王强，下午安排录音流程测试。",
+        "normalized_text": "王强，下午安排录音流程测试。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "王强，下午安排录音流程测试。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "王强，下午安排录音流程测试。",
+          "quote": "王强，下午安排录音流程测试。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "cabd3a99-7fd0-589b-a398-6751c29ae067",
+      "topic_id": null,
+      "source_text": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+      "primary_intent": "task_assignment",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "cabd3a99-7fd0-589b-a398-6751c29ae067",
+        "utterance_id": "4f56d733-eba7-4f1a-9b60-f8538600b8df",
+        "segment_id": "6f1a25f7-061b-4cd3-8eeb-08a3c43476f6,4f56d733-eba7-4f1a-9b60-f8538600b8df,69af9fd0-bcf6-4472-bedc-a7ca029819af",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 470.0,
+        "end_time": 474.0,
+        "source_text": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+        "normalized_text": "王强，下午安排录音流程测试。",
+        "primary_intent": "task_assignment",
+        "secondary_intents": [],
+        "event_type": "action",
+        "subject": "张伟",
+        "action": "task_assignment",
+        "object": "王强，下午安排录音流程测试。",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [
+            "录音"
+          ],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+          "quote": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+          "evidence_type": "contextual"
+        },
+        "confidence": {
+          "intent": 0.78,
+          "entity": 0.7,
+          "overall": 0.78
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "40d8a6b0-26fd-5058-bc9a-a664a1cd2c5f",
+      "topic_id": null,
+      "source_text": "没问题。",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "40d8a6b0-26fd-5058-bc9a-a664a1cd2c5f",
+        "utterance_id": "69af9fd0-bcf6-4472-bedc-a7ca029819af",
+        "segment_id": "69af9fd0-bcf6-4472-bedc-a7ca029819af",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 480.0,
+        "end_time": 484.0,
+        "source_text": "没问题。",
+        "normalized_text": "没问题。",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "王强",
+        "action": "information",
+        "object": "没问题。",
+        "entities": {
+          "persons": [
+            "王强"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "没问题。",
+          "quote": "没问题。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "3fc00521-4d40-5c58-a9f0-ab4b3b2a41cd",
+      "topic_id": null,
+      "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "3fc00521-4d40-5c58-a9f0-ab4b3b2a41cd",
+        "utterance_id": "1770a72a-3918-4c80-982d-725a47eaeadd",
+        "segment_id": "1770a72a-3918-4c80-982d-725a47eaeadd",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 490.0,
+        "end_time": 494.0,
+        "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+        "normalized_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+          "quote": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+      "event_id": "97320b5a-e98b-5ab6-a6eb-80be272977ff",
+      "topic_id": null,
+      "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+      "primary_intent": "information",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "97320b5a-e98b-5ab6-a6eb-80be272977ff",
+        "utterance_id": "2a0bba65-6b77-499c-a26d-03481d98102e",
+        "segment_id": "2a0bba65-6b77-499c-a26d-03481d98102e",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 500.0,
+        "end_time": 504.0,
+        "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+        "normalized_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+        "primary_intent": "information",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "张伟",
+        "action": "information",
+        "object": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+        "entities": {
+          "persons": [
+            "张伟"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [
+            "今天"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+          "quote": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    }
+  ]
+}

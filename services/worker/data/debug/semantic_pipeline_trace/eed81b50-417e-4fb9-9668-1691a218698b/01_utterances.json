@@ -1,0 +1,1572 @@
+{
+  "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+  "items": [
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "48b7c658-d965-4c25-8b84-19369b446884",
+        "segment_id": "48b7c658-d965-4c25-8b84-19369b446884",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 0.0,
+        "end_time": 4.0,
+        "text": "人都到了吧？ 赵敏，你声音正常吗？",
+        "previous_utterances": [],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": []
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "可以，能听到。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "6672acb0-b809-4f91-b082-1806ce370a53",
+        "segment_id": "6672acb0-b809-4f91-b082-1806ce370a53",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 10.0,
+        "end_time": 14.0,
+        "text": "可以，能听到。",
+        "previous_utterances": [
+          "人都到了吧？ 赵敏，你声音正常吗？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "人都到了吧？ 赵敏，你声音正常吗？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "d13993b9-bf66-46f4-a523-59d68a53586c",
+        "segment_id": "d13993b9-bf66-46f4-a523-59d68a53586c",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 20.0,
+        "end_time": 25.75,
+        "text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+        "previous_utterances": [
+          "人都到了吧？ 赵敏，你声音正常吗？",
+          "可以，能听到。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "人都到了吧？ 赵敏，你声音正常吗？",
+          "可以，能听到。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "b111f155-bd85-4f40-89d9-5a4ec133a5af",
+        "segment_id": "b111f155-bd85-4f40-89d9-5a4ec133a5af",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 30.0,
+        "end_time": 38.5,
+        "text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+        "previous_utterances": [
+          "人都到了吧？ 赵敏，你声音正常吗？",
+          "可以，能听到。",
+          "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "人都到了吧？ 赵敏，你声音正常吗？",
+          "可以，能听到。",
+          "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "249e3cea-43c2-42ef-953c-0bb0c71b47a9",
+        "segment_id": "249e3cea-43c2-42ef-953c-0bb0c71b47a9",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 40.0,
+        "end_time": 44.0,
+        "text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+        "previous_utterances": [
+          "可以，能听到。",
+          "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "可以，能听到。",
+          "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "对，看过。 但是现在感觉还是有。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "bb109ba5-adb9-4038-b3f3-2286ce60ee4a",
+        "segment_id": "bb109ba5-adb9-4038-b3f3-2286ce60ee4a",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 50.0,
+        "end_time": 54.0,
+        "text": "对，看过。 但是现在感觉还是有。",
+        "previous_utterances": [
+          "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "这个待办混乱的问题，上周不是已经看过一次了吗？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "这个待办混乱的问题，上周不是已经看过一次了吗？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "“这个事情后面关注一下。”",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "e220b866-308a-495b-a66c-71eeac10dbb0",
+        "segment_id": "e220b866-308a-495b-a66c-71eeac10dbb0",
+        "speaker": "比如用户说",
+        "speaker_role": null,
+        "start_time": 60.0,
+        "end_time": 64.0,
+        "text": "“这个事情后面关注一下。”",
+        "previous_utterances": [
+          "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "对，看过。 但是现在感觉还是有。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "对，看过。 但是现在感觉还是有。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "fbfb9c01-2931-4e7a-97fe-13e2830f3382",
+        "segment_id": "fbfb9c01-2931-4e7a-97fe-13e2830f3382",
+        "speaker": "模型有时候直接变成",
+        "speaker_role": null,
+        "start_time": 70.0,
+        "end_time": 74.0,
+        "text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "previous_utterances": [
+          "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "对，看过。 但是现在感觉还是有。",
+          "“这个事情后面关注一下。”"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "对，看过。 但是现在感觉还是有。",
+          "“这个事情后面关注一下。”"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "cdcaea77-9ac4-4d4d-809b-3a0ca3e3c81f",
+        "segment_id": "cdcaea77-9ac4-4d4d-809b-3a0ca3e3c81f",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 80.0,
+        "end_time": 86.08,
+        "text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+        "previous_utterances": [
+          "对，看过。 但是现在感觉还是有。",
+          "“这个事情后面关注一下。”",
+          "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "对，看过。 但是现在感觉还是有。",
+          "“这个事情后面关注一下。”",
+          "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "0fe7a27b-317a-4579-94e7-88b82edd3e64",
+        "segment_id": "0fe7a27b-317a-4579-94e7-88b82edd3e64",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 90.0,
+        "end_time": 94.0,
+        "text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+        "previous_utterances": [
+          "“这个事情后面关注一下。”",
+          "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "“这个事情后面关注一下。”",
+          "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "38d5d745-63c0-4d40-b916-205138df48bf",
+        "segment_id": "38d5d745-63c0-4d40-b916-205138df48bf",
+        "speaker": "他们看到的就是",
+        "speaker_role": null,
+        "start_time": 100.0,
+        "end_time": 104.0,
+        "text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+        "previous_utterances": [
+          "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "e3c39eab-0fe6-42b8-a1ee-ac9682dd65c8",
+        "segment_id": "e3c39eab-0fe6-42b8-a1ee-ac9682dd65c8",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 110.0,
+        "end_time": 115.67,
+        "text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+        "previous_utterances": [
+          "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "bc6a03b5-6f03-48ad-a16d-371c12be907e",
+        "segment_id": "bc6a03b5-6f03-48ad-a16d-371c12be907e",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 120.0,
+        "end_time": 124.0,
+        "text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+        "previous_utterances": [
+          "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "9a446c24-730a-48a9-9ea9-bbc920480f0e",
+        "segment_id": "9a446c24-730a-48a9-9ea9-bbc920480f0e",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 130.0,
+        "end_time": 134.0,
+        "text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+        "previous_utterances": [
+          "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "23f0e1fe-52ac-4990-9568-d1218b2214de",
+        "segment_id": "23f0e1fe-52ac-4990-9568-d1218b2214de",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 140.0,
+        "end_time": 144.0,
+        "text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+        "previous_utterances": [
+          "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "2f4f8ee6-98c3-4c01-811a-f8506b15928d",
+        "segment_id": "2f4f8ee6-98c3-4c01-811a-f8506b15928d",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 150.0,
+        "end_time": 154.0,
+        "text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+        "previous_utterances": [
+          "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "什么意思？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "8871511b-17d7-4104-aa2b-7a2bb8de39c2",
+        "segment_id": "8871511b-17d7-4104-aa2b-7a2bb8de39c2",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 160.0,
+        "end_time": 164.0,
+        "text": "什么意思？",
+        "previous_utterances": [
+          "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "“我将在8月15日前完成接口开发。”",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "423d6194-ca41-48e9-8f9e-9e39964a56fc",
+        "segment_id": "423d6194-ca41-48e9-8f9e-9e39964a56fc",
+        "speaker": "比如真实会议里面不会说",
+        "speaker_role": null,
+        "start_time": 170.0,
+        "end_time": 174.0,
+        "text": "“我将在8月15日前完成接口开发。”",
+        "previous_utterances": [
+          "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "什么意思？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "什么意思？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "7ce3d7a1-d754-4fbe-97d8-f33eab1317e9",
+        "segment_id": "7ce3d7a1-d754-4fbe-97d8-f33eab1317e9",
+        "speaker": "更多是",
+        "speaker_role": null,
+        "start_time": 180.0,
+        "end_time": 184.0,
+        "text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+        "previous_utterances": [
+          "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "什么意思？",
+          "“我将在8月15日前完成接口开发。”"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "什么意思？",
+          "“我将在8月15日前完成接口开发。”"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "849efd09-c2f9-45a1-b97d-62b326adc5ac",
+        "segment_id": "849efd09-c2f9-45a1-b97d-62b326adc5ac",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 190.0,
+        "end_time": 194.0,
+        "text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+        "previous_utterances": [
+          "什么意思？",
+          "“我将在8月15日前完成接口开发。”",
+          "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "什么意思？",
+          "“我将在8月15日前完成接口开发。”",
+          "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "还有一个。 之前测试发现一个情况。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "20a6558a-9a78-4846-8a35-e82b090c7578",
+        "segment_id": "20a6558a-9a78-4846-8a35-e82b090c7578",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 200.0,
+        "end_time": 204.0,
+        "text": "还有一个。 之前测试发现一个情况。",
+        "previous_utterances": [
+          "“我将在8月15日前完成接口开发。”",
+          "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "“我将在8月15日前完成接口开发。”",
+          "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "“是不是可以考虑增加导出功能？”",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "359332ce-61c9-4a8e-9c89-e1ad1cea0f3a",
+        "segment_id": "359332ce-61c9-4a8e-9c89-e1ad1cea0f3a",
+        "speaker": "产品说",
+        "speaker_role": null,
+        "start_time": 210.0,
+        "end_time": 214.0,
+        "text": "“是不是可以考虑增加导出功能？”",
+        "previous_utterances": [
+          "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "还有一个。 之前测试发现一个情况。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "还有一个。 之前测试发现一个情况。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "42f9c28c-73c9-4179-bbd4-e6a377d7f9df",
+        "segment_id": "42f9c28c-73c9-4179-bbd4-e6a377d7f9df",
+        "speaker": "结果 AI 直接生成",
+        "speaker_role": null,
+        "start_time": 220.0,
+        "end_time": 224.0,
+        "text": "“增加PDF导出功能。” 但是会议根本没决定。",
+        "previous_utterances": [
+          "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "还有一个。 之前测试发现一个情况。",
+          "“是不是可以考虑增加导出功能？”"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "还有一个。 之前测试发现一个情况。",
+          "“是不是可以考虑增加导出功能？”"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个确实。 我们只是讨论方向。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "4a493bda-bdac-4779-8b8c-0d0ba1f99b7d",
+        "segment_id": "4a493bda-bdac-4779-8b8c-0d0ba1f99b7d",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 230.0,
+        "end_time": 234.0,
+        "text": "这个确实。 我们只是讨论方向。",
+        "previous_utterances": [
+          "还有一个。 之前测试发现一个情况。",
+          "“是不是可以考虑增加导出功能？”",
+          "“增加PDF导出功能。” 但是会议根本没决定。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "还有一个。 之前测试发现一个情况。",
+          "“是不是可以考虑增加导出功能？”",
+          "“增加PDF导出功能。” 但是会议根本没决定。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "7ac23b5c-a6e4-4b4a-b987-ab9fb1604d5e",
+        "segment_id": "7ac23b5c-a6e4-4b4a-b987-ab9fb1604d5e",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 240.0,
+        "end_time": 244.08,
+        "text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+        "previous_utterances": [
+          "“是不是可以考虑增加导出功能？”",
+          "“增加PDF导出功能。” 但是会议根本没决定。",
+          "这个确实。 我们只是讨论方向。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "“是不是可以考虑增加导出功能？”",
+          "“增加PDF导出功能。” 但是会议根本没决定。",
+          "这个确实。 我们只是讨论方向。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "57633053-cc81-4124-8f3f-9f2fdbc9fa31",
+        "segment_id": "57633053-cc81-4124-8f3f-9f2fdbc9fa31",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 250.0,
+        "end_time": 254.0,
+        "text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "previous_utterances": [
+          "“增加PDF导出功能。” 但是会议根本没决定。",
+          "这个确实。 我们只是讨论方向。",
+          "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "“增加PDF导出功能。” 但是会议根本没决定。",
+          "这个确实。 我们只是讨论方向。",
+          "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "什么时候可以测试？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "9d9a5f55-0dd2-4f3d-9a85-ab7cdecf52a8",
+        "segment_id": "9d9a5f55-0dd2-4f3d-9a85-ab7cdecf52a8",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 260.0,
+        "end_time": 264.0,
+        "text": "什么时候可以测试？",
+        "previous_utterances": [
+          "这个确实。 我们只是讨论方向。",
+          "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个确实。 我们只是讨论方向。",
+          "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "b7df8803-28fa-40fe-bdcb-652374086da4",
+        "segment_id": "b7df8803-28fa-40fe-bdcb-652374086da4",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 270.0,
+        "end_time": 274.0,
+        "text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+        "previous_utterances": [
+          "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "什么时候可以测试？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "什么时候可以测试？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "是接口问题？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "45801209-8cf9-4ee5-9166-33053e5f48af",
+        "segment_id": "45801209-8cf9-4ee5-9166-33053e5f48af",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 280.0,
+        "end_time": 284.0,
+        "text": "是接口问题？",
+        "previous_utterances": [
+          "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "什么时候可以测试？",
+          "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "什么时候可以测试？",
+          "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "69f1ad45-e29a-44f0-962d-355aaf589b9b",
+        "segment_id": "69f1ad45-e29a-44f0-962d-355aaf589b9b",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 290.0,
+        "end_time": 294.0,
+        "text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+        "previous_utterances": [
+          "什么时候可以测试？",
+          "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "是接口问题？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "什么时候可以测试？",
+          "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "是接口问题？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "f9b7e334-c62e-45be-a948-0a0ad92e4e04",
+        "segment_id": "f9b7e334-c62e-45be-a948-0a0ad92e4e04",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 300.0,
+        "end_time": 304.0,
+        "text": "这个后面可以拆。 但是不是 V2.6 必须。",
+        "previous_utterances": [
+          "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "是接口问题？",
+          "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "是接口问题？",
+          "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "b5ea009f-14e3-4909-aee8-47f66c592b11",
+        "segment_id": "b5ea009f-14e3-4909-aee8-47f66c592b11",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 310.0,
+        "end_time": 314.0,
+        "text": "嗯，这个先作为优化项。 不要影响版本。",
+        "previous_utterances": [
+          "是接口问题？",
+          "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "这个后面可以拆。 但是不是 V2.6 必须。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "是接口问题？",
+          "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "这个后面可以拆。 但是不是 V2.6 必须。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "681cd5b1-7da8-499e-8056-d7dcf645c37b",
+        "segment_id": "681cd5b1-7da8-499e-8056-d7dcf645c37b",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 320.0,
+        "end_time": 326.75,
+        "text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+        "previous_utterances": [
+          "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "这个后面可以拆。 但是不是 V2.6 必须。",
+          "嗯，这个先作为优化项。 不要影响版本。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "这个后面可以拆。 但是不是 V2.6 必须。",
+          "嗯，这个先作为优化项。 不要影响版本。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个会影响上线吗？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "a3872cf7-7f2e-454d-bbe2-411d9fc86f9c",
+        "segment_id": "a3872cf7-7f2e-454d-bbe2-411d9fc86f9c",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 330.0,
+        "end_time": 334.0,
+        "text": "这个会影响上线吗？",
+        "previous_utterances": [
+          "这个后面可以拆。 但是不是 V2.6 必须。",
+          "嗯，这个先作为优化项。 不要影响版本。",
+          "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个后面可以拆。 但是不是 V2.6 必须。",
+          "嗯，这个先作为优化项。 不要影响版本。",
+          "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "9ab3bb5a-a5df-48bd-9801-789064e0deb9",
+        "segment_id": "9ab3bb5a-a5df-48bd-9801-789064e0deb9",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 340.0,
+        "end_time": 344.0,
+        "text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+        "previous_utterances": [
+          "嗯，这个先作为优化项。 不要影响版本。",
+          "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "这个会影响上线吗？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "嗯，这个先作为优化项。 不要影响版本。",
+          "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "这个会影响上线吗？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "好，这个放风险里面。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "e61e9819-a77a-4b95-850d-0c1634a4bd7b",
+        "segment_id": "e61e9819-a77a-4b95-850d-0c1634a4bd7b",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 350.0,
+        "end_time": 354.0,
+        "text": "好，这个放风险里面。",
+        "previous_utterances": [
+          "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "这个会影响上线吗？",
+          "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "这个会影响上线吗？",
+          "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "0f209030-c0d8-4045-ad62-50704d693580",
+        "segment_id": "0f209030-c0d8-4045-ad62-50704d693580",
+        "speaker": "李娜",
+        "speaker_role": null,
+        "start_time": 360.0,
+        "end_time": 364.0,
+        "text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+        "previous_utterances": [
+          "这个会影响上线吗？",
+          "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "好，这个放风险里面。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个会影响上线吗？",
+          "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "好，这个放风险里面。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "885ea90e-1d1a-4ef1-9ea1-687ae765a484",
+        "segment_id": "885ea90e-1d1a-4ef1-9ea1-687ae765a484",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 370.0,
+        "end_time": 374.0,
+        "text": "这个也是风险。 先记录，不作为当前版本任务。",
+        "previous_utterances": [
+          "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "好，这个放风险里面。",
+          "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "好，这个放风险里面。",
+          "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "e1db2e1e-7ad7-48f8-8555-a361decab213",
+        "segment_id": "e1db2e1e-7ad7-48f8-8555-a361decab213",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 380.0,
+        "end_time": 388.67,
+        "text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+        "previous_utterances": [
+          "好，这个放风险里面。",
+          "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "这个也是风险。 先记录，不作为当前版本任务。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "好，这个放风险里面。",
+          "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "这个也是风险。 先记录，不作为当前版本任务。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "772bc04c-9d94-41dd-ba49-bd771986e73e",
+        "segment_id": "772bc04c-9d94-41dd-ba49-bd771986e73e",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 390.0,
+        "end_time": 394.0,
+        "text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "previous_utterances": [
+          "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "这个也是风险。 先记录，不作为当前版本任务。",
+          "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "这个也是风险。 先记录，不作为当前版本任务。",
+          "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "8f8d5a51-df06-4979-8a31-2f2c3df3fb58",
+        "segment_id": "8f8d5a51-df06-4979-8a31-2f2c3df3fb58",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 400.0,
+        "end_time": 404.0,
+        "text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+        "previous_utterances": [
+          "这个也是风险。 先记录，不作为当前版本任务。",
+          "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "这个也是风险。 先记录，不作为当前版本任务。",
+          "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "什么时候给结果？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "69de5ca0-e168-4dd7-8551-021eba4da58b",
+        "segment_id": "69de5ca0-e168-4dd7-8551-021eba4da58b",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 410.0,
+        "end_time": 414.0,
+        "text": "什么时候给结果？",
+        "previous_utterances": [
+          "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "明天下午之前。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "3280ff8e-a988-4f0c-a155-520fbf7f7378",
+        "segment_id": "3280ff8e-a988-4f0c-a155-520fbf7f7378",
+        "speaker": "陈涛",
+        "speaker_role": null,
+        "start_time": 420.0,
+        "end_time": 424.0,
+        "text": "明天下午之前。",
+        "previous_utterances": [
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "什么时候给结果？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "什么时候给结果？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "赵敏，你补充真实会议测试样本。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "d61e4941-f538-45bf-8339-4e9949ff053b",
+        "segment_id": "d61e4941-f538-45bf-8339-4e9949ff053b",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 430.0,
+        "end_time": 434.0,
+        "text": "赵敏，你补充真实会议测试样本。",
+        "previous_utterances": [
+          "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "什么时候给结果？",
+          "明天下午之前。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "什么时候给结果？",
+          "明天下午之前。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "10c1eb31-921f-48ec-8507-b64d5a741188",
+        "segment_id": "10c1eb31-921f-48ec-8507-b64d5a741188",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 440.0,
+        "end_time": 444.0,
+        "text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+        "previous_utterances": [
+          "什么时候给结果？",
+          "明天下午之前。",
+          "赵敏，你补充真实会议测试样本。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "什么时候给结果？",
+          "明天下午之前。",
+          "赵敏，你补充真实会议测试样本。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "明天吧。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "e242f2f7-17a5-4558-a551-ae9b4c3ba8f9",
+        "segment_id": "e242f2f7-17a5-4558-a551-ae9b4c3ba8f9",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 450.0,
+        "end_time": 454.0,
+        "text": "明天吧。",
+        "previous_utterances": [
+          "明天下午之前。",
+          "赵敏，你补充真实会议测试样本。",
+          "好的。 我整理5个典型场景。 不过时间是今天还是明天？"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "明天下午之前。",
+          "赵敏，你补充真实会议测试样本。",
+          "好的。 我整理5个典型场景。 不过时间是今天还是明天？"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "好的。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "9aefbd63-5b0f-4f90-a678-8f2e3de55965",
+        "segment_id": "9aefbd63-5b0f-4f90-a678-8f2e3de55965",
+        "speaker": "赵敏",
+        "speaker_role": null,
+        "start_time": 460.0,
+        "end_time": 464.0,
+        "text": "好的。",
+        "previous_utterances": [
+          "赵敏，你补充真实会议测试样本。",
+          "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "明天吧。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "赵敏，你补充真实会议测试样本。",
+          "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "明天吧。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "王强，下午安排录音流程测试。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "690a7959-9715-45bf-8202-6af06eb0f332",
+        "segment_id": "690a7959-9715-45bf-8202-6af06eb0f332",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 470.0,
+        "end_time": 474.0,
+        "text": "王强，下午安排录音流程测试。",
+        "previous_utterances": [
+          "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "明天吧。",
+          "好的。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "明天吧。",
+          "好的。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "没问题。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "2f68eaf5-c402-45a7-b690-ae5f90a5812f",
+        "segment_id": "2f68eaf5-c402-45a7-b690-ae5f90a5812f",
+        "speaker": "王强",
+        "speaker_role": null,
+        "start_time": 480.0,
+        "end_time": 484.0,
+        "text": "没问题。",
+        "previous_utterances": [
+          "明天吧。",
+          "好的。",
+          "王强，下午安排录音流程测试。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "明天吧。",
+          "好的。",
+          "王强，下午安排录音流程测试。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "f453a87a-3506-4557-9693-088aeed7b3e3",
+        "segment_id": "f453a87a-3506-4557-9693-088aeed7b3e3",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 490.0,
+        "end_time": 494.0,
+        "text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+        "previous_utterances": [
+          "好的。",
+          "王强，下午安排录音流程测试。",
+          "没问题。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "好的。",
+          "王强，下午安排录音流程测试。",
+          "没问题。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "eed81b50-417e-4fb9-9668-1691a218698b",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "f89799c6-8c3b-4f2a-8836-4de241639142",
+        "segment_id": "f89799c6-8c3b-4f2a-8836-4de241639142",
+        "speaker": "张伟",
+        "speaker_role": null,
+        "start_time": 500.0,
+        "end_time": 504.0,
+        "text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+        "previous_utterances": [
+          "王强，下午安排录音流程测试。",
+          "没问题。",
+          "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "王强，下午安排录音流程测试。",
+          "没问题。",
+          "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）"
+        ]
+      }
+    }
+  ]
+}

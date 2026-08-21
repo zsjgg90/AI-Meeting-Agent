@@ -1,0 +1,2423 @@
+{
+  "agent_run_id": "agent-shadow-bc14e5f0-5ada-453d-9da8-ef05c52bc250",
+  "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+  "meeting_type": "project_weekly",
+  "status": "partial",
+  "started_at": "2026-08-02T05:29:05.495857+00:00",
+  "finished_at": "2026-08-02T05:30:24.622368+00:00",
+  "duration_ms": 79126.22,
+  "steps": [
+    {
+      "step_index": 0,
+      "tool_name": "get_meeting_context",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 78.0,
+      "result": {
+        "tool_name": "get_meeting_context",
+        "status": "success",
+        "data": {
+          "meeting": {
+            "id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+            "title": "项目周进度同步与版本排期会",
+            "status": "completed",
+            "created_at": "2026-08-02T13:22:31.397697+08:00",
+            "updated_at": "2026-08-02T13:27:04.174302+08:00"
+          },
+          "transcript_segments": [
+            {
+              "id": "750c597b-262e-441d-9853-726ebdc32a38",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 0,
+              "start_time": 3.61,
+              "end_time": 4.69,
+              "text": "各位同事早上好！",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "6d33e4a9-655b-420e-b811-186c94414b5d",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 1,
+              "start_time": 4.97,
+              "end_time": 13.57,
+              "text": "今天我们召开本周项目例行短会，全程控制在10分钟以内，高效同步进度，梳理阻塞问题，确定下周工作排期。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "11974c03-18fa-405c-8925-ff3281870f6b",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 2,
+              "start_time": 14.7,
+              "end_time": 16.38,
+              "text": "本次会议主要分为三个部分。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "6d72cc6a-efc1-4948-af1c-8eb8cac08a56",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 3,
+              "start_time": 16.74,
+              "end_time": 21.9,
+              "text": "各岗位进度同步、现存问题对齐、下周工作安排与风险预警。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "a3c5b488-32ed-451a-91e1-483eae463da4",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 4,
+              "start_time": 22.26,
+              "end_time": 25.46,
+              "text": "没有特殊临时问题，不展开闲聊，我们直接开始。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "e92edf2d-6c4f-470a-9138-cab271910b67",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 5,
+              "start_time": 26.2,
+              "end_time": 29.2,
+              "text": "首先由各岗位依次同步本周工作进度。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "5eb3c917-915d-4e51-b663-f746d25c027b",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 6,
+              "start_time": 29.56,
+              "end_time": 37.96,
+              "text": "我这边本周主要完成了用户中心、订单列表两个核心页面的改版开发，已经完成本地自测。",
+              "speaker_label": "speaker_2",
+              "speaker_name": "speaker_2",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "5e0cf947-2d65-4868-9664-852d5e94e671",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 7,
+              "start_time": 38.41,
+              "end_time": 49.65,
+              "text": "页面适配、交互逻辑都已调试完毕，没有明显 bug 同时配合产品完成了新弹窗组件、按钮样式的统一优化。",
+              "speaker_label": "speaker_2",
+              "speaker_name": "speaker_2",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "257adc80-b316-4fdc-8d5d-988faf249995",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 8,
+              "start_time": 50.4,
+              "end_time": 52.84,
+              "text": "整体 UI 交互需求全部落地。",
+              "speaker_label": "speaker_2",
+              "speaker_name": "speaker_2",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "4670c4c8-cc46-4bf5-857c-477e421d6db7",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 9,
+              "start_time": 53.36,
+              "end_time": 62.16,
+              "text": "目前剩余工作是兼容部分低版本浏览器的适配优化，预计今天下午可以全部完成交付测试。",
+              "speaker_label": "speaker_2",
+              "speaker_name": "speaker_2",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "3efa21e1-3042-40df-a32d-4f8b54794099",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 10,
+              "start_time": 62.82,
+              "end_time": 67.62,
+              "text": "整体进度符合本周排期，无延期，无阻塞问题。",
+              "speaker_label": "speaker_2",
+              "speaker_name": "speaker_2",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "b7e7af79-8c6e-4088-a81c-64846b60f236",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 11,
+              "start_time": 68.1,
+              "end_time": 75.58,
+              "text": "后端本周完成了订单新增、查询、状态变更的接口迭代，以及用户权限分级的接口开发。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "d5ad86cf-0edf-46a3-ad77-f2c0b7d32e55",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 12,
+              "start_time": 76.03,
+              "end_time": 80.79,
+              "text": "所有新增接口已完成单元测试，接口文档同步更新完毕。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "5f8c1db3-3008-430c-b602-927bd6d516e2",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 13,
+              "start_time": 81.27,
+              "end_time": 87.15,
+              "text": "目前核心功能接口全部开发完成，能够支撑前端页面正常联调。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "854c9c28-7801-4905-ac33-45374acd88fe",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 14,
+              "start_time": 87.67,
+              "end_time": 94.11,
+              "text": "目前存在一个小问题，大批量订单数据查询时，接口响应速度略有延迟。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "08799734-4683-4472-8770-6028ed702be0",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 15,
+              "start_time": 94.31,
+              "end_time": 97.39,
+              "text": "我已经定位到是数据分页优化问题。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "56e8bd0c-b202-45fc-ae13-ac7451c6ce28",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 16,
+              "start_time": 97.77,
+              "end_time": 103.61,
+              "text": "正在针对性调整代码，预计明天上午修复完成，不会影响整体测试进度。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "287b9a34-3a22-4c22-b2bb-f0694e6948a0",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 17,
+              "start_time": 104.09,
+              "end_time": 107.37,
+              "text": "除此之外，无其他阻塞，整体进度正常。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "036b48c9-630f-4a5e-b5e3-80b55f513cc6",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 18,
+              "start_time": 107.77,
+              "end_time": 114.33,
+              "text": "我本周主要对上周迭代的功能进行了回归测试，同时跟进了本期新需求的用例编写。",
+              "speaker_label": "speaker_4",
+              "speaker_name": "speaker_4",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "c27cf41c-54c9-4d82-87ef-bd8949421331",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 19,
+              "start_time": 114.61,
+              "end_time": 119.33,
+              "text": "目前所有新增功能的测试用例已经全部评审完毕，录入测试平台。",
+              "speaker_label": "speaker_4",
+              "speaker_name": "speaker_4",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "07335508-3e3b-4a64-aafe-654b9719520d",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 20,
+              "start_time": 119.96,
+              "end_time": 127.32,
+              "text": "上周遗留的3个轻微 UI bug 1个功能逻辑 bug 前端和后端均已修复，我已完成复测，全部通过。",
+              "speaker_label": "speaker_4",
+              "speaker_name": "speaker_4",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "baf6afd1-adb8-4c4b-90a2-07b928d5b4a4",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 21,
+              "start_time": 127.76,
+              "end_time": 131.52,
+              "text": "目前等待前后端联调完成后，启动全量功能测试。",
+              "speaker_label": "speaker_4",
+              "speaker_name": "speaker_4",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "148d4dc4-8d50-4633-9856-f3ae210f5a87",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 22,
+              "start_time": 131.9,
+              "end_time": 139.46,
+              "text": "当前没有严重 bug 堆积，唯一风险是如果后端接口优化延期，会小幅推后首轮测试启动时间。",
+              "speaker_label": "speaker_4",
+              "speaker_name": "speaker_4",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "5f674535-11cd-45bd-bdc5-d44fc7c47aea",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 23,
+              "start_time": 139.7,
+              "end_time": 143.26,
+              "text": "后续我会实时跟进进度，灵活调整测试计划。",
+              "speaker_label": "speaker_4",
+              "speaker_name": "speaker_4",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "604280d9-c1ec-4edd-9177-19f178fd20a6",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 24,
+              "start_time": 143.7,
+              "end_time": 154.22,
+              "text": "我这边本周完成了下期迭代的需求细化，更新了需求文档和原型图，同步梳理了用户反馈的核心问题，结合近期用户使用数据。",
+              "speaker_label": "speaker_5",
+              "speaker_name": "speaker_5",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "5e595218-950a-447a-ab06-09e874d81bdd",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 25,
+              "start_time": 154.56,
+              "end_time": 160.08,
+              "text": "我们确定本次迭代无需新增临时需求，大家按原定排期推进即可。",
+              "speaker_label": "speaker_5",
+              "speaker_name": "speaker_5",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "24a6bf9e-e1bd-4632-9b4e-3434444120b7",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 26,
+              "start_time": 160.52,
+              "end_time": 166.68,
+              "text": "另外同步一个重点，本次版本上线后，重点考核订单模块的稳定性和加载速度。",
+              "speaker_label": "speaker_5",
+              "speaker_name": "speaker_5",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "c8cd2d4c-03d3-4ada-aee3-f6e90239ebe0",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 27,
+              "start_time": 167.09,
+              "end_time": 169.01,
+              "text": "这是本次迭代的核心指标。",
+              "speaker_label": "speaker_5",
+              "speaker_name": "speaker_5",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "06295a56-4338-4975-b16c-c1e416931a11",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 28,
+              "start_time": 169.45,
+              "end_time": 176.57,
+              "text": "后续我会全程跟进测试过程，有需求提议、逻辑问题随时沟通，不占用大家开发时间。",
+              "speaker_label": "speaker_5",
+              "speaker_name": "speaker_5",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "42c3c2eb-95dd-4e0e-8835-cb3ad6eb7364",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 29,
+              "start_time": 177.09,
+              "end_time": 178.69,
+              "text": "好的，感谢各位同步进度。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "5305aca4-ea2c-44e8-9dfd-f5591a2cccaf",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 30,
+              "start_time": 178.85,
+              "end_time": 180.65,
+              "text": "我整体梳理一下本周情况。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "65be150b-c01e-443d-9e98-afab7d08d497",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 31,
+              "start_time": 181.13,
+              "end_time": 185.37,
+              "text": "首先整体迭代进度正常，没有重大延期风险，这点很好。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "e63d38a6-384b-4257-bc36-5c173c750251",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 32,
+              "start_time": 185.73,
+              "end_time": 188.13,
+              "text": "针对后端提到的接口响应延迟问题。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "afbee20b-06f5-4472-83e0-5afe8db4759c",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 33,
+              "start_time": 188.57,
+              "end_time": 194.09,
+              "text": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "fc02671a-1884-4944-8c55-2e040630a56e",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 34,
+              "start_time": 194.61,
+              "end_time": 199.89,
+              "text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "5d7d7dac-c741-4d91-842b-17bf5dcd3d4f",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 35,
+              "start_time": 200.31,
+              "end_time": 207.87,
+              "text": "压缩整体测试周期，前端完成剩余适配工作后及时同步进度，方便大家整体把控节奏。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "ae09ca30-bb22-471e-9141-17a0f0103f55",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 36,
+              "start_time": 208.31,
+              "end_time": 210.03,
+              "text": "另外强调一个风险点。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "aa13e0d2-4420-46b0-ba61-2e8e9c30c33a",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 37,
+              "start_time": 210.5,
+              "end_time": 221.82,
+              "text": "本周四会进行版本预打包，所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码，避免出现打包冲突、版本异常问题。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "bbaed03a-7168-4f48-ae60-494d739c82a2",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 38,
+              "start_time": 222.38,
+              "end_time": 227.34,
+              "text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "f8c19f77-0b48-4d4b-ac0f-58a7bda7b989",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 39,
+              "start_time": 227.7,
+              "end_time": 232.3,
+              "text": "大家目前还有无法解决的阻塞问题，或者需要团队配合的事项吗？",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "8d432c35-eea2-41c7-a8c7-76157229fc3f",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 40,
+              "start_time": 232.85,
+              "end_time": 236.49,
+              "text": "前端没有问题，可按时完成开发提交。",
+              "speaker_label": "speaker_2",
+              "speaker_name": "speaker_2",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "1ba5af0d-798d-4e05-aea4-8c9a669fde4e",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 41,
+              "start_time": 237.01,
+              "end_time": 242.13,
+              "text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+              "speaker_label": "speaker_3",
+              "speaker_name": "speaker_3",
+              "speaker_gender": "female",
+              "semantic_label": null
+            },
+            {
+              "id": "823f6c5c-965f-4295-aea9-ca5ac77db5b7",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 42,
+              "start_time": 242.77,
+              "end_time": 245.21,
+              "text": "测试无问题，随时待命启动测试。",
+              "speaker_label": "speaker_4",
+              "speaker_name": "speaker_4",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "bc70efbc-f42c-4064-835e-ac1c9643f529",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 43,
+              "start_time": 245.85,
+              "end_time": 249.33,
+              "text": "产品这边需求已锁定，无变更，无问题。",
+              "speaker_label": "speaker_5",
+              "speaker_name": "speaker_5",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "2f9ac32c-44e7-4367-ae45-bfefe10143c8",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 44,
+              "start_time": 249.81,
+              "end_time": 253.69,
+              "text": "好的，既然大家都没有问题，我们本次例会到此结束。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "f8a15d0d-2682-46ba-bf4c-4854d443dcdf",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 45,
+              "start_time": 254.45,
+              "end_time": 262.37,
+              "text": "所有人严格按照刚刚对齐的时间节点推进工作，有突发问题第一时间在项目群同步，不要私自挤压问题。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "c3dadb45-bf1e-45f0-95ac-435c5af45e10",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 46,
+              "start_time": 262.77,
+              "end_time": 267.37,
+              "text": "周四完成预打包，下周例会同步版本测试及上线进度。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            },
+            {
+              "id": "87c4b05d-95bf-4dcd-8644-b86cc082edfe",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "audio_file_id": "1c6e7089-ee94-40a0-9111-75a049806876",
+              "segment_index": 47,
+              "start_time": 267.91,
+              "end_time": 269.91,
+              "text": "大家继续推进工作，散会。",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            }
+          ],
+          "summary_metadata": {
+            "summary_id": "81c900ac-3c28-4b9b-b5cf-629df2072e56",
+            "model_name": "qwen3:14b+rag",
+            "prompt_version": "meeting-analyst-v1",
+            "rag_chunk_ids": [
+              "boundary_rule_012",
+              "boundary_rule_008",
+              "v4_deadline_rule_001",
+              "negative_example_010",
+              "negative_example_004",
+              "negative_example_006",
+              "positive_example_004",
+              "positive_example_015"
+            ],
+            "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+            "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+            "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+            "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+            "confidence_score": 0.844,
+            "result_source": "legacy_qwen_rag"
+          }
+        },
+        "error": null,
+        "duration_ms": 78.0,
+        "result_source": "postgresql",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "postgresql",
+      "started_at": "2026-08-02T05:29:05.495857+00:00",
+      "completed_at": "2026-08-02T05:29:05.573799+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    },
+    {
+      "step_index": 1,
+      "tool_name": "search_meeting_history",
+      "status": "success",
+      "optional": true,
+      "duration_ms": 7.53,
+      "result": {
+        "tool_name": "search_meeting_history",
+        "status": "success",
+        "data": {
+          "items": [],
+          "project_id_filter_applied": false,
+          "meeting_type_filter_applied": false,
+          "metadata": {
+            "project_id_ignored": false,
+            "meeting_type_ignored": true
+          }
+        },
+        "error": null,
+        "duration_ms": 7.53,
+        "result_source": "postgresql",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "postgresql",
+      "started_at": "2026-08-02T05:29:05.573799+00:00",
+      "completed_at": "2026-08-02T05:29:05.581474+00:00",
+      "metadata": {
+        "continue_on_failure": true
+      }
+    },
+    {
+      "step_index": 2,
+      "tool_name": "search_project_knowledge",
+      "status": "skipped",
+      "optional": true,
+      "duration_ms": 0.0,
+      "result": null,
+      "error": null,
+      "result_source": "unknown",
+      "started_at": "2026-08-02T05:29:05.581474+00:00",
+      "completed_at": "2026-08-02T05:29:05.581474+00:00",
+      "metadata": {
+        "skip_reason": "disabled_by_execution_plan"
+      }
+    },
+    {
+      "step_index": 3,
+      "tool_name": "get_open_action_items",
+      "status": "success",
+      "optional": true,
+      "duration_ms": 5.54,
+      "result": {
+        "tool_name": "get_open_action_items",
+        "status": "success",
+        "data": {
+          "items": [
+            {
+              "id": "b3726d99-b6f3-4273-bd3f-9fa071786e07",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "summary_id": "81c900ac-3c28-4b9b-b5cf-629df2072e56",
+              "task": "完成低版本浏览器适配优化",
+              "owner": null,
+              "owner_name": null,
+              "due_date": "今天下午",
+              "deadline": "今天下午",
+              "priority": "medium",
+              "status": "open",
+              "source": "预计今天下午可以全部完成交付测试。",
+              "source_text": "预计今天下午可以全部完成交付测试。",
+              "source_segment_id": null,
+              "confidence": 0.8
+            },
+            {
+              "id": "bfee28f0-e81b-45ba-b43d-2bc9e0555260",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "summary_id": "81c900ac-3c28-4b9b-b5cf-629df2072e56",
+              "task": "完成接口响应延迟问题的代码优化",
+              "owner": null,
+              "owner_name": null,
+              "due_date": "明天上午",
+              "deadline": "明天上午",
+              "priority": "medium",
+              "status": "open",
+              "source": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+              "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+              "source_segment_id": null,
+              "confidence": 0.9
+            },
+            {
+              "id": "2e1969c7-ebde-43d1-a145-e4928eaa7352",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "summary_id": "81c900ac-3c28-4b9b-b5cf-629df2072e56",
+              "task": "启动首轮测试并压缩测试周期",
+              "owner": "测试",
+              "owner_name": "测试",
+              "due_date": null,
+              "deadline": null,
+              "priority": "medium",
+              "status": "open",
+              "source": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+              "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+              "source_segment_id": null,
+              "confidence": 0.85
+            },
+            {
+              "id": "937fea56-5e0f-4ca0-9179-c4d554e90654",
+              "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+              "summary_id": "81c900ac-3c28-4b9b-b5cf-629df2072e56",
+              "task": "确认需求无变更并锁定迭代内容",
+              "owner": "产品",
+              "owner_name": "产品",
+              "due_date": null,
+              "deadline": null,
+              "priority": "medium",
+              "status": "open",
+              "source": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+              "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+              "source_segment_id": null,
+              "confidence": 0.8
+            }
+          ],
+          "status_filter": "open"
+        },
+        "error": null,
+        "duration_ms": 5.54,
+        "result_source": "postgresql",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "postgresql",
+      "started_at": "2026-08-02T05:29:05.581474+00:00",
+      "completed_at": "2026-08-02T05:29:05.587536+00:00",
+      "metadata": {
+        "continue_on_failure": true
+      }
+    },
+    {
+      "step_index": 4,
+      "tool_name": "analyze_meeting",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 79024.01,
+      "result": {
+        "tool_name": "analyze_meeting",
+        "status": "success",
+        "data": {
+          "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+          "analysis": {
+            "meeting_title": null,
+            "meeting_type": "project_weekly",
+            "meeting_type_confidence": 0.95,
+            "meeting_title_candidate": "项目周进度同步与版本排期会议",
+            "title_basis": [
+              "会议围绕项目进度同步、问题对齐、下周排期与风险预警展开",
+              "明确周四预打包及版本上线考核指标"
+            ],
+            "meeting_agenda": [
+              {
+                "item": "项目进度同步（开发/测试/产品）",
+                "order": 1,
+                "source_segment_ids": []
+              },
+              {
+                "item": "版本预打包安排与迭代内容锁定",
+                "order": 3,
+                "source_segment_ids": []
+              }
+            ],
+            "meeting_summary": "本次周会同步了各岗位进度：前端完成核心页面改版，后端优化接口性能，测试完成用例评审。重点对齐后端接口延迟问题的修复时限，明确周四预打包的代码提交截止要求，并确认本期迭代需求已锁定无变更。",
+            "key_conclusions": [
+              {
+                "conclusion": "后端接口优化必须于明天上午完成，确保不耽误联调测试",
+                "source_text": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+                "confidence": 0.9,
+                "source_supported": true
+              },
+              {
+                "conclusion": "周四中午前完成代码提交和自测，禁止超时提交",
+                "source_text": "所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码",
+                "confidence": 0.95,
+                "source_supported": true
+              },
+              {
+                "conclusion": "本期迭代需求已锁定无变更",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容",
+                "confidence": 0.85,
+                "source_supported": true
+              }
+            ],
+            "action_items": [
+              {
+                "owner_name": null,
+                "task": "完成低版本浏览器适配优化",
+                "deadline": "今天下午",
+                "priority": null,
+                "status": "open",
+                "source_text": "预计今天下午可以全部完成交付测试",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch",
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              },
+              {
+                "owner_name": null,
+                "task": "完成接口响应延迟问题的代码优化",
+                "deadline": "明天上午",
+                "priority": null,
+                "status": "open",
+                "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付",
+                "source_segment_id": null,
+                "confidence": 0.9,
+                "source_supported": true,
+                "owner": null,
+                "owner_repaired": true,
+                "repair_reason": "priority_without_source_evidence",
+                "priority_repaired": true
+              },
+              {
+                "owner_name": "测试",
+                "task": "启动首轮测试并压缩测试周期",
+                "deadline": null,
+                "priority": null,
+                "status": "open",
+                "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试",
+                "source_segment_id": null,
+                "confidence": 0.85,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            ],
+            "unresolved_issues": [],
+            "risks_and_focus": [
+              {
+                "risk": "后端接口优化延期导致测试启动推后",
+                "impact": "小幅推后首轮测试启动时间",
+                "focus_area": "接口性能优化进度",
+                "mitigation": null,
+                "source_text": "当前没有严重 bug 堆积，唯一风险是如果后端接口优化延期，会小幅推后首轮测试启动时间",
+                "confidence": 0.8,
+                "source_supported": true
+              },
+              {
+                "risk": "周四预打包前代码提交超时",
+                "impact": "可能导致打包冲突、版本异常",
+                "focus_area": "代码提交管理",
+                "mitigation": null,
+                "source_text": "禁止超时提交代码，避免出现打包冲突、版本异常问题",
+                "confidence": 0.9,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch"
+              }
+            ],
+            "topics": [],
+            "metadata": {
+              "schema_version": "meeting-analysis-v1",
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "rag_chunk_ids": [
+                "boundary_rule_012",
+                "boundary_rule_008",
+                "v4_deadline_rule_001",
+                "negative_example_010",
+                "negative_example_004",
+                "negative_example_006",
+                "positive_example_004",
+                "positive_example_015"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+              "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+              "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "rag_retrieval_strategy": "layered_1_2_3_2",
+              "rag_retrieval_buckets": {
+                "GLOBAL_FIXED": [
+                  "boundary_rule_012"
+                ],
+                "POLICY_SELECTED": [
+                  "boundary_rule_008",
+                  "v4_deadline_rule_001"
+                ],
+                "RAG_DYNAMIC": [
+                  "negative_example_010",
+                  "negative_example_004",
+                  "negative_example_006"
+                ],
+                "RAG_SCENARIO": [
+                  "positive_example_004",
+                  "positive_example_015"
+                ]
+              },
+              "rag_routed_meeting_type": "project_weekly",
+              "rag_routed_scenario": "project_weekly",
+              "rag_fallback_reason": null,
+              "result_source": "legacy_qwen_rag",
+              "confidence_score": 0.869,
+              "generated_at": "2026-08-02T05:30:24.599426+00:00"
+            },
+            "_validator_audit": [
+              {
+                "field": "meeting_agenda",
+                "action": "remove",
+                "reason": "non_agenda_or_flow_talk",
+                "before": {
+                  "item": "接口性能优化与测试风险对齐",
+                  "order": 2,
+                  "source_segment_ids": []
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "完成低版本浏览器适配优化",
+                  "deadline": "今天下午",
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "预计今天下午可以全部完成交付测试",
+                  "source_segment_id": null,
+                  "confidence": 0.8,
+                  "source_supported": true,
+                  "needs_review": true,
+                  "review_reason": "claim_source_mismatch"
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "完成低版本浏览器适配优化",
+                  "deadline": "今天下午",
+                  "priority": null,
+                  "status": "open",
+                  "source_text": "预计今天下午可以全部完成交付测试",
+                  "source_segment_id": null,
+                  "confidence": 0.8,
+                  "source_supported": true,
+                  "needs_review": true,
+                  "review_reason": "claim_source_mismatch",
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "owner_without_source_evidence",
+                "before": {
+                  "owner_name": "后端",
+                  "task": "完成接口响应延迟问题的代码优化",
+                  "deadline": "明天上午",
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付",
+                  "source_segment_id": null,
+                  "confidence": 0.9,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "完成接口响应延迟问题的代码优化",
+                  "deadline": "明天上午",
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付",
+                  "source_segment_id": null,
+                  "confidence": 0.9,
+                  "source_supported": true,
+                  "owner": null,
+                  "owner_repaired": true,
+                  "repair_reason": "owner_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "完成接口响应延迟问题的代码优化",
+                  "deadline": "明天上午",
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付",
+                  "source_segment_id": null,
+                  "confidence": 0.9,
+                  "source_supported": true,
+                  "owner": null,
+                  "owner_repaired": true,
+                  "repair_reason": "owner_without_source_evidence"
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "完成接口响应延迟问题的代码优化",
+                  "deadline": "明天上午",
+                  "priority": null,
+                  "status": "open",
+                  "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付",
+                  "source_segment_id": null,
+                  "confidence": 0.9,
+                  "source_supported": true,
+                  "owner": null,
+                  "owner_repaired": true,
+                  "repair_reason": "priority_without_source_evidence",
+                  "priority_repaired": true
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": "测试",
+                  "task": "启动首轮测试并压缩测试周期",
+                  "deadline": null,
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试",
+                  "source_segment_id": null,
+                  "confidence": 0.85,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": "测试",
+                  "task": "启动首轮测试并压缩测试周期",
+                  "deadline": null,
+                  "priority": null,
+                  "status": "open",
+                  "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试",
+                  "source_segment_id": null,
+                  "confidence": 0.85,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              }
+            ],
+            "_metadata": {
+              "prompt_id": "meeting-analyst",
+              "prompt_version": "meeting-analyst-v1",
+              "schema_version": "meeting-analysis-v1",
+              "rag_chunk_ids": [
+                "boundary_rule_012",
+                "boundary_rule_008",
+                "v4_deadline_rule_001",
+                "negative_example_010",
+                "negative_example_004",
+                "negative_example_006",
+                "positive_example_004",
+                "positive_example_015"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+              "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+              "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "rag_retrieval_strategy": "layered_1_2_3_2",
+              "rag_retrieval_buckets": {
+                "GLOBAL_FIXED": [
+                  "boundary_rule_012"
+                ],
+                "POLICY_SELECTED": [
+                  "boundary_rule_008",
+                  "v4_deadline_rule_001"
+                ],
+                "RAG_DYNAMIC": [
+                  "negative_example_010",
+                  "negative_example_004",
+                  "negative_example_006"
+                ],
+                "RAG_SCENARIO": [
+                  "positive_example_004",
+                  "positive_example_015"
+                ]
+              },
+              "rag_routed_meeting_type": "project_weekly",
+              "rag_routed_scenario": "project_weekly",
+              "rag_fallback_reason": null,
+              "ollama_temperature": 0.0,
+              "ollama_top_p": 0.2,
+              "ollama_seed": 42,
+              "ollama_format": "json",
+              "result_source": "legacy_qwen_rag"
+            }
+          },
+          "context_payload": {}
+        },
+        "error": null,
+        "duration_ms": 79024.01,
+        "result_source": "legacy_qwen_rag",
+        "retryable": false,
+        "metadata": {
+          "model_name": null,
+          "prompt_version": "meeting-analyst-v1",
+          "schema_version": "meeting-analysis-v1",
+          "rag_chunk_ids": [
+            "boundary_rule_012",
+            "boundary_rule_008",
+            "v4_deadline_rule_001",
+            "negative_example_010",
+            "negative_example_004",
+            "negative_example_006",
+            "positive_example_004",
+            "positive_example_015"
+          ],
+          "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+          "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+          "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+          "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+          "fallback_reason": null
+        }
+      },
+      "error": null,
+      "result_source": "legacy_qwen_rag",
+      "started_at": "2026-08-02T05:29:05.587536+00:00",
+      "completed_at": "2026-08-02T05:30:24.611763+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    },
+    {
+      "step_index": 5,
+      "tool_name": "validate_meeting_analysis",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 10.37,
+      "result": {
+        "tool_name": "validate_meeting_analysis",
+        "status": "success",
+        "data": {
+          "meeting_id": "272a56d6-9251-4148-9eb1-20a91148d9c3",
+          "validated_analysis": {
+            "overview": "本次周会同步了各岗位进度：前端完成核心页面改版，后端优化接口性能，测试完成用例评审。重点对齐后端接口延迟问题的修复时限，明确周四预打包的代码提交截止要求，并确认本期迭代需求已锁定无变更。",
+            "meeting_title": null,
+            "meeting_type": "project_weekly",
+            "meeting_type_confidence": 0.95,
+            "meeting_title_candidate": "项目周进度同步与版本排期会",
+            "title_basis": [
+              "会议围绕项目进度同步、问题对齐、下周排期与风险预警展开",
+              "明确周四预打包及版本上线考核指标"
+            ],
+            "agenda": [
+              {
+                "item": "项目进度同步（开发/测试/产品）",
+                "order": 1,
+                "source_segment_ids": []
+              },
+              {
+                "item": "版本预打包安排与迭代内容锁定",
+                "order": 2,
+                "source_segment_ids": []
+              }
+            ],
+            "topics": [],
+            "speaker_summaries": [],
+            "decisions": [
+              {
+                "decision": "后端接口优化必须于明天上午完成，确保不耽误联调测试",
+                "reason": null,
+                "source": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+                "conclusion": "后端接口优化必须于明天上午完成，确保不耽误联调测试",
+                "source_text": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+                "confidence": 0.9
+              },
+              {
+                "decision": "周四中午前完成代码提交和自测，禁止超时提交",
+                "reason": null,
+                "source": "所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码",
+                "conclusion": "周四中午前完成代码提交和自测，禁止超时提交",
+                "source_text": "所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码",
+                "confidence": 0.95
+              },
+              {
+                "decision": "本期迭代需求已锁定无变更",
+                "reason": null,
+                "source": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "conclusion": "本期迭代需求已锁定无变更",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "confidence": 0.85
+              }
+            ],
+            "action_items": [
+              {
+                "owner_name": null,
+                "task": "完成低版本浏览器适配优化",
+                "deadline": "今天下午",
+                "priority": null,
+                "status": "open",
+                "source_text": "预计今天下午可以全部完成交付测试。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch",
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              },
+              {
+                "owner_name": null,
+                "task": "完成接口响应延迟问题的代码优化",
+                "deadline": "明天上午",
+                "priority": null,
+                "status": "open",
+                "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+                "source_segment_id": null,
+                "confidence": 0.9,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              },
+              {
+                "owner_name": "测试",
+                "task": "启动首轮测试并压缩测试周期",
+                "deadline": null,
+                "priority": null,
+                "status": "open",
+                "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+                "source_segment_id": null,
+                "confidence": 0.85,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              },
+              {
+                "owner_name": "产品",
+                "task": "确认需求无变更并锁定迭代内容",
+                "deadline": null,
+                "priority": null,
+                "status": "open",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            ],
+            "risks": [
+              {
+                "risk": "后端接口优化延期",
+                "impact": "小幅推后首轮测试启动时间",
+                "mitigation": null,
+                "focus_area": "接口性能优化",
+                "source_text": "如果后端接口优化延期，会小幅推后首轮测试启动时间。",
+                "confidence": 0.75
+              },
+              {
+                "risk": "周四预打包前代码提交超时",
+                "impact": "可能导致打包冲突、版本异常",
+                "mitigation": null,
+                "focus_area": "代码提交管理",
+                "source_text": "禁止超时提交代码，避免出现打包冲突、版本异常问题。",
+                "confidence": 0.8
+              }
+            ],
+            "open_questions": [],
+            "next_steps": [
+              {
+                "item": "完成低版本浏览器适配优化",
+                "owner": null,
+                "time": "今天下午",
+                "note": "预计今天下午可以全部完成交付测试。"
+              },
+              {
+                "item": "完成接口响应延迟问题的代码优化",
+                "owner": null,
+                "time": "明天上午",
+                "note": "后端没问题，接口优化今天加班推进，明天上午准时交付。"
+              },
+              {
+                "item": "启动首轮测试并压缩测试周期",
+                "owner": "测试",
+                "time": null,
+                "note": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。"
+              },
+              {
+                "item": "确认需求无变更并锁定迭代内容",
+                "owner": "产品",
+                "time": null,
+                "note": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。"
+              }
+            ],
+            "meeting_agenda": [
+              {
+                "item": "项目进度同步（开发/测试/产品）",
+                "order": 1,
+                "source_segment_ids": []
+              },
+              {
+                "item": "版本预打包安排与迭代内容锁定",
+                "order": 2,
+                "source_segment_ids": []
+              }
+            ],
+            "meeting_summary": "本次周会同步了各岗位进度：前端完成核心页面改版，后端优化接口性能，测试完成用例评审。重点对齐后端接口延迟问题的修复时限，明确周四预打包的代码提交截止要求，并确认本期迭代需求已锁定无变更。",
+            "key_conclusions": [
+              {
+                "conclusion": "后端接口优化必须于明天上午完成，确保不耽误联调测试",
+                "source_text": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+                "confidence": 0.9,
+                "source_supported": true
+              },
+              {
+                "conclusion": "周四中午前完成代码提交和自测，禁止超时提交",
+                "source_text": "所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码",
+                "confidence": 0.95,
+                "source_supported": true
+              },
+              {
+                "conclusion": "本期迭代需求已锁定无变更",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "confidence": 0.85,
+                "source_supported": true
+              }
+            ],
+            "unresolved_issues": [],
+            "risks_and_focus": [
+              {
+                "risk": "后端接口优化延期",
+                "impact": "小幅推后首轮测试启动时间",
+                "focus_area": "接口性能优化",
+                "mitigation": null,
+                "source_text": "如果后端接口优化延期，会小幅推后首轮测试启动时间。",
+                "confidence": 0.75,
+                "source_supported": true
+              },
+              {
+                "risk": "周四预打包前代码提交超时",
+                "impact": "可能导致打包冲突、版本异常",
+                "focus_area": "代码提交管理",
+                "mitigation": null,
+                "source_text": "禁止超时提交代码，避免出现打包冲突、版本异常问题。",
+                "confidence": 0.8,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch"
+              }
+            ],
+            "model_name": "qwen3:14b+rag",
+            "confidence_score": 0.844,
+            "metadata": {
+              "schema_version": "meeting-analysis-v1",
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "rag_chunk_ids": [
+                "boundary_rule_012",
+                "boundary_rule_008",
+                "v4_deadline_rule_001",
+                "negative_example_010",
+                "negative_example_004",
+                "negative_example_006",
+                "positive_example_004",
+                "positive_example_015"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+              "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+              "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "rag_retrieval_strategy": "layered_1_2_3_2",
+              "rag_retrieval_buckets": {
+                "GLOBAL_FIXED": [
+                  "boundary_rule_012"
+                ],
+                "POLICY_SELECTED": [
+                  "boundary_rule_008",
+                  "v4_deadline_rule_001"
+                ],
+                "RAG_DYNAMIC": [
+                  "negative_example_010",
+                  "negative_example_004",
+                  "negative_example_006"
+                ],
+                "RAG_SCENARIO": [
+                  "positive_example_004",
+                  "positive_example_015"
+                ]
+              },
+              "rag_routed_meeting_type": "project_weekly",
+              "rag_routed_scenario": "project_weekly",
+              "rag_fallback_reason": null,
+              "result_source": "legacy_qwen_rag",
+              "confidence_score": 0.844,
+              "generated_at": "2026-08-02T05:29:05.452070+00:00"
+            },
+            "_validator_audit": [
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "完成低版本浏览器适配优化",
+                  "deadline": "今天下午",
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "预计今天下午可以全部完成交付测试。",
+                  "source_segment_id": null,
+                  "confidence": 0.8,
+                  "source_supported": true,
+                  "needs_review": true,
+                  "review_reason": "claim_source_mismatch"
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "完成低版本浏览器适配优化",
+                  "deadline": "今天下午",
+                  "priority": null,
+                  "status": "open",
+                  "source_text": "预计今天下午可以全部完成交付测试。",
+                  "source_segment_id": null,
+                  "confidence": 0.8,
+                  "source_supported": true,
+                  "needs_review": true,
+                  "review_reason": "claim_source_mismatch",
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "完成接口响应延迟问题的代码优化",
+                  "deadline": "明天上午",
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+                  "source_segment_id": null,
+                  "confidence": 0.9,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "完成接口响应延迟问题的代码优化",
+                  "deadline": "明天上午",
+                  "priority": null,
+                  "status": "open",
+                  "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+                  "source_segment_id": null,
+                  "confidence": 0.9,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": "测试",
+                  "task": "启动首轮测试并压缩测试周期",
+                  "deadline": null,
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+                  "source_segment_id": null,
+                  "confidence": 0.85,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": "测试",
+                  "task": "启动首轮测试并压缩测试周期",
+                  "deadline": null,
+                  "priority": null,
+                  "status": "open",
+                  "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+                  "source_segment_id": null,
+                  "confidence": 0.85,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": "产品",
+                  "task": "确认需求无变更并锁定迭代内容",
+                  "deadline": null,
+                  "priority": "medium",
+                  "status": "open",
+                  "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                  "source_segment_id": null,
+                  "confidence": 0.8,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": "产品",
+                  "task": "确认需求无变更并锁定迭代内容",
+                  "deadline": null,
+                  "priority": null,
+                  "status": "open",
+                  "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                  "source_segment_id": null,
+                  "confidence": 0.8,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              }
+            ]
+          },
+          "validator_audit": [
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "完成低版本浏览器适配优化",
+                "deadline": "今天下午",
+                "priority": "medium",
+                "status": "open",
+                "source_text": "预计今天下午可以全部完成交付测试。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch"
+              },
+              "after": {
+                "owner_name": null,
+                "task": "完成低版本浏览器适配优化",
+                "deadline": "今天下午",
+                "priority": null,
+                "status": "open",
+                "source_text": "预计今天下午可以全部完成交付测试。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch",
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "完成接口响应延迟问题的代码优化",
+                "deadline": "明天上午",
+                "priority": "medium",
+                "status": "open",
+                "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+                "source_segment_id": null,
+                "confidence": 0.9,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "完成接口响应延迟问题的代码优化",
+                "deadline": "明天上午",
+                "priority": null,
+                "status": "open",
+                "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+                "source_segment_id": null,
+                "confidence": 0.9,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": "测试",
+                "task": "启动首轮测试并压缩测试周期",
+                "deadline": null,
+                "priority": "medium",
+                "status": "open",
+                "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+                "source_segment_id": null,
+                "confidence": 0.85,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": "测试",
+                "task": "启动首轮测试并压缩测试周期",
+                "deadline": null,
+                "priority": null,
+                "status": "open",
+                "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+                "source_segment_id": null,
+                "confidence": 0.85,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": "产品",
+                "task": "确认需求无变更并锁定迭代内容",
+                "deadline": null,
+                "priority": "medium",
+                "status": "open",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": "产品",
+                "task": "确认需求无变更并锁定迭代内容",
+                "deadline": null,
+                "priority": null,
+                "status": "open",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            }
+          ],
+          "warnings": [
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "完成低版本浏览器适配优化",
+                "deadline": "今天下午",
+                "priority": "medium",
+                "status": "open",
+                "source_text": "预计今天下午可以全部完成交付测试。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch"
+              },
+              "after": {
+                "owner_name": null,
+                "task": "完成低版本浏览器适配优化",
+                "deadline": "今天下午",
+                "priority": null,
+                "status": "open",
+                "source_text": "预计今天下午可以全部完成交付测试。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch",
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "完成接口响应延迟问题的代码优化",
+                "deadline": "明天上午",
+                "priority": "medium",
+                "status": "open",
+                "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+                "source_segment_id": null,
+                "confidence": 0.9,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "完成接口响应延迟问题的代码优化",
+                "deadline": "明天上午",
+                "priority": null,
+                "status": "open",
+                "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+                "source_segment_id": null,
+                "confidence": 0.9,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": "测试",
+                "task": "启动首轮测试并压缩测试周期",
+                "deadline": null,
+                "priority": "medium",
+                "status": "open",
+                "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+                "source_segment_id": null,
+                "confidence": 0.85,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": "测试",
+                "task": "启动首轮测试并压缩测试周期",
+                "deadline": null,
+                "priority": null,
+                "status": "open",
+                "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+                "source_segment_id": null,
+                "confidence": 0.85,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": "产品",
+                "task": "确认需求无变更并锁定迭代内容",
+                "deadline": null,
+                "priority": "medium",
+                "status": "open",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": "产品",
+                "task": "确认需求无变更并锁定迭代内容",
+                "deadline": null,
+                "priority": null,
+                "status": "open",
+                "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+                "source_segment_id": null,
+                "confidence": 0.8,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            }
+          ]
+        },
+        "error": null,
+        "duration_ms": 10.37,
+        "result_source": "validator",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "validator",
+      "started_at": "2026-08-02T05:30:24.611763+00:00",
+      "completed_at": "2026-08-02T05:30:24.622368+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    }
+  ],
+  "result_source": "validator",
+  "shadow_analysis": {
+    "overview": "本次周会同步了各岗位进度：前端完成核心页面改版，后端优化接口性能，测试完成用例评审。重点对齐后端接口延迟问题的修复时限，明确周四预打包的代码提交截止要求，并确认本期迭代需求已锁定无变更。",
+    "meeting_title": null,
+    "meeting_type": "project_weekly",
+    "meeting_type_confidence": 0.95,
+    "meeting_title_candidate": "项目周进度同步与版本排期会",
+    "title_basis": [
+      "会议围绕项目进度同步、问题对齐、下周排期与风险预警展开",
+      "明确周四预打包及版本上线考核指标"
+    ],
+    "agenda": [
+      {
+        "item": "项目进度同步（开发/测试/产品）",
+        "order": 1,
+        "source_segment_ids": []
+      },
+      {
+        "item": "版本预打包安排与迭代内容锁定",
+        "order": 2,
+        "source_segment_ids": []
+      }
+    ],
+    "topics": [],
+    "speaker_summaries": [],
+    "decisions": [
+      {
+        "decision": "后端接口优化必须于明天上午完成，确保不耽误联调测试",
+        "reason": null,
+        "source": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+        "conclusion": "后端接口优化必须于明天上午完成，确保不耽误联调测试",
+        "source_text": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+        "confidence": 0.9
+      },
+      {
+        "decision": "周四中午前完成代码提交和自测，禁止超时提交",
+        "reason": null,
+        "source": "所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码",
+        "conclusion": "周四中午前完成代码提交和自测，禁止超时提交",
+        "source_text": "所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码",
+        "confidence": 0.95
+      },
+      {
+        "decision": "本期迭代需求已锁定无变更",
+        "reason": null,
+        "source": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+        "conclusion": "本期迭代需求已锁定无变更",
+        "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+        "confidence": 0.85
+      }
+    ],
+    "action_items": [
+      {
+        "owner_name": null,
+        "task": "完成低版本浏览器适配优化",
+        "deadline": "今天下午",
+        "priority": null,
+        "status": "open",
+        "source_text": "预计今天下午可以全部完成交付测试。",
+        "source_segment_id": null,
+        "confidence": 0.8,
+        "source_supported": true,
+        "needs_review": true,
+        "review_reason": "claim_source_mismatch",
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      },
+      {
+        "owner_name": null,
+        "task": "完成接口响应延迟问题的代码优化",
+        "deadline": "明天上午",
+        "priority": null,
+        "status": "open",
+        "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+        "source_segment_id": null,
+        "confidence": 0.9,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      },
+      {
+        "owner_name": "测试",
+        "task": "启动首轮测试并压缩测试周期",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+        "source_segment_id": null,
+        "confidence": 0.85,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      },
+      {
+        "owner_name": "产品",
+        "task": "确认需求无变更并锁定迭代内容",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+        "source_segment_id": null,
+        "confidence": 0.8,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "后端接口优化延期",
+        "impact": "小幅推后首轮测试启动时间",
+        "mitigation": null,
+        "focus_area": "接口性能优化",
+        "source_text": "如果后端接口优化延期，会小幅推后首轮测试启动时间。",
+        "confidence": 0.75
+      },
+      {
+        "risk": "周四预打包前代码提交超时",
+        "impact": "可能导致打包冲突、版本异常",
+        "mitigation": null,
+        "focus_area": "代码提交管理",
+        "source_text": "禁止超时提交代码，避免出现打包冲突、版本异常问题。",
+        "confidence": 0.8
+      }
+    ],
+    "open_questions": [],
+    "next_steps": [
+      {
+        "item": "完成低版本浏览器适配优化",
+        "owner": null,
+        "time": "今天下午",
+        "note": "预计今天下午可以全部完成交付测试。"
+      },
+      {
+        "item": "完成接口响应延迟问题的代码优化",
+        "owner": null,
+        "time": "明天上午",
+        "note": "后端没问题，接口优化今天加班推进，明天上午准时交付。"
+      },
+      {
+        "item": "启动首轮测试并压缩测试周期",
+        "owner": "测试",
+        "time": null,
+        "note": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。"
+      },
+      {
+        "item": "确认需求无变更并锁定迭代内容",
+        "owner": "产品",
+        "time": null,
+        "note": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。"
+      }
+    ],
+    "meeting_agenda": [
+      {
+        "item": "项目进度同步（开发/测试/产品）",
+        "order": 1,
+        "source_segment_ids": []
+      },
+      {
+        "item": "版本预打包安排与迭代内容锁定",
+        "order": 2,
+        "source_segment_ids": []
+      }
+    ],
+    "meeting_summary": "本次周会同步了各岗位进度：前端完成核心页面改版，后端优化接口性能，测试完成用例评审。重点对齐后端接口延迟问题的修复时限，明确周四预打包的代码提交截止要求，并确认本期迭代需求已锁定无变更。",
+    "key_conclusions": [
+      {
+        "conclusion": "后端接口优化必须于明天上午完成，确保不耽误联调测试",
+        "source_text": "优先加急优化，明天上午必须完成，确保不耽误下午整体联调和测试工作。",
+        "confidence": 0.9,
+        "source_supported": true
+      },
+      {
+        "conclusion": "周四中午前完成代码提交和自测，禁止超时提交",
+        "source_text": "所有人在周四中午前必须完成各自模块的代码提交和自测，禁止超时提交代码",
+        "confidence": 0.95,
+        "source_supported": true
+      },
+      {
+        "conclusion": "本期迭代需求已锁定无变更",
+        "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+        "confidence": 0.85,
+        "source_supported": true
+      }
+    ],
+    "unresolved_issues": [],
+    "risks_and_focus": [
+      {
+        "risk": "后端接口优化延期",
+        "impact": "小幅推后首轮测试启动时间",
+        "focus_area": "接口性能优化",
+        "mitigation": null,
+        "source_text": "如果后端接口优化延期，会小幅推后首轮测试启动时间。",
+        "confidence": 0.75,
+        "source_supported": true
+      },
+      {
+        "risk": "周四预打包前代码提交超时",
+        "impact": "可能导致打包冲突、版本异常",
+        "focus_area": "代码提交管理",
+        "mitigation": null,
+        "source_text": "禁止超时提交代码，避免出现打包冲突、版本异常问题。",
+        "confidence": 0.8,
+        "source_supported": true,
+        "needs_review": true,
+        "review_reason": "claim_source_mismatch"
+      }
+    ],
+    "model_name": "qwen3:14b+rag",
+    "confidence_score": 0.844,
+    "metadata": {
+      "schema_version": "meeting-analysis-v1",
+      "model_name": "qwen3:14b+rag",
+      "prompt_version": "meeting-analyst-v1",
+      "rag_chunk_ids": [
+        "boundary_rule_012",
+        "boundary_rule_008",
+        "v4_deadline_rule_001",
+        "negative_example_010",
+        "negative_example_004",
+        "negative_example_006",
+        "positive_example_004",
+        "positive_example_015"
+      ],
+      "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+      "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+      "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+      "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+      "rag_retrieval_strategy": "layered_1_2_3_2",
+      "rag_retrieval_buckets": {
+        "GLOBAL_FIXED": [
+          "boundary_rule_012"
+        ],
+        "POLICY_SELECTED": [
+          "boundary_rule_008",
+          "v4_deadline_rule_001"
+        ],
+        "RAG_DYNAMIC": [
+          "negative_example_010",
+          "negative_example_004",
+          "negative_example_006"
+        ],
+        "RAG_SCENARIO": [
+          "positive_example_004",
+          "positive_example_015"
+        ]
+      },
+      "rag_routed_meeting_type": "project_weekly",
+      "rag_routed_scenario": "project_weekly",
+      "rag_fallback_reason": null,
+      "result_source": "legacy_qwen_rag",
+      "confidence_score": 0.844,
+      "generated_at": "2026-08-02T05:29:05.452070+00:00"
+    },
+    "_validator_audit": [
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": null,
+          "task": "完成低版本浏览器适配优化",
+          "deadline": "今天下午",
+          "priority": "medium",
+          "status": "open",
+          "source_text": "预计今天下午可以全部完成交付测试。",
+          "source_segment_id": null,
+          "confidence": 0.8,
+          "source_supported": true,
+          "needs_review": true,
+          "review_reason": "claim_source_mismatch"
+        },
+        "after": {
+          "owner_name": null,
+          "task": "完成低版本浏览器适配优化",
+          "deadline": "今天下午",
+          "priority": null,
+          "status": "open",
+          "source_text": "预计今天下午可以全部完成交付测试。",
+          "source_segment_id": null,
+          "confidence": 0.8,
+          "source_supported": true,
+          "needs_review": true,
+          "review_reason": "claim_source_mismatch",
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      },
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": null,
+          "task": "完成接口响应延迟问题的代码优化",
+          "deadline": "明天上午",
+          "priority": "medium",
+          "status": "open",
+          "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+          "source_segment_id": null,
+          "confidence": 0.9,
+          "source_supported": true
+        },
+        "after": {
+          "owner_name": null,
+          "task": "完成接口响应延迟问题的代码优化",
+          "deadline": "明天上午",
+          "priority": null,
+          "status": "open",
+          "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+          "source_segment_id": null,
+          "confidence": 0.9,
+          "source_supported": true,
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      },
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": "测试",
+          "task": "启动首轮测试并压缩测试周期",
+          "deadline": null,
+          "priority": "medium",
+          "status": "open",
+          "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+          "source_segment_id": null,
+          "confidence": 0.85,
+          "source_supported": true
+        },
+        "after": {
+          "owner_name": "测试",
+          "task": "启动首轮测试并压缩测试周期",
+          "deadline": null,
+          "priority": null,
+          "status": "open",
+          "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+          "source_segment_id": null,
+          "confidence": 0.85,
+          "source_supported": true,
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      },
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": "产品",
+          "task": "确认需求无变更并锁定迭代内容",
+          "deadline": null,
+          "priority": "medium",
+          "status": "open",
+          "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+          "source_segment_id": null,
+          "confidence": 0.8,
+          "source_supported": true
+        },
+        "after": {
+          "owner_name": "产品",
+          "task": "确认需求无变更并锁定迭代内容",
+          "deadline": null,
+          "priority": null,
+          "status": "open",
+          "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+          "source_segment_id": null,
+          "confidence": 0.8,
+          "source_supported": true,
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      }
+    ]
+  },
+  "validation_audit": [
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": null,
+        "task": "完成低版本浏览器适配优化",
+        "deadline": "今天下午",
+        "priority": "medium",
+        "status": "open",
+        "source_text": "预计今天下午可以全部完成交付测试。",
+        "source_segment_id": null,
+        "confidence": 0.8,
+        "source_supported": true,
+        "needs_review": true,
+        "review_reason": "claim_source_mismatch"
+      },
+      "after": {
+        "owner_name": null,
+        "task": "完成低版本浏览器适配优化",
+        "deadline": "今天下午",
+        "priority": null,
+        "status": "open",
+        "source_text": "预计今天下午可以全部完成交付测试。",
+        "source_segment_id": null,
+        "confidence": 0.8,
+        "source_supported": true,
+        "needs_review": true,
+        "review_reason": "claim_source_mismatch",
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    },
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": null,
+        "task": "完成接口响应延迟问题的代码优化",
+        "deadline": "明天上午",
+        "priority": "medium",
+        "status": "open",
+        "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+        "source_segment_id": null,
+        "confidence": 0.9,
+        "source_supported": true
+      },
+      "after": {
+        "owner_name": null,
+        "task": "完成接口响应延迟问题的代码优化",
+        "deadline": "明天上午",
+        "priority": null,
+        "status": "open",
+        "source_text": "后端没问题，接口优化今天加班推进，明天上午准时交付。",
+        "source_segment_id": null,
+        "confidence": 0.9,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    },
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": "测试",
+        "task": "启动首轮测试并压缩测试周期",
+        "deadline": null,
+        "priority": "medium",
+        "status": "open",
+        "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+        "source_segment_id": null,
+        "confidence": 0.85,
+        "source_supported": true
+      },
+      "after": {
+        "owner_name": "测试",
+        "task": "启动首轮测试并压缩测试周期",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "source_text": "测试这边提前做好测试准备，接口优化完成后立刻启动首轮测试。",
+        "source_segment_id": null,
+        "confidence": 0.85,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    },
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": "产品",
+        "task": "确认需求无变更并锁定迭代内容",
+        "deadline": null,
+        "priority": "medium",
+        "status": "open",
+        "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+        "source_segment_id": null,
+        "confidence": 0.8,
+        "source_supported": true
+      },
+      "after": {
+        "owner_name": "产品",
+        "task": "确认需求无变更并锁定迭代内容",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "source_text": "产品这边同步跟进，确认所有需求无变更，锁定本期迭代内容。",
+        "source_segment_id": null,
+        "confidence": 0.8,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    }
+  ],
+  "comparison_summary": {
+    "fields": {
+      "meeting_agenda": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 2,
+        "shadow_count": 2,
+        "count_delta": 0
+      },
+      "meeting_summary": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 1,
+        "shadow_count": 1,
+        "count_delta": 0
+      },
+      "key_conclusions": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 3,
+        "shadow_count": 3,
+        "count_delta": 0
+      },
+      "action_items": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 4,
+        "shadow_count": 4,
+        "count_delta": 0
+      },
+      "unresolved_issues": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      },
+      "risks_and_focus": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 2,
+        "shadow_count": 2,
+        "count_delta": 0
+      }
+    },
+    "schema_ok": true,
+    "validator_warning_count": 4,
+    "result_source": {
+      "formal": "legacy_qwen_rag",
+      "shadow": "validator",
+      "same": false
+    }
+  },
+  "error": null,
+  "fallback_reason": null,
+  "metadata": {
+    "policy_schema_version": "meeting-scenario-policy-v1",
+    "policy_needs_review": false,
+    "plan_id": "agent-runtime-static-plan-v1",
+    "agent_mode_enabled": false,
+    "agent_actions_enabled": false,
+    "audit_path": "D:\\codex_work\\会议声纹识别\\services\\worker\\data\\debug\\agent_shadow_trace\\272a56d6-9251-4148-9eb1-20a91148d9c3\\agent-shadow-bc14e5f0-5ada-453d-9da8-ef05c52bc250.json"
+  }
+}

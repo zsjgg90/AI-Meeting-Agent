@@ -271,6 +271,93 @@ def _has_action_requirement_signal(text: str) -> bool:
     return bool(ASSIGNMENT_PATTERN.search(text))
 
 
+NEGATIVE_EXAMPLE_MARKERS = {
+    "只是提醒",
+    "只是说明",
+    "不是任务",
+    "不是待办",
+    "不是 action",
+    "不是 Action",
+    "不应该识别为任务",
+    "不能识别为任务",
+    "错误识别",
+    "误识别",
+    "误判",
+    "模型有时候直接变成",
+    "实际上用户只是",
+    "实际上不是",
+}
+
+QUOTE_EXAMPLE_MARKERS = {
+    "比如",
+    "例如",
+    "举例",
+    "例子",
+    "引用",
+    "原话",
+}
+
+PROGRESS_ONLY_MARKERS = {
+    "已完成",
+    "已经完成",
+    "基本完成",
+    "已增加",
+    "已经增加",
+    "增加了",
+    "已处理",
+    "已经处理",
+    "现在基本完成",
+    "当前状态",
+    "我同步一下",
+}
+
+FUTURE_ACTION_MARKERS = {
+    "安排",
+    "负责",
+    "需要",
+    "后续",
+    "下一步",
+    "明天",
+    "今天",
+    "下午",
+    "之前",
+    "我来",
+    "我会",
+    "我今天",
+    "我明天",
+    "测试",
+    "排查",
+    "补充",
+    "提交",
+    "输出",
+    "给结果",
+}
+
+
+def _is_negative_example_action_text(text: str) -> bool:
+    if not _contains_any(text, NEGATIVE_EXAMPLE_MARKERS):
+        return False
+    if "“" in text or "”" in text or '"' in text or "'" in text:
+        return True
+    return _contains_any(text, QUOTE_EXAMPLE_MARKERS) or _contains_any(text, {"任务", "待办", "Action", "action"})
+
+
+def _has_explicit_future_action(text: str) -> bool:
+    return bool(TIME_PATTERN.search(text)) or _contains_any(text, FUTURE_ACTION_MARKERS) or _has_action_requirement_signal(text)
+
+
+def _is_progress_update_without_action(text: str) -> bool:
+    if not _contains_any(text, PROGRESS_ONLY_MARKERS):
+        return False
+    if _has_explicit_future_action(text):
+        return False
+    return True
+
+
+def _should_reject_semantic_action_text(text: str) -> bool:
+    return _is_negative_example_action_text(text) or _is_progress_update_without_action(text)
+
+
 def _normalize_flow_text(text: str) -> str:
     return text.strip().rstrip("。！？!?；;，,")
 
@@ -344,6 +431,20 @@ def _validate_non_event(
         event.attributes.deadline = None
         event.attributes.status = "unknown"
         _set_event_type(event, "information")
+        return
+
+    if _should_reject_semantic_action_text(source_text):
+        event.secondary_intents = []
+        event.subject = None
+        event.action = None
+        event.object = None
+        event.attributes.owner = None
+        event.attributes.deadline = None
+        event.attributes.status = "unknown"
+        event.primary_intent = "information"
+        _set_event_type(event, "information")
+        event.needs_review = True
+        summary.add("non_action_example_or_progress_guard")
         return
 
     # non_event 不允许吞掉带业务内容的句子。
@@ -557,6 +658,20 @@ def _validate_assignment_and_requirement(
     source_text: str,
     summary: ValidationSummary,
 ) -> None:
+    if event.primary_intent == "task_assignment" and _should_reject_semantic_action_text(source_text):
+        event.primary_intent = "information"
+        event.secondary_intents = []
+        event.subject = None
+        event.action = None
+        event.object = None
+        event.attributes.owner = None
+        event.attributes.deadline = None
+        event.attributes.status = "unknown"
+        _set_event_type(event, "information")
+        event.needs_review = True
+        summary.add("task_assignment_rejected_as_example_or_progress")
+        return
+
     has_assignment = bool(ASSIGNMENT_PATTERN.search(source_text))
     has_requirement = _contains_any(source_text, REQUIREMENT_PATTERNS)
 

@@ -1324,6 +1324,60 @@ def filter_unassigned_or_suggested_action_items(result: dict, audit: list[dict] 
     assignment_terms = ["负责", "完成", "提交", "输出", "编写", "更新", "同步", "整理", "补充", "验证", "排查", "跟进", "安排"]
     weak_source_terms = ["建议", "可以", "可能", "否则", "不确定", "讨论"]
     action_requirement_terms = ["需要补充", "需要同步", "需要更新", "需要验证", "需要排查", "后续安排", "下一步完成"]
+    deadline_terms = [
+        "今天",
+        "明天",
+        "后天",
+        "下班前",
+        "周一",
+        "周二",
+        "周三",
+        "周四",
+        "周五",
+        "周六",
+        "周日",
+        "下周",
+        "本周",
+        "月底前",
+        "点前",
+    ]
+    explicit_assignment_terms = [
+        "负责",
+        "安排",
+        "完成",
+        "提供",
+        "调整",
+        "修复",
+    ]
+    suggestion_only_terms = [
+        "建议",
+        "可以考虑",
+        "要不要",
+        "是否调整",
+        "后续看看",
+        "后面看看",
+        "看看要不要",
+        "优化一下",
+    ]
+
+    def has_real_assignment_evidence(
+        item: dict,
+        source_norm: str,
+        owner: object,
+        has_commitment: bool,
+    ) -> bool:
+        if not source_norm:
+            return False
+        deadline = item.get("deadline") or item.get("due_date")
+        has_deadline = bool(deadline) or any(normalize_text(term) in source_norm for term in deadline_terms)
+        owner_norm = normalize_text(owner)
+        has_owner = bool(owner_norm and owner_norm in source_norm)
+        has_assignment_phrase = any(normalize_text(term) in source_norm for term in explicit_assignment_terms)
+        has_suggestion_only = any(normalize_text(term) in source_norm for term in suggestion_only_terms)
+
+        if has_suggestion_only and not (has_deadline or has_owner or has_commitment):
+            return False
+        return has_deadline or has_owner or has_assignment_phrase
 
     kept = []
     for item in result.get("action_items", []):
@@ -1334,11 +1388,12 @@ def filter_unassigned_or_suggested_action_items(result: dict, audit: list[dict] 
         owner = item.get("owner_name") or item.get("owner")
         has_commitment = any(normalize_text(term) in source_norm for term in commitment_terms)
         has_assignment = bool(owner) or any(normalize_text(term) in source_norm for term in assignment_terms)
-        weak_source = any(normalize_text(term) in source_norm for term in weak_source_terms)
+        has_assignment_evidence = has_real_assignment_evidence(item, source_norm, owner, has_commitment)
+        weak_source = any(normalize_text(term) in source_norm for term in weak_source_terms + suggestion_only_terms)
         has_action_requirement = any(normalize_text(term) in source_norm for term in action_requirement_terms)
         direction_only = "方向先推进" in source_norm and not has_commitment
 
-        if direction_only or (weak_source and not has_commitment and not has_assignment):
+        if direction_only or (weak_source and not has_commitment and not has_assignment and not has_assignment_evidence):
             add_audit(audit, "action_items", "remove", "suggestion_or_direction_without_assignment", item)
             continue
         if "需要" in source_norm and not (has_action_requirement or has_assignment or has_commitment):

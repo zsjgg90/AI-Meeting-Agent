@@ -1,0 +1,87 @@
+{
+  "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+  "as_of": "2026-08-04T13:18:21.099784Z",
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:24dc4ed14c9e",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+        "source_id": "resp:bf1412bd-4002-4d50-9002-7a94fbc512ac:ca24a2c5-8c43-49d5-8647-d280197bd99f:ed37a95c9bd6",
+        "occurred_at": "2026-08-04T13:18:21.099784Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:cf529b99e1cc",
+          "source_type": "semantic_event",
+          "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+          "source_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "segment_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-04T13:18:21.099784Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-04T13:18:21.099784Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:6f589fe6c5bb",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '哈哈哈哈 新年新期级 哈哈哈哈', 'topic_id': 'topic_1', 'source_event_ids': ['a5552de5-03a0-5364-b5cb-09d92c9fe2e0'], 'source_texts': ['哈哈哈哈 新年新期级 哈哈哈哈'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+        "source_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:8f82601e0b3b",
+          "source_type": "formal_summary_item",
+          "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+          "source_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-04T13:18:21.099784Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-04T13:18:21.099784Z",
+      "status": "candidate"
+    }
+  ]
+}

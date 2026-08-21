@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-08-11T16:40:13.944892Z",
+  "source_snapshot_as_of": "2026-08-11T16:40:13.944892Z",
+  "current_meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+  "retrieved_at": "2026-08-11T16:40:13.944892Z",
+  "token_budget": 480,
+  "token_cost": 479,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:1ef9c8409aad",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.1812,
+      "evidence": [
+        {
+          "evidence_id": "ev:05316d8d663f",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "9ca7e2e4-0ecc-4613-b41c-bf33000c1cbb",
+          "segment_id": "9ca7e2e4-0ecc-4613-b41c-bf33000c1cbb",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。"
+        }
+      ],
+      "token_cost": 165
+    },
+    {
+      "memory_id": "mem:responsibility:b45ab32040ec",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.1772,
+      "evidence": [
+        {
+          "evidence_id": "ev:6287caf24e03",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "52bb0db7-fd1c-4358-9289-6bb5c9e41a34",
+          "segment_id": "52bb0db7-fd1c-4358-9289-6bb5c9e41a34",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。"
+        }
+      ],
+      "token_cost": 160
+    },
+    {
+      "memory_id": "mem:responsibility:1dcf39294604",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.1623,
+      "evidence": [
+        {
+          "evidence_id": "ev:9bed55bf1c40",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "93b7a17f-ba76-43fb-9e6a-f5abf18228b5",
+          "segment_id": "93b7a17f-ba76-43fb-9e6a-f5abf18228b5",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。"
+        }
+      ],
+      "token_cost": 154
+    }
+  ]
+}

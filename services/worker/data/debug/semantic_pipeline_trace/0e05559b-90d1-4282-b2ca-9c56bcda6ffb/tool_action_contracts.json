@@ -1,0 +1,59 @@
+{
+  "meeting_id": "0e05559b-90d1-4282-b2ca-9c56bcda6ffb",
+  "items": [
+    {
+      "tool_id": "task.create",
+      "action_id": "action:create_task:7c6015c31ec2",
+      "required_permissions": [
+        "task:create",
+        "audit:write"
+      ],
+      "confirmation_required": true,
+      "execution_mode": "disabled",
+      "blocked_reason": [
+        "stage8_5_4_shadow_only",
+        "execution_not_attempted",
+        "no_execution_adapter",
+        "writes_disabled",
+        "human_confirmation_required",
+        "write_scope_not_enabled"
+      ]
+    },
+    {
+      "tool_id": "task.create",
+      "action_id": "action:create_task:3f11a6dc7223",
+      "required_permissions": [
+        "task:create",
+        "audit:write"
+      ],
+      "confirmation_required": true,
+      "execution_mode": "disabled",
+      "blocked_reason": [
+        "stage8_5_4_shadow_only",
+        "execution_not_attempted",
+        "no_execution_adapter",
+        "writes_disabled",
+        "human_confirmation_required",
+        "write_scope_not_enabled"
+      ]
+    },
+    {
+      "tool_id": "task.create",
+      "action_id": "action:create_task:b38ef1a920e6",
+      "required_permissions": [
+        "task:create",
+        "audit:write"
+      ],
+      "confirmation_required": true,
+      "execution_mode": "disabled",
+      "blocked_reason": [
+        "stage8_5_4_shadow_only",
+        "execution_not_attempted",
+        "no_execution_adapter",
+        "writes_disabled",
+        "human_confirmation_required",
+        "write_scope_not_enabled"
+      ]
+    }
+  ]
+}

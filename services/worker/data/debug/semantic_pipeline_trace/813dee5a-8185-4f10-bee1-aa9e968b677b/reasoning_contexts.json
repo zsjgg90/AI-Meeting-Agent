@@ -1,0 +1,413 @@
+{
+  "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+  "items": [
+    {
+      "reasoning_id": "reason:responsibility_analysis:3c56401382a0",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for information嗯，我今天看。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:63e59ccfe7be",
+          "source_type": "semantic_event",
+          "source_id": "92f31c76-a989-483d-9687-0fbb1fc686af",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:0034e98ce737",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "嗯，我今天看。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:0034e98ce737"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:0034e98ce737"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:0d212ffadd15",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment修复。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:08f7f0ac5594",
+          "source_type": "semantic_event",
+          "source_id": "3a594533-8e8c-4e2a-b66e-dc2432b33b4f,39fdb885-bce2-446a-a685-f2b4bf519a7c,1e946278-aa4a-4d54-a691-ce989a19d51c",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:d66460cf25d0",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "那可能 Worker 出错以后状态没回写。\n这个必须修。\n我今天查。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:d66460cf25d0"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:d66460cf25d0"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:40c65eff93c4",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for information我今天查。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:3373c23b5ced",
+          "source_type": "semantic_event",
+          "source_id": "1e946278-aa4a-4d54-a691-ce989a19d51c",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:ca825639e388",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "我今天查。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:ca825639e388"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:ca825639e388"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:a62216cc1af4",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment我会处理。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:ad52eb470c45",
+          "source_type": "semantic_event",
+          "source_id": "81e793fb-32ef-45e6-8a82-4ea1668e70d4",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:85c2c240381b",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "我会处理。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:85c2c240381b"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:85c2c240381b"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:5ceef73299af",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment修复任务搜索结果闪动问题, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:188477634f13",
+          "source_type": "semantic_event",
+          "source_id": "2cfbe988-ffe1-485d-bd18-3d20173a3583,b0e5c3c5-5d19-4369-a40e-588457805df0,9b5398f6-a692-4dcd-8faf-17d34b3079d1",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:e9de49d5517f",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "任务再过一下。\n前端，明天下午前修任务搜索结果闪动和 Android 后台恢复后录音计时不准。\n好。",
+          "confidence": 0.78,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.78,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:e9de49d5517f"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:e9de49d5517f"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:4215857961eb",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment修复 AI 分析失败状态返回机制, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:e51bbbeb87b9",
+          "source_type": "semantic_event",
+          "source_id": "be8aa06f-b5b5-4f06-a9e4-c0bd7e4bce9f,ebf9fa15-263c-4c93-a062-3d193c52e661,28f5aadb-c83e-4ca0-84c4-c3d7b01b936e",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:ee6843861c68",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "我提供文案。\n后端，AI 分析失败状态明天下午前修。\n好。",
+          "confidence": 0.78,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.78,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:ee6843861c68"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:ee6843861c68"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:3dee957ccc8b",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment完成声纹噪声环境测试, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:73e3d53a701b",
+          "source_type": "semantic_event",
+          "source_id": "e99e0073-f8bc-443b-807f-456b1dbdc04b,d2895bcf-5610-4159-99e0-6e18ffabff1b,d9d9b7c6-5b64-4839-9191-f27251027d0d",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:bcb87dffe4d5",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "可以。\n测试，周一回归这些问题，下周二前完成声纹噪声环境测试。\n嗯。",
+          "confidence": 0.78,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.78,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:bcb87dffe4d5"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:bcb87dffe4d5"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:b1b4ce92cf01",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment输出 Golden Dataset 基线报告并完成稳定性测试, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:9cedae0eb7f0",
+          "source_type": "semantic_event",
+          "source_id": "d9d9b7c6-5b64-4839-9191-f27251027d0d,7673603e-96b4-4338-94b2-ff8bc9b3d3e5,3910083d-2346-4bac-bb2c-d24ce3a63b61",
+          "meeting_id": "813dee5a-8185-4f10-bee1-aa9e968b677b",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:b9127436db8a",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "嗯。\nAI，下周三前出 Golden Dataset 基线报告，再挑两个案例各跑三次稳定性测试。\n好。",
+          "confidence": 0.78,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.78,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "813dee5a-8185-4f10-bee1-aa9e968b677b"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:b9127436db8a"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:b9127436db8a"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    }
+  ]
+}

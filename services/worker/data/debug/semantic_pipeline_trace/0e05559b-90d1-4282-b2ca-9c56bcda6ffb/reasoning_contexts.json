@@ -1,0 +1,223 @@
+{
+  "meeting_id": "0e05559b-90d1-4282-b2ca-9c56bcda6ffb",
+  "items": [
+    {
+      "reasoning_id": "reason:responsibility_analysis:2a82b2567298",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for information嗯，我今天看。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:b6f1cc8e8dff",
+          "source_type": "semantic_event",
+          "source_id": "15ff1109-6ebf-42e3-9307-95e3a7d3e4a2",
+          "meeting_id": "0e05559b-90d1-4282-b2ca-9c56bcda6ffb",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:0034e98ce737",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "嗯，我今天看。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "0e05559b-90d1-4282-b2ca-9c56bcda6ffb"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:0034e98ce737"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:0034e98ce737"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:4321e74198e5",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for information我今天查。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:1a23dcd9847e",
+          "source_type": "semantic_event",
+          "source_id": "b42aaef9-3892-4eff-8980-1b6d7921ff1d",
+          "meeting_id": "0e05559b-90d1-4282-b2ca-9c56bcda6ffb",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:ca825639e388",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "我今天查。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "0e05559b-90d1-4282-b2ca-9c56bcda6ffb"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:ca825639e388"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:ca825639e388"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:b730599362dc",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment我会处理。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:526bf643836d",
+          "source_type": "semantic_event",
+          "source_id": "94dd1e9b-f98b-4638-a8be-e7938b8cdfa2",
+          "meeting_id": "0e05559b-90d1-4282-b2ca-9c56bcda6ffb",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:85c2c240381b",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "我会处理。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "0e05559b-90d1-4282-b2ca-9c56bcda6ffb"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:85c2c240381b"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:85c2c240381b"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:trend_detection:b50884471b72",
+      "reasoning_type": "trend_detection",
+      "claim": "responsibility context around information appears repeatedly across the available evidence.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:fc5922c814d1",
+          "source_type": "semantic_event",
+          "source_id": "15ff1109-6ebf-42e3-9307-95e3a7d3e4a2",
+          "meeting_id": "0e05559b-90d1-4282-b2ca-9c56bcda6ffb",
+          "memory_id": "mem:responsibility:8ec4bfbd1bbf",
+          "semantic_event_id": null,
+          "responsibility_id": null,
+          "supported_claim_parts": [
+            "trend_signal"
+          ],
+          "support_level": "supports",
+          "source_text": "嗯，我今天看。",
+          "confidence": 0.62,
+          "evidence_status": "unknown"
+        },
+        {
+          "evidence_ref_id": "eref:78f9d053cf00",
+          "source_type": "semantic_event",
+          "source_id": "b42aaef9-3892-4eff-8980-1b6d7921ff1d",
+          "meeting_id": "0e05559b-90d1-4282-b2ca-9c56bcda6ffb",
+          "memory_id": "mem:responsibility:e2a9dfd843c5",
+          "semantic_event_id": null,
+          "responsibility_id": null,
+          "supported_claim_parts": [
+            "trend_signal"
+          ],
+          "support_level": "supports",
+          "source_text": "我今天查。",
+          "confidence": 0.62,
+          "evidence_status": "unknown"
+        }
+      ],
+      "confidence": 0.67,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "0e05559b-90d1-4282-b2ca-9c56bcda6ffb"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "compare_with_prior_memory",
+        "text": "Compare the repeated evidence with prior memory before treating it as a project trend.",
+        "target_refs": [
+          "mem:responsibility:8ec4bfbd1bbf",
+          "mem:responsibility:e2a9dfd843c5"
+        ],
+        "blocked_actions": [
+          "change_risk_status",
+          "close_issue",
+          "update_task"
+        ]
+      }
+    }
+  ]
+}

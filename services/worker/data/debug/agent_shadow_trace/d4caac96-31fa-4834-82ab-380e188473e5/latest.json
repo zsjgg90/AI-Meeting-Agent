@@ -1,0 +1,3803 @@
+{
+  "agent_run_id": "agent-shadow-9e444775-3d0b-4a3a-a3b8-5710bfb60e3b",
+  "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+  "meeting_type": "project_weekly",
+  "status": "partial",
+  "started_at": "2026-08-11T17:22:22.429237+00:00",
+  "finished_at": "2026-08-11T17:22:41.306548+00:00",
+  "duration_ms": 18877.23,
+  "steps": [
+    {
+      "step_index": 0,
+      "tool_name": "get_meeting_context",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 72.01,
+      "result": {
+        "tool_name": "get_meeting_context",
+        "status": "success",
+        "data": {
+          "meeting": {
+            "id": "d4caac96-31fa-4834-82ab-380e188473e5",
+            "title": "MeetMind_AI_V2.6_",
+            "status": "completed",
+            "created_at": "2026-08-12T01:22:02.944409+08:00",
+            "updated_at": "2026-08-12T01:22:02.944409+08:00"
+          },
+          "transcript_segments": [
+            {
+              "id": "3f93b074-4d8e-4f6c-823a-dbb1d31023ba",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 0,
+              "start_time": 0.0,
+              "end_time": 4.0,
+              "text": "人都到了吧？ 赵敏，你声音正常吗？",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "b4928791-77ab-4ff1-bad4-7ec9f7eace89",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 1,
+              "start_time": 10.0,
+              "end_time": 14.0,
+              "text": "可以，能听到。",
+              "speaker_label": "Speaker 2",
+              "speaker_name": "赵敏",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "642f9738-2260-441a-84be-2b010d116aef",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 2,
+              "start_time": 20.0,
+              "end_time": 25.75,
+              "text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "b29f97d8-fca2-4366-b49c-794aeb41af2b",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 3,
+              "start_time": 30.0,
+              "end_time": 38.5,
+              "text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+              "speaker_label": "Speaker 3",
+              "speaker_name": "李娜",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "8206097c-7379-47c0-97ac-98a8dbc3ce11",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 4,
+              "start_time": 40.0,
+              "end_time": 44.0,
+              "text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "6ded70b2-c6f2-4351-96ba-c90501c66bfd",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 5,
+              "start_time": 50.0,
+              "end_time": 54.0,
+              "text": "对，看过。 但是现在感觉还是有。",
+              "speaker_label": "Speaker 3",
+              "speaker_name": "李娜",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "c1785ef8-84f9-43be-a932-14f8f47951b5",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 6,
+              "start_time": 60.0,
+              "end_time": 64.0,
+              "text": "“这个事情后面关注一下。”",
+              "speaker_label": "Speaker 4",
+              "speaker_name": "比如用户说",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "919568df-cce1-494a-95e6-51aed2249c7e",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 7,
+              "start_time": 70.0,
+              "end_time": 74.0,
+              "text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+              "speaker_label": "Speaker 5",
+              "speaker_name": "模型有时候直接变成",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "2a9449f7-3885-42d6-b896-e95fadb0b698",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 8,
+              "start_time": 80.0,
+              "end_time": 86.08,
+              "text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "9495c0e2-ead8-49aa-a66a-f1dbf2f1bbdb",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 9,
+              "start_time": 90.0,
+              "end_time": 94.0,
+              "text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+              "speaker_label": "Speaker 7",
+              "speaker_name": "王强",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "67b24282-6322-4341-b0ca-ba6eb5125c69",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 10,
+              "start_time": 100.0,
+              "end_time": 104.0,
+              "text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+              "speaker_label": "Speaker 8",
+              "speaker_name": "他们看到的就是",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "15710663-3b91-4e89-91ff-89976391da7e",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 11,
+              "start_time": 110.0,
+              "end_time": 115.67,
+              "text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "59d7a234-810b-47c4-a9f4-d135d79770be",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 12,
+              "start_time": 120.0,
+              "end_time": 124.0,
+              "text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+              "speaker_label": "Speaker 3",
+              "speaker_name": "李娜",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "cea2a993-f284-4930-a0b6-3e0f9a6c50ad",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 13,
+              "start_time": 130.0,
+              "end_time": 134.0,
+              "text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "e6db7933-e400-4463-9247-7374ce2ada50",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 14,
+              "start_time": 140.0,
+              "end_time": 144.0,
+              "text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "2d7d86b1-526b-4cb9-a507-0d245ee874c4",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 15,
+              "start_time": 150.0,
+              "end_time": 154.0,
+              "text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+              "speaker_label": "Speaker 2",
+              "speaker_name": "赵敏",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "32e62ce9-408b-4862-9313-8fddfa1f4c20",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 16,
+              "start_time": 160.0,
+              "end_time": 164.0,
+              "text": "什么意思？",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "cb50b199-711e-4fb6-8a16-7fa54df5f8f7",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 17,
+              "start_time": 170.0,
+              "end_time": 174.0,
+              "text": "“我将在8月15日前完成接口开发。”",
+              "speaker_label": "Speaker 9",
+              "speaker_name": "比如真实会议里面不会说",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "600d6ca5-f95b-4dab-93c1-dd7fb299ae1f",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 18,
+              "start_time": 180.0,
+              "end_time": 184.0,
+              "text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+              "speaker_label": "Speaker 10",
+              "speaker_name": "更多是",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "87e69763-edb3-4302-9657-6a9b19362b80",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 19,
+              "start_time": 190.0,
+              "end_time": 194.0,
+              "text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "4a6f2a7b-6689-459f-bd73-49d629772e76",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 20,
+              "start_time": 200.0,
+              "end_time": 204.0,
+              "text": "还有一个。 之前测试发现一个情况。",
+              "speaker_label": "Speaker 2",
+              "speaker_name": "赵敏",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "2346a030-fe69-425e-a360-1b5684447ba8",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 21,
+              "start_time": 210.0,
+              "end_time": 214.0,
+              "text": "“是不是可以考虑增加导出功能？”",
+              "speaker_label": "Speaker 11",
+              "speaker_name": "产品说",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "a5013bcc-ff38-4a6c-94ad-095f79362289",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 22,
+              "start_time": 220.0,
+              "end_time": 224.0,
+              "text": "“增加PDF导出功能。” 但是会议根本没决定。",
+              "speaker_label": "Speaker 12",
+              "speaker_name": "结果 AI 直接生成",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "11ed4abb-700b-4084-9b14-ec48aafff7db",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 23,
+              "start_time": 230.0,
+              "end_time": 234.0,
+              "text": "这个确实。 我们只是讨论方向。",
+              "speaker_label": "Speaker 3",
+              "speaker_name": "李娜",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "748ac45c-c627-4292-8927-cdd18cbe7119",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 24,
+              "start_time": 240.0,
+              "end_time": 244.08,
+              "text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 25,
+              "start_time": 250.0,
+              "end_time": 254.0,
+              "text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+              "speaker_label": "Speaker 7",
+              "speaker_name": "王强",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "79be44d5-a9f6-46b4-880e-a62ef90f49b9",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 26,
+              "start_time": 260.0,
+              "end_time": 264.0,
+              "text": "什么时候可以测试？",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "2abe34c1-1575-4b10-991c-7a8c94fec90c",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 27,
+              "start_time": 270.0,
+              "end_time": 274.0,
+              "text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+              "speaker_label": "Speaker 7",
+              "speaker_name": "王强",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "f044a5af-1ed0-4009-81f0-ebc46f7b5701",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 28,
+              "start_time": 280.0,
+              "end_time": 284.0,
+              "text": "是接口问题？",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "200bfc2c-8dc9-4edd-94ce-e3c76e13eb0e",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 29,
+              "start_time": 290.0,
+              "end_time": 294.0,
+              "text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+              "speaker_label": "Speaker 7",
+              "speaker_name": "王强",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "fe4ef0bf-c54d-48ec-9877-647e30a9f425",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 30,
+              "start_time": 300.0,
+              "end_time": 304.0,
+              "text": "这个后面可以拆。 但是不是 V2.6 必须。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "6f1314e5-3b76-420d-89bc-ba4f3407c9a9",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 31,
+              "start_time": 310.0,
+              "end_time": 314.0,
+              "text": "嗯，这个先作为优化项。 不要影响版本。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "44b67319-c4cf-45d9-8457-c889d0e4dbc5",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 32,
+              "start_time": 320.0,
+              "end_time": 326.75,
+              "text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "8b326468-e24b-4d88-923e-5c277071a77a",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 33,
+              "start_time": 330.0,
+              "end_time": 334.0,
+              "text": "这个会影响上线吗？",
+              "speaker_label": "Speaker 3",
+              "speaker_name": "李娜",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "0380ff7b-e67d-431d-92fb-5327d3ed69c5",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 34,
+              "start_time": 340.0,
+              "end_time": 344.0,
+              "text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "2a9148d5-fca6-4f85-b1a4-9a2f15a716e3",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 35,
+              "start_time": 350.0,
+              "end_time": 354.0,
+              "text": "好，这个放风险里面。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "19ab4f6f-f2b7-40c0-9515-366a930e80a5",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 36,
+              "start_time": 360.0,
+              "end_time": 364.0,
+              "text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+              "speaker_label": "Speaker 3",
+              "speaker_name": "李娜",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "4c80aa92-ad79-42d1-8832-4f2deb60ac00",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 37,
+              "start_time": 370.0,
+              "end_time": 374.0,
+              "text": "这个也是风险。 先记录，不作为当前版本任务。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "5abc4d0a-b953-4d13-84bf-c5e5aa36e3d2",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 38,
+              "start_time": 380.0,
+              "end_time": 388.67,
+              "text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 39,
+              "start_time": 390.0,
+              "end_time": 394.0,
+              "text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "f551dea0-a6aa-4b8f-a409-08bd1f56ed30",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 40,
+              "start_time": 400.0,
+              "end_time": 404.0,
+              "text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "15f0b89b-d946-4c43-9bc6-88e9c1787123",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 41,
+              "start_time": 410.0,
+              "end_time": 414.0,
+              "text": "什么时候给结果？",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "bdcaf13e-0353-48fa-b803-9ad2e9a702e5",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 42,
+              "start_time": 420.0,
+              "end_time": 424.0,
+              "text": "明天下午之前。",
+              "speaker_label": "Speaker 6",
+              "speaker_name": "陈涛",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 43,
+              "start_time": 430.0,
+              "end_time": 434.0,
+              "text": "赵敏，你补充真实会议测试样本。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "9e201194-2471-4b5b-9cc0-065eccbded02",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 44,
+              "start_time": 440.0,
+              "end_time": 444.0,
+              "text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+              "speaker_label": "Speaker 2",
+              "speaker_name": "赵敏",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "f6930cca-4182-47a6-8e4d-525c9482e095",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 45,
+              "start_time": 450.0,
+              "end_time": 454.0,
+              "text": "明天吧。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "43f1540b-0eac-4a2d-885c-01f1944a585f",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 46,
+              "start_time": 460.0,
+              "end_time": 464.0,
+              "text": "好的。",
+              "speaker_label": "Speaker 2",
+              "speaker_name": "赵敏",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "fb247dec-e0ca-4b15-a619-6d071326d429",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 47,
+              "start_time": 470.0,
+              "end_time": 474.0,
+              "text": "王强，下午安排录音流程测试。",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "5694acb3-2657-47cd-bc49-bf464b4af116",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 48,
+              "start_time": 480.0,
+              "end_time": 484.0,
+              "text": "没问题。",
+              "speaker_label": "Speaker 7",
+              "speaker_name": "王强",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "8c411abb-8b36-4dca-9d1a-e58c6429bc80",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 49,
+              "start_time": 490.0,
+              "end_time": 494.0,
+              "text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            },
+            {
+              "id": "bcd28b57-46d6-40d6-bf7e-7c5ba595fa22",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "audio_file_id": null,
+              "segment_index": 50,
+              "start_time": 500.0,
+              "end_time": 504.0,
+              "text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+              "speaker_label": "Speaker 1",
+              "speaker_name": "张伟",
+              "speaker_gender": null,
+              "semantic_label": null
+            }
+          ],
+          "summary_metadata": {
+            "summary_id": "c851ab8b-3c5d-4f9e-b687-3eca764fdf88",
+            "model_name": "qwen3:14b+rag",
+            "prompt_version": "meeting-analyst-v1",
+            "rag_chunk_ids": [
+              "boundary_speaker_owner_001",
+              "boundary_rule_001",
+              "boundary_rule_002",
+              "exp500_cross_009",
+              "exp500_cross_003",
+              "v4_boundary_rule_008",
+              "boundary_rule_008",
+              "exp500_cross_019",
+              "definition_005",
+              "exp500_cross_005",
+              "definition_006",
+              "exp500_risk_boundary_008"
+            ],
+            "rag_dataset_version": "meeting_analyst_rag_v3_2_0",
+            "rag_chunk_schema_version": "rag-chunk-v3.2",
+            "rag_collection_name": "meeting_analyst_rules_v3_2_0",
+            "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+            "confidence_score": 0.728,
+            "result_source": "legacy_qwen_rag"
+          }
+        },
+        "error": null,
+        "duration_ms": 72.01,
+        "result_source": "postgresql",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "postgresql",
+      "started_at": "2026-08-11T17:22:22.429237+00:00",
+      "completed_at": "2026-08-11T17:22:22.500594+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    },
+    {
+      "step_index": 1,
+      "tool_name": "search_meeting_history",
+      "status": "success",
+      "optional": true,
+      "duration_ms": 12.18,
+      "result": {
+        "tool_name": "search_meeting_history",
+        "status": "success",
+        "data": {
+          "items": [
+            {
+              "meeting_id": "8e657e24-3e2d-4de6-8513-8ac2b680ca79",
+              "title": "MeetMind_AI_V2.6_",
+              "status": "completed",
+              "created_at": "2026-08-12T01:19:45.457249+08:00",
+              "meeting_summary": "会议重点讨论了AI分析结果波动、录音流程待办项混乱、测试数据真实性不足、前端性能瓶颈及长会议生成时长等核心问题，明确稳定性问题优先级最高，并分配了后续排查任务",
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "result_source": "legacy_qwen_rag",
+              "meeting_type": null
+            },
+            {
+              "meeting_id": "4f9d66fe-eaf1-4bd5-83ce-cc1592995703",
+              "title": "MeetMind_AI_V2.6_",
+              "status": "completed",
+              "created_at": "2026-08-12T01:10:20.303070+08:00",
+              "meeting_summary": "会议重点讨论了AI分析结果波动、录音流程待办项混乱、测试数据真实性不足、前端性能瓶颈及长会议生成时长等核心问题，明确稳定性问题优先级最高，并分配了后续排查任务",
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "result_source": "legacy_qwen_rag",
+              "meeting_type": null
+            }
+          ],
+          "project_id_filter_applied": false,
+          "meeting_type_filter_applied": false,
+          "metadata": {
+            "project_id_ignored": false,
+            "meeting_type_ignored": true
+          }
+        },
+        "error": null,
+        "duration_ms": 12.18,
+        "result_source": "postgresql",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "postgresql",
+      "started_at": "2026-08-11T17:22:22.500594+00:00",
+      "completed_at": "2026-08-11T17:22:22.513537+00:00",
+      "metadata": {
+        "continue_on_failure": true
+      }
+    },
+    {
+      "step_index": 2,
+      "tool_name": "search_project_knowledge",
+      "status": "skipped",
+      "optional": true,
+      "duration_ms": 0.0,
+      "result": null,
+      "error": null,
+      "result_source": "unknown",
+      "started_at": "2026-08-11T17:22:22.513537+00:00",
+      "completed_at": "2026-08-11T17:22:22.513537+00:00",
+      "metadata": {
+        "skip_reason": "disabled_by_execution_plan"
+      }
+    },
+    {
+      "step_index": 3,
+      "tool_name": "get_open_action_items",
+      "status": "success",
+      "optional": true,
+      "duration_ms": 5.61,
+      "result": {
+        "tool_name": "get_open_action_items",
+        "status": "success",
+        "data": {
+          "items": [
+            {
+              "id": "3fa6a815-bdc7-4b8f-806a-678d17c7061e",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "summary_id": "c851ab8b-3c5d-4f9e-b687-3eca764fdf88",
+              "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+              "owner": null,
+              "owner_name": null,
+              "due_date": "今天",
+              "deadline": "今天",
+              "priority": "medium",
+              "status": "open",
+              "source": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+              "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+              "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+              "confidence": 0.78
+            },
+            {
+              "id": "23132c82-70fd-463b-8d1f-30c8d08ac1d0",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "summary_id": "c851ab8b-3c5d-4f9e-b687-3eca764fdf88",
+              "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+              "owner": null,
+              "owner_name": null,
+              "due_date": null,
+              "deadline": null,
+              "priority": "medium",
+              "status": "open",
+              "source": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+              "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+              "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+              "confidence": 0.72
+            },
+            {
+              "id": "e9a7ad37-4084-4cc2-b8bd-85887a241ab1",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "summary_id": "c851ab8b-3c5d-4f9e-b687-3eca764fdf88",
+              "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+              "owner": null,
+              "owner_name": null,
+              "due_date": null,
+              "deadline": null,
+              "priority": "medium",
+              "status": "open",
+              "source": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+              "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+              "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+              "confidence": 0.72
+            },
+            {
+              "id": "c25ce2d4-cd15-4be1-9f6a-9fc14d5219d0",
+              "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+              "summary_id": "c851ab8b-3c5d-4f9e-b687-3eca764fdf88",
+              "task": "赵敏，你补充真实会议测试样本。",
+              "owner": null,
+              "owner_name": null,
+              "due_date": null,
+              "deadline": null,
+              "priority": "medium",
+              "status": "open",
+              "source": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+              "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+              "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+              "confidence": 0.72
+            }
+          ],
+          "status_filter": "open"
+        },
+        "error": null,
+        "duration_ms": 5.61,
+        "result_source": "postgresql",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "postgresql",
+      "started_at": "2026-08-11T17:22:22.514061+00:00",
+      "completed_at": "2026-08-11T17:22:22.519177+00:00",
+      "metadata": {
+        "continue_on_failure": true
+      }
+    },
+    {
+      "step_index": 4,
+      "tool_name": "analyze_meeting",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 18780.13,
+      "result": {
+        "tool_name": "analyze_meeting",
+        "status": "success",
+        "data": {
+          "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+          "analysis": {
+            "meeting_type": "project_weekly",
+            "meeting_title_candidate": "AI分析稳定性与录音流程优化讨论",
+            "meeting_agenda": [
+              {
+                "item": "性能优化与服务器压力评估",
+                "order": 3
+              }
+            ],
+            "meeting_summary": "会议重点讨论了AI分析稳定性问题、录音流程优化需求及测试反馈问题。确认稳定性问题优先级最高，需优先解决。测试数据真实性不足需补充，前端录音页面测试进展顺利但需关注长会议性能问题。服务器压力风险被识别为潜在风险项。",
+            "key_conclusions": [
+              {
+                "conclusion": "AI分析稳定性问题被列为最高优先级任务",
+                "source_text": "张伟（380.0-388.67）：我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。\n张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch"
+              }
+            ],
+            "metadata": {
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "rag_chunk_ids": [
+                "boundary_speaker_owner_001",
+                "boundary_rule_001",
+                "boundary_rule_002",
+                "exp500_cross_009",
+                "exp500_cross_003",
+                "v4_boundary_rule_008",
+                "boundary_rule_008",
+                "exp500_cross_019",
+                "definition_005",
+                "exp500_cross_005",
+                "definition_006",
+                "exp500_risk_boundary_008"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v3_2_0",
+              "rag_chunk_schema_version": "rag-chunk-v3.2",
+              "rag_collection_name": "meeting_analyst_rules_v3_2_0",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "retrieved_chunk_ids": [
+                "boundary_speaker_owner_001",
+                "boundary_rule_001",
+                "boundary_rule_002",
+                "exp500_cross_009",
+                "exp500_cross_003",
+                "v4_boundary_rule_008",
+                "boundary_rule_008",
+                "exp500_cross_019",
+                "definition_005",
+                "exp500_cross_005",
+                "definition_006",
+                "exp500_risk_boundary_008"
+              ],
+              "retrieval_version": "meeting-rag-retrieval-v2",
+              "scenario_taxonomy_version": "meeting-scenario-9-v1",
+              "rag_retrieval_strategy": "v3_formal_dimension_aware",
+              "rag_retrieval_buckets": {
+                "V3_FIXED_POLICY": [
+                  "boundary_speaker_owner_001",
+                  "boundary_rule_008",
+                  "definition_005",
+                  "definition_006"
+                ],
+                "V3_VECTOR": [
+                  "boundary_rule_001",
+                  "boundary_rule_002",
+                  "exp500_cross_009",
+                  "exp500_cross_003",
+                  "v4_boundary_rule_008",
+                  "exp500_cross_019",
+                  "exp500_cross_005",
+                  "exp500_risk_boundary_008"
+                ]
+              },
+              "result_source": "legacy_qwen_rag",
+              "confidence_score": 0.7,
+              "generated_at": "2026-08-11T17:22:41.262583+00:00"
+            },
+            "action_items": [],
+            "unresolved_issues": [],
+            "risks_and_focus": [],
+            "_validator_audit": [
+              {
+                "field": "meeting_agenda",
+                "action": "remove",
+                "reason": "non_agenda_or_flow_talk",
+                "before": {
+                  "item": "同步AI分析稳定性问题",
+                  "order": 1
+                }
+              },
+              {
+                "field": "meeting_agenda",
+                "action": "remove",
+                "reason": "non_agenda_or_flow_talk",
+                "before": {
+                  "item": "测试反馈问题分析",
+                  "order": 2
+                }
+              }
+            ],
+            "_metadata": {
+              "prompt_id": "meeting-analyst",
+              "prompt_version": "meeting-analyst-v1",
+              "schema_version": "meeting-analysis-v1",
+              "rag_chunk_ids": [
+                "boundary_speaker_owner_001",
+                "boundary_rule_001",
+                "boundary_rule_002",
+                "exp500_cross_009",
+                "exp500_cross_003",
+                "v4_boundary_rule_008",
+                "boundary_rule_008",
+                "exp500_cross_019",
+                "definition_005",
+                "exp500_cross_005",
+                "definition_006",
+                "exp500_risk_boundary_008"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v3_2_0",
+              "rag_chunk_schema_version": "rag-chunk-v3.2",
+              "rag_collection_name": "meeting_analyst_rules_v3_2_0",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "retrieved_chunk_ids": [
+                "boundary_speaker_owner_001",
+                "boundary_rule_001",
+                "boundary_rule_002",
+                "exp500_cross_009",
+                "exp500_cross_003",
+                "v4_boundary_rule_008",
+                "boundary_rule_008",
+                "exp500_cross_019",
+                "definition_005",
+                "exp500_cross_005",
+                "definition_006",
+                "exp500_risk_boundary_008"
+              ],
+              "retrieval_version": "meeting-rag-retrieval-v2",
+              "scenario_taxonomy_version": "meeting-scenario-9-v1",
+              "rag_retrieval_strategy": "v3_formal_dimension_aware",
+              "rag_retrieval_buckets": {
+                "V3_FIXED_POLICY": [
+                  "boundary_speaker_owner_001",
+                  "boundary_rule_008",
+                  "definition_005",
+                  "definition_006"
+                ],
+                "V3_VECTOR": [
+                  "boundary_rule_001",
+                  "boundary_rule_002",
+                  "exp500_cross_009",
+                  "exp500_cross_003",
+                  "v4_boundary_rule_008",
+                  "exp500_cross_019",
+                  "exp500_cross_005",
+                  "exp500_risk_boundary_008"
+                ]
+              },
+              "rag_dimension_traces": {
+                "action_items": {
+                  "query": "会议六大维度分析规则。\n\n重点检索：\n会议议程、\n会议总结、\n核心结论、\n待办与后续安排、\n遗留问题、\n风险与关注点。\n\n尤其关注：\n待办和遗留问题边界、\n遗留问题和风险边界、\n建议和核心结论边界、\n会议总结禁止原文摘录、\n截止时间证据绑定、\n负责人证据绑定、\n限流风险、\n数据迁移返工风险。\n\nTarget dimension: action_items.\nFocus: actionable commitments, assignment, owner/deadline evidence, quoted examples, progress updates, weak suggestions, and boundaries where a progress update is not a new action item.",
+                  "target_dimension": "Action",
+                  "resolved_dimensions": [
+                    "action_items",
+                    "cross_dimension",
+                    "evidence"
+                  ],
+                  "meeting_scenario": "all",
+                  "candidate_chunks": [
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.7249,
+                      "distance": 0.4817,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.698508,
+                      "distance": 0.542,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.693708,
+                      "distance": 0.5535,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_003",
+                      "score": 0.66024,
+                      "distance": 0.6387,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_008",
+                      "score": 0.659868,
+                      "distance": 0.6397,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_019",
+                      "score": 0.659756,
+                      "distance": 0.64,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_006",
+                      "score": 0.658939,
+                      "distance": 0.6422,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_006",
+                      "score": 0.607533,
+                      "distance": 0.646,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "cross_team_coordination",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_action_neg_011",
+                      "score": 0.653391,
+                      "distance": 0.6573,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "action_items",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_005",
+                      "score": 0.652991,
+                      "distance": 0.6584,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_002",
+                      "score": 0.652664,
+                      "distance": 0.6593,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_010",
+                      "score": 0.650925,
+                      "distance": 0.6641,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "action_items",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_action_boundary_004",
+                      "score": 0.648982,
+                      "distance": 0.6695,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "action_items",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_004",
+                      "score": 0.648444,
+                      "distance": 0.671,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_action_neg_010",
+                      "score": 0.642487,
+                      "distance": 0.6878,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "action_items",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_007",
+                      "score": 0.641506,
+                      "distance": 0.6906,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_026",
+                      "score": 0.640214,
+                      "distance": 0.6943,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "technical_incident_boundary_002",
+                      "score": 0.59004,
+                      "distance": 0.6948,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "technical_incident",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_010",
+                      "score": 0.640005,
+                      "distance": 0.6949,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_003",
+                      "score": 0.639727,
+                      "distance": 0.6957,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_cross_004",
+                      "score": 0.639414,
+                      "distance": 0.6966,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_negative_example_004",
+                      "score": 0.637682,
+                      "distance": 0.7016,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "action_items",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_action_neg_015",
+                      "score": 0.636682,
+                      "distance": 0.7045,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "action_items",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_003",
+                      "score": 0.585274,
+                      "distance": 0.7086,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "customer_requirement",
+                      "dimension": "action_items",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    }
+                  ],
+                  "final_selected_chunks": [
+                    {
+                      "chunk_id": "boundary_speaker_owner_001",
+                      "score": 1.05,
+                      "distance": null,
+                      "retrieval_pool": "fixed_policy",
+                      "scenario": "all",
+                      "dimension": "action_items",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "fixed_policy_injected"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.7249,
+                      "distance": 0.4817,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.698508,
+                      "distance": 0.542,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.693708,
+                      "distance": 0.5535,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_003",
+                      "score": 0.66024,
+                      "distance": 0.6387,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_008",
+                      "score": 0.659868,
+                      "distance": 0.6397,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    }
+                  ],
+                  "final_selected_chunk_ids": [
+                    "boundary_speaker_owner_001",
+                    "boundary_rule_001",
+                    "boundary_rule_002",
+                    "exp500_cross_009",
+                    "exp500_cross_003",
+                    "v4_boundary_rule_008"
+                  ],
+                  "fallback_reason": "meeting_scenario_unknown_all_global_fallback"
+                },
+                "key_conclusions": {
+                  "query": "会议六大维度分析规则。\n\n重点检索：\n会议议程、\n会议总结、\n核心结论、\n待办与后续安排、\n遗留问题、\n风险与关注点。\n\n尤其关注：\n待办和遗留问题边界、\n遗留问题和风险边界、\n建议和核心结论边界、\n会议总结禁止原文摘录、\n截止时间证据绑定、\n负责人证据绑定、\n限流风险、\n数据迁移返工风险。\n\nTarget dimension: key_conclusions.\nFocus: accepted decisions, explicit confirmation, proposal-vs-decision boundaries, weak suggestions, options, and negative examples where a proposal is not a conclusion.",
+                  "target_dimension": "Decision",
+                  "resolved_dimensions": [
+                    "key_conclusions",
+                    "cross_dimension",
+                    "evidence"
+                  ],
+                  "meeting_scenario": "all",
+                  "candidate_chunks": [
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.72659,
+                      "distance": 0.478,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.694454,
+                      "distance": 0.5517,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.687471,
+                      "distance": 0.5687,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_019",
+                      "score": 0.663497,
+                      "distance": 0.63,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_003",
+                      "score": 0.662407,
+                      "distance": 0.6329,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_010",
+                      "score": 0.611995,
+                      "distance": 0.634,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "release_planning",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_008",
+                      "score": 0.660687,
+                      "distance": 0.6375,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_decision_019",
+                      "score": 0.609868,
+                      "distance": 0.6397,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "management_decision",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_006",
+                      "score": 0.659756,
+                      "distance": 0.64,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_005",
+                      "score": 0.656649,
+                      "distance": 0.6484,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_006",
+                      "score": 0.605694,
+                      "distance": 0.651,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "cross_team_coordination",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v3_retro_001",
+                      "score": 0.602301,
+                      "distance": 0.6603,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "project_retrospective",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_002",
+                      "score": 0.650565,
+                      "distance": 0.6651,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_004",
+                      "score": 0.60006,
+                      "distance": 0.6665,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "management_decision",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_decision_boundary_001",
+                      "score": 0.649053,
+                      "distance": 0.6693,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_004",
+                      "score": 0.647443,
+                      "distance": 0.6738,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_010",
+                      "score": 0.64499,
+                      "distance": 0.6807,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_003",
+                      "score": 0.64312,
+                      "distance": 0.686,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_026",
+                      "score": 0.639623,
+                      "distance": 0.696,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_007",
+                      "score": 0.637993,
+                      "distance": 0.7007,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_decision_007",
+                      "score": 0.587889,
+                      "distance": 0.701,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "technical_review",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_decision_boundary_017",
+                      "score": 0.636717,
+                      "distance": 0.7044,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_002",
+                      "score": 0.636613,
+                      "distance": 0.7047,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v3_mgmt_007",
+                      "score": 0.586441,
+                      "distance": 0.7052,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "management_decision",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    }
+                  ],
+                  "final_selected_chunks": [
+                    {
+                      "chunk_id": "boundary_rule_008",
+                      "score": 1.05,
+                      "distance": null,
+                      "retrieval_pool": "fixed_policy",
+                      "scenario": "all",
+                      "dimension": "key_conclusions",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "fixed_policy_injected"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.72659,
+                      "distance": 0.478,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.694454,
+                      "distance": 0.5517,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.687471,
+                      "distance": 0.5687,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_019",
+                      "score": 0.663497,
+                      "distance": 0.63,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_003",
+                      "score": 0.662407,
+                      "distance": 0.6329,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    }
+                  ],
+                  "final_selected_chunk_ids": [
+                    "boundary_rule_008",
+                    "boundary_rule_001",
+                    "boundary_rule_002",
+                    "exp500_cross_009",
+                    "exp500_cross_019",
+                    "exp500_cross_003"
+                  ],
+                  "fallback_reason": "meeting_scenario_unknown_all_global_fallback"
+                },
+                "unresolved_issues": {
+                  "query": "会议六大维度分析规则。\n\n重点检索：\n会议议程、\n会议总结、\n核心结论、\n待办与后续安排、\n遗留问题、\n风险与关注点。\n\n尤其关注：\n待办和遗留问题边界、\n遗留问题和风险边界、\n建议和核心结论边界、\n会议总结禁止原文摘录、\n截止时间证据绑定、\n负责人证据绑定、\n限流风险、\n数据迁移返工风险。\n\nTarget dimension: unresolved_issues.\nFocus: open questions, unresolved state, answered-question boundaries, question-vs-unresolved negative examples, and issues that remain without answer, plan, or closure.",
+                  "target_dimension": "Unresolved",
+                  "resolved_dimensions": [
+                    "unresolved_issues",
+                    "cross_dimension",
+                    "evidence"
+                  ],
+                  "meeting_scenario": "all",
+                  "candidate_chunks": [
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.714452,
+                      "distance": 0.505,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.687511,
+                      "distance": 0.5686,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.685042,
+                      "distance": 0.5747,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_008",
+                      "score": 0.657275,
+                      "distance": 0.6467,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_005",
+                      "score": 0.656833,
+                      "distance": 0.6479,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_019",
+                      "score": 0.654339,
+                      "distance": 0.6547,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_003",
+                      "score": 0.653464,
+                      "distance": 0.6571,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_unresolved_neg_001",
+                      "score": 0.651395,
+                      "distance": 0.6628,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_006",
+                      "score": 0.649952,
+                      "distance": 0.6668,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_002",
+                      "score": 0.649664,
+                      "distance": 0.6676,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_006",
+                      "score": 0.594601,
+                      "distance": 0.6818,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "cross_team_coordination",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_004",
+                      "score": 0.640319,
+                      "distance": 0.694,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_026",
+                      "score": 0.640319,
+                      "distance": 0.694,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_unresolved_boundary_020",
+                      "score": 0.639067,
+                      "distance": 0.6976,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_007",
+                      "score": 0.638028,
+                      "distance": 0.7006,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "boundary_rule_009",
+                      "score": 0.636889,
+                      "distance": 0.7039,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "reasoning_pattern_001",
+                      "score": 0.58401,
+                      "distance": 0.7123,
+                      "retrieval_pool": "reasoning_pattern",
+                      "scenario": "technical_review",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "reasoning_pattern",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_003",
+                      "score": 0.633431,
+                      "distance": 0.714,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_unresolved_pos_024",
+                      "score": 0.583431,
+                      "distance": 0.714,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "project_weekly",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_unresolved_boundary_007",
+                      "score": 0.633226,
+                      "distance": 0.7146,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_010",
+                      "score": 0.632106,
+                      "distance": 0.7179,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_013",
+                      "score": 0.630215,
+                      "distance": 0.7235,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_021",
+                      "score": 0.62971,
+                      "distance": 0.725,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_unresolved_boundary_019",
+                      "score": 0.629441,
+                      "distance": 0.7258,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    }
+                  ],
+                  "final_selected_chunks": [
+                    {
+                      "chunk_id": "definition_005",
+                      "score": 1.05,
+                      "distance": null,
+                      "retrieval_pool": "fixed_policy",
+                      "scenario": "all",
+                      "dimension": "unresolved_issues",
+                      "knowledge_type": "definition",
+                      "reasons": [
+                        "fixed_policy_injected"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.714452,
+                      "distance": 0.505,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.687511,
+                      "distance": 0.5686,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.685042,
+                      "distance": 0.5747,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_008",
+                      "score": 0.657275,
+                      "distance": 0.6467,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_005",
+                      "score": 0.656833,
+                      "distance": 0.6479,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    }
+                  ],
+                  "final_selected_chunk_ids": [
+                    "definition_005",
+                    "boundary_rule_001",
+                    "boundary_rule_002",
+                    "exp500_cross_009",
+                    "v4_boundary_rule_008",
+                    "exp500_cross_005"
+                  ],
+                  "fallback_reason": "meeting_scenario_unknown_all_global_fallback"
+                },
+                "risks_and_focus": {
+                  "query": "会议六大维度分析规则。\n\n重点检索：\n会议议程、\n会议总结、\n核心结论、\n待办与后续安排、\n遗留问题、\n风险与关注点。\n\n尤其关注：\n待办和遗留问题边界、\n遗留问题和风险边界、\n建议和核心结论边界、\n会议总结禁止原文摘录、\n截止时间证据绑定、\n负责人证据绑定、\n限流风险、\n数据迁移返工风险。\n\nTarget dimension: risks_and_focus.\nFocus: future adverse impact, risk-vs-unresolved boundary, mitigation only when confirmed, and negative examples where suggestions or quoted examples are not risks.",
+                  "target_dimension": "Risk",
+                  "resolved_dimensions": [
+                    "risks_and_focus",
+                    "cross_dimension",
+                    "evidence"
+                  ],
+                  "meeting_scenario": "all",
+                  "candidate_chunks": [
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.727323,
+                      "distance": 0.4764,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.699098,
+                      "distance": 0.5406,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.68804,
+                      "distance": 0.5673,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_risk_boundary_008",
+                      "score": 0.67282,
+                      "distance": 0.6056,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_risk_pos_002",
+                      "score": 0.622045,
+                      "distance": 0.6076,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "customer_requirement",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_008",
+                      "score": 0.670078,
+                      "distance": 0.6127,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_003",
+                      "score": 0.669118,
+                      "distance": 0.6152,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_009",
+                      "score": 0.669118,
+                      "distance": 0.6152,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_005",
+                      "score": 0.663987,
+                      "distance": 0.6287,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_019",
+                      "score": 0.663874,
+                      "distance": 0.629,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_risk_002",
+                      "score": 0.610799,
+                      "distance": 0.6372,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "customer_requirement",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_risk_pos_018",
+                      "score": 0.609162,
+                      "distance": 0.6416,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "management_decision",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_risk_020",
+                      "score": 0.608014,
+                      "distance": 0.6447,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "technical_review",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_006",
+                      "score": 0.607644,
+                      "distance": 0.6457,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "cross_team_coordination",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp500_cross_002",
+                      "score": 0.656833,
+                      "distance": 0.6479,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_006",
+                      "score": 0.656538,
+                      "distance": 0.6487,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "positive_example_013",
+                      "score": 0.60562,
+                      "distance": 0.6512,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "technical_review",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_risk_014",
+                      "score": 0.653828,
+                      "distance": 0.6561,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "v4_positive_example_007",
+                      "score": 0.603209,
+                      "distance": 0.6578,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "technical_incident",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_risk_017",
+                      "score": 0.598193,
+                      "distance": 0.6717,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "requirement_review",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_risk_016",
+                      "score": 0.597729,
+                      "distance": 0.673,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "technical_review",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_risk_010",
+                      "score": 0.597657,
+                      "distance": 0.6732,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "customer_requirement",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "positive_example",
+                      "reasons": [
+                        "unknown_scenario_global_fallback"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "negative_example_004",
+                      "score": 0.64755,
+                      "distance": 0.6735,
+                      "retrieval_pool": "scenario_example",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "negative_example",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    },
+                    {
+                      "chunk_id": "exp_risk_015",
+                      "score": 0.646659,
+                      "distance": 0.676,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [
+                        "all_global_fallback_boost"
+                      ],
+                      "selected": false
+                    }
+                  ],
+                  "final_selected_chunks": [
+                    {
+                      "chunk_id": "definition_006",
+                      "score": 1.05,
+                      "distance": null,
+                      "retrieval_pool": "fixed_policy",
+                      "scenario": "all",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "definition",
+                      "reasons": [
+                        "fixed_policy_injected"
+                      ],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_001",
+                      "score": 0.727323,
+                      "distance": 0.4764,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "boundary_rule_002",
+                      "score": 0.699098,
+                      "distance": 0.5406,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_cross_009",
+                      "score": 0.68804,
+                      "distance": 0.5673,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "exp500_risk_boundary_008",
+                      "score": 0.67282,
+                      "distance": 0.6056,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "risks_and_focus",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    },
+                    {
+                      "chunk_id": "v4_boundary_rule_008",
+                      "score": 0.670078,
+                      "distance": 0.6127,
+                      "retrieval_pool": "dynamic_boundary",
+                      "scenario": "all",
+                      "dimension": "cross_dimension",
+                      "knowledge_type": "boundary_rule",
+                      "reasons": [],
+                      "selected": true
+                    }
+                  ],
+                  "final_selected_chunk_ids": [
+                    "definition_006",
+                    "boundary_rule_001",
+                    "boundary_rule_002",
+                    "exp500_cross_009",
+                    "exp500_risk_boundary_008",
+                    "v4_boundary_rule_008"
+                  ],
+                  "fallback_reason": "meeting_scenario_unknown_all_global_fallback"
+                }
+              },
+              "rag_routed_meeting_type": null,
+              "rag_routed_scenario": null,
+              "rag_fallback_reason": null,
+              "ollama_temperature": 0.0,
+              "ollama_top_p": 0.2,
+              "ollama_seed": 42,
+              "ollama_format": "json",
+              "semantic_action_candidate_count": 0,
+              "semantic_decision_candidate_count": 0,
+              "semantic_unresolved_candidate_count": 0,
+              "legacy_unresolved_count": 0,
+              "fused_unresolved_count": 0,
+              "result_source": "legacy_qwen_rag"
+            }
+          },
+          "context_payload": {}
+        },
+        "error": null,
+        "duration_ms": 18780.13,
+        "result_source": "legacy_qwen_rag",
+        "retryable": false,
+        "metadata": {
+          "model_name": null,
+          "prompt_version": "meeting-analyst-v1",
+          "schema_version": "meeting-analysis-v1",
+          "rag_chunk_ids": [
+            "boundary_speaker_owner_001",
+            "boundary_rule_001",
+            "boundary_rule_002",
+            "exp500_cross_009",
+            "exp500_cross_003",
+            "v4_boundary_rule_008",
+            "boundary_rule_008",
+            "exp500_cross_019",
+            "definition_005",
+            "exp500_cross_005",
+            "definition_006",
+            "exp500_risk_boundary_008"
+          ],
+          "rag_dataset_version": "meeting_analyst_rag_v3_2_0",
+          "rag_chunk_schema_version": "rag-chunk-v3.2",
+          "rag_collection_name": "meeting_analyst_rules_v3_2_0",
+          "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+          "fallback_reason": null
+        }
+      },
+      "error": null,
+      "result_source": "legacy_qwen_rag",
+      "started_at": "2026-08-11T17:22:22.519177+00:00",
+      "completed_at": "2026-08-11T17:22:41.299483+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    },
+    {
+      "step_index": 5,
+      "tool_name": "validate_meeting_analysis",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 6.62,
+      "result": {
+        "tool_name": "validate_meeting_analysis",
+        "status": "success",
+        "data": {
+          "meeting_id": "d4caac96-31fa-4834-82ab-380e188473e5",
+          "validated_analysis": {
+            "overview": "会议重点讨论了AI分析稳定性问题、录音流程优化需求及测试反馈问题。确认稳定性问题优先级最高，需优先解决。测试数据真实性不足需补充，前端录音页面测试进展顺利但需关注长会议性能问题。服务器压力风险被识别为潜在风险项。",
+            "meeting_title": null,
+            "meeting_type": "project_weekly",
+            "meeting_type_confidence": 0.0,
+            "meeting_title_candidate": "AI分析稳定性与录音流程优化讨论",
+            "title_basis": [],
+            "agenda": [
+              {
+                "item": "性能优化与服务器压力评估",
+                "order": 1,
+                "source_segment_ids": []
+              }
+            ],
+            "topics": [],
+            "speaker_summaries": [],
+            "decisions": [
+              {
+                "decision": "AI分析稳定性问题被列为最高优先级任务",
+                "reason": null,
+                "source": "张伟（380.0-388.67）：我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。\n张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+                "conclusion": "AI分析稳定性问题被列为最高优先级任务",
+                "source_text": "张伟（380.0-388.67）：我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。\n张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+                "confidence": 0.7
+              }
+            ],
+            "action_items": [
+              {
+                "owner_name": null,
+                "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                "deadline": "今天",
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+                "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+                "confidence": 0.78,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              },
+              {
+                "owner_name": null,
+                "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              },
+              {
+                "owner_name": null,
+                "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              },
+              {
+                "owner_name": null,
+                "task": "赵敏，你补充真实会议测试样本。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+                "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            ],
+            "risks": [],
+            "open_questions": [],
+            "next_steps": [
+              {
+                "item": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                "owner": null,
+                "time": "今天",
+                "note": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？"
+              },
+              {
+                "item": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "owner": null,
+                "time": null,
+                "note": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。"
+              },
+              {
+                "item": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "owner": null,
+                "time": null,
+                "note": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。"
+              },
+              {
+                "item": "赵敏，你补充真实会议测试样本。",
+                "owner": null,
+                "time": null,
+                "note": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。"
+              }
+            ],
+            "meeting_agenda": [
+              {
+                "item": "性能优化与服务器压力评估",
+                "order": 1,
+                "source_segment_ids": []
+              }
+            ],
+            "meeting_summary": "会议重点讨论了AI分析稳定性问题、录音流程优化需求及测试反馈问题。确认稳定性问题优先级最高，需优先解决。测试数据真实性不足需补充，前端录音页面测试进展顺利但需关注长会议性能问题。服务器压力风险被识别为潜在风险项。",
+            "key_conclusions": [
+              {
+                "conclusion": "AI分析稳定性问题被列为最高优先级任务",
+                "source_text": "张伟（380.0-388.67）：我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。\n张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+                "confidence": 0.7,
+                "source_supported": true,
+                "needs_review": true,
+                "review_reason": "claim_source_mismatch"
+              }
+            ],
+            "unresolved_issues": [],
+            "risks_and_focus": [],
+            "model_name": "qwen3:14b+rag",
+            "confidence_score": 0.728,
+            "metadata": {
+              "schema_version": "meeting-analysis-v1",
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "rag_chunk_ids": [
+                "boundary_speaker_owner_001",
+                "boundary_rule_001",
+                "boundary_rule_002",
+                "exp500_cross_009",
+                "exp500_cross_003",
+                "v4_boundary_rule_008",
+                "boundary_rule_008",
+                "exp500_cross_019",
+                "definition_005",
+                "exp500_cross_005",
+                "definition_006",
+                "exp500_risk_boundary_008"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v3_2_0",
+              "rag_chunk_schema_version": "rag-chunk-v3.2",
+              "rag_collection_name": "meeting_analyst_rules_v3_2_0",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "retrieved_chunk_ids": [
+                "boundary_speaker_owner_001",
+                "boundary_rule_001",
+                "boundary_rule_002",
+                "exp500_cross_009",
+                "exp500_cross_003",
+                "v4_boundary_rule_008",
+                "boundary_rule_008",
+                "exp500_cross_019",
+                "definition_005",
+                "exp500_cross_005",
+                "definition_006",
+                "exp500_risk_boundary_008"
+              ],
+              "retrieval_version": "meeting-rag-retrieval-v2",
+              "scenario_taxonomy_version": "meeting-scenario-9-v1",
+              "rag_retrieval_strategy": "v3_formal_dimension_aware",
+              "rag_retrieval_buckets": {
+                "V3_FIXED_POLICY": [
+                  "boundary_speaker_owner_001",
+                  "boundary_rule_008",
+                  "definition_005",
+                  "definition_006"
+                ],
+                "V3_VECTOR": [
+                  "boundary_rule_001",
+                  "boundary_rule_002",
+                  "exp500_cross_009",
+                  "exp500_cross_003",
+                  "v4_boundary_rule_008",
+                  "exp500_cross_019",
+                  "exp500_cross_005",
+                  "exp500_risk_boundary_008"
+                ]
+              },
+              "rag_routed_meeting_type": null,
+              "rag_routed_scenario": null,
+              "rag_fallback_reason": null,
+              "result_source": "legacy_qwen_rag",
+              "confidence_score": 0.728,
+              "generated_at": "2026-08-11T17:22:22.404240+00:00"
+            },
+            "_validator_audit": [
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                  "deadline": "今天",
+                  "priority": "medium",
+                  "status": "in_progress",
+                  "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+                  "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+                  "confidence": 0.78,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                  "deadline": "今天",
+                  "priority": null,
+                  "status": "in_progress",
+                  "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+                  "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+                  "confidence": 0.78,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                  "deadline": null,
+                  "priority": "medium",
+                  "status": "in_progress",
+                  "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                  "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+                  "confidence": 0.72,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                  "deadline": null,
+                  "priority": null,
+                  "status": "in_progress",
+                  "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                  "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+                  "confidence": 0.72,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                  "deadline": null,
+                  "priority": "medium",
+                  "status": "in_progress",
+                  "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                  "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+                  "confidence": 0.72,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                  "deadline": null,
+                  "priority": null,
+                  "status": "in_progress",
+                  "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                  "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+                  "confidence": 0.72,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              },
+              {
+                "field": "action_items",
+                "action": "modify",
+                "reason": "priority_without_source_evidence",
+                "before": {
+                  "owner_name": null,
+                  "task": "赵敏，你补充真实会议测试样本。",
+                  "deadline": null,
+                  "priority": "medium",
+                  "status": "in_progress",
+                  "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+                  "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+                  "confidence": 0.72,
+                  "source_supported": true
+                },
+                "after": {
+                  "owner_name": null,
+                  "task": "赵敏，你补充真实会议测试样本。",
+                  "deadline": null,
+                  "priority": null,
+                  "status": "in_progress",
+                  "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+                  "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+                  "confidence": 0.72,
+                  "source_supported": true,
+                  "priority_repaired": true,
+                  "repair_reason": "priority_without_source_evidence"
+                }
+              }
+            ]
+          },
+          "validator_audit": [
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                "deadline": "今天",
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+                "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+                "confidence": 0.78,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                "deadline": "今天",
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+                "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+                "confidence": 0.78,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "deadline": null,
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+                "confidence": 0.72,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "deadline": null,
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+                "confidence": 0.72,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "赵敏，你补充真实会议测试样本。",
+                "deadline": null,
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+                "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+                "confidence": 0.72,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "赵敏，你补充真实会议测试样本。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+                "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            }
+          ],
+          "warnings": [
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                "deadline": "今天",
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+                "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+                "confidence": 0.78,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+                "deadline": "今天",
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+                "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+                "confidence": 0.78,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "deadline": null,
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+                "confidence": 0.72,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+                "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "deadline": null,
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+                "confidence": 0.72,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+                "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            },
+            {
+              "field": "action_items",
+              "action": "modify",
+              "reason": "priority_without_source_evidence",
+              "before": {
+                "owner_name": null,
+                "task": "赵敏，你补充真实会议测试样本。",
+                "deadline": null,
+                "priority": "medium",
+                "status": "in_progress",
+                "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+                "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+                "confidence": 0.72,
+                "source_supported": true
+              },
+              "after": {
+                "owner_name": null,
+                "task": "赵敏，你补充真实会议测试样本。",
+                "deadline": null,
+                "priority": null,
+                "status": "in_progress",
+                "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+                "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+                "confidence": 0.72,
+                "source_supported": true,
+                "priority_repaired": true,
+                "repair_reason": "priority_without_source_evidence"
+              }
+            }
+          ]
+        },
+        "error": null,
+        "duration_ms": 6.62,
+        "result_source": "validator",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "validator",
+      "started_at": "2026-08-11T17:22:41.299483+00:00",
+      "completed_at": "2026-08-11T17:22:41.306548+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    }
+  ],
+  "result_source": "validator",
+  "shadow_analysis": {
+    "overview": "会议重点讨论了AI分析稳定性问题、录音流程优化需求及测试反馈问题。确认稳定性问题优先级最高，需优先解决。测试数据真实性不足需补充，前端录音页面测试进展顺利但需关注长会议性能问题。服务器压力风险被识别为潜在风险项。",
+    "meeting_title": null,
+    "meeting_type": "project_weekly",
+    "meeting_type_confidence": 0.0,
+    "meeting_title_candidate": "AI分析稳定性与录音流程优化讨论",
+    "title_basis": [],
+    "agenda": [
+      {
+        "item": "性能优化与服务器压力评估",
+        "order": 1,
+        "source_segment_ids": []
+      }
+    ],
+    "topics": [],
+    "speaker_summaries": [],
+    "decisions": [
+      {
+        "decision": "AI分析稳定性问题被列为最高优先级任务",
+        "reason": null,
+        "source": "张伟（380.0-388.67）：我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。\n张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "conclusion": "AI分析稳定性问题被列为最高优先级任务",
+        "source_text": "张伟（380.0-388.67）：我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。\n张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "confidence": 0.7
+      }
+    ],
+    "action_items": [
+      {
+        "owner_name": null,
+        "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+        "deadline": "今天",
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+        "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+        "confidence": 0.78,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      },
+      {
+        "owner_name": null,
+        "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "deadline": null,
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+        "confidence": 0.72,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      },
+      {
+        "owner_name": null,
+        "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "deadline": null,
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+        "confidence": 0.72,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      },
+      {
+        "owner_name": null,
+        "task": "赵敏，你补充真实会议测试样本。",
+        "deadline": null,
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+        "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+        "confidence": 0.72,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    ],
+    "risks": [],
+    "open_questions": [],
+    "next_steps": [
+      {
+        "item": "输出 Golden Dataset 基线报告并完成稳定性测试",
+        "owner": null,
+        "time": "今天",
+        "note": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？"
+      },
+      {
+        "item": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "owner": null,
+        "time": null,
+        "note": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。"
+      },
+      {
+        "item": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "owner": null,
+        "time": null,
+        "note": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。"
+      },
+      {
+        "item": "赵敏，你补充真实会议测试样本。",
+        "owner": null,
+        "time": null,
+        "note": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。"
+      }
+    ],
+    "meeting_agenda": [
+      {
+        "item": "性能优化与服务器压力评估",
+        "order": 1,
+        "source_segment_ids": []
+      }
+    ],
+    "meeting_summary": "会议重点讨论了AI分析稳定性问题、录音流程优化需求及测试反馈问题。确认稳定性问题优先级最高，需优先解决。测试数据真实性不足需补充，前端录音页面测试进展顺利但需关注长会议性能问题。服务器压力风险被识别为潜在风险项。",
+    "key_conclusions": [
+      {
+        "conclusion": "AI分析稳定性问题被列为最高优先级任务",
+        "source_text": "张伟（380.0-388.67）：我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。\n张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "confidence": 0.7,
+        "source_supported": true,
+        "needs_review": true,
+        "review_reason": "claim_source_mismatch"
+      }
+    ],
+    "unresolved_issues": [],
+    "risks_and_focus": [],
+    "model_name": "qwen3:14b+rag",
+    "confidence_score": 0.728,
+    "metadata": {
+      "schema_version": "meeting-analysis-v1",
+      "model_name": "qwen3:14b+rag",
+      "prompt_version": "meeting-analyst-v1",
+      "rag_chunk_ids": [
+        "boundary_speaker_owner_001",
+        "boundary_rule_001",
+        "boundary_rule_002",
+        "exp500_cross_009",
+        "exp500_cross_003",
+        "v4_boundary_rule_008",
+        "boundary_rule_008",
+        "exp500_cross_019",
+        "definition_005",
+        "exp500_cross_005",
+        "definition_006",
+        "exp500_risk_boundary_008"
+      ],
+      "rag_dataset_version": "meeting_analyst_rag_v3_2_0",
+      "rag_chunk_schema_version": "rag-chunk-v3.2",
+      "rag_collection_name": "meeting_analyst_rules_v3_2_0",
+      "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+      "retrieved_chunk_ids": [
+        "boundary_speaker_owner_001",
+        "boundary_rule_001",
+        "boundary_rule_002",
+        "exp500_cross_009",
+        "exp500_cross_003",
+        "v4_boundary_rule_008",
+        "boundary_rule_008",
+        "exp500_cross_019",
+        "definition_005",
+        "exp500_cross_005",
+        "definition_006",
+        "exp500_risk_boundary_008"
+      ],
+      "retrieval_version": "meeting-rag-retrieval-v2",
+      "scenario_taxonomy_version": "meeting-scenario-9-v1",
+      "rag_retrieval_strategy": "v3_formal_dimension_aware",
+      "rag_retrieval_buckets": {
+        "V3_FIXED_POLICY": [
+          "boundary_speaker_owner_001",
+          "boundary_rule_008",
+          "definition_005",
+          "definition_006"
+        ],
+        "V3_VECTOR": [
+          "boundary_rule_001",
+          "boundary_rule_002",
+          "exp500_cross_009",
+          "exp500_cross_003",
+          "v4_boundary_rule_008",
+          "exp500_cross_019",
+          "exp500_cross_005",
+          "exp500_risk_boundary_008"
+        ]
+      },
+      "rag_routed_meeting_type": null,
+      "rag_routed_scenario": null,
+      "rag_fallback_reason": null,
+      "result_source": "legacy_qwen_rag",
+      "confidence_score": 0.728,
+      "generated_at": "2026-08-11T17:22:22.404240+00:00"
+    },
+    "_validator_audit": [
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": null,
+          "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "in_progress",
+          "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+          "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+          "confidence": 0.78,
+          "source_supported": true
+        },
+        "after": {
+          "owner_name": null,
+          "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+          "deadline": "今天",
+          "priority": null,
+          "status": "in_progress",
+          "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+          "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+          "confidence": 0.78,
+          "source_supported": true,
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      },
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": null,
+          "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "deadline": null,
+          "priority": "medium",
+          "status": "in_progress",
+          "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+          "confidence": 0.72,
+          "source_supported": true
+        },
+        "after": {
+          "owner_name": null,
+          "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "deadline": null,
+          "priority": null,
+          "status": "in_progress",
+          "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+          "confidence": 0.72,
+          "source_supported": true,
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      },
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": null,
+          "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "deadline": null,
+          "priority": "medium",
+          "status": "in_progress",
+          "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+          "confidence": 0.72,
+          "source_supported": true
+        },
+        "after": {
+          "owner_name": null,
+          "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "deadline": null,
+          "priority": null,
+          "status": "in_progress",
+          "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+          "confidence": 0.72,
+          "source_supported": true,
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      },
+      {
+        "field": "action_items",
+        "action": "modify",
+        "reason": "priority_without_source_evidence",
+        "before": {
+          "owner_name": null,
+          "task": "赵敏，你补充真实会议测试样本。",
+          "deadline": null,
+          "priority": "medium",
+          "status": "in_progress",
+          "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+          "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+          "confidence": 0.72,
+          "source_supported": true
+        },
+        "after": {
+          "owner_name": null,
+          "task": "赵敏，你补充真实会议测试样本。",
+          "deadline": null,
+          "priority": null,
+          "status": "in_progress",
+          "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+          "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+          "confidence": 0.72,
+          "source_supported": true,
+          "priority_repaired": true,
+          "repair_reason": "priority_without_source_evidence"
+        }
+      }
+    ]
+  },
+  "validation_audit": [
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": null,
+        "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+        "deadline": "今天",
+        "priority": "medium",
+        "status": "in_progress",
+        "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+        "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+        "confidence": 0.78,
+        "source_supported": true
+      },
+      "after": {
+        "owner_name": null,
+        "task": "输出 Golden Dataset 基线报告并完成稳定性测试",
+        "deadline": "今天",
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "张伟（390.0-394.0）：任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n陈涛（400.0-404.0）：可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n张伟（410.0-414.0）：什么时候给结果？",
+        "source_segment_id": "d5708be6-9b4c-49e5-b2bb-2a266ba839a2",
+        "confidence": 0.78,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    },
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": null,
+        "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "deadline": null,
+        "priority": "medium",
+        "status": "in_progress",
+        "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+        "confidence": 0.72,
+        "source_supported": true
+      },
+      "after": {
+        "owner_name": null,
+        "task": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "deadline": null,
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "模型有时候直接变成（70.0-74.0）：“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "source_segment_id": "919568df-cce1-494a-95e6-51aed2249c7e",
+        "confidence": 0.72,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    },
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": null,
+        "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "deadline": null,
+        "priority": "medium",
+        "status": "in_progress",
+        "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+        "confidence": 0.72,
+        "source_supported": true
+      },
+      "after": {
+        "owner_name": null,
+        "task": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "deadline": null,
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "王强（250.0-254.0）：我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "source_segment_id": "17d61b43-e9a9-4cbc-b45d-93f2ce44dda7",
+        "confidence": 0.72,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    },
+    {
+      "field": "action_items",
+      "action": "modify",
+      "reason": "priority_without_source_evidence",
+      "before": {
+        "owner_name": null,
+        "task": "赵敏，你补充真实会议测试样本。",
+        "deadline": null,
+        "priority": "medium",
+        "status": "in_progress",
+        "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+        "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+        "confidence": 0.72,
+        "source_supported": true
+      },
+      "after": {
+        "owner_name": null,
+        "task": "赵敏，你补充真实会议测试样本。",
+        "deadline": null,
+        "priority": null,
+        "status": "in_progress",
+        "source_text": "张伟（430.0-434.0）：赵敏，你补充真实会议测试样本。",
+        "source_segment_id": "9a52eb96-0af7-4bd3-99f4-e6be53ddfd6a",
+        "confidence": 0.72,
+        "source_supported": true,
+        "priority_repaired": true,
+        "repair_reason": "priority_without_source_evidence"
+      }
+    }
+  ],
+  "comparison_summary": {
+    "fields": {
+      "meeting_agenda": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 1,
+        "shadow_count": 1,
+        "count_delta": 0
+      },
+      "meeting_summary": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 1,
+        "shadow_count": 1,
+        "count_delta": 0
+      },
+      "key_conclusions": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 1,
+        "shadow_count": 1,
+        "count_delta": 0
+      },
+      "action_items": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 4,
+        "shadow_count": 4,
+        "count_delta": 0
+      },
+      "unresolved_issues": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      },
+      "risks_and_focus": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      }
+    },
+    "schema_ok": true,
+    "validator_warning_count": 4,
+    "result_source": {
+      "formal": "legacy_qwen_rag",
+      "shadow": "validator",
+      "same": false
+    }
+  },
+  "error": null,
+  "fallback_reason": null,
+  "metadata": {
+    "policy_schema_version": "meeting-scenario-policy-v1",
+    "policy_needs_review": false,
+    "plan_id": "agent-runtime-static-plan-v1",
+    "agent_mode_enabled": false,
+    "agent_actions_enabled": false,
+    "audit_path": "D:\\codex_work\\会议声纹识别\\services\\worker\\data\\debug\\agent_shadow_trace\\d4caac96-31fa-4834-82ab-380e188473e5\\agent-shadow-9e444775-3d0b-4a3a-a3b8-5710bfb60e3b.json"
+  }
+}

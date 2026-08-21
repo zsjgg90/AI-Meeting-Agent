@@ -1,0 +1,124 @@
+{
+  "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+  "items": [
+    {
+      "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+      "event_id": "e16d30e2-71a9-54f6-b37c-55b0c8cdc956",
+      "topic_id": "topic_1",
+      "source_text": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_agenda",
+      "needs_review": false,
+      "item": {
+        "content": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+        "topic_id": "topic_1",
+        "source_event_ids": [
+          "e16d30e2-71a9-54f6-b37c-55b0c8cdc956"
+        ],
+        "source_texts": [
+          "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+      "event_id": "c7b51e1f-b9f1-5784-b51c-d30c734686ef",
+      "topic_id": "topic_2",
+      "source_text": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+        "topic_id": "topic_2",
+        "source_event_ids": [
+          "c7b51e1f-b9f1-5784-b51c-d30c734686ef"
+        ],
+        "source_texts": [
+          "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+      "event_id": "b5020fa3-9499-585a-ae66-f80033d82b4c",
+      "topic_id": "topic_3",
+      "source_text": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+        "topic_id": "topic_3",
+        "source_event_ids": [
+          "b5020fa3-9499-585a-ae66-f80033d82b4c"
+        ],
+        "source_texts": [
+          "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+      "event_id": "78b014e5-4ca0-5b53-b4d4-551578ccc302",
+      "topic_id": "topic_4",
+      "source_text": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+        "topic_id": "topic_4",
+        "source_event_ids": [
+          "78b014e5-4ca0-5b53-b4d4-551578ccc302"
+        ],
+        "source_texts": [
+          "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "7214eaef-0f42-452d-a9dc-cecb64350594",
+      "event_id": "cdcf4411-ddf0-5caa-9e27-a40e1f3a6832",
+      "topic_id": "topic_5",
+      "source_text": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+        "topic_id": "topic_5",
+        "source_event_ids": [
+          "cdcf4411-ddf0-5caa-9e27-a40e1f3a6832"
+        ],
+        "source_texts": [
+          "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    }
+  ]
+}

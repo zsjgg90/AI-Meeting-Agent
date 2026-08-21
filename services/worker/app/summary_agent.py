@@ -10,7 +10,12 @@ from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
-from app.analysis_contract import analysis_to_persistence_payload, normalize_meeting_analysis_result
+from app.analysis_contract import (
+    analysis_to_persistence_payload,
+    ensure_non_empty_analysis_result,
+    normalize_meeting_analysis_result,
+    persistence_source_segment_id,
+)
 from app.agent_orchestrator import maybe_run_agent_shadow
 from app.meeting_analysis_pipeline import analyze_meeting_shadow_mode
 from app.observability import log_event, log_stage
@@ -1109,6 +1114,7 @@ def summarize_transcript_with_retry(transcript: str) -> dict[str, Any]:
 
 
 def save_summary(db: Session, meeting: Meeting, payload: dict[str, Any]) -> MeetingSummary:
+    ensure_non_empty_analysis_result(payload)
     db.execute(delete(ActionItem).where(ActionItem.meeting_id == meeting.id))
     db.execute(delete(MeetingSummary).where(MeetingSummary.meeting_id == meeting.id))
     db.flush()
@@ -1128,6 +1134,8 @@ def save_summary(db: Session, meeting: Meeting, payload: dict[str, Any]) -> Meet
         next_steps=payload["next_steps"],
         meeting_agenda=payload.get("meeting_agenda", payload["agenda"]),
         meeting_summary=payload.get("meeting_summary", payload["overview"]),
+        meeting_type=payload.get("meeting_type"),
+        meeting_type_confidence=payload.get("meeting_type_confidence"),
         key_conclusions=payload.get("key_conclusions", payload["decisions"]),
         unresolved_issues=payload.get("unresolved_issues", payload["open_questions"]),
         risks_and_focus=payload.get("risks_and_focus", payload["risks"]),
@@ -1160,7 +1168,7 @@ def save_summary(db: Session, meeting: Meeting, payload: dict[str, Any]) -> Meet
                 status="open",
                 source=item.get("source") or item.get("source_text") or None,
                 source_text=item.get("source_text") or item.get("source") or None,
-                source_segment_id=item.get("source_segment_id") or None,
+                source_segment_id=persistence_source_segment_id(item.get("source_segment_id")),
                 confidence=item.get("confidence"),
             )
         )
@@ -1317,7 +1325,13 @@ def summarize_meeting(db: Session, meeting_id: str) -> MeetingSummary:
         raw_result = analyze_meeting_shadow_mode(
             meeting_id,
             segments,
-            legacy_analyzer=lambda: analyze_meeting_with_rag(transcript_text),
+            legacy_analyzer=lambda semantic_action_candidates=None, semantic_decision_candidates=None, semantic_unresolved_candidates=None: analyze_meeting_with_rag(
+                transcript_text,
+                semantic_action_candidates=semantic_action_candidates,
+                semantic_decision_candidates=semantic_decision_candidates,
+                semantic_unresolved_candidates=semantic_unresolved_candidates,
+                transcript_segments=segments,
+            ),
         )
         with log_stage("analysis_contract", meeting_id=meeting_id):
             raw_metadata = raw_result.get("_metadata") if isinstance(raw_result.get("_metadata"), dict) else {}
@@ -1325,7 +1339,9 @@ def summarize_meeting(db: Session, meeting_id: str) -> MeetingSummary:
                 raw_result,
                 model_name=raw_metadata.get("model_name") or f"{get_settings().ollama_model}+rag",
             )
+            ensure_non_empty_analysis_result(analysis)
             payload = analysis_to_persistence_payload(analysis)
+            ensure_non_empty_analysis_result(payload)
         with log_stage(
             "persistence",
             meeting_id=meeting_id,

@@ -1,0 +1,77 @@
+{
+  "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+  "responsibility_contexts": [
+    {
+      "responsibility_id": "resp:bf1412bd-4002-4d50-9002-7a94fbc512ac:ca24a2c5-8c43-49d5-8647-d280197bd99f:ed37a95c9bd6",
+      "speaker_id": null,
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+          "event_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+          "utterance_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "segment_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "speaker_id": null,
+          "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+          "owner_text": null,
+          "task_text": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    }
+  ],
+  "responsibility_matrix": {
+    "rows": [
+      {
+        "task_key": "task:0b6733366eed",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:bf1412bd-4002-4d50-9002-7a94fbc512ac:ca24a2c5-8c43-49d5-8647-d280197bd99f:ed37a95c9bd6",
+            "responsibility_type": "unknown",
+            "task": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+            "event_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+            "utterance_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+            "segment_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+            "speaker_id": null,
+            "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+            "owner_text": null,
+            "task_text": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      }
+    ]
+  },
+  "consistency_status": "needs_review"
+}

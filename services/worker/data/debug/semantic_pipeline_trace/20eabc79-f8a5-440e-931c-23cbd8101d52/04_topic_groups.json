@@ -1,0 +1,70 @@
+{
+  "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+  "items": [
+    {
+      "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+      "event_id": null,
+      "topic_id": "topic_1",
+      "source_text": "是不是更牛逼了？",
+      "primary_intent": null,
+      "status": "active",
+      "target_dimension": null,
+      "needs_review": true,
+      "title": "是不是更牛逼了？",
+      "event_ids": [
+        "cd7bbfee-655b-543d-b5a1-120ee8fa09cf"
+      ],
+      "start_time": 130.0,
+      "end_time": 930.0,
+      "events": [
+        {
+          "event_id": "cd7bbfee-655b-543d-b5a1-120ee8fa09cf",
+          "utterance_id": "a26383b4-11c9-42a0-84f1-89904c163522",
+          "segment_id": "a26383b4-11c9-42a0-84f1-89904c163522",
+          "speaker": "speaker_1",
+          "speaker_role": null,
+          "start_time": 130.0,
+          "end_time": 930.0,
+          "source_text": "是不是更牛逼了？",
+          "normalized_text": "是不是更牛逼了？",
+          "primary_intent": "agenda_statement",
+          "secondary_intents": [],
+          "event_type": "information",
+          "subject": "speaker_1",
+          "action": "agenda_statement",
+          "object": "是不是更牛逼了？",
+          "entities": {
+            "persons": [
+              "speaker_1"
+            ],
+            "teams": [],
+            "projects": [],
+            "features": [],
+            "dates": [],
+            "versions": [],
+            "numbers": []
+          },
+          "attributes": {
+            "owner": null,
+            "deadline": null,
+            "priority": "medium",
+            "status": "unknown",
+            "polarity": "neutral",
+            "certainty": "contextual"
+          },
+          "evidence": {
+            "source_text": "是不是更牛逼了？",
+            "quote": "是不是更牛逼了？",
+            "evidence_type": "direct"
+          },
+          "confidence": {
+            "intent": 0.72,
+            "entity": 0.68,
+            "overall": 0.72
+          },
+          "needs_review": true
+        }
+      ]
+    }
+  ]
+}

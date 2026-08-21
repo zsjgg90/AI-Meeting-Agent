@@ -1,0 +1,3672 @@
+{
+  "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+  "responsibility_contexts": [
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:faccddf8-7373-436f-95ae-6ad55b9d6655:31825ad23334",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "agenda_statement人都到了吧？ 赵敏，你声音正常吗？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "19576f82-3d8e-526e-b239-fcc004b81b6c",
+          "utterance_id": "faccddf8-7373-436f-95ae-6ad55b9d6655",
+          "segment_id": "faccddf8-7373-436f-95ae-6ad55b9d6655",
+          "speaker_id": "张伟",
+          "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+          "owner_text": null,
+          "task_text": "agenda_statement人都到了吧？ 赵敏，你声音正常吗？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:cb0a187f-56ab-4c96-8958-c8bd5323e00e:63a59a6dd2fc",
+      "speaker_id": "赵敏",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information可以，能听到。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "5c1cf206-78bf-59b8-acf5-a8d4972ae886",
+          "utterance_id": "cb0a187f-56ab-4c96-8958-c8bd5323e00e",
+          "segment_id": "cb0a187f-56ab-4c96-8958-c8bd5323e00e",
+          "speaker_id": "赵敏",
+          "source_text": "可以，能听到。",
+          "owner_text": null,
+          "task_text": "information可以，能听到。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:1aef96b9-8484-49ec-b99e-814a1721a6ed:6ddc0db08caf",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "b26b55a9-fe4c-507a-a4cf-a6430fb0f350",
+          "utterance_id": "1aef96b9-8484-49ec-b99e-814a1721a6ed",
+          "segment_id": "1aef96b9-8484-49ec-b99e-814a1721a6ed",
+          "speaker_id": "张伟",
+          "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "owner_text": null,
+          "task_text": "information行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:246bacee-8563-479b-b024-313fa3db4628:5338345bec2c",
+      "speaker_id": "李娜",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "064d6a81-da5d-5549-a7da-e103099af359",
+          "utterance_id": "246bacee-8563-479b-b024-313fa3db4628",
+          "segment_id": "246bacee-8563-479b-b024-313fa3db4628",
+          "speaker_id": "李娜",
+          "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "owner_text": null,
+          "task_text": "information我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:c3a953f5-4707-456e-809c-445e12be8473:8ac41884c647",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "progress_update这个待办混乱的问题，上周不是已经看过一次了吗？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "da70e73e-10db-545a-92b4-d42eab7d5d91",
+          "utterance_id": "c3a953f5-4707-456e-809c-445e12be8473",
+          "segment_id": "c3a953f5-4707-456e-809c-445e12be8473",
+          "speaker_id": "张伟",
+          "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "owner_text": null,
+          "task_text": "progress_update这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6c75c409-0f7d-46c3-a03f-3dacb68581ba:cfa51d7f33ee",
+      "speaker_id": "李娜",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information对，看过。 但是现在感觉还是有。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "a2b078be-3014-5d97-8776-d33e77ebdb11",
+          "utterance_id": "6c75c409-0f7d-46c3-a03f-3dacb68581ba",
+          "segment_id": "6c75c409-0f7d-46c3-a03f-3dacb68581ba",
+          "speaker_id": "李娜",
+          "source_text": "对，看过。 但是现在感觉还是有。",
+          "owner_text": null,
+          "task_text": "information对，看过。 但是现在感觉还是有。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:cf352fd1-b18b-44da-abd5-61a5d414e384:71077c2236da",
+      "speaker_id": "比如用户说",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information“这个事情后面关注一下。”",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "96a8347b-c81c-525e-9048-d9fc4954be63",
+          "utterance_id": "cf352fd1-b18b-44da-abd5-61a5d414e384",
+          "segment_id": "cf352fd1-b18b-44da-abd5-61a5d414e384",
+          "speaker_id": "比如用户说",
+          "source_text": "“这个事情后面关注一下。”",
+          "owner_text": null,
+          "task_text": "information“这个事情后面关注一下。”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5c188314-3518-48aa-8fd5-eb26dfe6db62:980160492735",
+      "speaker_id": "模型有时候直接变成",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "86149356-f6ed-5966-83d1-d3a2b1f969cd",
+          "utterance_id": "5c188314-3518-48aa-8fd5-eb26dfe6db62",
+          "segment_id": "5c188314-3518-48aa-8fd5-eb26dfe6db62",
+          "speaker_id": "模型有时候直接变成",
+          "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "owner_text": null,
+          "task_text": "information“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5d9e1a26-deac-4867-88c8-ed768a446960:35d1cab033fb",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "task_assignment嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "d5cf9a44-8df7-538c-8a90-60d49b4b8ea3",
+          "utterance_id": "5d9e1a26-deac-4867-88c8-ed768a446960",
+          "segment_id": "5d9e1a26-deac-4867-88c8-ed768a446960",
+          "speaker_id": "陈涛",
+          "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "owner_text": null,
+          "task_text": "task_assignment嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:0c1c779f-8d94-40ea-9934-08ec4131edac:06c5ec9147b7",
+      "speaker_id": "王强",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "d7b559b3-cf94-5fbd-9192-a556b5e42384",
+          "utterance_id": "0c1c779f-8d94-40ea-9934-08ec4131edac",
+          "segment_id": "0c1c779f-8d94-40ea-9934-08ec4131edac",
+          "speaker_id": "王强",
+          "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "owner_text": null,
+          "task_text": "information这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5ffb9dca-ee55-4ba2-ab93-5664fe6f540e:c963d00738b1",
+      "speaker_id": "他们看到的就是",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "a67b804c-345c-515f-98ea-882152d65b93",
+          "utterance_id": "5ffb9dca-ee55-4ba2-ab93-5664fe6f540e",
+          "segment_id": "5ffb9dca-ee55-4ba2-ab93-5664fe6f540e",
+          "speaker_id": "他们看到的就是",
+          "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "owner_text": null,
+          "task_text": "information第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:0f2f805a-0165-41e6-93a5-a6e6e5eb8dcc:13aeac381880",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "risk_warning对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "b7a7df18-9dd9-53cd-8f1a-72291add9a3a",
+          "utterance_id": "0f2f805a-0165-41e6-93a5-a6e6e5eb8dcc",
+          "segment_id": "0f2f805a-0165-41e6-93a5-a6e6e5eb8dcc",
+          "speaker_id": "陈涛",
+          "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "owner_text": null,
+          "task_text": "risk_warning对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:4b6583c4-abcf-4f86-8ef3-9b75ed2de6a6:11219d63907c",
+      "speaker_id": "李娜",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "progress_update但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "342c3628-464d-5015-ad54-a5c1f8a9f3db",
+          "utterance_id": "4b6583c4-abcf-4f86-8ef3-9b75ed2de6a6",
+          "segment_id": "4b6583c4-abcf-4f86-8ef3-9b75ed2de6a6",
+          "speaker_id": "李娜",
+          "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "owner_text": null,
+          "task_text": "progress_update但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:fbfc65ca-941d-4c56-954f-171e31f5b9f2:2224f35e4d88",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "decision嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "7a64ab0e-b9e9-53ef-829a-b030da57737b",
+          "utterance_id": "fbfc65ca-941d-4c56-954f-171e31f5b9f2",
+          "segment_id": "fbfc65ca-941d-4c56-954f-171e31f5b9f2",
+          "speaker_id": "陈涛",
+          "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "owner_text": null,
+          "task_text": "decision嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:fb188369-fc91-471e-b785-173d1323251a:83aed9b74bfc",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "1166e48b-165b-52db-befa-c324435b149b",
+          "utterance_id": "fb188369-fc91-471e-b785-173d1323251a",
+          "segment_id": "fb188369-fc91-471e-b785-173d1323251a",
+          "speaker_id": "张伟",
+          "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "owner_text": null,
+          "task_text": "information这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:2da18430-c698-470c-ba65-ec385c496900:449bdaf7974d",
+      "speaker_id": "赵敏",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "c130e413-d505-568b-9ff8-5f9af33cdb06",
+          "utterance_id": "2da18430-c698-470c-ba65-ec385c496900",
+          "segment_id": "2da18430-c698-470c-ba65-ec385c496900",
+          "speaker_id": "赵敏",
+          "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "owner_text": null,
+          "task_text": "information我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6c5e24b4-a018-40f4-a68b-bd221b613c09:ecac1319889a",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information什么意思？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "be315578-59c7-5a4d-9e71-3ca421fb0993",
+          "utterance_id": "6c5e24b4-a018-40f4-a68b-bd221b613c09",
+          "segment_id": "6c5e24b4-a018-40f4-a68b-bd221b613c09",
+          "speaker_id": "张伟",
+          "source_text": "什么意思？",
+          "owner_text": null,
+          "task_text": "information什么意思？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:4dc4d331-2f4d-4c57-8846-138c6c744646:f0b3f5f8d463",
+      "speaker_id": "比如真实会议里面不会说",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "progress_update“我将在8月15日前完成接口开发。”",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "fc2e6711-a448-5dad-8177-acf5bba2077f",
+          "utterance_id": "4dc4d331-2f4d-4c57-8846-138c6c744646",
+          "segment_id": "4dc4d331-2f4d-4c57-8846-138c6c744646",
+          "speaker_id": "比如真实会议里面不会说",
+          "source_text": "“我将在8月15日前完成接口开发。”",
+          "owner_text": null,
+          "task_text": "progress_update“我将在8月15日前完成接口开发。”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:750e2444-7fb6-4a38-9bc6-9f5329f83fd2:51862796e239",
+      "speaker_id": "更多是",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "82daf739-23f6-558c-9d18-6717218bb645",
+          "utterance_id": "750e2444-7fb6-4a38-9bc6-9f5329f83fd2",
+          "segment_id": "750e2444-7fb6-4a38-9bc6-9f5329f83fd2",
+          "speaker_id": "更多是",
+          "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "owner_text": null,
+          "task_text": "information“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:8a63f412-7df3-4c38-a44f-4c56f4d08633:699a4c38b559",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "8a2c50b6-4f61-5461-ad02-e24af16c7e5b",
+          "utterance_id": "8a63f412-7df3-4c38-a44f-4c56f4d08633",
+          "segment_id": "8a63f412-7df3-4c38-a44f-4c56f4d08633",
+          "speaker_id": "陈涛",
+          "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "owner_text": null,
+          "task_text": "information对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5925aa34-cbd7-4a7d-baee-c24d7097ff3e:b8dd3cd7c3a8",
+      "speaker_id": "赵敏",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information还有一个。 之前测试发现一个情况。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "9f75deb3-3e9e-5a6f-95f9-83b2eba23c1b",
+          "utterance_id": "5925aa34-cbd7-4a7d-baee-c24d7097ff3e",
+          "segment_id": "5925aa34-cbd7-4a7d-baee-c24d7097ff3e",
+          "speaker_id": "赵敏",
+          "source_text": "还有一个。 之前测试发现一个情况。",
+          "owner_text": null,
+          "task_text": "information还有一个。 之前测试发现一个情况。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:84177363-7b38-48a9-b59f-2299b91200e0:f72c97e4efdf",
+      "speaker_id": "产品说",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "proposal“是不是可以考虑增加导出功能？”",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "8c4fd028-466f-5bcc-bc84-f4727b49d4ae",
+          "utterance_id": "84177363-7b38-48a9-b59f-2299b91200e0",
+          "segment_id": "84177363-7b38-48a9-b59f-2299b91200e0",
+          "speaker_id": "产品说",
+          "source_text": "“是不是可以考虑增加导出功能？”",
+          "owner_text": null,
+          "task_text": "proposal“是不是可以考虑增加导出功能？”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:0b79a84f-deee-4c8b-be83-fe25b678e5c2:99401a9e4cfe",
+      "speaker_id": "结果 AI 直接生成",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information“增加PDF导出功能。” 但是会议根本没决定。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "e7c3c856-0731-5b6a-acb4-995a871bfc0e",
+          "utterance_id": "0b79a84f-deee-4c8b-be83-fe25b678e5c2",
+          "segment_id": "0b79a84f-deee-4c8b-be83-fe25b678e5c2",
+          "speaker_id": "结果 AI 直接生成",
+          "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+          "owner_text": null,
+          "task_text": "information“增加PDF导出功能。” 但是会议根本没决定。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:f8d82f91-0f4d-49e5-b69b-f7188b006f40:a32b365da837",
+      "speaker_id": "李娜",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information这个确实。 我们只是讨论方向。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "c6b9f458-6e35-5a28-a45b-9d978c39d238",
+          "utterance_id": "f8d82f91-0f4d-49e5-b69b-f7188b006f40",
+          "segment_id": "f8d82f91-0f4d-49e5-b69b-f7188b006f40",
+          "speaker_id": "李娜",
+          "source_text": "这个确实。 我们只是讨论方向。",
+          "owner_text": null,
+          "task_text": "information这个确实。 我们只是讨论方向。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5f0f6d50-d047-4d3a-8b05-ecb134f02112:5f431876742a",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "ab5a8abc-b960-522c-a73d-42b1f161281b",
+          "utterance_id": "5f0f6d50-d047-4d3a-8b05-ecb134f02112",
+          "segment_id": "5f0f6d50-d047-4d3a-8b05-ecb134f02112",
+          "speaker_id": "张伟",
+          "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "owner_text": null,
+          "task_text": "information这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5bd91b5e-dadb-4eb8-9342-05c54e867a98:a7e7686702cc",
+      "speaker_id": "王强",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "caa24b49-9b18-5131-8e62-862fbad0c179",
+          "utterance_id": "5bd91b5e-dadb-4eb8-9342-05c54e867a98",
+          "segment_id": "5bd91b5e-dadb-4eb8-9342-05c54e867a98",
+          "speaker_id": "王强",
+          "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "owner_text": null,
+          "task_text": "information我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:061edafc-fbbc-4fc2-a38c-f82b18ca49d4:e4a0040fecfc",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information什么时候可以测试？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "1afc3ecb-7d35-576a-b220-f502790a9759",
+          "utterance_id": "061edafc-fbbc-4fc2-a38c-f82b18ca49d4",
+          "segment_id": "061edafc-fbbc-4fc2-a38c-f82b18ca49d4",
+          "speaker_id": "张伟",
+          "source_text": "什么时候可以测试？",
+          "owner_text": null,
+          "task_text": "information什么时候可以测试？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:d2522827-a994-4d2f-ba68-5cc465f36e8d:7ac2342b7383",
+      "speaker_id": "王强",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "e7f1cef4-a2be-56c1-bcff-1ae54a0b4c39",
+          "utterance_id": "d2522827-a994-4d2f-ba68-5cc465f36e8d",
+          "segment_id": "d2522827-a994-4d2f-ba68-5cc465f36e8d",
+          "speaker_id": "王强",
+          "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "owner_text": null,
+          "task_text": "information下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:1e3a172d-d63d-42dd-8c8e-ef996fdb04df:8316159df223",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information是接口问题？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "5a2fb97a-0bb4-55b1-afb7-8f3b6c297511",
+          "utterance_id": "1e3a172d-d63d-42dd-8c8e-ef996fdb04df",
+          "segment_id": "1e3a172d-d63d-42dd-8c8e-ef996fdb04df",
+          "speaker_id": "陈涛",
+          "source_text": "是接口问题？",
+          "owner_text": null,
+          "task_text": "information是接口问题？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:e5a45e1d-e8e6-4b46-b45b-a630f6ce48e7:59f6408e85e8",
+      "speaker_id": "王强",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "risk_warning不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "0098cf46-bdf0-5c47-9766-184a0ea8f0a9",
+          "utterance_id": "e5a45e1d-e8e6-4b46-b45b-a630f6ce48e7",
+          "segment_id": "e5a45e1d-e8e6-4b46-b45b-a630f6ce48e7",
+          "speaker_id": "王强",
+          "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "owner_text": null,
+          "task_text": "risk_warning不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:82cb7697-59b7-4c9f-8d2a-1cba734a4a8e:8f543e44dc46",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "decision这个后面可以拆。 但是不是 V2.6 必须。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "44ad9764-0587-5eaa-ac3f-2ce998d334fa",
+          "utterance_id": "82cb7697-59b7-4c9f-8d2a-1cba734a4a8e",
+          "segment_id": "82cb7697-59b7-4c9f-8d2a-1cba734a4a8e",
+          "speaker_id": "陈涛",
+          "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+          "owner_text": null,
+          "task_text": "decision这个后面可以拆。 但是不是 V2.6 必须。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:2bdfa04a-f60b-4702-bce7-3a04a7bfce65:65e25838e3a2",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information嗯，这个先作为优化项。 不要影响版本。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "46975671-26f8-55c5-98bf-3324340b9bea",
+          "utterance_id": "2bdfa04a-f60b-4702-bce7-3a04a7bfce65",
+          "segment_id": "2bdfa04a-f60b-4702-bce7-3a04a7bfce65",
+          "speaker_id": "张伟",
+          "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+          "owner_text": null,
+          "task_text": "information嗯，这个先作为优化项。 不要影响版本。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:33247400-f56d-4547-8e4b-7b978bd71488:449c09fa4b56",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "risk_warning还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "59a042e5-5c66-5c52-ba85-d377e247d79f",
+          "utterance_id": "33247400-f56d-4547-8e4b-7b978bd71488",
+          "segment_id": "33247400-f56d-4547-8e4b-7b978bd71488",
+          "speaker_id": "陈涛",
+          "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "owner_text": null,
+          "task_text": "risk_warning还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:fd3bee96-7f13-4d67-a821-07777d72389c:b672d818e0a7",
+      "speaker_id": "李娜",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information这个会影响上线吗？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "7cabfeb4-7ea0-5ae3-ac1a-2e28f81a85df",
+          "utterance_id": "fd3bee96-7f13-4d67-a821-07777d72389c",
+          "segment_id": "fd3bee96-7f13-4d67-a821-07777d72389c",
+          "speaker_id": "李娜",
+          "source_text": "这个会影响上线吗？",
+          "owner_text": null,
+          "task_text": "information这个会影响上线吗？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:00f3ddea-440b-48ce-a83f-2bec948b5f9b:09f9da22268f",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "progress_update目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "c218a899-2753-56b7-a751-a50e9550ca24",
+          "utterance_id": "00f3ddea-440b-48ce-a83f-2bec948b5f9b",
+          "segment_id": "00f3ddea-440b-48ce-a83f-2bec948b5f9b",
+          "speaker_id": "陈涛",
+          "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "owner_text": null,
+          "task_text": "progress_update目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:d7a9645e-6fdd-4c69-9e26-a31be8d63711:0e2b627795b2",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "risk_warning好，这个放风险里面。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "1e5e37f8-663e-57c4-b494-71431f556159",
+          "utterance_id": "d7a9645e-6fdd-4c69-9e26-a31be8d63711",
+          "segment_id": "d7a9645e-6fdd-4c69-9e26-a31be8d63711",
+          "speaker_id": "张伟",
+          "source_text": "好，这个放风险里面。",
+          "owner_text": null,
+          "task_text": "risk_warning好，这个放风险里面。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:8d9340a6-752a-41c4-b95b-e933c0ab032c:5e1e814c2445",
+      "speaker_id": "李娜",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "risk_warning还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "171bcb01-0f32-5c8c-b297-44b8c8a2e8ec",
+          "utterance_id": "8d9340a6-752a-41c4-b95b-e933c0ab032c",
+          "segment_id": "8d9340a6-752a-41c4-b95b-e933c0ab032c",
+          "speaker_id": "李娜",
+          "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "owner_text": null,
+          "task_text": "risk_warning还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:cfad76e1-5a34-4b44-99a5-1840464bc6f3:578b257e3af1",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "risk_warning这个也是风险。 先记录，不作为当前版本任务。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "c34edcb6-2c6b-528b-a0d0-72bbf713d7ca",
+          "utterance_id": "cfad76e1-5a34-4b44-99a5-1840464bc6f3",
+          "segment_id": "cfad76e1-5a34-4b44-99a5-1840464bc6f3",
+          "speaker_id": "张伟",
+          "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+          "owner_text": null,
+          "task_text": "risk_warning这个也是风险。 先记录，不作为当前版本任务。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:bd790ba9-ccbe-46d2-9ee8-287e22faab80:349389c32d4d",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "risk_warning我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "84cfba7a-cdb1-57b0-bf6f-de942bafe637",
+          "utterance_id": "bd790ba9-ccbe-46d2-9ee8-287e22faab80",
+          "segment_id": "bd790ba9-ccbe-46d2-9ee8-287e22faab80",
+          "speaker_id": "张伟",
+          "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "owner_text": null,
+          "task_text": "risk_warning我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6d8f866e-8859-4b3b-bc2e-fa5657cbcc68:2452c131a221",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "task_assignment任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "76579612-5b13-50dc-8a6e-a6601c9b8ecf",
+          "utterance_id": "6d8f866e-8859-4b3b-bc2e-fa5657cbcc68",
+          "segment_id": "6d8f866e-8859-4b3b-bc2e-fa5657cbcc68",
+          "speaker_id": "张伟",
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "owner_text": null,
+          "task_text": "task_assignment任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:b42e114d-9a11-4a5e-8cc3-71aa6d04364a:d081f31ab7a0",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "commitment",
+      "task": "task_assignment可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+      "owner": "陈涛",
+      "evidence": [
+        {
+          "type": "commitment_text",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "78b5abd6-d5ed-552f-9f2d-c63ef7caa238",
+          "utterance_id": "b42e114d-9a11-4a5e-8cc3-71aa6d04364a",
+          "segment_id": "b42e114d-9a11-4a5e-8cc3-71aa6d04364a",
+          "speaker_id": "陈涛",
+          "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "owner_text": "陈涛",
+          "task_text": "task_assignment可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.62,
+          "requires_confirmation": true,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.62,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6d8f866e-8859-4b3b-bc2e-fa5657cbcc68,b42e114d-9a11-4a5e-8cc3-71aa6d04364a,7e9216bf-6a7b-4dd6-8370-eef35a94f40c:d75a428bcc5b",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "commitment",
+      "task": "task_assignment输出 Golden Dataset 基线报告并完成稳定性测试",
+      "owner": "陈涛",
+      "evidence": [
+        {
+          "type": "commitment_text",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "6442337b-f913-5af9-8b26-825c380a0c29",
+          "utterance_id": "b42e114d-9a11-4a5e-8cc3-71aa6d04364a",
+          "segment_id": "6d8f866e-8859-4b3b-bc2e-fa5657cbcc68,b42e114d-9a11-4a5e-8cc3-71aa6d04364a,7e9216bf-6a7b-4dd6-8370-eef35a94f40c",
+          "speaker_id": "陈涛",
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+          "owner_text": "陈涛",
+          "task_text": "task_assignment输出 Golden Dataset 基线报告并完成稳定性测试",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.62,
+          "requires_confirmation": true,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.62,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:7e9216bf-6a7b-4dd6-8370-eef35a94f40c:3d9733929390",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information什么时候给结果？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "c32d5459-30d2-50bd-b84a-e796cb6c6f35",
+          "utterance_id": "7e9216bf-6a7b-4dd6-8370-eef35a94f40c",
+          "segment_id": "7e9216bf-6a7b-4dd6-8370-eef35a94f40c",
+          "speaker_id": "张伟",
+          "source_text": "什么时候给结果？",
+          "owner_text": null,
+          "task_text": "information什么时候给结果？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6302afc6-6648-4ca3-867b-c1bb4a6a90bb:fd118d50cff0",
+      "speaker_id": "陈涛",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information明天下午之前。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "3038446a-1923-56d4-8206-d110568dc4d1",
+          "utterance_id": "6302afc6-6648-4ca3-867b-c1bb4a6a90bb",
+          "segment_id": "6302afc6-6648-4ca3-867b-c1bb4a6a90bb",
+          "speaker_id": "陈涛",
+          "source_text": "明天下午之前。",
+          "owner_text": null,
+          "task_text": "information明天下午之前。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:26c37231-bc0b-4ba3-b023-2176caed8f1c:592c1cf22633",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "task_assignment赵敏，你补充真实会议测试样本。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "e8f4affe-bdee-5012-8f6b-4e50ced4ed18",
+          "utterance_id": "26c37231-bc0b-4ba3-b023-2176caed8f1c",
+          "segment_id": "26c37231-bc0b-4ba3-b023-2176caed8f1c",
+          "speaker_id": "张伟",
+          "source_text": "赵敏，你补充真实会议测试样本。",
+          "owner_text": null,
+          "task_text": "task_assignment赵敏，你补充真实会议测试样本。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6302afc6-6648-4ca3-867b-c1bb4a6a90bb,26c37231-bc0b-4ba3-b023-2176caed8f1c,91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c:1cbe96a7f870",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "task_assignment赵敏，你补充真实会议测试样本。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "eeab78a0-5cdb-5147-8884-b5db786dd1b8",
+          "utterance_id": "26c37231-bc0b-4ba3-b023-2176caed8f1c",
+          "segment_id": "6302afc6-6648-4ca3-867b-c1bb4a6a90bb,26c37231-bc0b-4ba3-b023-2176caed8f1c,91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c",
+          "speaker_id": "张伟",
+          "source_text": "明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "owner_text": null,
+          "task_text": "task_assignment赵敏，你补充真实会议测试样本。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c:4d531172932e",
+      "speaker_id": "赵敏",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "624cad7d-83c1-5680-96cc-6ef273829df7",
+          "utterance_id": "91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c",
+          "segment_id": "91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c",
+          "speaker_id": "赵敏",
+          "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "owner_text": null,
+          "task_text": "information好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:117ecb79-ac2e-408a-a67d-bca0161a2f28:71f884183f9f",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information明天吧。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "874dbee3-c6e3-545d-9fd3-36b54a094e5d",
+          "utterance_id": "117ecb79-ac2e-408a-a67d-bca0161a2f28",
+          "segment_id": "117ecb79-ac2e-408a-a67d-bca0161a2f28",
+          "speaker_id": "张伟",
+          "source_text": "明天吧。",
+          "owner_text": null,
+          "task_text": "information明天吧。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:952c3bbe-4298-440d-8196-004405e6caf2:95d407bc6862",
+      "speaker_id": "赵敏",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information好的。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "b86b013c-9cd5-5d43-85c4-cb97662ad34d",
+          "utterance_id": "952c3bbe-4298-440d-8196-004405e6caf2",
+          "segment_id": "952c3bbe-4298-440d-8196-004405e6caf2",
+          "speaker_id": "赵敏",
+          "source_text": "好的。",
+          "owner_text": null,
+          "task_text": "information好的。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:a4e04347-3591-4bf0-96d4-ad64d996da62:ed5cd2d481b5",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "task_assignment王强，下午安排录音流程测试。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "af1b2ff5-bc75-5bc2-b715-2e40295e3719",
+          "utterance_id": "a4e04347-3591-4bf0-96d4-ad64d996da62",
+          "segment_id": "a4e04347-3591-4bf0-96d4-ad64d996da62",
+          "speaker_id": "张伟",
+          "source_text": "王强，下午安排录音流程测试。",
+          "owner_text": null,
+          "task_text": "task_assignment王强，下午安排录音流程测试。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:952c3bbe-4298-440d-8196-004405e6caf2,a4e04347-3591-4bf0-96d4-ad64d996da62,b4353bd1-b0bd-471a-8338-7a411e0c57e3:d1d1188066f4",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "task_assignment王强，下午安排录音流程测试。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "1f18c494-8114-5d8e-b01a-71a4c76205f1",
+          "utterance_id": "a4e04347-3591-4bf0-96d4-ad64d996da62",
+          "segment_id": "952c3bbe-4298-440d-8196-004405e6caf2,a4e04347-3591-4bf0-96d4-ad64d996da62,b4353bd1-b0bd-471a-8338-7a411e0c57e3",
+          "speaker_id": "张伟",
+          "source_text": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+          "owner_text": null,
+          "task_text": "task_assignment王强，下午安排录音流程测试。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:b4353bd1-b0bd-471a-8338-7a411e0c57e3:4c96ae8e332a",
+      "speaker_id": "王强",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information没问题。",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "6a2c3db7-5a70-5db2-94ba-69022788be08",
+          "utterance_id": "b4353bd1-b0bd-471a-8338-7a411e0c57e3",
+          "segment_id": "b4353bd1-b0bd-471a-8338-7a411e0c57e3",
+          "speaker_id": "王强",
+          "source_text": "没问题。",
+          "owner_text": null,
+          "task_text": "information没问题。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6f437a24-aa4e-41f8-9907-aaeb6074f4d7:b97d918297cd",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "996337d4-64a6-5e69-95ab-f551b8cf2f18",
+          "utterance_id": "6f437a24-aa4e-41f8-9907-aaeb6074f4d7",
+          "segment_id": "6f437a24-aa4e-41f8-9907-aaeb6074f4d7",
+          "speaker_id": "张伟",
+          "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+          "owner_text": null,
+          "task_text": "information还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    },
+    {
+      "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5a7c77fd-4bff-4da2-9781-2fb35b01e02c:bd73facb171c",
+      "speaker_id": "张伟",
+      "identity_context": null,
+      "role_context": null,
+      "responsibility_type": "unknown",
+      "task": "information没有其他事情的话，今天先这样。 散会。 【会议结束】",
+      "owner": null,
+      "evidence": [
+        {
+          "type": "unknown_owner",
+          "source_type": "semantic_event",
+          "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+          "event_id": "b07e3291-0c81-5a85-8f8b-2e5f736c0f82",
+          "utterance_id": "5a7c77fd-4bff-4da2-9781-2fb35b01e02c",
+          "segment_id": "5a7c77fd-4bff-4da2-9781-2fb35b01e02c",
+          "speaker_id": "张伟",
+          "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+          "owner_text": null,
+          "task_text": "information没有其他事情的话，今天先这样。 散会。 【会议结束】",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "requires_confirmation": false,
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "source_type": "semantic_event"
+    }
+  ],
+  "responsibility_matrix": {
+    "rows": [
+      {
+        "task_key": "task:fd6e927ab632",
+        "action_owner": "陈涛",
+        "responsibility_candidates": [],
+        "evidence": [],
+        "confidence": 0.72,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:f6f3bb65e312",
+        "action_owner": "张伟",
+        "responsibility_candidates": [],
+        "evidence": [],
+        "confidence": 0.72,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:c849cda575ac",
+        "action_owner": "陈涛",
+        "responsibility_candidates": [],
+        "evidence": [],
+        "confidence": 0.78,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:5284372bfc06",
+        "action_owner": "张伟",
+        "responsibility_candidates": [],
+        "evidence": [],
+        "confidence": 0.72,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:b0418b93b133",
+        "action_owner": "张伟",
+        "responsibility_candidates": [],
+        "evidence": [],
+        "confidence": 0.72,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:5824ad4c02d7",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:faccddf8-7373-436f-95ae-6ad55b9d6655:31825ad23334",
+            "responsibility_type": "unknown",
+            "task": "agenda_statement人都到了吧？ 赵敏，你声音正常吗？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "19576f82-3d8e-526e-b239-fcc004b81b6c",
+            "utterance_id": "faccddf8-7373-436f-95ae-6ad55b9d6655",
+            "segment_id": "faccddf8-7373-436f-95ae-6ad55b9d6655",
+            "speaker_id": "张伟",
+            "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+            "owner_text": null,
+            "task_text": "agenda_statement人都到了吧？ 赵敏，你声音正常吗？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:f0e4411b63c8",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:cb0a187f-56ab-4c96-8958-c8bd5323e00e:63a59a6dd2fc",
+            "responsibility_type": "unknown",
+            "task": "information可以，能听到。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "5c1cf206-78bf-59b8-acf5-a8d4972ae886",
+            "utterance_id": "cb0a187f-56ab-4c96-8958-c8bd5323e00e",
+            "segment_id": "cb0a187f-56ab-4c96-8958-c8bd5323e00e",
+            "speaker_id": "赵敏",
+            "source_text": "可以，能听到。",
+            "owner_text": null,
+            "task_text": "information可以，能听到。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:189d4c4219b3",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:1aef96b9-8484-49ec-b99e-814a1721a6ed:6ddc0db08caf",
+            "responsibility_type": "unknown",
+            "task": "information行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "b26b55a9-fe4c-507a-a4cf-a6430fb0f350",
+            "utterance_id": "1aef96b9-8484-49ec-b99e-814a1721a6ed",
+            "segment_id": "1aef96b9-8484-49ec-b99e-814a1721a6ed",
+            "speaker_id": "张伟",
+            "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+            "owner_text": null,
+            "task_text": "information行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:cee47e7c53cf",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:246bacee-8563-479b-b024-313fa3db4628:5338345bec2c",
+            "responsibility_type": "unknown",
+            "task": "information我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "064d6a81-da5d-5549-a7da-e103099af359",
+            "utterance_id": "246bacee-8563-479b-b024-313fa3db4628",
+            "segment_id": "246bacee-8563-479b-b024-313fa3db4628",
+            "speaker_id": "李娜",
+            "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+            "owner_text": null,
+            "task_text": "information我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:6b532318e622",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:c3a953f5-4707-456e-809c-445e12be8473:8ac41884c647",
+            "responsibility_type": "unknown",
+            "task": "progress_update这个待办混乱的问题，上周不是已经看过一次了吗？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "da70e73e-10db-545a-92b4-d42eab7d5d91",
+            "utterance_id": "c3a953f5-4707-456e-809c-445e12be8473",
+            "segment_id": "c3a953f5-4707-456e-809c-445e12be8473",
+            "speaker_id": "张伟",
+            "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+            "owner_text": null,
+            "task_text": "progress_update这个待办混乱的问题，上周不是已经看过一次了吗？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:b23b5d201eec",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6c75c409-0f7d-46c3-a03f-3dacb68581ba:cfa51d7f33ee",
+            "responsibility_type": "unknown",
+            "task": "information对，看过。 但是现在感觉还是有。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "a2b078be-3014-5d97-8776-d33e77ebdb11",
+            "utterance_id": "6c75c409-0f7d-46c3-a03f-3dacb68581ba",
+            "segment_id": "6c75c409-0f7d-46c3-a03f-3dacb68581ba",
+            "speaker_id": "李娜",
+            "source_text": "对，看过。 但是现在感觉还是有。",
+            "owner_text": null,
+            "task_text": "information对，看过。 但是现在感觉还是有。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:a5f9bb257a9e",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:cf352fd1-b18b-44da-abd5-61a5d414e384:71077c2236da",
+            "responsibility_type": "unknown",
+            "task": "information“这个事情后面关注一下。”",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "96a8347b-c81c-525e-9048-d9fc4954be63",
+            "utterance_id": "cf352fd1-b18b-44da-abd5-61a5d414e384",
+            "segment_id": "cf352fd1-b18b-44da-abd5-61a5d414e384",
+            "speaker_id": "比如用户说",
+            "source_text": "“这个事情后面关注一下。”",
+            "owner_text": null,
+            "task_text": "information“这个事情后面关注一下。”",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:e9cbb902c78c",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5c188314-3518-48aa-8fd5-eb26dfe6db62:980160492735",
+            "responsibility_type": "unknown",
+            "task": "information“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "86149356-f6ed-5966-83d1-d3a2b1f969cd",
+            "utterance_id": "5c188314-3518-48aa-8fd5-eb26dfe6db62",
+            "segment_id": "5c188314-3518-48aa-8fd5-eb26dfe6db62",
+            "speaker_id": "模型有时候直接变成",
+            "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+            "owner_text": null,
+            "task_text": "information“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:583860eb3335",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5d9e1a26-deac-4867-88c8-ed768a446960:35d1cab033fb",
+            "responsibility_type": "unknown",
+            "task": "task_assignment嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "d5cf9a44-8df7-538c-8a90-60d49b4b8ea3",
+            "utterance_id": "5d9e1a26-deac-4867-88c8-ed768a446960",
+            "segment_id": "5d9e1a26-deac-4867-88c8-ed768a446960",
+            "speaker_id": "陈涛",
+            "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+            "owner_text": null,
+            "task_text": "task_assignment嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:6d5b726e0a10",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:0c1c779f-8d94-40ea-9934-08ec4131edac:06c5ec9147b7",
+            "responsibility_type": "unknown",
+            "task": "information这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "d7b559b3-cf94-5fbd-9192-a556b5e42384",
+            "utterance_id": "0c1c779f-8d94-40ea-9934-08ec4131edac",
+            "segment_id": "0c1c779f-8d94-40ea-9934-08ec4131edac",
+            "speaker_id": "王强",
+            "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+            "owner_text": null,
+            "task_text": "information这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:f582fbc80311",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5ffb9dca-ee55-4ba2-ab93-5664fe6f540e:c963d00738b1",
+            "responsibility_type": "unknown",
+            "task": "information第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "a67b804c-345c-515f-98ea-882152d65b93",
+            "utterance_id": "5ffb9dca-ee55-4ba2-ab93-5664fe6f540e",
+            "segment_id": "5ffb9dca-ee55-4ba2-ab93-5664fe6f540e",
+            "speaker_id": "他们看到的就是",
+            "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+            "owner_text": null,
+            "task_text": "information第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:de02397dee2f",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:0f2f805a-0165-41e6-93a5-a6e6e5eb8dcc:13aeac381880",
+            "responsibility_type": "unknown",
+            "task": "risk_warning对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "b7a7df18-9dd9-53cd-8f1a-72291add9a3a",
+            "utterance_id": "0f2f805a-0165-41e6-93a5-a6e6e5eb8dcc",
+            "segment_id": "0f2f805a-0165-41e6-93a5-a6e6e5eb8dcc",
+            "speaker_id": "陈涛",
+            "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+            "owner_text": null,
+            "task_text": "risk_warning对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:0da35e99122c",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:4b6583c4-abcf-4f86-8ef3-9b75ed2de6a6:11219d63907c",
+            "responsibility_type": "unknown",
+            "task": "progress_update但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "342c3628-464d-5015-ad54-a5c1f8a9f3db",
+            "utterance_id": "4b6583c4-abcf-4f86-8ef3-9b75ed2de6a6",
+            "segment_id": "4b6583c4-abcf-4f86-8ef3-9b75ed2de6a6",
+            "speaker_id": "李娜",
+            "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+            "owner_text": null,
+            "task_text": "progress_update但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:adf07d0fb2c0",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:fbfc65ca-941d-4c56-954f-171e31f5b9f2:2224f35e4d88",
+            "responsibility_type": "unknown",
+            "task": "decision嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "7a64ab0e-b9e9-53ef-829a-b030da57737b",
+            "utterance_id": "fbfc65ca-941d-4c56-954f-171e31f5b9f2",
+            "segment_id": "fbfc65ca-941d-4c56-954f-171e31f5b9f2",
+            "speaker_id": "陈涛",
+            "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+            "owner_text": null,
+            "task_text": "decision嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:265e4a20cc2d",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:fb188369-fc91-471e-b785-173d1323251a:83aed9b74bfc",
+            "responsibility_type": "unknown",
+            "task": "information这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "1166e48b-165b-52db-befa-c324435b149b",
+            "utterance_id": "fb188369-fc91-471e-b785-173d1323251a",
+            "segment_id": "fb188369-fc91-471e-b785-173d1323251a",
+            "speaker_id": "张伟",
+            "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+            "owner_text": null,
+            "task_text": "information这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:30ee2a7f29da",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:2da18430-c698-470c-ba65-ec385c496900:449bdaf7974d",
+            "responsibility_type": "unknown",
+            "task": "information我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "c130e413-d505-568b-9ff8-5f9af33cdb06",
+            "utterance_id": "2da18430-c698-470c-ba65-ec385c496900",
+            "segment_id": "2da18430-c698-470c-ba65-ec385c496900",
+            "speaker_id": "赵敏",
+            "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+            "owner_text": null,
+            "task_text": "information我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:4d24f58441c0",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6c5e24b4-a018-40f4-a68b-bd221b613c09:ecac1319889a",
+            "responsibility_type": "unknown",
+            "task": "information什么意思？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "be315578-59c7-5a4d-9e71-3ca421fb0993",
+            "utterance_id": "6c5e24b4-a018-40f4-a68b-bd221b613c09",
+            "segment_id": "6c5e24b4-a018-40f4-a68b-bd221b613c09",
+            "speaker_id": "张伟",
+            "source_text": "什么意思？",
+            "owner_text": null,
+            "task_text": "information什么意思？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:264e60f045ec",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:4dc4d331-2f4d-4c57-8846-138c6c744646:f0b3f5f8d463",
+            "responsibility_type": "unknown",
+            "task": "progress_update“我将在8月15日前完成接口开发。”",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "fc2e6711-a448-5dad-8177-acf5bba2077f",
+            "utterance_id": "4dc4d331-2f4d-4c57-8846-138c6c744646",
+            "segment_id": "4dc4d331-2f4d-4c57-8846-138c6c744646",
+            "speaker_id": "比如真实会议里面不会说",
+            "source_text": "“我将在8月15日前完成接口开发。”",
+            "owner_text": null,
+            "task_text": "progress_update“我将在8月15日前完成接口开发。”",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:44e5ce488376",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:750e2444-7fb6-4a38-9bc6-9f5329f83fd2:51862796e239",
+            "responsibility_type": "unknown",
+            "task": "information“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "82daf739-23f6-558c-9d18-6717218bb645",
+            "utterance_id": "750e2444-7fb6-4a38-9bc6-9f5329f83fd2",
+            "segment_id": "750e2444-7fb6-4a38-9bc6-9f5329f83fd2",
+            "speaker_id": "更多是",
+            "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+            "owner_text": null,
+            "task_text": "information“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:9eb707a79342",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:8a63f412-7df3-4c38-a44f-4c56f4d08633:699a4c38b559",
+            "responsibility_type": "unknown",
+            "task": "information对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "8a2c50b6-4f61-5461-ad02-e24af16c7e5b",
+            "utterance_id": "8a63f412-7df3-4c38-a44f-4c56f4d08633",
+            "segment_id": "8a63f412-7df3-4c38-a44f-4c56f4d08633",
+            "speaker_id": "陈涛",
+            "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+            "owner_text": null,
+            "task_text": "information对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:1f5082cce8e3",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5925aa34-cbd7-4a7d-baee-c24d7097ff3e:b8dd3cd7c3a8",
+            "responsibility_type": "unknown",
+            "task": "information还有一个。 之前测试发现一个情况。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "9f75deb3-3e9e-5a6f-95f9-83b2eba23c1b",
+            "utterance_id": "5925aa34-cbd7-4a7d-baee-c24d7097ff3e",
+            "segment_id": "5925aa34-cbd7-4a7d-baee-c24d7097ff3e",
+            "speaker_id": "赵敏",
+            "source_text": "还有一个。 之前测试发现一个情况。",
+            "owner_text": null,
+            "task_text": "information还有一个。 之前测试发现一个情况。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:1ca520a7b71b",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:84177363-7b38-48a9-b59f-2299b91200e0:f72c97e4efdf",
+            "responsibility_type": "unknown",
+            "task": "proposal“是不是可以考虑增加导出功能？”",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "8c4fd028-466f-5bcc-bc84-f4727b49d4ae",
+            "utterance_id": "84177363-7b38-48a9-b59f-2299b91200e0",
+            "segment_id": "84177363-7b38-48a9-b59f-2299b91200e0",
+            "speaker_id": "产品说",
+            "source_text": "“是不是可以考虑增加导出功能？”",
+            "owner_text": null,
+            "task_text": "proposal“是不是可以考虑增加导出功能？”",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:927bc11d2784",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:0b79a84f-deee-4c8b-be83-fe25b678e5c2:99401a9e4cfe",
+            "responsibility_type": "unknown",
+            "task": "information“增加PDF导出功能。” 但是会议根本没决定。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "e7c3c856-0731-5b6a-acb4-995a871bfc0e",
+            "utterance_id": "0b79a84f-deee-4c8b-be83-fe25b678e5c2",
+            "segment_id": "0b79a84f-deee-4c8b-be83-fe25b678e5c2",
+            "speaker_id": "结果 AI 直接生成",
+            "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+            "owner_text": null,
+            "task_text": "information“增加PDF导出功能。” 但是会议根本没决定。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:3f51133dbc99",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:f8d82f91-0f4d-49e5-b69b-f7188b006f40:a32b365da837",
+            "responsibility_type": "unknown",
+            "task": "information这个确实。 我们只是讨论方向。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "c6b9f458-6e35-5a28-a45b-9d978c39d238",
+            "utterance_id": "f8d82f91-0f4d-49e5-b69b-f7188b006f40",
+            "segment_id": "f8d82f91-0f4d-49e5-b69b-f7188b006f40",
+            "speaker_id": "李娜",
+            "source_text": "这个确实。 我们只是讨论方向。",
+            "owner_text": null,
+            "task_text": "information这个确实。 我们只是讨论方向。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:f7bf5cdc382d",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5f0f6d50-d047-4d3a-8b05-ecb134f02112:5f431876742a",
+            "responsibility_type": "unknown",
+            "task": "information这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "ab5a8abc-b960-522c-a73d-42b1f161281b",
+            "utterance_id": "5f0f6d50-d047-4d3a-8b05-ecb134f02112",
+            "segment_id": "5f0f6d50-d047-4d3a-8b05-ecb134f02112",
+            "speaker_id": "张伟",
+            "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+            "owner_text": null,
+            "task_text": "information这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:b9ca55d7678d",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5bd91b5e-dadb-4eb8-9342-05c54e867a98:a7e7686702cc",
+            "responsibility_type": "unknown",
+            "task": "information我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "caa24b49-9b18-5131-8e62-862fbad0c179",
+            "utterance_id": "5bd91b5e-dadb-4eb8-9342-05c54e867a98",
+            "segment_id": "5bd91b5e-dadb-4eb8-9342-05c54e867a98",
+            "speaker_id": "王强",
+            "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+            "owner_text": null,
+            "task_text": "information我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:fcc0970003ec",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:061edafc-fbbc-4fc2-a38c-f82b18ca49d4:e4a0040fecfc",
+            "responsibility_type": "unknown",
+            "task": "information什么时候可以测试？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "1afc3ecb-7d35-576a-b220-f502790a9759",
+            "utterance_id": "061edafc-fbbc-4fc2-a38c-f82b18ca49d4",
+            "segment_id": "061edafc-fbbc-4fc2-a38c-f82b18ca49d4",
+            "speaker_id": "张伟",
+            "source_text": "什么时候可以测试？",
+            "owner_text": null,
+            "task_text": "information什么时候可以测试？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:1f889d3feed2",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:d2522827-a994-4d2f-ba68-5cc465f36e8d:7ac2342b7383",
+            "responsibility_type": "unknown",
+            "task": "information下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "e7f1cef4-a2be-56c1-bcff-1ae54a0b4c39",
+            "utterance_id": "d2522827-a994-4d2f-ba68-5cc465f36e8d",
+            "segment_id": "d2522827-a994-4d2f-ba68-5cc465f36e8d",
+            "speaker_id": "王强",
+            "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+            "owner_text": null,
+            "task_text": "information下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:3a8c0828d574",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:1e3a172d-d63d-42dd-8c8e-ef996fdb04df:8316159df223",
+            "responsibility_type": "unknown",
+            "task": "information是接口问题？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "5a2fb97a-0bb4-55b1-afb7-8f3b6c297511",
+            "utterance_id": "1e3a172d-d63d-42dd-8c8e-ef996fdb04df",
+            "segment_id": "1e3a172d-d63d-42dd-8c8e-ef996fdb04df",
+            "speaker_id": "陈涛",
+            "source_text": "是接口问题？",
+            "owner_text": null,
+            "task_text": "information是接口问题？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:04cb4b707698",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:e5a45e1d-e8e6-4b46-b45b-a630f6ce48e7:59f6408e85e8",
+            "responsibility_type": "unknown",
+            "task": "risk_warning不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "0098cf46-bdf0-5c47-9766-184a0ea8f0a9",
+            "utterance_id": "e5a45e1d-e8e6-4b46-b45b-a630f6ce48e7",
+            "segment_id": "e5a45e1d-e8e6-4b46-b45b-a630f6ce48e7",
+            "speaker_id": "王强",
+            "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+            "owner_text": null,
+            "task_text": "risk_warning不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:0785eff4057f",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:82cb7697-59b7-4c9f-8d2a-1cba734a4a8e:8f543e44dc46",
+            "responsibility_type": "unknown",
+            "task": "decision这个后面可以拆。 但是不是 V2.6 必须。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "44ad9764-0587-5eaa-ac3f-2ce998d334fa",
+            "utterance_id": "82cb7697-59b7-4c9f-8d2a-1cba734a4a8e",
+            "segment_id": "82cb7697-59b7-4c9f-8d2a-1cba734a4a8e",
+            "speaker_id": "陈涛",
+            "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+            "owner_text": null,
+            "task_text": "decision这个后面可以拆。 但是不是 V2.6 必须。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:60a65116be6c",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:2bdfa04a-f60b-4702-bce7-3a04a7bfce65:65e25838e3a2",
+            "responsibility_type": "unknown",
+            "task": "information嗯，这个先作为优化项。 不要影响版本。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "46975671-26f8-55c5-98bf-3324340b9bea",
+            "utterance_id": "2bdfa04a-f60b-4702-bce7-3a04a7bfce65",
+            "segment_id": "2bdfa04a-f60b-4702-bce7-3a04a7bfce65",
+            "speaker_id": "张伟",
+            "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+            "owner_text": null,
+            "task_text": "information嗯，这个先作为优化项。 不要影响版本。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:df915a3d386f",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:33247400-f56d-4547-8e4b-7b978bd71488:449c09fa4b56",
+            "responsibility_type": "unknown",
+            "task": "risk_warning还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "59a042e5-5c66-5c52-ba85-d377e247d79f",
+            "utterance_id": "33247400-f56d-4547-8e4b-7b978bd71488",
+            "segment_id": "33247400-f56d-4547-8e4b-7b978bd71488",
+            "speaker_id": "陈涛",
+            "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+            "owner_text": null,
+            "task_text": "risk_warning还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:512061a30ea0",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:fd3bee96-7f13-4d67-a821-07777d72389c:b672d818e0a7",
+            "responsibility_type": "unknown",
+            "task": "information这个会影响上线吗？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "7cabfeb4-7ea0-5ae3-ac1a-2e28f81a85df",
+            "utterance_id": "fd3bee96-7f13-4d67-a821-07777d72389c",
+            "segment_id": "fd3bee96-7f13-4d67-a821-07777d72389c",
+            "speaker_id": "李娜",
+            "source_text": "这个会影响上线吗？",
+            "owner_text": null,
+            "task_text": "information这个会影响上线吗？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:bb4371f67068",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:00f3ddea-440b-48ce-a83f-2bec948b5f9b:09f9da22268f",
+            "responsibility_type": "unknown",
+            "task": "progress_update目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "c218a899-2753-56b7-a751-a50e9550ca24",
+            "utterance_id": "00f3ddea-440b-48ce-a83f-2bec948b5f9b",
+            "segment_id": "00f3ddea-440b-48ce-a83f-2bec948b5f9b",
+            "speaker_id": "陈涛",
+            "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+            "owner_text": null,
+            "task_text": "progress_update目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:9173f0b3096f",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:d7a9645e-6fdd-4c69-9e26-a31be8d63711:0e2b627795b2",
+            "responsibility_type": "unknown",
+            "task": "risk_warning好，这个放风险里面。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "1e5e37f8-663e-57c4-b494-71431f556159",
+            "utterance_id": "d7a9645e-6fdd-4c69-9e26-a31be8d63711",
+            "segment_id": "d7a9645e-6fdd-4c69-9e26-a31be8d63711",
+            "speaker_id": "张伟",
+            "source_text": "好，这个放风险里面。",
+            "owner_text": null,
+            "task_text": "risk_warning好，这个放风险里面。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:0e53cd4b18f2",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:8d9340a6-752a-41c4-b95b-e933c0ab032c:5e1e814c2445",
+            "responsibility_type": "unknown",
+            "task": "risk_warning还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "171bcb01-0f32-5c8c-b297-44b8c8a2e8ec",
+            "utterance_id": "8d9340a6-752a-41c4-b95b-e933c0ab032c",
+            "segment_id": "8d9340a6-752a-41c4-b95b-e933c0ab032c",
+            "speaker_id": "李娜",
+            "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+            "owner_text": null,
+            "task_text": "risk_warning还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:0a4894cd7080",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:cfad76e1-5a34-4b44-99a5-1840464bc6f3:578b257e3af1",
+            "responsibility_type": "unknown",
+            "task": "risk_warning这个也是风险。 先记录，不作为当前版本任务。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "c34edcb6-2c6b-528b-a0d0-72bbf713d7ca",
+            "utterance_id": "cfad76e1-5a34-4b44-99a5-1840464bc6f3",
+            "segment_id": "cfad76e1-5a34-4b44-99a5-1840464bc6f3",
+            "speaker_id": "张伟",
+            "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+            "owner_text": null,
+            "task_text": "risk_warning这个也是风险。 先记录，不作为当前版本任务。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:1adf06e2adf3",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:bd790ba9-ccbe-46d2-9ee8-287e22faab80:349389c32d4d",
+            "responsibility_type": "unknown",
+            "task": "risk_warning我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "84cfba7a-cdb1-57b0-bf6f-de942bafe637",
+            "utterance_id": "bd790ba9-ccbe-46d2-9ee8-287e22faab80",
+            "segment_id": "bd790ba9-ccbe-46d2-9ee8-287e22faab80",
+            "speaker_id": "张伟",
+            "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+            "owner_text": null,
+            "task_text": "risk_warning我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:ed268362c78e",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6d8f866e-8859-4b3b-bc2e-fa5657cbcc68:2452c131a221",
+            "responsibility_type": "unknown",
+            "task": "task_assignment任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "76579612-5b13-50dc-8a6e-a6601c9b8ecf",
+            "utterance_id": "6d8f866e-8859-4b3b-bc2e-fa5657cbcc68",
+            "segment_id": "6d8f866e-8859-4b3b-bc2e-fa5657cbcc68",
+            "speaker_id": "张伟",
+            "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+            "owner_text": null,
+            "task_text": "task_assignment任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:fd4dc7d54f8a",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:b42e114d-9a11-4a5e-8cc3-71aa6d04364a:d081f31ab7a0",
+            "responsibility_type": "commitment",
+            "task": "task_assignment可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+            "owner": "陈涛",
+            "confidence": 0.62,
+            "requires_confirmation": true
+          }
+        ],
+        "evidence": [
+          {
+            "type": "commitment_text",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "78b5abd6-d5ed-552f-9f2d-c63ef7caa238",
+            "utterance_id": "b42e114d-9a11-4a5e-8cc3-71aa6d04364a",
+            "segment_id": "b42e114d-9a11-4a5e-8cc3-71aa6d04364a",
+            "speaker_id": "陈涛",
+            "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+            "owner_text": "陈涛",
+            "task_text": "task_assignment可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+            "supported_fields": [
+              "task",
+              "owner"
+            ],
+            "confidence": 0.62,
+            "requires_confirmation": true,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.62,
+        "consistency_status": "responsibility_only"
+      },
+      {
+        "task_key": "task:b9127436db8a",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6d8f866e-8859-4b3b-bc2e-fa5657cbcc68,b42e114d-9a11-4a5e-8cc3-71aa6d04364a,7e9216bf-6a7b-4dd6-8370-eef35a94f40c:d75a428bcc5b",
+            "responsibility_type": "commitment",
+            "task": "task_assignment输出 Golden Dataset 基线报告并完成稳定性测试",
+            "owner": "陈涛",
+            "confidence": 0.62,
+            "requires_confirmation": true
+          }
+        ],
+        "evidence": [
+          {
+            "type": "commitment_text",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "6442337b-f913-5af9-8b26-825c380a0c29",
+            "utterance_id": "b42e114d-9a11-4a5e-8cc3-71aa6d04364a",
+            "segment_id": "6d8f866e-8859-4b3b-bc2e-fa5657cbcc68,b42e114d-9a11-4a5e-8cc3-71aa6d04364a,7e9216bf-6a7b-4dd6-8370-eef35a94f40c",
+            "speaker_id": "陈涛",
+            "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+            "owner_text": "陈涛",
+            "task_text": "task_assignment输出 Golden Dataset 基线报告并完成稳定性测试",
+            "supported_fields": [
+              "task",
+              "owner"
+            ],
+            "confidence": 0.62,
+            "requires_confirmation": true,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.62,
+        "consistency_status": "responsibility_only"
+      },
+      {
+        "task_key": "task:3943dee60c63",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:7e9216bf-6a7b-4dd6-8370-eef35a94f40c:3d9733929390",
+            "responsibility_type": "unknown",
+            "task": "information什么时候给结果？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "c32d5459-30d2-50bd-b84a-e796cb6c6f35",
+            "utterance_id": "7e9216bf-6a7b-4dd6-8370-eef35a94f40c",
+            "segment_id": "7e9216bf-6a7b-4dd6-8370-eef35a94f40c",
+            "speaker_id": "张伟",
+            "source_text": "什么时候给结果？",
+            "owner_text": null,
+            "task_text": "information什么时候给结果？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:b85911ba57f4",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6302afc6-6648-4ca3-867b-c1bb4a6a90bb:fd118d50cff0",
+            "responsibility_type": "unknown",
+            "task": "information明天下午之前。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "3038446a-1923-56d4-8206-d110568dc4d1",
+            "utterance_id": "6302afc6-6648-4ca3-867b-c1bb4a6a90bb",
+            "segment_id": "6302afc6-6648-4ca3-867b-c1bb4a6a90bb",
+            "speaker_id": "陈涛",
+            "source_text": "明天下午之前。",
+            "owner_text": null,
+            "task_text": "information明天下午之前。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:f77d9fbebd90",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:26c37231-bc0b-4ba3-b023-2176caed8f1c:592c1cf22633",
+            "responsibility_type": "unknown",
+            "task": "task_assignment赵敏，你补充真实会议测试样本。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "e8f4affe-bdee-5012-8f6b-4e50ced4ed18",
+            "utterance_id": "26c37231-bc0b-4ba3-b023-2176caed8f1c",
+            "segment_id": "26c37231-bc0b-4ba3-b023-2176caed8f1c",
+            "speaker_id": "张伟",
+            "source_text": "赵敏，你补充真实会议测试样本。",
+            "owner_text": null,
+            "task_text": "task_assignment赵敏，你补充真实会议测试样本。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:f77d9fbebd90",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6302afc6-6648-4ca3-867b-c1bb4a6a90bb,26c37231-bc0b-4ba3-b023-2176caed8f1c,91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c:1cbe96a7f870",
+            "responsibility_type": "unknown",
+            "task": "task_assignment赵敏，你补充真实会议测试样本。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "eeab78a0-5cdb-5147-8884-b5db786dd1b8",
+            "utterance_id": "26c37231-bc0b-4ba3-b023-2176caed8f1c",
+            "segment_id": "6302afc6-6648-4ca3-867b-c1bb4a6a90bb,26c37231-bc0b-4ba3-b023-2176caed8f1c,91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c",
+            "speaker_id": "张伟",
+            "source_text": "明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+            "owner_text": null,
+            "task_text": "task_assignment赵敏，你补充真实会议测试样本。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:4ac93ab4a8d2",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c:4d531172932e",
+            "responsibility_type": "unknown",
+            "task": "information好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "624cad7d-83c1-5680-96cc-6ef273829df7",
+            "utterance_id": "91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c",
+            "segment_id": "91afc02e-04c8-40f8-ab4e-c8d6c3d69c2c",
+            "speaker_id": "赵敏",
+            "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+            "owner_text": null,
+            "task_text": "information好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:03c9d1add2d9",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:117ecb79-ac2e-408a-a67d-bca0161a2f28:71f884183f9f",
+            "responsibility_type": "unknown",
+            "task": "information明天吧。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "874dbee3-c6e3-545d-9fd3-36b54a094e5d",
+            "utterance_id": "117ecb79-ac2e-408a-a67d-bca0161a2f28",
+            "segment_id": "117ecb79-ac2e-408a-a67d-bca0161a2f28",
+            "speaker_id": "张伟",
+            "source_text": "明天吧。",
+            "owner_text": null,
+            "task_text": "information明天吧。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:3b7a3a38360b",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:952c3bbe-4298-440d-8196-004405e6caf2:95d407bc6862",
+            "responsibility_type": "unknown",
+            "task": "information好的。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "b86b013c-9cd5-5d43-85c4-cb97662ad34d",
+            "utterance_id": "952c3bbe-4298-440d-8196-004405e6caf2",
+            "segment_id": "952c3bbe-4298-440d-8196-004405e6caf2",
+            "speaker_id": "赵敏",
+            "source_text": "好的。",
+            "owner_text": null,
+            "task_text": "information好的。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:0ea55b870d28",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:a4e04347-3591-4bf0-96d4-ad64d996da62:ed5cd2d481b5",
+            "responsibility_type": "unknown",
+            "task": "task_assignment王强，下午安排录音流程测试。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "af1b2ff5-bc75-5bc2-b715-2e40295e3719",
+            "utterance_id": "a4e04347-3591-4bf0-96d4-ad64d996da62",
+            "segment_id": "a4e04347-3591-4bf0-96d4-ad64d996da62",
+            "speaker_id": "张伟",
+            "source_text": "王强，下午安排录音流程测试。",
+            "owner_text": null,
+            "task_text": "task_assignment王强，下午安排录音流程测试。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:0ea55b870d28",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:952c3bbe-4298-440d-8196-004405e6caf2,a4e04347-3591-4bf0-96d4-ad64d996da62,b4353bd1-b0bd-471a-8338-7a411e0c57e3:d1d1188066f4",
+            "responsibility_type": "unknown",
+            "task": "task_assignment王强，下午安排录音流程测试。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "1f18c494-8114-5d8e-b01a-71a4c76205f1",
+            "utterance_id": "a4e04347-3591-4bf0-96d4-ad64d996da62",
+            "segment_id": "952c3bbe-4298-440d-8196-004405e6caf2,a4e04347-3591-4bf0-96d4-ad64d996da62,b4353bd1-b0bd-471a-8338-7a411e0c57e3",
+            "speaker_id": "张伟",
+            "source_text": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+            "owner_text": null,
+            "task_text": "task_assignment王强，下午安排录音流程测试。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:3917c042dc64",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:b4353bd1-b0bd-471a-8338-7a411e0c57e3:4c96ae8e332a",
+            "responsibility_type": "unknown",
+            "task": "information没问题。",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "6a2c3db7-5a70-5db2-94ba-69022788be08",
+            "utterance_id": "b4353bd1-b0bd-471a-8338-7a411e0c57e3",
+            "segment_id": "b4353bd1-b0bd-471a-8338-7a411e0c57e3",
+            "speaker_id": "王强",
+            "source_text": "没问题。",
+            "owner_text": null,
+            "task_text": "information没问题。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:1eaa6fd8b083",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:6f437a24-aa4e-41f8-9907-aaeb6074f4d7:b97d918297cd",
+            "responsibility_type": "unknown",
+            "task": "information还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "996337d4-64a6-5e69-95ab-f551b8cf2f18",
+            "utterance_id": "6f437a24-aa4e-41f8-9907-aaeb6074f4d7",
+            "segment_id": "6f437a24-aa4e-41f8-9907-aaeb6074f4d7",
+            "speaker_id": "张伟",
+            "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+            "owner_text": null,
+            "task_text": "information还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      },
+      {
+        "task_key": "task:65f2239a7448",
+        "action_owner": null,
+        "responsibility_candidates": [
+          {
+            "responsibility_id": "resp:aabcd266-6dbb-4116-adda-135fc637eea8:5a7c77fd-4bff-4da2-9781-2fb35b01e02c:bd73facb171c",
+            "responsibility_type": "unknown",
+            "task": "information没有其他事情的话，今天先这样。 散会。 【会议结束】",
+            "owner": null,
+            "confidence": 0.35,
+            "requires_confirmation": false
+          }
+        ],
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "aabcd266-6dbb-4116-adda-135fc637eea8",
+            "event_id": "b07e3291-0c81-5a85-8f8b-2e5f736c0f82",
+            "utterance_id": "5a7c77fd-4bff-4da2-9781-2fb35b01e02c",
+            "segment_id": "5a7c77fd-4bff-4da2-9781-2fb35b01e02c",
+            "speaker_id": "张伟",
+            "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+            "owner_text": null,
+            "task_text": "information没有其他事情的话，今天先这样。 散会。 【会议结束】",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "consistency_status": "unknown"
+      }
+    ]
+  },
+  "consistency_status": "needs_review"
+}

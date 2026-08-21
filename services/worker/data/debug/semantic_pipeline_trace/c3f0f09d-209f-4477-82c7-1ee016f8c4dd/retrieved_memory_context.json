@@ -1,0 +1,70 @@
+{
+  "as_of": "2026-08-10T15:09:44.332097Z",
+  "source_snapshot_as_of": "2026-08-10T15:09:44.332097Z",
+  "current_meeting_id": "c3f0f09d-209f-4477-82c7-1ee016f8c4dd",
+  "retrieved_at": "2026-08-10T15:09:44.332097Z",
+  "token_budget": 480,
+  "token_cost": 357,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:8ca1ba5f77ff",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment修复任务搜索结果闪动问题",
+        "owner": "前端",
+        "responsibility_type": "explicit_owner",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1592,
+      "evidence": [
+        {
+          "evidence_id": "ev:3244aab65dee",
+          "source_type": "semantic_event",
+          "meeting_id": "c3f0f09d-209f-4477-82c7-1ee016f8c4dd",
+          "source_id": "36be2e39-29f4-4216-830c-1f5ad66159bf,80d38eb6-f938-4d5c-9ce9-3967983dfe95,2d1fc47d-07a3-429f-880f-5098f0c018ec",
+          "segment_id": "36be2e39-29f4-4216-830c-1f5ad66159bf,80d38eb6-f938-4d5c-9ce9-3967983dfe95,2d1fc47d-07a3-429f-880f-5098f0c018ec",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.78,
+          "source_text": "任务再过一下。\n前端，明天下午前修任务搜索结果闪动和 Android 后台恢复后录音计时不准。\n好。"
+        }
+      ],
+      "token_cost": 176
+    },
+    {
+      "memory_id": "mem:responsibility:6211044abec5",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment输出 Golden Dataset 基线报告并完成稳定性测试",
+        "owner": "AI",
+        "responsibility_type": "explicit_owner",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1591,
+      "evidence": [
+        {
+          "evidence_id": "ev:361463940798",
+          "source_type": "semantic_event",
+          "meeting_id": "c3f0f09d-209f-4477-82c7-1ee016f8c4dd",
+          "source_id": "a93d5877-14a3-47d3-8970-052208bb05eb,d7241b96-d993-4506-85df-5e9974987c59,7a9f6cb6-9ed2-46cf-bc95-4f57633f72c7",
+          "segment_id": "a93d5877-14a3-47d3-8970-052208bb05eb,d7241b96-d993-4506-85df-5e9974987c59,7a9f6cb6-9ed2-46cf-bc95-4f57633f72c7",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.78,
+          "source_text": "嗯。\nAI，下周三前出 Golden Dataset 基线报告，再挑两个案例各跑三次稳定性测试。\n好。"
+        }
+      ],
+      "token_cost": 181
+    }
+  ]
+}

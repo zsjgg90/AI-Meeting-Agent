@@ -1,0 +1,371 @@
+{
+  "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+  "as_of": "2026-08-05T08:29:19.013916Z",
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:d39552b6c1c3",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "agenda_statement本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "resp:d17102d5-a7b0-41da-9597-8d7623c8afb2:2649bc50-2bc6-490d-b0e1-e82fe705eddc:937339d23f41",
+        "occurred_at": "2026-08-05T08:29:19.013916Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e79b5392e6aa",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "2649bc50-2bc6-490d-b0e1-e82fe705eddc",
+          "segment_id": "2649bc50-2bc6-490d-b0e1-e82fe705eddc",
+          "speaker_id": "产品经理",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:5a80de06d6a0",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "proposal部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "resp:d17102d5-a7b0-41da-9597-8d7623c8afb2:4b67d8c6-b68a-4a1b-ad43-d9aecd039253:4ded4c3a0331",
+        "occurred_at": "2026-08-05T08:29:19.013916Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:77b93db9f7b2",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+          "segment_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+          "speaker_id": "研发负责人",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:2e8d982cbe9d",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "resp:d17102d5-a7b0-41da-9597-8d7623c8afb2:dd28d7e7-0e53-4141-b40c-fd8840f08d2f:634e7c2bef9a",
+        "occurred_at": "2026-08-05T08:29:19.013916Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:3b0f29b5bba3",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+          "segment_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+          "speaker_id": "前端",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:e9e5fdcbeb52",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "resp:d17102d5-a7b0-41da-9597-8d7623c8afb2:494cb832-e2c3-49c6-9c1c-426c6ecc583f:ca4a2c12c1e4",
+        "occurred_at": "2026-08-05T08:29:19.013916Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:9cdf48af85aa",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "494cb832-e2c3-49c6-9c1c-426c6ecc583f",
+          "segment_id": "494cb832-e2c3-49c6-9c1c-426c6ecc583f",
+          "speaker_id": "测试",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:11707b9cdf59",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "open_issue本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "resp:d17102d5-a7b0-41da-9597-8d7623c8afb2:cc51b469-3490-42ae-865f-37d2358b2670:3d51709c789a",
+        "occurred_at": "2026-08-05T08:29:19.013916Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:c9444f834ca2",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+          "segment_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+          "speaker_id": "产品经理",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:c180f0994a33",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。', 'topic_id': 'topic_1', 'source_event_ids': ['2cec2e78-aeae-572b-ae04-a310f3f01dda'], 'source_texts': ['本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "2cec2e78-aeae-572b-ae04-a310f3f01dda",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:bf60ee361bc9",
+          "source_type": "formal_summary_item",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "2cec2e78-aeae-572b-ae04-a310f3f01dda",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:534a5890d593",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。', 'topic_id': 'topic_4', 'source_event_ids': ['3f282b4e-ed13-579b-8d47-7ee8aa357c85'], 'source_texts': ['需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'owner': '测试', 'deadline': None, 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "3f282b4e-ed13-579b-8d47-7ee8aa357c85",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:a71d7560bdff",
+          "source_type": "formal_summary_item",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "3f282b4e-ed13-579b-8d47-7ee8aa357c85",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:89f35a8ba41e",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "unresolved_issue",
+        "text": "{'content': '本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。', 'topic_id': 'topic_5', 'source_event_ids': ['e9597384-0771-550e-86e7-9086c896d147'], 'source_texts': ['本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'status': 'blocked'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "e9597384-0771-550e-86e7-9086c896d147",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:925fa01af17f",
+          "source_type": "formal_summary_item",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "e9597384-0771-550e-86e7-9086c896d147",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:642377d520ce",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。', 'topic_id': 'topic_3', 'source_event_ids': ['ece6d916-b543-5acf-99c9-4a66bc3583ca'], 'source_texts': ['移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+        "source_id": "ece6d916-b543-5acf-99c9-4a66bc3583ca",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:405c578dc00e",
+          "source_type": "formal_summary_item",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "ece6d916-b543-5acf-99c9-4a66bc3583ca",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-05T08:29:19.013916Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-05T08:29:19.013916Z",
+      "status": "candidate"
+    }
+  ]
+}

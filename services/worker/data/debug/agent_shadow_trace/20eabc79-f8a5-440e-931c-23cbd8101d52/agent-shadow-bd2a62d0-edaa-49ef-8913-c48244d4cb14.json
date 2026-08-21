@@ -1,0 +1,489 @@
+{
+  "agent_run_id": "agent-shadow-bd2a62d0-edaa-49ef-8913-c48244d4cb14",
+  "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+  "meeting_type": "unknown",
+  "status": "partial",
+  "started_at": "2026-08-02T05:46:30.122353+00:00",
+  "finished_at": "2026-08-02T05:46:45.274920+00:00",
+  "duration_ms": 15152.45,
+  "steps": [
+    {
+      "step_index": 0,
+      "tool_name": "get_meeting_context",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 3.16,
+      "result": {
+        "tool_name": "get_meeting_context",
+        "status": "success",
+        "data": {
+          "meeting": {
+            "id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+            "title": "2026-08-02 13:45 实时录音",
+            "status": "completed",
+            "created_at": "2026-08-02T13:45:55.968302+08:00",
+            "updated_at": "2026-08-02T13:46:01.789147+08:00"
+          },
+          "transcript_segments": [
+            {
+              "id": "a26383b4-11c9-42a0-84f1-89904c163522",
+              "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+              "audio_file_id": "375f5e88-c2b1-458e-95ec-7757245b930b",
+              "segment_index": 0,
+              "start_time": 130.0,
+              "end_time": 930.0,
+              "text": "是不是更牛逼了？",
+              "speaker_label": "speaker_1",
+              "speaker_name": "speaker_1",
+              "speaker_gender": "male",
+              "semantic_label": null
+            }
+          ],
+          "summary_metadata": {
+            "summary_id": "1f59bd80-ad66-4e66-a8c4-d1898a85c6ea",
+            "model_name": "qwen3:14b+rag",
+            "prompt_version": "meeting-analyst-v1",
+            "rag_chunk_ids": [
+              "boundary_rule_008",
+              "definition_002",
+              "positive_example_013",
+              "negative_example_006",
+              "positive_example_004",
+              "positive_example_001",
+              "boundary_rule_012",
+              "boundary_rule_004"
+            ],
+            "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+            "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+            "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+            "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+            "confidence_score": 0.0,
+            "result_source": "legacy_qwen_rag"
+          }
+        },
+        "error": null,
+        "duration_ms": 3.16,
+        "result_source": "postgresql",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "postgresql",
+      "started_at": "2026-08-02T05:46:30.122353+00:00",
+      "completed_at": "2026-08-02T05:46:30.125386+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    },
+    {
+      "step_index": 1,
+      "tool_name": "search_meeting_history",
+      "status": "skipped",
+      "optional": true,
+      "duration_ms": 0.0,
+      "result": null,
+      "error": null,
+      "result_source": "unknown",
+      "started_at": "2026-08-02T05:46:30.125386+00:00",
+      "completed_at": "2026-08-02T05:46:30.125386+00:00",
+      "metadata": {
+        "skip_reason": "disabled_by_execution_plan"
+      }
+    },
+    {
+      "step_index": 2,
+      "tool_name": "search_project_knowledge",
+      "status": "skipped",
+      "optional": true,
+      "duration_ms": 0.0,
+      "result": null,
+      "error": null,
+      "result_source": "unknown",
+      "started_at": "2026-08-02T05:46:30.125386+00:00",
+      "completed_at": "2026-08-02T05:46:30.125386+00:00",
+      "metadata": {
+        "skip_reason": "disabled_by_execution_plan"
+      }
+    },
+    {
+      "step_index": 3,
+      "tool_name": "get_open_action_items",
+      "status": "skipped",
+      "optional": true,
+      "duration_ms": 0.0,
+      "result": null,
+      "error": null,
+      "result_source": "unknown",
+      "started_at": "2026-08-02T05:46:30.125386+00:00",
+      "completed_at": "2026-08-02T05:46:30.125386+00:00",
+      "metadata": {
+        "skip_reason": "disabled_by_execution_plan"
+      }
+    },
+    {
+      "step_index": 4,
+      "tool_name": "analyze_meeting",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 15147.83,
+      "result": {
+        "tool_name": "analyze_meeting",
+        "status": "success",
+        "data": {
+          "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+          "analysis": {
+            "meeting_title": null,
+            "meeting_type": "other",
+            "meeting_type_confidence": 0.5,
+            "meeting_title_candidate": "技术讨论会",
+            "title_basis": [
+              "会议原文中包含技术相关讨论",
+              "无明确会议类型信息"
+            ],
+            "meeting_agenda": [],
+            "meeting_summary": "无有效讨论内容可总结",
+            "key_conclusions": [],
+            "action_items": [],
+            "unresolved_issues": [],
+            "risks_and_focus": [],
+            "topics": [],
+            "metadata": {
+              "schema_version": "meeting-analysis-v1",
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "rag_chunk_ids": [
+                "boundary_rule_008",
+                "definition_002",
+                "positive_example_013",
+                "negative_example_006",
+                "positive_example_004",
+                "positive_example_001",
+                "boundary_rule_012",
+                "boundary_rule_004"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+              "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+              "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "rag_retrieval_strategy": "legacy_top_k_fallback",
+              "rag_retrieval_buckets": {
+                "LEGACY_TOP_K": [
+                  "boundary_rule_008",
+                  "definition_002",
+                  "positive_example_013",
+                  "negative_example_006",
+                  "positive_example_004",
+                  "positive_example_001",
+                  "boundary_rule_012",
+                  "boundary_rule_004"
+                ]
+              },
+              "rag_routed_meeting_type": null,
+              "rag_routed_scenario": null,
+              "rag_fallback_reason": "meeting_type_route_not_found",
+              "result_source": "legacy_qwen_rag",
+              "confidence_score": 0.0,
+              "generated_at": "2026-08-02T05:46:45.272852+00:00"
+            },
+            "_validator_audit": [],
+            "_metadata": {
+              "prompt_id": "meeting-analyst",
+              "prompt_version": "meeting-analyst-v1",
+              "schema_version": "meeting-analysis-v1",
+              "rag_chunk_ids": [
+                "boundary_rule_008",
+                "definition_002",
+                "positive_example_013",
+                "negative_example_006",
+                "positive_example_004",
+                "positive_example_001",
+                "boundary_rule_012",
+                "boundary_rule_004"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+              "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+              "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "rag_retrieval_strategy": "legacy_top_k_fallback",
+              "rag_retrieval_buckets": {
+                "LEGACY_TOP_K": [
+                  "boundary_rule_008",
+                  "definition_002",
+                  "positive_example_013",
+                  "negative_example_006",
+                  "positive_example_004",
+                  "positive_example_001",
+                  "boundary_rule_012",
+                  "boundary_rule_004"
+                ]
+              },
+              "rag_routed_meeting_type": null,
+              "rag_routed_scenario": null,
+              "rag_fallback_reason": "meeting_type_route_not_found",
+              "ollama_temperature": 0.0,
+              "ollama_top_p": 0.2,
+              "ollama_seed": 42,
+              "ollama_format": "json",
+              "result_source": "legacy_qwen_rag"
+            }
+          },
+          "context_payload": {}
+        },
+        "error": null,
+        "duration_ms": 15147.83,
+        "result_source": "legacy_qwen_rag",
+        "retryable": false,
+        "metadata": {
+          "model_name": null,
+          "prompt_version": "meeting-analyst-v1",
+          "schema_version": "meeting-analysis-v1",
+          "rag_chunk_ids": [
+            "boundary_rule_008",
+            "definition_002",
+            "positive_example_013",
+            "negative_example_006",
+            "positive_example_004",
+            "positive_example_001",
+            "boundary_rule_012",
+            "boundary_rule_004"
+          ],
+          "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+          "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+          "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+          "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+          "fallback_reason": null
+        }
+      },
+      "error": null,
+      "result_source": "legacy_qwen_rag",
+      "started_at": "2026-08-02T05:46:30.125386+00:00",
+      "completed_at": "2026-08-02T05:46:45.273885+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    },
+    {
+      "step_index": 5,
+      "tool_name": "validate_meeting_analysis",
+      "status": "success",
+      "optional": false,
+      "duration_ms": 1.18,
+      "result": {
+        "tool_name": "validate_meeting_analysis",
+        "status": "success",
+        "data": {
+          "meeting_id": "20eabc79-f8a5-440e-931c-23cbd8101d52",
+          "validated_analysis": {
+            "overview": "会议记录中仅包含单条口语化感叹句，未体现具体讨论背景、问题或决策过程",
+            "meeting_title": null,
+            "meeting_type": "other",
+            "meeting_type_confidence": 0.1,
+            "meeting_title_candidate": "技术讨论会",
+            "title_basis": [
+              "会议内容涉及技术成果讨论",
+              "无明确会议类型但包含技术相关对话"
+            ],
+            "agenda": [],
+            "topics": [],
+            "speaker_summaries": [],
+            "decisions": [],
+            "action_items": [],
+            "risks": [],
+            "open_questions": [],
+            "next_steps": [],
+            "meeting_agenda": [],
+            "meeting_summary": "会议记录中仅包含单条口语化感叹句，未体现具体讨论背景、问题或决策过程",
+            "key_conclusions": [],
+            "unresolved_issues": [],
+            "risks_and_focus": [],
+            "model_name": "qwen3:14b+rag",
+            "confidence_score": 0.0,
+            "metadata": {
+              "schema_version": "meeting-analysis-v1",
+              "model_name": "qwen3:14b+rag",
+              "prompt_version": "meeting-analyst-v1",
+              "rag_chunk_ids": [
+                "boundary_rule_008",
+                "definition_002",
+                "positive_example_013",
+                "negative_example_006",
+                "positive_example_004",
+                "positive_example_001",
+                "boundary_rule_012",
+                "boundary_rule_004"
+              ],
+              "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+              "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+              "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+              "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+              "rag_retrieval_strategy": "legacy_top_k_fallback",
+              "rag_retrieval_buckets": {
+                "LEGACY_TOP_K": [
+                  "boundary_rule_008",
+                  "definition_002",
+                  "positive_example_013",
+                  "negative_example_006",
+                  "positive_example_004",
+                  "positive_example_001",
+                  "boundary_rule_012",
+                  "boundary_rule_004"
+                ]
+              },
+              "rag_routed_meeting_type": null,
+              "rag_routed_scenario": null,
+              "rag_fallback_reason": "meeting_type_route_not_found",
+              "result_source": "legacy_qwen_rag",
+              "confidence_score": 0.0,
+              "generated_at": "2026-08-02T05:46:30.116756+00:00"
+            },
+            "_validator_audit": []
+          },
+          "validator_audit": [],
+          "warnings": []
+        },
+        "error": null,
+        "duration_ms": 1.18,
+        "result_source": "validator",
+        "retryable": false,
+        "metadata": {}
+      },
+      "error": null,
+      "result_source": "validator",
+      "started_at": "2026-08-02T05:46:45.273885+00:00",
+      "completed_at": "2026-08-02T05:46:45.274920+00:00",
+      "metadata": {
+        "continue_on_failure": false
+      }
+    }
+  ],
+  "result_source": "validator",
+  "shadow_analysis": {
+    "overview": "会议记录中仅包含单条口语化感叹句，未体现具体讨论背景、问题或决策过程",
+    "meeting_title": null,
+    "meeting_type": "other",
+    "meeting_type_confidence": 0.1,
+    "meeting_title_candidate": "技术讨论会",
+    "title_basis": [
+      "会议内容涉及技术成果讨论",
+      "无明确会议类型但包含技术相关对话"
+    ],
+    "agenda": [],
+    "topics": [],
+    "speaker_summaries": [],
+    "decisions": [],
+    "action_items": [],
+    "risks": [],
+    "open_questions": [],
+    "next_steps": [],
+    "meeting_agenda": [],
+    "meeting_summary": "会议记录中仅包含单条口语化感叹句，未体现具体讨论背景、问题或决策过程",
+    "key_conclusions": [],
+    "unresolved_issues": [],
+    "risks_and_focus": [],
+    "model_name": "qwen3:14b+rag",
+    "confidence_score": 0.0,
+    "metadata": {
+      "schema_version": "meeting-analysis-v1",
+      "model_name": "qwen3:14b+rag",
+      "prompt_version": "meeting-analyst-v1",
+      "rag_chunk_ids": [
+        "boundary_rule_008",
+        "definition_002",
+        "positive_example_013",
+        "negative_example_006",
+        "positive_example_004",
+        "positive_example_001",
+        "boundary_rule_012",
+        "boundary_rule_004"
+      ],
+      "rag_dataset_version": "meeting_analyst_rag_v2_1_1",
+      "rag_chunk_schema_version": "rag-chunk-v2.1.1",
+      "rag_collection_name": "meeting_analyst_rules_v2_1_1",
+      "rag_embedding_model": "BAAI/bge-small-zh-v1.5",
+      "rag_retrieval_strategy": "legacy_top_k_fallback",
+      "rag_retrieval_buckets": {
+        "LEGACY_TOP_K": [
+          "boundary_rule_008",
+          "definition_002",
+          "positive_example_013",
+          "negative_example_006",
+          "positive_example_004",
+          "positive_example_001",
+          "boundary_rule_012",
+          "boundary_rule_004"
+        ]
+      },
+      "rag_routed_meeting_type": null,
+      "rag_routed_scenario": null,
+      "rag_fallback_reason": "meeting_type_route_not_found",
+      "result_source": "legacy_qwen_rag",
+      "confidence_score": 0.0,
+      "generated_at": "2026-08-02T05:46:30.116756+00:00"
+    },
+    "_validator_audit": []
+  },
+  "validation_audit": [],
+  "comparison_summary": {
+    "fields": {
+      "meeting_agenda": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      },
+      "meeting_summary": {
+        "formal_present": true,
+        "shadow_present": true,
+        "formal_count": 1,
+        "shadow_count": 1,
+        "count_delta": 0
+      },
+      "key_conclusions": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      },
+      "action_items": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      },
+      "unresolved_issues": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      },
+      "risks_and_focus": {
+        "formal_present": false,
+        "shadow_present": false,
+        "formal_count": 0,
+        "shadow_count": 0,
+        "count_delta": 0
+      }
+    },
+    "schema_ok": true,
+    "validator_warning_count": 0,
+    "result_source": {
+      "formal": "legacy_qwen_rag",
+      "shadow": "validator",
+      "same": false
+    }
+  },
+  "error": null,
+  "fallback_reason": null,
+  "metadata": {
+    "policy_schema_version": "meeting-scenario-policy-v1",
+    "policy_needs_review": true,
+    "plan_id": "agent-runtime-static-plan-v1",
+    "agent_mode_enabled": false,
+    "agent_actions_enabled": false,
+    "audit_path": "D:\\codex_work\\会议声纹识别\\services\\worker\\data\\debug\\agent_shadow_trace\\20eabc79-f8a5-440e-931c-23cbd8101d52\\agent-shadow-bd2a62d0-edaa-49ef-8913-c48244d4cb14.json"
+  }
+}

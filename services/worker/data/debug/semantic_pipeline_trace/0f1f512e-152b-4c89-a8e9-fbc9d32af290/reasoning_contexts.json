@@ -1,0 +1,172 @@
+{
+  "meeting_id": "0f1f512e-152b-4c89-a8e9-fbc9d32af290",
+  "items": [
+    {
+      "reasoning_id": "reason:responsibility_analysis:c3b915c29a76",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for information可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:6ba94f9a2ac4",
+          "source_type": "semantic_event",
+          "source_id": "7fc20ec0-6640-4c5b-9f49-1a7920a76ca4",
+          "meeting_id": "0f1f512e-152b-4c89-a8e9-fbc9d32af290",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:9327755c615c",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "0f1f512e-152b-4c89-a8e9-fbc9d32af290"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:9327755c615c"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:9327755c615c"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:responsibility_analysis:54882004189d",
+      "reasoning_type": "responsibility_analysis",
+      "claim": "Responsibility evidence exists for task_assignment输出 Golden Dataset 基线报告并完成稳定性测试, but no matching action item is present.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:7ef8c38be718",
+          "source_type": "semantic_event",
+          "source_id": "af8b0fc3-2121-4098-bd0c-dddc15a6e19b,7fc20ec0-6640-4c5b-9f49-1a7920a76ca4,20979494-2d74-468c-910e-0c7bad324c6c",
+          "meeting_id": "0f1f512e-152b-4c89-a8e9-fbc9d32af290",
+          "memory_id": null,
+          "semantic_event_id": null,
+          "responsibility_id": "task:b9127436db8a",
+          "supported_claim_parts": [
+            "task",
+            "owner"
+          ],
+          "support_level": "supports",
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "0f1f512e-152b-4c89-a8e9-fbc9d32af290"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [
+          "task:b9127436db8a"
+        ],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "ask_for_confirmation",
+        "text": "Ask a reviewer to confirm the responsibility evidence before any owner or task update.",
+        "target_refs": [
+          "task:b9127436db8a"
+        ],
+        "blocked_actions": [
+          "update_task",
+          "assign_owner",
+          "create_task"
+        ]
+      }
+    },
+    {
+      "reasoning_id": "reason:trend_detection:2adcc39d567e",
+      "reasoning_type": "trend_detection",
+      "claim": "responsibility context around information appears repeatedly across the available evidence.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:f1ef3b8347c1",
+          "source_type": "semantic_event",
+          "source_id": "9d3f7328-3c1d-41fe-8052-95de8d023f5c",
+          "meeting_id": "0f1f512e-152b-4c89-a8e9-fbc9d32af290",
+          "memory_id": "mem:responsibility:1ef9c8409aad",
+          "semantic_event_id": null,
+          "responsibility_id": null,
+          "supported_claim_parts": [
+            "trend_signal"
+          ],
+          "support_level": "supports",
+          "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "confidence": 0.35,
+          "evidence_status": "unknown"
+        },
+        {
+          "evidence_ref_id": "eref:f55e796f6e7a",
+          "source_type": "semantic_event",
+          "source_id": "ccbbb1ce-86c8-4bf1-a07e-76f6b1112324",
+          "meeting_id": "0f1f512e-152b-4c89-a8e9-fbc9d32af290",
+          "memory_id": "mem:responsibility:1dcf39294604",
+          "semantic_event_id": null,
+          "responsibility_id": null,
+          "supported_claim_parts": [
+            "trend_signal"
+          ],
+          "support_level": "supports",
+          "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "confidence": 0.35,
+          "evidence_status": "unknown"
+        }
+      ],
+      "confidence": 0.39999999999999997,
+      "impact_scope": {
+        "project_id": null,
+        "meeting_ids": [
+          "0f1f512e-152b-4c89-a8e9-fbc9d32af290"
+        ],
+        "affected_entities": [],
+        "affected_responsibilities": [],
+        "affected_decisions": [],
+        "affected_risks": [],
+        "time_horizon": "near_term"
+      },
+      "requires_confirmation": true,
+      "suggested_next_step": {
+        "step_type": "compare_with_prior_memory",
+        "text": "Compare the repeated evidence with prior memory before treating it as a project trend.",
+        "target_refs": [
+          "mem:responsibility:1ef9c8409aad",
+          "mem:responsibility:1dcf39294604"
+        ],
+        "blocked_actions": [
+          "change_risk_status",
+          "close_issue",
+          "update_task"
+        ]
+      }
+    }
+  ]
+}

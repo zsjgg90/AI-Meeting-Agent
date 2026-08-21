@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-08-05T08:30:10.067719Z",
+  "source_snapshot_as_of": "2026-08-05T08:30:10.067719Z",
+  "current_meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+  "retrieved_at": "2026-08-05T08:30:10.067719Z",
+  "token_budget": 480,
+  "token_cost": 446,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:61a7407ed3f9",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.3391,
+      "evidence": [
+        {
+          "evidence_id": "ev:a4edf2008c5a",
+          "source_type": "semantic_event",
+          "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+          "source_id": "8d8d8d79-9633-4b00-863d-652de1e232b1",
+          "segment_id": "8d8d8d79-9633-4b00-863d-652de1e232b1",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。"
+        }
+      ],
+      "token_cost": 157
+    },
+    {
+      "memory_id": "mem:responsibility:b4595ff7aaac",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.2676,
+      "evidence": [
+        {
+          "evidence_id": "ev:52a38e9b4516",
+          "source_type": "semantic_event",
+          "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+          "source_id": "4c64cfce-3456-450b-8cfc-83878bd26439",
+          "segment_id": "4c64cfce-3456-450b-8cfc-83878bd26439",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。"
+        }
+      ],
+      "token_cost": 146
+    },
+    {
+      "memory_id": "mem:responsibility:99ff8942ccb7",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.2557,
+      "evidence": [
+        {
+          "evidence_id": "ev:cc9b283a9bf2",
+          "source_type": "semantic_event",
+          "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+          "source_id": "c998756f-6bb0-4329-8dde-9a92eaa84d0b",
+          "segment_id": "c998756f-6bb0-4329-8dde-9a92eaa84d0b",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。"
+        }
+      ],
+      "token_cost": 143
+    }
+  ]
+}

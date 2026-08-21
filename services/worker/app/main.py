@@ -9,6 +9,11 @@ from app.diarization import DiarizationError
 from app.summary_agent import SummaryAgentError, summarize_meeting
 from app.config import get_settings
 from app.errors import classify_exception
+from app.knowledge_grounded_answer import (
+    KnowledgeGroundedAnswerRequest,
+    KnowledgeGroundedAnswerResponse,
+    answer_from_sources,
+)
 from app.observability import log_event
 from app.prompt_registry import get_meeting_analyst_prompt_spec
 from app.transcription import TranscriptionError, get_whisper_model, transcribe_audio_chunk
@@ -220,3 +225,13 @@ def transcribe_chunk(meeting_id: str, payload: ChunkTranscriptionRequest) -> Chu
         raise HTTPException(status_code=400, detail=info.safe_message) from exc
     finally:
         db.close()
+
+
+@app.post("/knowledge/grounded-answer", response_model=KnowledgeGroundedAnswerResponse)
+def knowledge_grounded_answer(payload: KnowledgeGroundedAnswerRequest) -> KnowledgeGroundedAnswerResponse:
+    try:
+        return answer_from_sources(payload)
+    except Exception as exc:
+        detail = _error_detail(exc, "knowledge_answer", error_code="knowledge_answer_failed")
+        log_event("worker.knowledge_answer.failed", level="error", error_type=exc.__class__.__name__, **detail)
+        raise HTTPException(status_code=500, detail=detail) from exc

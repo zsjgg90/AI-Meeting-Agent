@@ -1,0 +1,41 @@
+{
+  "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+  "items": [
+    {
+      "tool_id": "task.create",
+      "action_id": "action:create_task:9ef9456bf07d",
+      "required_permissions": [
+        "task:create",
+        "audit:write"
+      ],
+      "confirmation_required": true,
+      "execution_mode": "disabled",
+      "blocked_reason": [
+        "stage8_5_4_shadow_only",
+        "execution_not_attempted",
+        "no_execution_adapter",
+        "writes_disabled",
+        "human_confirmation_required",
+        "write_scope_not_enabled"
+      ]
+    },
+    {
+      "tool_id": "task.create",
+      "action_id": "action:create_task:675351b7cd99",
+      "required_permissions": [
+        "task:create",
+        "audit:write"
+      ],
+      "confirmation_required": true,
+      "execution_mode": "disabled",
+      "blocked_reason": [
+        "stage8_5_4_shadow_only",
+        "execution_not_attempted",
+        "no_execution_adapter",
+        "writes_disabled",
+        "human_confirmation_required",
+        "write_scope_not_enabled"
+      ]
+    }
+  ]
+}

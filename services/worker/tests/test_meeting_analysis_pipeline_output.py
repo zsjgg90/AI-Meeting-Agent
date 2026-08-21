@@ -42,6 +42,31 @@ class MeetingAnalysisPipelineOutputTest(unittest.TestCase):
         self.assertEqual(second["owner_name"], "Alice")
         self.assertEqual(second["deadline"], "Monday")
 
+    def test_action_export_uses_single_authoritative_source_window(self) -> None:
+        result = SixDimensionResult(
+            meeting_id="meeting-1",
+            action_items=[
+                ActionItem(
+                    content="Cancel stale search requests",
+                    topic_id="topic-1",
+                    source_event_ids=["seg-1,seg-2,seg-3"],
+                    source_texts=[
+                        "Search result flickers.\nUse request id to cancel stale requests.\nSend the result tomorrow.",
+                        "Use request id to cancel stale requests.",
+                    ],
+                    confidence=0.9,
+                )
+            ],
+        )
+
+        payload = six_dimension_result_to_analysis_dict(result)
+
+        self.assertEqual(
+            payload["action_items"][0]["source_text"],
+            "Search result flickers.\nUse request id to cancel stale requests.\nSend the result tomorrow.",
+        )
+        self.assertEqual(payload["action_items"][0]["source_segment_id"], "seg-1,seg-2,seg-3")
+
 
 if __name__ == "__main__":
     unittest.main()

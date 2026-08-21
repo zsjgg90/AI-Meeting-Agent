@@ -1,0 +1,1234 @@
+{
+  "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+  "items": [
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "5191ab27-4ad5-516c-93f1-4b20709e8a28",
+      "topic_id": "topic_1",
+      "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_agenda",
+      "needs_review": false,
+      "item": {
+        "content": "人都到了吧？ 赵敏，你声音正常吗？",
+        "topic_id": "topic_1",
+        "source_event_ids": [
+          "5191ab27-4ad5-516c-93f1-4b20709e8a28"
+        ],
+        "source_texts": [
+          "人都到了吧？ 赵敏，你声音正常吗？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "fc11a19f-a714-52b7-aa25-984b1caf9fe4",
+      "topic_id": "topic_2",
+      "source_text": "可以，能听到。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "可以，能听到。",
+        "topic_id": "topic_2",
+        "source_event_ids": [
+          "fc11a19f-a714-52b7-aa25-984b1caf9fe4"
+        ],
+        "source_texts": [
+          "可以，能听到。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "fd1f3814-74cb-562a-a0c6-5eae8eed9751",
+      "topic_id": "topic_3",
+      "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+        "topic_id": "topic_3",
+        "source_event_ids": [
+          "fd1f3814-74cb-562a-a0c6-5eae8eed9751"
+        ],
+        "source_texts": [
+          "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "b0b0aa7e-0492-5868-8309-31633554af06",
+      "topic_id": "topic_4",
+      "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+        "topic_id": "topic_4",
+        "source_event_ids": [
+          "b0b0aa7e-0492-5868-8309-31633554af06"
+        ],
+        "source_texts": [
+          "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "169ff17d-d8eb-53c0-8c4e-d704021d7251",
+      "topic_id": "topic_5",
+      "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+        "topic_id": "topic_5",
+        "source_event_ids": [
+          "169ff17d-d8eb-53c0-8c4e-d704021d7251"
+        ],
+        "source_texts": [
+          "这个待办混乱的问题，上周不是已经看过一次了吗？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "1213659c-ff5b-5eb0-aee9-0ded43b3049c",
+      "topic_id": "topic_6",
+      "source_text": "对，看过。 但是现在感觉还是有。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "对，看过。 但是现在感觉还是有。",
+        "topic_id": "topic_6",
+        "source_event_ids": [
+          "1213659c-ff5b-5eb0-aee9-0ded43b3049c"
+        ],
+        "source_texts": [
+          "对，看过。 但是现在感觉还是有。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "b1c48303-ce35-5e00-b4b0-fa8adf52e269",
+      "topic_id": "topic_7",
+      "source_text": "“这个事情后面关注一下。”",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "“这个事情后面关注一下。”",
+        "topic_id": "topic_7",
+        "source_event_ids": [
+          "b1c48303-ce35-5e00-b4b0-fa8adf52e269"
+        ],
+        "source_texts": [
+          "“这个事情后面关注一下。”"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "f9830d78-436d-5e1d-9da2-e4c4fa5e2923",
+      "topic_id": "topic_8",
+      "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "topic_id": "topic_8",
+        "source_event_ids": [
+          "f9830d78-436d-5e1d-9da2-e4c4fa5e2923"
+        ],
+        "source_texts": [
+          "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "6af90263-3e71-53a1-8a5b-58be77f356c1",
+      "topic_id": "topic_10",
+      "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+        "topic_id": "topic_10",
+        "source_event_ids": [
+          "6af90263-3e71-53a1-8a5b-58be77f356c1"
+        ],
+        "source_texts": [
+          "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "d25c6838-8e53-5bb1-9c3d-3b32afa1d70f",
+      "topic_id": "topic_11",
+      "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+        "topic_id": "topic_11",
+        "source_event_ids": [
+          "d25c6838-8e53-5bb1-9c3d-3b32afa1d70f"
+        ],
+        "source_texts": [
+          "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "19d2cfff-2e6f-59b5-8a07-680396c0d54f",
+      "topic_id": "topic_13",
+      "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+        "topic_id": "topic_13",
+        "source_event_ids": [
+          "19d2cfff-2e6f-59b5-8a07-680396c0d54f"
+        ],
+        "source_texts": [
+          "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "19a47b46-d831-54d9-a4db-0fc00fd631c7",
+      "topic_id": "topic_15",
+      "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+        "topic_id": "topic_15",
+        "source_event_ids": [
+          "19a47b46-d831-54d9-a4db-0fc00fd631c7"
+        ],
+        "source_texts": [
+          "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "d773a1f6-298d-5ddb-a613-a5d499711ea4",
+      "topic_id": "topic_16",
+      "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+        "topic_id": "topic_16",
+        "source_event_ids": [
+          "d773a1f6-298d-5ddb-a613-a5d499711ea4"
+        ],
+        "source_texts": [
+          "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "acce8e6e-207e-5d8e-aa0e-dec4de3595b9",
+      "topic_id": "topic_17",
+      "source_text": "什么意思？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "什么意思？",
+        "topic_id": "topic_17",
+        "source_event_ids": [
+          "acce8e6e-207e-5d8e-aa0e-dec4de3595b9"
+        ],
+        "source_texts": [
+          "什么意思？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "7a65e9d7-d2a4-58b4-b379-1d0380247e05",
+      "topic_id": "topic_18",
+      "source_text": "“我将在8月15日前完成接口开发。”",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "“我将在8月15日前完成接口开发。”",
+        "topic_id": "topic_18",
+        "source_event_ids": [
+          "7a65e9d7-d2a4-58b4-b379-1d0380247e05"
+        ],
+        "source_texts": [
+          "“我将在8月15日前完成接口开发。”"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "712d0af7-1fda-504c-b27b-0d6a798b8af9",
+      "topic_id": "topic_19",
+      "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+        "topic_id": "topic_19",
+        "source_event_ids": [
+          "712d0af7-1fda-504c-b27b-0d6a798b8af9"
+        ],
+        "source_texts": [
+          "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "d53bd192-02c9-53bf-ba72-ea0243516ed3",
+      "topic_id": "topic_20",
+      "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+        "topic_id": "topic_20",
+        "source_event_ids": [
+          "d53bd192-02c9-53bf-ba72-ea0243516ed3"
+        ],
+        "source_texts": [
+          "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "47f90fc4-879c-59f9-8579-e40590eff856",
+      "topic_id": "topic_21",
+      "source_text": "还有一个。 之前测试发现一个情况。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "还有一个。 之前测试发现一个情况。",
+        "topic_id": "topic_21",
+        "source_event_ids": [
+          "47f90fc4-879c-59f9-8579-e40590eff856"
+        ],
+        "source_texts": [
+          "还有一个。 之前测试发现一个情况。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "7d5a5781-23d9-527b-9a12-8882cdece705",
+      "topic_id": "topic_23",
+      "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "“增加PDF导出功能。” 但是会议根本没决定。",
+        "topic_id": "topic_23",
+        "source_event_ids": [
+          "7d5a5781-23d9-527b-9a12-8882cdece705"
+        ],
+        "source_texts": [
+          "“增加PDF导出功能。” 但是会议根本没决定。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "83e48ee3-d622-5218-a6f8-cd3126f89473",
+      "topic_id": "topic_24",
+      "source_text": "这个确实。 我们只是讨论方向。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "这个确实。 我们只是讨论方向。",
+        "topic_id": "topic_24",
+        "source_event_ids": [
+          "83e48ee3-d622-5218-a6f8-cd3126f89473"
+        ],
+        "source_texts": [
+          "这个确实。 我们只是讨论方向。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "d80d6972-96d0-5327-b9fb-fd7b2fd08aba",
+      "topic_id": "topic_25",
+      "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+        "topic_id": "topic_25",
+        "source_event_ids": [
+          "d80d6972-96d0-5327-b9fb-fd7b2fd08aba"
+        ],
+        "source_texts": [
+          "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "e86f08cf-7fc3-54fd-b6c4-23a7270cb9c1",
+      "topic_id": "topic_26",
+      "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "topic_id": "topic_26",
+        "source_event_ids": [
+          "e86f08cf-7fc3-54fd-b6c4-23a7270cb9c1"
+        ],
+        "source_texts": [
+          "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "05ffacb6-cb55-5066-8bde-c08e77abe397",
+      "topic_id": "topic_27",
+      "source_text": "什么时候可以测试？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "什么时候可以测试？",
+        "topic_id": "topic_27",
+        "source_event_ids": [
+          "05ffacb6-cb55-5066-8bde-c08e77abe397"
+        ],
+        "source_texts": [
+          "什么时候可以测试？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "a98dbbd9-12b6-5d44-9cf5-fc6169bbe317",
+      "topic_id": "topic_28",
+      "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+        "topic_id": "topic_28",
+        "source_event_ids": [
+          "a98dbbd9-12b6-5d44-9cf5-fc6169bbe317"
+        ],
+        "source_texts": [
+          "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "60dc9cf9-811d-5b92-9658-a1a460082024",
+      "topic_id": "topic_29",
+      "source_text": "是接口问题？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "是接口问题？",
+        "topic_id": "topic_29",
+        "source_event_ids": [
+          "60dc9cf9-811d-5b92-9658-a1a460082024"
+        ],
+        "source_texts": [
+          "是接口问题？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "75b51eeb-c990-5f9f-a3db-3f97a0b07f89",
+      "topic_id": "topic_32",
+      "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "嗯，这个先作为优化项。 不要影响版本。",
+        "topic_id": "topic_32",
+        "source_event_ids": [
+          "75b51eeb-c990-5f9f-a3db-3f97a0b07f89"
+        ],
+        "source_texts": [
+          "嗯，这个先作为优化项。 不要影响版本。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "12c543b3-4efb-5b15-9d46-d0e5db7c2348",
+      "topic_id": "topic_34",
+      "source_text": "这个会影响上线吗？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "这个会影响上线吗？",
+        "topic_id": "topic_34",
+        "source_event_ids": [
+          "12c543b3-4efb-5b15-9d46-d0e5db7c2348"
+        ],
+        "source_texts": [
+          "这个会影响上线吗？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "c0c179e4-9ee1-5476-a230-95e8d4bc3202",
+      "topic_id": "topic_35",
+      "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+        "topic_id": "topic_35",
+        "source_event_ids": [
+          "c0c179e4-9ee1-5476-a230-95e8d4bc3202"
+        ],
+        "source_texts": [
+          "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "8e4fb103-9bea-5904-85af-89cfbb658872",
+      "topic_id": "topic_40",
+      "source_text": "什么时候给结果？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "什么时候给结果？",
+        "topic_id": "topic_40",
+        "source_event_ids": [
+          "8e4fb103-9bea-5904-85af-89cfbb658872"
+        ],
+        "source_texts": [
+          "什么时候给结果？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "c7444798-43ae-5db1-b352-cedc6f95cf23",
+      "topic_id": "topic_41",
+      "source_text": "明天下午之前。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "明天下午之前。",
+        "topic_id": "topic_41",
+        "source_event_ids": [
+          "c7444798-43ae-5db1-b352-cedc6f95cf23"
+        ],
+        "source_texts": [
+          "明天下午之前。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "d7cd7500-7d15-5157-9d26-4a660b58d774",
+      "topic_id": "topic_43",
+      "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+        "topic_id": "topic_43",
+        "source_event_ids": [
+          "d7cd7500-7d15-5157-9d26-4a660b58d774"
+        ],
+        "source_texts": [
+          "好的。 我整理5个典型场景。 不过时间是今天还是明天？"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "9660a98c-6601-5168-b6c0-37d2408c792f",
+      "topic_id": "topic_44",
+      "source_text": "明天吧。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "明天吧。",
+        "topic_id": "topic_44",
+        "source_event_ids": [
+          "9660a98c-6601-5168-b6c0-37d2408c792f"
+        ],
+        "source_texts": [
+          "明天吧。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "754c8165-9f7a-5016-aa6f-c34a4a80f8e1",
+      "topic_id": "topic_45",
+      "source_text": "好的。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "好的。",
+        "topic_id": "topic_45",
+        "source_event_ids": [
+          "754c8165-9f7a-5016-aa6f-c34a4a80f8e1"
+        ],
+        "source_texts": [
+          "好的。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "762250fd-6675-5343-9d43-c83593cc8a76",
+      "topic_id": "topic_47",
+      "source_text": "没问题。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "没问题。",
+        "topic_id": "topic_47",
+        "source_event_ids": [
+          "762250fd-6675-5343-9d43-c83593cc8a76"
+        ],
+        "source_texts": [
+          "没问题。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "25fe0865-ab8f-569e-b05f-3d338953dc19",
+      "topic_id": "topic_48",
+      "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+        "topic_id": "topic_48",
+        "source_event_ids": [
+          "25fe0865-ab8f-569e-b05f-3d338953dc19"
+        ],
+        "source_texts": [
+          "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "3d1f57c3-2945-534c-9dfa-0485252b8710",
+      "topic_id": "topic_48",
+      "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_summary",
+      "needs_review": false,
+      "item": {
+        "content": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+        "topic_id": "topic_48",
+        "source_event_ids": [
+          "3d1f57c3-2945-534c-9dfa-0485252b8710"
+        ],
+        "source_texts": [
+          "没有其他事情的话，今天先这样。 散会。 【会议结束】"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "73d66ed3-7d0b-5060-8210-91bdae0ac800",
+      "topic_id": "topic_14",
+      "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+      "primary_intent": null,
+      "status": "confirmed",
+      "target_dimension": "key_conclusions",
+      "needs_review": false,
+      "item": {
+        "content": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+        "topic_id": "topic_14",
+        "source_event_ids": [
+          "73d66ed3-7d0b-5060-8210-91bdae0ac800"
+        ],
+        "source_texts": [
+          "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "status": "confirmed"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "5f0cf957-f2e7-5b79-b3a3-86becc78e767",
+      "topic_id": "topic_31",
+      "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+      "primary_intent": null,
+      "status": "confirmed",
+      "target_dimension": "key_conclusions",
+      "needs_review": false,
+      "item": {
+        "content": "这个后面可以拆。 但是不是 V2.6 必须。",
+        "topic_id": "topic_31",
+        "source_event_ids": [
+          "5f0cf957-f2e7-5b79-b3a3-86becc78e767"
+        ],
+        "source_texts": [
+          "这个后面可以拆。 但是不是 V2.6 必须。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "status": "confirmed"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "ddb0fa6d-1b94-40ce-90f0-e5aef259471a",
+      "topic_id": "topic_9",
+      "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "action_items",
+      "needs_review": false,
+      "item": {
+        "content": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+        "topic_id": "topic_9",
+        "source_event_ids": [
+          "ddb0fa6d-1b94-40ce-90f0-e5aef259471a"
+        ],
+        "source_texts": [
+          "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "owner": "陈涛",
+        "deadline": null,
+        "priority": "medium",
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "d8145d1e-cc8c-4987-ab7b-e73411ffac7d",
+      "topic_id": "topic_38",
+      "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "action_items",
+      "needs_review": false,
+      "item": {
+        "content": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "topic_id": "topic_38",
+        "source_event_ids": [
+          "d8145d1e-cc8c-4987-ab7b-e73411ffac7d"
+        ],
+        "source_texts": [
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "owner": "张伟",
+        "deadline": null,
+        "priority": "medium",
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "76b002bf-6605-4b42-b928-c5bd791e9625",
+      "topic_id": "topic_39",
+      "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "action_items",
+      "needs_review": false,
+      "item": {
+        "content": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+        "topic_id": "topic_39",
+        "source_event_ids": [
+          "76b002bf-6605-4b42-b928-c5bd791e9625"
+        ],
+        "source_texts": [
+          "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "owner": "陈涛",
+        "deadline": "今天",
+        "priority": "medium",
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "d8145d1e-cc8c-4987-ab7b-e73411ffac7d,76b002bf-6605-4b42-b928-c5bd791e9625,065f9163-8da9-4142-abdf-e15667d24bee",
+      "topic_id": "topic_39",
+      "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "action_items",
+      "needs_review": false,
+      "item": {
+        "content": "输出 Golden Dataset 基线报告并完成稳定性测试",
+        "topic_id": "topic_39",
+        "source_event_ids": [
+          "d8145d1e-cc8c-4987-ab7b-e73411ffac7d,76b002bf-6605-4b42-b928-c5bd791e9625,065f9163-8da9-4142-abdf-e15667d24bee"
+        ],
+        "source_texts": [
+          "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？"
+        ],
+        "confidence": 0.78,
+        "needs_review": false,
+        "validation_errors": [],
+        "owner": null,
+        "deadline": "今天",
+        "priority": "medium",
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "5163d45a-3630-4e3e-b5d9-67cebe017e0c",
+      "topic_id": "topic_42",
+      "source_text": "赵敏，你补充真实会议测试样本。\n明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？\n赵敏，你补充真实会议测试样本。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "action_items",
+      "needs_review": false,
+      "item": {
+        "content": "赵敏，你补充真实会议测试样本。",
+        "topic_id": "topic_42",
+        "source_event_ids": [
+          "5163d45a-3630-4e3e-b5d9-67cebe017e0c"
+        ],
+        "source_texts": [
+          "赵敏，你补充真实会议测试样本。\n明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "赵敏，你补充真实会议测试样本。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "owner": "张伟",
+        "deadline": null,
+        "priority": "medium",
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "e39959f7-d547-4cef-b68d-e175a74a6402",
+      "topic_id": "topic_46",
+      "source_text": "王强，下午安排录音流程测试。\n好的。\n王强，下午安排录音流程测试。\n没问题。\n王强，下午安排录音流程测试。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "action_items",
+      "needs_review": false,
+      "item": {
+        "content": "王强，下午安排录音流程测试。",
+        "topic_id": "topic_46",
+        "source_event_ids": [
+          "e39959f7-d547-4cef-b68d-e175a74a6402"
+        ],
+        "source_texts": [
+          "王强，下午安排录音流程测试。\n好的。\n王强，下午安排录音流程测试。\n没问题。",
+          "王强，下午安排录音流程测试。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "owner": "张伟",
+        "deadline": null,
+        "priority": "medium",
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "ceb7e6bc-7a02-5cb2-8845-9f9e6feaa25e",
+      "topic_id": "topic_12",
+      "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+        "topic_id": "topic_12",
+        "source_event_ids": [
+          "ceb7e6bc-7a02-5cb2-8845-9f9e6feaa25e"
+        ],
+        "source_texts": [
+          "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "c0b3330b-62be-591f-bc2f-d9a999cb1f3c",
+      "topic_id": "topic_30",
+      "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+        "topic_id": "topic_30",
+        "source_event_ids": [
+          "c0b3330b-62be-591f-bc2f-d9a999cb1f3c"
+        ],
+        "source_texts": [
+          "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "026eb8d4-94b1-59fd-9e32-cc0d0ff22587",
+      "topic_id": "topic_33",
+      "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+        "topic_id": "topic_33",
+        "source_event_ids": [
+          "026eb8d4-94b1-59fd-9e32-cc0d0ff22587"
+        ],
+        "source_texts": [
+          "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "a3b01ad6-ec3c-5581-bc67-005f123ab8d7",
+      "topic_id": "topic_36",
+      "source_text": "好，这个放风险里面。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "好，这个放风险里面。",
+        "topic_id": "topic_36",
+        "source_event_ids": [
+          "a3b01ad6-ec3c-5581-bc67-005f123ab8d7"
+        ],
+        "source_texts": [
+          "好，这个放风险里面。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "好，这个放风险里面。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "b5ec8476-dde5-5431-a6e7-e41a9e4d2dde",
+      "topic_id": "topic_37",
+      "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+        "topic_id": "topic_37",
+        "source_event_ids": [
+          "b5ec8476-dde5-5431-a6e7-e41a9e4d2dde"
+        ],
+        "source_texts": [
+          "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "13dbe88a-b121-5f19-94f5-b69444ff0312",
+      "topic_id": "topic_38",
+      "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "这个也是风险。 先记录，不作为当前版本任务。",
+        "topic_id": "topic_38",
+        "source_event_ids": [
+          "13dbe88a-b121-5f19-94f5-b69444ff0312"
+        ],
+        "source_texts": [
+          "这个也是风险。 先记录，不作为当前版本任务。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "这个也是风险。 先记录，不作为当前版本任务。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "72d428db-d065-49b1-8e2b-63f15021a8e0",
+      "event_id": "dedb0c55-8630-509a-8e53-90a86a117b32",
+      "topic_id": "topic_38",
+      "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+        "topic_id": "topic_38",
+        "source_event_ids": [
+          "dedb0c55-8630-509a-8e53-90a86a117b32"
+        ],
+        "source_texts": [
+          "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    }
+  ]
+}

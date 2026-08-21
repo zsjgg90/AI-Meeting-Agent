@@ -1,0 +1,821 @@
+{
+  "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+  "speaker_contexts": {
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 1": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 1",
+      "speaker_label": "Speaker 1",
+      "display_name": "Speaker 1",
+      "role": null,
+      "department": null,
+      "confidence": 0.0,
+      "identity_source": "unknown",
+      "identity_status": "anonymous",
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 2": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 2",
+      "speaker_label": "Speaker 2",
+      "display_name": "Speaker 2",
+      "role": null,
+      "department": null,
+      "confidence": 0.0,
+      "identity_source": "unknown",
+      "identity_status": "anonymous",
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 3": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 3",
+      "speaker_label": "Speaker 3",
+      "display_name": "Speaker 3",
+      "role": null,
+      "department": null,
+      "confidence": 0.0,
+      "identity_source": "unknown",
+      "identity_status": "anonymous",
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 4": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 4",
+      "speaker_label": "Speaker 4",
+      "display_name": "Speaker 4",
+      "role": null,
+      "department": null,
+      "confidence": 0.0,
+      "identity_source": "unknown",
+      "identity_status": "anonymous",
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 5": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 5",
+      "speaker_label": "Speaker 5",
+      "display_name": "Speaker 5",
+      "role": null,
+      "department": null,
+      "confidence": 0.0,
+      "identity_source": "unknown",
+      "identity_status": "anonymous",
+      "evidence": []
+    }
+  },
+  "speaker_role_context": {
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 1": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 1",
+      "speaker_label": "Speaker 1",
+      "confirmed_role": null,
+      "suggested_role": null,
+      "role_status": "unknown",
+      "role_source": "unknown",
+      "confidence": 0.0,
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 2": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 2",
+      "speaker_label": "Speaker 2",
+      "confirmed_role": null,
+      "suggested_role": null,
+      "role_status": "unknown",
+      "role_source": "unknown",
+      "confidence": 0.0,
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 3": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 3",
+      "speaker_label": "Speaker 3",
+      "confirmed_role": null,
+      "suggested_role": null,
+      "role_status": "unknown",
+      "role_source": "unknown",
+      "confidence": 0.0,
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 4": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 4",
+      "speaker_label": "Speaker 4",
+      "confirmed_role": null,
+      "suggested_role": null,
+      "role_status": "unknown",
+      "role_source": "unknown",
+      "confidence": 0.0,
+      "evidence": []
+    },
+    "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 5": {
+      "speaker_id": "meeting:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:Speaker 5",
+      "speaker_label": "Speaker 5",
+      "confirmed_role": null,
+      "suggested_role": null,
+      "role_status": "unknown",
+      "role_source": "unknown",
+      "confidence": 0.0,
+      "evidence": []
+    }
+  },
+  "responsibility_evidence_matrix": {
+    "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+    "responsibility_contexts": [
+      {
+        "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:7f814147-949e-4bfc-bd23-0f91dbf0f74e:399c49c28a43",
+        "speaker_id": "项目经理",
+        "identity_context": null,
+        "role_context": null,
+        "responsibility_type": "unknown",
+        "task": "agenda_statement今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+        "owner": null,
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+            "event_id": "abf158e3-fd2c-5530-89d3-e46eb96f9cae",
+            "utterance_id": "7f814147-949e-4bfc-bd23-0f91dbf0f74e",
+            "segment_id": "7f814147-949e-4bfc-bd23-0f91dbf0f74e",
+            "speaker_id": "项目经理",
+            "source_text": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+            "owner_text": null,
+            "task_text": "agenda_statement今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "source_type": "semantic_event"
+      },
+      {
+        "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:4c64cfce-3456-450b-8cfc-83878bd26439:ff8a35b36e48",
+        "speaker_id": "后端",
+        "identity_context": null,
+        "role_context": null,
+        "responsibility_type": "unknown",
+        "task": "risk_warning核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "owner": null,
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+            "event_id": "066b4992-abc8-514e-a7ba-522ea22f2228",
+            "utterance_id": "4c64cfce-3456-450b-8cfc-83878bd26439",
+            "segment_id": "4c64cfce-3456-450b-8cfc-83878bd26439",
+            "speaker_id": "后端",
+            "source_text": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+            "owner_text": null,
+            "task_text": "risk_warning核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "source_type": "semantic_event"
+      },
+      {
+        "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:c998756f-6bb0-4329-8dde-9a92eaa84d0b:904b2f6f7dfb",
+        "speaker_id": "运维",
+        "identity_context": null,
+        "role_context": null,
+        "responsibility_type": "unknown",
+        "task": "risk_warning监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "owner": null,
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+            "event_id": "ae78de1a-205d-58e5-bd42-520208e92091",
+            "utterance_id": "c998756f-6bb0-4329-8dde-9a92eaa84d0b",
+            "segment_id": "c998756f-6bb0-4329-8dde-9a92eaa84d0b",
+            "speaker_id": "运维",
+            "source_text": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+            "owner_text": null,
+            "task_text": "risk_warning监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "source_type": "semantic_event"
+      },
+      {
+        "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:95fc860f-de02-4b07-897d-8052ee1737fe:cddb31a76998",
+        "speaker_id": "财务",
+        "identity_context": null,
+        "role_context": null,
+        "responsibility_type": "unknown",
+        "task": "risk_warning重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "owner": null,
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+            "event_id": "dc210c43-daf5-599e-9fb0-28eb55e047db",
+            "utterance_id": "95fc860f-de02-4b07-897d-8052ee1737fe",
+            "segment_id": "95fc860f-de02-4b07-897d-8052ee1737fe",
+            "speaker_id": "财务",
+            "source_text": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+            "owner_text": null,
+            "task_text": "risk_warning重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "source_type": "semantic_event"
+      },
+      {
+        "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:88560230-1d5d-40b4-a972-70e1ef8e070d:b68f29e0cd43",
+        "speaker_id": "测试",
+        "identity_context": null,
+        "role_context": null,
+        "responsibility_type": "unknown",
+        "task": "risk_warning异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "owner": null,
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+            "event_id": "cc7fc600-8846-50d9-9c2f-b905dcce8e1e",
+            "utterance_id": "88560230-1d5d-40b4-a972-70e1ef8e070d",
+            "segment_id": "88560230-1d5d-40b4-a972-70e1ef8e070d",
+            "speaker_id": "测试",
+            "source_text": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+            "owner_text": null,
+            "task_text": "risk_warning异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "source_type": "semantic_event"
+      },
+      {
+        "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:8d8d8d79-9633-4b00-863d-652de1e232b1:7b3d442b1755",
+        "speaker_id": "项目经理",
+        "identity_context": null,
+        "role_context": null,
+        "responsibility_type": "unknown",
+        "task": "risk_warning结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "owner": null,
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+            "event_id": "15fbb948-fef1-5764-9964-4f6bbb7a20cb",
+            "utterance_id": "8d8d8d79-9633-4b00-863d-652de1e232b1",
+            "segment_id": "8d8d8d79-9633-4b00-863d-652de1e232b1",
+            "speaker_id": "项目经理",
+            "source_text": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+            "owner_text": null,
+            "task_text": "risk_warning结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "source_type": "semantic_event"
+      }
+    ],
+    "responsibility_matrix": {
+      "rows": [
+        {
+          "task_key": "task:acc5d4f27fd6",
+          "action_owner": null,
+          "responsibility_candidates": [
+            {
+              "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:7f814147-949e-4bfc-bd23-0f91dbf0f74e:399c49c28a43",
+              "responsibility_type": "unknown",
+              "task": "agenda_statement今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+              "owner": null,
+              "confidence": 0.35,
+              "requires_confirmation": false
+            }
+          ],
+          "evidence": [
+            {
+              "type": "unknown_owner",
+              "source_type": "semantic_event",
+              "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+              "event_id": "abf158e3-fd2c-5530-89d3-e46eb96f9cae",
+              "utterance_id": "7f814147-949e-4bfc-bd23-0f91dbf0f74e",
+              "segment_id": "7f814147-949e-4bfc-bd23-0f91dbf0f74e",
+              "speaker_id": "项目经理",
+              "source_text": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+              "owner_text": null,
+              "task_text": "agenda_statement今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+              "supported_fields": [
+                "task"
+              ],
+              "confidence": 0.35,
+              "requires_confirmation": false,
+              "metadata": {}
+            }
+          ],
+          "confidence": 0.35,
+          "consistency_status": "unknown"
+        },
+        {
+          "task_key": "task:99dd7c0922b7",
+          "action_owner": null,
+          "responsibility_candidates": [
+            {
+              "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:4c64cfce-3456-450b-8cfc-83878bd26439:ff8a35b36e48",
+              "responsibility_type": "unknown",
+              "task": "risk_warning核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+              "owner": null,
+              "confidence": 0.35,
+              "requires_confirmation": false
+            }
+          ],
+          "evidence": [
+            {
+              "type": "unknown_owner",
+              "source_type": "semantic_event",
+              "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+              "event_id": "066b4992-abc8-514e-a7ba-522ea22f2228",
+              "utterance_id": "4c64cfce-3456-450b-8cfc-83878bd26439",
+              "segment_id": "4c64cfce-3456-450b-8cfc-83878bd26439",
+              "speaker_id": "后端",
+              "source_text": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+              "owner_text": null,
+              "task_text": "risk_warning核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+              "supported_fields": [
+                "task"
+              ],
+              "confidence": 0.35,
+              "requires_confirmation": false,
+              "metadata": {}
+            }
+          ],
+          "confidence": 0.35,
+          "consistency_status": "unknown"
+        },
+        {
+          "task_key": "task:e9a3fe216363",
+          "action_owner": null,
+          "responsibility_candidates": [
+            {
+              "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:c998756f-6bb0-4329-8dde-9a92eaa84d0b:904b2f6f7dfb",
+              "responsibility_type": "unknown",
+              "task": "risk_warning监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+              "owner": null,
+              "confidence": 0.35,
+              "requires_confirmation": false
+            }
+          ],
+          "evidence": [
+            {
+              "type": "unknown_owner",
+              "source_type": "semantic_event",
+              "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+              "event_id": "ae78de1a-205d-58e5-bd42-520208e92091",
+              "utterance_id": "c998756f-6bb0-4329-8dde-9a92eaa84d0b",
+              "segment_id": "c998756f-6bb0-4329-8dde-9a92eaa84d0b",
+              "speaker_id": "运维",
+              "source_text": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+              "owner_text": null,
+              "task_text": "risk_warning监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+              "supported_fields": [
+                "task"
+              ],
+              "confidence": 0.35,
+              "requires_confirmation": false,
+              "metadata": {}
+            }
+          ],
+          "confidence": 0.35,
+          "consistency_status": "unknown"
+        },
+        {
+          "task_key": "task:ecb17a201a3a",
+          "action_owner": null,
+          "responsibility_candidates": [
+            {
+              "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:95fc860f-de02-4b07-897d-8052ee1737fe:cddb31a76998",
+              "responsibility_type": "unknown",
+              "task": "risk_warning重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+              "owner": null,
+              "confidence": 0.35,
+              "requires_confirmation": false
+            }
+          ],
+          "evidence": [
+            {
+              "type": "unknown_owner",
+              "source_type": "semantic_event",
+              "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+              "event_id": "dc210c43-daf5-599e-9fb0-28eb55e047db",
+              "utterance_id": "95fc860f-de02-4b07-897d-8052ee1737fe",
+              "segment_id": "95fc860f-de02-4b07-897d-8052ee1737fe",
+              "speaker_id": "财务",
+              "source_text": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+              "owner_text": null,
+              "task_text": "risk_warning重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+              "supported_fields": [
+                "task"
+              ],
+              "confidence": 0.35,
+              "requires_confirmation": false,
+              "metadata": {}
+            }
+          ],
+          "confidence": 0.35,
+          "consistency_status": "unknown"
+        },
+        {
+          "task_key": "task:78a4ee45d3b0",
+          "action_owner": null,
+          "responsibility_candidates": [
+            {
+              "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:88560230-1d5d-40b4-a972-70e1ef8e070d:b68f29e0cd43",
+              "responsibility_type": "unknown",
+              "task": "risk_warning异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+              "owner": null,
+              "confidence": 0.35,
+              "requires_confirmation": false
+            }
+          ],
+          "evidence": [
+            {
+              "type": "unknown_owner",
+              "source_type": "semantic_event",
+              "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+              "event_id": "cc7fc600-8846-50d9-9c2f-b905dcce8e1e",
+              "utterance_id": "88560230-1d5d-40b4-a972-70e1ef8e070d",
+              "segment_id": "88560230-1d5d-40b4-a972-70e1ef8e070d",
+              "speaker_id": "测试",
+              "source_text": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+              "owner_text": null,
+              "task_text": "risk_warning异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+              "supported_fields": [
+                "task"
+              ],
+              "confidence": 0.35,
+              "requires_confirmation": false,
+              "metadata": {}
+            }
+          ],
+          "confidence": 0.35,
+          "consistency_status": "unknown"
+        },
+        {
+          "task_key": "task:71e76f4a163c",
+          "action_owner": null,
+          "responsibility_candidates": [
+            {
+              "responsibility_id": "resp:d5a46c4a-2f31-4865-bcb5-d91b231cdf97:8d8d8d79-9633-4b00-863d-652de1e232b1:7b3d442b1755",
+              "responsibility_type": "unknown",
+              "task": "risk_warning结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+              "owner": null,
+              "confidence": 0.35,
+              "requires_confirmation": false
+            }
+          ],
+          "evidence": [
+            {
+              "type": "unknown_owner",
+              "source_type": "semantic_event",
+              "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+              "event_id": "15fbb948-fef1-5764-9964-4f6bbb7a20cb",
+              "utterance_id": "8d8d8d79-9633-4b00-863d-652de1e232b1",
+              "segment_id": "8d8d8d79-9633-4b00-863d-652de1e232b1",
+              "speaker_id": "项目经理",
+              "source_text": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+              "owner_text": null,
+              "task_text": "risk_warning结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+              "supported_fields": [
+                "task"
+              ],
+              "confidence": 0.35,
+              "requires_confirmation": false,
+              "metadata": {}
+            }
+          ],
+          "confidence": 0.35,
+          "consistency_status": "unknown"
+        }
+      ]
+    },
+    "consistency_status": "needs_review"
+  },
+  "items": [
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "abf158e3-fd2c-5530-89d3-e46eb96f9cae",
+      "topic_id": "topic_1",
+      "source_text": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_agenda",
+      "needs_review": false,
+      "item": {
+        "content": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+        "topic_id": "topic_1",
+        "source_event_ids": [
+          "abf158e3-fd2c-5530-89d3-e46eb96f9cae"
+        ],
+        "source_texts": [
+          "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "066b4992-abc8-514e-a7ba-522ea22f2228",
+      "topic_id": "topic_2",
+      "source_text": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "topic_id": "topic_2",
+        "source_event_ids": [
+          "066b4992-abc8-514e-a7ba-522ea22f2228"
+        ],
+        "source_texts": [
+          "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "ae78de1a-205d-58e5-bd42-520208e92091",
+      "topic_id": "topic_3",
+      "source_text": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "topic_id": "topic_3",
+        "source_event_ids": [
+          "ae78de1a-205d-58e5-bd42-520208e92091"
+        ],
+        "source_texts": [
+          "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "dc210c43-daf5-599e-9fb0-28eb55e047db",
+      "topic_id": "topic_4",
+      "source_text": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "topic_id": "topic_4",
+        "source_event_ids": [
+          "dc210c43-daf5-599e-9fb0-28eb55e047db"
+        ],
+        "source_texts": [
+          "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "cc7fc600-8846-50d9-9c2f-b905dcce8e1e",
+      "topic_id": "topic_5",
+      "source_text": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "topic_id": "topic_5",
+        "source_event_ids": [
+          "cc7fc600-8846-50d9-9c2f-b905dcce8e1e"
+        ],
+        "source_texts": [
+          "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "15fbb948-fef1-5764-9964-4f6bbb7a20cb",
+      "topic_id": "topic_6",
+      "source_text": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "topic_id": "topic_6",
+        "source_event_ids": [
+          "15fbb948-fef1-5764-9964-4f6bbb7a20cb"
+        ],
+        "source_texts": [
+          "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    }
+  ],
+  "analysis": {
+    "meeting_agenda": [
+      {
+        "item": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+        "order": 1,
+        "source_segment_ids": [
+          "abf158e3-fd2c-5530-89d3-e46eb96f9cae"
+        ]
+      }
+    ],
+    "meeting_summary": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。；核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。；监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+    "key_conclusions": [],
+    "action_items": [],
+    "unresolved_issues": [],
+    "risks_and_focus": [
+      {
+        "risk": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "impact": "",
+        "focus_area": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "mitigation": "",
+        "source_text": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "confidence": 0.72
+      },
+      {
+        "risk": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "impact": "",
+        "focus_area": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "mitigation": "",
+        "source_text": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "confidence": 0.72
+      },
+      {
+        "risk": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "impact": "",
+        "focus_area": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "mitigation": "",
+        "source_text": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "confidence": 0.72
+      },
+      {
+        "risk": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "impact": "",
+        "focus_area": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "mitigation": "",
+        "source_text": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "confidence": 0.72
+      },
+      {
+        "risk": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "impact": "",
+        "focus_area": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "mitigation": "",
+        "source_text": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "confidence": 0.72
+      }
+    ],
+    "topics": [
+      {
+        "title": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+        "summary": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+        "start_time": 0.0,
+        "end_time": 4.0,
+        "related_segment_ids": [
+          "7f814147-949e-4bfc-bd23-0f91dbf0f74e"
+        ],
+        "speakers": [
+          "项目经理"
+        ]
+      },
+      {
+        "title": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "summary": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "start_time": 10.0,
+        "end_time": 14.42,
+        "related_segment_ids": [
+          "4c64cfce-3456-450b-8cfc-83878bd26439"
+        ],
+        "speakers": [
+          "后端"
+        ]
+      },
+      {
+        "title": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "summary": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "start_time": 20.0,
+        "end_time": 24.0,
+        "related_segment_ids": [
+          "c998756f-6bb0-4329-8dde-9a92eaa84d0b"
+        ],
+        "speakers": [
+          "运维"
+        ]
+      },
+      {
+        "title": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "summary": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "start_time": 30.0,
+        "end_time": 34.0,
+        "related_segment_ids": [
+          "95fc860f-de02-4b07-897d-8052ee1737fe"
+        ],
+        "speakers": [
+          "财务"
+        ]
+      },
+      {
+        "title": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "summary": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "start_time": 40.0,
+        "end_time": 44.0,
+        "related_segment_ids": [
+          "88560230-1d5d-40b4-a972-70e1ef8e070d"
+        ],
+        "speakers": [
+          "测试"
+        ]
+      },
+      {
+        "title": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "summary": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "start_time": 50.0,
+        "end_time": 56.25,
+        "related_segment_ids": [
+          "8d8d8d79-9633-4b00-863d-652de1e232b1"
+        ],
+        "speakers": [
+          "项目经理"
+        ]
+      }
+    ],
+    "_metadata": {
+      "model_name": "semantic-events+rules",
+      "prompt_version": "semantic-event-pipeline-v1",
+      "rag_chunk_ids": [],
+      "result_source": "semantic_pipeline"
+    }
+  }
+}

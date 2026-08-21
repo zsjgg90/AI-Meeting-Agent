@@ -1,0 +1,4278 @@
+{
+  "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+  "as_of": "2026-08-11T16:40:13.944892Z",
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:39edc46932f6",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "agenda_statement人都到了吧？ 赵敏，你声音正常吗？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:50d087d2-fe0d-4fa4-a2bc-382bbe42f109:90ae3cf4cfd5",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:9ba76aa315df",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "50d087d2-fe0d-4fa4-a2bc-382bbe42f109",
+          "segment_id": "50d087d2-fe0d-4fa4-a2bc-382bbe42f109",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:cd2f1b24c097",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information可以，能听到。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:4083cc3f-3751-42c5-846c-4fabb45b7145:03879f5385e7",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:5ff8bc3f1b5c",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "4083cc3f-3751-42c5-846c-4fabb45b7145",
+          "segment_id": "4083cc3f-3751-42c5-846c-4fabb45b7145",
+          "speaker_id": "赵敏",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "可以，能听到。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:1dcf39294604",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:93b7a17f-ba76-43fb-9e6a-f5abf18228b5:6272ac50db39",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:9bed55bf1c40",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "93b7a17f-ba76-43fb-9e6a-f5abf18228b5",
+          "segment_id": "93b7a17f-ba76-43fb-9e6a-f5abf18228b5",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:1ef9c8409aad",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:9ca7e2e4-0ecc-4613-b41c-bf33000c1cbb:5f09a3f5b017",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:05316d8d663f",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "9ca7e2e4-0ecc-4613-b41c-bf33000c1cbb",
+          "segment_id": "9ca7e2e4-0ecc-4613-b41c-bf33000c1cbb",
+          "speaker_id": "李娜",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:d4f65b63d677",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "progress_update这个待办混乱的问题，上周不是已经看过一次了吗？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:96985669-b777-4229-a45c-909956172b03:ba3c304ad818",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:6a35c5cfc48e",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "96985669-b777-4229-a45c-909956172b03",
+          "segment_id": "96985669-b777-4229-a45c-909956172b03",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:af7d99bda002",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information对，看过。 但是现在感觉还是有。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:fdc4adb6-7c36-4518-8363-57bab4368ef2:d9ae2e85816e",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:bcb6f8086c5e",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "fdc4adb6-7c36-4518-8363-57bab4368ef2",
+          "segment_id": "fdc4adb6-7c36-4518-8363-57bab4368ef2",
+          "speaker_id": "李娜",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "对，看过。 但是现在感觉还是有。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:988899f6421f",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information“这个事情后面关注一下。”",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:d8d3ce68-4feb-4238-aa5a-38c455ae2b7b:e387cbcf9f73",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:ddf3b264a291",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "d8d3ce68-4feb-4238-aa5a-38c455ae2b7b",
+          "segment_id": "d8d3ce68-4feb-4238-aa5a-38c455ae2b7b",
+          "speaker_id": "比如用户说",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“这个事情后面关注一下。”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:9ac374cf5ee0",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:be42b8d5-cc39-48b5-931d-f9c75150de2c:45b82fb4a281",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e457d715814a",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "be42b8d5-cc39-48b5-931d-f9c75150de2c",
+          "segment_id": "be42b8d5-cc39-48b5-931d-f9c75150de2c",
+          "speaker_id": "模型有时候直接变成",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:a5ae438d04ea",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:9a097348-641b-47ac-921e-51526f81bab9:179eccfde428",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:d6015ae1b350",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "9a097348-641b-47ac-921e-51526f81bab9",
+          "segment_id": "9a097348-641b-47ac-921e-51526f81bab9",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:72fb62456330",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:29752fe9-98a2-457c-9394-ac85f5860257:5ce1f4711857",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:c65f401cb478",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "29752fe9-98a2-457c-9394-ac85f5860257",
+          "segment_id": "29752fe9-98a2-457c-9394-ac85f5860257",
+          "speaker_id": "王强",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:2fa4e3d50c0e",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:2f2b5cc1-78bc-4136-a736-3e0cad103ba3:dff35cd5406f",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:dadc8e267831",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "2f2b5cc1-78bc-4136-a736-3e0cad103ba3",
+          "segment_id": "2f2b5cc1-78bc-4136-a736-3e0cad103ba3",
+          "speaker_id": "他们看到的就是",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:b6cade53b991",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:68db023b-9493-4dba-aac9-77b62d7381c7:7f92e3c81e7f",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b46271ba4438",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "68db023b-9493-4dba-aac9-77b62d7381c7",
+          "segment_id": "68db023b-9493-4dba-aac9-77b62d7381c7",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:dc529f6d5222",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "progress_update但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:3bfccb6d-d413-4137-a76d-22182444ed1a:fcb863877061",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:f780938ba1e6",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "3bfccb6d-d413-4137-a76d-22182444ed1a",
+          "segment_id": "3bfccb6d-d413-4137-a76d-22182444ed1a",
+          "speaker_id": "李娜",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:432ab373c65b",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "decision嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:0ad7d410-563d-4f35-aadd-8b70ec1df1fb:a266d3339e62",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:ae272c4fbb36",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "0ad7d410-563d-4f35-aadd-8b70ec1df1fb",
+          "segment_id": "0ad7d410-563d-4f35-aadd-8b70ec1df1fb",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:33668e0cf002",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:1ba6daff-7598-4595-ae4d-7c5048219965:b97b57f5b3fc",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:c6a9d7e831e0",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "1ba6daff-7598-4595-ae4d-7c5048219965",
+          "segment_id": "1ba6daff-7598-4595-ae4d-7c5048219965",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:3da1dcc426aa",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:10c2d8b9-2b46-4960-8294-eea18b563d54:0012f93eb0b2",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:c13440442734",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "10c2d8b9-2b46-4960-8294-eea18b563d54",
+          "segment_id": "10c2d8b9-2b46-4960-8294-eea18b563d54",
+          "speaker_id": "赵敏",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:ad822f51aa28",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information什么意思？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:2917a558-3ea1-4f8a-a707-fc0fd40e7d6e:7119cd49f72e",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:2a26a4966b73",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "2917a558-3ea1-4f8a-a707-fc0fd40e7d6e",
+          "segment_id": "2917a558-3ea1-4f8a-a707-fc0fd40e7d6e",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "什么意思？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:1bf9a19a5bd0",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "progress_update“我将在8月15日前完成接口开发。”",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:d7f7ffae-9b65-41c9-b0cc-df948fae42e3:7946c4b5d393",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:3cb90c4d73b1",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "d7f7ffae-9b65-41c9-b0cc-df948fae42e3",
+          "segment_id": "d7f7ffae-9b65-41c9-b0cc-df948fae42e3",
+          "speaker_id": "比如真实会议里面不会说",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“我将在8月15日前完成接口开发。”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:a08cf47fa013",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:28cabda4-9341-43f1-94d4-9eb20df15020:8cbce2f10e31",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e108ace53379",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "28cabda4-9341-43f1-94d4-9eb20df15020",
+          "segment_id": "28cabda4-9341-43f1-94d4-9eb20df15020",
+          "speaker_id": "更多是",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:0e546a5864ae",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:ab3fa36b-35d5-404f-9a04-8e11ecae3621:77ff194537a9",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:7b40b52ccabd",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "ab3fa36b-35d5-404f-9a04-8e11ecae3621",
+          "segment_id": "ab3fa36b-35d5-404f-9a04-8e11ecae3621",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:bcc22548564d",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information还有一个。 之前测试发现一个情况。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:460536b8-b1f2-41c9-83a5-833d71d61456:a7e8bb0f27ba",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:2e747280b780",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "460536b8-b1f2-41c9-83a5-833d71d61456",
+          "segment_id": "460536b8-b1f2-41c9-83a5-833d71d61456",
+          "speaker_id": "赵敏",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个。 之前测试发现一个情况。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:d8e4ec6b8c3c",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "proposal“是不是可以考虑增加导出功能？”",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:6c31cd51-37d5-43b4-9f74-d5e52a294b03:68d32c8bad7e",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:1e727b967df5",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "6c31cd51-37d5-43b4-9f74-d5e52a294b03",
+          "segment_id": "6c31cd51-37d5-43b4-9f74-d5e52a294b03",
+          "speaker_id": "产品说",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“是不是可以考虑增加导出功能？”",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:5fae85c04e98",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information“增加PDF导出功能。” 但是会议根本没决定。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:96046ddd-9f77-45df-8f2f-9c238eb97f74:da179f5609bc",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:633cf5eeed3a",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "96046ddd-9f77-45df-8f2f-9c238eb97f74",
+          "segment_id": "96046ddd-9f77-45df-8f2f-9c238eb97f74",
+          "speaker_id": "结果 AI 直接生成",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:73e364b378fa",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information这个确实。 我们只是讨论方向。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:81cac5cb-9741-4934-8fc7-edb991cb09ba:cf3d5c0ce71e",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:0724fc09e2e4",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "81cac5cb-9741-4934-8fc7-edb991cb09ba",
+          "segment_id": "81cac5cb-9741-4934-8fc7-edb991cb09ba",
+          "speaker_id": "李娜",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个确实。 我们只是讨论方向。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:73f94e6f673c",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:ee35ed37-fd4c-454c-b7a3-478a939ed5f3:429960743054",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:02bf3b26b888",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "ee35ed37-fd4c-454c-b7a3-478a939ed5f3",
+          "segment_id": "ee35ed37-fd4c-454c-b7a3-478a939ed5f3",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:13afe2e2f927",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:16480836-6d82-4c7e-a0b9-98b07efcd318:ff9afa8b0210",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:047970cf359f",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "16480836-6d82-4c7e-a0b9-98b07efcd318",
+          "segment_id": "16480836-6d82-4c7e-a0b9-98b07efcd318",
+          "speaker_id": "王强",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:50601df9c7d2",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information什么时候可以测试？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:02c65265-8342-46ea-bf2a-4b5c329f3795:75fa125437d7",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e1f894d8c912",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "02c65265-8342-46ea-bf2a-4b5c329f3795",
+          "segment_id": "02c65265-8342-46ea-bf2a-4b5c329f3795",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "什么时候可以测试？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:d406b645ff19",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:2264fa7a-3f8c-4d5e-b96c-a4ca8643b7c1:2bfebc5084d0",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:46df6db34a4c",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "2264fa7a-3f8c-4d5e-b96c-a4ca8643b7c1",
+          "segment_id": "2264fa7a-3f8c-4d5e-b96c-a4ca8643b7c1",
+          "speaker_id": "王强",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:bceae13d3784",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information是接口问题？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:ef1a9014-3d37-43a1-ac41-da4d3fb92a7e:8c9d06fbf409",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:79b8c40814aa",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "ef1a9014-3d37-43a1-ac41-da4d3fb92a7e",
+          "segment_id": "ef1a9014-3d37-43a1-ac41-da4d3fb92a7e",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "是接口问题？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:b10c4746bf3c",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:60e68e8b-d820-4c09-a6cb-da62b6f98b7d:29d38c9a351e",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:2e5550618368",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "60e68e8b-d820-4c09-a6cb-da62b6f98b7d",
+          "segment_id": "60e68e8b-d820-4c09-a6cb-da62b6f98b7d",
+          "speaker_id": "王强",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:c9c298527893",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "decision这个后面可以拆。 但是不是 V2.6 必须。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:7251683e-5271-4b07-a430-1f69a4d009ce:9c7523e34209",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:facfd93a9118",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "7251683e-5271-4b07-a430-1f69a4d009ce",
+          "segment_id": "7251683e-5271-4b07-a430-1f69a4d009ce",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:7b649d6fa9c4",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information嗯，这个先作为优化项。 不要影响版本。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:55be52fe-3ad9-4edf-8bac-458ff7260df5:137da452dc27",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b42936ea979d",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "55be52fe-3ad9-4edf-8bac-458ff7260df5",
+          "segment_id": "55be52fe-3ad9-4edf-8bac-458ff7260df5",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:b45ab32040ec",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:52bb0db7-fd1c-4358-9289-6bb5c9e41a34:0634b310a1db",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:6287caf24e03",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "52bb0db7-fd1c-4358-9289-6bb5c9e41a34",
+          "segment_id": "52bb0db7-fd1c-4358-9289-6bb5c9e41a34",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:5cc754817d86",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information这个会影响上线吗？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:13e8cd00-a159-4bc6-a3e0-d4f2571bb541:d88b3c4e25c7",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:5c7086aa5a77",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "13e8cd00-a159-4bc6-a3e0-d4f2571bb541",
+          "segment_id": "13e8cd00-a159-4bc6-a3e0-d4f2571bb541",
+          "speaker_id": "李娜",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个会影响上线吗？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:8c66dc150598",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "progress_update目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:7e74002b-bf57-4537-882e-1eabbc0a0bc0:21185cf15b6a",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:024729a793eb",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "7e74002b-bf57-4537-882e-1eabbc0a0bc0",
+          "segment_id": "7e74002b-bf57-4537-882e-1eabbc0a0bc0",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:fa3e309fe855",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning好，这个放风险里面。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:057a6764-6181-43ff-ba57-23938bb1281a:67cc984aee4d",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:95eadb0616d2",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "057a6764-6181-43ff-ba57-23938bb1281a",
+          "segment_id": "057a6764-6181-43ff-ba57-23938bb1281a",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好，这个放风险里面。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:33ac21db5213",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:11ed93fe-72b9-4d43-b5ac-dc4469323731:b4d0da31ecf0",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:ac8c62d9ddab",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "11ed93fe-72b9-4d43-b5ac-dc4469323731",
+          "segment_id": "11ed93fe-72b9-4d43-b5ac-dc4469323731",
+          "speaker_id": "李娜",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:7a65dce9c347",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning这个也是风险。 先记录，不作为当前版本任务。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:7c7357fb-17a0-4365-8c17-7877d58011a0:bd000b4f9dd8",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:769f34457c70",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "7c7357fb-17a0-4365-8c17-7877d58011a0",
+          "segment_id": "7c7357fb-17a0-4365-8c17-7877d58011a0",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:61042842a21d",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:d8cb0528-b5f7-4d89-b80d-fabd46eb4fb1:b5c6f9b82598",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b39e090f3ed3",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "d8cb0528-b5f7-4d89-b80d-fabd46eb4fb1",
+          "segment_id": "d8cb0528-b5f7-4d89-b80d-fabd46eb4fb1",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:b94dc69cf286",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:a8b58ce8-3855-4889-9e23-e3c10e2c0455:bb6764f47dcb",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:5b7f2a1089ea",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455",
+          "segment_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:534a3525d7b2",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+        "owner": "陈涛",
+        "responsibility_type": "commitment",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:fffeb2b5-c53d-4ade-b84f-cdcde642f664:bef0408c8d64",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e627009f6daf",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "fffeb2b5-c53d-4ade-b84f-cdcde642f664",
+          "segment_id": "fffeb2b5-c53d-4ade-b84f-cdcde642f664",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.62,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.62,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:535fa37881a0",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment输出 Golden Dataset 基线报告并完成稳定性测试",
+        "owner": "陈涛",
+        "responsibility_type": "commitment",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:a8b58ce8-3855-4889-9e23-e3c10e2c0455,fffeb2b5-c53d-4ade-b84f-cdcde642f664,0d702341-b351-4266-aaad-9eecb3c2fd10:2bba276c4a90",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:4b84647b49aa",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455,fffeb2b5-c53d-4ade-b84f-cdcde642f664,0d702341-b351-4266-aaad-9eecb3c2fd10",
+          "segment_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455,fffeb2b5-c53d-4ade-b84f-cdcde642f664,0d702341-b351-4266-aaad-9eecb3c2fd10",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.62,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.62,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:262d829102ff",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information什么时候给结果？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:0d702341-b351-4266-aaad-9eecb3c2fd10:9dfeab90bd7c",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:eb018550d1bd",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "0d702341-b351-4266-aaad-9eecb3c2fd10",
+          "segment_id": "0d702341-b351-4266-aaad-9eecb3c2fd10",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "什么时候给结果？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:8f52ed66a6ad",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information明天下午之前。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:936930aa-d6e5-487e-9698-b3d8552236af:6aa76262e431",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:a2940485def5",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "936930aa-d6e5-487e-9698-b3d8552236af",
+          "segment_id": "936930aa-d6e5-487e-9698-b3d8552236af",
+          "speaker_id": "陈涛",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "明天下午之前。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:64ccd4732684",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment赵敏，你补充真实会议测试样本。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:5d10dc30-3a1f-4e71-90b9-cf30b082908e:fee40978deaf",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:811fcd92df4a",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "5d10dc30-3a1f-4e71-90b9-cf30b082908e",
+          "segment_id": "5d10dc30-3a1f-4e71-90b9-cf30b082908e",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "赵敏，你补充真实会议测试样本。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        },
+        {
+          "evidence_id": "ev:5feb7f667ec6",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "936930aa-d6e5-487e-9698-b3d8552236af,5d10dc30-3a1f-4e71-90b9-cf30b082908e,2b0d6027-b518-4b2f-bec1-fa13877e3265",
+          "segment_id": "936930aa-d6e5-487e-9698-b3d8552236af,5d10dc30-3a1f-4e71-90b9-cf30b082908e,2b0d6027-b518-4b2f-bec1-fa13877e3265",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:6da8262e6d57",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:2b0d6027-b518-4b2f-bec1-fa13877e3265:d887da36d6a3",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:0f257bca38eb",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "2b0d6027-b518-4b2f-bec1-fa13877e3265",
+          "segment_id": "2b0d6027-b518-4b2f-bec1-fa13877e3265",
+          "speaker_id": "赵敏",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:c489c6ac343e",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information明天吧。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:5ffa745f-8284-4e04-9fe5-cc337b8ca0f2:42619f189093",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:de7db6eb9cc5",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "5ffa745f-8284-4e04-9fe5-cc337b8ca0f2",
+          "segment_id": "5ffa745f-8284-4e04-9fe5-cc337b8ca0f2",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "明天吧。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:0b50e5e5659f",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information好的。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:dcaf9edf-a82d-4897-9153-3a2b9c502b92:588eced789c6",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:eb591116a392",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "dcaf9edf-a82d-4897-9153-3a2b9c502b92",
+          "segment_id": "dcaf9edf-a82d-4897-9153-3a2b9c502b92",
+          "speaker_id": "赵敏",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好的。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:ecd5300df553",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information王强，下午安排录音流程测试。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:40a4e229-cb61-4069-adcf-96d63412de39:a41abed5b0ad",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:7415325654db",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "40a4e229-cb61-4069-adcf-96d63412de39",
+          "segment_id": "40a4e229-cb61-4069-adcf-96d63412de39",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "王强，下午安排录音流程测试。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:d7d8c4c246cc",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment王强，下午安排录音流程测试。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:dcaf9edf-a82d-4897-9153-3a2b9c502b92,40a4e229-cb61-4069-adcf-96d63412de39,83a37dec-23b2-4b62-8e04-c7118c20725d:47bbd9f955ca",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:a3e9c3ffa9ea",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "dcaf9edf-a82d-4897-9153-3a2b9c502b92,40a4e229-cb61-4069-adcf-96d63412de39,83a37dec-23b2-4b62-8e04-c7118c20725d",
+          "segment_id": "dcaf9edf-a82d-4897-9153-3a2b9c502b92,40a4e229-cb61-4069-adcf-96d63412de39,83a37dec-23b2-4b62-8e04-c7118c20725d",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:1f87d3a3c7d3",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information没问题。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:83a37dec-23b2-4b62-8e04-c7118c20725d:f0c501d39c43",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:6818f4c9157f",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "83a37dec-23b2-4b62-8e04-c7118c20725d",
+          "segment_id": "83a37dec-23b2-4b62-8e04-c7118c20725d",
+          "speaker_id": "王强",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "没问题。",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:18dc01c3fbcd",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:ff78b085-1957-43c2-a96b-eab6b251a9b7:0aa7758e8cac",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:ed1efec83912",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "ff78b085-1957-43c2-a96b-eab6b251a9b7",
+          "segment_id": "ff78b085-1957-43c2-a96b-eab6b251a9b7",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:responsibility:cb72bb0c639a",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information没有其他事情的话，今天先这样。 散会。 【会议结束】",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "source_event": {
+        "source_type": "responsibility_context",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "resp:9eacff08-3a02-4446-b482-4b8065a6aa46:44824afd-8315-46f4-9f5b-872867c1f6ae:71803de5ed90",
+        "occurred_at": "2026-08-11T16:40:13.944892Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:a3dbc6de4524",
+          "source_type": "semantic_event",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "44824afd-8315-46f4-9f5b-872867c1f6ae",
+          "segment_id": "44824afd-8315-46f4-9f5b-872867c1f6ae",
+          "speaker_id": "张伟",
+          "start_time": null,
+          "end_time": null,
+          "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.35,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:bbe7f7e2dfc6",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '人都到了吧？ 赵敏，你声音正常吗？', 'topic_id': 'topic_1', 'source_event_ids': ['32892ac0-d392-5d46-a5b7-8851132c8800'], 'source_texts': ['人都到了吧？ 赵敏，你声音正常吗？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "32892ac0-d392-5d46-a5b7-8851132c8800",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:1cfe27bbd91e",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "32892ac0-d392-5d46-a5b7-8851132c8800",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "人都到了吧？ 赵敏，你声音正常吗？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:7ea56e2d97de",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '可以，能听到。', 'topic_id': 'topic_2', 'source_event_ids': ['0c4cc7f5-bcd1-5e58-b525-60824f90f511'], 'source_texts': ['可以，能听到。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "0c4cc7f5-bcd1-5e58-b525-60824f90f511",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b894f6957e6a",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "0c4cc7f5-bcd1-5e58-b525-60824f90f511",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "可以，能听到。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:95fa98b88c42",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。', 'topic_id': 'topic_3', 'source_event_ids': ['a69fdcbf-6e7f-5f68-955d-0b2241571419'], 'source_texts': ['行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "a69fdcbf-6e7f-5f68-955d-0b2241571419",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:48da0dc3622b",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a69fdcbf-6e7f-5f68-955d-0b2241571419",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "行，那我们开始。 今天不用讲特别细，主要看几个问题。 上周那个 AI 分析稳定性，还有录音流程。 另外测试那边也反馈了一些真实场景的问题。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:ede37b93b6a8",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。', 'topic_id': 'topic_4', 'source_event_ids': ['fcb59aa2-a0fc-56ec-9e79-93f46fcbed61'], 'source_texts': ['我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "fcb59aa2-a0fc-56ec-9e79-93f46fcbed61",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:0ea951f4fe2e",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "fcb59aa2-a0fc-56ec-9e79-93f46fcbed61",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我先说产品这边吧。 整体需求其实没有大的变化。 但是用户反馈有两个比较明显。 第一个就是会议结束以后，用户不知道是不是还在生成。 有些人一直点刷新。 第二个就是 AI 纪要里面，待办和问题有时候混在一起。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:1311e5cfd242",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '这个待办混乱的问题，上周不是已经看过一次了吗？', 'topic_id': 'topic_5', 'source_event_ids': ['aacd886a-0b96-5c0d-bdc9-51af185d2c34'], 'source_texts': ['这个待办混乱的问题，上周不是已经看过一次了吗？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "aacd886a-0b96-5c0d-bdc9-51af185d2c34",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:0fb311bb564d",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "aacd886a-0b96-5c0d-bdc9-51af185d2c34",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个待办混乱的问题，上周不是已经看过一次了吗？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:34ab1a8b42a0",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '对，看过。 但是现在感觉还是有。', 'topic_id': 'topic_6', 'source_event_ids': ['99406fd7-3593-5bad-850e-5da0eb1be365'], 'source_texts': ['对，看过。 但是现在感觉还是有。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "99406fd7-3593-5bad-850e-5da0eb1be365",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:41d0c879624b",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "99406fd7-3593-5bad-850e-5da0eb1be365",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "对，看过。 但是现在感觉还是有。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:7509bec4f5a8",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '“这个事情后面关注一下。”', 'topic_id': 'topic_7', 'source_event_ids': ['08f95385-c972-5995-8116-599cf925e072'], 'source_texts': ['“这个事情后面关注一下。”'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "08f95385-c972-5995-8116-599cf925e072",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:8837a296d313",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "08f95385-c972-5995-8116-599cf925e072",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“这个事情后面关注一下。”",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:3de5af398d0a",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '这个用户其实感知会很明显。 他们不会管你后面有多少层流程。', 'topic_id': 'topic_10', 'source_event_ids': ['c056a160-cd90-5eb5-bffc-6546bf897790'], 'source_texts': ['这个用户其实感知会很明显。 他们不会管你后面有多少层流程。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "c056a160-cd90-5eb5-bffc-6546bf897790",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:1778b9a96048",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "c056a160-cd90-5eb5-bffc-6546bf897790",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个用户其实感知会很明显。 他们不会管你后面有多少层流程。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:b9432e7efc19",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。', 'topic_id': 'topic_11', 'source_event_ids': ['c2f98b6a-303a-5fa0-9acd-43f32f874c01'], 'source_texts': ['第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "c2f98b6a-303a-5fa0-9acd-43f32f874c01",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:1c546cefe085",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "c2f98b6a-303a-5fa0-9acd-43f32f874c01",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "第一次三个任务，刷新一下变两个。 然后觉得 AI 不稳定。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:32156640e5bc",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。', 'topic_id': 'topic_13', 'source_event_ids': ['a65399d5-164f-5441-b005-a2f3587dee42'], 'source_texts': ['但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "a65399d5-164f-5441-b005-a2f3587dee42",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:7f6249050c64",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a65399d5-164f-5441-b005-a2f3587dee42",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "但是如果用户已经觉得不准了，技术原因其实解释不了。 他们只看结果。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:9808bcd2cdd9",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。', 'topic_id': 'topic_15', 'source_event_ids': ['2a43ad41-3deb-5763-85da-13e11ab9c42a'], 'source_texts': ['这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "2a43ad41-3deb-5763-85da-13e11ab9c42a",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e8f478ff7ed4",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "2a43ad41-3deb-5763-85da-13e11ab9c42a",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个优先级先确定一下。 稳定性问题最高。 标题那些优化先放一下。 先把六维输出稳定。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:696f8f4f3fd3",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。', 'topic_id': 'topic_16', 'source_event_ids': ['b21c7c8a-356d-570a-8fb4-25b93f7965b9'], 'source_texts': ['我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "b21c7c8a-356d-570a-8fb4-25b93f7965b9",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:632d0080de40",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "b21c7c8a-356d-570a-8fb4-25b93f7965b9",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我说一下测试。 现在测试数据有一个问题。 我们之前准备的数据太规范了。 不像真实会议。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:bd7b6c31d5ab",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '什么意思？', 'topic_id': 'topic_17', 'source_event_ids': ['91e2d58a-118f-5417-96d1-c16fbfa19428'], 'source_texts': ['什么意思？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "91e2d58a-118f-5417-96d1-c16fbfa19428",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:25adb562ea95",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "91e2d58a-118f-5417-96d1-c16fbfa19428",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "什么意思？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:675329d825db",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '“我将在8月15日前完成接口开发。”', 'topic_id': 'topic_18', 'source_event_ids': ['b68332f4-171d-5047-86f7-f78cba0a3e0c'], 'source_texts': ['“我将在8月15日前完成接口开发。”'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "b68332f4-171d-5047-86f7-f78cba0a3e0c",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b80cb91ea69b",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "b68332f4-171d-5047-86f7-f78cba0a3e0c",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“我将在8月15日前完成接口开发。”",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:faa0ad3692d1",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”', 'topic_id': 'topic_19', 'source_event_ids': ['3c12704d-838e-5ef9-aac6-e0da0a2623c7'], 'source_texts': ['“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "3c12704d-838e-5ef9-aac6-e0da0a2623c7",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:be387fe9e07f",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "3c12704d-838e-5ef9-aac6-e0da0a2623c7",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“这个我这周尽量看一下。” “应该问题不大。” “后面有时间处理一下。”",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:cd51c910e552",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。', 'topic_id': 'topic_20', 'source_event_ids': ['df08f3ba-459f-5095-83d9-437fbdc9e1b6'], 'source_texts': ['对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "df08f3ba-459f-5095-83d9-437fbdc9e1b6",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:fb8dc390d639",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "df08f3ba-459f-5095-83d9-437fbdc9e1b6",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "对。 这种其实最难判断。 因为有些是真任务。 有些只是表达。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:dc2fde8366e6",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '还有一个。 之前测试发现一个情况。', 'topic_id': 'topic_21', 'source_event_ids': ['b98d6b62-3994-5a85-b2bb-45623214cec6'], 'source_texts': ['还有一个。 之前测试发现一个情况。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "b98d6b62-3994-5a85-b2bb-45623214cec6",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:1c690d538c46",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "b98d6b62-3994-5a85-b2bb-45623214cec6",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个。 之前测试发现一个情况。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:536d3dfad3b9",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '“增加PDF导出功能。” 但是会议根本没决定。', 'topic_id': 'topic_23', 'source_event_ids': ['3e7a6f0d-4c9d-5e64-bcd6-b1e291cff7cf'], 'source_texts': ['“增加PDF导出功能。” 但是会议根本没决定。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "3e7a6f0d-4c9d-5e64-bcd6-b1e291cff7cf",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b78df7390ad7",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "3e7a6f0d-4c9d-5e64-bcd6-b1e291cff7cf",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“增加PDF导出功能。” 但是会议根本没决定。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:88ce1e50f50c",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '这个确实。 我们只是讨论方向。', 'topic_id': 'topic_24', 'source_event_ids': ['6e11c2cb-f8e0-54fa-877f-a04eb57eac5c'], 'source_texts': ['这个确实。 我们只是讨论方向。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "6e11c2cb-f8e0-54fa-877f-a04eb57eac5c",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:f0e449690f77",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "6e11c2cb-f8e0-54fa-877f-a04eb57eac5c",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个确实。 我们只是讨论方向。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:51c91e6e70bc",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。', 'topic_id': 'topic_25', 'source_event_ids': ['d3298f4a-cdf0-53b0-b234-f5b040f0b6c3'], 'source_texts': ['这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "d3298f4a-cdf0-53b0-b234-f5b040f0b6c3",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:09f8055b6ae9",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "d3298f4a-cdf0-53b0-b234-f5b040f0b6c3",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个先记录。 proposal 和 decision 区分问题，需要技术评估。 但是今天不要展开。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:12d574b0002c",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '什么时候可以测试？', 'topic_id': 'topic_27', 'source_event_ids': ['df6997df-ae52-5ae2-8b60-6ceb73a107b7'], 'source_texts': ['什么时候可以测试？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "df6997df-ae52-5ae2-8b60-6ceb73a107b7",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:26f0d8321457",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "df6997df-ae52-5ae2-8b60-6ceb73a107b7",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "什么时候可以测试？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:b3042aef035f",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '下午吧。 不过有个小问题。 长会议详情页可能会慢一点。', 'topic_id': 'topic_28', 'source_event_ids': ['032d36c0-11ae-557a-b2b8-0ca9148d3681'], 'source_texts': ['下午吧。 不过有个小问题。 长会议详情页可能会慢一点。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "032d36c0-11ae-557a-b2b8-0ca9148d3681",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:db391ff979e5",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "032d36c0-11ae-557a-b2b8-0ca9148d3681",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "下午吧。 不过有个小问题。 长会议详情页可能会慢一点。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:79bd2fc9e152",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '是接口问题？', 'topic_id': 'topic_29', 'source_event_ids': ['b6c406ef-693a-577c-a7ab-d3110f3c3156'], 'source_texts': ['是接口问题？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "b6c406ef-693a-577c-a7ab-d3110f3c3156",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:f46fc2195f12",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "b6c406ef-693a-577c-a7ab-d3110f3c3156",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "是接口问题？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:adae165c9860",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '嗯，这个先作为优化项。 不要影响版本。', 'topic_id': 'topic_32', 'source_event_ids': ['4dd2df8e-6a71-5ee4-bc51-8f1ff069f71a'], 'source_texts': ['嗯，这个先作为优化项。 不要影响版本。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "4dd2df8e-6a71-5ee4-bc51-8f1ff069f71a",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:fff6567ed35c",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "4dd2df8e-6a71-5ee4-bc51-8f1ff069f71a",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "嗯，这个先作为优化项。 不要影响版本。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:949e7b2e10db",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '这个会影响上线吗？', 'topic_id': 'topic_34', 'source_event_ids': ['d6b3d6d6-717e-5d12-885e-f85ece451bde'], 'source_texts': ['这个会影响上线吗？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "d6b3d6d6-717e-5d12-885e-f85ece451bde",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:c2f621d84013",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "d6b3d6d6-717e-5d12-885e-f85ece451bde",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个会影响上线吗？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:301ad8af2174",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。', 'topic_id': 'topic_35', 'source_event_ids': ['73b57c6b-0868-5c09-830c-fbf82c619efc'], 'source_texts': ['目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "73b57c6b-0868-5c09-830c-fbf82c619efc",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:9a1c1cacfeb7",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "73b57c6b-0868-5c09-830c-fbf82c619efc",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "目前不会。 只是提前提醒。 后面需要考虑云GPU或者其他方案。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:0023ac713b40",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。', 'topic_id': 'topic_39', 'source_event_ids': ['b184e95c-f159-5c8e-870e-8d7f90ddffd4'], 'source_texts': ['可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "b184e95c-f159-5c8e-870e-8d7f90ddffd4",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:6cef27e1a8ef",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "b184e95c-f159-5c8e-870e-8d7f90ddffd4",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:f8f7e34413f0",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '什么时候给结果？', 'topic_id': 'topic_40', 'source_event_ids': ['9b5e6fff-88a0-589a-b38c-3f07fcf6baa1'], 'source_texts': ['什么时候给结果？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "9b5e6fff-88a0-589a-b38c-3f07fcf6baa1",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:7a1886aed18e",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "9b5e6fff-88a0-589a-b38c-3f07fcf6baa1",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "什么时候给结果？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:ac73d9dd23f6",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '明天下午之前。', 'topic_id': 'topic_41', 'source_event_ids': ['acc49ffa-086f-5223-b352-0ed2d792a31d'], 'source_texts': ['明天下午之前。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "acc49ffa-086f-5223-b352-0ed2d792a31d",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:6de68b3ab016",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "acc49ffa-086f-5223-b352-0ed2d792a31d",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "明天下午之前。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:89df144d36ae",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '好的。 我整理5个典型场景。 不过时间是今天还是明天？', 'topic_id': 'topic_43', 'source_event_ids': ['c95d675d-2d6c-59a8-9d3d-f1624f85a21f'], 'source_texts': ['好的。 我整理5个典型场景。 不过时间是今天还是明天？'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "c95d675d-2d6c-59a8-9d3d-f1624f85a21f",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:c9706d85cf0f",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "c95d675d-2d6c-59a8-9d3d-f1624f85a21f",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好的。 我整理5个典型场景。 不过时间是今天还是明天？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:e7e4343c3374",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '明天吧。', 'topic_id': 'topic_44', 'source_event_ids': ['966ba2cb-3fa5-5087-b657-07e918006072'], 'source_texts': ['明天吧。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "966ba2cb-3fa5-5087-b657-07e918006072",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:00e503fb8aca",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "966ba2cb-3fa5-5087-b657-07e918006072",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "明天吧。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:1326a73e09c8",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '好的。', 'topic_id': 'topic_45', 'source_event_ids': ['fa9fb104-0f48-56dd-9d8d-dc003749eaf2'], 'source_texts': ['好的。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "fa9fb104-0f48-56dd-9d8d-dc003749eaf2",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:34cdb66be1cd",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "fa9fb104-0f48-56dd-9d8d-dc003749eaf2",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好的。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:25edba05cf7f",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '王强，下午安排录音流程测试。', 'topic_id': 'topic_46', 'source_event_ids': ['19c7d334-71dc-561c-8886-3d3a9a14f28f'], 'source_texts': ['王强，下午安排录音流程测试。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "19c7d334-71dc-561c-8886-3d3a9a14f28f",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:394347944036",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "19c7d334-71dc-561c-8886-3d3a9a14f28f",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "王强，下午安排录音流程测试。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:331c3d857967",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '没问题。', 'topic_id': 'topic_47', 'source_event_ids': ['3914d6ca-60d8-5858-b621-620cfdfd3089'], 'source_texts': ['没问题。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "3914d6ca-60d8-5858-b621-620cfdfd3089",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:6533e0c179d4",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "3914d6ca-60d8-5858-b621-620cfdfd3089",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "没问题。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:4ef8f8b1e097",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）', 'topic_id': 'topic_48', 'source_event_ids': ['a78867ea-27f0-5a4d-884e-f806fd82a364'], 'source_texts': ['还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "a78867ea-27f0-5a4d-884e-f806fd82a364",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:466d7d063128",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a78867ea-27f0-5a4d-884e-f806fd82a364",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个性能优化先不要急。 等版本稳定以后再看。 （短暂停顿）",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:3626a7050dd3",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '没有其他事情的话，今天先这样。 散会。 【会议结束】', 'topic_id': 'topic_48', 'source_event_ids': ['edd69ca0-4967-5641-b116-74e63c46a20f'], 'source_texts': ['没有其他事情的话，今天先这样。 散会。 【会议结束】'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': []}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "edd69ca0-4967-5641-b116-74e63c46a20f",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:586fd3c81794",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "edd69ca0-4967-5641-b116-74e63c46a20f",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "没有其他事情的话，今天先这样。 散会。 【会议结束】",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:15152679f9b7",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "decision",
+        "text": "{'content': '嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。', 'topic_id': 'topic_14', 'source_event_ids': ['a2daf2af-3531-5756-b907-9cd50b86d753'], 'source_texts': ['嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'status': 'confirmed'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "a2daf2af-3531-5756-b907-9cd50b86d753",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:6eff58f205a3",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a2daf2af-3531-5756-b907-9cd50b86d753",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "嗯，这个我同意。 我的意思是先定位。 不要直接改一个地方，可能改完引入其他问题。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:c261668d6041",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "decision",
+        "text": "{'content': '这个后面可以拆。 但是不是 V2.6 必须。', 'topic_id': 'topic_31', 'source_event_ids': ['de8a661c-97d0-5995-9b32-9ca779659648'], 'source_texts': ['这个后面可以拆。 但是不是 V2.6 必须。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'status': 'confirmed'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "de8a661c-97d0-5995-9b32-9ca779659648",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:d373c337ac4b",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "de8a661c-97d0-5995-9b32-9ca779659648",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个后面可以拆。 但是不是 V2.6 必须。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:a85e5225580a",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '“负责人跟进这个事情。” 但是实际上用户只是提醒一下。', 'topic_id': 'topic_8', 'source_event_ids': ['be42b8d5-cc39-48b5-931d-f9c75150de2c'], 'source_texts': ['“负责人跟进这个事情。” 但是实际上用户只是提醒一下。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'owner': '模型有时候直接变成', 'deadline': None, 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "be42b8d5-cc39-48b5-931d-f9c75150de2c",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e962beb9cef9",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "be42b8d5-cc39-48b5-931d-f9c75150de2c",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "“负责人跟进这个事情。” 但是实际上用户只是提醒一下。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:5e7f7bbb41cb",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。', 'topic_id': 'topic_9', 'source_event_ids': ['9a097348-641b-47ac-921e-51526f81bab9'], 'source_texts': ['嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'owner': '陈涛', 'deadline': None, 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "9a097348-641b-47ac-921e-51526f81bab9",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e80776f6a98c",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "9a097348-641b-47ac-921e-51526f81bab9",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "嗯，这个我补充一下。 其实这个不完全是 Prompt 的问题。 昨天我们跑了一批数据。 同一个会议文本，第一次出来三个待办。 第二次可能只有一个。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:d5116eed76bf",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。', 'topic_id': 'topic_26', 'source_event_ids': ['16480836-6d82-4c7e-a0b9-98b07efcd318'], 'source_texts': ['我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'owner': '王强', 'deadline': None, 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "16480836-6d82-4c7e-a0b9-98b07efcd318",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b09ea440a08f",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "16480836-6d82-4c7e-a0b9-98b07efcd318",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我同步一下前端。 录音页面现在基本完成。 结束会议以后增加了二次确认。 生成状态也增加了处理中。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:d8b6fae5520b",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。', 'topic_id': 'topic_38', 'source_event_ids': ['a8b58ce8-3855-4889-9e23-e3c10e2c0455'], 'source_texts': ['任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'owner': '张伟', 'deadline': None, 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:98258895ec33",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:6ce3e4523bc2",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '输出 Golden Dataset 基线报告并完成稳定性测试', 'topic_id': 'topic_39', 'source_event_ids': ['a8b58ce8-3855-4889-9e23-e3c10e2c0455,fffeb2b5-c53d-4ade-b84f-cdcde642f664,0d702341-b351-4266-aaad-9eecb3c2fd10'], 'source_texts': ['任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\\n什么时候给结果？'], 'confidence': 0.78, 'needs_review': False, 'validation_errors': [], 'owner': None, 'deadline': '今天', 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455,fffeb2b5-c53d-4ade-b84f-cdcde642f664,0d702341-b351-4266-aaad-9eecb3c2fd10",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:88c082ff77f4",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "a8b58ce8-3855-4889-9e23-e3c10e2c0455,fffeb2b5-c53d-4ade-b84f-cdcde642f664,0d702341-b351-4266-aaad-9eecb3c2fd10",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "任务确认一下。 陈涛，你负责排查AI分析结果波动原因。 重点看模型输出和后处理链路。\n可以。 我今天先跑一批Golden Dataset。 看每个阶段输出。\n什么时候给结果？",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:d5ff8ca65072",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '赵敏，你补充真实会议测试样本。', 'topic_id': 'topic_42', 'source_event_ids': ['5d10dc30-3a1f-4e71-90b9-cf30b082908e'], 'source_texts': ['赵敏，你补充真实会议测试样本。\\n明天下午之前。\\n赵敏，你补充真实会议测试样本。\\n好的。 我整理5个典型场景。 不过时间是今天还是明天？', '赵敏，你补充真实会议测试样本。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'owner': '张伟', 'deadline': None, 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "5d10dc30-3a1f-4e71-90b9-cf30b082908e",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:b7d4df7ed997",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "5d10dc30-3a1f-4e71-90b9-cf30b082908e",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "赵敏，你补充真实会议测试样本。\n明天下午之前。\n赵敏，你补充真实会议测试样本。\n好的。 我整理5个典型场景。 不过时间是今天还是明天？\n赵敏，你补充真实会议测试样本。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:749160ba310e",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "project_fact",
+        "text": "{'content': '王强，下午安排录音流程测试。', 'topic_id': 'topic_46', 'source_event_ids': ['dcaf9edf-a82d-4897-9153-3a2b9c502b92,40a4e229-cb61-4069-adcf-96d63412de39,83a37dec-23b2-4b62-8e04-c7118c20725d'], 'source_texts': ['好的。\\n王强，下午安排录音流程测试。\\n没问题。'], 'confidence': 0.78, 'needs_review': False, 'validation_errors': [], 'owner': None, 'deadline': None, 'priority': 'medium', 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "dcaf9edf-a82d-4897-9153-3a2b9c502b92,40a4e229-cb61-4069-adcf-96d63412de39,83a37dec-23b2-4b62-8e04-c7118c20725d",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:ca8d89aa5a5e",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "dcaf9edf-a82d-4897-9153-3a2b9c502b92,40a4e229-cb61-4069-adcf-96d63412de39,83a37dec-23b2-4b62-8e04-c7118c20725d",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好的。\n王强，下午安排录音流程测试。\n没问题。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:c75190e51183",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。', 'topic_id': 'topic_12', 'source_event_ids': ['81eef36c-1dea-5476-a56c-fd1bd6de1551'], 'source_texts': ['对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "81eef36c-1dea-5476-a56c-fd1bd6de1551",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e486d38b0405",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "81eef36c-1dea-5476-a56c-fd1bd6de1551",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "对，我理解。 但是这里可能不是一个点的问题。 现在流程比较长。 语义事件、RAG、模型生成、后处理、Validator。 都有可能影响。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:c1f662312e92",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。', 'topic_id': 'topic_30', 'source_event_ids': ['19d0fa0a-1ecd-5f7b-aa00-5c636c956a0d'], 'source_texts': ['不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "19d0fa0a-1ecd-5f7b-aa00-5c636c956a0d",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:7ff1b76ca1e9",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "19d0fa0a-1ecd-5f7b-aa00-5c636c956a0d",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "不完全是。 现在全文记录和分析结果一起加载。 长文本可能压力比较大。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:b2b5980d57c3",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。', 'topic_id': 'topic_33', 'source_event_ids': ['e944a462-0850-5897-a8f4-ce1c5bc0f707'], 'source_texts': ['还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "e944a462-0850-5897-a8f4-ce1c5bc0f707",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:e781035e88e5",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "e944a462-0850-5897-a8f4-ce1c5bc0f707",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个事情提前说一下。 现在本地14B模型测试没问题。 但是以后如果用户量起来，我感觉服务器压力可能会比较明显。 现在还没有做压测。 所以这个方案不能完全保证。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:cec1f1613c6a",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '好，这个放风险里面。', 'topic_id': 'topic_36', 'source_event_ids': ['bb1feb28-fb7f-593d-9dab-a297ad1b40c6'], 'source_texts': ['好，这个放风险里面。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '好，这个放风险里面。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "bb1feb28-fb7f-593d-9dab-a297ad1b40c6",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:cbb370f04793",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "bb1feb28-fb7f-593d-9dab-a297ad1b40c6",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "好，这个放风险里面。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:7a95e8834b2f",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。', 'topic_id': 'topic_37', 'source_event_ids': ['3895f04b-ba41-5e07-beab-14c2252bdc7f'], 'source_texts': ['还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "3895f04b-ba41-5e07-beab-14c2252bdc7f",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:ba1189d0f7bc",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "3895f04b-ba41-5e07-beab-14c2252bdc7f",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "还有一个用户体验风险。 有客户希望会议结束几分钟内看到结果。 但是长会议现在生成时间可能比较久。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:a8d87118a7e4",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '这个也是风险。 先记录，不作为当前版本任务。', 'topic_id': 'topic_38', 'source_event_ids': ['2998a73c-249c-5abe-9f02-7b1ad2041c90'], 'source_texts': ['这个也是风险。 先记录，不作为当前版本任务。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '这个也是风险。 先记录，不作为当前版本任务。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "2998a73c-249c-5abe-9f02-7b1ad2041c90",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:01267a52600d",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "2998a73c-249c-5abe-9f02-7b1ad2041c90",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "这个也是风险。 先记录，不作为当前版本任务。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    },
+    {
+      "memory_id": "mem:meeting:13134fb663e8",
+      "memory_type": "meeting",
+      "content": {
+        "meeting_memory_type": "risk",
+        "text": "{'content': '我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。', 'topic_id': 'topic_38', 'source_event_ids': ['bb676a2b-0269-580f-b286-e734810ae00d'], 'source_texts': ['我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。'], 'confidence': 0.72, 'needs_review': False, 'validation_errors': [], 'condition': '我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。', 'impact': None, 'mitigation': None, 'status': 'pending'}",
+        "related_entities": [],
+        "related_responsibilities": [],
+        "effective_status": "current"
+      },
+      "source_event": {
+        "source_type": "formal_summary_item",
+        "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+        "source_id": "bb676a2b-0269-580f-b286-e734810ae00d",
+        "occurred_at": null
+      },
+      "evidence": [
+        {
+          "evidence_id": "ev:7fc3a3a6e40c",
+          "source_type": "formal_summary_item",
+          "meeting_id": "9eacff08-3a02-4446-b482-4b8065a6aa46",
+          "source_id": "bb676a2b-0269-580f-b286-e734810ae00d",
+          "segment_id": null,
+          "speaker_id": null,
+          "start_time": null,
+          "end_time": null,
+          "source_text": "我总结一下。 第一，AI分析稳定性优先级最高。 第二，测试数据增加真实会议表达。 第三，proposal和decision区分问题技术评估。 第四，前端录音流程下午测试。 第五，生产环境模型资源风险提前关注。",
+          "supported_fields": [
+            "text",
+            "meeting_memory_type"
+          ],
+          "confidence": 0.0,
+          "created_at": "2026-08-11T16:40:13.944892Z",
+          "metadata": {}
+        }
+      ],
+      "confidence": 0.0,
+      "created_at": "2026-08-11T16:40:13.944892Z",
+      "status": "candidate"
+    }
+  ]
+}

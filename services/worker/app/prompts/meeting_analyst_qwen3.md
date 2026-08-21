@@ -26,6 +26,52 @@
 13. 严禁输出 `发言人：...内容` 这种缩写证据；如果原文证据太长，宁可减少条目，也不能缩写 source_text。
 14. source_text 不要求包含发言人名；可以只复制原文中的连续关键子句，例如 `我会后补充异常场景、超时重试、失败回滚方案，今天内更新文档。`
 
+【Output Contract：meeting-analysis-v1】
+你必须输出 meeting-analysis-v1 契约 JSON。
+meeting-analysis-v1 是契约名称，不是 JSON 字段名。
+禁止把 meeting-analysis-v1 作为顶层 key。
+顶层只能包含以下字段，不得增加、删除、改名或翻译字段名：
+- meeting_type
+- meeting_type_confidence
+- meeting_title_candidate
+- title_basis
+- meeting_agenda
+- meeting_summary
+- key_conclusions
+- action_items
+- unresolved_issues
+- risks_and_focus
+
+字段名必须严格使用英文 snake_case。
+不得把六维内容包在任何外层对象中。
+不得输出中文顶层字段。
+不得输出旧纪要结构。
+不得输出以下字段名：
+- 会议纪要
+- 主要决定
+- 任务分配
+- 风险点
+- title_candidates
+- title_justification
+- title_candidate
+- meeting_title_candidates
+- agenda
+- summary
+- decisions
+- risks
+- open_questions
+- next_steps
+- follow_up
+- risks_and_concerns
+- conclusions
+- tasks
+- issues
+- risk_points
+
+标题字段必须使用：
+- meeting_title_candidate
+- title_basis
+
 【跨会议污染禁止规则】
 1. 只能分析当前【会议原文】中的内容。
 2. 不允许引用、复用、迁移历史测试会议中的项目、需求、结论或任务。
@@ -264,6 +310,73 @@ title_basis 必须至少包含 2 条依据，每条依据说明标题来自会�
 【RAG 知识规则】
 {{RAG_CONTEXT}}
 
+【错误输出示例：禁止】
+下面这种结构是错误的，即使它是合法 JSON 也不能输出：
+{
+  "会议纪要": {
+    "主要决定": {},
+    "任务分配": {},
+    "风险点": {}
+  }
+}
+
+错误原因：
+- 顶层字段不是 meeting-analysis-v1 字段。
+- 使用了中文顶层字段。
+- 缺少 meeting_agenda、meeting_summary、key_conclusions、action_items、unresolved_issues、risks_and_focus。
+
+【正确输出示例：必须遵循】
+下面这种结构才是正确的 meeting-analysis-v1 顶层结构。实际内容必须来自【会议原文】，示例文字不能照抄：
+{
+  "meeting_type": "project_weekly",
+  "meeting_type_confidence": 0.8,
+  "meeting_title_candidate": "项目周例会：进度同步与风险确认",
+  "title_basis": [
+    "会议围绕项目当前进度、阻塞事项和后续安排展开。",
+    "会议议程和总结均体现本次会议是项目周度进度同步。"
+  ],
+  "meeting_agenda": [
+    "同步项目当前进度",
+    "讨论阻塞问题与风险",
+    "确认后续执行安排"
+  ],
+  "meeting_summary": "会议围绕项目进度、当前阻塞、范围调整和后续安排展开，参会方对核心事项进行了确认，并明确了后续需要继续推进的问题。",
+  "key_conclusions": [
+    {
+      "conclusion": "会议已确认的结论",
+      "source_text": "原文完整连续片段；禁止使用 ... 或 ……",
+      "confidence": 0.8
+    }
+  ],
+  "action_items": [
+    {
+      "owner_name": null,
+      "task": "会议后需要执行的具体动作",
+      "deadline": null,
+      "priority": null,
+      "source_text": "原文完整连续片段；禁止使用 ... 或 ……",
+      "confidence": 0.8
+    }
+  ],
+  "unresolved_issues": [
+    {
+      "issue": "会议结束时仍未解决的问题",
+      "reason": "问题仍未解决的原因",
+      "source_text": "原文完整连续片段；禁止使用 ... 或 ……",
+      "confidence": 0.8
+    }
+  ],
+  "risks_and_focus": [
+    {
+      "risk": "未来可能发生的不利情况",
+      "impact": "原文支持的潜在影响",
+      "focus_area": "需要关注的范围",
+      "source_text": "原文完整连续片段；禁止使用 ... 或 ……",
+      "confidence": 0.8
+    }
+  ]
+}
+
 【输出 JSON Schema】
 {
   "meeting_type": "project_weekly | progress_sync | requirement_review | solution_review | project_retrospective | risk_review | release_review | customer_communication | training | interview | one_on_one | other",
@@ -323,3 +436,45 @@ title_basis 必须至少包含 2 条依据，每条依据说明标题来自会�
 
 【会议原文】
 {{TRANSCRIPT}}
+
+【最终输出前检查】
+现在只输出一个符合 meeting-analysis-v1 契约的 JSON 对象。
+meeting-analysis-v1 是契约名称，不是字段名。
+禁止输出 `"meeting-analysis-v1": {...}` 这种外层包装。
+最终 JSON 必须直接以 `{ "meeting_type": ... }` 这种结构开始。
+顶层只能使用这些英文 key：
+meeting_type, meeting_type_confidence, meeting_title_candidate, title_basis, meeting_agenda, meeting_summary, key_conclusions, action_items, unresolved_issues, risks_and_focus
+
+禁止输出任何外层包装对象。
+禁止输出中文顶层 key。
+禁止输出：会议纪要、主要决定、任务分配、风险点。
+禁止输出：meeting-analysis-v1。
+禁止输出：title_candidates、title_justification。
+禁止输出：title_candidate、meeting_title_candidates、agenda、summary、decisions、risks、open_questions、next_steps、follow_up、risks_and_concerns。
+标题候选必须写入 meeting_title_candidate。
+标题依据必须写入 title_basis。
+即使标题依据不足，也必须保留 title_basis 字段，值为 []。
+议程必须写入 meeting_agenda。
+总结必须写入 meeting_summary。
+风险必须写入 risks_and_focus。
+不要使用任何同义字段名。字段名只能逐字复制下面 10 个字段名。
+如果你想输出 title_candidates，必须改成 meeting_title_candidate。
+如果你想输出 agenda，必须改成 meeting_agenda。
+如果你想输出 summary，必须改成 meeting_summary。
+如果你想输出 risks 或 risks_and_concerns，必须改成 risks_and_focus。
+如果你想输出 follow_up 或 next_steps，必须改成 action_items。
+如果某一维没有足够原文证据，输出空数组或空字符串，但字段必须保留。
+
+最终 JSON 顶层字段必须严格等于下面这 10 个字段名：
+{
+  "meeting_type": "other",
+  "meeting_type_confidence": 0.0,
+  "meeting_title_candidate": "",
+  "title_basis": [],
+  "meeting_agenda": [],
+  "meeting_summary": "",
+  "key_conclusions": [],
+  "action_items": [],
+  "unresolved_issues": [],
+  "risks_and_focus": []
+}

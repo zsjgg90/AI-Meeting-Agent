@@ -73,15 +73,27 @@ class Settings(BaseSettings):
 
     # Meeting Analyst RAG
     rag_enabled: bool = True
-    rag_chroma_db_dir: str | None = None
-    rag_collection_name: str = "meeting_analyst_rules_v2_1_1"
-    rag_embedding_model: str = "BAAI/bge-small-zh-v1.5"
+    rag_chroma_db_dir: str | None = r"D:\codex_work\会议声纹识别\data\vector_db\gate_b1_v34_2"
+    rag_collection_name: str = "meeting_analyst_rules_gate_b_v3_4_2_bge_m3_dense_v1"
+    rag_embedding_model: str = r"D:\model_cache\bge-m3"
     rag_embedding_local_files_only: bool = True
     rag_top_k: int = 8
     rag_distance_threshold: float | None = None
     rag_max_context_chars: int = 12000
     rag_dataset_version: str = "meeting_analyst_rag_v2_1_1"
     rag_chunk_schema_version: str = "rag-chunk-v2.1.1"
+    rag_scenario_taxonomy_version: str | None = None
+    rag_retrieval_version: str | None = None
+
+    # RAG v3.2.0 retrieval. Default off to preserve current production behavior.
+    rag_v3_retrieval_enabled: bool = False
+    rag_v3_final_k: int = 6
+    rag_v3_fixed_policy_k: int = 1
+    rag_v3_vector_candidate_multiplier: int = 4
+    rag_v3_scenario_boost: float = 0.15
+    rag_v3_global_scenario_boost: float = 0.05
+    rag_v3_meeting_scenario_min_confidence: float = 0.7
+    rag_reranker_enabled: bool = False
 
     # Layered RAG retrieval
     # 默认关闭，确保旧版统一 Top-K 行为保持不变。
@@ -92,6 +104,10 @@ class Settings(BaseSettings):
     rag_layered_dynamic_k: int = 3
     rag_layered_scenario_k: int = 2
     rag_layered_query_transcript_chars: int = 3000
+
+    # Diagnostics
+    action_validator_trace_enabled: bool = False
+    action_validator_trace_dir: str | None = None
 
     # MeetMind Agent rollout guardrails
     agent_mode_enabled: bool = False
@@ -137,6 +153,9 @@ class Settings(BaseSettings):
         "ollama_format",
         "rag_chroma_db_dir",
         "rag_distance_threshold",
+        "rag_scenario_taxonomy_version",
+        "rag_retrieval_version",
+        "action_validator_trace_dir",
         mode="before",
     )
     @classmethod

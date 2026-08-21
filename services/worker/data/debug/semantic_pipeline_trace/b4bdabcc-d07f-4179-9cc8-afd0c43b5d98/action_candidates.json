@@ -1,0 +1,89 @@
+{
+  "meeting_id": "b4bdabcc-d07f-4179-9cc8-afd0c43b5d98",
+  "items": [
+    {
+      "action_id": "action:create_task:0ad064543d0a",
+      "action_type": "create_task",
+      "reason": {
+        "summary": "Confirmed responsibility evidence exists without a matching action item.",
+        "reasoning_refs": [],
+        "risk_or_gap": "responsibility_only",
+        "expected_outcome": "A reviewer can decide whether to create a task from the cited responsibility evidence."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:7acc974ce469",
+          "source_type": "semantic_event",
+          "source_id": "0dfdc6d9-ba27-42b6-886d-2000c4824096",
+          "meeting_id": "b4bdabcc-d07f-4179-9cc8-afd0c43b5d98",
+          "supported_action_parts": [
+            "action_type",
+            "target",
+            "reason"
+          ],
+          "support_level": "supports",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "requires_confirmation": true
+    },
+    {
+      "action_id": "action:create_task:67b3f3186662",
+      "action_type": "create_task",
+      "reason": {
+        "summary": "Confirmed responsibility evidence exists without a matching action item.",
+        "reasoning_refs": [],
+        "risk_or_gap": "responsibility_only",
+        "expected_outcome": "A reviewer can decide whether to create a task from the cited responsibility evidence."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:a4696b50001b",
+          "source_type": "semantic_event",
+          "source_id": "6b4b2de9-65cd-4c48-befa-0a9da3b3d500",
+          "meeting_id": "b4bdabcc-d07f-4179-9cc8-afd0c43b5d98",
+          "supported_action_parts": [
+            "action_type",
+            "target",
+            "reason"
+          ],
+          "support_level": "supports",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "requires_confirmation": true
+    },
+    {
+      "action_id": "action:create_task:1ff2a59751ad",
+      "action_type": "create_task",
+      "reason": {
+        "summary": "Confirmed responsibility evidence exists without a matching action item.",
+        "reasoning_refs": [],
+        "risk_or_gap": "responsibility_only",
+        "expected_outcome": "A reviewer can decide whether to create a task from the cited responsibility evidence."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:2d8ae005fd1e",
+          "source_type": "semantic_event",
+          "source_id": "34bc8f37-77f8-437c-83cb-4253b4c6b9f7",
+          "meeting_id": "b4bdabcc-d07f-4179-9cc8-afd0c43b5d98",
+          "supported_action_parts": [
+            "action_type",
+            "target",
+            "reason"
+          ],
+          "support_level": "supports",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "requires_confirmation": true
+    }
+  ]
+}

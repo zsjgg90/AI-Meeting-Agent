@@ -1,0 +1,146 @@
+{
+  "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+  "items": [
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "2649bc50-2bc6-490d-b0e1-e82fe705eddc",
+        "segment_id": "2649bc50-2bc6-490d-b0e1-e82fe705eddc",
+        "speaker": "产品经理",
+        "speaker_role": null,
+        "start_time": 0.0,
+        "end_time": 4.0,
+        "text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+        "previous_utterances": [],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": []
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+        "segment_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+        "speaker": "研发负责人",
+        "speaker_role": null,
+        "start_time": 10.0,
+        "end_time": 14.33,
+        "text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+        "previous_utterances": [
+          "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+        "segment_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+        "speaker": "前端",
+        "speaker_role": null,
+        "start_time": 20.0,
+        "end_time": 24.17,
+        "text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "previous_utterances": [
+          "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "494cb832-e2c3-49c6-9c1c-426c6ecc583f",
+        "segment_id": "494cb832-e2c3-49c6-9c1c-426c6ecc583f",
+        "speaker": "测试",
+        "speaker_role": null,
+        "start_time": 30.0,
+        "end_time": 34.0,
+        "text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+        "previous_utterances": [
+          "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+          "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+          "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+          "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。"
+        ]
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": null,
+      "topic_id": null,
+      "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": null,
+      "needs_review": false,
+      "utterance": {
+        "utterance_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+        "segment_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+        "speaker": "产品经理",
+        "speaker_role": null,
+        "start_time": 40.0,
+        "end_time": 46.08,
+        "text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+        "previous_utterances": [
+          "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+          "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+          "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。"
+        ],
+        "topic": null,
+        "candidate_clauses": [],
+        "context": [
+          "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+          "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+          "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。"
+        ]
+      }
+    }
+  ]
+}

@@ -307,6 +307,8 @@ class SixDimensionMapper:
         topic: TopicEventGroup,
         event: SemanticEvent,
     ) -> list[str]:
+        if self._intent(event) in _ACTION_INTENTS and event.segment_id:
+            return [event.segment_id]
         event_id = event.event_id or event.utterance_id or event.segment_id
         if event_id:
             return [event_id]

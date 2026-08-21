@@ -1,0 +1,106 @@
+{
+  "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+  "items": [
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "2cec2e78-aeae-572b-ae04-a310f3f01dda",
+      "topic_id": "topic_1",
+      "source_text": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_agenda",
+      "needs_review": false,
+      "item": {
+        "content": "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。",
+        "topic_id": "topic_1",
+        "source_event_ids": [
+          "2cec2e78-aeae-572b-ae04-a310f3f01dda"
+        ],
+        "source_texts": [
+          "本次评审企业知识库权限需求，目标是支持按部门和项目控制文档可见范围，并在移动端展示权限不足提示。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "3f282b4e-ed13-579b-8d47-7ee8aa357c85",
+      "topic_id": "topic_4",
+      "source_text": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "action_items",
+      "needs_review": false,
+      "item": {
+        "content": "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。",
+        "topic_id": "topic_4",
+        "source_event_ids": [
+          "3f282b4e-ed13-579b-8d47-7ee8aa357c85"
+        ],
+        "source_texts": [
+          "需要补充跨部门、跨项目、离职成员和临时成员四类场景。权限缓存如果存在延迟，也要有可验证的规则。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "owner": "测试",
+        "deadline": null,
+        "priority": "medium",
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "e9597384-0771-550e-86e7-9086c896d147",
+      "topic_id": "topic_5",
+      "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+      "primary_intent": null,
+      "status": "blocked",
+      "target_dimension": "unresolved_issues",
+      "needs_review": false,
+      "item": {
+        "content": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+        "topic_id": "topic_5",
+        "source_event_ids": [
+          "e9597384-0771-550e-86e7-9086c896d147"
+        ],
+        "source_texts": [
+          "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "status": "blocked"
+      }
+    },
+    {
+      "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+      "event_id": "ece6d916-b543-5acf-99c9-4a66bc3583ca",
+      "topic_id": "topic_3",
+      "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "topic_id": "topic_3",
+        "source_event_ids": [
+          "ece6d916-b543-5acf-99c9-4a66bc3583ca"
+        ],
+        "source_texts": [
+          "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    }
+  ]
+}

@@ -71,6 +71,8 @@ class MeetingSummary(Base):
     next_steps: Mapped[list[dict]] = mapped_column(JSONB, default=list)
     meeting_agenda: Mapped[list[dict]] = mapped_column(JSONB, default=list)
     meeting_summary: Mapped[str | None] = mapped_column(Text, nullable=True)
+    meeting_type: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
+    meeting_type_confidence: Mapped[float | None] = mapped_column(Float, nullable=True)
     key_conclusions: Mapped[list[dict]] = mapped_column(JSONB, default=list)
     unresolved_issues: Mapped[list[dict]] = mapped_column(JSONB, default=list)
     risks_and_focus: Mapped[list[dict]] = mapped_column(JSONB, default=list)

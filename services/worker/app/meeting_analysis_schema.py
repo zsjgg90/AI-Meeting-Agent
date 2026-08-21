@@ -119,6 +119,9 @@ class MeetingAnalysisMetadata(BaseModel):
     rag_chunk_schema_version: str | None = None
     rag_collection_name: str | None = None
     rag_embedding_model: str | None = None
+    retrieved_chunk_ids: list[str] = []
+    retrieval_version: str | None = None
+    scenario_taxonomy_version: str | None = None
 
     rag_retrieval_strategy: str | None = None
     rag_retrieval_buckets: dict[

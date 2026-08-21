@@ -111,6 +111,42 @@ ROUTE_RULES: dict[str, dict[str, object]] = {
     },
 }
 
+ROUTE_RULES.update(
+    {
+        "management_decision": {
+            "scenario": "management_decision",
+            "keywords": [
+                "management_decision",
+                "management decision",
+                "decision meeting",
+            ],
+        },
+        "cross_team_coordination": {
+            "scenario": "cross_team_coordination",
+            "keywords": [
+                "cross_team_coordination",
+                "cross team coordination",
+                "cross-team coordination",
+            ],
+        },
+        "cross_department": {
+            "scenario": "cross_team_coordination",
+            "keywords": [
+                "cross_department",
+                "cross department",
+                "cross-department",
+            ],
+        },
+        "incident_review": {
+            "scenario": "technical_incident",
+            "keywords": [
+                "incident_review",
+                "incident review",
+            ],
+        },
+    }
+)
+
 
 def route_rag_meeting_type(
     transcript: str,

@@ -1,0 +1,295 @@
+{
+  "meeting_id": "3bf68079-3827-426f-b89a-c296ae21ce9a",
+  "items": [
+    {
+      "meeting_id": "3bf68079-3827-426f-b89a-c296ae21ce9a",
+      "event_id": "dd397268-1678-585c-84ec-4e3738fa5584",
+      "topic_id": null,
+      "source_text": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+      "primary_intent": "agenda_statement",
+      "status": "unknown",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "dd397268-1678-585c-84ec-4e3738fa5584",
+        "utterance_id": "7e682d6b-065e-4680-99a5-1329e5fa286c",
+        "segment_id": "7e682d6b-065e-4680-99a5-1329e5fa286c",
+        "speaker": "项目经理",
+        "speaker_role": null,
+        "start_time": 0.0,
+        "end_time": 4.92,
+        "source_text": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+        "normalized_text": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+        "primary_intent": "agenda_statement",
+        "secondary_intents": [],
+        "event_type": "information",
+        "subject": "项目经理",
+        "action": "agenda_statement",
+        "object": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+        "entities": {
+          "persons": [
+            "项目经理"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [
+            "今天"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "medium",
+          "status": "unknown",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+          "quote": "今天召开项目周会，同步V2.5版本进度。整体目标仍然是下周三前完成提测，当前重点是首页改版、消息中心和支付链路稳定性。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "3bf68079-3827-426f-b89a-c296ae21ce9a",
+      "event_id": "e3333d50-9f41-5718-b965-22064857a0b2",
+      "topic_id": null,
+      "source_text": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+      "primary_intent": "progress_update",
+      "status": "completed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "e3333d50-9f41-5718-b965-22064857a0b2",
+        "utterance_id": "296a3cec-3d5d-4827-9217-b9d4faca4a0a",
+        "segment_id": "296a3cec-3d5d-4827-9217-b9d4faca4a0a",
+        "speaker": "前端",
+        "speaker_role": null,
+        "start_time": 10.0,
+        "end_time": 14.25,
+        "source_text": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+        "normalized_text": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+        "primary_intent": "progress_update",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "前端",
+        "action": "progress_update",
+        "object": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+        "entities": {
+          "persons": [
+            "前端"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "completed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+          "quote": "首页开发已经完成，列表骨架屏和搜索入口也合并了。消息中心还有两个交互细节没收尾，预计明天下午可以联调。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "3bf68079-3827-426f-b89a-c296ae21ce9a",
+      "event_id": "e9a2c2bd-daeb-5284-9a9f-8d5c27cdbf08",
+      "topic_id": null,
+      "source_text": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+      "primary_intent": "progress_update",
+      "status": "completed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "e9a2c2bd-daeb-5284-9a9f-8d5c27cdbf08",
+        "utterance_id": "7942be22-5da2-43b8-98f9-eba77b30b357",
+        "segment_id": "7942be22-5da2-43b8-98f9-eba77b30b357",
+        "speaker": "后端",
+        "speaker_role": null,
+        "start_time": 20.0,
+        "end_time": 24.0,
+        "source_text": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+        "normalized_text": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+        "primary_intent": "progress_update",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "后端",
+        "action": "progress_update",
+        "object": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+        "entities": {
+          "persons": [
+            "后端"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "completed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+          "quote": "用户接口已经发布到测试环境，但支付回调接口延期两天，需要评估对联调和提测节奏的影响。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "3bf68079-3827-426f-b89a-c296ae21ce9a",
+      "event_id": "bb212f3f-0a0d-5863-9a01-d9a15535b16b",
+      "topic_id": null,
+      "source_text": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+      "primary_intent": "progress_update",
+      "status": "completed",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "bb212f3f-0a0d-5863-9a01-d9a15535b16b",
+        "utterance_id": "fecfcbe0-8228-4abd-89fd-23c6ab52185d",
+        "segment_id": "fecfcbe0-8228-4abd-89fd-23c6ab52185d",
+        "speaker": "测试",
+        "speaker_role": null,
+        "start_time": 30.0,
+        "end_time": 34.17,
+        "source_text": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+        "normalized_text": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+        "primary_intent": "progress_update",
+        "secondary_intents": [],
+        "event_type": "state",
+        "subject": "测试",
+        "action": "progress_update",
+        "object": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+        "entities": {
+          "persons": [
+            "测试"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": null,
+          "priority": "medium",
+          "status": "completed",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+          "quote": "测试用例完成了百分之七十，首页和消息中心可以先测。支付链路如果后端周五才能给环境，回归时间会比较紧。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    },
+    {
+      "meeting_id": "3bf68079-3827-426f-b89a-c296ae21ce9a",
+      "event_id": "ab06eb84-703e-5c68-91e4-d923af51a034",
+      "topic_id": null,
+      "source_text": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+      "primary_intent": "risk_warning",
+      "status": "pending",
+      "target_dimension": null,
+      "needs_review": true,
+      "event": {
+        "event_id": "ab06eb84-703e-5c68-91e4-d923af51a034",
+        "utterance_id": "906fbc3b-0c70-4ffe-83ac-ac2efef9c76b",
+        "segment_id": "906fbc3b-0c70-4ffe-83ac-ac2efef9c76b",
+        "speaker": "项目经理",
+        "speaker_role": null,
+        "start_time": 40.0,
+        "end_time": 45.58,
+        "source_text": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+        "normalized_text": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+        "primary_intent": "risk_warning",
+        "secondary_intents": [],
+        "event_type": "risk",
+        "subject": "项目经理",
+        "action": "risk_warning",
+        "object": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+        "entities": {
+          "persons": [
+            "项目经理"
+          ],
+          "teams": [],
+          "projects": [],
+          "features": [],
+          "dates": [
+            "今天",
+            "本周"
+          ],
+          "versions": [],
+          "numbers": []
+        },
+        "attributes": {
+          "owner": null,
+          "deadline": "今天",
+          "priority": "high",
+          "status": "pending",
+          "polarity": "neutral",
+          "certainty": "contextual"
+        },
+        "evidence": {
+          "source_text": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+          "quote": "前端明天完成消息中心联调，后端周五中午前给出支付回调接口，测试先覆盖已完成模块。支付延期是本周最大风险，今天会同步给产品确认提测范围。",
+          "evidence_type": "direct"
+        },
+        "confidence": {
+          "intent": 0.72,
+          "entity": 0.68,
+          "overall": 0.72
+        },
+        "needs_review": true
+      }
+    }
+  ]
+}

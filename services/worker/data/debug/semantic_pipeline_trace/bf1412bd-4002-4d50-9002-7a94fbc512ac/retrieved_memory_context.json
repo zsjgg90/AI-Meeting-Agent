@@ -1,0 +1,39 @@
+{
+  "as_of": "2026-08-04T13:18:21.099784Z",
+  "source_snapshot_as_of": "2026-08-04T13:18:21.099784Z",
+  "current_meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+  "retrieved_at": "2026-08-04T13:18:21.099784Z",
+  "token_budget": 480,
+  "token_cost": 128,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:24dc4ed14c9e",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.6497,
+      "evidence": [
+        {
+          "evidence_id": "ev:cf529b99e1cc",
+          "source_type": "semantic_event",
+          "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+          "source_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "segment_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "哈哈哈哈 新年新期级 哈哈哈哈"
+        }
+      ],
+      "token_cost": 128
+    }
+  ]
+}

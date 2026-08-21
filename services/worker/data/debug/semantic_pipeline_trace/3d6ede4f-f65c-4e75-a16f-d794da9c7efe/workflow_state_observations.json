@@ -1,0 +1,125 @@
+{
+  "meeting_id": "3d6ede4f-f65c-4e75-a16f-d794da9c7efe",
+  "items": [
+    {
+      "workflow_id": "workflow:meeting_follow_up:28df9d11-143a-5ae9-8e27-71bdb8ed34c6",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:bd51136a-034a-59d9-9549-e714c8370211",
+          "source_type": "formal_action_item",
+          "source_id": "d38fc9e6-50fb-5b50-8385-a2ff55f0322a",
+          "meeting_id": "3d6ede4f-f65c-4e75-a16f-d794da9c7efe",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:3f85d35d-9f74-505c-963f-c8c53c80b6d0",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:21bd4ad9-8f6c-5fd7-a7eb-561d5bd79120",
+          "source_type": "formal_action_item",
+          "source_id": "7bf39e12-e656-57dc-bd17-78ea6a62671c",
+          "meeting_id": "3d6ede4f-f65c-4e75-a16f-d794da9c7efe",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:06fd73ae-3823-5a9e-9705-054d75445d33",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:8ab0603c-436f-5864-a4d6-cbc870e88892",
+          "source_type": "formal_action_item",
+          "source_id": "81ae7778-f740-59af-ac89-c788de6e5abc",
+          "meeting_id": "3d6ede4f-f65c-4e75-a16f-d794da9c7efe",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:issue_resolution:19e5a42f-c2a1-5ca6-b42d-b036bf58fcc2",
+      "workflow_type": "issue_resolution",
+      "observed_state": "resolved",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "resolved",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:735ecf09-a542-523c-8e77-86e702356647",
+          "source_type": "formal_summary_item",
+          "source_id": "issue:1",
+          "meeting_id": "3d6ede4f-f65c-4e75-a16f-d794da9c7efe",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "issue"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    }
+  ]
+}

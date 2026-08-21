@@ -119,7 +119,7 @@ def maybe_apply_ai_title(meeting: Any, payload: dict[str, Any]) -> str | None:
         return None
     if title_source == "ai_generated":
         return None
-    if not is_default_title(getattr(meeting, "title", None)):
+    if title_source != "text_debug" and not is_default_title(getattr(meeting, "title", None)):
         return None
     if not has_valid_meeting_type(payload):
         return None

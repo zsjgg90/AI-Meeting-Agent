@@ -1,0 +1,61 @@
+{
+  "meeting_id": "064b4b37-8701-4ae1-b66e-44f09b90e834",
+  "items": [
+    {
+      "action_id": "action:create_task:e4e4e21d05da",
+      "action_type": "create_task",
+      "reason": {
+        "summary": "Confirmed responsibility evidence exists without a matching action item.",
+        "reasoning_refs": [],
+        "risk_or_gap": "responsibility_only",
+        "expected_outcome": "A reviewer can decide whether to create a task from the cited responsibility evidence."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:b97ed3f75c39",
+          "source_type": "semantic_event",
+          "source_id": "f17515d4-7759-4f1b-90f0-5a0650f26030",
+          "meeting_id": "064b4b37-8701-4ae1-b66e-44f09b90e834",
+          "supported_action_parts": [
+            "action_type",
+            "target",
+            "reason"
+          ],
+          "support_level": "supports",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "requires_confirmation": true
+    },
+    {
+      "action_id": "action:create_task:d794819e1cd2",
+      "action_type": "create_task",
+      "reason": {
+        "summary": "Confirmed responsibility evidence exists without a matching action item.",
+        "reasoning_refs": [],
+        "risk_or_gap": "responsibility_only",
+        "expected_outcome": "A reviewer can decide whether to create a task from the cited responsibility evidence."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:c1b910e0bf09",
+          "source_type": "semantic_event",
+          "source_id": "b8f775ac-b425-4faf-911f-48aef56fa6b9,f17515d4-7759-4f1b-90f0-5a0650f26030,5991dea4-f046-4981-bf2e-0c889b92e690",
+          "meeting_id": "064b4b37-8701-4ae1-b66e-44f09b90e834",
+          "supported_action_parts": [
+            "action_type",
+            "target",
+            "reason"
+          ],
+          "support_level": "supports",
+          "confidence": 0.62,
+          "evidence_status": "shadow_only"
+        }
+      ],
+      "confidence": 0.62,
+      "requires_confirmation": true
+    }
+  ]
+}

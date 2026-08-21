@@ -1,0 +1,163 @@
+{
+  "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+  "items": [
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "abf158e3-fd2c-5530-89d3-e46eb96f9cae",
+      "topic_id": "topic_1",
+      "source_text": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_agenda",
+      "needs_review": false,
+      "item": {
+        "content": "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。",
+        "topic_id": "topic_1",
+        "source_event_ids": [
+          "abf158e3-fd2c-5530-89d3-e46eb96f9cae"
+        ],
+        "source_texts": [
+          "今天聚焦支付系统上线风险，确认是否具备灰度发布条件，以及上线前还需要补哪些控制措施。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "066b4992-abc8-514e-a7ba-522ea22f2228",
+      "topic_id": "topic_2",
+      "source_text": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "topic_id": "topic_2",
+        "source_event_ids": [
+          "066b4992-abc8-514e-a7ba-522ea22f2228"
+        ],
+        "source_texts": [
+          "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "核心支付链路压测通过，但第三方回调偶发超时。我们已经加了重试机制，不过还需要观察重试后是否会造成重复入账。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "ae78de1a-205d-58e5-bd42-520208e92091",
+      "topic_id": "topic_3",
+      "source_text": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "topic_id": "topic_3",
+        "source_event_ids": [
+          "ae78de1a-205d-58e5-bd42-520208e92091"
+        ],
+        "source_texts": [
+          "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "监控面板已经接入订单成功率、回调耗时和失败重试数。告警阈值还没最终确认，建议上线前一天完成演练。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "dc210c43-daf5-599e-9fb0-28eb55e047db",
+      "topic_id": "topic_4",
+      "source_text": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "topic_id": "topic_4",
+        "source_event_ids": [
+          "dc210c43-daf5-599e-9fb0-28eb55e047db"
+        ],
+        "source_texts": [
+          "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "重复入账和退款状态不一致是高风险问题，需要明确人工核对流程和回滚窗口。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "cc7fc600-8846-50d9-9c2f-b905dcce8e1e",
+      "topic_id": "topic_5",
+      "source_text": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "topic_id": "topic_5",
+        "source_event_ids": [
+          "cc7fc600-8846-50d9-9c2f-b905dcce8e1e"
+        ],
+        "source_texts": [
+          "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "异常场景覆盖还不完整，尤其是回调超时、网络抖动和重复通知。建议灰度首日限制流量，不要全量开放。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    },
+    {
+      "meeting_id": "d5a46c4a-2f31-4865-bcb5-d91b231cdf97",
+      "event_id": "15fbb948-fef1-5764-9964-4f6bbb7a20cb",
+      "topic_id": "topic_6",
+      "source_text": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+      "primary_intent": null,
+      "status": "pending",
+      "target_dimension": "risks_and_focus",
+      "needs_review": false,
+      "item": {
+        "content": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "topic_id": "topic_6",
+        "source_event_ids": [
+          "15fbb948-fef1-5764-9964-4f6bbb7a20cb"
+        ],
+        "source_texts": [
+          "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": [],
+        "condition": "结论是可以进入小流量灰度，但不上全量。后端今天补充幂等校验说明，运维明天完成告警演练，测试补齐异常回归，财务输出人工核对流程。重复入账仍列为重点风险。",
+        "impact": null,
+        "mitigation": null,
+        "status": "pending"
+      }
+    }
+  ]
+}

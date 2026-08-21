@@ -1,0 +1,101 @@
+{
+  "meeting_id": "f1c7a33e-845b-4e4c-b9ca-f39c58ab0bb4",
+  "items": [
+    {
+      "recommendation_id": "wrec:request_confirmation:7d90cd83b13c",
+      "workflow_id": "workflow:meeting_follow_up:edc5b393-b5ea-56cb-a89e-17e3f658a966",
+      "recommendation_type": "request_confirmation",
+      "reason": "Follow-up owner is not confirmed by source-backed formal analysis.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:992558e1-e747-5a8f-8b37-9aa03a6c672d",
+          "source_type": "formal_action_item",
+          "source_id": "82d5a205-e113-5d40-a39b-5d3717067c3b",
+          "meeting_id": "f1c7a33e-845b-4e4c-b9ca-f39c58ab0bb4",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.44000000000000006,
+      "requires_confirmation": true
+    },
+    {
+      "recommendation_id": "wrec:request_confirmation:3c8228a7cdbb",
+      "workflow_id": "workflow:meeting_follow_up:6e237926-1196-5fd1-b73e-23627e265762",
+      "recommendation_type": "request_confirmation",
+      "reason": "Follow-up owner is not confirmed by source-backed formal analysis.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:77000cb7-5668-5456-8ebe-e4e885146daf",
+          "source_type": "formal_action_item",
+          "source_id": "00ca6178-da7b-562b-996e-92e5a0c1a6d0",
+          "meeting_id": "f1c7a33e-845b-4e4c-b9ca-f39c58ab0bb4",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.44000000000000006,
+      "requires_confirmation": true
+    },
+    {
+      "recommendation_id": "wrec:request_confirmation:67c134e705a3",
+      "workflow_id": "workflow:meeting_follow_up:8ffa70e8-1a82-50c1-9964-5b2d67ec0e97",
+      "recommendation_type": "request_confirmation",
+      "reason": "Follow-up owner is not confirmed by source-backed formal analysis.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:d5423716-a08e-5418-9e20-4d4d076f9923",
+          "source_type": "formal_action_item",
+          "source_id": "b7c3b7f5-b382-5f15-af92-e16d0379a313",
+          "meeting_id": "f1c7a33e-845b-4e4c-b9ca-f39c58ab0bb4",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.44000000000000006,
+      "requires_confirmation": true
+    },
+    {
+      "recommendation_id": "wrec:request_confirmation:246cc0469010",
+      "workflow_id": "workflow:issue_resolution:cb9e58c2-118f-5e82-a1c6-e42287309016",
+      "recommendation_type": "request_confirmation",
+      "reason": "Unresolved issue remains review-only and requires human confirmation before workflow use.",
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:1568b8d3-bf24-5d54-8337-06417c057bb9",
+          "source_type": "formal_summary_item",
+          "source_id": "issue:1",
+          "meeting_id": "f1c7a33e-845b-4e4c-b9ca-f39c58ab0bb4",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "issue"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.44000000000000006,
+      "requires_confirmation": true
+    }
+  ]
+}

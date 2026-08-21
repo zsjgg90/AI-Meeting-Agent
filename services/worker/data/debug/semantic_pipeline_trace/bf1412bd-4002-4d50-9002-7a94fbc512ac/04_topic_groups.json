@@ -1,0 +1,68 @@
+{
+  "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+  "items": [
+    {
+      "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+      "event_id": null,
+      "topic_id": "topic_1",
+      "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+      "primary_intent": null,
+      "status": "active",
+      "target_dimension": null,
+      "needs_review": true,
+      "title": "哈哈哈哈 新年新期级 哈哈哈哈",
+      "event_ids": [
+        "a5552de5-03a0-5364-b5cb-09d92c9fe2e0"
+      ],
+      "start_time": 0.0,
+      "end_time": 3.44,
+      "events": [
+        {
+          "event_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+          "utterance_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "segment_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+          "speaker": null,
+          "speaker_role": null,
+          "start_time": 0.0,
+          "end_time": 3.44,
+          "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+          "normalized_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+          "primary_intent": "agenda_statement",
+          "secondary_intents": [],
+          "event_type": "information",
+          "subject": "meeting",
+          "action": "agenda_statement",
+          "object": "哈哈哈哈 新年新期级 哈哈哈哈",
+          "entities": {
+            "persons": [],
+            "teams": [],
+            "projects": [],
+            "features": [],
+            "dates": [],
+            "versions": [],
+            "numbers": []
+          },
+          "attributes": {
+            "owner": null,
+            "deadline": null,
+            "priority": "medium",
+            "status": "unknown",
+            "polarity": "neutral",
+            "certainty": "contextual"
+          },
+          "evidence": {
+            "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+            "quote": "哈哈哈哈 新年新期级 哈哈哈哈",
+            "evidence_type": "direct"
+          },
+          "confidence": {
+            "intent": 0.72,
+            "entity": 0.68,
+            "overall": 0.72
+          },
+          "needs_review": true
+        }
+      ]
+    }
+  ]
+}

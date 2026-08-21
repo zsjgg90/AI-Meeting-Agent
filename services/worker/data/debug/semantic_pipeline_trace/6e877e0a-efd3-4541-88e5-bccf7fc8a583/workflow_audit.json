@@ -1,0 +1,17 @@
+{
+  "meeting_id": "6e877e0a-efd3-4541-88e5-bccf7fc8a583",
+  "workflow_count": 17,
+  "state_observation_count": 17,
+  "recommendation_count": 17,
+  "execution_attempted": false,
+  "writes_performed": false,
+  "blocked_actions": [
+    "execute_workflow",
+    "advance_workflow_state",
+    "update_task_status",
+    "create_task",
+    "send_notification",
+    "call_mcp_or_external_connector",
+    "write_database"
+  ]
+}

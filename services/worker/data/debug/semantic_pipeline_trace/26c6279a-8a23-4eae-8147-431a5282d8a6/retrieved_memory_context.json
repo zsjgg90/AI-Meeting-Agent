@@ -1,0 +1,100 @@
+{
+  "as_of": "2026-08-08T19:26:22.022194Z",
+  "source_snapshot_as_of": "2026-08-08T19:26:22.022194Z",
+  "current_meeting_id": "26c6279a-8a23-4eae-8147-431a5282d8a6",
+  "retrieved_at": "2026-08-08T19:26:22.022194Z",
+  "token_budget": 480,
+  "token_cost": 374,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:8ec4bfbd1bbf",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information嗯，我今天看。",
+        "owner": "前端",
+        "responsibility_type": "commitment",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1283,
+      "evidence": [
+        {
+          "evidence_id": "ev:e8e1be63c3b7",
+          "source_type": "semantic_event",
+          "meeting_id": "26c6279a-8a23-4eae-8147-431a5282d8a6",
+          "source_id": "0fa74b5f-cd8d-482e-ae74-a467aac810bf",
+          "segment_id": "0fa74b5f-cd8d-482e-ae74-a467aac810bf",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.62,
+          "source_text": "嗯，我今天看。"
+        }
+      ],
+      "token_cost": 125
+    },
+    {
+      "memory_id": "mem:responsibility:e2a9dfd843c5",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "information我今天查。",
+        "owner": "后端",
+        "responsibility_type": "commitment",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1278,
+      "evidence": [
+        {
+          "evidence_id": "ev:73d4c3a19138",
+          "source_type": "semantic_event",
+          "meeting_id": "26c6279a-8a23-4eae-8147-431a5282d8a6",
+          "source_id": "c520b63a-bd40-417a-89e5-db124a61f497",
+          "segment_id": "c520b63a-bd40-417a-89e5-db124a61f497",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.62,
+          "source_text": "我今天查。"
+        }
+      ],
+      "token_cost": 124
+    },
+    {
+      "memory_id": "mem:responsibility:0bf2a79a669b",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "task_assignment我会处理。",
+        "owner": "前端",
+        "responsibility_type": "commitment",
+        "deadline": null,
+        "priority": null,
+        "status": "open",
+        "dependency": null
+      },
+      "relevance_score": 0.1278,
+      "evidence": [
+        {
+          "evidence_id": "ev:44d76915434e",
+          "source_type": "semantic_event",
+          "meeting_id": "26c6279a-8a23-4eae-8147-431a5282d8a6",
+          "source_id": "cff01261-2b28-4cec-b1e3-568df86c0cb1",
+          "segment_id": "cff01261-2b28-4cec-b1e3-568df86c0cb1",
+          "supported_fields": [
+            "task",
+            "owner"
+          ],
+          "confidence": 0.62,
+          "source_text": "我会处理。"
+        }
+      ],
+      "token_cost": 125
+    }
+  ]
+}

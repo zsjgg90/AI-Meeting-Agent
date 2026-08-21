@@ -1,0 +1,141 @@
+{
+  "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+  "speaker_contexts": {},
+  "speaker_role_context": {},
+  "responsibility_evidence_matrix": {
+    "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+    "responsibility_contexts": [
+      {
+        "responsibility_id": "resp:bf1412bd-4002-4d50-9002-7a94fbc512ac:ca24a2c5-8c43-49d5-8647-d280197bd99f:ed37a95c9bd6",
+        "speaker_id": null,
+        "identity_context": null,
+        "role_context": null,
+        "responsibility_type": "unknown",
+        "task": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+        "owner": null,
+        "evidence": [
+          {
+            "type": "unknown_owner",
+            "source_type": "semantic_event",
+            "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+            "event_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+            "utterance_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+            "segment_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+            "speaker_id": null,
+            "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+            "owner_text": null,
+            "task_text": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+            "supported_fields": [
+              "task"
+            ],
+            "confidence": 0.35,
+            "requires_confirmation": false,
+            "metadata": {}
+          }
+        ],
+        "confidence": 0.35,
+        "source_type": "semantic_event"
+      }
+    ],
+    "responsibility_matrix": {
+      "rows": [
+        {
+          "task_key": "task:0b6733366eed",
+          "action_owner": null,
+          "responsibility_candidates": [
+            {
+              "responsibility_id": "resp:bf1412bd-4002-4d50-9002-7a94fbc512ac:ca24a2c5-8c43-49d5-8647-d280197bd99f:ed37a95c9bd6",
+              "responsibility_type": "unknown",
+              "task": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+              "owner": null,
+              "confidence": 0.35,
+              "requires_confirmation": false
+            }
+          ],
+          "evidence": [
+            {
+              "type": "unknown_owner",
+              "source_type": "semantic_event",
+              "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+              "event_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+              "utterance_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+              "segment_id": "ca24a2c5-8c43-49d5-8647-d280197bd99f",
+              "speaker_id": null,
+              "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+              "owner_text": null,
+              "task_text": "agenda_statement哈哈哈哈 新年新期级 哈哈哈哈",
+              "supported_fields": [
+                "task"
+              ],
+              "confidence": 0.35,
+              "requires_confirmation": false,
+              "metadata": {}
+            }
+          ],
+          "confidence": 0.35,
+          "consistency_status": "unknown"
+        }
+      ]
+    },
+    "consistency_status": "needs_review"
+  },
+  "items": [
+    {
+      "meeting_id": "bf1412bd-4002-4d50-9002-7a94fbc512ac",
+      "event_id": "a5552de5-03a0-5364-b5cb-09d92c9fe2e0",
+      "topic_id": "topic_1",
+      "source_text": "哈哈哈哈 新年新期级 哈哈哈哈",
+      "primary_intent": null,
+      "status": null,
+      "target_dimension": "meeting_agenda",
+      "needs_review": false,
+      "item": {
+        "content": "哈哈哈哈 新年新期级 哈哈哈哈",
+        "topic_id": "topic_1",
+        "source_event_ids": [
+          "a5552de5-03a0-5364-b5cb-09d92c9fe2e0"
+        ],
+        "source_texts": [
+          "哈哈哈哈 新年新期级 哈哈哈哈"
+        ],
+        "confidence": 0.72,
+        "needs_review": false,
+        "validation_errors": []
+      }
+    }
+  ],
+  "analysis": {
+    "meeting_agenda": [
+      {
+        "item": "哈哈哈哈 新年新期级 哈哈哈哈",
+        "order": 1,
+        "source_segment_ids": [
+          "a5552de5-03a0-5364-b5cb-09d92c9fe2e0"
+        ]
+      }
+    ],
+    "meeting_summary": "哈哈哈哈 新年新期级 哈哈哈哈",
+    "key_conclusions": [],
+    "action_items": [],
+    "unresolved_issues": [],
+    "risks_and_focus": [],
+    "topics": [
+      {
+        "title": "哈哈哈哈 新年新期级 哈哈哈哈",
+        "summary": "哈哈哈哈 新年新期级 哈哈哈哈",
+        "start_time": 0.0,
+        "end_time": 3.44,
+        "related_segment_ids": [
+          "ca24a2c5-8c43-49d5-8647-d280197bd99f"
+        ],
+        "speakers": []
+      }
+    ],
+    "_metadata": {
+      "model_name": "semantic-events+rules",
+      "prompt_version": "semantic-event-pipeline-v1",
+      "rag_chunk_ids": [],
+      "result_source": "semantic_pipeline"
+    }
+  }
+}

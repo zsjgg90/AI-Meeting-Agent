@@ -1,0 +1,545 @@
+{
+  "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+  "items": [
+    {
+      "workflow_id": "workflow:meeting_follow_up:c70cb962-b1f4-5c6c-9b87-428e3b682884",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:6da72387-2cfe-56c9-8fed-b30870675831",
+          "source_type": "formal_action_item",
+          "source_id": "c5a2a6fc-cc7d-5de1-91f7-2bcf26301875",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.74
+        }
+      ],
+      "confidence": 0.56,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:98c7cc2c-95a6-5fde-bbf6-2f5495755ae6",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:fab15f44-97b5-5542-9338-9cb5fc6bc37c",
+          "source_type": "formal_action_item",
+          "source_id": "5d1a8585-a61e-5f4f-a01e-c5e417fd0f4b",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.74
+        }
+      ],
+      "confidence": 0.56,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:307bd76f-fe8b-58a8-80a0-df3b19a675eb",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:d2d2fdeb-3b0f-51fb-9920-f923e32cbf99",
+          "source_type": "formal_action_item",
+          "source_id": "ffb55ffd-5f11-5654-a6f8-b4ca86f79c70",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.74
+        }
+      ],
+      "confidence": 0.56,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:ca932736-d137-5ecf-818a-adb03bcca8a9",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:8d6de1a3-b8a0-581e-9cc9-bcced6ed9e60",
+          "source_type": "formal_action_item",
+          "source_id": "0db60b2a-c59b-50c1-8b49-868073a0d42a",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.74
+        }
+      ],
+      "confidence": 0.56,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:016d264e-077d-52ab-8a6c-84a8b008e824",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:4cf3dd09-ea88-5100-8ea6-11817f3007a3",
+          "source_type": "formal_action_item",
+          "source_id": "72a8432b-26f4-55cc-a46a-2daeefbc4952",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.74
+        }
+      ],
+      "confidence": 0.56,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:555634db-9d5e-579e-b309-f0cf8a196332",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:384705e8-e8fd-5f61-9f03-9f2abeac7eed",
+          "source_type": "formal_action_item",
+          "source_id": "611c869a-b40d-58e0-a698-1fe4e61a1833",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.74
+        }
+      ],
+      "confidence": 0.56,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:409aa791-c41e-562e-8d27-a4817a3f87ec",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:14734677-3569-5a95-95e7-bcd505f5f551",
+          "source_type": "formal_action_item",
+          "source_id": "b3c786de-1523-50f0-8648-5981fabb0ba9",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:38fd425d-a35d-5a01-b257-f7a1f28a159c",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:23faf2bf-3a20-591b-84dc-9228fb2bfdea",
+          "source_type": "formal_action_item",
+          "source_id": "72bb01fb-749b-5e9d-ad41-75280665e895",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:471a6c6d-653b-517c-bc73-a874c3b99310",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:94ea5cdd-8c1a-57d5-b6dc-ee8da14397ea",
+          "source_type": "formal_action_item",
+          "source_id": "70066356-9837-5578-8ac9-3bddd8ba3d9c",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:742ea3c7-c4d3-5b52-953c-b43bc921b10e",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:c14b361c-de1d-5734-8348-581857d3b89d",
+          "source_type": "formal_action_item",
+          "source_id": "ee367c86-e2ac-5bad-a5cd-5755ab8ef58a",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:3e0df03a-2c90-5ebd-bc75-d897d6acc720",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:7b5aff6d-2248-5d70-a31c-e7bb4cce9946",
+          "source_type": "formal_action_item",
+          "source_id": "e0af3131-c204-5f63-9321-af766c4a7c0b",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:d72d7af1-3f28-55d4-9d96-06a542363545",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:255b9cbe-358f-5754-978d-35a1da651e49",
+          "source_type": "formal_action_item",
+          "source_id": "c7a14757-f3af-510f-978e-c25d18623c19",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:98246526-b0d9-5dee-b9a7-82b204d473bf",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:cc7a2e1c-461e-576d-b9d2-078c5c957993",
+          "source_type": "formal_action_item",
+          "source_id": "d13a831d-b542-5680-9603-caae98734928",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:bf655870-c86e-56a3-a04d-9ca83cb6f6f7",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:d827955d-182f-56b5-9a1f-1253478883f1",
+          "source_type": "formal_action_item",
+          "source_id": "2f119514-4ecb-5bdb-8d8c-133d5991ce32",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:ea116040-960d-556f-b569-a54874472ba9",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:e672c763-0284-53dd-829f-cd092c5c26a6",
+          "source_type": "formal_action_item",
+          "source_id": "53ba6843-ca1e-5202-9348-d93f349d822a",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:5184ddcc-d6af-5478-8ca2-4290cd6548ba",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:cbba589e-e0f0-5965-813e-8b30252db22d",
+          "source_type": "formal_action_item",
+          "source_id": "dcfe8cdb-43d0-510d-a32e-db50c5329558",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:meeting_follow_up:dd8a67e5-23b9-581f-9960-3615a34ae3ba",
+      "workflow_type": "meeting_follow_up",
+      "observed_state": "in_progress",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "in_progress",
+        "transition_type": "no_previous_state",
+        "reason": "No previous workflow state was available for comparison."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:242aeaf0-75ee-5f71-87c8-c9bbed380957",
+          "source_type": "formal_action_item",
+          "source_id": "20606687-68fe-5584-adf0-b9dbebb4afde",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "task"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.78
+        }
+      ],
+      "confidence": 0.78,
+      "requires_confirmation": false
+    },
+    {
+      "workflow_id": "workflow:issue_resolution:f14aa75e-d879-57dc-9bcf-a20189004c79",
+      "workflow_type": "issue_resolution",
+      "observed_state": "resolved",
+      "previous_state": null,
+      "transition": {
+        "from_state": null,
+        "to_state": "resolved",
+        "transition_type": "requires_confirmation",
+        "reason": "Observed evidence is conflicted or reviewable and requires confirmation."
+      },
+      "evidence_refs": [
+        {
+          "evidence_ref_id": "eref:workflow:35893ca7-902c-5adb-9cd6-d07e55dadf72",
+          "source_type": "formal_summary_item",
+          "source_id": "issue:1",
+          "meeting_id": "bedae8bd-7ea3-44f5-9bb9-cdce49c1326f",
+          "supports": [
+            "observed_state",
+            "recommendation",
+            "issue"
+          ],
+          "support_level": "supports",
+          "evidence_status": "active",
+          "confidence": 0.72
+        }
+      ],
+      "confidence": 0.54,
+      "requires_confirmation": true
+    }
+  ]
+}

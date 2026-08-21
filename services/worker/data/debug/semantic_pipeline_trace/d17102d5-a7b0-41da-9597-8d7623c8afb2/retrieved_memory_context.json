@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-08-05T08:29:19.013916Z",
+  "source_snapshot_as_of": "2026-08-05T08:29:19.013916Z",
+  "current_meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+  "retrieved_at": "2026-08-05T08:29:19.013916Z",
+  "token_budget": 480,
+  "token_cost": 443,
+  "memories": [
+    {
+      "memory_id": "mem:responsibility:11707b9cdf59",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "open_issue本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.3495,
+      "evidence": [
+        {
+          "evidence_id": "ev:c9444f834ca2",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+          "segment_id": "cc51b469-3490-42ae-865f-37d2358b2670",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "本期确认只做查看权限，编辑权限进入后续版本。研发输出接口字段方案，前端补充权限不足页面，测试整理四类权限用例。实时刷新策略先作为遗留问题继续评估。"
+        }
+      ],
+      "token_cost": 155
+    },
+    {
+      "memory_id": "mem:responsibility:5a80de06d6a0",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "proposal部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.2758,
+      "evidence": [
+        {
+          "evidence_id": "ev:77b93db9f7b2",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+          "segment_id": "4b67d8c6-b68a-4a1b-ad43-d9aecd039253",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "部门维度可以复用现有组织架构，项目维度需要新增一层资源绑定关系。第一版建议只支持查看权限，不做编辑权限。"
+        }
+      ],
+      "token_cost": 144
+    },
+    {
+      "memory_id": "mem:responsibility:2e8d982cbe9d",
+      "memory_type": "responsibility",
+      "content": {
+        "task": "risk_warning移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。",
+        "owner": null,
+        "responsibility_type": "unknown",
+        "deadline": null,
+        "priority": null,
+        "status": "unknown",
+        "dependency": null
+      },
+      "relevance_score": 0.2693,
+      "evidence": [
+        {
+          "evidence_id": "ev:3b0f29b5bba3",
+          "source_type": "semantic_event",
+          "meeting_id": "d17102d5-a7b0-41da-9597-8d7623c8afb2",
+          "source_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+          "segment_id": "dd28d7e7-0e53-4141-b40c-fd8840f08d2f",
+          "supported_fields": [
+            "task"
+          ],
+          "confidence": 0.35,
+          "source_text": "移动端需要接口返回权限状态和不可见原因，否则只能展示通用提示。权限变更后是否需要实时刷新还没有明确。"
+        }
+      ],
+      "token_cost": 144
+    }
+  ]
+}
